@@ -51,7 +51,6 @@ A stack inicial do site foi mantida simples:
 - JavaScript;
 - Git;
 - GitHub;
-- GitHub Pages;
 - `localStorage`;
 - QR Codes.
 
