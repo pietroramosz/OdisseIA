@@ -172,7 +172,7 @@ A arquitetura foi mantida simples de propósito.
 
 ### Hospedagem
 
-Planejada com **GitHub Pages**.
+Planejada com **GitHub Pages** ou **Vercel**.
 
 ### Persistência
 
