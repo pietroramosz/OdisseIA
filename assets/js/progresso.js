@@ -15,19 +15,19 @@ function progressoEstadoInicial() {
 }
 
 function obterProgresso() {
-  const bruto = localStorage.getItem(PROGRESSO_CHAVE);
-
-  if (!bruto) {
-    return progressoEstadoInicial();
-  }
-
   try {
+    const bruto = localStorage.getItem(PROGRESSO_CHAVE);
+
+    if (!bruto) {
+      return progressoEstadoInicial();
+    }
+
     const dado = JSON.parse(bruto);
 
     const valido =
       dado &&
       dado.versao === PROGRESSO_VERSAO &&
-      typeof dado.ultimaEstacaoDesbloqueada === "number" &&
+      Number.isInteger(dado.ultimaEstacaoDesbloqueada) &&
       dado.ultimaEstacaoDesbloqueada >= 0 &&
       dado.ultimaEstacaoDesbloqueada <= OdisseIAConfig.totalEstacoes;
 
@@ -42,7 +42,11 @@ function obterProgresso() {
 }
 
 function salvarProgresso(progresso) {
-  localStorage.setItem(PROGRESSO_CHAVE, JSON.stringify(progresso));
+  try {
+    localStorage.setItem(PROGRESSO_CHAVE, JSON.stringify(progresso));
+  } catch (erro) {
+    return;
+  }
 }
 
 function estacaoDesbloqueada(numeroEstacao) {
