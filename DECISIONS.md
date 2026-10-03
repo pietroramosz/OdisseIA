@@ -263,3 +263,25 @@ De forma geral:
 - casos importantes de uso de IA podem ser registrados;
 - não vamos fingir autoria manual de algo que não aconteceu;
 - também não vamos tratar o projeto como se tivesse sido criado automaticamente.
+
+---
+
+## DEC-010 — Padrão de config.js
+
+**Status:** aceita
+
+### Contexto
+
+Precisávamos de uma forma simples de armazenar configuração global (totalEstacoes, gameUrl, downloadUrl) acessível por outros scripts, considerando que o projeto roda localmente (file://) sem servidor e será mantido por estudantes sem experiência avançada em front-end.
+
+### Decisão
+
+Usar um objeto global simples (`const OdisseIAConfig = {...}`) carregado via tag `<script>` comum, em vez de ES modules.
+
+### Por quê?
+
+Porque ES modules exigem servidor HTTP e falham silenciosamente em `file://`, o que quebraria a abertura local dos arquivos — justamente o cenário de uso real do projeto (estudantes abrindo o HTML direto, sem servidor).
+
+### Consequências
+
+Esse padrão deve ser seguido pelos outros arquivos JS do projeto (progresso.js, qr.js, app.js) para manter consistência. Todos os scripts são carregados como `<script>` comuns, na mesma ordem, no fim do `<body>`.
