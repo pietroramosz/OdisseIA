@@ -150,7 +150,120 @@ Até aqui, o trabalho esteve concentrado principalmente em:
 - documentação;
 - preparação para implementação.
 
-Ainda não faz sentido tratar funcionalidades planejadas como se já estivessem prontas.
+Ainda não fazia sentido tratar funcionalidades planejadas como se já estivessem prontas.
+
+---
+
+## 02/10/2026 — Início da implementação
+
+### Contexto
+
+Depois da fase inicial de planejamento, conteúdo, UX e documentação, o projeto entrou oficialmente em desenvolvimento.
+
+Até esse momento, a estrutura principal do site ainda não tinha sido implementada.
+
+### O que foi feito
+
+Foi criada a fundação inicial do projeto, incluindo:
+
+- `index.html`;
+- `hub.html`;
+- `validar.html`;
+- `estacao-1.html`;
+- `estacao-2.html`;
+- `estacao-3.html`;
+- `estacao-4.html`;
+- `final.html`;
+- estrutura inicial de `assets`;
+- configuração central em JavaScript.
+
+A primeira tarefa foi propositalmente limitada à fundação.
+
+Lógica de progresso, QR Codes e desbloqueio não foram misturados nessa etapa.
+
+### Decisões técnicas
+
+A configuração foi mantida em JavaScript puro, utilizando `const`.
+
+Módulos ES foram evitados nessa fase para preservar compatibilidade com execução local através de `file://`.
+
+Essa decisão foi registrada em `DECISIONS.md`.
+
+### Impacto
+
+O projeto deixou a fase de planejamento puro e passou a possuir uma estrutura real sobre a qual as próximas funcionalidades podem ser desenvolvidas.
+
+---
+
+## 02/10/2026 — Sistema de progresso implementado
+
+### Contexto
+
+Com a fundação pronta, a próxima tarefa foi criar a base de progresso usada pelo restante da experiência.
+
+### Implementação
+
+O progresso passou a ser salvo em:
+
+```text
+odisseia:progresso
+```
+
+com a estrutura:
+
+```js
+{
+  versao: 1,
+  ultimaEstacaoDesbloqueada: 0
+}
+```
+
+A última estação desbloqueada varia entre `0` e `4`.
+
+Os demais estados podem ser derivados desse valor, evitando armazenamento redundante.
+
+### Testes
+
+O sistema foi testado manualmente quanto a:
+
+- avanço do progresso;
+- persistência após recarregar;
+- limite de quatro estações;
+- tratamento de estado inválido.
+
+### Versionamento
+
+A implementação foi commitada na branch `dev`.
+
+### Impacto
+
+O projeto passou a ter sua primeira funcionalidade estrutural implementada e validada.
+
+Esse sistema será a base para o próximo grande componente: o **Hub**.
+
+---
+
+## 02/10/2026 — Direção visual consolidada
+
+### Contexto
+
+Antes de iniciar o desenvolvimento visual do Hub, foi necessário consolidar como o site e o Robot TCG deveriam se relacionar visualmente.
+
+### Decisão
+
+Foi definida uma identidade contínua entre as duas partes, baseada em:
+
+- tons de cinza;
+- roxo como destaque;
+- estética tecnológica/cyberpunk mais limpa;
+- prioridade para contraste;
+- legibilidade em telas pequenas.
+
+A decisão foi registrada em `DECISIONS.md`.
+
+### Impacto
+
+O Hub e as páginas seguintes passam a ter uma direção visual comum antes do início de sua implementação.
 
 ---
 
@@ -158,10 +271,9 @@ Ainda não faz sentido tratar funcionalidades planejadas como se já estivessem 
 
 O DEVLOG só deve ganhar uma nova entrada quando houver algo realmente relevante, por exemplo:
 
-- início da implementação;
-- criação da estrutura real de arquivos;
-- sistema de progresso funcionando;
+- Hub implementado;
 - integração dos QR Codes;
+- conteúdo das estações integrado;
 - integração do Robot TCG;
 - problema técnico importante;
 - testes relevantes;

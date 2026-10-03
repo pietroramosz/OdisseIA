@@ -36,6 +36,7 @@ Pietro participa principalmente de:
 - preparar tarefas para implementação;
 - acompanhar o código;
 - identificar problemas;
+- testar manualmente;
 - pedir correções;
 - organizar o projeto;
 - usar Git e GitHub;
@@ -76,7 +77,7 @@ Uma sugestão pode ser:
 
 O Claude Code é usado principalmente quando precisamos trabalhar diretamente no projeto.
 
-Entre as tarefas esperadas estão:
+Entre as tarefas estão:
 
 - criar arquivos;
 - alterar código;
@@ -87,63 +88,62 @@ Entre as tarefas esperadas estão:
 
 A ideia não é simplesmente pedir “faça o site”.
 
-Antes da implementação, tentamos chegar com contexto suficiente para explicar:
+Antes da implementação, o contexto geral do projeto é estabelecido e depois o trabalho segue uma tarefa por vez.
 
-- o que precisa ser feito;
-- por que aquilo existe;
-- quais restrições devem ser respeitadas;
-- como saber se a solução funcionou.
+Os prompts costumam ser enxutos e organizados em:
+
+```text
+Tarefa
+Contexto necessário
+Requisitos
+Restrições
+Critério de conclusão
+```
+
+Não é necessário repetir toda a história do projeto a cada tarefa.
+
+Claude Code pode decidir detalhes internos de implementação, mas decisões de produto, UX, fluxo e regras do projeto são definidas antes.
 
 ---
 
-## 5. Fluxo de trabalho
+## 5. Workflow atual
 
-O processo que estamos tentando seguir é:
+Com o início da implementação, o processo deixou de ser apenas planejado e passou a ser usado de verdade.
+
+O ciclo atual é:
 
 ```text
-necessidade
+prompt / especificação da tarefa
 ↓
-entender o problema
+revisão
 ↓
-definir objetivo e restrições
+implementação pelo Claude Code
 ↓
-discutir alternativas
+teste manual
 ↓
-tomar uma decisão
+commit na branch dev
 ↓
-transformar isso em uma tarefa clara
-↓
-implementar
-↓
-revisar
-↓
-testar
-↓
-corrigir
-↓
-versionar
+registro das decisões relevantes
 ```
 
-Nem toda tarefa passa exatamente por todas essas etapas, mas esse é o fluxo geral.
+Quando uma mudança é maior ou mais arriscada, primeiro é feito um diagnóstico antes de alterar o código.
+
+A intenção é manter tarefas pequenas o suficiente para que o resultado possa ser entendido, testado e versionado sem misturar várias responsabilidades ao mesmo tempo.
 
 ---
 
 ## 6. Estado atual
 
-Até agora, o projeto passou muito mais tempo em:
+O workflow já foi usado em ciclos completos de desenvolvimento.
 
-- planejamento;
-- conteúdo;
-- UX;
-- estrutura;
-- arquitetura inicial;
-- documentação.
+Em 02/10/2026 foram concluídas as primeiras entregas técnicas importantes:
 
-Por isso, este arquivo ainda tem mais exemplos de decisões e organização do que de código implementado.
+- fundação inicial do site;
+- sistema de progresso local.
 
-Isso é intencional.
+Essas tarefas passaram por especificação, implementação com Claude Code, revisão, teste manual e commit em `dev`.
 
-Não faz sentido inventar histórias de implementação só para deixar a documentação mais cheia.
+O projeto continua usando IA como ferramenta de implementação, não como substituta da definição do produto.
 
 ---
 
@@ -191,12 +191,61 @@ Então adotamos uma regra:
 
 > O frontend pode controlar a experiência, mas não deve guardar nada que dependa de segurança real.
 
-Essa discussão ajudou a separar duas coisas que pareciam semelhantes no começo:
+Essa discussão ajudou a separar duas coisas diferentes:
 
 - impedir um usuário comum de pular uma etapa;
 - proteger de verdade uma informação ou recurso.
 
 São problemas diferentes.
+
+---
+
+### 7.4 Fundação inicial do projeto
+
+Antes de desenvolver Hub, QR Codes e conteúdo das estações, era necessário criar uma base consistente para o site.
+
+A tarefa foi especificada com limites claros: criar as páginas principais, a estrutura de `assets` e a configuração central, sem antecipar a lógica de progresso, QR Codes ou desbloqueio.
+
+A implementação foi feita com Claude Code.
+
+Os arquivos de documentação existentes foram preservados e a estrutura resultante foi revisada antes de seguir para a próxima tarefa.
+
+O principal ganho dessa etapa foi criar uma fundação real sem misturar responsabilidades que pertenciam a tarefas posteriores.
+
+---
+
+### 7.5 Sistema de progresso
+
+Depois da fundação, a próxima tarefa foi criar a base de progresso usada pelo restante da experiência.
+
+A decisão de usar `localStorage` já existia. Na implementação, o estado foi reduzido a uma estrutura simples:
+
+```js
+{
+  versao: 1,
+  ultimaEstacaoDesbloqueada: 0
+}
+```
+
+A chave definida foi:
+
+```text
+odisseia:progresso
+```
+
+Em vez de guardar vários estados redundantes, as demais informações da interface podem ser derivadas da última estação desbloqueada.
+
+A funcionalidade foi implementada com Claude Code e depois testada manualmente.
+
+Foram verificados o avanço do progresso, a persistência após recarregar, o limite das quatro estações e o comportamento diante de estado inválido.
+
+Depois da validação, a mudança foi commitada na branch `dev`.
+
+Esse foi o primeiro exemplo completo do ciclo:
+
+```text
+especificação → implementação → teste → commit
+```
 
 ---
 

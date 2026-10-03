@@ -30,7 +30,29 @@ Durante o desenvolvimento, usamos quatro estados para evitar confusão:
 - **Implementado:** já existe no código;
 - **Validado:** foi implementado e testado no fluxo esperado.
 
-No momento, boa parte do projeto ainda está entre **definido** e **planejado**.
+O projeto já entrou na fase de implementação.
+
+### Implementado e testado
+
+- estrutura base das páginas;
+- estrutura inicial de `assets`;
+- configuração central em JavaScript;
+- sistema de progresso local;
+- persistência do progresso entre recarregamentos.
+
+### Definido
+
+- fluxo geral da experiência;
+- quatro estações;
+- função dos QR Codes no desbloqueio;
+- progressão sequencial;
+- arquitetura sem backend;
+- identidade visual geral;
+- integração planejada com o Robot TCG.
+
+### Próximo passo
+
+O próximo componente principal a ser desenvolvido é o **Hub**.
 
 ---
 
@@ -56,36 +78,33 @@ Algumas decisões já tomadas:
 
 - não forçar um marco exclusivo para 2026;
 - tratar 2024–2026 como um período de tendências atuais quando fizer sentido;
-- não transformar imagens ilustrativas em “marcos históricos” sem base;
+- não transformar imagens ilustrativas em marcos históricos sem base;
 - evitar comparações ou afirmações que não tenham suporte suficiente.
 
 ### Estação 3 — Inteligência Artificial nos jogos
 
-A terceira estação mostra como a IA foi sendo usada nos jogos ao longo do tempo.
+A terceira estação apresenta a evolução de abordagens de IA em jogos.
 
-A linha conceitual atualmente considerada passa por ideias como:
+A linha conceitual atual passa por:
 
 - regras;
+- perseguição e tomada de decisão simples;
+- máquinas de estado;
 - pathfinding;
 - behavior trees;
-- utility systems;
+- utility AI;
 - machine learning;
 - IA generativa.
 
-O conteúdo final ainda depende da versão aprovada da estação.
+O conteúdo final continua dependente da versão aprovada da apresentação da estação.
 
 ### Estação 4 — Robot TCG
 
-A quarta estação apresenta o **Robot TCG**, um jogo desenvolvido por outro núcleo do projeto.
+A quarta estação apresenta o **Robot TCG**, jogo desenvolvido por outro núcleo do projeto.
 
-O que já está definido:
+O site deve mostrar apenas mecânicas e tecnologias que realmente existirem na versão final do jogo.
 
-- a versão final será executada no navegador;
-- existe intenção de oferecer uma versão adaptada para mobile;
-- existe também a ideia de disponibilizar download, mas o formato ainda não foi fechado;
-- o site só deve apresentar mecânicas e tecnologias que realmente existirem na versão final.
-
-As regras internas, o balanceamento, as cartas, a energia, a IA adversária e outras decisões do jogo ficam com o grupo responsável pelo Robot TCG.
+As regras internas, balanceamento, cartas, energia, IA adversária e outras decisões do Robot TCG continuam sob responsabilidade do grupo responsável pelo jogo.
 
 ---
 
@@ -95,72 +114,139 @@ No começo, o projeto tinha uma quinta estação ligada a portfólio/documentaç
 
 Depois de revisar a experiência, decidimos que essa parte não precisava ocupar uma estação física.
 
-A estrutura atual ficou com quatro estações, enquanto o portfólio e a documentação continuam existindo separadamente.
+A estrutura atual ficou com quatro estações, enquanto o portfólio e os bastidores permanecem apenas na documentação do projeto.
 
-Essa mudança é importante porque alterou diretamente o fluxo do site e o escopo da experiência.
-
----
-
-## 5. Fluxo do visitante
-
-### Já definido
-
-- o visitante usa o próprio celular;
-- a experiência é mobile-first;
-- cada estação possui um QR Code;
-- as estações são visitadas em ordem;
-- o site deve mostrar o progresso do visitante.
-
-### Planejado
-
-O fluxo esperado é:
-
-1. o visitante chega à estação;
-2. acompanha a apresentação física;
-3. escaneia o QR Code;
-4. acessa a parte digital daquela etapa;
-5. a conclusão é registrada;
-6. a próxima estação é liberada;
-7. o processo continua até o final.
-
-A forma exata de entrada no Robot TCG ainda depende da versão final do jogo.
+Essa mudança alterou diretamente o fluxo do site e o escopo da experiência.
 
 ---
 
-## 6. Sistema de progresso
+## 5. Estrutura atual de páginas
 
-A ideia é registrar no próprio navegador quais estações já foram concluídas.
+A fundação inicial do site já foi criada.
 
-Para a primeira versão, a solução escolhida é usar `localStorage`.
+Atualmente o projeto possui as seguintes páginas principais:
 
-Essa escolha faz sentido porque o projeto:
+```text
+index.html
+hub.html
+validar.html
+estacao-1.html
+estacao-2.html
+estacao-3.html
+estacao-4.html
+final.html
+```
 
-- não precisa de conta de usuário;
-- não precisa sincronizar progresso entre celulares;
-- não trabalha com dados críticos;
-- será hospedado como site estático.
+Também existe uma estrutura de `assets` para organizar CSS, JavaScript e imagens.
 
-Ao mesmo tempo, sabemos que `localStorage` pode ser alterado pelo próprio usuário.
+### Função geral das páginas
 
-Por isso, esse sistema serve para **organizar a experiência**, e não como mecanismo real de segurança.
+- `index.html` — visão geral e entrada da experiência;
+- `hub.html` — central das estações e representação do progresso;
+- `validar.html` — página usada pelo fluxo de validação dos QR Codes;
+- `estacao-1.html` a `estacao-4.html` — conteúdo digital de cada estação;
+- `final.html` — conclusão da jornada antes do acesso ao Robot TCG.
 
----
-
-## 7. QR Codes
-
-Cada estação terá um QR Code que leva o visitante para a parte correspondente do site.
-
-Eles funcionam como ponte entre:
-
-**estação física → parte digital**
-
-A ordem das etapas será controlada pelo próprio site.
-
-Como essa lógica fica no navegador, uma pessoa com conhecimento técnico pode tentar contornar o fluxo. Isso é aceitável porque o projeto não está protegendo informações sensíveis ou recursos críticos.
+A existência dessas páginas não significa que todas as funcionalidades internas já estejam finalizadas.
 
 ---
 
-## 8. Arquitetura inicial
+## 6. Fluxo do visitante
+
+O fluxo oficial da experiência é:
+
+```text
+Visão geral
+↓
+Hub
+↓
+Estação 1
+↓
+Estação 2
+↓
+Estação 3
+↓
+Estação 4
+↓
+Conclusão
+↓
+Robot TCG
+```
+
+A experiência física e a experiência digital estão ligadas pelos QR Codes.
+
+### Regra principal
+
+O QR Code de uma estação valida que o visitante passou por aquela etapa física e desbloqueia o conteúdo digital da própria estação.
+
+Apenas navegar diretamente até uma página não deve avançar o progresso.
+
+Estações futuras podem ser acessadas pelo Hub para mostrar seu estado bloqueado, mas o conteúdo permanece indisponível até a validação correta.
+
+Depois de um QR válido, a experiência deve permitir voltar ao Hub ou seguir para o conteúdo desbloqueado. Após a quarta estação, a conclusão também passa a fazer parte do fluxo.
+
+---
+
+## 7. Sistema de progresso
+
+O sistema de progresso já foi implementado.
+
+Os dados são armazenados no navegador utilizando `localStorage`.
+
+### Chave utilizada
+
+```text
+odisseia:progresso
+```
+
+### Estrutura base
+
+```js
+{
+  versao: 1,
+  ultimaEstacaoDesbloqueada: 0
+}
+```
+
+`ultimaEstacaoDesbloqueada` varia de `0` a `4`.
+
+Os demais estados da interface devem ser derivados desse valor sempre que possível, evitando armazenamento redundante.
+
+### Objetivo
+
+O progresso existe para representar a jornada do visitante durante a feira.
+
+Ele não funciona como mecanismo de segurança.
+
+Como os dados ficam no próprio navegador, uma pessoa com conhecimento técnico pode alterá-los manualmente.
+
+Isso é aceitável porque nenhuma informação sensível ou recurso crítico depende desse controle.
+
+### Estado atual
+
+O sistema já foi implementado, testado manualmente e versionado na branch `dev`.
+
+Ele cobre a leitura e gravação do progresso, persistência após recarregar a página, limite das quatro estações e tratamento de estado inválido.
+
+---
+
+## 8. QR Codes
+
+Os QR Codes fazem a conexão entre a parte física e a parte digital do OdisseIA.
+
+Cada estação possui seu próprio QR Code.
+
+A função dele é validar que o visitante chegou àquela estação física e então desbloquear o conteúdo digital correspondente.
+
+Por isso, o progresso não deve avançar apenas porque alguém abriu diretamente uma página.
+
+O comportamento já está definido, mas a integração completa dos QR Codes ainda faz parte das próximas etapas de implementação.
+
+O QR Code faz parte da lógica da experiência, mas não deve ser tratado como mecanismo de segurança real.
+
+---
+
+## 9. Arquitetura inicial
 
 A arquitetura foi mantida simples de propósito.
 
@@ -176,12 +262,13 @@ Planejada com **GitHub Pages**.
 
 ### Persistência
 
-Planejada com `localStorage`.
+Implementada com `localStorage`.
 
 ### Versionamento
 
 - Git;
-- GitHub.
+- GitHub;
+- desenvolvimento incremental na branch `dev`.
 
 ### Backend
 
@@ -189,9 +276,19 @@ Não existe backend previsto para a primeira versão.
 
 Se no futuro surgir uma necessidade real — como autenticação, sincronização ou proteção de dados — essa decisão pode ser revista.
 
+### Configuração central
+
+O projeto possui uma configuração central em JavaScript.
+
+Ela foi mantida em JavaScript puro, utilizando `const`.
+
+Nesta fase, módulos ES foram evitados para preservar compatibilidade com execução local através de `file://`.
+
+Essa escolha reduz dependências durante etapas simples de desenvolvimento e teste e está registrada em `DECISIONS.md`.
+
 ---
 
-## 9. Segurança
+## 10. Segurança
 
 Uma regra simples foi adotada para o projeto:
 
@@ -210,7 +307,7 @@ O frontend pode controlar a experiência do visitante, mas não é tratado como 
 
 ---
 
-## 10. Mobile-first
+## 11. Mobile-first
 
 O mobile-first não foi escolhido por moda.
 
@@ -226,7 +323,29 @@ Alguns princípios que guiam o design:
 
 ---
 
-## 11. Conteúdo
+## 12. Identidade visual
+
+O site e o Robot TCG devem parecer partes da mesma experiência.
+
+A identidade definida combina tecnologia e jogos com uma estética cyberpunk mais limpa, sem exagerar em efeitos que prejudiquem a leitura.
+
+A base visual utiliza principalmente:
+
+- tons de cinza;
+- roxo como cor de destaque;
+- elementos tecnológicos;
+- contraste forte;
+- interface limpa.
+
+O roxo deve aparecer principalmente em destaques, estados, bordas, ícones e componentes interativos, e não como cor dominante em textos longos.
+
+Como a experiência é mobile-first, legibilidade e contraste têm prioridade sobre efeitos visuais.
+
+Estados importantes da interface também não devem depender exclusivamente de cor para serem compreendidos.
+
+---
+
+## 13. Conteúdo
 
 O conteúdo digital está sendo construído junto com as apresentações físicas.
 
@@ -235,13 +354,13 @@ Algumas regras que seguimos:
 - usar como base a pesquisa real dos grupos;
 - não tratar conteúdo ainda em discussão como definitivo;
 - não inventar marcos ou tecnologias;
-- manter a Estação 4 sempre sincronizada com o jogo real.
+- manter a Estação 4 sincronizada com o jogo real.
 
 Decisões pequenas de conteúdo não precisam virar registros técnicos.
 
 ---
 
-## 12. Integração com o Robot TCG
+## 14. Integração com o Robot TCG
 
 Para evitar confusão entre os grupos, as responsabilidades foram separadas.
 
@@ -264,12 +383,14 @@ Cuida de:
 - como o jogo aparece na experiência;
 - acesso e integração;
 - apresentação da estação;
-- eventual desbloqueio;
+- desbloqueio dentro do fluxo;
 - documentação apenas do que realmente existir na versão final.
+
+A página de conclusão deve informar que o Robot TCG foi desbloqueado e conduzir o visitante para o jogo quando a integração estiver pronta.
 
 ---
 
-## 13. O que não faz parte do escopo atual
+## 15. O que não faz parte do escopo atual
 
 Neste momento, não há motivo para adicionar:
 
@@ -284,7 +405,7 @@ A ideia é manter o projeto simples enquanto isso for suficiente.
 
 ---
 
-## 14. Outros arquivos
+## 16. Outros arquivos
 
 - [`README.md`](./README.md)
 - [`AI-WORKFLOW.md`](./AI-WORKFLOW.md)

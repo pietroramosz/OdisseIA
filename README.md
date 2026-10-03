@@ -2,10 +2,10 @@
 
 O **OdisseIA** é um projeto criado para uma feira escolar que mistura uma experiência física, dividida em estações, com uma parte digital acessada pelo celular dos visitantes.
 
-A ideia do site é acompanhar o percurso da feira, complementar as apresentações de cada estação e conectar tudo em uma experiência única. O projeto também inclui o **Robot TCG**, um jogo digital que fará parte da etapa final.
+A ideia do site é acompanhar o percurso da feira, complementar as apresentações de cada estação e conectar tudo em uma experiência única. O projeto também inclui o **Robot TCG**, um jogo digital que será desbloqueado ao final da jornada.
 
 > **Status atual:** em desenvolvimento.  
-> Neste momento, o projeto ainda está passando por definições de conteúdo, UX, estrutura e arquitetura. Nem tudo que aparece como planejado aqui já foi implementado.
+> A fundação do site e o sistema de progresso local já foram implementados. O próximo grande passo é o desenvolvimento do **Hub**.
 
 ---
 
@@ -18,27 +18,68 @@ Atualmente, o OdisseIA está dividido em **quatro estações físicas**:
 3. **Estação 3 — Inteligência Artificial nos jogos**
 4. **Estação 4 — Robot TCG**
 
-Cada estação terá um **QR Code** ligado à parte correspondente do site.
+O fluxo oficial da experiência digital é:
+
+```text
+Visão geral
+↓
+Hub
+↓
+Estação 1
+↓
+Estação 2
+↓
+Estação 3
+↓
+Estação 4
+↓
+Conclusão
+↓
+Robot TCG
+```
+
+Cada estação física possui um **QR Code** próprio.
+
+O QR Code não funciona apenas como um link: ele valida que o visitante passou pela estação física e desbloqueia o conteúdo digital daquela mesma etapa.
+
+Abrir diretamente uma página não deve avançar o progresso.
 
 Como os visitantes vão usar o próprio celular durante a feira, o projeto está sendo pensado desde o início com foco em **mobile-first**.
 
-No começo, o projeto tinha uma quinta estação ligada a portfólio/documentação. Depois de revisar a estrutura, decidimos tirar essa parte do percurso da feira e manter a documentação separada no repositório.
+No começo, o projeto tinha uma quinta estação ligada a portfólio/documentação. Depois de revisar a estrutura, essa parte foi retirada do percurso da feira e permaneceu apenas como documentação do projeto.
 
 ---
 
-## O que está planejado
+## O que já foi implementado
 
-Entre as principais ideias já definidas para o site estão:
+A base técnica do projeto já existe.
 
-- navegação pensada primeiro para celular;
-- conexão entre as estações físicas e as páginas digitais;
-- progresso em sequência entre as etapas;
-- registro local do progresso;
-- liberação das próximas estações conforme o avanço;
-- integração com o Robot TCG;
-- hospedagem como site estático.
+Atualmente, estão implementados:
 
-Alguns detalhes da Estação 4 ainda dependem diretamente da versão final do Robot TCG.
+- estrutura inicial das páginas;
+- organização base de `assets`;
+- configuração central do projeto;
+- sistema de progresso usando `localStorage`;
+- persistência do progresso após recarregar a página;
+- limite de progresso até a quarta estação.
+
+O sistema de progresso já foi testado manualmente e versionado na branch `dev`.
+
+---
+
+## O que ainda está em desenvolvimento
+
+Entre os próximos passos estão:
+
+- desenvolvimento do Hub;
+- integração completa dos QR Codes;
+- conteúdo e comportamento final das páginas das estações;
+- página de conclusão;
+- integração final com o Robot TCG;
+- refinamentos visuais;
+- testes da experiência completa da feira.
+
+Alguns detalhes da Estação 4 continuam dependendo diretamente da versão final do Robot TCG.
 
 ---
 
@@ -69,7 +110,7 @@ De forma geral:
 
 - **ChatGPT** é usado principalmente para planejamento, análise, arquitetura, UX, revisão, documentação e preparação de tarefas;
 - **Claude Code** é usado principalmente para implementação e alterações diretas no código;
-- decisões finais, validação e responsabilidade pelo resultado continuam sendo humanas.
+- decisões finais, testes, validação e responsabilidade pelo resultado continuam sendo humanas.
 
 A intenção não é esconder o uso de IA, mas também não apresentar o projeto como se bastasse pedir para uma ferramenta gerar tudo.
 
@@ -90,14 +131,8 @@ Além deste README, o projeto possui:
 
 ## Estado atual
 
-O projeto ainda não está finalizado.
+O projeto já saiu da fase de planejamento puro e entrou em implementação.
 
-Neste momento, o foco está principalmente em:
-
-- fechar o conteúdo das estações;
-- organizar a experiência do visitante;
-- definir a estrutura do site;
-- preparar a integração com o Robot TCG;
-- registrar as decisões importantes antes da implementação avançar.
+A fundação e o sistema de progresso formam a primeira base funcional do site. O **Hub** é o próximo componente principal a ser desenvolvido.
 
 Screenshots, demonstração, instruções de execução e links públicos serão adicionados quando essas partes realmente existirem.
