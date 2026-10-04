@@ -44,8 +44,9 @@ function obterProgresso() {
 function salvarProgresso(progresso) {
   try {
     localStorage.setItem(PROGRESSO_CHAVE, JSON.stringify(progresso));
+    return true;
   } catch (erro) {
-    return;
+    return false;
   }
 }
 
@@ -57,12 +58,12 @@ function estacaoDesbloqueada(numeroEstacao) {
 function desbloquearProximaEstacao() {
   const progresso = obterProgresso();
 
-  if (progresso.ultimaEstacaoDesbloqueada < OdisseIAConfig.totalEstacoes) {
-    progresso.ultimaEstacaoDesbloqueada += 1;
-    salvarProgresso(progresso);
+  if (progresso.ultimaEstacaoDesbloqueada >= OdisseIAConfig.totalEstacoes) {
+    return false;
   }
 
-  return progresso;
+  progresso.ultimaEstacaoDesbloqueada += 1;
+  return salvarProgresso(progresso);
 }
 
 function jornadaCompleta() {

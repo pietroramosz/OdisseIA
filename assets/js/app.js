@@ -137,8 +137,82 @@ function criarTexto(tag, classe, texto) {
   return elemento;
 }
 
+function renderizarValidacao() {
+  const { resultado, estacao } = validarQrCode();
+  const total = OdisseIAConfig.totalEstacoes;
+  const area = document.getElementById("resultado-qr");
+
+  let rotulo = "";
+  let titulo = "";
+  const textos = [];
+  const acoes = [];
+
+  if (resultado === "sucesso") {
+    rotulo = "SUCESSO";
+    titulo = "Estação " + estacao + " desbloqueada";
+    textos.push(estacao < total
+      ? "Próxima estação física: Estação " + (estacao + 1) + "."
+      : "Jornada concluída.");
+    acoes.push({ href: "hub.html", texto: "Voltar ao Hub", principal: false });
+    acoes.push({ href: "estacao-" + estacao + ".html", texto: "Ver conteúdo desbloqueado", principal: true });
+    if (estacao === total) {
+      acoes.push({ href: "final.html", texto: "Ver conclusão", principal: false });
+    }
+  } else if (resultado === "repetido") {
+    rotulo = "JÁ VALIDADA";
+    titulo = "Estação " + estacao + " já validada";
+    textos.push("Esta estação já foi validada neste navegador.");
+    acoes.push({ href: "hub.html", texto: "Voltar ao Hub", principal: false });
+    acoes.push({ href: "estacao-" + estacao + ".html", texto: "Ver conteúdo", principal: true });
+  } else if (resultado === "fora-de-ordem") {
+    const faltando = obterProgresso().ultimaEstacaoDesbloqueada + 1;
+    rotulo = "FORA DE ORDEM";
+    titulo = "Estação bloqueada";
+    textos.push("Ainda falta validar a Estação " + faltando + " antes desta.");
+    textos.push("Se você já visitou as estações anteriores e o progresso não aparece, abra este link no mesmo navegador em que abriu o Hub.");
+    acoes.push({ href: "hub.html", texto: "Voltar ao Hub", principal: true });
+  } else if (resultado === "invalido") {
+    rotulo = "INVÁLIDO";
+    titulo = "QR Code inválido.";
+    acoes.push({ href: "hub.html", texto: "Voltar ao Hub", principal: true });
+  } else {
+    rotulo = "ERRO";
+    titulo = "Progresso não salvo";
+    textos.push("Não foi possível salvar o progresso neste navegador. Abra o link no navegador principal, o mesmo usado para abrir o Hub.");
+    acoes.push({ href: "hub.html", texto: "Voltar ao Hub", principal: true });
+  }
+
+  area.textContent = "";
+  area.className = "resultado resultado--" + resultado;
+  area.appendChild(criarTexto("p", "rotulo", rotulo));
+  area.appendChild(criarTexto("h2", "resultado__titulo", titulo));
+
+  textos.forEach(function (texto, indice) {
+    const classe = indice === 0 ? "resultado__texto" : "resultado__secundario";
+    area.appendChild(criarTexto("p", classe, texto));
+  });
+
+  const grupo = document.createElement("div");
+  grupo.className = "acoes";
+  acoes.forEach(function (acao) {
+    grupo.appendChild(criarBotao(acao));
+  });
+  area.appendChild(grupo);
+}
+
+function criarBotao(acao) {
+  const botao = document.createElement("a");
+  botao.className = "botao" + (acao.principal ? " botao--principal" : "");
+  botao.href = acao.href;
+  botao.textContent = acao.texto;
+  return botao;
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   if (document.getElementById("lista-estacoes")) {
     renderizarHub();
+  }
+  if (document.getElementById("resultado-qr")) {
+    renderizarValidacao();
   }
 });
