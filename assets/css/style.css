@@ -24,9 +24,9 @@
   --cor-texto: #f3f3f6;
   --cor-texto-secundario: #c2c2cc;
   --cor-texto-atenuado: #9d9daa;
-  --cor-destaque: #a16bff;
-  --cor-segmento-vazio: #6f6f7d;
-  --cor-apagado: #5c5c68;
+  --cor-destaque: #cd5efa;
+  --cor-apagado: #6f6f7d;
+  --cor-grade: rgba(255, 255, 255, 0.04);
 
   --fonte-titulo: "Chakra Petch", system-ui, sans-serif;
   --fonte-corpo: system-ui, sans-serif;
@@ -55,7 +55,11 @@
 
 body {
   margin: 0;
-  background: var(--cor-fundo);
+  background-color: var(--cor-fundo);
+  background-image:
+    linear-gradient(var(--cor-grade) 1px, transparent 1px),
+    linear-gradient(90deg, var(--cor-grade) 1px, transparent 1px);
+  background-size: var(--espaco-8) var(--espaco-8);
   color: var(--cor-texto);
   font-family: var(--fonte-corpo);
   line-height: 1.5;
@@ -63,7 +67,7 @@ body {
 
 .cabecalho,
 main {
-  max-width: 28rem;
+  max-width: 640px;
   margin: 0 auto;
   padding-left: var(--espaco-4);
   padding-right: var(--espaco-4);
@@ -111,7 +115,7 @@ main {
 
 .barra__segmento {
   height: var(--espaco-3);
-  background: var(--cor-segmento-vazio);
+  background: var(--cor-apagado);
   clip-path: polygon(
     var(--espaco-2) 0,
     100% 0,
@@ -174,9 +178,8 @@ main {
 
 .marcador {
   flex: none;
-  width: var(--espaco-8);
-  height: var(--espaco-8);
-  color: var(--cor-apagado);
+  width: 56px;
+  height: 56px;
 }
 
 .estacao__titulo,
@@ -203,10 +206,6 @@ main {
   font-size: 0.875rem;
 }
 
-.estacao--desbloqueada .marcador {
-  color: var(--cor-destaque);
-}
-
 .estacao--desbloqueada .rotulo {
   color: var(--cor-texto);
 }
@@ -215,12 +214,6 @@ main {
   padding: var(--espaco-6) var(--espaco-8) var(--espaco-6) var(--espaco-6);
   background: var(--cor-superficie-alta);
   box-shadow: inset var(--espaco-1) 0 0 var(--cor-destaque);
-}
-
-.estacao--proxima .marcador {
-  width: var(--espaco-12);
-  height: var(--espaco-12);
-  color: var(--cor-destaque);
 }
 
 .estacao--proxima .rotulo {
@@ -331,6 +324,23 @@ main {
   to {
     opacity: 1;
     transform: none;
+  }
+}
+
+@media (min-width: 900px) {
+  .pagina-hub .cabecalho,
+  .pagina-hub main {
+    max-width: 900px;
+  }
+
+  .pagina-hub .estacoes,
+  .pagina-hub .finais {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .pagina-hub .estacao--proxima,
+  .pagina-hub .estacao--final {
+    grid-column: 1 / -1;
   }
 }
 

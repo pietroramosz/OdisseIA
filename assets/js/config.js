@@ -1,5 +1,5 @@
 // Configuração central do projeto OdisseIA.
-// Usada futuramente pelo sistema de progresso, QR Codes e Robot TCG.
+// Usada futuramente pelo sistema de progresso, QR Codes e X-BOT.
 
 const OdisseIAConfig = {
   totalEstacoes: 4,

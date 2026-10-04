@@ -4,7 +4,7 @@ const ESTACOES_NOMES = [
   "Evolução dos jogos até 1999",
   "Evolução dos jogos de 2001 até hoje",
   "Inteligência Artificial nos jogos",
-  "Robot TCG"
+  "X-BOT"
 ];
 
 const ESTACAO_ROTULOS = {
@@ -65,13 +65,23 @@ function renderizarEstacoes(ultima, total) {
 function criarCardEstacao(numero, estado) {
   const item = document.createElement("li");
   item.className = "estacao estacao--" + estado;
+  if (numero === OdisseIAConfig.totalEstacoes && estado === "desbloqueada") {
+    item.classList.add("estacao--final");
+  }
 
   const cartao = document.createElement("a");
   cartao.className = "cartao";
   cartao.href = "estacao-" + numero + ".html";
 
-  const modelo = document.getElementById("modelo-marcador");
-  cartao.appendChild(modelo.content.firstElementChild.cloneNode(true));
+  const marcador = document.createElement("img");
+  marcador.className = "marcador";
+  marcador.alt = "";
+  marcador.src = estado === "desbloqueada"
+    ? "assets/img/engrenagem-acesa.png"
+    : "assets/img/engrenagem-apagada.png";
+  marcador.width = 56;
+  marcador.height = 56;
+  cartao.appendChild(marcador);
 
   const corpo = document.createElement("div");
   corpo.className = "cartao__corpo";
@@ -99,7 +109,7 @@ function renderizarFinais(completa) {
   }));
 
   lista.appendChild(criarCardFinal({
-    titulo: "Robot TCG",
+    titulo: "X-BOT",
     href: null,
     bloqueado: !completa,
     rotulo: completa ? "DESBLOQUEADO" : "BLOQUEADO",
