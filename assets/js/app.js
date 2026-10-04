@@ -30,8 +30,9 @@ function renderizarHub() {
 }
 
 function renderizarProgresso(ultima, total) {
-  document.getElementById("progresso-texto").textContent =
-    "Progresso da jornada — " + ultima + "/" + total;
+  const texto = document.getElementById("progresso-texto");
+  texto.textContent = "Progresso da jornada — ";
+  texto.appendChild(criarTexto("span", "progresso__numero", ultima + "/" + total));
 
   const barra = document.getElementById("progresso-barra");
   barra.setAttribute("aria-valuenow", ultima);
@@ -92,6 +93,7 @@ function renderizarFinais(completa) {
   lista.appendChild(criarCardFinal({
     titulo: "Conclusão",
     href: completa ? "final.html" : null,
+    bloqueado: !completa,
     rotulo: completa ? "DISPONÍVEL" : "BLOQUEADA",
     detalhe: completa ? "Ver conclusão" : "Disponível após a 4ª estação"
   }));
@@ -99,14 +101,17 @@ function renderizarFinais(completa) {
   lista.appendChild(criarCardFinal({
     titulo: "Robot TCG",
     href: null,
-    rotulo: completa ? "DISPONÍVEL" : "BLOQUEADO",
-    detalhe: completa ? "Em breve" : "Disponível após a conclusão"
+    bloqueado: !completa,
+    rotulo: completa ? "DESBLOQUEADO" : "BLOQUEADO",
+    detalhe: completa
+      ? (OdisseIAConfig.gameUrl === null ? "Em breve" : "Disponível")
+      : "Disponível após a conclusão"
   }));
 }
 
 function criarCardFinal(dados) {
   const item = document.createElement("li");
-  item.className = "final" + (dados.href ? "" : " final--bloqueado");
+  item.className = "final" + (dados.bloqueado ? " final--bloqueado" : "");
 
   const cartao = document.createElement(dados.href ? "a" : "div");
   cartao.className = "cartao";
