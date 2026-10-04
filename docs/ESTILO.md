@@ -10,7 +10,7 @@ Vale para todas as páginas (DEC-011 e DEC-013).
 \- Fundo: grade sutil feita em CSS, opacidade baixa, nunca atrás de texto de leitura.
 \- Cor especial: a Conclusão é o único momento da jornada autorizado a ampliar muito a cor e os efeitos como recompensa visual, ainda dentro da paleta e das regras de contraste e de movimento.
 \- Imagens (assets/img/):
-&#x20; \- Engrenagem acesa (PNG) = conteúdo da estação desbloqueado. Engrenagem SVG cinza = conteúdo bloqueado. Sem filtro CSS para fingir engrenagem apagada.
+&#x20; \- Engrenagem acesa (PNG) = conteúdo da estação desbloqueado. Engrenagem apagada = PNG derivado da arte original, sem filtro CSS.
 &#x20; \- A estação próxima tem o conteúdo ainda bloqueado, então usa a engrenagem cinza. Ela se destaca pelo rótulo PRÓXIMA ESTAÇÃO, pelo tamanho e pela barra roxa, nunca só pela engrenagem ou pela cor.
 &#x20; \- A engrenagem é decorativa (alt vazio ou aria-hidden); o estado sempre aparece também em texto.
 &#x20; \- Verso da carta só na Estação 4 e na Conclusão, em tamanho de carta (200 a 280 px de largura), com loading="lazy" e dimensões declaradas.
