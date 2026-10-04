@@ -99,6 +99,7 @@ function criarCardEstacao(numero, estado) {
 function renderizarFinais(completa) {
   const lista = document.getElementById("lista-finais");
   lista.textContent = "";
+  lista.classList.toggle("finais--completa", completa);
 
   lista.appendChild(criarCardFinal({
     titulo: "Conclusão",

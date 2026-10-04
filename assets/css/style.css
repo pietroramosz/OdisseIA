@@ -338,9 +338,12 @@ main {
     grid-template-columns: 1fr 1fr;
   }
 
-  .pagina-hub .estacao--proxima,
-  .pagina-hub .estacao--final {
-    grid-column: 1 / -1;
+  .pagina-hub .finais--completa {
+    grid-template-columns: 1fr;
+  }
+
+  .pagina-hub .estacao--proxima .cartao {
+    padding-left: var(--espaco-4);
   }
 }
 
