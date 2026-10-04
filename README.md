@@ -2,10 +2,10 @@
 
 O **OdisseIA** é um projeto criado para uma feira escolar que mistura uma experiência física, dividida em estações, com uma parte digital acessada pelo celular dos visitantes.
 
-A ideia do site é acompanhar o percurso da feira, complementar as apresentações de cada estação e conectar tudo em uma experiência única. O projeto também inclui o **Robot TCG**, um jogo digital que será desbloqueado ao final da jornada.
+A ideia do site é acompanhar o percurso da feira, complementar as apresentações de cada estação e conectar tudo em uma experiência única. O projeto também inclui o **X-BOT**, um jogo digital que será desbloqueado ao final da jornada.
 
 > **Status atual:** em desenvolvimento.  
-> A fundação do site e o sistema de progresso local já foram implementados. O próximo grande passo é o desenvolvimento do **Hub**.
+> A fundação, o sistema de progresso, o Hub e a validação dos QR Codes já foram implementados e testados em desenvolvimento.
 
 ---
 
@@ -16,7 +16,7 @@ Atualmente, o OdisseIA está dividido em **quatro estações físicas**:
 1. **Estação 1 — Evolução dos jogos até 1999**
 2. **Estação 2 — Evolução dos jogos de 2001 até hoje**
 3. **Estação 3 — Inteligência Artificial nos jogos**
-4. **Estação 4 — Robot TCG**
+4. **Estação 4 — X-BOT**
 
 O fluxo oficial da experiência digital é:
 
@@ -35,7 +35,7 @@ Estação 4
 ↓
 Conclusão
 ↓
-Robot TCG
+X-BOT
 ```
 
 Cada estação física possui um **QR Code** próprio.
@@ -61,7 +61,9 @@ Atualmente, estão implementados:
 - configuração central do projeto;
 - sistema de progresso usando `localStorage`;
 - persistência do progresso após recarregar a página;
-- limite de progresso até a quarta estação.
+- limite de progresso até a quarta estação;
+- Hub com estados 0 a 4;
+- validação dos QR Codes por `validar.html` e `qr.js`.
 
 O sistema de progresso já foi testado manualmente e versionado na branch `dev`.
 
@@ -71,15 +73,13 @@ O sistema de progresso já foi testado manualmente e versionado na branch `dev`.
 
 Entre os próximos passos estão:
 
-- desenvolvimento do Hub;
-- integração completa dos QR Codes;
 - conteúdo e comportamento final das páginas das estações;
 - página de conclusão;
-- integração final com o Robot TCG;
+- integração final com o X-BOT;
 - refinamentos visuais;
 - testes da experiência completa da feira.
 
-Alguns detalhes da Estação 4 continuam dependendo diretamente da versão final do Robot TCG.
+Alguns detalhes da Estação 4 continuam dependendo diretamente da versão final do X-BOT.
 
 ---
 
@@ -92,13 +92,13 @@ A stack inicial do site foi mantida simples:
 - JavaScript;
 - Git;
 - GitHub;
-- GitHub Pages;
+- hospedagem a definir (GitHub Pages usado em testes);
 - `localStorage`;
 - QR Codes.
 
 A ideia é não adicionar frameworks, backend ou outras tecnologias só para deixar o projeto mais complexo. Se surgir uma necessidade real, isso pode ser revisto depois.
 
-O Robot TCG é tratado separadamente, porque possui seu próprio desenvolvimento.
+O X-BOT é tratado separadamente, porque possui seu próprio desenvolvimento.
 
 ---
 
@@ -133,6 +133,8 @@ Além deste README, o projeto possui:
 
 O projeto já saiu da fase de planejamento puro e entrou em implementação.
 
-A fundação e o sistema de progresso formam a primeira base funcional do site. O **Hub** é o próximo componente principal a ser desenvolvido.
+A fundação, o sistema de progresso, o Hub e a validação dos QR Codes já formam a base funcional atual do site.
+
+Já existem: sistema de progresso, Hub e validação dos QR Codes, testados em desenvolvimento. Ainda faltam o conteúdo das estações, a conclusão e a integração com o X-BOT.
 
 Screenshots, demonstração, instruções de execução e links públicos serão adicionados quando essas partes realmente existirem.

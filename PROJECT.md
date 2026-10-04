@@ -15,7 +15,7 @@ O **OdisseIA** é um projeto para uma feira escolar que combina:
 - QR Codes;
 - progressão entre etapas;
 - acesso pelo celular do visitante;
-- integração com o jogo **Robot TCG**.
+- integração com o jogo **X-BOT** (antes chamado Robot TCG).
 
 O site não foi pensado para substituir a apresentação física. Ele funciona como uma extensão da experiência, ajudando a conectar as estações e oferecendo conteúdo e interações que fazem sentido no celular.
 
@@ -30,29 +30,12 @@ Durante o desenvolvimento, usamos quatro estados para evitar confusão:
 - **Implementado:** já existe no código;
 - **Validado:** foi implementado e testado no fluxo esperado.
 
-O projeto já entrou na fase de implementação.
+Situação em 03/10/2026:
 
-### Implementado e testado
-
-- estrutura base das páginas;
-- estrutura inicial de `assets`;
-- configuração central em JavaScript;
-- sistema de progresso local;
-- persistência do progresso entre recarregamentos.
-
-### Definido
-
-- fluxo geral da experiência;
-- quatro estações;
-- função dos QR Codes no desbloqueio;
-- progressão sequencial;
-- arquitetura sem backend;
-- identidade visual geral;
-- integração planejada com o Robot TCG.
-
-### Próximo passo
-
-O próximo componente principal a ser desenvolvido é o **Hub**.
+- **Validado:** sistema de progresso (progresso.js), testado no console, incluindo dado corrompido e número decimal.
+- **Implementado e testado em emulador e no celular:** Hub (hub.html), nos estados 0 a 4.
+- **Implementado e testado por console e URL, ainda não validado com câmera real nem com WhatsApp:** validação de QR (validar.html e qr.js).
+- **Planejado:** conteúdo das estações, conclusão, integração com o X-BOT e QR Codes impressos.
 
 ---
 
@@ -98,13 +81,13 @@ A linha conceitual atual passa por:
 
 O conteúdo final continua dependente da versão aprovada da apresentação da estação.
 
-### Estação 4 — Robot TCG
+### Estação 4 — X-BOT
 
-A quarta estação apresenta o **Robot TCG**, jogo desenvolvido por outro núcleo do projeto.
+A quarta estação apresenta o **X-BOT**, jogo desenvolvido por outro núcleo do projeto.
 
 O site deve mostrar apenas mecânicas e tecnologias que realmente existirem na versão final do jogo.
 
-As regras internas, balanceamento, cartas, energia, IA adversária e outras decisões do Robot TCG continuam sob responsabilidade do grupo responsável pelo jogo.
+As regras internas, balanceamento, cartas, energia, IA adversária e outras decisões do X-BOT continuam sob responsabilidade do grupo responsável pelo jogo.
 
 ---
 
@@ -145,7 +128,7 @@ Também existe uma estrutura de `assets` para organizar CSS, JavaScript e imagen
 - `hub.html` — central das estações e representação do progresso;
 - `validar.html` — página usada pelo fluxo de validação dos QR Codes;
 - `estacao-1.html` a `estacao-4.html` — conteúdo digital de cada estação;
-- `final.html` — conclusão da jornada antes do acesso ao Robot TCG.
+- `final.html` — conclusão da jornada antes do acesso ao X-BOT.
 
 A existência dessas páginas não significa que todas as funcionalidades internas já estejam finalizadas.
 
@@ -170,7 +153,7 @@ Estação 4
 ↓
 Conclusão
 ↓
-Robot TCG
+X-BOT
 ```
 
 A experiência física e a experiência digital estão ligadas pelos QR Codes.
@@ -244,6 +227,9 @@ O comportamento já está definido, mas a integração completa dos QR Codes ain
 
 O QR Code faz parte da lógica da experiência, mas não deve ser tratado como mecanismo de segurança real.
 
+
+Cada QR abre `validar.html?estacao=N`. Só o QR da próxima estação na ordem avança o progresso; QR repetido, fora de ordem ou inválido não altera nada. O progresso fica salvo no navegador usado, então abrir o QR em um navegador diferente do Hub resulta em "fora de ordem". A tela explica isso ao visitante (DEC-014).
+
 ---
 
 ## 9. Arquitetura inicial
@@ -258,7 +244,7 @@ A arquitetura foi mantida simples de propósito.
 
 ### Hospedagem
 
-Planejada com **GitHub Pages**.
+Ainda não definida. O GitHub Pages está ligado na branch `dev` apenas para testes. A URL final precisa estar fechada antes de imprimir os QR Codes.
 
 ### Persistência
 
@@ -325,7 +311,7 @@ Alguns princípios que guiam o design:
 
 ## 12. Identidade visual
 
-O site e o Robot TCG devem parecer partes da mesma experiência.
+O site e o X-BOT devem parecer partes da mesma experiência.
 
 A identidade definida combina tecnologia e jogos com uma estética cyberpunk mais limpa, sem exagerar em efeitos que prejudiquem a leitura.
 
@@ -360,11 +346,11 @@ Decisões pequenas de conteúdo não precisam virar registros técnicos.
 
 ---
 
-## 14. Integração com o Robot TCG
+## 14. Integração com o X-BOT
 
 Para evitar confusão entre os grupos, as responsabilidades foram separadas.
 
-### Grupo do Robot TCG
+### Grupo do X-BOT
 
 Cuida de:
 
@@ -386,7 +372,7 @@ Cuida de:
 - desbloqueio dentro do fluxo;
 - documentação apenas do que realmente existir na versão final.
 
-A página de conclusão deve informar que o Robot TCG foi desbloqueado e conduzir o visitante para o jogo quando a integração estiver pronta.
+A página de conclusão deve informar que o X-BOT foi desbloqueado e conduzir o visitante para o jogo quando a integração estiver pronta.
 
 ---
 

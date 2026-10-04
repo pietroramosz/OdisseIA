@@ -310,3 +310,67 @@ Porque o site e o jogo se complementam como uma experiência única, não como d
 - O roxo é reservado para destaque (estados ativos, bordas, indicadores, progresso, elementos tecnológicos), nunca como cor dominante de texto corrido, para preservar legibilidade.
 - Contraste e legibilidade em celular, inclusive sob iluminação variável de ambiente de feira, têm prioridade sobre intensidade visual (evitar glow/neon excessivo).
 - O site mantém uma versão "mais limpa" dessa linguagem (mais espaço, leitura fácil) comparado à intensidade de HUD esperada dentro do próprio jogo.
+
+---
+
+## DEC-012 — Conteúdo das estações direto no HTML
+
+**Status:** aceita
+
+### Contexto
+
+As 4 estações têm estrutura editorial fixa (título, introdução, 4 blocos, timeline/cards quando fizer sentido, fechamento), mas a copy final depende das falas presenciais e vai mudar.
+
+### Decisão
+
+O conteúdo de cada estação fica escrito diretamente no HTML (estacao-1.html a estacao-4.html). A parte visual fica no CSS compartilhado, sem arquivo de dados nem geração de páginas por JavaScript.
+
+### Por quê?
+
+É o mais simples para estudantes editarem, não exige build nem dependência (DEC-003) e trocar texto depois das falas é abrir o arquivo e mudar.
+
+### Consequências
+
+- O esqueleto das 4 páginas deve ser idêntico (mesmas classes, mesma ordem de blocos).
+- O nome de cada estação aparece no Hub e na página da estação: ao mudar um, mudar o outro.
+- Imagens ficam em assets/img/, nunca linkadas de outro site.
+
+---
+
+## DEC-013 — Identidade visual do Hub
+
+**Status:** aceita (valores de cor provisórios)
+
+### Contexto
+
+A DEC-011 define a direção (cyberpunk limpo, cinza/preto com roxo de destaque). O Hub foi a primeira implementação e serve de referência para as demais páginas.
+
+### Decisão
+
+- Base escura com roxo como destaque (estados ativos, bordas, indicadores, progresso, ícones), nunca como cor de texto corrido.
+- Chakra Petch SemiBold (600) como peso padrão da interface e Bold (700) para a maior hierarquia. Texto corrido em fonte de sistema. Fontes locais em assets/fonts/, sem CDN. A Inter fica na pasta como alternativa futura, sem ser carregada.
+- Motivo de forma: cantos cortados em diagonal nos cards e nos segmentos da barra.
+- Escala de espaçamento em variáveis CSS (4, 8, 12, 16, 24, 32 e 48 px).
+- Estados (bloqueada, próxima, desbloqueada) distinguíveis por texto, tamanho e ícone, não só por cor. Nada depende de hover.
+- A engrenagem SVG é placeholder, a ser trocada pela arte do grupo do X-BOT.
+
+### Consequências
+
+- As cores finais dependem dos hex do X-BOT. Ficam em variáveis CSS em :root, então a troca é num ponto só.
+- As outras páginas devem herdar do style.css, sem estilos próprios divergentes.
+
+---
+
+## DEC-014 — Contrato de validação dos QR Codes
+
+**Status:** aceita
+
+### Decisão
+
+O QR da estação N abre validar.html?estacao=N. Cinco resultados possíveis: sucesso, repetido, fora de ordem, inválido e erro de armazenamento. Só "sucesso" altera o progresso. Se o salvamento falhar, nunca se mostra sucesso. Recarregar a página é seguro (vira "repetido"). O parâmetro é validado antes de qualquer uso e exibido somente via textContent.
+
+### Limitações aceitas
+
+- O QR não é segurança real (DEC-006).
+- O progresso é por navegador. Confirmado em teste real: dois navegadores no mesmo celular têm progressos separados, e quem abre o QR em outro navegador cai em "fora de ordem". Por ora a mensagem da tela orienta a abrir no mesmo navegador do Hub. Decisão do grupo pendente (instrução impressa nas estações e/ou saída na tela de fora de ordem).
+

@@ -267,6 +267,26 @@ O Hub e as páginas seguintes passam a ter uma direção visual comum antes do i
 
 ---
 
+## 03/10/2026 — Auditoria, Hub, validação de QR e site de teste no ar
+
+### O que foi feito
+
+- Auditoria de segurança somente leitura: sem segredos, sem XSS, sem dependência externa. Três melhorias de baixa gravidade aplicadas (Number.isInteger, try/catch no localStorage, .gitignore).
+- Hub com identidade visual inicial, testado nos estados 0 a 4, em emulador e no celular.
+- validar.html e qr.js com os cinco resultados, testados por console e por URL. O progresso só avança com o QR na ordem certa.
+- GitHub Pages ligado na branch dev apenas para teste. A hospedagem final não foi decidida.
+- O jogo passa a se chamar X-BOT (nos documentos anteriores aparece como Robot TCG).
+
+### O que descobrimos
+
+O progresso é por navegador. Um QR aberto em navegador diferente do Hub cai em "fora de ordem". Hoje só a mensagem da tela mitiga isso.
+
+### Ainda não validado
+
+Leitura de QR real pela câmera, abertura de dentro do WhatsApp, conteúdo das estações, conclusão e integração com o X-BOT.
+
+---
+
 ## Próximas entradas
 
 O DEVLOG só deve ganhar uma nova entrada quando houver algo realmente relevante, por exemplo:
@@ -274,7 +294,7 @@ O DEVLOG só deve ganhar uma nova entrada quando houver algo realmente relevante
 - Hub implementado;
 - integração dos QR Codes;
 - conteúdo das estações integrado;
-- integração do Robot TCG;
+- integração do X-BOT;
 - problema técnico importante;
 - testes relevantes;
 - deploy;

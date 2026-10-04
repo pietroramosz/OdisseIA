@@ -15,6 +15,7 @@ O projeto utiliza IA como ferramenta de apoio em várias etapas.
 De forma geral:
 
 - **ChatGPT** ajuda mais na parte de planejamento, análise, organização, UX, arquitetura, revisão e documentação;
+- **Claude (chat)** é usado principalmente para revisão crítica, análise de risco, revisão e montagem de prompts para o Claude Code e conferência de resultados;
 - **Claude Code** entra mais diretamente na implementação e edição do código;
 - decisões finais, testes, validação e responsabilidade continuam sendo humanas.
 
@@ -246,6 +247,28 @@ Esse foi o primeiro exemplo completo do ciclo:
 ```text
 especificação → implementação → teste → commit
 ```
+
+---
+
+### 7.6 Validação de progresso que aceitava número decimal
+
+Uma revisão em chat considerou a validação do progresso robusta. Uma auditoria posterior, feita direto no código, mostrou que o valor 2.5 passava na checagem, porque ela só testava se era número. Foi corrigido com `Number.isInteger` e testado no console.
+
+Lição: revisão de uma IA que não rodou o código não é validação.
+
+---
+
+### 7.7 A IA não conseguiu testar o resultado
+
+O Claude Code informou que o painel de pré-visualização dele bloqueia o `localStorage` e que, por isso, os estados do Hub não foram testados por ele. Os testes foram feitos por uma pessoa, no navegador e no celular.
+
+Lição: "rodou sem erro" não é o mesmo que "está correto".
+
+---
+
+### 7.8 Referência visual sem trazer a stack
+
+Foi usada uma referência de componentes feita para React, Tailwind e TypeScript. O prompt proibiu explicitamente instalar dependências, e o visual foi recriado em HTML e CSS puros, conforme a DEC-003.
 
 ---
 
