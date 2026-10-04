@@ -6,9 +6,31 @@
   <title>OdisseIA — Hub</title>
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body>
-  <h1>Hub</h1>
-  <p>Central da jornada do visitante.</p>
+<body class="pagina-hub">
+  <header class="cabecalho">
+    <h1 id="titulo-odisseia" class="titulo-marca">OdisseIA</h1>
+  </header>
+
+  <main>
+    <section class="progresso">
+      <p id="progresso-texto" class="progresso__texto"></p>
+      <div id="progresso-barra" class="barra" role="progressbar" aria-label="Progresso da jornada" aria-valuemin="0" aria-valuemax="4" aria-valuenow="0"></div>
+    </section>
+
+    <section aria-label="Estações">
+      <ol id="lista-estacoes" class="estacoes"></ol>
+    </section>
+
+    <section aria-label="Etapas finais">
+      <ul id="lista-finais" class="finais"></ul>
+    </section>
+  </main>
+
+  <template id="modelo-marcador">
+    <svg class="marcador" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path fill="currentColor" fill-rule="evenodd" d="M10.5 2h3l.5 2.6a7.9 7.9 0 0 1 1.9.8l2.2-1.5 2.1 2.1-1.5 2.2c.4.6.7 1.2.8 1.9L22 10.5v3l-2.6.5a7.9 7.9 0 0 1-.8 1.9l1.5 2.2-2.1 2.1-2.2-1.5a7.9 7.9 0 0 1-1.9.8L13.5 22h-3l-.5-2.6a7.9 7.9 0 0 1-1.9-.8l-2.2 1.5-2.1-2.1 1.5-2.2a7.9 7.9 0 0 1-.8-1.9L2 13.5v-3l2.6-.5c.2-.7.5-1.3.8-1.9L4.9 5.9l2.1-2.1 2.2 1.5c.6-.4 1.2-.7 1.9-.8zM12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7z"/>
+    </svg>
+  </template>
 
   <script src="assets/js/config.js"></script>
   <script src="assets/js/progresso.js"></script>
