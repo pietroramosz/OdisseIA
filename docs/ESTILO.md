@@ -16,4 +16,4 @@ Vale para todas as páginas (DEC-011 e DEC-013).
 &#x20; \- Verso da carta só na Estação 4 e na Conclusão, em tamanho de carta (200 a 280 px de largura), com loading="lazy" e dimensões declaradas.
 \- Proibido: glow generalizado, gradiente excessivo, glassmorphism, emoji como ícone, hover como requisito, texto pequeno em contorno, fonte nova sem decisão explícita.
 \- Acessibilidade: contraste 4,5:1 no texto e 3:1 na interface, alvos de 44px, foco visível (cuidado com clip-path cortando o contorno), prefers-reduced-motion, estados nunca só por cor, sem rolagem horizontal entre 360 e 430px.
-\- Layout: celular primeiro. A partir de 768px, uma coluna centralizada de até 640px em todas as páginas. Layout desktop mais largo (por exemplo, bento no Hub) fica fora do MVP e só entra com decisão explícita.
+\- Layout: celular primeiro. Nas páginas em geral, uma coluna centralizada de até 640px. No Hub, a partir de 900px, o layout atual pode chegar a 900px e usa grade 2x2 para as estações. Outras expansões de desktop ou layouts mais largos ficam fora do MVP e só entram com decisão explícita.

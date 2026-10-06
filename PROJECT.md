@@ -30,12 +30,12 @@ Durante o desenvolvimento, usamos quatro estados para evitar confusão:
 - **Implementado:** já existe no código;
 - **Validado:** foi implementado e testado no fluxo esperado.
 
-Situação em 03/10/2026:
+Situação revisada em 06/10/2026:
 
-- **Validado:** sistema de progresso (progresso.js), testado no console, incluindo dado corrompido e número decimal.
-- **Implementado e testado em emulador e no celular:** Hub (hub.html), nos estados 0 a 4.
-- **Implementado e testado por console e URL, ainda não validado com câmera real nem com WhatsApp:** validação de QR (validar.html e qr.js).
-- **Planejado:** conteúdo das estações, conclusão, integração com o X-BOT e QR Codes impressos.
+- **Validado:** sistema de progresso (`progresso.js`), testado no console, incluindo dado corrompido e número decimal.
+- **Implementado e testado em emulador e no celular:** Hub (`hub.html`), nos estados 0 a 4. A versão atual já usa o nome X-BOT, engrenagens em PNG, roxo `#CD5EFA` e grade 2x2 no desktop.
+- **Implementado e testado por console e URL, ainda não validado com câmera real nem com WhatsApp:** validação de QR (`validar.html` e `qr.js`).
+- **Ainda em placeholder ou por implementar:** visão geral (`index.html`), conteúdo e estados finais das quatro páginas de estação, conclusão, integração com o X-BOT e QR Codes impressos.
 
 ---
 
@@ -223,10 +223,9 @@ A função dele é validar que o visitante chegou àquela estação física e en
 
 Por isso, o progresso não deve avançar apenas porque alguém abriu diretamente uma página.
 
-O comportamento já está definido, mas a integração completa dos QR Codes ainda faz parte das próximas etapas de implementação.
+A validação digital já está implementada em `validar.html` e `qr.js`. O que ainda falta é validar o fluxo físico com QR real pela câmera, testar a abertura por aplicativos como o WhatsApp e gerar/imprimir os QR Codes definitivos depois que a URL final estiver fechada.
 
 O QR Code faz parte da lógica da experiência, mas não deve ser tratado como mecanismo de segurança real.
-
 
 Cada QR abre `validar.html?estacao=N`. Só o QR da próxima estação na ordem avança o progresso; QR repetido, fora de ordem ou inválido não altera nada. O progresso fica salvo no navegador usado, então abrir o QR em um navegador diferente do Hub resulta em "fora de ordem". A tela explica isso ao visitante (DEC-014).
 
@@ -391,9 +390,44 @@ A ideia é manter o projeto simples enquanto isso for suficiente.
 
 ---
 
-## 16. Outros arquivos
+## 16. Pendências atuais
+
+**Última revisão:** 06/10/2026  
+**Data externa principal:** feira em **29/10/2026**.
+
+Esta seção guarda apenas trabalho concreto ainda aberto. Ela não substitui o DEVLOG: quando uma pendência relevante for concluída, ela sai daqui e pode virar um marco no histórico.
+
+### Necessárias para fechar a experiência da feira
+
+- [ ] Implementar a visão geral de `index.html`.
+- [ ] Criar o esqueleto definitivo das páginas das estações, incluindo o estado bloqueado, antes de inserir a copy final.
+- [ ] Fechar e inserir o conteúdo das Estações 1–3 a partir das falas finais dos grupos.
+- [ ] Manter a Estação 4 sincronizada apenas com mecânicas realmente implementadas no X-BOT.
+- [ ] Implementar a página de conclusão e a mensagem de desbloqueio do X-BOT.
+- [ ] Integrar a build utilizável do X-BOT e preencher `gameUrl`; decidir `downloadUrl` apenas se houver versão para download.
+- [ ] Definir hospedagem e URL final antes de gerar ou imprimir os QR Codes definitivos.
+- [ ] Testar QR real pela câmera e abertura por WhatsApp/navegador interno.
+- [ ] Definir como comunicar ao visitante a exigência de usar o mesmo navegador do Hub.
+- [ ] Fazer um teste completo em celular do fluxo: visão geral → Hub → QR1 → 1 → QR2 → 2 → QR3 → 3 → QR4 → 4 → conclusão → X-BOT.
+- [ ] Confirmar a cor final do X-BOT; enquanto isso, `#CD5EFA` continua provisório.
+
+### A avaliar antes da versão final
+
+Estes itens já apareceram nas discussões, mas não são tratados aqui como compromisso com data definida:
+
+- créditos da equipe e do grupo do X-BOT;
+- favicon;
+- comportamento do site depois da feira;
+- necessidade de tutorial/instruções do X-BOT.
+
+Não serão criados prazos artificiais para esses itens. Se algum deles virar requisito, entra na lista principal com contexto e, quando necessário, data.
+
+---
+
+## 17. Outros arquivos
 
 - [`README.md`](./README.md)
 - [`AI-WORKFLOW.md`](./AI-WORKFLOW.md)
 - [`DECISIONS.md`](./DECISIONS.md)
 - [`DEVLOG.md`](./DEVLOG.md)
+- [`docs/ESTILO.md`](./docs/ESTILO.md)

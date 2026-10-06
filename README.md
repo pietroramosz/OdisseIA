@@ -122,10 +122,11 @@ Mais detalhes estão em [`AI-WORKFLOW.md`](./AI-WORKFLOW.md).
 
 Além deste README, o projeto possui:
 
-- [`PROJECT.md`](./PROJECT.md) — explica como o projeto está estruturado;
+- [`PROJECT.md`](./PROJECT.md) — explica como o projeto está estruturado e mantém as pendências atuais;
 - [`AI-WORKFLOW.md`](./AI-WORKFLOW.md) — mostra como as ferramentas de IA entram no processo;
 - [`DECISIONS.md`](./DECISIONS.md) — registra decisões importantes e seus motivos;
-- [`DEVLOG.md`](./DEVLOG.md) — acompanha os principais marcos da criação do site.
+- [`DEVLOG.md`](./DEVLOG.md) — acompanha os principais marcos da criação do site;
+- [`docs/ESTILO.md`](./docs/ESTILO.md) — concentra as regras visuais, responsividade e acessibilidade.
 
 ---
 

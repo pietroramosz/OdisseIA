@@ -287,17 +287,35 @@ Leitura de QR real pela câmera, abertura de dentro do WhatsApp, conteúdo das e
 
 ---
 
+## 04/10/2026 — Guia de estilo e consolidação visual do Hub
+
+### O que foi feito
+
+- Foram adicionados os assets `engrenagem-acesa.png`, `engrenagem-apagada.png` e `verso-carta.png`.
+- O nome X-BOT foi sincronizado no Hub, na configuração e no placeholder da conclusão.
+- O roxo de destaque passou para `#CD5EFA`, ainda tratado como provisório até confirmação com a identidade final do jogo.
+- O Hub passou a usar as engrenagens em PNG e recebeu grade de fundo sutil.
+- No desktop, o Hub passou a usar largura de até 900px e grade 2x2 para as quatro estações.
+- Foi criado `docs/ESTILO.md` para concentrar regras visuais, responsividade e acessibilidade.
+
+### Impacto
+
+O Hub deixou de ser apenas a primeira implementação visual e passou a funcionar como referência concreta para as próximas páginas.
+
+Essa etapa também mostrou a necessidade de manter o guia de estilo sincronizado com o código quando uma regra de layout muda.
+
+---
+
 ## Próximas entradas
 
 O DEVLOG só deve ganhar uma nova entrada quando houver algo realmente relevante, por exemplo:
 
-- Hub implementado;
-- integração dos QR Codes;
 - conteúdo das estações integrado;
+- conclusão implementada;
 - integração do X-BOT;
+- definição da URL final e deploy definitivo;
+- testes físicos de QR e fluxo completo;
 - problema técnico importante;
-- testes relevantes;
-- deploy;
 - versão final da feira.
 
 Pequenos ajustes continuam ficando apenas no histórico normal do Git.
