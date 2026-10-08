@@ -13,50 +13,94 @@
   </header>
 
   <main>
-    <!-- Introdução: panorama geral da estação, conectando o que o visitante acabou de ver presencialmente -->
     <section class="estacao-intro">
+      <h2 class="bloco__titulo">Das regras à inteligência artificial</h2>
+      <p>A inteligência artificial está presente nos videogames há muito mais tempo do que ferramentas modernas como o ChatGPT.</p>
+      <p>Desde os primeiros jogos, desenvolvedores já precisavam criar maneiras de fazer o computador responder às ações do jogador.</p>
+      <p>No início, esses comportamentos eram extremamente simples. Com o tempo, surgiram técnicas capazes de organizar decisões, encontrar caminhos, analisar situações e até gerar novos conteúdos.</p>
     </section>
 
-    <!-- Bloco 1: Regras simples e máquinas de estados (ex.: Pong, estados como patrulhar/perseguir/atacar/procurar/fugir, rotinas de NPCs) -->
     <section class="bloco">
-      <h2 class="bloco__titulo"></h2>
+      <h2 class="bloco__titulo">Das regras às máquinas de estados</h2>
       <div class="bloco__corpo">
+        <p>Nos primeiros jogos, muitos comportamentos eram controlados por cálculos e regras previamente programadas.</p>
+        <p>Em <strong>Pong</strong>, por exemplo, o adversário controlado pelo computador utilizava cálculos simples para acompanhar a bola.</p>
+        <p>Uma forma comum de organizar comportamentos é utilizar regras como:</p>
+        <ul>
+          <li>se não encontrar o jogador, patrulhar;</li>
+          <li>se detectar o jogador, perseguir;</li>
+          <li>se estiver próximo, atacar;</li>
+          <li>se estiver em perigo, fugir.</li>
+        </ul>
+        <p>As <strong>máquinas de estados</strong> organizam essas ações em diferentes situações.</p>
+        <p>Um personagem pode estar patrulhando, perceber o jogador, começar a persegui-lo e depois mudar novamente de comportamento.</p>
       </div>
     </section>
 
-    <!-- Bloco 2: Navegação (pathfinding) e organização de comportamentos (Behavior Trees e Utility AI) -->
     <section class="bloco">
-      <h2 class="bloco__titulo"></h2>
+      <h2 class="bloco__titulo">Encontrando caminhos e escolhendo ações</h2>
       <div class="bloco__corpo">
+        <p>Quando os cenários ficaram maiores, os personagens também precisaram aprender a navegar por eles.</p>
+        <p>O <strong>pathfinding</strong> permite encontrar rotas pelo ambiente, desviando de paredes e outros obstáculos.</p>
+        <p>O algoritmo <strong>A*</strong> é um exemplo de técnica usada para calcular caminhos.</p>
+        <p>Com jogos mais complexos, também surgiram formas mais avançadas de organizar decisões.</p>
+        <p>As <strong>Behavior Trees</strong> estruturam comportamentos como uma árvore de possibilidades.</p>
+        <p>Já a <strong>Utility AI</strong> pode atribuir prioridades às ações disponíveis. Um personagem com pouca vida, por exemplo, pode considerar que se proteger ou se curar é mais importante do que continuar atacando.</p>
+        <p>NPCs também podem utilizar esses sistemas para executar rotinas, como trabalhar, conversar, descansar, patrulhar ou reagir a acontecimentos do mundo.</p>
       </div>
     </section>
 
-    <!-- Bloco 3: Machine Learning e adaptação (padrões em dados/experiências, ajuste de dificuldade, AlphaGo como exemplo complementar) -->
     <section class="bloco">
-      <h2 class="bloco__titulo"></h2>
+      <h2 class="bloco__titulo">Machine Learning e adaptação</h2>
       <div class="bloco__corpo">
+        <p>O <strong>Machine Learning</strong>, ou aprendizado de máquina, permite que sistemas encontrem padrões a partir de dados e experiências.</p>
+        <p>Nos jogos, essas técnicas podem ser utilizadas para analisar comportamentos, estudar estratégias, treinar agentes ou ajudar a ajustar desafios.</p>
+        <p>Um exemplo conhecido apresentado na pesquisa é o <strong>AlphaGo</strong>, que combinou aprendizado de máquina e técnicas de busca para jogar Go.</p>
+        <p>Também existem sistemas adaptativos capazes de alterar comportamentos ou desafios de acordo com as ações do jogador.</p>
+        <p>Isso não significa necessariamente que todo inimigo esteja "aprendendo" como uma pessoa. Muitas vezes, o sistema está apenas utilizando regras e informações previamente definidas para responder de maneiras diferentes.</p>
       </div>
     </section>
 
-    <!-- Bloco 4: IA generativa (diálogos, histórias, personagens, imagens, músicas, vozes, cenários) e comparação curta com IA tradicional -->
     <section class="bloco">
-      <h2 class="bloco__titulo"></h2>
+      <h2 class="bloco__titulo">IA generativa e o futuro</h2>
       <div class="bloco__corpo">
+        <p>A <strong>IA generativa</strong> amplia novamente as possibilidades.</p>
+        <p>Em vez de apenas escolher uma ação, esses sistemas podem ajudar a produzir novos conteúdos, como:</p>
+        <ul>
+          <li>diálogos;</li>
+          <li>histórias;</li>
+          <li>personagens;</li>
+          <li>imagens;</li>
+          <li>músicas;</li>
+          <li>vozes;</li>
+          <li>cenários.</li>
+        </ul>
+        <p>Isso pode permitir experiências mais variadas, mas também cria novos desafios.</p>
+        <p>O conteúdo gerado precisa continuar coerente com o mundo do jogo, respeitar suas regras e não prejudicar o equilíbrio da experiência.</p>
+        <p>A IA tradicional, portanto, não desapareceu.</p>
+        <p>Regras, máquinas de estados, pathfinding, Behavior Trees e outras técnicas continuam úteis porque oferecem controle e previsibilidade.</p>
+        <p>Em muitos casos, tecnologias diferentes podem trabalhar juntas.</p>
       </div>
     </section>
 
-    <!-- Timeline/cards: exemplos e ponte conceitual com TCGs/X-BOT (ex.: Pac-Man, A*, escolha de cartas, análise de jogadas, testes de balanceamento — como possibilidades gerais, não recursos confirmados) -->
     <section class="estacao-cards">
-      <h2 class="bloco__titulo"></h2>
+      <h2 class="bloco__titulo">A evolução em uma sequência</h2>
       <ul class="cartoes">
-        <li class="cartoes__item"></li>
-        <li class="cartoes__item"></li>
-        <li class="cartoes__item"></li>
+        <li class="cartoes__item">Regras simples</li>
+        <li class="cartoes__item">Máquinas de estados</li>
+        <li class="cartoes__item">Pathfinding e navegação</li>
+        <li class="cartoes__item">Behavior Trees e Utility AI</li>
+        <li class="cartoes__item">Machine Learning</li>
+        <li class="cartoes__item">IA generativa</li>
       </ul>
     </section>
 
-    <!-- Fechamento: transição para a Estação 4 (X-BOT) -->
     <section class="estacao-fechamento">
+      <h2 class="bloco__titulo">E o X-BOT?</h2>
+      <p>Em jogos de cartas, uma inteligência artificial pode analisar jogadas, escolher cartas e controlar um adversário.</p>
+      <p>Esses conceitos ajudam a criar uma ponte entre esta estação e o <strong>X-BOT</strong>, jogo desenvolvido para o OdisseIA.</p>
+      <p>Isso não significa que todas as técnicas apresentadas aqui estejam implementadas no X-BOT. A tecnologia utilizada no jogo depende do que for realmente concluído pelo grupo responsável.</p>
+      <p>Na próxima estação, você poderá conhecer essa aplicação na prática.</p>
     </section>
   </main>
 
