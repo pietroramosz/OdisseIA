@@ -8,20 +8,22 @@
 </head>
 <body class="pagina-hub">
   <header class="cabecalho">
-    <h1 id="titulo-odisseia" class="titulo-marca">OdisseIA</h1>
+    <div class="painel-status">
+      <h1 id="titulo-odisseia" class="titulo-marca">OdisseIA</h1>
+      <section class="progresso" aria-label="Progresso">
+        <p id="progresso-texto" class="progresso__texto"></p>
+        <div id="progresso-barra" class="barra" role="progressbar" aria-label="Progresso da jornada" aria-valuemin="0" aria-valuemax="4" aria-valuenow="0"></div>
+      </section>
+    </div>
   </header>
 
   <main>
-    <section class="progresso">
-      <p id="progresso-texto" class="progresso__texto"></p>
-      <div id="progresso-barra" class="barra" role="progressbar" aria-label="Progresso da jornada" aria-valuemin="0" aria-valuemax="4" aria-valuenow="0"></div>
-    </section>
-
     <section aria-label="Estações">
       <ol id="lista-estacoes" class="estacoes"></ol>
     </section>
 
-    <section aria-label="Etapas finais">
+    <section class="destino" aria-labelledby="destino-titulo">
+      <h2 id="destino-titulo" class="destino__titulo">DESTINO FINAL</h2>
       <ul id="lista-finais" class="finais"></ul>
     </section>
   </main>

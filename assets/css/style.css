@@ -245,6 +245,307 @@ main {
   color: var(--cor-texto-secundario);
 }
 
+/* Hub: painel de status, trilho das estações e destino final.
+   Tudo escopado em .pagina-hub para não mudar as outras páginas. */
+
+.pagina-hub .visualmente-oculto {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.pagina-hub .cabecalho {
+  padding-bottom: var(--espaco-6);
+}
+
+.pagina-hub .painel-status {
+  padding: var(--espaco-4) var(--espaco-6) var(--espaco-6);
+  background: var(--cor-superficie);
+  clip-path: var(--recorte);
+}
+
+.pagina-hub .painel-status .titulo-marca {
+  padding-bottom: var(--espaco-3);
+  margin-bottom: var(--espaco-4);
+  border-bottom: 1px solid var(--cor-superficie-alta);
+}
+
+.pagina-hub .progresso {
+  margin: 0;
+}
+
+.pagina-hub .progresso__texto {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--espaco-3);
+  margin: 0 0 var(--espaco-3);
+}
+
+.pagina-hub .progresso__rotulo,
+.pagina-hub .barra__numero,
+.pagina-hub .destino__titulo {
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--cor-texto-secundario);
+}
+
+.pagina-hub .progresso__numero {
+  font-size: 2rem;
+}
+
+.pagina-hub .barra__celula {
+  display: grid;
+  grid-template-rows: var(--espaco-3) auto;
+  gap: var(--espaco-2);
+}
+
+/* Segmento vazio = trilho fino; cheio = bloco alto roxo. A diferença é de forma, não só de cor. */
+.pagina-hub .barra__segmento:not(.barra__segmento--cheio) {
+  align-self: end;
+  height: var(--espaco-1);
+  clip-path: none;
+}
+
+.pagina-hub .barra__numero {
+  color: var(--cor-texto-atenuado);
+}
+
+.pagina-hub .barra__celula--cheia .barra__numero {
+  color: var(--cor-texto);
+}
+
+.pagina-hub .estacoes {
+  gap: var(--espaco-4);
+}
+
+.pagina-hub .cartao,
+.pagina-hub .estacao .cartao {
+  display: flex;
+  align-items: stretch;
+  gap: var(--espaco-3);
+  padding: 0;
+  background: none;
+  box-shadow: none;
+  clip-path: none;
+}
+
+.pagina-hub .cartao:focus-visible {
+  outline: 2px solid var(--cor-destaque);
+  outline-offset: var(--espaco-1);
+  box-shadow: none;
+}
+
+.pagina-hub .cartao__corpo {
+  flex: 1;
+  padding: var(--espaco-3) var(--espaco-6) var(--espaco-3) var(--espaco-4);
+  background: var(--cor-superficie);
+  clip-path: var(--recorte);
+}
+
+.pagina-hub .rotulo {
+  margin-bottom: var(--espaco-1);
+}
+
+/* Nó do trilho: engrenagem, número da estação e a linha até a próxima. */
+.pagina-hub .estacao__no {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 56px;
+}
+
+.pagina-hub .marcador {
+  width: 44px;
+  height: 44px;
+}
+
+.pagina-hub .estacao--proxima .marcador {
+  width: 56px;
+  height: 56px;
+}
+
+.pagina-hub .estacao--bloqueada .marcador {
+  width: 36px;
+  height: 36px;
+  margin-top: var(--espaco-1);
+}
+
+.pagina-hub .estacao__numero {
+  margin-top: var(--espaco-1);
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 1.375rem;
+  line-height: 1;
+  color: var(--cor-texto);
+}
+
+.pagina-hub .estacao--proxima .estacao__numero {
+  font-size: 1.75rem;
+}
+
+.pagina-hub .estacao--bloqueada .estacao__numero {
+  color: var(--cor-texto-atenuado);
+}
+
+.pagina-hub .estacao__no::after {
+  content: "";
+  flex: 1;
+  min-height: var(--espaco-3);
+  margin-top: var(--espaco-2);
+  margin-bottom: calc(-1 * var(--espaco-4));
+  border-left: 2px dashed var(--cor-apagado);
+}
+
+.pagina-hub .estacao--liga-desbloqueada .estacao__no::after {
+  border-left: 2px solid var(--cor-texto-atenuado);
+}
+
+.pagina-hub .estacao--liga-proxima .estacao__no::after {
+  border-left: 2px solid var(--cor-destaque);
+}
+
+.pagina-hub .estacao:last-child .estacao__no::after {
+  content: none;
+}
+
+.pagina-hub .estacao__titulo {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.pagina-hub .estacao__acao,
+.pagina-hub .final__detalhe {
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-2);
+  margin-top: var(--espaco-2);
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: var(--cor-texto-secundario);
+}
+
+/* Próxima estação: o elemento principal da tela. */
+.pagina-hub .estacao--proxima .cartao__corpo,
+.pagina-hub .final--principal .cartao__corpo {
+  padding: var(--espaco-4) var(--espaco-6) 0;
+  background: var(--cor-superficie-alta);
+  box-shadow: inset var(--espaco-1) 0 0 var(--cor-destaque);
+}
+
+.pagina-hub .estacao--proxima .rotulo,
+.pagina-hub .final--principal .rotulo {
+  display: inline-block;
+  margin-bottom: var(--espaco-3);
+  padding: var(--espaco-1) var(--espaco-2);
+  background: var(--cor-destaque);
+  color: var(--cor-fundo);
+  clip-path: polygon(
+    var(--espaco-1) 0,
+    100% 0,
+    100% calc(100% - var(--espaco-1)),
+    calc(100% - var(--espaco-1)) 100%,
+    0 100%,
+    0 var(--espaco-1)
+  );
+}
+
+.pagina-hub .estacao--proxima .estacao__titulo,
+.pagina-hub .final--principal .final__titulo {
+  font-weight: 700;
+  font-size: 1.375rem;
+  line-height: 1.2;
+}
+
+.pagina-hub .estacao--proxima .estacao__acao,
+.pagina-hub .final--principal .final__detalhe {
+  justify-content: space-between;
+  min-height: 44px;
+  margin-top: var(--espaco-4);
+  border-top: 1px solid var(--cor-apagado);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--cor-texto);
+}
+
+/* Bloqueada: dormente. Sem painel preenchido, só o recorte sobre o fundo. */
+.pagina-hub .estacao--bloqueada .cartao__corpo,
+.pagina-hub .final--bloqueado .cartao__corpo {
+  background: var(--cor-fundo);
+  box-shadow: inset 0 0 0 1px var(--cor-superficie-alta);
+}
+
+.pagina-hub .estacao--bloqueada .rotulo,
+.pagina-hub .estacao--bloqueada .estacao__titulo,
+.pagina-hub .estacao--bloqueada .estacao__acao,
+.pagina-hub .final--bloqueado .rotulo,
+.pagina-hub .final--bloqueado .final__detalhe {
+  color: var(--cor-texto-atenuado);
+}
+
+.pagina-hub .estacao--bloqueada .seta {
+  display: none;
+}
+
+/* Destino final: separado do trilho. */
+.pagina-hub .destino {
+  margin-top: var(--espaco-8);
+}
+
+.pagina-hub .destino__titulo {
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-3);
+  margin: 0 0 var(--espaco-3);
+}
+
+.pagina-hub .destino__titulo::after {
+  content: "";
+  flex: 1;
+  border-top: 1px solid var(--cor-apagado);
+}
+
+.pagina-hub .finais {
+  grid-template-columns: 1fr 1fr;
+  margin-top: 0;
+}
+
+.pagina-hub .finais--completa {
+  grid-template-columns: 1fr;
+}
+
+.pagina-hub .final .cartao,
+.pagina-hub .final .cartao__corpo {
+  display: block;
+  height: 100%;
+}
+
+.pagina-hub .final .cartao__corpo {
+  padding: var(--espaco-3) var(--espaco-4);
+}
+
+.pagina-hub .final--principal .cartao__corpo {
+  padding: var(--espaco-4) var(--espaco-6) 0;
+}
+
+@media (hover: hover) {
+  .pagina-hub a.cartao:hover .cartao__corpo {
+    background: var(--cor-superficie-alta);
+  }
+
+  .pagina-hub .estacao--bloqueada a.cartao:hover .cartao__corpo {
+    background: var(--cor-superficie-escura);
+  }
+}
+
 .pagina-estacao .cabecalho {
   padding-bottom: var(--espaco-6);
 }
@@ -399,8 +700,9 @@ main {
     grid-template-columns: 1fr;
   }
 
-  .pagina-hub .estacao--proxima .cartao {
-    padding-left: var(--espaco-4);
+  /* Na grade 2x2 não há sequência vertical: o trilho some, o nó fica. */
+  .pagina-hub .estacao__no::after {
+    content: none;
   }
 }
 

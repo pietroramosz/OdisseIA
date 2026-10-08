@@ -19,6 +19,13 @@ const ESTACAO_ACOES = {
   bloqueada: "Abrir estação"
 };
 
+// Tamanho da engrenagem no trilho: a próxima é a maior, a bloqueada a menor.
+const ESTACAO_MARCADOR_TAMANHO = {
+  desbloqueada: 44,
+  proxima: 56,
+  bloqueada: 36
+};
+
 function renderizarHub() {
   const ultima = obterProgresso().ultimaEstacaoDesbloqueada;
   const total = OdisseIAConfig.totalEstacoes;
@@ -31,7 +38,8 @@ function renderizarHub() {
 
 function renderizarProgresso(ultima, total) {
   const texto = document.getElementById("progresso-texto");
-  texto.textContent = "Progresso da jornada — ";
+  texto.textContent = "";
+  texto.appendChild(criarTexto("span", "progresso__rotulo", "PROGRESSO DA JORNADA"));
   texto.appendChild(criarTexto("span", "progresso__numero", ultima + "/" + total));
 
   const barra = document.getElementById("progresso-barra");
@@ -39,11 +47,21 @@ function renderizarProgresso(ultima, total) {
   barra.textContent = "";
 
   for (let n = 1; n <= total; n++) {
+    const cheia = n <= ultima;
+
+    const celula = document.createElement("span");
+    celula.className = cheia
+      ? "barra__celula barra__celula--cheia"
+      : "barra__celula";
+
     const segmento = document.createElement("span");
-    segmento.className = n <= ultima
+    segmento.className = cheia
       ? "barra__segmento barra__segmento--cheio"
       : "barra__segmento";
-    barra.appendChild(segmento);
+    celula.appendChild(segmento);
+    celula.appendChild(criarTexto("span", "barra__numero", doisDigitos(n)));
+
+    barra.appendChild(celula);
   }
 }
 
@@ -51,6 +69,7 @@ function renderizarEstacoes(ultima, total) {
   const lista = document.getElementById("lista-estacoes");
   lista.textContent = "";
 
+  const estados = [];
   for (let n = 1; n <= total; n++) {
     let estado = "bloqueada";
     if (n <= ultima) {
@@ -58,13 +77,21 @@ function renderizarEstacoes(ultima, total) {
     } else if (n === ultima + 1) {
       estado = "proxima";
     }
-    lista.appendChild(criarCardEstacao(n, estado));
+    estados.push(estado);
+  }
+
+  // O trecho do trilho que sai de uma estação tem o estilo da estação seguinte.
+  for (let n = 1; n <= total; n++) {
+    lista.appendChild(criarCardEstacao(n, estados[n - 1], estados[n] || null));
   }
 }
 
-function criarCardEstacao(numero, estado) {
+function criarCardEstacao(numero, estado, estadoSeguinte) {
   const item = document.createElement("li");
   item.className = "estacao estacao--" + estado;
+  if (estadoSeguinte) {
+    item.classList.add("estacao--liga-" + estadoSeguinte);
+  }
   if (numero === OdisseIAConfig.totalEstacoes && estado === "desbloqueada") {
     item.classList.add("estacao--final");
   }
@@ -73,23 +100,37 @@ function criarCardEstacao(numero, estado) {
   cartao.className = "cartao";
   cartao.href = "estacao-" + numero + ".html";
 
+  // Nó do trilho: engrenagem + número da estação física.
+  const no = document.createElement("span");
+  no.className = "estacao__no";
+
   const marcador = document.createElement("img");
   marcador.className = "marcador";
   marcador.alt = "";
   marcador.src = estado === "desbloqueada"
     ? "assets/img/engrenagem-acesa.png"
     : "assets/img/engrenagem-apagada.png";
-  marcador.width = 56;
-  marcador.height = 56;
-  cartao.appendChild(marcador);
+  marcador.width = ESTACAO_MARCADOR_TAMANHO[estado];
+  marcador.height = ESTACAO_MARCADOR_TAMANHO[estado];
+  no.appendChild(marcador);
+
+  const numeroTexto = document.createElement("span");
+  numeroTexto.className = "estacao__numero";
+  numeroTexto.appendChild(criarTexto("span", "visualmente-oculto", "Estação "));
+  numeroTexto.appendChild(document.createTextNode(doisDigitos(numero)));
+  no.appendChild(numeroTexto);
+
+  cartao.appendChild(no);
 
   const corpo = document.createElement("div");
   corpo.className = "cartao__corpo";
 
   corpo.appendChild(criarTexto("p", "rotulo", ESTACAO_ROTULOS[estado]));
-  corpo.appendChild(criarTexto("h2", "estacao__titulo", "Estação " + numero));
-  corpo.appendChild(criarTexto("p", "estacao__nome", ESTACOES_NOMES[numero - 1]));
-  corpo.appendChild(criarTexto("span", "estacao__acao", ESTACAO_ACOES[estado]));
+  corpo.appendChild(criarTexto("h2", "estacao__titulo", ESTACOES_NOMES[numero - 1]));
+
+  const acao = criarTexto("span", "estacao__acao", ESTACAO_ACOES[estado]);
+  acao.appendChild(criarSeta());
+  corpo.appendChild(acao);
 
   cartao.appendChild(corpo);
   item.appendChild(cartao);
@@ -105,6 +146,7 @@ function renderizarFinais(completa) {
     titulo: "Conclusão",
     href: completa ? "final.html" : null,
     bloqueado: !completa,
+    principal: completa,
     rotulo: completa ? "DISPONÍVEL" : "BLOQUEADA",
     detalhe: completa ? "Ver conclusão" : "Disponível após a 4ª estação"
   }));
@@ -122,7 +164,9 @@ function renderizarFinais(completa) {
 
 function criarCardFinal(dados) {
   const item = document.createElement("li");
-  item.className = "final" + (dados.bloqueado ? " final--bloqueado" : "");
+  item.className = "final"
+    + (dados.bloqueado ? " final--bloqueado" : "")
+    + (dados.principal ? " final--principal" : "");
 
   const cartao = document.createElement(dados.href ? "a" : "div");
   cartao.className = "cartao";
@@ -133,12 +177,27 @@ function criarCardFinal(dados) {
   const corpo = document.createElement("div");
   corpo.className = "cartao__corpo";
   corpo.appendChild(criarTexto("p", "rotulo", dados.rotulo));
-  corpo.appendChild(criarTexto("h2", "final__titulo", dados.titulo));
-  corpo.appendChild(criarTexto("span", "final__detalhe", dados.detalhe));
+  corpo.appendChild(criarTexto("h3", "final__titulo", dados.titulo));
+
+  const detalhe = criarTexto("span", "final__detalhe", dados.detalhe);
+  if (dados.href) {
+    detalhe.appendChild(criarSeta());
+  }
+  corpo.appendChild(detalhe);
 
   cartao.appendChild(corpo);
   item.appendChild(cartao);
   return item;
+}
+
+function criarSeta() {
+  const seta = criarTexto("span", "seta", "→");
+  seta.setAttribute("aria-hidden", "true");
+  return seta;
+}
+
+function doisDigitos(numero) {
+  return (numero < 10 ? "0" : "") + numero;
 }
 
 function criarTexto(tag, classe, texto) {
