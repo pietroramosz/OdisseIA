@@ -1006,6 +1006,157 @@ main {
   }
 }
 
+/* Desktop, só com conteúdo desbloqueado: dossiê em duas colunas — 240px de contexto,
+   40px de respiro e até 680px de conteúdo (encolhe entre 900 e 991px). Cada rótulo cai
+   na coluna 1 e o resto da seção na coluna 2, na ordem do DOM; nada usa `order`. */
+@media (min-width: 900px) {
+  .pagina-estacao--desbloqueada {
+    --dossie-contexto: 240px;
+    --dossie-respiro: 40px;
+  }
+
+  .pagina-estacao.pagina-estacao--desbloqueada main {
+    max-width: calc(960px + 2 * var(--espaco-4));
+    padding-top: var(--espaco-8);
+  }
+
+  .pagina-estacao--desbloqueada .briefing,
+  .pagina-estacao--desbloqueada .capitulo,
+  .pagina-estacao--desbloqueada .linha-tempo,
+  .pagina-estacao--desbloqueada .conexao {
+    display: grid;
+    grid-template-columns: var(--dossie-contexto) minmax(0, 680px);
+    column-gap: var(--dossie-respiro);
+    align-items: start;
+  }
+
+  .pagina-estacao--desbloqueada .briefing > *,
+  .pagina-estacao--desbloqueada .capitulo > *,
+  .pagina-estacao--desbloqueada .linha-tempo > *,
+  .pagina-estacao--desbloqueada .conexao > * {
+    grid-column: 2;
+  }
+
+  /* O rótulo ocupa as linhas do título e do primeiro bloco, para não empurrar o corpo. */
+  .pagina-estacao.pagina-estacao--desbloqueada .terminal-rotulo {
+    grid-column: 1;
+    grid-row: span 2;
+    margin: 0;
+  }
+
+  /* Texto corrido numa medida confortável; títulos e módulos usam a coluna inteira. */
+  .pagina-estacao.pagina-estacao--desbloqueada .briefing p:not(.terminal-rotulo),
+  .pagina-estacao.pagina-estacao--desbloqueada .capitulo__corpo p,
+  .pagina-estacao.pagina-estacao--desbloqueada .capitulo__corpo ul,
+  .pagina-estacao.pagina-estacao--desbloqueada .conexao p:not(.terminal-rotulo) {
+    max-width: 62ch;
+  }
+
+  /* Hero horizontal: número grande à esquerda, título à direita, alinhado à coluna de conteúdo. */
+  .pagina-estacao--desbloqueada .terminal-hero__painel {
+    display: grid;
+    grid-template-columns: calc(var(--dossie-contexto) - var(--espaco-6)) minmax(0, 680px);
+    column-gap: var(--dossie-respiro);
+    align-items: center;
+    padding-top: var(--espaco-8);
+    padding-bottom: var(--espaco-8);
+  }
+
+  .pagina-estacao.pagina-estacao--desbloqueada .terminal-hero__rotulo {
+    margin: 0;
+  }
+
+  .pagina-estacao.pagina-estacao--desbloqueada .terminal-hero__numero {
+    display: block;
+    margin: var(--espaco-1) 0;
+    font-size: 4.5rem;
+  }
+
+  .pagina-estacao.pagina-estacao--desbloqueada .terminal-hero .titulo-estacao {
+    margin: 0;
+    font-size: 2.5rem;
+  }
+
+  /* Briefing: sem o fio lateral do celular; o rótulo na coluna de contexto já o marca. */
+  .pagina-estacao--desbloqueada .briefing {
+    margin-top: var(--espaco-12);
+    padding-left: 0;
+    border-left: none;
+  }
+
+  .pagina-estacao.pagina-estacao--desbloqueada .briefing p:not(.terminal-rotulo) {
+    font-size: 1.1875rem;
+  }
+
+  /* Capítulos abertos: separador fino no topo, número grande na coluna de contexto. */
+  .pagina-estacao--desbloqueada .capitulo,
+  .pagina-estacao--desbloqueada .linha-tempo,
+  .pagina-estacao--desbloqueada .conexao {
+    margin-top: var(--espaco-12);
+    padding-top: var(--espaco-8);
+    border-top: 1px solid var(--cor-apagado);
+  }
+
+  .pagina-estacao.pagina-estacao--desbloqueada .capitulo__rotulo {
+    display: block;
+  }
+
+  .pagina-estacao.pagina-estacao--desbloqueada .capitulo__rotulo::after {
+    content: none;
+  }
+
+  .pagina-estacao.pagina-estacao--desbloqueada .capitulo__numero {
+    display: block;
+    margin-top: var(--espaco-1);
+    font-size: 3.5rem;
+  }
+
+  .pagina-estacao.pagina-estacao--desbloqueada .capitulo__titulo {
+    font-size: 1.75rem;
+  }
+
+  /* Linha do tempo: a seção fica aberta; o painel-instrumento é só a lista, numa coluna. */
+  .pagina-estacao.pagina-estacao--desbloqueada .linha-tempo {
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    background: none;
+    clip-path: none;
+  }
+
+  .pagina-estacao.pagina-estacao--desbloqueada .linha-tempo__titulo {
+    margin-bottom: var(--espaco-4);
+  }
+
+  .pagina-estacao.pagina-estacao--desbloqueada .linha-tempo__lista {
+    padding: var(--espaco-6) var(--espaco-8);
+    background: var(--cor-superficie);
+    clip-path: var(--recorte);
+  }
+
+  .pagina-estacao.pagina-estacao--desbloqueada .linha-tempo__item {
+    grid-template-columns: 5.25rem 1fr;
+  }
+
+  .pagina-estacao.pagina-estacao--desbloqueada .linha-tempo__lista--etapas .linha-tempo__item {
+    grid-template-columns: var(--espaco-8) 1fr;
+  }
+
+  /* Próxima conexão aberta, como os capítulos; o botão principal fecha a página. */
+  .pagina-estacao.pagina-estacao--desbloqueada .conexao {
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    background: none;
+    clip-path: none;
+  }
+
+  .pagina-estacao.pagina-estacao--desbloqueada .conexao__acao {
+    justify-self: start;
+    min-width: 320px;
+  }
+}
+
 /* Index: porta de entrada estática. Hero e "Como funciona" são os únicos painéis;
    o resto é tipografia, número e linha. Tudo escopado em .pagina-index. */
 
@@ -1274,6 +1425,153 @@ main {
 
   .pagina-index .index-passo__titulo {
     margin-top: var(--espaco-3);
+  }
+}
+
+/* Metadado da jornada: só aparece no desktop. */
+.pagina-index .index-secao__detalhe {
+  display: none;
+}
+
+/* Desktop: canvas de 960px com distribuição própria por seção. Grid assimétrico,
+   tudo na ordem do DOM; nada usa `order`. */
+@media (min-width: 900px) {
+  .pagina-index main {
+    max-width: calc(960px + 2 * var(--espaco-4));
+    padding-top: var(--espaco-12);
+  }
+
+  /* Hero aberto: marca, proposta e CTA à esquerda; "4 estações" tipográfico à direita. */
+  .pagina-index .index-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 520px) 400px;
+    column-gap: 40px;
+    row-gap: var(--espaco-8);
+    align-items: center;
+    padding: 0 0 var(--espaco-12);
+    background: none;
+    clip-path: none;
+    border-bottom: 1px solid var(--cor-apagado);
+  }
+
+  .pagina-index .index-hero__titulo {
+    font-size: 4.5rem;
+  }
+
+  .pagina-index .index-hero__proposta {
+    max-width: 62ch;
+    font-size: 1.25rem;
+  }
+
+  .pagina-index .index-hero__jornada {
+    grid-column: 2;
+    grid-row: 1;
+    display: block;
+    margin: 0;
+    padding: 0 0 0 var(--espaco-8);
+    border-top: none;
+    border-left: 1px solid var(--cor-apagado);
+    font-family: var(--fonte-corpo);
+    font-weight: 400;
+    font-size: 1.125rem;
+    line-height: 1.5;
+  }
+
+  .pagina-index .index-hero__numero {
+    display: block;
+    font-family: var(--fonte-titulo);
+    font-size: 7.5rem;
+    line-height: 0.9;
+  }
+
+  .pagina-index .index-hero__frase,
+  .pagina-index .index-hero__unidade {
+    display: block;
+  }
+
+  .pagina-index .index-hero__unidade {
+    margin: var(--espaco-2) 0 var(--espaco-3);
+    font-family: var(--fonte-titulo);
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--cor-texto);
+  }
+
+  .pagina-index .index-cta {
+    width: min(100%, 320px);
+    margin-top: 0;
+  }
+
+  /* Como funciona: uma faixa, com o passo 02 um pouco mais largo. */
+  .pagina-index .index-passos {
+    margin-top: var(--espaco-12);
+  }
+
+  .pagina-index .index-passos__lista {
+    grid-template-columns: 1fr 1.3fr 1fr;
+    column-gap: var(--espaco-6);
+  }
+
+  .pagina-index .index-passo::before {
+    right: calc(-1 * var(--espaco-6));
+  }
+
+  .pagina-index .index-passo__texto {
+    max-width: 62ch;
+  }
+
+  /* A jornada: dossiê — rótulo e metadado à esquerda, lista à direita. */
+  .pagina-index .index-jornada {
+    display: grid;
+    grid-template-columns: 240px minmax(0, 680px);
+    column-gap: 40px;
+    align-items: start;
+    padding-top: var(--espaco-8);
+    border-top: 1px solid var(--cor-apagado);
+  }
+
+  .pagina-index .index-jornada .index-secao {
+    display: block;
+    margin: 0;
+  }
+
+  .pagina-index .index-jornada .index-secao::after {
+    content: none;
+  }
+
+  .pagina-index .index-secao__detalhe {
+    display: block;
+    margin-top: var(--espaco-2);
+    color: var(--cor-texto-atenuado);
+  }
+
+  .pagina-index .index-jornada__item {
+    grid-template-columns: 72px 1fr;
+    padding: var(--espaco-4) 0;
+  }
+
+  .pagina-index .index-jornada__item:first-child {
+    padding-top: 0;
+  }
+
+  .pagina-index .index-jornada__numero {
+    font-size: 2.25rem;
+  }
+
+  .pagina-index .index-jornada__nome {
+    font-size: 1.25rem;
+  }
+
+  /* Destino final e CTA deslocados para a coluna de conteúdo: um fechamento diferente. */
+  .pagina-index .index-destino,
+  .pagina-index .index-final {
+    margin-left: 280px;
+  }
+
+  .pagina-index .index-destino__texto {
+    max-width: 62ch;
   }
 }
 
