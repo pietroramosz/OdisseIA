@@ -6,85 +6,111 @@
   <title>OdisseIA — Estação 1</title>
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body class="pagina-estacao">
-  <header class="cabecalho">
-    <p class="rotulo">ESTAÇÃO 01 / 04</p>
-    <h1 class="titulo-estacao">Evolução dos jogos até 1999</h1>
-  </header>
-
+<body class="pagina-estacao" data-estacao="1">
   <main>
-    <section class="estacao-intro">
-      <h2 class="bloco__titulo">Do laboratório ao videogame</h2>
-      <p>Os videogames que conhecemos hoje nasceram de experiências muito mais simples. Antes dos consoles domésticos, dos gráficos em 3D e dos grandes mundos virtuais, computadores enormes e caros já eram utilizados para testar novas formas de interação.</p>
-      <p>Ao longo de algumas décadas, os jogos saíram dos laboratórios, chegaram aos fliperamas, entraram nas casas e se transformaram em uma parte importante da cultura.</p>
-    </section>
+    <!-- Conteúdo da estação: só aparece quando a estação está desbloqueada (app.js). -->
+    <div id="conteudo-estacao" hidden>
+      <header class="terminal-hero">
+        <a class="terminal-voltar" href="hub.html"><span aria-hidden="true">←</span> Voltar ao Hub</a>
+        <div class="terminal-hero__painel">
+          <p class="terminal-hero__rotulo">ESTAÇÃO <span class="terminal-hero__numero">01</span> / 04</p>
+          <h1 class="titulo-estacao">Evolução dos jogos até 1999</h1>
+        </div>
+      </header>
 
-    <section class="bloco">
-      <h2 class="bloco__titulo">Os primeiros experimentos</h2>
-      <div class="bloco__corpo">
-        <p>Nos anos 1950, computadores eram usados principalmente em pesquisas. Mesmo assim, projetos como <strong>Bertie the Brain, OXO e Tennis for Two</strong> mostraram que essas máquinas também poderiam ser usadas para jogar.</p>
-        <p>Em 1961 começou o desenvolvimento de <strong>Spacewar!</strong>, lançado e popularizado em 1962. Nele, dois jogadores controlavam naves espaciais e disputavam uma batalha em tempo real.</p>
-        <p>Esses projetos ainda estavam muito distantes dos videogames atuais, mas ajudaram a demonstrar o potencial dos computadores para criar experiências interativas e competitivas.</p>
-      </div>
-    </section>
+      <section class="briefing">
+        <p class="terminal-rotulo">BRIEFING</p>
+        <h2 class="briefing__titulo">Do laboratório ao videogame</h2>
+        <p>Os videogames que conhecemos hoje nasceram de experiências muito mais simples. Antes dos consoles domésticos, dos gráficos em 3D e dos grandes mundos virtuais, computadores enormes e caros já eram utilizados para testar novas formas de interação.</p>
+        <p>Ao longo de algumas décadas, os jogos saíram dos laboratórios, chegaram aos fliperamas, entraram nas casas e se transformaram em uma parte importante da cultura.</p>
+      </section>
 
-    <section class="bloco">
-      <h2 class="bloco__titulo">Dos laboratórios aos arcades</h2>
-      <div class="bloco__corpo">
-        <p>Nos anos 1970, os jogos começaram a alcançar um público maior.</p>
-        <p><strong>Computer Space</strong> foi uma das primeiras tentativas de transformar esse tipo de experiência em um produto comercial. Pouco depois, <strong>Pong</strong>, lançado em 1972, ajudou a popularizar os videogames.</p>
-        <p>Outros jogos, como <strong>Breakout, Gun Fight, Space Invaders e Asteroids</strong>, também fizeram parte do crescimento dos arcades.</p>
-        <p>Em 1977, o <strong>Atari 2600</strong> ajudou a levar os videogames para dentro das casas. O uso de cartuchos permitia jogar vários títulos diferentes no mesmo console, aproximando cada vez mais essa tecnologia do cotidiano das pessoas.</p>
-      </div>
-    </section>
+      <section class="capitulo">
+        <p class="terminal-rotulo capitulo__rotulo">CAPÍTULO <span class="capitulo__numero">01</span></p>
+        <h2 class="capitulo__titulo">Os primeiros experimentos</h2>
+        <div class="capitulo__corpo">
+          <p>Nos anos 1950, computadores eram usados principalmente em pesquisas. Mesmo assim, projetos como <strong>Bertie the Brain, OXO e Tennis for Two</strong> mostraram que essas máquinas também poderiam ser usadas para jogar.</p>
+          <p>Em 1961 começou o desenvolvimento de <strong>Spacewar!</strong>, lançado e popularizado em 1962. Nele, dois jogadores controlavam naves espaciais e disputavam uma batalha em tempo real.</p>
+          <p>Esses projetos ainda estavam muito distantes dos videogames atuais, mas ajudaram a demonstrar o potencial dos computadores para criar experiências interativas e competitivas.</p>
+        </div>
+      </section>
 
-    <section class="bloco">
-      <h2 class="bloco__titulo">Anos 80: crescimento, crise e recuperação</h2>
-      <div class="bloco__corpo">
-        <p>Durante os anos 1980 surgiram jogos que se tornaram símbolos da história dos videogames.</p>
-        <p><strong>Pac-Man, Tetris e Super Mario Bros.</strong> marcaram gerações com personagens, músicas e mecânicas facilmente reconhecíveis.</p>
-        <p>Mas a indústria também passou por dificuldades. Em 1983 aconteceu uma grande crise no mercado de videogames, ligada, entre outros fatores, ao excesso de produtos e à baixa qualidade de vários lançamentos.</p>
-        <p>Nos anos seguintes, o <strong>NES</strong>, da Nintendo, teve um papel importante na recuperação e reorganização desse mercado.</p>
-      </div>
-    </section>
+      <section class="capitulo">
+        <p class="terminal-rotulo capitulo__rotulo">CAPÍTULO <span class="capitulo__numero">02</span></p>
+        <h2 class="capitulo__titulo">Dos laboratórios aos arcades</h2>
+        <div class="capitulo__corpo">
+          <p>Nos anos 1970, os jogos começaram a alcançar um público maior.</p>
+          <p><strong>Computer Space</strong> foi uma das primeiras tentativas de transformar esse tipo de experiência em um produto comercial. Pouco depois, <strong>Pong</strong>, lançado em 1972, ajudou a popularizar os videogames.</p>
+          <p>Outros jogos, como <strong>Breakout, Gun Fight, Space Invaders e Asteroids</strong>, também fizeram parte do crescimento dos arcades.</p>
+          <p>Em 1977, o <strong>Atari 2600</strong> ajudou a levar os videogames para dentro das casas. O uso de cartuchos permitia jogar vários títulos diferentes no mesmo console, aproximando cada vez mais essa tecnologia do cotidiano das pessoas.</p>
+        </div>
+      </section>
 
-    <section class="bloco">
-      <h2 class="bloco__titulo">Anos 90: tecnologia e cultura</h2>
-      <div class="bloco__corpo">
-        <p>Os anos 1990 marcaram uma das maiores transformações dos videogames.</p>
-        <p>Consoles como <strong>PlayStation e Nintendo 64</strong> ajudaram a popularizar ambientes em 3D, mudando a maneira como os jogadores exploravam os cenários.</p>
-        <p>O crescimento do uso de CDs também permitiu jogos maiores, com mais músicas, vídeos, diálogos e histórias.</p>
-        <p>Mas a transformação não foi apenas tecnológica. Os videogames passaram a se relacionar cada vez mais com outras formas de entretenimento, como cinema e televisão.</p>
-        <p>A franquia <strong>Pokémon</strong> é um exemplo dessa expansão: além dos jogos, passou a envolver desenhos, cartas, brinquedos e outros produtos. Os videogames começaram a se tornar não apenas produtos tecnológicos, mas também grandes fenômenos culturais.</p>
-      </div>
-    </section>
+      <section class="capitulo">
+        <p class="terminal-rotulo capitulo__rotulo">CAPÍTULO <span class="capitulo__numero">03</span></p>
+        <h2 class="capitulo__titulo">Anos 80: crescimento, crise e recuperação</h2>
+        <div class="capitulo__corpo">
+          <p>Durante os anos 1980 surgiram jogos que se tornaram símbolos da história dos videogames.</p>
+          <p><strong>Pac-Man, Tetris e Super Mario Bros.</strong> marcaram gerações com personagens, músicas e mecânicas facilmente reconhecíveis.</p>
+          <p>Mas a indústria também passou por dificuldades. Em 1983 aconteceu uma grande crise no mercado de videogames, ligada, entre outros fatores, ao excesso de produtos e à baixa qualidade de vários lançamentos.</p>
+          <p>Nos anos seguintes, o <strong>NES</strong>, da Nintendo, teve um papel importante na recuperação e reorganização desse mercado.</p>
+        </div>
+      </section>
 
-    <section class="estacao-cards">
-      <h2 class="bloco__titulo">Alguns marcos</h2>
-      <ul class="cartoes">
-        <li class="cartoes__item"><strong>1950</strong> — Bertie the Brain</li>
-        <li class="cartoes__item"><strong>1952</strong> — OXO</li>
-        <li class="cartoes__item"><strong>1958</strong> — Tennis for Two</li>
-        <li class="cartoes__item"><strong>1961</strong> — início do desenvolvimento de Spacewar!</li>
-        <li class="cartoes__item"><strong>1962</strong> — lançamento e popularização de Spacewar!</li>
-        <li class="cartoes__item"><strong>1972</strong> — Pong</li>
-        <li class="cartoes__item"><strong>1975</strong> — Gun Fight</li>
-        <li class="cartoes__item"><strong>1977</strong> — Atari 2600</li>
-        <li class="cartoes__item"><strong>1978</strong> — Space Invaders</li>
-        <li class="cartoes__item"><strong>1980</strong> — Pac-Man</li>
-        <li class="cartoes__item"><strong>1983</strong> — crise dos videogames</li>
-        <li class="cartoes__item"><strong>1984</strong> — Tetris</li>
-        <li class="cartoes__item"><strong>1985</strong> — Super Mario Bros.</li>
-        <li class="cartoes__item"><strong>1994</strong> — PlayStation</li>
-        <li class="cartoes__item"><strong>1996</strong> — Nintendo 64</li>
-      </ul>
-    </section>
+      <section class="capitulo">
+        <p class="terminal-rotulo capitulo__rotulo">CAPÍTULO <span class="capitulo__numero">04</span></p>
+        <h2 class="capitulo__titulo">Anos 90: tecnologia e cultura</h2>
+        <div class="capitulo__corpo">
+          <p>Os anos 1990 marcaram uma das maiores transformações dos videogames.</p>
+          <p>Consoles como <strong>PlayStation e Nintendo 64</strong> ajudaram a popularizar ambientes em 3D, mudando a maneira como os jogadores exploravam os cenários.</p>
+          <p>O crescimento do uso de CDs também permitiu jogos maiores, com mais músicas, vídeos, diálogos e histórias.</p>
+          <p>Mas a transformação não foi apenas tecnológica. Os videogames passaram a se relacionar cada vez mais com outras formas de entretenimento, como cinema e televisão.</p>
+          <p>A franquia <strong>Pokémon</strong> é um exemplo dessa expansão: além dos jogos, passou a envolver desenhos, cartas, brinquedos e outros produtos. Os videogames começaram a se tornar não apenas produtos tecnológicos, mas também grandes fenômenos culturais.</p>
+        </div>
+      </section>
 
-    <section class="estacao-fechamento">
-      <h2 class="bloco__titulo">E depois?</h2>
-      <p>Até o fim dos anos 1990, os videogames já tinham saído dos laboratórios, conquistado os arcades, chegado às casas e avançado para ambientes tridimensionais.</p>
-      <p>Na próxima estação, você vai acompanhar o que aconteceu quando novas gerações de consoles, internet, jogos online e mundos cada vez maiores começaram a transformar ainda mais essa indústria.</p>
-    </section>
+      <section class="linha-tempo">
+        <p class="terminal-rotulo">LINHA DO TEMPO</p>
+        <h2 class="linha-tempo__titulo">Alguns marcos</h2>
+        <ol class="linha-tempo__lista">
+          <li class="linha-tempo__item"><strong class="linha-tempo__marca">1950</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">Bertie the Brain</span></li>
+          <li class="linha-tempo__item"><strong class="linha-tempo__marca">1952</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">OXO</span></li>
+          <li class="linha-tempo__item"><strong class="linha-tempo__marca">1958</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">Tennis for Two</span></li>
+          <li class="linha-tempo__item"><strong class="linha-tempo__marca">1961</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">início do desenvolvimento de Spacewar!</span></li>
+          <li class="linha-tempo__item"><strong class="linha-tempo__marca">1962</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">lançamento e popularização de Spacewar!</span></li>
+          <li class="linha-tempo__item"><strong class="linha-tempo__marca">1972</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">Pong</span></li>
+          <li class="linha-tempo__item"><strong class="linha-tempo__marca">1975</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">Gun Fight</span></li>
+          <li class="linha-tempo__item"><strong class="linha-tempo__marca">1977</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">Atari 2600</span></li>
+          <li class="linha-tempo__item"><strong class="linha-tempo__marca">1978</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">Space Invaders</span></li>
+          <li class="linha-tempo__item"><strong class="linha-tempo__marca">1980</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">Pac-Man</span></li>
+          <li class="linha-tempo__item"><strong class="linha-tempo__marca">1983</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">crise dos videogames</span></li>
+          <li class="linha-tempo__item"><strong class="linha-tempo__marca">1984</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">Tetris</span></li>
+          <li class="linha-tempo__item"><strong class="linha-tempo__marca">1985</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">Super Mario Bros.</span></li>
+          <li class="linha-tempo__item"><strong class="linha-tempo__marca">1994</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">PlayStation</span></li>
+          <li class="linha-tempo__item"><strong class="linha-tempo__marca">1996</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">Nintendo 64</span></li>
+        </ol>
+      </section>
+
+      <section class="conexao">
+        <p class="terminal-rotulo">PRÓXIMA CONEXÃO</p>
+        <h2 class="conexao__titulo">E depois?</h2>
+        <p>Até o fim dos anos 1990, os videogames já tinham saído dos laboratórios, conquistado os arcades, chegado às casas e avançado para ambientes tridimensionais.</p>
+        <p>Na próxima estação, você vai acompanhar o que aconteceu quando novas gerações de consoles, internet, jogos online e mundos cada vez maiores começaram a transformar ainda mais essa indústria.</p>
+        <a class="botao botao--principal conexao__acao" href="hub.html">Voltar ao Hub</a>
+      </section>
+    </div>
+
+    <!-- Mensagem de bloqueio: preenchida por app.js quando a estação é a próxima ou futura. -->
+    <div id="estado-bloqueado" hidden>
+      <header class="terminal-hero terminal-hero--bloqueada">
+        <a class="terminal-voltar" href="hub.html"><span aria-hidden="true">←</span> Voltar ao Hub</a>
+        <div class="terminal-hero__painel">
+          <p class="terminal-hero__rotulo">ESTAÇÃO <span class="terminal-hero__numero">01</span> / 04</p>
+          <h1 class="titulo-estacao">Evolução dos jogos até 1999</h1>
+        </div>
+      </header>
+      <section id="bloqueio-painel" class="bloqueio"></section>
+    </div>
   </main>
 
   <script src="assets/js/config.js"></script>

@@ -603,6 +603,409 @@ main {
   border-top: 1px solid var(--cor-grade);
 }
 
+/* Estações 1 a 3: Terminal Editorial (hero, briefing, capítulos, linha do tempo,
+   próxima conexão) e mensagem de bloqueio. Tudo escopado em .pagina-estacao. */
+
+.pagina-estacao [hidden] {
+  display: none !important;
+}
+
+.pagina-estacao .visualmente-oculto {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Fundo sólido na coluna: a grade nunca fica atrás do texto de leitura. */
+.pagina-estacao main {
+  min-height: 100vh;
+  padding-top: var(--espaco-4);
+  padding-bottom: var(--espaco-12);
+  background: var(--cor-fundo);
+}
+
+.pagina-estacao .terminal-rotulo,
+.pagina-estacao .terminal-hero__rotulo,
+.pagina-estacao .bloqueio__estado,
+.pagina-estacao .bloqueio__destino-rotulo {
+  margin: 0 0 var(--espaco-2);
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--cor-texto-secundario);
+}
+
+.pagina-estacao .terminal-voltar {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espaco-2);
+  min-height: 44px;
+  margin-bottom: var(--espaco-2);
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: var(--cor-texto-secundario);
+  text-decoration: none;
+}
+
+.pagina-estacao .terminal-voltar:focus-visible {
+  outline: 2px solid var(--cor-destaque);
+  outline-offset: var(--espaco-1);
+}
+
+/* Hero: número da estação forte, nome como título. A faixa roxa marca conteúdo aberto. */
+.pagina-estacao .terminal-hero__painel {
+  padding: var(--espaco-4) var(--espaco-6) var(--espaco-6);
+  background: var(--cor-superficie);
+  clip-path: var(--recorte);
+  box-shadow: inset var(--espaco-1) 0 0 var(--cor-destaque);
+}
+
+.pagina-estacao .terminal-hero--bloqueada .terminal-hero__painel {
+  box-shadow: none;
+}
+
+.pagina-estacao .terminal-hero__numero {
+  font-weight: 700;
+  font-size: 1.75rem;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: var(--cor-texto);
+}
+
+.pagina-estacao .terminal-hero .titulo-estacao {
+  margin: var(--espaco-2) 0 0;
+}
+
+/* Briefing: abertura em texto maior, marcada por um fio lateral. */
+.pagina-estacao .briefing {
+  margin-top: var(--espaco-8);
+  padding-left: var(--espaco-4);
+  border-left: 2px solid var(--cor-apagado);
+}
+
+.pagina-estacao .briefing__titulo,
+.pagina-estacao .capitulo__titulo,
+.pagina-estacao .linha-tempo__titulo,
+.pagina-estacao .conexao__titulo,
+.pagina-estacao .bloqueio__titulo {
+  margin: 0 0 var(--espaco-3);
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 1.375rem;
+  line-height: 1.25;
+}
+
+.pagina-estacao .briefing p:not(.terminal-rotulo) {
+  margin: 0 0 var(--espaco-3);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+
+.pagina-estacao .briefing p:last-child,
+.pagina-estacao .capitulo__corpo > :last-child,
+.pagina-estacao .conexao p:last-of-type {
+  margin-bottom: 0;
+}
+
+/* Capítulos: sem painel, para a leitura respirar; o rótulo numerado abre cada um. */
+.pagina-estacao .capitulo {
+  margin-top: var(--espaco-12);
+}
+
+.pagina-estacao .capitulo__rotulo {
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-2);
+}
+
+.pagina-estacao .capitulo__rotulo::after {
+  content: "";
+  flex: 1;
+  margin-left: var(--espaco-2);
+  border-top: 1px solid var(--cor-apagado);
+}
+
+.pagina-estacao .capitulo__numero {
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1;
+  color: var(--cor-texto);
+}
+
+.pagina-estacao .capitulo__corpo p {
+  margin: 0 0 var(--espaco-4);
+  line-height: 1.65;
+  color: var(--cor-texto-secundario);
+}
+
+.pagina-estacao .capitulo__corpo strong {
+  color: var(--cor-texto);
+}
+
+.pagina-estacao .capitulo__corpo ul {
+  display: grid;
+  gap: var(--espaco-2);
+  margin: 0 0 var(--espaco-4);
+  padding: 0;
+  list-style: none;
+}
+
+.pagina-estacao .capitulo__corpo li {
+  position: relative;
+  padding-left: var(--espaco-6);
+  line-height: 1.5;
+  color: var(--cor-texto-secundario);
+}
+
+.pagina-estacao .capitulo__corpo li::before {
+  content: "";
+  position: absolute;
+  left: var(--espaco-1);
+  top: calc(0.75em - var(--espaco-1));
+  width: var(--espaco-2);
+  height: var(--espaco-2);
+  background: var(--cor-apagado);
+}
+
+/* Linha do tempo: todos os itens, em trilho vertical compacto. */
+.pagina-estacao .linha-tempo {
+  margin-top: var(--espaco-12);
+  padding: var(--espaco-6) var(--espaco-4);
+  background: var(--cor-superficie);
+  clip-path: var(--recorte);
+}
+
+.pagina-estacao .linha-tempo__titulo {
+  margin-bottom: var(--espaco-6);
+}
+
+.pagina-estacao .linha-tempo__lista {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Coluna estreita para anos de 4 dígitos; um intervalo ("2024–2026") quebra após o traço. */
+.pagina-estacao .linha-tempo__item {
+  display: grid;
+  grid-template-columns: 3.5rem 1fr;
+  column-gap: var(--espaco-3);
+}
+
+.pagina-estacao .linha-tempo__marca,
+.pagina-estacao .linha-tempo__lista--etapas .linha-tempo__item::before {
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 0.9375rem;
+  line-height: 1.4;
+  text-align: right;
+  color: var(--cor-texto);
+}
+
+.pagina-estacao .linha-tempo__texto {
+  position: relative;
+  padding: 0 0 var(--espaco-4) var(--espaco-4);
+  border-left: 2px solid var(--cor-apagado);
+  line-height: 1.4;
+  color: var(--cor-texto-secundario);
+}
+
+.pagina-estacao .linha-tempo__texto::before {
+  content: "";
+  position: absolute;
+  left: -5px;
+  top: calc(0.7em - var(--espaco-1));
+  width: var(--espaco-2);
+  height: var(--espaco-2);
+  background: var(--cor-texto-atenuado);
+}
+
+.pagina-estacao .linha-tempo__item:last-child .linha-tempo__texto {
+  padding-bottom: 0;
+  border-left-color: transparent;
+}
+
+.pagina-estacao .linha-tempo__lista--etapas {
+  counter-reset: etapa;
+}
+
+.pagina-estacao .linha-tempo__lista--etapas .linha-tempo__item {
+  grid-template-columns: var(--espaco-8) 1fr;
+}
+
+.pagina-estacao .linha-tempo__lista--etapas .linha-tempo__item::before {
+  counter-increment: etapa;
+  content: counter(etapa, decimal-leading-zero);
+  color: var(--cor-texto-atenuado);
+}
+
+.pagina-estacao .linha-tempo__lista--etapas .linha-tempo__texto {
+  padding-bottom: var(--espaco-6);
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  color: var(--cor-texto);
+}
+
+/* Próxima conexão: fechamento em painel, com saída para o Hub. */
+.pagina-estacao .conexao {
+  margin-top: var(--espaco-12);
+  padding: var(--espaco-6);
+  background: var(--cor-superficie-alta);
+  clip-path: var(--recorte);
+}
+
+.pagina-estacao .conexao p:not(.terminal-rotulo) {
+  margin: 0 0 var(--espaco-3);
+  line-height: 1.6;
+}
+
+.pagina-estacao .conexao__acao {
+  margin-top: var(--espaco-6);
+}
+
+/* Bloqueio: próxima = painel em destaque com passos; futura = painel dormente. */
+.pagina-estacao .bloqueio {
+  margin-top: var(--espaco-6);
+  padding: var(--espaco-6);
+  clip-path: var(--recorte);
+}
+
+.pagina-estacao .bloqueio--proxima {
+  background: var(--cor-superficie-alta);
+  box-shadow: inset var(--espaco-1) 0 0 var(--cor-destaque);
+}
+
+.pagina-estacao .bloqueio--futura {
+  background: var(--cor-fundo);
+  box-shadow: inset 0 0 0 1px var(--cor-superficie-alta);
+}
+
+.pagina-estacao .bloqueio__estado {
+  display: inline-block;
+  margin-bottom: var(--espaco-3);
+}
+
+.pagina-estacao .bloqueio--proxima .bloqueio__estado {
+  padding: var(--espaco-1) var(--espaco-2);
+  background: var(--cor-destaque);
+  color: var(--cor-fundo);
+  clip-path: polygon(
+    var(--espaco-1) 0,
+    100% 0,
+    100% calc(100% - var(--espaco-1)),
+    calc(100% - var(--espaco-1)) 100%,
+    0 100%,
+    0 var(--espaco-1)
+  );
+}
+
+.pagina-estacao .bloqueio--futura .bloqueio__estado,
+.pagina-estacao .bloqueio--futura .bloqueio__titulo {
+  color: var(--cor-texto-atenuado);
+}
+
+.pagina-estacao .bloqueio__texto {
+  margin: 0 0 var(--espaco-4);
+  color: var(--cor-texto-secundario);
+}
+
+.pagina-estacao .bloqueio__passos {
+  display: grid;
+  gap: var(--espaco-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: passo;
+}
+
+.pagina-estacao .bloqueio__passo {
+  counter-increment: passo;
+  display: grid;
+  grid-template-columns: var(--espaco-8) 1fr;
+  align-items: center;
+  gap: var(--espaco-3);
+  min-height: var(--espaco-8);
+}
+
+.pagina-estacao .bloqueio__passo::before {
+  content: counter(passo, decimal-leading-zero);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--espaco-8);
+  background: var(--cor-fundo);
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 0.875rem;
+  clip-path: polygon(
+    var(--espaco-2) 0,
+    100% 0,
+    100% calc(100% - var(--espaco-2)),
+    calc(100% - var(--espaco-2)) 100%,
+    0 100%,
+    0 var(--espaco-2)
+  );
+}
+
+.pagina-estacao .bloqueio__destino {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  column-gap: var(--espaco-3);
+  min-height: 44px;
+  padding: var(--espaco-4);
+  background: var(--cor-superficie);
+  color: var(--cor-texto);
+  text-decoration: none;
+  clip-path: var(--recorte);
+}
+
+.pagina-estacao .bloqueio__destino-rotulo {
+  grid-column: 1;
+  margin: 0;
+}
+
+.pagina-estacao .bloqueio__destino-nome {
+  grid-column: 1;
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  font-size: 1.0625rem;
+  line-height: 1.3;
+}
+
+.pagina-estacao .bloqueio__destino .seta {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+}
+
+.pagina-estacao .bloqueio__destino:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 2px var(--cor-texto);
+}
+
+@media (hover: hover) {
+  .pagina-estacao .terminal-voltar:hover {
+    color: var(--cor-texto);
+  }
+
+  .pagina-estacao .bloqueio__destino:hover {
+    background: var(--cor-superficie-alta);
+  }
+}
+
+@media (min-width: 768px) {
+  .pagina-estacao .terminal-hero .titulo-estacao {
+    font-size: 2.25rem;
+  }
+}
+
 .pagina-validar main {
   padding-top: var(--espaco-8);
 }

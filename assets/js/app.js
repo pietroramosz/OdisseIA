@@ -1,4 +1,4 @@
-// Inicialização das páginas. Hoje só o Hub renderiza conteúdo; o Hub só lê o progresso.
+// Inicialização das páginas. Hub e estações só leem o progresso; só a validação grava.
 
 const ESTACOES_NOMES = [
   "Evolução dos jogos até 1999",
@@ -278,11 +278,85 @@ function criarBotao(acao) {
   return botao;
 }
 
+// Páginas das estações: mostram o conteúdo ou a mensagem de bloqueio.
+// Só leem o progresso, nunca gravam. Quem grava é validar.html.
+// A regra repete a do Hub de propósito, para não acoplar as duas telas.
+
+function calcularEstadoEstacao(numero, ultima) {
+  if (numero <= ultima) {
+    return "desbloqueada";
+  }
+  if (numero === ultima + 1) {
+    return "proxima";
+  }
+  return "futura";
+}
+
+function renderizarPaginaEstacao() {
+  const numero = Number(document.body.dataset.estacao);
+  const total = OdisseIAConfig.totalEstacoes;
+  if (!Number.isInteger(numero) || numero < 1 || numero > total) {
+    return;
+  }
+
+  const ultima = obterProgresso().ultimaEstacaoDesbloqueada;
+  const estado = calcularEstadoEstacao(numero, ultima);
+  document.body.classList.add("pagina-estacao--" + estado);
+
+  if (estado === "desbloqueada") {
+    document.getElementById("conteudo-estacao").hidden = false;
+    return;
+  }
+
+  renderizarBloqueio(numero, estado, ultima + 1, total);
+  document.getElementById("estado-bloqueado").hidden = false;
+}
+
+function renderizarBloqueio(numero, estado, proximaValida, total) {
+  const painel = document.getElementById("bloqueio-painel");
+  painel.textContent = "";
+  painel.className = "bloqueio bloqueio--" + estado;
+
+  if (estado === "proxima") {
+    painel.appendChild(criarTexto("p", "bloqueio__estado", "PRÓXIMA ESTAÇÃO"));
+    painel.appendChild(criarTexto("h2", "bloqueio__titulo", "Esta é a sua próxima estação"));
+    painel.appendChild(criarTexto("p", "bloqueio__texto", "O conteúdo é liberado depois da visita presencial:"));
+
+    const passos = document.createElement("ol");
+    passos.className = "bloqueio__passos";
+    [
+      "Visite a Estação " + doisDigitos(numero) + " na feira.",
+      "Acompanhe a apresentação.",
+      "Valide o QR Code da estação."
+    ].forEach(function (texto) {
+      passos.appendChild(criarTexto("li", "bloqueio__passo", texto));
+    });
+    painel.appendChild(passos);
+    return;
+  }
+
+  painel.appendChild(criarTexto("p", "bloqueio__estado", "BLOQUEADA"));
+  painel.appendChild(criarTexto("h2", "bloqueio__titulo", "Estação ainda bloqueada"));
+  painel.appendChild(criarTexto("p", "bloqueio__texto", "Antes dela, faltam etapas anteriores da jornada. A próxima estação válida é:"));
+
+  const destino = document.createElement("a");
+  destino.className = "bloqueio__destino";
+  destino.href = "estacao-" + proximaValida + ".html";
+  destino.appendChild(criarTexto("span", "bloqueio__destino-rotulo",
+    "ESTAÇÃO " + doisDigitos(proximaValida) + " / " + doisDigitos(total)));
+  destino.appendChild(criarTexto("span", "bloqueio__destino-nome", ESTACOES_NOMES[proximaValida - 1]));
+  destino.appendChild(criarSeta());
+  painel.appendChild(destino);
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   if (document.getElementById("lista-estacoes")) {
     renderizarHub();
   }
   if (document.getElementById("resultado-qr")) {
     renderizarValidacao();
+  }
+  if (document.getElementById("conteudo-estacao")) {
+    renderizarPaginaEstacao();
   }
 });
