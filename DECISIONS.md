@@ -352,7 +352,7 @@ A DEC-011 define a direção (cyberpunk limpo, cinza/preto com roxo de destaque)
 - Motivo de forma: cantos cortados em diagonal nos cards e nos segmentos da barra.
 - Escala de espaçamento em variáveis CSS (4, 8, 12, 16, 24, 32 e 48 px).
 - Estados (bloqueada, próxima, desbloqueada) distinguíveis por texto, tamanho e ícone, não só por cor. Nada depende de hover.
-- A engrenagem SVG é placeholder, a ser trocada pela arte do grupo do X-BOT.
+- A engrenagem SVG foi usada como placeholder na primeira implementação. Em 04/10/2026, ela foi substituída por PNGs derivados da arte do X-BOT para os estados aceso e apagado, sem filtro CSS.
 
 ### Consequências
 
@@ -373,4 +373,31 @@ O QR da estação N abre validar.html?estacao=N. Cinco resultados possíveis: su
 
 - O QR não é segurança real (DEC-006).
 - O progresso é por navegador. Confirmado em teste real: dois navegadores no mesmo celular têm progressos separados, e quem abre o QR em outro navegador cai em "fora de ordem". Por ora a mensagem da tela orienta a abrir no mesmo navegador do Hub. Decisão do grupo pendente (instrução impressa nas estações e/ou saída na tela de fora de ordem).
+
+---
+
+## DEC-015 — Hub desktop em grade 2x2
+
+**Status:** aceita e implementada
+
+### Contexto
+
+O Hub possui exatamente quatro estações. Na adaptação para desktop, destacar uma estação ocupando a largura inteira deixava a composição dependente do estado do progresso e podia criar uma estação visualmente “sobrando” em relação às demais.
+
+### Decisão
+
+A partir de 900px, as quatro estações do Hub usam uma grade 2x2, mantendo os cards das estações com a mesma lógica espacial independentemente de estarem desbloqueados, próximos ou bloqueados.
+
+A área de “Destino final” continua separada das quatro estações e pode ter comportamento próprio quando a jornada estiver completa.
+
+### Por quê?
+
+Quatro estações formam naturalmente duas linhas de duas colunas. Isso deixa a leitura do Hub mais previsível no desktop e evita que o estado de uma estação mude a estrutura geral da grade.
+
+### Consequências
+
+- No celular, o Hub continua em uma coluna.
+- No desktop, estados de estação não devem usar `grid-column: 1 / -1` para ocupar as duas colunas.
+- A hierarquia de “próxima estação” continua sendo comunicada por texto, tamanho, barra e ícone, sem depender de mudar a posição ou a largura do card.
+- Mudanças futuras para outro arranjo desktop exigem revisão desta decisão.
 

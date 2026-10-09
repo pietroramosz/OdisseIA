@@ -43,7 +43,7 @@ Pietro participa principalmente de:
 - usar Git e GitHub;
 - assumir responsabilidade pelo resultado final.
 
-Quando alguma parte depende de outro grupo, como o Robot TCG, essa responsabilidade continua com os integrantes daquele grupo.
+Quando alguma parte depende de outro grupo, como o X-BOT, essa responsabilidade continua com os integrantes daquele grupo.
 
 ---
 
@@ -74,9 +74,11 @@ Uma sugestão pode ser:
 
 ---
 
-## 4. Como o Claude Code é usado
+## 4. Como Claude e Claude Code são usados
 
-O Claude Code é usado principalmente quando precisamos trabalhar diretamente no projeto.
+O **Claude (chat)** é usado como uma camada intermediária de revisão quando vale a pena questionar uma ideia antes de transformar aquilo em implementação. Ele ajuda a criticar soluções, levantar riscos, refinar composição/UX, revisar instruções e montar uma tarefa mais clara para o Claude Code.
+
+O **Claude Code** é usado principalmente quando precisamos trabalhar diretamente no projeto.
 
 Entre as tarefas estão:
 
@@ -111,21 +113,27 @@ Claude Code pode decidir detalhes internos de implementação, mas decisões de 
 
 Com o início da implementação, o processo deixou de ser apenas planejado e passou a ser usado de verdade.
 
-O ciclo atual é:
+O ciclo atual pode incluir:
 
 ```text
-prompt / especificação da tarefa
+ideia / requisito
 ↓
-revisão
+planejamento e revisão
 ↓
-implementação pelo Claude Code
+quando útil: crítica e refinamento no Claude (chat)
 ↓
-teste manual
+tarefa enxuta para o Claude Code
+↓
+implementação
+↓
+revisão e teste manual
 ↓
 commit na branch dev
 ↓
 registro das decisões relevantes
 ```
+
+Nem toda tarefa precisa passar pelas três ferramentas. O objetivo é usar cada uma quando ela melhora a clareza ou reduz risco, e não adicionar etapas por ritual.
 
 Quando uma mudança é maior ou mais arriscada, primeiro é feito um diagnóstico antes de alterar o código.
 
@@ -172,7 +180,7 @@ Durante o planejamento percebemos um problema: se o site começasse a documentar
 
 Por isso, decidimos separar as responsabilidades.
 
-O grupo do jogo cuida das mecânicas e da implementação. O site recebe apenas as informações finais necessárias para integrar e apresentar o Robot TCG.
+O grupo do jogo cuida das mecânicas e da implementação. O site recebe apenas as informações finais necessárias para integrar e apresentar o X-BOT.
 
 Essa decisão também virou uma regra de documentação: **planejado não é o mesmo que implementado**.
 
@@ -269,6 +277,16 @@ Lição: "rodou sem erro" não é o mesmo que "está correto".
 ### 7.8 Referência visual sem trazer a stack
 
 Foi usada uma referência de componentes feita para React, Tailwind e TypeScript. O prompt proibiu explicitamente instalar dependências, e o visual foi recriado em HTML e CSS puros, conforme a DEC-003.
+
+---
+
+### 7.9 Refinamento em chat antes da implementação visual
+
+Durante o trabalho do Index e das Estações 1–3, algumas ideias de composição e UX passaram por revisão em chat antes de virarem tarefas de implementação. O Claude (chat) foi usado para questionar escolhas, refinar a direção e ajudar a transformar o feedback em instruções mais claras para o Claude Code.
+
+A implementação continuou sendo feita no repositório pelo Claude Code e o resultado foi revisado manualmente. Em alguns pontos, novas rodadas de composição foram feitas depois de ver o resultado funcionando.
+
+Lição: uma IA de conversa e um agente de código podem cumprir papéis diferentes no mesmo problema. A primeira pode ajudar a criticar e especificar; a segunda implementa. Iteração visual melhora o resultado, mas precisa ter critério de parada para não consumir o tempo das partes mais críticas do projeto.
 
 ---
 

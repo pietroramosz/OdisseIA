@@ -306,11 +306,29 @@ Essa etapa também mostrou a necessidade de manter o guia de estilo sincronizado
 
 ---
 
+## 08/10/2026 — Visão geral e Estações 1–3 entram na experiência real
+
+### O que foi feito
+
+- `index.html` deixou de ser placeholder e passou a funcionar como porta de entrada estática, com Hero, explicação da jornada, quatro estações, destino final e CTAs. A página não carrega JavaScript e não depende de `localStorage`.
+- As Estações 1–3 foram consolidadas no formato “Terminal Editorial”, com conteúdo real, estados `desbloqueada`, `próxima` e `futura`, retorno ao Hub e tratamento visual compartilhado.
+- A implementação das três estações foi revisada quanto a estados, copy, CSS e acessibilidade.
+- O desktop deixou de apenas esticar a composição mobile: as Estações 1–3 passaram a usar um dossiê técnico compacto de até 832px, enquanto o Index ganhou uma composição editorial própria de até 960px.
+- O Index passou a avisar que a jornada deve continuar no mesmo navegador para preservar o progresso.
+
+### Impacto
+
+A jornada deixou de ter apenas Hub e validação funcionando. Agora já existe uma entrada real e conteúdo navegável nas três primeiras estações.
+
+O principal gargalo do projeto passa a estar nas partes que dependem da reta final da experiência: Estação 4, conclusão, X-BOT, hospedagem definitiva e testes físicos de QR.
+
+---
+
 ## Próximas entradas
 
 O DEVLOG só deve ganhar uma nova entrada quando houver algo realmente relevante, por exemplo:
 
-- conteúdo das estações integrado;
+- Estação 4 integrada;
 - conclusão implementada;
 - integração do X-BOT;
 - definição da URL final e deploy definitivo;
