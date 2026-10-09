@@ -1006,6 +1006,277 @@ main {
   }
 }
 
+/* Index: porta de entrada estática. Hero e "Como funciona" são os únicos painéis;
+   o resto é tipografia, número e linha. Tudo escopado em .pagina-index. */
+
+.pagina-index .visualmente-oculto {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Fundo sólido na coluna: a grade nunca fica atrás do texto de leitura. */
+.pagina-index main {
+  min-height: 100vh;
+  padding-top: var(--espaco-6);
+  padding-bottom: var(--espaco-12);
+  background: var(--cor-fundo);
+}
+
+.pagina-index .index-rotulo,
+.pagina-index .index-secao {
+  margin: 0 0 var(--espaco-2);
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--cor-texto-secundario);
+}
+
+.pagina-index .index-cta {
+  min-height: 52px;
+  margin-top: var(--espaco-6);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+/* Hero: nome, proposta, tamanho da jornada e a ação para começar. */
+.pagina-index .index-hero {
+  padding: var(--espaco-6);
+  background: var(--cor-superficie);
+  clip-path: var(--recorte);
+}
+
+.pagina-index .index-hero__titulo {
+  margin: 0;
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 2.75rem;
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+}
+
+.pagina-index .index-hero__proposta {
+  margin: var(--espaco-3) 0 0;
+  font-size: 1.125rem;
+  line-height: 1.5;
+}
+
+.pagina-index .index-hero__jornada {
+  display: flex;
+  align-items: baseline;
+  gap: var(--espaco-2);
+  margin: var(--espaco-6) 0 0;
+  padding-top: var(--espaco-4);
+  border-top: 1px solid var(--cor-superficie-alta);
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  color: var(--cor-texto-secundario);
+}
+
+.pagina-index .index-hero__numero {
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 1;
+  color: var(--cor-texto);
+}
+
+/* Como funciona: uma sequência só, ligada por um trilho (vertical no celular). */
+.pagina-index .index-passos {
+  margin-top: var(--espaco-8);
+  padding: var(--espaco-6);
+  background: var(--cor-superficie);
+  clip-path: var(--recorte);
+}
+
+.pagina-index .index-passos__lista {
+  margin: var(--espaco-4) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pagina-index .index-passo {
+  position: relative;
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  column-gap: var(--espaco-4);
+  padding-bottom: var(--espaco-6);
+}
+
+.pagina-index .index-passo:last-child {
+  padding-bottom: 0;
+}
+
+.pagina-index .index-passo::before {
+  content: "";
+  position: absolute;
+  top: 40px;
+  bottom: 0;
+  left: 19px;
+  border-left: 2px solid var(--cor-destaque);
+}
+
+.pagina-index .index-passo:last-child::before {
+  content: none;
+}
+
+.pagina-index .index-passo__numero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  background: var(--cor-fundo);
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 0.9375rem;
+  clip-path: polygon(
+    var(--espaco-2) 0,
+    100% 0,
+    100% calc(100% - var(--espaco-2)),
+    calc(100% - var(--espaco-2)) 100%,
+    0 100%,
+    0 var(--espaco-2)
+  );
+}
+
+.pagina-index .index-passo__titulo {
+  display: block;
+  margin-top: var(--espaco-2);
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 0.875rem;
+  line-height: 1.3;
+  letter-spacing: 0.06em;
+}
+
+.pagina-index .index-passo__texto {
+  margin: var(--espaco-1) 0 0;
+  line-height: 1.5;
+  color: var(--cor-texto-secundario);
+}
+
+/* Aviso secundário do passo 03: informação, não um quarto passo. */
+.pagina-index .index-passo__nota {
+  margin: var(--espaco-3) 0 0;
+  padding-left: var(--espaco-3);
+  border-left: 2px solid var(--cor-apagado);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--cor-texto-atenuado);
+}
+
+/* A jornada e o destino: sem painel, só rótulo com linha, números e texto. */
+.pagina-index .index-jornada,
+.pagina-index .index-destino {
+  margin-top: var(--espaco-12);
+}
+
+.pagina-index .index-secao {
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-3);
+}
+
+.pagina-index .index-secao::after {
+  content: "";
+  flex: 1;
+  border-top: 1px solid var(--cor-apagado);
+}
+
+.pagina-index .index-jornada__lista {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pagina-index .index-jornada__item {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  align-items: baseline;
+  column-gap: var(--espaco-4);
+  padding: var(--espaco-3) 0;
+  border-bottom: 1px solid var(--cor-superficie-alta);
+}
+
+.pagina-index .index-jornada__item:last-child {
+  border-bottom: none;
+}
+
+.pagina-index .index-jornada__numero {
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 1.75rem;
+  line-height: 1;
+}
+
+.pagina-index .index-jornada__nome {
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  font-size: 1.0625rem;
+  line-height: 1.3;
+}
+
+.pagina-index .index-destino__texto {
+  margin: var(--espaco-1) 0 0;
+  line-height: 1.6;
+  color: var(--cor-texto-secundario);
+}
+
+.pagina-index .index-final {
+  margin-top: var(--espaco-8);
+}
+
+@media (min-width: 768px) {
+  .pagina-index main {
+    padding-top: var(--espaco-12);
+  }
+
+  .pagina-index .index-hero {
+    padding: var(--espaco-8);
+  }
+
+  .pagina-index .index-hero__titulo {
+    font-size: 3.5rem;
+  }
+
+  .pagina-index .index-passos {
+    padding: var(--espaco-8);
+  }
+
+  /* Trilho horizontal: as três etapas lado a lado. */
+  .pagina-index .index-passos__lista {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: var(--espaco-4);
+  }
+
+  .pagina-index .index-passo {
+    grid-template-columns: 1fr;
+    align-content: start;
+    padding-bottom: 0;
+  }
+
+  .pagina-index .index-passo::before {
+    top: 19px;
+    bottom: auto;
+    left: 40px;
+    right: calc(-1 * var(--espaco-4));
+    border-left: none;
+    border-top: 2px solid var(--cor-destaque);
+  }
+
+  .pagina-index .index-passo__numero {
+    width: 40px;
+  }
+
+  .pagina-index .index-passo__titulo {
+    margin-top: var(--espaco-3);
+  }
+}
+
 .pagina-validar main {
   padding-top: var(--espaco-8);
 }
