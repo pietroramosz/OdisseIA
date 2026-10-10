@@ -6,9 +6,72 @@
   <title>OdisseIA — Conclusão</title>
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body>
-  <h1>Conclusão</h1>
-  <p>Conclusão da jornada e acesso ao X-BOT.</p>
+<body class="pagina-final">
+  <main>
+    <!-- Conclusão: só aparece com a jornada completa (app.js). -->
+    <div id="conclusao" hidden>
+      <a class="final-voltar" href="hub.html"><span aria-hidden="true">←</span> Voltar ao Hub</a>
+
+      <header class="final-hero">
+        <div class="final-hero__topo">
+          <p class="final-marca">OdisseIA</p>
+          <p class="final-selo">JORNADA CONCLUÍDA</p>
+        </div>
+        <div class="final-hero__texto">
+          <h1 class="final-titulo">Parabéns! Você concluiu a jornada.</h1>
+          <p class="final-hero__descricao">Você passou pelas estações do OdisseIA e validou cada uma delas. Como recompensa, o X-BOT foi desbloqueado.</p>
+        </div>
+        <div class="final-placar">
+          <p class="final-placar__numero"><span id="conclusao-validadas" class="final-placar__feito"></span><span class="final-placar__total"> / <span id="conclusao-total"></span></span></p>
+          <p class="final-placar__rotulo">ESTAÇÕES VALIDADAS</p>
+          <div id="conclusao-barra" class="final-barra" role="progressbar" aria-label="Progresso da jornada" aria-valuemin="0" aria-valuemax="4" aria-valuenow="0"></div>
+        </div>
+      </header>
+
+      <section class="final-jornada" aria-labelledby="final-jornada-titulo">
+        <h2 id="final-jornada-titulo" class="final-secao">RESUMO DA JORNADA</h2>
+        <ol id="conclusao-estacoes" class="final-jornada__lista"></ol>
+      </section>
+
+      <section class="final-xbot" aria-labelledby="final-xbot-titulo">
+        <div class="final-xbot__palco">
+          <img class="final-xbot__carta" src="assets/img/verso-carta.png" alt="" width="220" height="307" loading="lazy">
+        </div>
+        <div class="final-xbot__corpo">
+          <p class="final-selo">DESBLOQUEADO</p>
+          <h2 id="final-xbot-titulo" class="final-xbot__titulo">X-BOT</h2>
+          <p class="final-xbot__texto">O X-BOT foi desbloqueado. O jogo desenvolvido para o OdisseIA agora faz parte da sua jornada.</p>
+          <div id="xbot-acesso" class="final-acoes"></div>
+        </div>
+      </section>
+
+      <nav class="final-saida" aria-label="Navegação">
+        <a class="botao" href="hub.html">Voltar ao Hub</a>
+      </nav>
+    </div>
+
+    <!-- Acesso antecipado: aparece quando a jornada ainda não tem 4/4 (app.js). -->
+    <div id="estado-incompleto" hidden>
+      <a class="final-voltar" href="hub.html"><span aria-hidden="true">←</span> Voltar ao Hub</a>
+
+      <section class="final-bloqueio" aria-labelledby="final-bloqueio-titulo">
+        <p class="final-marca">OdisseIA <span class="final-marca__pagina">/ Conclusão</span></p>
+        <p class="final-bloqueio__estado">JORNADA INCOMPLETA</p>
+        <h1 id="final-bloqueio-titulo" class="final-bloqueio__titulo">Conclusão ainda bloqueada</h1>
+        <p class="final-bloqueio__texto">Para ver a conclusão, é necessário validar as 4 estações da jornada.</p>
+
+        <div class="final-bloqueio__progresso">
+          <p class="final-bloqueio__linha">
+            <span class="final-bloqueio__rotulo">PROGRESSO DA JORNADA</span>
+            <span class="final-bloqueio__numero"><span id="incompleto-validadas"></span> / <span id="incompleto-total"></span></span>
+          </p>
+          <div id="incompleto-barra" class="final-barra" role="progressbar" aria-label="Progresso da jornada" aria-valuemin="0" aria-valuemax="4" aria-valuenow="0"></div>
+        </div>
+
+        <a class="botao botao--principal final-bloqueio__acao" href="hub.html">Voltar ao Hub</a>
+      </section>
+    </div>
+  </main>
 
   <script src="assets/js/config.js"></script>
   <script src="assets/js/progresso.js"></script>

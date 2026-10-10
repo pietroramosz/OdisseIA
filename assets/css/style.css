@@ -1578,6 +1578,586 @@ main {
   }
 }
 
+/* Conclusão: o pico visual da jornada (ESTILO.md). Mais roxo, a carta do X-BOT e uma
+   entrada curta, sempre a partir dos mesmos tokens e recortes. Os tons suaves de roxo
+   saem de --cor-destaque via color-mix. Tudo escopado em .pagina-final. */
+
+.pagina-final [hidden] {
+  display: none !important;
+}
+
+.pagina-final .visualmente-oculto {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Fundo sólido na coluna: a grade nunca fica atrás do texto de leitura. */
+.pagina-final main {
+  min-height: 100vh;
+  padding-top: var(--espaco-4);
+  padding-bottom: var(--espaco-12);
+  background: var(--cor-fundo);
+}
+
+.pagina-final .final-voltar {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espaco-2);
+  min-height: 44px;
+  margin-bottom: var(--espaco-2);
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: var(--cor-texto-secundario);
+  text-decoration: none;
+}
+
+.pagina-final .final-voltar:focus-visible {
+  outline: 2px solid var(--cor-destaque);
+  outline-offset: var(--espaco-1);
+}
+
+.pagina-final .final-marca {
+  margin: 0;
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 1.125rem;
+  letter-spacing: 0.04em;
+}
+
+.pagina-final .final-selo,
+.pagina-final .final-secao,
+.pagina-final .final-placar__rotulo,
+.pagina-final .final-barra__numero,
+.pagina-final .final-jornada__estado,
+.pagina-final .final-aviso__rotulo,
+.pagina-final .final-bloqueio__estado,
+.pagina-final .final-bloqueio__rotulo {
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--cor-texto-secundario);
+}
+
+/* Selo roxo: o mesmo da estação próxima no Hub, aqui marcando o que foi conquistado. */
+.pagina-final .final-selo {
+  display: inline-block;
+  margin: 0;
+  padding: var(--espaco-1) var(--espaco-2);
+  background: var(--cor-destaque);
+  color: var(--cor-fundo);
+  font-weight: 700;
+  clip-path: polygon(
+    var(--espaco-1) 0,
+    100% 0,
+    100% calc(100% - var(--espaco-1)),
+    calc(100% - var(--espaco-1)) 100%,
+    0 100%,
+    0 var(--espaco-1)
+  );
+}
+
+.pagina-final .final-secao {
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-3);
+  margin: 0 0 var(--espaco-2);
+}
+
+.pagina-final .final-secao::after {
+  content: "";
+  flex: 1;
+  border-top: 1px solid var(--cor-apagado);
+}
+
+/* Barra de progresso: cheia = bloco alto roxo, vazia = trilho fino (forma, não só cor). */
+.pagina-final .final-barra {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: var(--espaco-1);
+}
+
+.pagina-final .final-barra__celula {
+  display: grid;
+  grid-template-rows: var(--espaco-3) auto;
+  gap: var(--espaco-2);
+}
+
+.pagina-final .final-barra__segmento {
+  align-self: end;
+  height: var(--espaco-1);
+  background: var(--cor-apagado);
+}
+
+.pagina-final .final-barra__celula--cheia .final-barra__segmento {
+  height: var(--espaco-3);
+  background: var(--cor-destaque);
+  clip-path: polygon(
+    var(--espaco-2) 0,
+    100% 0,
+    100% calc(100% - var(--espaco-2)),
+    calc(100% - var(--espaco-2)) 100%,
+    0 100%,
+    0 var(--espaco-2)
+  );
+}
+
+.pagina-final .final-barra__numero {
+  color: var(--cor-texto-atenuado);
+}
+
+.pagina-final .final-barra__celula--cheia .final-barra__numero {
+  color: var(--cor-texto);
+}
+
+/* Hero da conclusão: faixa diagonal roxa no topo, título e placar 4 / 4. */
+.pagina-final .final-hero {
+  position: relative;
+  padding: calc(var(--espaco-3) + var(--espaco-6)) var(--espaco-6) var(--espaco-6);
+  background: var(--cor-superficie-alta);
+  clip-path: var(--recorte);
+  animation: entrar 0.4s ease both;
+}
+
+.pagina-final .final-hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--espaco-3);
+  background: repeating-linear-gradient(
+    135deg,
+    var(--cor-destaque) 0 var(--espaco-2),
+    color-mix(in srgb, var(--cor-destaque) 35%, transparent) var(--espaco-2) var(--espaco-4)
+  );
+}
+
+.pagina-final .final-hero__topo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espaco-3);
+  padding-bottom: var(--espaco-4);
+  border-bottom: 1px solid var(--cor-apagado);
+}
+
+.pagina-final .final-titulo {
+  margin: var(--espaco-6) 0 var(--espaco-3);
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 1.15;
+}
+
+.pagina-final .final-hero__descricao {
+  margin: 0;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--cor-texto-secundario);
+}
+
+.pagina-final .final-placar {
+  margin-top: var(--espaco-6);
+  padding-top: var(--espaco-4);
+  border-top: 1px solid var(--cor-apagado);
+}
+
+.pagina-final .final-placar__numero {
+  display: flex;
+  align-items: baseline;
+  margin: 0;
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.pagina-final .final-placar__feito {
+  font-size: 4.5rem;
+  color: var(--cor-destaque);
+}
+
+.pagina-final .final-placar__total {
+  font-size: 2rem;
+  white-space: pre;
+}
+
+.pagina-final .final-placar__rotulo {
+  margin: var(--espaco-2) 0 var(--espaco-4);
+  color: var(--cor-texto);
+}
+
+/* Na conclusão, os quatro blocos acendem em sequência (desligado com movimento reduzido). */
+.pagina-final--completa .final-barra__celula--cheia .final-barra__segmento {
+  transform-origin: left center;
+  animation: final-preencher 0.35s ease-out both;
+}
+
+.pagina-final--completa .final-barra__celula:nth-child(1) .final-barra__segmento { animation-delay: 0.3s; }
+.pagina-final--completa .final-barra__celula:nth-child(2) .final-barra__segmento { animation-delay: 0.45s; }
+.pagina-final--completa .final-barra__celula:nth-child(3) .final-barra__segmento { animation-delay: 0.6s; }
+.pagina-final--completa .final-barra__celula:nth-child(4) .final-barra__segmento { animation-delay: 0.75s; }
+
+/* Resumo: as estações validadas, em lista tipográfica sem painel. */
+.pagina-final .final-jornada {
+  margin-top: var(--espaco-12);
+}
+
+.pagina-final .final-jornada__lista {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pagina-final .final-jornada__item {
+  display: grid;
+  grid-template-columns: var(--espaco-8) var(--espaco-8) minmax(0, 1fr);
+  grid-template-areas:
+    "marcador numero nome"
+    "marcador numero estado";
+  align-items: center;
+  column-gap: var(--espaco-3);
+  padding: var(--espaco-3) 0;
+  border-bottom: 1px solid var(--cor-superficie-alta);
+}
+
+.pagina-final .final-jornada__item:last-child {
+  border-bottom: none;
+}
+
+.pagina-final .final-jornada__marcador {
+  grid-area: marcador;
+  width: var(--espaco-8);
+  height: var(--espaco-8);
+}
+
+.pagina-final .final-jornada__numero {
+  grid-area: numero;
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 1.375rem;
+  line-height: 1;
+}
+
+.pagina-final .final-jornada__nome {
+  grid-area: nome;
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.3;
+}
+
+.pagina-final .final-jornada__estado {
+  grid-area: estado;
+  margin-top: var(--espaco-1);
+  color: var(--cor-texto-atenuado);
+}
+
+/* X-BOT: o clímax. Moldura roxa, carta sobre um palco listrado e a ação de jogar. */
+.pagina-final .final-xbot {
+  position: relative;
+  margin-top: var(--espaco-12);
+  background: var(--cor-superficie);
+  clip-path: var(--recorte);
+  animation: entrar 0.4s ease 0.2s both;
+}
+
+/* Moldura por cima do palco e do corpo (um box-shadow no próprio bloco ficaria atrás do palco). */
+.pagina-final .final-xbot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 0 2px var(--cor-destaque);
+  pointer-events: none;
+}
+
+.pagina-final .final-xbot__palco {
+  display: flex;
+  justify-content: center;
+  padding: var(--espaco-8) var(--espaco-6);
+  background: repeating-linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--cor-destaque) 14%, transparent) 0 1px,
+    transparent 1px var(--espaco-3)
+  ), var(--cor-superficie-escura);
+  border-bottom: 1px solid var(--cor-apagado);
+}
+
+.pagina-final .final-xbot__carta {
+  display: block;
+  width: 220px;
+  max-width: 100%;
+  height: auto;
+  transform: rotate(-3deg);
+  filter: drop-shadow(0 var(--espaco-3) var(--espaco-6) color-mix(in srgb, var(--cor-destaque) 30%, transparent));
+  animation: final-carta 0.6s ease-out 0.35s both;
+}
+
+.pagina-final .final-xbot__corpo {
+  padding: var(--espaco-6);
+}
+
+.pagina-final .final-xbot__titulo {
+  margin: var(--espaco-3) 0 var(--espaco-2);
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 2.5rem;
+  line-height: 1;
+  letter-spacing: 0.04em;
+}
+
+.pagina-final .final-xbot__texto {
+  margin: 0 0 var(--espaco-6);
+  line-height: 1.6;
+  color: var(--cor-texto-secundario);
+}
+
+.pagina-final .final-acoes {
+  display: grid;
+  gap: var(--espaco-3);
+}
+
+.pagina-final .final-acoes__jogar {
+  min-height: 56px;
+  font-weight: 700;
+  font-size: 1.125rem;
+  letter-spacing: 0.06em;
+}
+
+/* Sem gameUrl: aviso em linha tracejada (pendente), nunca um botão sem destino. */
+.pagina-final .final-aviso {
+  margin: 0;
+  padding: var(--espaco-4);
+  border: 1px dashed var(--cor-texto-atenuado);
+}
+
+.pagina-final .final-aviso__rotulo,
+.pagina-final .final-aviso__texto {
+  display: block;
+}
+
+.pagina-final .final-aviso__texto {
+  margin-top: var(--espaco-1);
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.pagina-final .final-saida {
+  display: grid;
+  margin-top: var(--espaco-8);
+}
+
+/* Acesso antecipado: painel neutro, sem roxo de recompensa; só o progresso real. */
+.pagina-final .final-bloqueio {
+  padding: var(--espaco-6);
+  background: var(--cor-superficie);
+  clip-path: var(--recorte);
+}
+
+.pagina-final .final-marca__pagina {
+  font-weight: 600;
+  color: var(--cor-texto-atenuado);
+}
+
+.pagina-final .final-bloqueio__estado {
+  display: inline-block;
+  margin: var(--espaco-6) 0 var(--espaco-3);
+  padding: var(--espaco-1) var(--espaco-2);
+  box-shadow: inset 0 0 0 1px var(--cor-texto-atenuado);
+}
+
+.pagina-final .final-bloqueio__titulo {
+  margin: 0 0 var(--espaco-3);
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 1.75rem;
+  line-height: 1.2;
+}
+
+.pagina-final .final-bloqueio__texto {
+  margin: 0 0 var(--espaco-6);
+  line-height: 1.6;
+  color: var(--cor-texto-secundario);
+}
+
+.pagina-final .final-bloqueio__progresso {
+  padding: var(--espaco-4);
+  background: var(--cor-fundo);
+  clip-path: var(--recorte);
+}
+
+.pagina-final .final-bloqueio__linha {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--espaco-3);
+  margin: 0 0 var(--espaco-3);
+}
+
+.pagina-final .final-bloqueio__numero {
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 1.75rem;
+  line-height: 1;
+}
+
+.pagina-final .final-bloqueio__acao {
+  margin-top: var(--espaco-6);
+}
+
+@keyframes final-preencher {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@keyframes final-carta {
+  from {
+    opacity: 0;
+    transform: translateY(var(--espaco-4)) rotate(-8deg);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(-3deg);
+  }
+}
+
+@media (hover: hover) {
+  .pagina-final .final-voltar:hover {
+    color: var(--cor-texto);
+  }
+}
+
+@media (min-width: 768px) {
+  .pagina-final .final-titulo {
+    font-size: 2.5rem;
+  }
+}
+
+/* Desktop, só na conclusão: mesma largura do dossiê das estações (832px). Hero com placar à direita,
+   resumo em duas colunas e X-BOT com a carta ao lado do texto. Ordem do DOM mantida. */
+@media (min-width: 900px) {
+  .pagina-final.pagina-final--completa main {
+    max-width: calc(832px + 2 * var(--espaco-4));
+    padding-top: var(--espaco-6);
+  }
+
+  .pagina-final .final-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 240px;
+    column-gap: 40px;
+    align-items: end;
+    padding: calc(var(--espaco-3) + var(--espaco-8)) 40px 40px;
+  }
+
+  .pagina-final .final-hero__topo {
+    grid-column: 1 / -1;
+  }
+
+  .pagina-final .final-titulo {
+    font-size: 2.75rem;
+  }
+
+  .pagina-final .final-hero__descricao {
+    max-width: 52ch;
+    font-size: 1.1875rem;
+  }
+
+  .pagina-final .final-placar {
+    margin-top: var(--espaco-6);
+    padding: 0 0 0 var(--espaco-8);
+    border-top: none;
+    border-left: 1px solid var(--cor-apagado);
+  }
+
+  .pagina-final .final-placar__feito {
+    font-size: 6rem;
+  }
+
+  .pagina-final .final-jornada {
+    display: grid;
+    grid-template-columns: 160px minmax(0, 1fr);
+    column-gap: var(--espaco-8);
+    align-items: start;
+  }
+
+  .pagina-final .final-jornada .final-secao {
+    display: block;
+    margin: 0;
+    padding-top: var(--espaco-4);
+  }
+
+  .pagina-final .final-jornada .final-secao::after {
+    content: none;
+  }
+
+  .pagina-final .final-jornada__item {
+    grid-template-columns: var(--espaco-8) var(--espaco-12) minmax(0, 1fr) auto;
+    grid-template-areas: "marcador numero nome estado";
+    padding: var(--espaco-4) 0;
+  }
+
+  .pagina-final .final-jornada__numero {
+    font-size: 1.75rem;
+  }
+
+  .pagina-final .final-jornada__nome {
+    font-size: 1.125rem;
+  }
+
+  .pagina-final .final-jornada__estado {
+    margin-top: 0;
+  }
+
+  .pagina-final .final-xbot {
+    display: grid;
+    grid-template-columns: 320px minmax(0, 1fr);
+  }
+
+  .pagina-final .final-xbot__palco {
+    align-items: center;
+    padding: 40px var(--espaco-8);
+    border-bottom: none;
+    border-right: 1px solid var(--cor-apagado);
+  }
+
+  .pagina-final .final-xbot__corpo {
+    align-self: center;
+    padding: 40px;
+  }
+
+  .pagina-final .final-xbot__titulo {
+    font-size: 3.5rem;
+  }
+
+  .pagina-final .final-acoes {
+    max-width: 320px;
+  }
+
+  .pagina-final .final-saida {
+    justify-content: start;
+  }
+
+  .pagina-final .final-saida .botao {
+    width: calc(8 * var(--espaco-8));
+  }
+
+  .pagina-final .final-bloqueio {
+    padding: var(--espaco-8);
+  }
+}
+
 .pagina-validar main {
   padding-top: var(--espaco-8);
 }

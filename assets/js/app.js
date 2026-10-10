@@ -349,6 +349,99 @@ function renderizarBloqueio(numero, estado, proximaValida, total) {
   painel.appendChild(destino);
 }
 
+// Conclusão: recompensa com 4/4 ou aviso de jornada incompleta.
+// Só lê o progresso, nunca grava; não redireciona.
+
+function renderizarConclusao() {
+  const ultima = obterProgresso().ultimaEstacaoDesbloqueada;
+  const total = OdisseIAConfig.totalEstacoes;
+
+  if (jornadaCompleta()) {
+    preencherPlacarFinal("conclusao", ultima, total);
+    renderizarEstacoesValidadas(total);
+    renderizarAcessoXbot();
+    document.body.classList.add("pagina-final--completa");
+    document.getElementById("conclusao").hidden = false;
+    return;
+  }
+
+  preencherPlacarFinal("incompleto", ultima, total);
+  document.getElementById("estado-incompleto").hidden = false;
+}
+
+function preencherPlacarFinal(prefixo, ultima, total) {
+  document.getElementById(prefixo + "-validadas").textContent = ultima;
+  document.getElementById(prefixo + "-total").textContent = total;
+
+  const barra = document.getElementById(prefixo + "-barra");
+  barra.setAttribute("aria-valuemax", total);
+  barra.setAttribute("aria-valuenow", ultima);
+  barra.textContent = "";
+
+  for (let n = 1; n <= total; n++) {
+    const celula = document.createElement("span");
+    celula.className = n <= ultima
+      ? "final-barra__celula final-barra__celula--cheia"
+      : "final-barra__celula";
+    celula.appendChild(criarTexto("span", "final-barra__segmento", ""));
+    celula.appendChild(criarTexto("span", "final-barra__numero", doisDigitos(n)));
+    barra.appendChild(celula);
+  }
+}
+
+function renderizarEstacoesValidadas(total) {
+  const lista = document.getElementById("conclusao-estacoes");
+  lista.textContent = "";
+
+  for (let n = 1; n <= total; n++) {
+    const item = document.createElement("li");
+    item.className = "final-jornada__item";
+
+    const marcador = document.createElement("img");
+    marcador.className = "final-jornada__marcador";
+    marcador.src = "assets/img/engrenagem-acesa.png";
+    marcador.alt = "";
+    marcador.width = 32;
+    marcador.height = 32;
+    item.appendChild(marcador);
+
+    const numero = criarTexto("span", "final-jornada__numero", doisDigitos(n));
+    numero.setAttribute("aria-hidden", "true");
+    item.appendChild(numero);
+
+    const nome = document.createElement("span");
+    nome.className = "final-jornada__nome";
+    nome.appendChild(criarTexto("span", "visualmente-oculto", "Estação " + n + ": "));
+    nome.appendChild(document.createTextNode(ESTACOES_NOMES[n - 1]));
+    item.appendChild(nome);
+
+    item.appendChild(criarTexto("span", "final-jornada__estado", "VALIDADA"));
+    lista.appendChild(item);
+  }
+}
+
+// Sem gameUrl o X-BOT continua desbloqueado, mas sem link: só o aviso de "em breve".
+function renderizarAcessoXbot() {
+  const area = document.getElementById("xbot-acesso");
+  area.textContent = "";
+
+  if (OdisseIAConfig.gameUrl !== null) {
+    const jogar = criarBotao({ href: OdisseIAConfig.gameUrl, texto: "Jogar X-BOT", principal: true });
+    jogar.classList.add("final-acoes__jogar");
+    area.appendChild(jogar);
+  } else {
+    const aviso = document.createElement("p");
+    aviso.className = "final-aviso";
+    aviso.appendChild(criarTexto("span", "final-aviso__rotulo", "ACESSO AO JOGO"));
+    aviso.appendChild(criarTexto("span", "final-aviso__texto", "Disponível em breve. Quando o jogo for liberado, o botão para jogar aparece aqui."));
+    area.appendChild(aviso);
+  }
+
+  if (OdisseIAConfig.downloadUrl !== null) {
+    area.appendChild(criarBotao({ href: OdisseIAConfig.downloadUrl, texto: "Baixar X-BOT", principal: false }));
+  }
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   if (document.getElementById("lista-estacoes")) {
     renderizarHub();
@@ -358,5 +451,8 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   if (document.getElementById("conteudo-estacao")) {
     renderizarPaginaEstacao();
+  }
+  if (document.getElementById("conclusao")) {
+    renderizarConclusao();
   }
 });
