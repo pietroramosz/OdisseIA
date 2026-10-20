@@ -409,10 +409,17 @@ function renderizarEstacoesValidadas(total) {
     numero.setAttribute("aria-hidden", "true");
     item.appendChild(numero);
 
+    // No resumo final, a Estação 4 usa o título editorial;
+    // o nome no Hub continua "X-BOT".
+    let nomeEstacao = ESTACOES_NOMES[n - 1];
+    if (n === 4) {
+      nomeEstacao = "Por trás do X-BOT";
+    }
+
     const nome = document.createElement("span");
     nome.className = "final-jornada__nome";
     nome.appendChild(criarTexto("span", "visualmente-oculto", "Estação " + n + ": "));
-    nome.appendChild(document.createTextNode(ESTACOES_NOMES[n - 1]));
+    nome.appendChild(document.createTextNode(nomeEstacao));
     item.appendChild(nome);
 
     item.appendChild(criarTexto("span", "final-jornada__estado", "VALIDADA"));
