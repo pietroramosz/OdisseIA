@@ -324,6 +324,27 @@ O principal gargalo do projeto passa a estar nas partes que dependem da reta fin
 
 ---
 
+## 20/10/2026 — Estação 4 e conclusão implementadas
+
+### O que foi feito
+
+- `estacao-4.html` passou a ter uma página própria para a estação ligada ao X-BOT.
+- `final.html` passou a apresentar os estados de jornada completa/incompleta e a área de acesso ao X-BOT.
+- A implementação das páginas não significa que a integração com o jogo esteja concluída: `gameUrl` e `downloadUrl` ainda dependem de endereços confirmados.
+
+### O que continua pendente
+
+- Confirmar com o grupo as informações finais do X-BOT e um endereço/build utilizável.
+- Decidir se a conclusão também deve oferecer acesso a um portfólio/PDF.
+- Testar os QR Codes físicos com câmera real e abertura pelo WhatsApp/navegador interno.
+- Decidir como orientar visitantes cujo QR abre em navegador diferente daquele usado no Hub.
+
+### Impacto
+
+As páginas das quatro estações e a conclusão estão implementadas. O foco passa a ser confirmar as informações externas, configurar os acessos e validar a experiência física completa.
+
+---
+
 ## Próximas entradas
 
 O DEVLOG só deve ganhar uma nova entrada quando houver algo realmente relevante, por exemplo:

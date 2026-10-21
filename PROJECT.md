@@ -30,14 +30,16 @@ Durante o desenvolvimento, usamos quatro estados para evitar confusão:
 - **Implementado:** já existe no código;
 - **Validado:** foi implementado e testado no fluxo esperado.
 
-Situação revisada em 08/10/2026:
+Situação revisada em 20/10/2026:
 
 - **Validado:** sistema de progresso (`progresso.js`), testado no console, incluindo dado corrompido e número decimal.
 - **Implementado e testado em emulador e no celular:** Hub (`hub.html`), nos estados 0 a 4.
 - **Implementado e revisado:** `index.html` como porta de entrada estática, sem JavaScript e sem dependência de `localStorage`.
 - **Implementadas e revisadas:** Estações 1–3 com conteúdo, estados `desbloqueada`, `próxima` e `futura`, além da composição editorial compartilhada.
+- **Implementada:** Estação 4 (`estacao-4.html`), com página própria ligada ao X-BOT; o conteúdo deve continuar fiel às informações confirmadas pelo grupo do jogo.
+- **Implementada:** `final.html`, com estados de jornada completa/incompleta e área de acesso ao X-BOT; os links finais ainda dependem de configuração.
 - **Implementado e testado por console e URL, ainda não validado com câmera real nem com WhatsApp:** validação de QR (`validar.html` e `qr.js`).
-- **Ainda pendente:** Estação 4, conclusão, integração com o X-BOT, hospedagem final, QR Codes definitivos e teste físico completo da jornada.
+- **Ainda pendente:** integração funcional com o X-BOT, hospedagem final, QR Codes definitivos e teste físico completo da jornada.
 
 ---
 
@@ -129,9 +131,8 @@ Também existe uma estrutura de `assets` para organizar CSS, JavaScript e imagen
 - `index.html` — visão geral e porta de entrada estática da experiência; não lê nem altera progresso;
 - `hub.html` — central das estações e representação do progresso;
 - `validar.html` — página usada pelo fluxo de validação dos QR Codes;
-- `estacao-1.html` a `estacao-3.html` — conteúdo editorial e estados de acesso das três primeiras estações;
-- `estacao-4.html` — reservada para a integração da estação ligada ao X-BOT;
-- `final.html` — conclusão da jornada antes do acesso ao X-BOT.
+- `estacao-1.html` a `estacao-4.html` — páginas das estações e seus estados de acesso; a Estação 4 é dedicada ao X-BOT;
+- `final.html` — conclusão da jornada, com estados de acesso e área destinada ao link do X-BOT.
 
 A existência dessas páginas não significa que todas as funcionalidades internas já estejam finalizadas.
 
@@ -337,7 +338,7 @@ Estados importantes da interface também não devem depender exclusivamente de c
 
 O conteúdo digital é construído junto com as apresentações físicas.
 
-As Estações 1–3 já possuem copy integrada e uma estrutura editorial comum. A Estação 4 continua dependente do estado real do X-BOT.
+As Estações 1–4 possuem páginas implementadas e estados de acesso. A precisão do conteúdo da Estação 4 continua dependente das informações confirmadas sobre o X-BOT.
 
 Algumas regras que seguimos:
 
@@ -397,18 +398,20 @@ A ideia é manter o projeto simples enquanto isso for suficiente.
 
 ## 16. Pendências atuais
 
-**Última revisão:** 08/10/2026  
+**Última revisão:** 20/10/2026  
 **Data externa principal:** feira em **29/10/2026**.
 
 Esta seção guarda apenas trabalho concreto ainda aberto. Ela não substitui o DEVLOG: quando uma pendência relevante for concluída, ela sai daqui e pode virar um marco no histórico.
 
 ### Necessárias para fechar a experiência da feira
 
-- [ ] Implementar a Estação 4 apenas com informações e mecânicas confirmadas no X-BOT.
+- [x] Implementar a página da Estação 4 ligada ao X-BOT; revisar o conteúdo conforme as informações confirmadas pelo grupo.
 - [ ] Obter um status/build utilizável do X-BOT para destravar a integração da Estação 4 e da conclusão.
 - [ ] Resolver a duplicação de nome entre “Estação 4 — X-BOT” e o card final do jogo, sem renomear nada antes da decisão.
-- [ ] Implementar a página de conclusão e a mensagem de desbloqueio do X-BOT.
-- [ ] Preencher `gameUrl`; decidir `downloadUrl` apenas se houver versão para download.
+- [x] Implementar a página de conclusão e os estados de jornada completa/incompleta.
+- [ ] Configurar os links finais para o X-BOT quando o grupo confirmar um endereço/build utilizável.
+- [ ] Decidir se a conclusão terá link para portfólio/PDF e confirmar o arquivo/endereço antes de adicioná-lo.
+- [ ] Preencher `gameUrl` quando houver endereço utilizável; decidir `downloadUrl` apenas se houver versão para download.
 - [ ] Adicionar no Hub um caminho claro de volta para a Visão geral (`index.html`).
 - [ ] Definir hospedagem e URL final antes de gerar ou imprimir os QR Codes definitivos.
 - [ ] Testar QR real pela câmera e abertura por WhatsApp/navegador interno.
