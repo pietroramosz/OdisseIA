@@ -350,7 +350,6 @@ As páginas das quatro estações e a conclusão estão implementadas. O foco pa
 O DEVLOG só deve ganhar uma nova entrada quando houver algo realmente relevante, por exemplo:
 
 - Estação 4 integrada;
-- conclusão implementada;
 - integração do X-BOT;
 - definição da URL final e deploy definitivo;
 - testes físicos de QR e fluxo completo;

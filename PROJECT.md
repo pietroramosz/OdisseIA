@@ -30,7 +30,7 @@ Durante o desenvolvimento, usamos quatro estados para evitar confusão:
 - **Implementado:** já existe no código;
 - **Validado:** foi implementado e testado no fluxo esperado.
 
-Situação revisada em 20/10/2026:
+Situação revisada em 21/10/2026:
 
 - **Validado:** sistema de progresso (`progresso.js`), testado no console, incluindo dado corrompido e número decimal.
 - **Implementado e testado em emulador e no celular:** Hub (`hub.html`), nos estados 0 a 4.
@@ -398,7 +398,7 @@ A ideia é manter o projeto simples enquanto isso for suficiente.
 
 ## 16. Pendências atuais
 
-**Última revisão:** 20/10/2026  
+**Última revisão:** 21/10/2026\
 **Data externa principal:** feira em **29/10/2026**.
 
 Esta seção guarda apenas trabalho concreto ainda aberto. Ela não substitui o DEVLOG: quando uma pendência relevante for concluída, ela sai daqui e pode virar um marco no histórico.

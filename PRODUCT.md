@@ -36,8 +36,9 @@ A experiência não é "um site sobre a feira" nem "um jogo com um site de apoio
 - QR: cada QR abre `validar.html?estacao=N`; só o QR da próxima estação na ordem avança o progresso (DEC-014). Cinco resultados possíveis: sucesso, repetido, fora de ordem, inválido, erro de armazenamento.
 - Conteúdo das 4 estações é escrito direto no HTML (`estacao-1.html`–`estacao-4.html`), sem arquivo de dados nem geração por JS (DEC-012); esqueleto das 4 páginas deve ser idêntico.
 - Páginas atuais: `index.html` (porta de entrada estática, sem JS, sem progresso), `hub.html` (estados 0–4), `validar.html`, `estacao-1.html`–`estacao-4.html`, `final.html` (conclusão).
-- **Estação 4 e `final.html` (Conclusão) já estão implementadas e validadas** — não tratar como pendentes apesar de `PROJECT.md` (revisão 08/10) ainda listá-las como tal.
-- **Ainda pendente, sem novidades**: `gameUrl` (URL do X-BOT) e `downloadUrl` não preenchidos; cor final do X-BOT não confirmada (`#CD5EFA` segue provisório); hospedagem/URL definitiva; QR Codes definitivos; teste físico completo do fluxo em celular; validação por câmera real e abertura via WhatsApp.
+- **Estação 4 e `final.html` (Conclusão) já estão implementadas** — não tratar como pendentes de implementação. Implementado ≠ validado: nenhuma das duas foi testada no fluxo físico completo da feira, e a jornada completa (visão geral → Hub → 4 estações → conclusão → X-BOT) ainda não foi validada ponta a ponta.
+- **Testes efetivamente realizados até aqui**: sistema de progresso testado manualmente no console (incluindo dado corrompido e número decimal); Hub testado nos estados 0–4 em emulador e no celular; validação de QR (`validar.html`/`qr.js`) testada por console e por URL.
+- **Validações pendentes, sem novidades**: `gameUrl` (URL do X-BOT) e `downloadUrl` não preenchidos; cor final do X-BOT não confirmada (`#CD5EFA` segue provisório); hospedagem/URL definitiva; QR Codes definitivos; leitura de QR real pela câmera; abertura via WhatsApp; teste físico completo do fluxo em celular, do zero até o X-BOT.
 - Nenhum prazo artificial deve ser inventado para itens em aberto (créditos da equipe, favicon, comportamento pós-feira, tutorial do X-BOT) — eles só entram na lista principal quando virarem requisito real.
 
 ## Brand Commitments

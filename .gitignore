@@ -25,6 +25,7 @@ node_modules/
 **/.impeccable/*.png
 **/.impeccable/review/
 **/.impeccable/questions/
+**/.impeccable/critique/
 
 **/.impeccable/live/server.json
 **/.impeccable/live/codex-worker.json

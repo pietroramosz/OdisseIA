@@ -15,13 +15,13 @@ colors:
 typography:
   display:
     fontFamily: "Chakra Petch, system-ui, sans-serif"
-    fontSize: "clamp(2.5rem, 6vw, 4.5rem)"
+    fontSize: "2.75rem" # valor base (mobile); a progressão real por breakpoint está em "Typography > Hierarchy"
     fontWeight: 700
     lineHeight: 1.05
     letterSpacing: "0.02em"
   headline:
     fontFamily: "Chakra Petch, system-ui, sans-serif"
-    fontSize: "clamp(1.75rem, 3vw, 2.75rem)"
+    fontSize: "1.75rem" # valor base (mobile); a progressão real por breakpoint está em "Typography > Hierarchy"
     fontWeight: 700
     lineHeight: 1.2
     letterSpacing: "normal"
@@ -133,8 +133,8 @@ Paleta cinza-grafite quase monocromática com um único acento roxo reservado pa
 **Character:** Chakra Petch é usada só onde a interface fala como sistema — títulos, números, rótulos, botões. Texto corrido usa a fonte de sistema do dispositivo do visitante, priorizando legibilidade e carregamento imediato sobre identidade tipográfica no corpo do texto.
 
 ### Hierarchy
-- **Display** (700, `clamp(2.5rem, 6vw, 4.5rem)`, 1.05): títulos de entrada de maior escala — hero do Index (2.75rem→4.5rem) e título do X-BOT na Conclusão (2.5rem→3.5rem), ambos crescendo nos mesmos breakpoints de layout (768px/900px).
-- **Headline** (700, `clamp(1.75rem, 3vw, 2.75rem)`, 1.2): título da estação (`titulo-estacao`) e título da Conclusão (`final-titulo`).
+- **Display** (700, 1.05): maior escala de título, em passos fixos por breakpoint de layout — o CSS não usa `clamp`, cada página define o tamanho em cada `@media`. Hero do Index (`.index-hero__titulo`): 2.75rem (base) → 3.5rem (≥768px) → 4.5rem (≥900px). Título do X-BOT na Conclusão (`.final-xbot__titulo`): 2.5rem (base) → 3.5rem (≥900px), sem passo em 768px.
+- **Headline** (700, 1.2): também em passos fixos, não `clamp`. Título da estação (`.titulo-estacao`): 1.75rem (base) → 2.25rem (≥768px); nas estações desbloqueadas, já em layout de dossiê (≥900px), cai para 2rem — a composição em duas colunas pede um título menor que o passo de 768px. Título da Conclusão (`.final-titulo`): 2rem (base) → 2.5rem (≥768px) → 2.75rem (≥900px).
 - **Title** (600, 1.25rem, 1.3): título de cartão/estação no Hub, título de capítulo e seção dentro de uma estação.
 - **Body** (400, 1.0625rem, 1.6): parágrafo de abertura (briefing) e corpo de capítulo; linha de 60–75ch em telas largas.
 - **Label** (600, 0.75rem, letter-spacing 0.08em, caixa alta): rótulo numerado (`01 / 04`), estado de acesso, selo de conquista — sempre o elemento que "fala como sistema".
@@ -177,7 +177,7 @@ O recorte tem duas escalas: o grande (`--espaco-3`, 12px) para painéis e cards;
 
 ## Components
 
-Técnico e contível: formas cortadas e precisas, cor rara e com propósito, estados sempre legíveis em texto — nada decorativo ou gratuito. Hover é sempre um bônus de desktop (`@media (hover: hover)`), nunca a única forma de entender um estado.
+Técnico e confiável: formas cortadas e precisas, cor rara e com propósito, estados sempre legíveis em texto — nada decorativo ou gratuito. Hover é sempre um bônus de desktop (`@media (hover: hover)`), nunca a única forma de entender um estado.
 
 ### Buttons
 - **Shape:** recorte diagonal (`--recorte`, 12px), sem borda.

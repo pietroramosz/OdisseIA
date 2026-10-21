@@ -5,7 +5,7 @@ O **OdisseIA** é um projeto criado para uma feira escolar que mistura uma exper
 A ideia do site é acompanhar o percurso da feira, complementar as apresentações de cada estação e conectar tudo em uma experiência única. O projeto também inclui o **X-BOT**, um jogo digital que será desbloqueado ao final da jornada.
 
 > **Status atual:** em desenvolvimento.  
-> A fundação, o sistema de progresso, o Hub, a validação dos QR Codes, a visão geral e as Estações 1–3 já possuem implementação real na branch `dev`.
+> A fundação, o sistema de progresso, o Hub, a validação dos QR Codes, a visão geral, as Estações 1–4 e a Conclusão já possuem implementação real na branch `dev`.
 
 ---
 
@@ -65,7 +65,8 @@ Atualmente, estão implementados:
 - Hub com estados 0 a 4;
 - validação dos QR Codes por `validar.html` e `qr.js`;
 - `index.html` como porta de entrada estática, sem JavaScript nem dependência de progresso;
-- Estações 1–3 com conteúdo, três estados de acesso e linguagem editorial compartilhada.
+- Estações 1–4 com conteúdo, três estados de acesso e linguagem editorial compartilhada;
+- página de conclusão (`final.html`), com estados de jornada completa/incompleta e área de acesso ao X-BOT.
 
 O sistema de progresso já foi testado manualmente e versionado na branch `dev`.
 
@@ -75,13 +76,12 @@ O sistema de progresso já foi testado manualmente e versionado na branch `dev`.
 
 Entre os próximos passos estão:
 
-- Estação 4;
-- página de conclusão;
-- integração final com o X-BOT;
-- hospedagem e QR Codes definitivos;
-- testes físicos e da experiência completa da feira.
+- integração funcional com o X-BOT;
+- hospedagem definitiva;
+- QR Codes finais;
+- testes físicos da experiência completa da feira.
 
-Alguns detalhes da Estação 4 continuam dependendo diretamente da versão final do X-BOT.
+Alguns detalhes da Estação 4 e da Conclusão continuam dependendo diretamente da versão final do X-BOT.
 
 ---
 
@@ -137,8 +137,8 @@ Além deste README, o projeto possui:
 
 O projeto já saiu da fase de planejamento puro e entrou em implementação.
 
-A fundação, o sistema de progresso, o Hub, a validação dos QR Codes, a visão geral e as Estações 1–3 já formam a base funcional e editorial atual do site.
+A fundação, o sistema de progresso, o Hub, a validação dos QR Codes, a visão geral, as Estações 1–4 e a Conclusão já formam a base funcional e editorial atual do site.
 
-Ainda faltam principalmente a Estação 4, a conclusão, a integração com o X-BOT, a hospedagem definitiva e os testes físicos do fluxo da feira.
+Ainda faltam principalmente a integração funcional com o X-BOT, a hospedagem definitiva, os QR Codes finais e os testes físicos do fluxo da feira.
 
 Screenshots, demonstração, instruções de execução e links públicos serão adicionados quando essas partes realmente existirem.
