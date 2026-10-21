@@ -401,3 +401,27 @@ Quatro estações formam naturalmente duas linhas de duas colunas. Isso deixa a 
 - A hierarquia de “próxima estação” continua sendo comunicada por texto, tamanho, barra e ícone, sem depender de mudar a posição ou a largura do card.
 - Mudanças futuras para outro arranjo desktop exigem revisão desta decisão.
 
+---
+
+## DEC-016 — Dossiê de 832px é compartilhado por qualquer página de conteúdo desbloqueado
+
+**Status:** aceita, registrada agora (20/10/2026) a partir de uma implementação já existente
+
+### Contexto
+
+A DEC anterior sobre o dossiê técnico (`docs/ESTILO.md`, seção de layout) associava a largura de 832px (160px de contexto + 32px de respiro + até 640px de conteúdo) apenas às Estações 1–3 desbloqueadas. Na implementação da Conclusão (`final.html`), o layout de desktop (`@media (min-width: 900px)`) já reutiliza exatamente essa mesma largura — o próprio comentário no CSS registra a intenção: "mesma largura do dossiê das estações (832px)". Essa decisão de reuso nunca tinha sido documentada numa DEC nem atualizada na documentação de estilo; a consolidação de `docs/ESTILO.md` em `DESIGN.md` expôs a divergência.
+
+### Decisão
+
+O dossiê de 832px não é uma medida exclusiva das Estações 1–3: é a largura compartilhada por qualquer página que siga o padrão "dossiê técnico" (coluna de contexto/rótulo + coluna de conteúdo), hoje as Estações 1–3 desbloqueadas e a Conclusão completa.
+
+### Por quê?
+
+A reutilização já existe no código e não está sendo alterada por esta decisão — ela só estava documentada de forma incompleta. Registrar a regra no nível certo evita que o guia de estilo pareça estar errado e deixa claro, para qualquer página futura que adote o mesmo padrão de dossiê, que ela deve herdar essa largura em vez de definir a sua própria.
+
+### Consequências
+
+- `DESIGN.md` passa a descrever o dossiê de 832px como regra geral de padrão "dossiê", citando esta DEC.
+- Nenhuma mudança de HTML, CSS ou comportamento visual decorre desta decisão — ela formaliza o que já estava implementado.
+- Uma página nova que queira usar outra largura de dossiê, ou não seguir esse padrão, continua exigindo decisão explícita (DEC-015, DEC-016).
+

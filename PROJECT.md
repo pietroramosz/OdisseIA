@@ -439,4 +439,4 @@ Não serão criados prazos artificiais para esses itens. Se algum deles virar re
 - [`AI-WORKFLOW.md`](./AI-WORKFLOW.md)
 - [`DECISIONS.md`](./DECISIONS.md)
 - [`DEVLOG.md`](./DEVLOG.md)
-- [`docs/ESTILO.md`](./docs/ESTILO.md)
+- [`DESIGN.md`](./DESIGN.md) — sistema de design (substitui o antigo `docs/ESTILO.md`)

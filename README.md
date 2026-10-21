@@ -129,7 +129,7 @@ Além deste README, o projeto possui:
 - [`AI-WORKFLOW.md`](./AI-WORKFLOW.md) — mostra como as ferramentas de IA entram no processo;
 - [`DECISIONS.md`](./DECISIONS.md) — registra decisões importantes e seus motivos;
 - [`DEVLOG.md`](./DEVLOG.md) — acompanha os principais marcos da criação do site;
-- [`docs/ESTILO.md`](./docs/ESTILO.md) — concentra as regras visuais, responsividade e acessibilidade.
+- [`DESIGN.md`](./DESIGN.md) — concentra o sistema de design: cores, tipografia, layout, componentes, responsividade e acessibilidade (substitui o antigo `docs/ESTILO.md`).
 
 ---
 

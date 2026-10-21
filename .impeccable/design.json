@@ -1,0 +1,161 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-20T00:00:00.000Z",
+  "title": "Design System: OdisseIA",
+  "extensions": {
+    "colorMeta": {
+      "cyber-purple": {
+        "role": "primary",
+        "displayName": "Cyber Purple",
+        "canonical": "#cd5efa",
+        "tonalRamp": ["#2b0e3a", "#4a1864", "#702790", "#9a3cc0", "#b94fe0", "#cd5efa", "#ddaafd", "#f0d9fe"]
+      },
+      "void-black": {
+        "role": "neutral",
+        "displayName": "Void Black",
+        "canonical": "#0c0c10",
+        "tonalRamp": ["#0c0c10", "#16161d", "#222230", "#30303f", "#46465a", "#63637a", "#9d9daa", "#d4d4dc"]
+      },
+      "graphite-surface": {
+        "role": "neutral",
+        "displayName": "Graphite Surface",
+        "canonical": "#16161d",
+        "tonalRamp": ["#0c0c10", "#111116", "#16161d", "#1f1f29", "#2a2a36", "#3b3b49", "#55556a", "#7c7c90"]
+      },
+      "graphite-surface-elevated": {
+        "role": "neutral",
+        "displayName": "Elevated Graphite",
+        "canonical": "#1f1f29",
+        "tonalRamp": ["#111116", "#16161d", "#1a1a23", "#1f1f29", "#2b2b38", "#3d3d4d", "#57576b", "#7d7d92"]
+      },
+      "signal-white": {
+        "role": "neutral",
+        "displayName": "Signal White",
+        "canonical": "#f3f3f6",
+        "tonalRamp": ["#26262d", "#46464f", "#6f6f7d", "#9d9daa", "#c2c2cc", "#dadade", "#eeeef0", "#f3f3f6"]
+      },
+      "dormant-gray": {
+        "role": "neutral",
+        "displayName": "Dormant Gray",
+        "canonical": "#6f6f7d",
+        "tonalRamp": ["#1a1a1f", "#2c2c34", "#434350", "#5b5b6c", "#6f6f7d", "#8f8f9b", "#b4b4bd", "#dadade"]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero de maior escala: Index e título da carta do X-BOT na Conclusão." },
+      "headline": { "displayName": "Headline", "purpose": "Título de página: nome da estação, título da Conclusão." },
+      "title": { "displayName": "Title", "purpose": "Título de cartão, capítulo e seção dentro de uma página." },
+      "body": { "displayName": "Body", "purpose": "Parágrafo de abertura e corpo de capítulo, 60-75ch." },
+      "label": { "displayName": "Label", "purpose": "Rótulo numerado, estado de acesso, selo — sempre caixa alta." }
+    },
+    "shadows": [
+      { "name": "edge-focus", "value": "inset 0 0 0 2px var(--cor-destaque)", "purpose": "Foco de teclado em cartões e botões; aresta dura, nunca blur." },
+      { "name": "edge-emphasis", "value": "inset 4px 0 0 var(--cor-destaque)", "purpose": "Barra lateral roxa que marca o card em destaque (próxima estação, conclusão principal)." },
+      { "name": "edge-dormant", "value": "inset 0 0 0 1px var(--cor-superficie-alta)", "purpose": "Contorno fino em card bloqueado, sem preenchimento." },
+      { "name": "card-drop-shadow", "value": "drop-shadow(0 12px 24px color-mix(in srgb, var(--cor-destaque) 30%, transparent))", "purpose": "Único uso de sombra suave: a carta do X-BOT na Conclusão, tratada como objeto físico." }
+    ],
+    "motion": [
+      { "name": "entrar", "value": "cubic-bezier(0.25, 0.1, 0.25, 1) 0.4s", "purpose": "Entrada suave de painéis-resultado (validação de QR, hero da Conclusão)." },
+      { "name": "preencher-barra", "value": "ease-out 0.35s", "purpose": "Escala horizontal (scaleX) dos segmentos de progresso acendendo em sequência na Conclusão." }
+    ],
+    "breakpoints": [
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "900px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Ação principal (ex: jogar X-BOT na Conclusão).",
+      "html": "<a class=\"ds-btn-primary\" href=\"#\">JOGAR X-BOT</a>",
+      "css": ".ds-btn-primary { display: flex; align-items: center; justify-content: center; min-height: 44px; padding: 12px 16px; background: #cd5efa; color: #0c0c10; font-family: 'Chakra Petch', system-ui, sans-serif; font-weight: 700; font-size: 1.125rem; letter-spacing: 0.06em; text-decoration: none; clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px); transition: none; } .ds-btn-primary:focus-visible { outline: none; box-shadow: inset 0 0 0 2px #f3f3f6; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Ação secundária (ex: voltar ao Hub após validar um QR).",
+      "html": "<a class=\"ds-btn-secondary\" href=\"#\">VOLTAR AO HUB</a>",
+      "css": ".ds-btn-secondary { display: flex; align-items: center; justify-content: center; min-height: 44px; padding: 12px 16px; background: #1f1f29; color: #f3f3f6; font-family: 'Chakra Petch', system-ui, sans-serif; font-weight: 600; font-size: 1rem; text-decoration: none; clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px); } .ds-btn-secondary:focus-visible { outline: none; box-shadow: inset 0 0 0 2px #f3f3f6; }"
+    },
+    {
+      "name": "Station Card — Next",
+      "kind": "card",
+      "refersTo": "card-elevated",
+      "description": "Card de 'próxima estação' no Hub: painel em destaque com borda lateral roxa.",
+      "html": "<a class=\"ds-card-next\" href=\"#\"><span class=\"ds-card-next__label\">PRÓXIMA ESTAÇÃO</span><span class=\"ds-card-next__title\">02 — Evolução dos jogos de 2001 até hoje</span></a>",
+      "css": ".ds-card-next { display: block; padding: 16px 32px 24px 24px; background: #1f1f29; color: #f3f3f6; text-decoration: none; box-shadow: inset 4px 0 0 #cd5efa; clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px); } .ds-card-next__label { display: inline-block; margin-bottom: 12px; padding: 4px 8px; background: #cd5efa; color: #0c0c10; font-family: 'Chakra Petch', system-ui, sans-serif; font-weight: 700; font-size: 0.75rem; letter-spacing: 0.08em; clip-path: polygon(4px 0, 100% 0, 100% calc(100% - 4px), calc(100% - 4px) 100%, 0 100%, 0 4px); } .ds-card-next__title { display: block; font-family: 'Chakra Petch', system-ui, sans-serif; font-weight: 700; font-size: 1.75rem; line-height: 1.2; }"
+    },
+    {
+      "name": "Station Card — Locked",
+      "kind": "card",
+      "refersTo": "card-dormant",
+      "description": "Card bloqueado no Hub: dormente, sem preenchimento, só contorno.",
+      "html": "<div class=\"ds-card-locked\"><span class=\"ds-card-locked__label\">ESTAÇÃO 03</span><span class=\"ds-card-locked__title\">Inteligência Artificial nos jogos</span></div>",
+      "css": ".ds-card-locked { padding: 16px; background: #0c0c10; color: #9d9daa; box-shadow: inset 0 0 0 1px #1f1f29; clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px); } .ds-card-locked__label { display: block; margin-bottom: 8px; font-family: 'Chakra Petch', system-ui, sans-serif; font-weight: 600; font-size: 0.75rem; letter-spacing: 0.08em; } .ds-card-locked__title { display: block; font-family: 'Chakra Petch', system-ui, sans-serif; font-weight: 600; font-size: 1.25rem; }"
+    },
+    {
+      "name": "Status Chip",
+      "kind": "chip",
+      "refersTo": "chip-label",
+      "description": "Selo de estado: 'próxima estação' ou 'conquistado' na Conclusão.",
+      "html": "<span class=\"ds-chip\">DESBLOQUEADO</span>",
+      "css": ".ds-chip { display: inline-block; padding: 4px 8px; background: #cd5efa; color: #0c0c10; font-family: 'Chakra Petch', system-ui, sans-serif; font-weight: 700; font-size: 0.75rem; letter-spacing: 0.08em; clip-path: polygon(4px 0, 100% 0, 100% calc(100% - 4px), calc(100% - 4px) 100%, 0 100%, 0 4px); }"
+    },
+    {
+      "name": "Progress Segment",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "Segmento da barra de progresso: vazio = trilho fino, cheio = bloco alto roxo. A diferença é de forma, não só de cor.",
+      "html": "<div class=\"ds-progress\"><span class=\"ds-progress__seg ds-progress__seg--full\"></span><span class=\"ds-progress__seg ds-progress__seg--full\"></span><span class=\"ds-progress__seg\"></span><span class=\"ds-progress__seg\"></span></div>",
+      "css": ".ds-progress { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; } .ds-progress__seg { height: 4px; align-self: end; background: #6f6f7d; } .ds-progress__seg--full { height: 12px; background: #cd5efa; clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px); }"
+    },
+    {
+      "name": "Back Navigation Link",
+      "kind": "nav",
+      "refersTo": null,
+      "description": "Link de voltar no topo das páginas de estação e conclusão.",
+      "html": "<a class=\"ds-nav-back\" href=\"#\">← HUB</a>",
+      "css": ".ds-nav-back { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-family: 'Chakra Petch', system-ui, sans-serif; font-weight: 600; font-size: 0.875rem; color: #c2c2cc; text-decoration: none; } .ds-nav-back:hover, .ds-nav-back:focus-visible { color: #f3f3f6; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "O Terminal Editorial",
+    "overview": "OdisseIA lê como um terminal técnico que decidiu contar uma história: a casca é toda recortes diagonais, rótulos numerados em caixa alta e hierarquia de grade — mas o miolo de cada tela é texto corrido, respirado, feito para ser lido em pé, num celular, em pé entre estações de uma feira. É cyberpunk sem neon: a estética vem da estrutura (recorte, contraste, numeração) e não de efeito (glow, gradiente, vidro). O roxo é raro e funcional — ele marca \"isto é o próximo passo\" ou \"isto foi conquistado\", nunca decoração.\n\nO sistema não finge ser o HUD de um jogo. Ele é a documentação de campo dessa jornada: mais espaço, leitura mais fácil, texto mais longo do que o X-BOT teria dentro do próprio jogo — a mesma linguagem visual, numa chave mais limpa.\n\nA única exceção deliberada é a Conclusão: o único momento em que o roxo e o movimento podem se abrir como recompensa visual, ainda dentro da mesma paleta e das mesmas regras de contraste.",
+    "keyCharacteristics": [
+      "Recorte diagonal como única assinatura de forma, repetida em cards, chips, botões e nós de trilho.",
+      "Hierarquia por numeração (01 / 04), não por decoração.",
+      "Roxo como tinta rara: destaque, nunca cor de texto corrido.",
+      "Estados de acesso sempre legíveis por texto e tamanho, nunca só por cor.",
+      "Fundo quase preto com grade sutil em CSS, nunca atrás de texto de leitura."
+    ],
+    "rules": [
+      { "name": "The Rare Ink Rule", "body": "Cyber Purple nunca é cor de texto corrido. Ele aparece em bordas de ênfase, chips, barra de progresso e no momento de recompensa da Conclusão — sempre como sinal de estado, nunca como preenchimento decorativo.", "section": "colors" },
+      { "name": "The Two-Dark Rule", "body": "Existem dois tons de escuro com papéis opostos: Graphite Surface Dim marca bloqueado/apagado, Elevated Graphite marca em destaque/próximo. Nunca usar um no lugar do outro.", "section": "colors" },
+      { "name": "The Single Headline Rule", "body": "Cada página tem um único título grande (Display ou Headline), com contraste forte contra o resto do conteúdo. Nenhuma outra manchete do mesmo peso/escala compete com ele na mesma tela.", "section": "typography" },
+      { "name": "The No New Font Rule", "body": "Nenhuma fonte entra no projeto sem decisão explícita registrada. A Inter já está na pasta de fontes como alternativa futura e não deve ser carregada sem essa decisão.", "section": "typography" },
+      { "name": "The Hard-Edge Rule", "body": "Toda sombra estrutural do sistema é uma borda sólida (inset), nunca um blur difuso. Blur é reservado ao único objeto ilustrado do site (a carta do X-BOT).", "section": "elevation" },
+      { "name": "The One Cut Rule", "body": "Existe um motivo de forma — o recorte diagonal — e ele nunca compete com outro (sem cantos arredondados, sem recorte em outro ângulo, sem combinação de formas no mesmo componente).", "section": "shapes" }
+    ],
+    "dos": [
+      "Do usar o recorte diagonal (--recorte) como única assinatura de forma em qualquer novo contêiner.",
+      "Do expressar estado por texto + tamanho + cor juntos, nunca só por cor.",
+      "Do comunicar o estado da estação próxima pelo rótulo, pelo tamanho do card e pela barra/borda roxa — nunca só pela engrenagem (ícone) ou só pela cor.",
+      "Do manter o roxo raro: destaque, borda, chip, barra — nunca bloco de texto corrido nem fundo de página inteira (exceto a Conclusão).",
+      "Do manter contraste mínimo 4,5:1 em texto e 3:1 em interface, alvos de toque de 44px e foco sempre visível.",
+      "Do respeitar prefers-reduced-motion em qualquer animação nova.",
+      "Do restringir o verso da carta do X-BOT à Estação 4 e à Conclusão, sempre em tamanho de carta (200-280px de largura), com loading=\"lazy\" e dimensões declaradas."
+    ],
+    "donts": [
+      "Don't usar glow difuso, gradiente decorativo fora dos já existentes, glassmorphism, border-radius, ou qualquer segunda linguagem de forma.",
+      "Don't usar emoji como ícone, nem depender de hover como único jeito de revelar informação em mobile.",
+      "Don't introduzir uma nova fonte, peso de fonte, ou carregar a Inter sem decisão explícita registrada.",
+      "Don't reusar a largura do canvas do Index (960px) para o dossiê de conteúdo desbloqueado, nem o contrário.",
+      "Don't usar texto pequeno em contorno (stroke/outline sem preenchimento) em nenhum tamanho de texto.",
+      "Don't permitir rolagem horizontal da página em larguras de viewport entre 360px e 430px.",
+      "Don't aplicar o tratamento de recompensa visual (roxo ampliado, drop-shadow, textura, carta) fora da página de Conclusão."
+    ]
+  }
+}
