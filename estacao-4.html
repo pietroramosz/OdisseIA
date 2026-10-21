@@ -7,6 +7,15 @@
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body class="pagina-estacao" data-estacao="4">
+  <!-- Pictograma da estação: duas cartas com uma engrenagem, só linhas retas e quadrados. Decorativo. -->
+  <svg class="sprite" width="0" height="0" aria-hidden="true" focusable="false">
+    <symbol id="pictograma" viewBox="0 0 48 48">
+      <path d="M14 12V4H40L44 8V36H36"/>
+      <path d="M6 12H30L36 18V44H6Z"/>
+      <path d="M14 26H20L24 30V36L20 40H14L10 36V30Z"/>
+      <rect x="15" y="31" width="4" height="4" fill="currentColor" stroke="none"/>
+    </symbol>
+  </svg>
   <main>
     <!-- Conteúdo da estação: só aparece quando a estação está desbloqueada (app.js). -->
     <div id="conteudo-estacao" hidden>
@@ -15,6 +24,7 @@
         <div class="terminal-hero__painel">
           <p class="terminal-hero__rotulo">ESTAÇÃO <span class="terminal-hero__numero">04</span> / 04</p>
           <h1 class="titulo-estacao">Por trás do X-BOT</h1>
+          <svg class="terminal-hero__pict" aria-hidden="true" focusable="false"><use href="#pictograma"/></svg>
         </div>
       </header>
 
@@ -22,9 +32,16 @@
       <section class="briefing">
         <p class="terminal-rotulo">IDENTIDADE</p>
         <h2 class="briefing__titulo">Um jogo de cartas feito para o OdisseIA</h2>
-        <p><img src="assets/img/verso-carta.png" alt="Verso de uma carta do X-BOT: duas engrenagens cinza sobre fundo roxo, com o nome X-BOT escrito duas vezes." width="220" height="307" loading="lazy"></p>
-        <p>O X-BOT é um jogo digital de cartas, com robôs e estética cyberpunk, desenvolvido por outro grupo do OdisseIA para esta jornada.</p>
-        <p>O cinza, o roxo e os cantos cortados que acompanham você desde o Hub vêm do X-BOT. As engrenagens que marcam o seu progresso saíram da mesma arte deste verso de carta.</p>
+        <div class="briefing__corpo">
+          <figure class="carta-moldura">
+            <div class="carta-moldura__arte">
+              <img src="assets/img/verso-carta.png" alt="Verso de uma carta do X-BOT: duas engrenagens cinza sobre fundo roxo, com o nome X-BOT escrito duas vezes." width="220" height="307" loading="lazy">
+            </div>
+            <figcaption class="carta-moldura__legenda">VERSO DA CARTA</figcaption>
+          </figure>
+          <p>O X-BOT é um jogo digital de cartas, com robôs e estética cyberpunk, desenvolvido por outro grupo do OdisseIA para esta jornada.</p>
+          <p>O cinza, o roxo e os cantos cortados que acompanham você desde o Hub vêm do X-BOT. As engrenagens que marcam o seu progresso saíram da mesma arte deste verso de carta.</p>
+        </div>
       </section>
 
       <section class="capitulo">
@@ -79,6 +96,7 @@
         <div class="terminal-hero__painel">
           <p class="terminal-hero__rotulo">ESTAÇÃO <span class="terminal-hero__numero">04</span> / 04</p>
           <h1 class="titulo-estacao">Por trás do X-BOT</h1>
+          <svg class="terminal-hero__pict" aria-hidden="true" focusable="false"><use href="#pictograma"/></svg>
         </div>
       </header>
       <section id="bloqueio-painel" class="bloqueio"></section>

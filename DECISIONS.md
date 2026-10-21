@@ -425,3 +425,33 @@ A reutilização já existe no código e não está sendo alterada por esta deci
 - Nenhuma mudança de HTML, CSS ou comportamento visual decorre desta decisão — ela formaliza o que já estava implementado.
 - Uma página nova que queira usar outra largura de dossiê, ou não seguir esse padrão, continua exigindo decisão explícita (DEC-015, DEC-016).
 
+---
+
+## DEC-017 — Refinamento visual (Direção A): pictogramas, carta da Estação 4 e jornada concluída × jogo acessível
+
+**Status:** aceita (21/10/2026)
+
+### Contexto
+
+Um diagnóstico visual de 21/10/2026 comparou duas direções: refinar a identidade atual (A) ou torná-la mais expressiva (B). A Direção A foi escolhida: melhorar a execução dentro da linguagem existente, sem trocar de paleta e sem reabrir a DEC-011 nem a DEC-013. A implementação mudou regras que o `DESIGN.md` descrevia de outro jeito, e este registro formaliza quais.
+
+### Decisão
+
+1. **Pictograma de estação.** As páginas das Estações 1–4 ganham um pictograma decorativo no hero, em SVG inline no HTML, só com linhas retas e quadrados, em cinza (nunca roxo). Ele não entra no Hub nem na Conclusão, para o Hub não virar uma grade de cartões com ícone.
+2. **Carta na Estação 4.** O `DESIGN.md` dizia "sem tratamento especial". Passa a valer um painel com o recorte do sistema, moldura de 1px em cinza e legenda. A moldura roxa, a rotação, a sombra e a textura continuam exclusivas da Conclusão, e o limite de 200–280px de largura e as duas páginas permitidas não mudam.
+3. **Jornada concluída é diferente de jogo acessível.** O X-BOT só é tratado como acessível, no Hub e na Conclusão, quando `gameUrl` é uma URL absoluta http(s) válida. Sem isso, o X-BOT continua "desbloqueado" como recompensa, mas o acesso aparece como "aguardando liberação", sem botão. `gameUrl` e `downloadUrl` não foram alterados.
+4. **Rótulos de ação do Hub descrevem a ação real.** Estação próxima: "Ver como desbloquear". Estação bloqueada: "Ver o que falta". Ambas abrem a tela de bloqueio, não o conteúdo. Estação validada: "Ver conteúdo". Os destinos dos links são os mesmos de antes.
+5. **Hierarquia nas estações.** Numerais de capítulo maiores, primeira frase de cada capítulo em destaque e rótulos de época na linha do tempo (só períodos já presentes no conteúdo).
+
+### Por quê?
+
+As páginas de estação eram texto cinza em template repetido, o Hub repetia quatro cartões idênticos e a Conclusão sem link parecia uma tela de erro. O refinamento resolve isso sem nova paleta, sem asset novo (exceto a correção abaixo) e sem mexer em fluxo, QR ou progresso.
+
+### Consequências
+
+- A `#CD5EFA` continua provisória (DEC-013): nenhuma cor nova foi introduzida.
+- A DEC-012 se mantém: as quatro páginas de estação têm o mesmo esqueleto, agora com o sprite do pictograma e o pictograma nos dois estados do hero.
+- DEC-015 (Hub 2×2) e DEC-016 (dossiê de 832px) não mudam. O alinhamento dos cards do Hub foi uma correção de execução.
+- `assets/img/engrenagem-acesa.png` teve o halo difuso removido do canal alfa (geometria, cores e tamanho preservados). É correção de execução, não mudança de regra: a regra "sem glow" já existia.
+- Uma versão mais expressiva (Direção B) exigiria rever a DEC-011, a DEC-013 e várias regras do `DESIGN.md`, e continua fora de escopo.
+

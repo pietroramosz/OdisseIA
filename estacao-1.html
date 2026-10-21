@@ -7,6 +7,16 @@
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body class="pagina-estacao" data-estacao="1">
+  <!-- Pictograma da estação: joystick de fliperama, só linhas retas e quadrados. Decorativo. -->
+  <svg class="sprite" width="0" height="0" aria-hidden="true" focusable="false">
+    <symbol id="pictograma" viewBox="0 0 48 48">
+      <path d="M24 25V14"/>
+      <rect x="19" y="6" width="10" height="9" fill="currentColor" stroke="none"/>
+      <path d="M5 42V32L10 26H38L43 32V42Z"/>
+      <rect x="28" y="32" width="5" height="5" fill="currentColor" stroke="none"/>
+      <rect x="36" y="32" width="5" height="5" fill="currentColor" stroke="none"/>
+    </symbol>
+  </svg>
   <main>
     <!-- Conteúdo da estação: só aparece quando a estação está desbloqueada (app.js). -->
     <div id="conteudo-estacao" hidden>
@@ -15,6 +25,7 @@
         <div class="terminal-hero__painel">
           <p class="terminal-hero__rotulo">ESTAÇÃO <span class="terminal-hero__numero">01</span> / 04</p>
           <h1 class="titulo-estacao">Evolução dos jogos até 1999</h1>
+          <svg class="terminal-hero__pict" aria-hidden="true" focusable="false"><use href="#pictograma"/></svg>
         </div>
       </header>
 
@@ -73,20 +84,20 @@
         <p class="terminal-rotulo">LINHA DO TEMPO</p>
         <h2 class="linha-tempo__titulo">Alguns marcos</h2>
         <ol class="linha-tempo__lista">
-          <li class="linha-tempo__item"><strong class="linha-tempo__marca">1950</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">Bertie the Brain</span></li>
+          <li class="linha-tempo__item" data-era="ANOS 1950–60"><strong class="linha-tempo__marca">1950</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">Bertie the Brain</span></li>
           <li class="linha-tempo__item"><strong class="linha-tempo__marca">1952</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">OXO</span></li>
           <li class="linha-tempo__item"><strong class="linha-tempo__marca">1958</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">Tennis for Two</span></li>
           <li class="linha-tempo__item"><strong class="linha-tempo__marca">1961</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">início do desenvolvimento de Spacewar!</span></li>
           <li class="linha-tempo__item"><strong class="linha-tempo__marca">1962</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">lançamento e popularização de Spacewar!</span></li>
-          <li class="linha-tempo__item"><strong class="linha-tempo__marca">1972</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">Pong</span></li>
+          <li class="linha-tempo__item" data-era="ANOS 1970"><strong class="linha-tempo__marca">1972</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">Pong</span></li>
           <li class="linha-tempo__item"><strong class="linha-tempo__marca">1975</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">Gun Fight</span></li>
           <li class="linha-tempo__item"><strong class="linha-tempo__marca">1977</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">Atari 2600</span></li>
           <li class="linha-tempo__item"><strong class="linha-tempo__marca">1978</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">Space Invaders</span></li>
-          <li class="linha-tempo__item"><strong class="linha-tempo__marca">1980</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">Pac-Man</span></li>
+          <li class="linha-tempo__item" data-era="ANOS 1980"><strong class="linha-tempo__marca">1980</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">Pac-Man</span></li>
           <li class="linha-tempo__item"><strong class="linha-tempo__marca">1983</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">crise dos videogames</span></li>
           <li class="linha-tempo__item"><strong class="linha-tempo__marca">1984</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">Tetris</span></li>
           <li class="linha-tempo__item"><strong class="linha-tempo__marca">1985</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">Super Mario Bros.</span></li>
-          <li class="linha-tempo__item"><strong class="linha-tempo__marca">1994</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">PlayStation</span></li>
+          <li class="linha-tempo__item" data-era="ANOS 1990"><strong class="linha-tempo__marca">1994</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">PlayStation</span></li>
           <li class="linha-tempo__item"><strong class="linha-tempo__marca">1996</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">Nintendo 64</span></li>
         </ol>
       </section>
@@ -107,6 +118,7 @@
         <div class="terminal-hero__painel">
           <p class="terminal-hero__rotulo">ESTAÇÃO <span class="terminal-hero__numero">01</span> / 04</p>
           <h1 class="titulo-estacao">Evolução dos jogos até 1999</h1>
+          <svg class="terminal-hero__pict" aria-hidden="true" focusable="false"><use href="#pictograma"/></svg>
         </div>
       </header>
       <section id="bloqueio-painel" class="bloqueio"></section>

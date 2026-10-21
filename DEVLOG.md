@@ -345,6 +345,43 @@ As páginas das quatro estações e a conclusão estão implementadas. O foco pa
 
 ---
 
+## 21/10/2026 — Refinamento visual da identidade atual (Direção A)
+
+### Contexto
+
+Um diagnóstico visual do site renderizado (desktop 1280px e mobile 390px, Chrome headless) apontou páginas de conteúdo planas, Hub repetitivo e uma Conclusão sem link que parecia tela de erro. Foi escolhida a Direção A: melhorar a execução dentro da identidade atual, sem trocar de paleta. A decisão está registrada na DEC-017.
+
+### Problemas confirmados antes de mexer
+
+- Hub 2×2: os cards não preenchiam a célula da grade (um card terminava 44–71px acima do fim da linha).
+- Index no mobile: o numeral "4" tinha 32px, contra 120px no desktop.
+- Estação 1 no mobile: 4187px de altura.
+- `engrenagem-acesa.png`: halo roxo difuso embutido no canal alfa, visível mesmo em 44px.
+
+### O que foi feito
+
+- Hub: cards preenchem a grade; quadrado roxo marca a estação validada; rótulos de ação passaram a descrever a ação real ("Ver como desbloquear", "Ver o que falta"); o card do X-BOT mostra "AGUARDANDO LIBERAÇÃO" enquanto não houver `gameUrl` válida.
+- Estações 1–4: pictograma SVG inline cinza no hero, numeral de capítulo maior, primeira frase de cada capítulo em destaque, linha do tempo com ano como numeral e rótulos de época (Estações 1 e 2).
+- Estações bloqueadas: faixa "Seu progresso" com a mesma barra do Hub, no lugar de um grande vazio.
+- Estação 4: carta com painel, recorte e moldura cinza; no desktop fica ao lado do texto.
+- Conclusão: painel de status separando "Jornada concluída" de "Acesso ao jogo"; o botão "Jogar X-BOT" só aparece com URL absoluta http(s) válida; carta um pouco maior no desktop.
+- Index: o "4" do hero fica em 72px no mobile, ao lado da frase.
+- `engrenagem-acesa.png`: halo removido só do canal alfa; geometria, cores e tamanho preservados.
+- `DESIGN.md` e `DECISIONS.md` (DEC-017) atualizados com as regras que mudaram.
+
+### Medições
+
+- Altura no mobile, antes e depois: Estação 1 de 4187px para 4281px; Estação 2 de 4688px para 4793px; Estação 3 de 4737px para 4749px. O conteúdo educativo não foi removido: os marcos e a hierarquia nova ocupam mais espaço, e só os espaçamentos excessivos entre seções foram reduzidos.
+- Sem rolagem horizontal em nenhuma das capturas a 390px e 1280px. Com `prefers-reduced-motion: reduce`, as animações em execução caem de 7 para 0.
+
+### O que continua pendente
+
+- `gameUrl` e `downloadUrl` seguem `null`: o X-BOT aparece como "aguardando liberação" até haver endereço oficial.
+- A validação foi feita em Chrome headless, por servidor local e por `file://`. Não houve teste em celular real, em outros navegadores, com câmera de QR nem pelo WhatsApp.
+- O roxo `#CD5EFA` continua provisório até a confirmação com a arte final do X-BOT.
+
+---
+
 ## Próximas entradas
 
 O DEVLOG só deve ganhar uma nova entrada quando houver algo realmente relevante, por exemplo:

@@ -13,11 +13,30 @@ const ESTACAO_ROTULOS = {
   bloqueada: "BLOQUEADA"
 };
 
+// O link de uma estação sem conteúdo liberado abre a tela de bloqueio, não a estação.
 const ESTACAO_ACOES = {
   desbloqueada: "Ver conteúdo",
-  proxima: "Abrir estação",
-  bloqueada: "Abrir estação"
+  proxima: "Ver como desbloquear",
+  bloqueada: "Ver o que falta"
 };
+
+// O X-BOT só é tratado como acessível com uma URL absoluta http(s) em gameUrl.
+// Valores vazios, com espaços no meio, relativos ou de outro protocolo ficam como pendentes.
+function urlAcessivel(valor) {
+  if (typeof valor !== "string") {
+    return false;
+  }
+  const texto = valor.trim();
+  if (texto === "" || /\s/.test(texto)) {
+    return false;
+  }
+  try {
+    const protocolo = new URL(texto).protocol;
+    return protocolo === "http:" || protocolo === "https:";
+  } catch (erro) {
+    return false;
+  }
+}
 
 // Tamanho da engrenagem no trilho: a próxima é a maior, a bloqueada a menor.
 const ESTACAO_MARCADOR_TAMANHO = {
@@ -151,14 +170,17 @@ function renderizarFinais(completa) {
     detalhe: completa ? "Ver conclusão" : "Disponível após a 4ª estação"
   }));
 
+  // Concluir a jornada desbloqueia o X-BOT; só uma URL válida o torna acessível.
+  const acessivel = completa && urlAcessivel(OdisseIAConfig.gameUrl);
   lista.appendChild(criarCardFinal({
     titulo: "X-BOT",
     href: null,
     bloqueado: !completa,
-    rotulo: completa ? "DESBLOQUEADO" : "BLOQUEADO",
-    detalhe: completa
-      ? (OdisseIAConfig.gameUrl === null ? "Em breve" : "Disponível")
-      : "Disponível após a conclusão"
+    pendente: completa && !acessivel,
+    rotulo: !completa ? "BLOQUEADO" : (acessivel ? "DESBLOQUEADO" : "AGUARDANDO LIBERAÇÃO"),
+    detalhe: !completa
+      ? "Disponível após a conclusão"
+      : (acessivel ? "Disponível na Conclusão" : "Em breve")
   }));
 }
 
@@ -166,6 +188,7 @@ function criarCardFinal(dados) {
   const item = document.createElement("li");
   item.className = "final"
     + (dados.bloqueado ? " final--bloqueado" : "")
+    + (dados.pendente ? " final--pendente" : "")
     + (dados.principal ? " final--principal" : "");
 
   const cartao = document.createElement(dados.href ? "a" : "div");
@@ -332,6 +355,7 @@ function renderizarBloqueio(numero, estado, proximaValida, total) {
       passos.appendChild(criarTexto("li", "bloqueio__passo", texto));
     });
     painel.appendChild(passos);
+    painel.appendChild(criarProgressoBloqueio(proximaValida - 1, total));
     return;
   }
 
@@ -347,6 +371,40 @@ function renderizarBloqueio(numero, estado, proximaValida, total) {
   destino.appendChild(criarTexto("span", "bloqueio__destino-nome", ESTACOES_NOMES[proximaValida - 1]));
   destino.appendChild(criarSeta());
   painel.appendChild(destino);
+  painel.appendChild(criarProgressoBloqueio(proximaValida - 1, total));
+}
+
+// Mostra onde o visitante está na jornada; só lê o progresso já calculado.
+function criarProgressoBloqueio(ultima, total) {
+  const bloco = document.createElement("div");
+  bloco.className = "bloqueio__progresso";
+
+  const linha = document.createElement("p");
+  linha.className = "bloqueio__progresso-linha";
+  linha.appendChild(criarTexto("span", "bloqueio__progresso-rotulo", "SEU PROGRESSO"));
+  linha.appendChild(criarTexto("span", "bloqueio__progresso-numero", ultima + " / " + total));
+  bloco.appendChild(linha);
+
+  const barra = document.createElement("div");
+  barra.className = "bloqueio__barra";
+  barra.setAttribute("role", "progressbar");
+  barra.setAttribute("aria-label", "Progresso da jornada");
+  barra.setAttribute("aria-valuemin", "0");
+  barra.setAttribute("aria-valuemax", total);
+  barra.setAttribute("aria-valuenow", ultima);
+
+  for (let n = 1; n <= total; n++) {
+    const celula = document.createElement("span");
+    celula.className = n <= ultima
+      ? "bloqueio__celula bloqueio__celula--cheia"
+      : "bloqueio__celula";
+    celula.appendChild(criarTexto("span", "bloqueio__segmento", ""));
+    celula.appendChild(criarTexto("span", "bloqueio__numero", doisDigitos(n)));
+    barra.appendChild(celula);
+  }
+
+  bloco.appendChild(barra);
+  return bloco;
 }
 
 // Conclusão: recompensa com 4/4 ou aviso de jornada incompleta.
@@ -427,26 +485,42 @@ function renderizarEstacoesValidadas(total) {
   }
 }
 
-// Sem gameUrl o X-BOT continua desbloqueado, mas sem link: só o aviso de "em breve".
+// Jornada concluída e jogo acessível são coisas diferentes: sem uma gameUrl válida o X-BOT
+// continua desbloqueado como recompensa, mas o acesso fica marcado como pendente, sem botão.
 function renderizarAcessoXbot() {
   const area = document.getElementById("xbot-acesso");
   area.textContent = "";
 
-  if (OdisseIAConfig.gameUrl !== null) {
-    const jogar = criarBotao({ href: OdisseIAConfig.gameUrl, texto: "Jogar X-BOT", principal: true });
+  if (urlAcessivel(OdisseIAConfig.gameUrl)) {
+    const jogar = criarBotao({ href: OdisseIAConfig.gameUrl.trim(), texto: "Jogar X-BOT", principal: true });
     jogar.classList.add("final-acoes__jogar");
     area.appendChild(jogar);
   } else {
-    const aviso = document.createElement("p");
-    aviso.className = "final-aviso";
-    aviso.appendChild(criarTexto("span", "final-aviso__rotulo", "ACESSO AO JOGO"));
-    aviso.appendChild(criarTexto("span", "final-aviso__texto", "Disponível em breve. Quando o jogo for liberado, o botão para jogar aparece aqui."));
-    area.appendChild(aviso);
+    area.appendChild(criarStatusAcesso(document.getElementById("conclusao-total").textContent));
   }
 
-  if (OdisseIAConfig.downloadUrl !== null) {
-    area.appendChild(criarBotao({ href: OdisseIAConfig.downloadUrl, texto: "Baixar X-BOT", principal: false }));
+  if (urlAcessivel(OdisseIAConfig.downloadUrl)) {
+    area.appendChild(criarBotao({ href: OdisseIAConfig.downloadUrl.trim(), texto: "Baixar X-BOT", principal: false }));
   }
+}
+
+function criarStatusAcesso(total) {
+  const painel = document.createElement("div");
+  painel.className = "final-status";
+
+  [
+    { rotulo: "JORNADA", valor: "CONCLUÍDA · " + total + "/" + total, pendente: false },
+    { rotulo: "ACESSO AO JOGO", valor: "AGUARDANDO LIBERAÇÃO", pendente: true }
+  ].forEach(function (linha) {
+    const item = document.createElement("p");
+    item.className = "final-status__linha" + (linha.pendente ? " final-status__linha--pendente" : "");
+    item.appendChild(criarTexto("span", "final-status__rotulo", linha.rotulo));
+    item.appendChild(criarTexto("span", "final-status__valor", linha.valor));
+    painel.appendChild(item);
+  });
+
+  painel.appendChild(criarTexto("p", "final-status__nota", "O link para jogar ainda não foi publicado. Quando o jogo estiver disponível, o botão aparece aqui."));
+  return painel;
 }
 
 document.addEventListener("DOMContentLoaded", function () {

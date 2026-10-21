@@ -7,6 +7,15 @@
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body class="pagina-estacao" data-estacao="2">
+  <!-- Pictograma da estação: controle de videogame, só linhas retas e quadrados. Decorativo. -->
+  <svg class="sprite" width="0" height="0" aria-hidden="true" focusable="false">
+    <symbol id="pictograma" viewBox="0 0 48 48">
+      <path d="M4 24L11 13H37L44 24V35L39 40H34L29 33H19L14 40H9L4 35Z"/>
+      <path d="M14 21H22M18 17V25"/>
+      <rect x="30" y="19" width="4" height="4" fill="currentColor" stroke="none"/>
+      <rect x="36" y="24" width="4" height="4" fill="currentColor" stroke="none"/>
+    </symbol>
+  </svg>
   <main>
     <!-- Conteúdo da estação: só aparece quando a estação está desbloqueada (app.js). -->
     <div id="conteudo-estacao" hidden>
@@ -15,6 +24,7 @@
         <div class="terminal-hero__painel">
           <p class="terminal-hero__rotulo">ESTAÇÃO <span class="terminal-hero__numero">02</span> / 04</p>
           <h1 class="titulo-estacao">Evolução dos jogos de 2001 até hoje</h1>
+          <svg class="terminal-hero__pict" aria-hidden="true" focusable="false"><use href="#pictograma"/></svg>
         </div>
       </header>
 
@@ -80,17 +90,17 @@
         <p class="terminal-rotulo">LINHA DO TEMPO</p>
         <h2 class="linha-tempo__titulo">Alguns marcos</h2>
         <ol class="linha-tempo__lista">
-          <li class="linha-tempo__item"><strong class="linha-tempo__marca">2001</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">Xbox, GameCube e Game Boy Advance</span></li>
+          <li class="linha-tempo__item" data-era="2001–2007"><strong class="linha-tempo__marca">2001</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">Xbox, GameCube e Game Boy Advance</span></li>
           <li class="linha-tempo__item"><strong class="linha-tempo__marca">2004</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">GTA San Andreas e World of Warcraft</span></li>
           <li class="linha-tempo__item"><strong class="linha-tempo__marca">2005</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">God of War e Guitar Hero</span></li>
-          <li class="linha-tempo__item"><strong class="linha-tempo__marca">2008</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">GTA IV</span></li>
+          <li class="linha-tempo__item" data-era="2008–2013"><strong class="linha-tempo__marca">2008</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">GTA IV</span></li>
           <li class="linha-tempo__item"><strong class="linha-tempo__marca">2009</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">Minecraft</span></li>
           <li class="linha-tempo__item"><strong class="linha-tempo__marca">2010</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">StarCraft II</span></li>
           <li class="linha-tempo__item"><strong class="linha-tempo__marca">2011</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">Twitch</span></li>
           <li class="linha-tempo__item"><strong class="linha-tempo__marca">2012</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">Oculus Rift</span></li>
           <li class="linha-tempo__item"><strong class="linha-tempo__marca">2013</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">The Last of Us</span></li>
-          <li class="linha-tempo__item"><strong class="linha-tempo__marca">2017</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">crescimento do Battle Royale</span></li>
-          <li class="linha-tempo__item"><strong class="linha-tempo__marca">2020</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">PlayStation 5 e Xbox Series X|S</span></li>
+          <li class="linha-tempo__item" data-era="2014–2019"><strong class="linha-tempo__marca">2017</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">crescimento do Battle Royale</span></li>
+          <li class="linha-tempo__item" data-era="2020 ATÉ HOJE"><strong class="linha-tempo__marca">2020</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">PlayStation 5 e Xbox Series X|S</span></li>
           <li class="linha-tempo__item"><strong class="linha-tempo__marca">2024–2026</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">IA, realidade virtual e novas tecnologias continuam avançando</span></li>
         </ol>
       </section>
@@ -112,6 +122,7 @@
         <div class="terminal-hero__painel">
           <p class="terminal-hero__rotulo">ESTAÇÃO <span class="terminal-hero__numero">02</span> / 04</p>
           <h1 class="titulo-estacao">Evolução dos jogos de 2001 até hoje</h1>
+          <svg class="terminal-hero__pict" aria-hidden="true" focusable="false"><use href="#pictograma"/></svg>
         </div>
       </header>
       <section id="bloqueio-painel" class="bloqueio"></section>

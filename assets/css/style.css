@@ -495,6 +495,38 @@ main {
   display: none;
 }
 
+/* O cartão preenche toda a célula da grade, para os cartões de uma linha terminarem juntos. */
+.pagina-hub .estacao > .cartao {
+  height: 100%;
+}
+
+/* Estação validada: quadrado roxo antes do rótulo (estado por forma, texto e cor). */
+.pagina-hub .estacao--desbloqueada .rotulo::before {
+  content: "";
+  display: inline-block;
+  width: var(--espaco-2);
+  height: var(--espaco-2);
+  margin-right: var(--espaco-2);
+  background: var(--cor-destaque);
+  clip-path: polygon(
+    var(--espaco-1) 0,
+    100% 0,
+    100% calc(100% - var(--espaco-1)),
+    calc(100% - var(--espaco-1)) 100%,
+    0 100%,
+    0 var(--espaco-1)
+  );
+}
+
+/* X-BOT desbloqueado pela jornada, mas sem gameUrl válida: contorno fino e rótulo apagado. */
+.pagina-hub .final--pendente .cartao__corpo {
+  box-shadow: inset 0 0 0 1px var(--cor-apagado);
+}
+
+.pagina-hub .final--pendente .rotulo {
+  color: var(--cor-texto-atenuado);
+}
+
 /* Destino final: separado do trilho. */
 .pagina-hub .destino {
   margin-top: var(--espaco-8);
@@ -657,8 +689,21 @@ main {
   outline-offset: var(--espaco-1);
 }
 
-/* Hero: número da estação forte, nome como título. A faixa roxa marca conteúdo aberto. */
+/* Sprite SVG da página: só guarda o <symbol> do pictograma e nunca ocupa espaço. */
+.sprite {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+/* Hero: número da estação forte, nome como título. A faixa roxa marca conteúdo aberto.
+   O pictograma (cinza, só linhas retas) ocupa a coluna da direita. */
 .pagina-estacao .terminal-hero__painel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  column-gap: var(--espaco-4);
+  align-items: start;
   padding: var(--espaco-4) var(--espaco-6) var(--espaco-6);
   background: var(--cor-superficie);
   clip-path: var(--recorte);
@@ -667,6 +712,33 @@ main {
 
 .pagina-estacao .terminal-hero--bloqueada .terminal-hero__painel {
   box-shadow: none;
+}
+
+.pagina-estacao .terminal-hero__rotulo {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.pagina-estacao .terminal-hero .titulo-estacao {
+  grid-column: 1 / -1;
+  grid-row: 2;
+}
+
+.pagina-estacao .terminal-hero__pict {
+  grid-column: 2;
+  grid-row: 1;
+  width: 40px;
+  height: 40px;
+  color: var(--cor-texto-atenuado);
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linejoin: miter;
+  stroke-linecap: square;
+}
+
+.pagina-estacao .terminal-hero--bloqueada .terminal-hero__pict {
+  color: var(--cor-apagado);
 }
 
 .pagina-estacao .terminal-hero__numero {
@@ -714,12 +786,12 @@ main {
 
 /* Capítulos: sem painel, para a leitura respirar; o rótulo numerado abre cada um. */
 .pagina-estacao .capitulo {
-  margin-top: var(--espaco-12);
+  margin-top: calc(var(--espaco-8) + var(--espaco-2));
 }
 
 .pagina-estacao .capitulo__rotulo {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: var(--espaco-2);
 }
 
@@ -732,15 +804,22 @@ main {
 
 .pagina-estacao .capitulo__numero {
   font-weight: 700;
-  font-size: 1.25rem;
+  font-size: 2.25rem;
   line-height: 1;
-  color: var(--cor-texto);
+  color: var(--cor-texto-atenuado);
 }
 
 .pagina-estacao .capitulo__corpo p {
   margin: 0 0 var(--espaco-4);
   line-height: 1.65;
   color: var(--cor-texto-secundario);
+}
+
+/* A frase de abertura do capítulo é a frase-chave: maior e mais clara que a explicação. */
+.pagina-estacao .capitulo__corpo > p:first-child {
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  color: var(--cor-texto);
 }
 
 .pagina-estacao .capitulo__corpo strong {
@@ -774,14 +853,14 @@ main {
 
 /* Linha do tempo: todos os itens, em trilho vertical compacto. */
 .pagina-estacao .linha-tempo {
-  margin-top: var(--espaco-12);
+  margin-top: calc(var(--espaco-8) + var(--espaco-2));
   padding: var(--espaco-6) var(--espaco-4);
   background: var(--cor-superficie);
   clip-path: var(--recorte);
 }
 
 .pagina-estacao .linha-tempo__titulo {
-  margin-bottom: var(--espaco-6);
+  margin-bottom: var(--espaco-4);
 }
 
 .pagina-estacao .linha-tempo__lista {
@@ -793,26 +872,52 @@ main {
 /* Coluna estreita para anos de 4 dígitos; um intervalo ("2024–2026") quebra após o traço. */
 .pagina-estacao .linha-tempo__item {
   display: grid;
-  grid-template-columns: 3.5rem 1fr;
+  grid-template-columns: 4rem 1fr;
   column-gap: var(--espaco-3);
 }
 
+/* O ano é o numeral do marco; o nome do marco fica em branco ao lado. */
 .pagina-estacao .linha-tempo__marca,
 .pagina-estacao .linha-tempo__lista--etapas .linha-tempo__item::before {
   font-family: var(--fonte-titulo);
   font-weight: 700;
-  font-size: 0.9375rem;
-  line-height: 1.4;
+  font-size: 1.125rem;
+  line-height: 1.3;
   text-align: right;
   color: var(--cor-texto);
 }
 
 .pagina-estacao .linha-tempo__texto {
   position: relative;
-  padding: 0 0 var(--espaco-4) var(--espaco-4);
+  padding: 0 0 var(--espaco-3) var(--espaco-4);
   border-left: 2px solid var(--cor-apagado);
-  line-height: 1.4;
+  line-height: 1.3;
+  color: var(--cor-texto);
+}
+
+/* O último marco de uma época não desenha o trilho até o filete da época seguinte. */
+.pagina-estacao .linha-tempo__item:has(+ .linha-tempo__item[data-era]) .linha-tempo__texto {
+  padding-bottom: var(--espaco-4);
+  border-left-color: transparent;
+}
+
+/* Início de cada época: rótulo com filete, ocupando as duas colunas. O texto vem de data-era. */
+.pagina-estacao .linha-tempo__item[data-era]::before {
+  content: attr(data-era);
+  grid-column: 1 / -1;
+  margin-bottom: var(--espaco-2);
+  padding-top: var(--espaco-3);
+  border-top: 1px solid var(--cor-apagado);
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
   color: var(--cor-texto-secundario);
+}
+
+.pagina-estacao .linha-tempo__item[data-era]:first-child::before {
+  padding-top: 0;
+  border-top: none;
 }
 
 .pagina-estacao .linha-tempo__texto::before {
@@ -853,7 +958,7 @@ main {
 
 /* Próxima conexão: fechamento em painel, com saída para o Hub. */
 .pagina-estacao .conexao {
-  margin-top: var(--espaco-12);
+  margin-top: calc(var(--espaco-8) + var(--espaco-2));
   padding: var(--espaco-6);
   background: var(--cor-superficie-alta);
   clip-path: var(--recorte);
@@ -990,6 +1095,110 @@ main {
   box-shadow: inset 0 0 0 2px var(--cor-texto);
 }
 
+/* Onde o visitante está na jornada: mesma barra do Hub (cheio = bloco alto, vazio = trilho fino). */
+.pagina-estacao .bloqueio__progresso {
+  margin-top: var(--espaco-6);
+  padding-top: var(--espaco-4);
+  border-top: 1px solid var(--cor-apagado);
+}
+
+.pagina-estacao .bloqueio__progresso-linha {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--espaco-3);
+  margin: 0 0 var(--espaco-3);
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--cor-texto-secundario);
+}
+
+.pagina-estacao .bloqueio__progresso-numero {
+  font-weight: 700;
+  font-size: 1.375rem;
+  line-height: 1;
+  letter-spacing: 0;
+  color: var(--cor-texto);
+}
+
+.pagina-estacao .bloqueio__barra {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: var(--espaco-1);
+}
+
+.pagina-estacao .bloqueio__celula {
+  display: grid;
+  grid-template-rows: var(--espaco-3) auto;
+  gap: var(--espaco-2);
+}
+
+.pagina-estacao .bloqueio__segmento {
+  align-self: end;
+  height: var(--espaco-1);
+  background: var(--cor-apagado);
+}
+
+.pagina-estacao .bloqueio__celula--cheia .bloqueio__segmento {
+  height: var(--espaco-3);
+  background: var(--cor-destaque);
+  clip-path: polygon(
+    var(--espaco-2) 0,
+    100% 0,
+    100% calc(100% - var(--espaco-2)),
+    calc(100% - var(--espaco-2)) 100%,
+    0 100%,
+    0 var(--espaco-2)
+  );
+}
+
+.pagina-estacao .bloqueio__numero {
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--cor-texto-atenuado);
+}
+
+.pagina-estacao .bloqueio__celula--cheia .bloqueio__numero {
+  color: var(--cor-texto);
+}
+
+/* Estação 4: verso da carta em moldura de painel cinza com o recorte do sistema.
+   A moldura roxa, a rotação e a sombra continuam exclusivas da Conclusão. */
+.pagina-estacao .carta-moldura {
+  display: grid;
+  justify-items: center;
+  margin: 0 0 var(--espaco-4);
+  padding: var(--espaco-4);
+  background: var(--cor-superficie);
+  clip-path: var(--recorte);
+}
+
+.pagina-estacao .carta-moldura__arte {
+  padding: var(--espaco-1);
+  box-shadow: inset 0 0 0 1px var(--cor-apagado);
+}
+
+.pagina-estacao .carta-moldura img {
+  display: block;
+  width: 220px;
+  max-width: 100%;
+  height: auto;
+}
+
+.pagina-estacao .carta-moldura__legenda {
+  margin-top: var(--espaco-3);
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--cor-texto-secundario);
+}
+
 @media (hover: hover) {
   .pagina-estacao .terminal-voltar:hover {
     color: var(--cor-texto);
@@ -1074,8 +1283,20 @@ main {
   }
 
   .pagina-estacao.pagina-estacao--desbloqueada .terminal-hero .titulo-estacao {
+    grid-column: 2;
+    grid-row: 1;
     margin: 0;
     font-size: 2rem;
+  }
+
+  /* O pictograma divide a coluna de contexto com o número: número à esquerda, desenho à direita. */
+  .pagina-estacao.pagina-estacao--desbloqueada .terminal-hero__pict {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: center;
+    justify-self: end;
+    width: 56px;
+    height: 56px;
   }
 
   /* Briefing: logo abaixo do hero, sem o fio lateral do celular nem separador. */
@@ -1125,7 +1346,7 @@ main {
   .pagina-estacao.pagina-estacao--desbloqueada .capitulo__numero {
     display: block;
     margin-top: var(--espaco-1);
-    font-size: 2rem;
+    font-size: 2.75rem;
     color: var(--cor-texto-atenuado);
   }
 
@@ -1157,6 +1378,21 @@ main {
   .pagina-estacao.pagina-estacao--desbloqueada .conexao__acao {
     justify-self: start;
     width: calc(8 * var(--espaco-8));
+  }
+
+  /* Estação 4: a carta flutua à esquerda do texto, em vez de abrir uma faixa só para ela. */
+  .pagina-estacao--desbloqueada .briefing__corpo {
+    display: flow-root;
+  }
+
+  .pagina-estacao--desbloqueada .carta-moldura {
+    float: left;
+    justify-items: start;
+    margin: var(--espaco-1) var(--espaco-6) var(--espaco-4) 0;
+  }
+
+  .pagina-estacao--desbloqueada .carta-moldura img {
+    width: 200px;
   }
 }
 
@@ -1220,9 +1456,10 @@ main {
 }
 
 .pagina-index .index-hero__jornada {
-  display: flex;
-  align-items: baseline;
-  gap: var(--espaco-2);
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  column-gap: var(--espaco-4);
   margin: var(--espaco-6) 0 0;
   padding-top: var(--espaco-4);
   border-top: 1px solid var(--cor-superficie-alta);
@@ -1233,9 +1470,15 @@ main {
 
 .pagina-index .index-hero__numero {
   font-weight: 700;
-  font-size: 2rem;
-  line-height: 1;
+  font-size: 4.5rem;
+  line-height: 0.85;
   color: var(--cor-texto);
+}
+
+.pagina-index .index-hero__unidade {
+  color: var(--cor-texto);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 /* Como funciona: uma sequência só, ligada por um trilho (vertical no celular). */
@@ -1634,7 +1877,6 @@ main {
 .pagina-final .final-placar__rotulo,
 .pagina-final .final-barra__numero,
 .pagina-final .final-jornada__estado,
-.pagina-final .final-aviso__rotulo,
 .pagina-final .final-bloqueio__estado,
 .pagina-final .final-bloqueio__rotulo {
   font-family: var(--fonte-titulo);
@@ -1931,23 +2173,72 @@ main {
   letter-spacing: 0.06em;
 }
 
-/* Sem gameUrl: aviso em linha tracejada (pendente), nunca um botão sem destino. */
-.pagina-final .final-aviso {
-  margin: 0;
+/* Sem gameUrl válida: painel de status, nunca um botão sem destino. Jornada concluída
+   (quadrado cheio) e acesso ao jogo (quadrado vazio) são duas linhas separadas. */
+.pagina-final .final-status {
   padding: var(--espaco-4);
-  border: 1px dashed var(--cor-texto-atenuado);
+  background: var(--cor-fundo);
+  clip-path: var(--recorte);
 }
 
-.pagina-final .final-aviso__rotulo,
-.pagina-final .final-aviso__texto {
-  display: block;
+.pagina-final .final-status__linha {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espaco-1) var(--espaco-3);
+  margin: 0;
+  padding: var(--espaco-3) 0;
 }
 
-.pagina-final .final-aviso__texto {
-  margin-top: var(--espaco-1);
+.pagina-final .final-status__linha:first-child {
+  padding-top: 0;
+  border-bottom: 1px solid var(--cor-superficie-alta);
+}
+
+.pagina-final .final-status__rotulo {
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-2);
   font-family: var(--fonte-titulo);
   font-weight: 600;
-  line-height: 1.4;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--cor-texto-secundario);
+}
+
+.pagina-final .final-status__rotulo::before {
+  content: "";
+  flex: none;
+  width: var(--espaco-2);
+  height: var(--espaco-2);
+  background: var(--cor-destaque);
+}
+
+.pagina-final .final-status__linha--pendente .final-status__rotulo::before {
+  background: none;
+  box-shadow: inset 0 0 0 1px var(--cor-texto-atenuado);
+}
+
+.pagina-final .final-status__valor {
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 0.875rem;
+  letter-spacing: 0.04em;
+  color: var(--cor-texto);
+}
+
+.pagina-final .final-status__linha--pendente .final-status__valor {
+  color: var(--cor-texto-secundario);
+}
+
+.pagina-final .final-status__nota {
+  margin: var(--espaco-3) 0 0;
+  padding-top: var(--espaco-3);
+  border-top: 1px solid var(--cor-superficie-alta);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--cor-texto-secundario);
 }
 
 .pagina-final .final-saida {
@@ -2139,6 +2430,10 @@ main {
 
   .pagina-final .final-xbot__titulo {
     font-size: 3.5rem;
+  }
+
+  .pagina-final .final-xbot__carta {
+    width: 240px;
   }
 
   .pagina-final .final-acoes {

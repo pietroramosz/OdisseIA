@@ -188,6 +188,7 @@ Técnico e confiável: formas cortadas e precisas, cor rara e com propósito, es
 ### Chips / Status Labels
 - **Rótulo numerado** (`.rotulo`): texto puro, sem fundo — caixa alta, Signal White Secondary (ou Signal White quando o estado está ativo).
 - **Selo de estado** (`.bloqueio__estado`, `.final-selo`): fundo Cyber Purple, texto Void Black, recorte pequeno (4px) — usado só para "próxima estação" e "conquistado na Conclusão". Nunca aparece em estado bloqueado.
+- **Marcador de estado** (quadrado de 8px antes do rótulo): cheio em Cyber Purple = validado/concluído (rótulo do Hub `.estacao--desbloqueada` e linha "Jornada" do status da Conclusão); vazado, só com contorno de 1px em Signal White Muted = pendente (linha "Acesso ao jogo"). A forma acompanha sempre o texto do rótulo, nunca o substitui (DEC-017).
 
 ### Cards / Containers
 - **Corner Style:** recorte diagonal (`--recorte`, 12px); sem borda visível no estado padrão.
@@ -197,15 +198,26 @@ Técnico e confiável: formas cortadas e precisas, cor rara e com propósito, es
 
 ### Navigation
 - **Link de voltar** (`.terminal-voltar`, `.final-voltar`): Chakra Petch 600, 0.875rem, Signal White Secondary em repouso, Signal White em hover/foco — altura mínima 44px, sem fundo, sem recorte.
-- **Nó de trilho do Hub** (`.estacao__no`): engrenagem (PNG, decorativa, `alt` vazio), número da estação e linha tracejada até o próximo nó; a linha vira sólida (apagado) quando a estação anterior foi desbloqueada e roxa sólida quando leva à próxima estação. Engrenagem acesa = conteúdo desbloqueado; apagada (PNG derivado da arte original, sem filtro CSS) = ainda bloqueado ou aguardando a próxima estação. **O estado da estação "próxima" nunca é comunicado só pela engrenagem ou só pela cor** — ele depende do rótulo PRÓXIMA ESTAÇÃO, do tamanho maior do card e da barra/borda roxa juntos; a engrenagem continua puramente decorativa.
+- **Nó de trilho do Hub** (`.estacao__no`): engrenagem (PNG, decorativa, `alt` vazio), número da estação e linha tracejada até o próximo nó; a linha vira sólida (apagado) quando a estação anterior foi desbloqueada e roxa sólida quando leva à próxima estação. Engrenagem acesa = conteúdo desbloqueado; apagada (PNG derivado da arte original, sem filtro CSS) = ainda bloqueado ou aguardando a próxima estação. Os dois PNGs têm fundo transparente e nenhum halo: o brilho difuso que a versão acesa trazia embutido foi removido do canal alfa em 21/10/2026, por contrariar "sem glow". **O estado da estação "próxima" nunca é comunicado só pela engrenagem ou só pela cor** — ele depende do rótulo PRÓXIMA ESTAÇÃO, do tamanho maior do card e da barra/borda roxa juntos; a engrenagem continua puramente decorativa.
 
 ### Progress Bar
 - **Segmento vazio:** trilho fino (`--espaco-1`, 4px), cor Dormant Gray — forma reduzida, não só cor diferente.
 - **Segmento cheio:** bloco alto (`--espaco-3`, 12px) com recorte pequeno, cor Cyber Purple — a diferença de altura é o que comunica "preenchido", a cor reforça.
 
+### Station Pictogram
+Cada página de estação (1–4) tem um pictograma no hero (`.terminal-hero__pict`), em SVG inline no próprio HTML (um `<symbol id="pictograma">` por página, reutilizado com `<use href="#pictograma">` nos dois estados do hero). Só linhas retas, quadrados e chanfros, traço de 2px em `currentColor`, sem curvas, sem preenchimento além de quadrados pontuais: joystick (1), controle (2), árvore de decisão (3), cartas (4). Cor Signal White Muted no conteúdo aberto e Dormant Gray no hero bloqueado; nunca roxo. É decorativo (`aria-hidden`, sem `alt`) e não aparece no Hub nem na Conclusão (DEC-017). Em ≥900px divide a coluna de contexto com o número da estação.
+
+### Chapter Numeral, Lead and Timeline Eras
+- **Numeral do capítulo** (`.capitulo__numero`): Chakra Petch 700 em 2.25rem (2.75rem em ≥900px), Signal White Muted — identifica sem competir com o título do capítulo.
+- **Frase de abertura:** o primeiro parágrafo de cada capítulo (`.capitulo__corpo > p:first-child`) usa Signal White; o restante da explicação fica em Signal White Secondary. É só hierarquia, o texto não muda.
+- **Linha do tempo:** o ano é o numeral do marco (Chakra Petch 700, 1.125rem) e o nome do marco fica em Signal White. O primeiro marco de cada época leva `data-era="…"` e abre com um rótulo e um filete (`::before`). Os rótulos só repetem períodos já presentes na página (décadas dos anos do próprio marco ou o título do capítulo correspondente), sem conteúdo novo.
+
+### Conclusão — Status de acesso
+Quando `OdisseIAConfig.gameUrl` não é uma URL absoluta http(s) válida, a Conclusão mostra o painel `.final-status` no lugar do botão: duas linhas separadas, "Jornada: concluída · 4/4" (marcador cheio) e "Acesso ao jogo: aguardando liberação" (marcador vazado), mais uma nota. O botão "Jogar X-BOT" só existe com URL válida. O Hub aplica a mesma regra ao card do X-BOT (`.final--pendente`: contorno de 1px em Dormant Gray e rótulo "AGUARDANDO LIBERAÇÃO"). Jornada concluída e jogo acessível são estados diferentes e nunca se confundem na interface (DEC-017).
+
 ### X-BOT Card Image
 O verso da carta do X-BOT (`verso-carta.png`) só aparece em duas páginas, sempre em tamanho de carta (200–280px de largura), com `loading="lazy"` e dimensões declaradas:
-- **Estação 4** (`.briefing img`): uso simples, inline no texto de abertura, sem tratamento especial — a imagem fala por si.
+- **Estação 4** (`.carta-moldura`): a carta fica num painel Graphite Surface com o recorte do sistema, uma moldura de 1px em Dormant Gray ao redor da arte e a legenda "VERSO DA CARTA". Em ≥900px flutua à esquerda do texto de abertura. Sem roxo, sem rotação, sem sombra e sem textura: a moldura roxa e a sombra suave continuam exclusivas da Conclusão (DEC-017).
 - **Conclusão — X-BOT Card Reveal** (signature component, só nesta página): a mesma carta sobre um "palco" com textura diagonal repetida em baixa opacidade da própria cor de destaque; entra com leve rotação e `drop-shadow` colorido — o único momento do sistema em que uma sombra suave e um objeto ilustrado substituem o vocabulário plano do resto do site.
 
 ## Do's and Don'ts
