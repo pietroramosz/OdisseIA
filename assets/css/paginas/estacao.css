@@ -646,6 +646,7 @@
   -webkit-mask: var(--textura-foco) 35% 45% / cover no-repeat;
   mask: var(--textura-foco) 35% 45% / cover no-repeat;
   clip-path: polygon(22% 0, 100% 0, 100% 100%, 0 100%);
+  pointer-events: none;
 }
 
 [data-estacao="4"] .dossie-capa__numeral {
@@ -1178,6 +1179,26 @@
   [data-estacao="3"] .dossie-capa__numeral {
     left: auto;
     right: calc(-1 * var(--espaco-2));
+  }
+
+  /* A explosão irrompe do numeral 04 (DESIGN.md), que ocupa o vazio central da textura. Antes as
+     linhas convergiam para o meio da coluna direita, onde não havia nada.
+     A caixa vai de 40% da capa até a margem; a textura, com 1,6 vez a altura da caixa, fica
+     centrada nela (50% 50%), então o centro da explosão cai em 70% da largura da capa + 1rem e
+     em 50% da altura + 1rem. O numeral (14rem: cerca de 16,4rem de largura e 11,2rem de altura)
+     é posto nesse mesmo ponto, dentro do vazio central da textura. */
+  [data-estacao="4"] .dossie-capa::before {
+    left: 40%;
+    width: auto;
+    -webkit-mask: var(--textura-foco) 50% 50% / auto 160% no-repeat;
+    mask: var(--textura-foco) 50% 50% / auto 160% no-repeat;
+  }
+
+  [data-estacao="4"] .dossie-capa__numeral {
+    top: calc(50% - 4.6rem);
+    right: auto;
+    left: calc(70% - 7.2rem);
+    font-size: 14rem;
   }
 
   [data-estacao="4"] .briefing__corpo {

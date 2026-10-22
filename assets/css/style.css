@@ -224,6 +224,8 @@ a {
   z-index: 40;
   top: var(--espaco-2);
   left: 50%;
+  /* Com left: 50% a largura natural seria só a metade da tela e o texto quebraria. */
+  width: max-content;
   max-width: calc(100vw - 2 * var(--gutter));
   padding: var(--espaco-3) var(--espaco-4);
   border: 2px solid var(--cor-destaque);
@@ -370,6 +372,9 @@ main:focus {
   color: transparent;
   -webkit-text-stroke: 1.5px var(--cor-apagado);
   user-select: none;
+  /* Decorativo: a área do texto passa da caixa de linha (line-height 0.8) e, sem isto, cobriria
+     links vizinhos, como o "Voltar ao Hub" no topo das estações. */
+  pointer-events: none;
 }
 
 /* Retícula de mangá: pontos na cor de destaque. */
