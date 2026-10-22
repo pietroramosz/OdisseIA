@@ -7,8 +7,16 @@ const ESTACOES_NOMES = [
   "X-BOT"
 ];
 
+// Descrição curta de cada cartão: o título do briefing da própria estação.
+const ESTACOES_DESCRICOES = [
+  "Do laboratório ao videogame",
+  "A era dos jogos conectados",
+  "Das regras à inteligência artificial",
+  "Um jogo de cartas feito para o OdisseIA"
+];
+
 const ESTACAO_ROTULOS = {
-  desbloqueada: "CONTEÚDO DESBLOQUEADO",
+  desbloqueada: "VALIDADA",
   proxima: "PRÓXIMA ESTAÇÃO",
   bloqueada: "BLOQUEADA"
 };
@@ -62,7 +70,7 @@ function renderizarProgresso(ultima, total) {
   texto.appendChild(criarTexto("span", "progresso__numero", ultima + "/" + total));
 
   const barra = document.getElementById("progresso-barra");
-  barra.setAttribute("aria-valuenow", ultima);
+  marcarProgresso(barra, ultima, total);
   barra.textContent = "";
 
   for (let n = 1; n <= total; n++) {
@@ -138,24 +146,33 @@ function criarCardEstacao(numero, estado, estadoSeguinte) {
 
   cartao.appendChild(no);
 
+  // Anatomia do cartão: título, descrição, faixa de estado e barra de ação.
+  // O título abre o cartão; o estado vem depois, nunca como rótulo acima do título.
+  const id = "estacao-" + numero;
   const corpo = document.createElement("div");
-  corpo.className = "cartao__corpo";
+  corpo.className = "ficha cartao__corpo";
+  const faixa = criarTexto("span", "cartao__faixa", "");
+  faixa.setAttribute("aria-hidden", "true");
+  corpo.appendChild(faixa);
+  corpo.appendChild(criarTexto("h2", "estacao__titulo", ESTACOES_NOMES[numero - 1], id + "-titulo"));
+  corpo.appendChild(criarTexto("p", "cartao__descricao", ESTACOES_DESCRICOES[numero - 1], id + "-descricao"));
 
-  // O título abre o cartão; o estado vem depois, como selo (nunca um rótulo acima do título).
-  corpo.appendChild(criarTexto("h2", "estacao__titulo", ESTACOES_NOMES[numero - 1]));
-  corpo.appendChild(criarTexto("p", "rotulo", ESTACAO_ROTULOS[estado]));
-  // O carimbo repete visualmente o rótulo de estado, que já está no nome acessível do link.
-  if (estado === "desbloqueada") {
-    const carimbo = criarTexto("span", "carimbo estacao__carimbo", "VALIDADA");
-    carimbo.setAttribute("aria-hidden", "true");
-    corpo.appendChild(carimbo);
-  }
+  const meta = document.createElement("div");
+  meta.className = "cartao__meta";
+  meta.appendChild(criarTexto("p", "rotulo cartao__estado", ESTACAO_ROTULOS[estado], id + "-estado"));
+  const ficha = criarTexto("span", "cartao__ficha", "EST. " + doisDigitos(numero) + " / " + doisDigitos(OdisseIAConfig.totalEstacoes));
+  ficha.setAttribute("aria-hidden", "true");
+  meta.appendChild(ficha);
+  corpo.appendChild(meta);
 
-  const acao = criarTexto("span", "estacao__acao", ESTACAO_ACOES[estado]);
+  const acao = criarTexto("span", "estacao__acao", ESTACAO_ACOES[estado], id + "-acao");
   acao.appendChild(criarSeta());
   corpo.appendChild(acao);
-
   cartao.appendChild(corpo);
+
+  // Nome acessível curto: título, estado e ação. A descrição vem como complemento.
+  cartao.setAttribute("aria-labelledby", [id + "-titulo", id + "-estado", id + "-acao"].join(" "));
+  cartao.setAttribute("aria-describedby", id + "-descricao");
   item.appendChild(cartao);
 
   // Os passos ficam fora do link para não alongar o nome acessível do cartão.
@@ -190,6 +207,7 @@ function renderizarFinais(completa) {
   lista.appendChild(criarCardFinal({
     tipo: "conclusao",
     titulo: "Conclusão",
+    descricao: "A etapa que fecha a jornada depois das quatro estações validadas.",
     href: completa ? "final.html" : null,
     bloqueado: !completa,
     principal: completa,
@@ -202,6 +220,7 @@ function renderizarFinais(completa) {
   lista.appendChild(criarCardFinal({
     tipo: "xbot",
     titulo: "X-BOT",
+    descricao: "O jogo digital de cartas desenvolvido para o OdisseIA.",
     href: null,
     bloqueado: !completa,
     pendente: completa && !acessivel,
@@ -225,14 +244,26 @@ function criarCardFinal(dados) {
     cartao.href = dados.href;
   }
 
+  // Mesma anatomia dos cartões de estação. Sem link, o detalhe é um status, não uma ação.
+  const id = "destino-" + dados.tipo;
   const corpo = document.createElement("div");
-  corpo.className = "cartao__corpo";
-  corpo.appendChild(criarTexto("h3", "final__titulo", dados.titulo));
-  corpo.appendChild(criarTexto("p", "rotulo", dados.rotulo));
+  corpo.className = "ficha cartao__corpo";
+  const faixa = criarTexto("span", "cartao__faixa", "");
+  faixa.setAttribute("aria-hidden", "true");
+  corpo.appendChild(faixa);
+  corpo.appendChild(criarTexto("h3", "final__titulo", dados.titulo, id + "-titulo"));
+  corpo.appendChild(criarTexto("p", "cartao__descricao", dados.descricao, id + "-descricao"));
 
-  const detalhe = criarTexto("span", "final__detalhe", dados.detalhe);
+  const meta = document.createElement("div");
+  meta.className = "cartao__meta";
+  meta.appendChild(criarTexto("p", "rotulo cartao__estado", dados.rotulo, id + "-estado"));
+  corpo.appendChild(meta);
+
+  const detalhe = criarTexto("span", dados.href ? "final__detalhe" : "final__detalhe final__detalhe--status", dados.detalhe, id + "-detalhe");
   if (dados.href) {
     detalhe.appendChild(criarSeta());
+    cartao.setAttribute("aria-labelledby", [id + "-titulo", id + "-estado", id + "-detalhe"].join(" "));
+    cartao.setAttribute("aria-describedby", id + "-descricao");
   }
   corpo.appendChild(detalhe);
 
@@ -251,11 +282,21 @@ function doisDigitos(numero) {
   return (numero < 10 ? "0" : "") + numero;
 }
 
-function criarTexto(tag, classe, texto) {
+function criarTexto(tag, classe, texto, id) {
   const elemento = document.createElement(tag);
   elemento.className = classe;
   elemento.textContent = texto;
+  if (id) {
+    elemento.id = id;
+  }
   return elemento;
+}
+
+// Barra de progresso falada: "2 de 4 estações validadas".
+function marcarProgresso(barra, ultima, total) {
+  barra.setAttribute("aria-valuemax", total);
+  barra.setAttribute("aria-valuenow", ultima);
+  barra.setAttribute("aria-valuetext", ultima + " de " + total + " estações validadas");
 }
 
 function renderizarValidacao() {
@@ -412,8 +453,7 @@ function criarProgressoBloqueio(ultima, total) {
   barra.setAttribute("role", "progressbar");
   barra.setAttribute("aria-label", "Progresso da jornada");
   barra.setAttribute("aria-valuemin", "0");
-  barra.setAttribute("aria-valuemax", total);
-  barra.setAttribute("aria-valuenow", ultima);
+  marcarProgresso(barra, ultima, total);
 
   for (let n = 1; n <= total; n++) {
     const celula = document.createElement("span");
@@ -454,8 +494,7 @@ function preencherPlacarFinal(prefixo, ultima, total) {
   document.getElementById(prefixo + "-total").textContent = total;
 
   const barra = document.getElementById(prefixo + "-barra");
-  barra.setAttribute("aria-valuemax", total);
-  barra.setAttribute("aria-valuenow", ultima);
+  marcarProgresso(barra, ultima, total);
   barra.textContent = "";
 
   for (let n = 1; n <= total; n++) {

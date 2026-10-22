@@ -8,14 +8,15 @@
   <link rel="stylesheet" href="assets/css/paginas/abertura.css">
 </head>
 <body class="pagina-index">
+  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
   <!-- Porta de entrada estática: não lê progresso e não carrega scripts. -->
-  <main class="abertura">
+  <main id="conteudo" tabindex="-1" class="abertura">
     <section class="capa" aria-labelledby="index-titulo">
       <div class="capa__tom textura-reticula" aria-hidden="true"></div>
       <span class="registro capa__registro-a" aria-hidden="true"></span>
       <span class="registro capa__registro-b" aria-hidden="true"></span>
 
-      <h1 id="index-titulo" class="capa__titulo"><span class="capa__odisse">Odisse</span><span class="capa__ia">IA</span></h1>
+      <h1 id="index-titulo" class="capa__titulo" aria-label="OdisseIA"><span class="capa__odisse">Odisse</span><span class="capa__ia">IA</span></h1>
       <p class="capa__proposta">Uma jornada pela evolução dos videogames, da inteligência artificial e das ideias que transformaram a forma de jogar.</p>
       <a class="botao botao--principal capa__cta" href="hub.html">INICIAR JORNADA</a>
 
@@ -57,7 +58,7 @@
     <section class="protocolo" aria-labelledby="passos-titulo">
       <h2 id="passos-titulo" class="protocolo__titulo">Como funciona</h2>
       <ol class="protocolo__lista">
-        <li class="protocolo__passo">
+        <li class="protocolo__passo ficha">
           <span class="numeral-vazado protocolo__numeral" aria-hidden="true">1</span>
           <svg class="protocolo__icone" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
             <path class="esquema__traco" d="M8 42V12L14 6H40V42M4 42H44M18 42V26H30V42M18 14H30"/>
@@ -67,7 +68,7 @@
             <p class="protocolo__texto">Visite a estação na feira e descubra uma parte dessa evolução.</p>
           </div>
         </li>
-        <li class="protocolo__passo">
+        <li class="protocolo__passo ficha">
           <span class="numeral-vazado protocolo__numeral" aria-hidden="true">2</span>
           <svg class="protocolo__icone" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
             <path class="esquema__traco" d="M4 6H44V30H4ZM24 30V36M14 42L24 36L34 42M12 14H28M12 20H36"/>
@@ -77,7 +78,7 @@
             <p class="protocolo__texto">Ouça a apresentação e explore o tema junto com o grupo.</p>
           </div>
         </li>
-        <li class="protocolo__passo">
+        <li class="protocolo__passo ficha">
           <span class="numeral-vazado protocolo__numeral" aria-hidden="true">3</span>
           <svg class="protocolo__icone" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
             <path class="esquema__traco" d="M12 4H36V44H12ZM20 38H28"/>

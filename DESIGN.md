@@ -156,7 +156,7 @@ Fundo quase preto, planos de grafite, branco-sinal para leitura e um único acen
   - corpo de leitura com no máximo 62ch;
   - frase de abertura do briefing em 1.1875rem (1.375rem a partir de 900px);
   - primeira frase de cada capítulo em Signal White, o resto em Signal White Secondary.
-- **Label** (600, 0.75rem, espaçamento 0.08–0.16em, caixa alta): ficha técnica, selos, carimbos e anotações de margem. Nada de texto visível abaixo de 11px.
+- **Label** (600, 0.75rem, espaçamento 0.08–0.16em, caixa alta): ficha técnica, selos, carimbos e anotações de margem. Nada de texto visível abaixo de 12px.
 
 ### Named Rules
 **The Heading-First Rule.** O título abre a seção. Rótulos de estado (PRÓXIMA ESTAÇÃO, BLOQUEADA, DESBLOQUEADO, SUCESSO) vêm depois dele, como selo. Rótulos de seção (BRIEFING, LINHA DO TEMPO) ficam na coluna de margem a partir de 900px e somem no celular. Nenhum rótulo acima de título.
@@ -192,7 +192,7 @@ Mobile-first: cada página foi composta primeiro a 390px e recomposta, não esti
 O sistema continua plano. A profundidade vem de:
 1. **Camadas de superfície:** Void Black, Graphite Surface Dim, Graphite Surface, Elevated Graphite.
 2. **Planos sobrepostos:** numeral vazado atrás do título, retícula atrás da palavra-marca, explosão de foco atrás do placar e da carta, carimbo batido por cima do placar.
-3. **Borda interna sólida** (`box-shadow: inset`, 1–4px): foco, moldura da carta, carimbos, contorno de fechado.
+3. **Borda interna sólida** (`box-shadow: inset`, 1–4px): foco, moldura da carta, carimbos, contorno de fechado. Nos cartões recortados, a moldura é a da `.ficha` (abaixo), porque o `box-shadow` não acompanha o canto diagonal.
 4. **Drop-shadow só na carta da Conclusão.**
 
 ### Named Rules
@@ -210,7 +210,9 @@ Um motivo de contêiner, o **recorte diagonal** (`--recorte` 12px, `--recorte-pe
 ### Gramática gráfica (`style.css`)
 - **Numeral vazado** (`.numeral-vazado`): contorno de 1,5px em Dormant Gray ou Signal White Muted. Na Estação 4 o contorno fica roxo.
 - **Texturas** (`.textura-reticula`, `.textura-foco`, `.textura-movimento`, `.textura-hachura`): máscaras SVG geradas com semente fixa e coloridas por token. A retícula e as linhas de foco marcam conquista; as linhas de movimento marcam "a seguir"; a hachura marca "ainda fechado".
-- **Carimbo** (`.carimbo` e variações por página): moldura dupla em aresta dura, Chakra 700 espaçado, levemente girado. Marca o que foi conquistado (VALIDADA, JORNADA CONCLUÍDA, SUCESSO).
+- **Carimbo** (desenhado em cada página: estado do cartão no Hub, Conclusão, validação): moldura dupla em aresta dura, Chakra 700 espaçado, levemente girado. Marca o que foi conquistado (VALIDADA, JORNADA CONCLUÍDA, SUCESSO). No Hub, o carimbo é o próprio rótulo de estado, visível e lido, sem cópia escondida.
+- **Ficha** (`.ficha`): o cartão do sistema, em três camadas. O elemento tem a cor do miolo (`--miolo`), então o texto continua legível se as camadas falharem; `::before` pinta a moldura (`--moldura`) e `::after` repinta o miolo recuado em `--espessura`, para a moldura seguir também o corte diagonal. Usada nos cartões do Hub e nos passos de "Como funciona" da abertura. Os dois pseudo-elementos ficam reservados para a ficha; detalhes extras vêm de elementos próprios (ex.: `.cartao__faixa`).
+- **Pular para o conteúdo** (`.pular`): primeiro link de toda página, só aparece com foco e leva ao `<main id="conteudo">`.
 - **Esquema** (`.esquema__*`): linhas, nós e textos dos diagramas SVG.
 - **Seta** (`.seta`, `.seta--voltar`): ícone desenhado em SVG por máscara, que herda a cor do texto. Substitui os glifos ← e →.
 - **Cruz de registro** (`.registro`): marca de impressão no canto da capa.
@@ -227,16 +229,27 @@ Um motivo de contêiner, o **recorte diagonal** (`--recorte` 12px, `--recorte-pe
   - engrenagem acesa = validada; apagada = ainda não;
   - a próxima estação ganha um alvo roxo em volta do nó;
   - trecho sólido roxo = percorrido; tracejado roxo = até a próxima; tracejado cinza = futuro.
-- **Validada:** card de grafite e carimbo VALIDADA ao lado da ação. O rótulo de estado fica só para leitores de tela.
+- **Anatomia do cartão** (`.cartao__corpo`, uma `.ficha`), de cima para baixo:
+  - faixa de estado (`.cartao__faixa`, decorativa);
+  - título;
+  - descrição curta (o título do briefing da estação);
+  - linha de estado: selo à esquerda, registro "EST. 0N / 04" à direita (decorativo);
+  - barra de ação com altura mínima de 48px.
+  - O link inteiro é o alvo. Nome acessível: título, estado e ação; a descrição entra como `aria-describedby`.
+- **Validada:** faixa roxa cheia (como o segmento cheio da barra) e carimbo VALIDADA.
 - **Próxima:**
-  - card elevado com faixa de linhas de movimento no topo e título grande;
-  - selo PRÓXIMA ESTAÇÃO depois do título;
-  - folha anexa com os três passos reais.
-- **Bloqueada:** silhueta hachurada, texto atenuado, ação "Ver o que falta".
-- **Destino final:**
-  - Conclusão disponível: faixa de movimento e selo;
+  - moldura roxa de 2px, miolo elevado, faixa de linhas de movimento e título maior;
+  - selo PRÓXIMA ESTAÇÃO cheio e barra de ação roxa;
+  - folha anexa com os três passos reais, fora do link.
+- **Bloqueada:** miolo no fundo, faixa hachurada, cadeado ao lado de BLOQUEADA, texto atenuado e ação "Ver o que falta", que leva à explicação de como desbloquear.
+- Estado sempre por texto, forma e cor juntos; nenhum depende só da cor.
+- **Interação:** no hover o cartão sobe 2px, o miolo clareia e a seta avança; no toque ele desce 1px; no foco a moldura vira Signal White de 3px seguindo o recorte e o número do nó ganha sublinhado.
+- **≥900px:** os quatro cartões dividem a mesma linha (subgrid), então as linhas de estado e as barras de ação se alinham; a folha de passos fica numa segunda linha, só embaixo da próxima.
+- **Destino final:** mesma anatomia, sem o registro.
+  - Conclusão disponível: moldura roxa, faixa de movimento e barra de ação roxa;
   - X-BOT: miniatura da silhueta de carta;
-  - X-BOT sem `gameUrl` válida: contorno e "AGUARDANDO LIBERAÇÃO".
+  - bloqueados: faixa hachurada e cadeado; sem link, o detalhe é texto de status, não ação;
+  - X-BOT sem `gameUrl` válida: marcador vazado e "AGUARDANDO LIBERAÇÃO", sem botão.
 
 ### Estação — dossiê
 - **Capa** (`.dossie-capa`): numeral vazado gigante, título, "ESTAÇÃO 0N / 04", ficha técnica (`.dossie-ficha`) só com fatos do próprio conteúdo e ilustração SVG do assunto (`.dossie-capa__arte`).
@@ -277,7 +290,9 @@ O movimento é um gesto por página, sempre partindo de um estado já visível:
 - na Conclusão, a explosão irrompe e os carimbos batem em sequência;
 - na validação, o carimbo bate.
 
-Easing `cubic-bezier(0.22, 1, 0.36, 1)`, sem curvas com ricochete. Com `prefers-reduced-motion: reduce`, todas as animações e transições desligam.
+Fora desses gestos, só respostas de interação: cartões e botões que sobem no hover e descem no toque, setas que avançam (0,15s).
+
+Easing `cubic-bezier(0.22, 1, 0.36, 1)`, sem curvas com ricochete. Com `prefers-reduced-motion: reduce`, todas as animações e deslocamentos desligam: a rota já aparece desenhada e os carimbos já batidos. Ficam só trocas de cor, borda e opacidade em 0,12s, para o hover e o foco continuarem perceptíveis.
 
 ## Do's and Don'ts
 
@@ -296,5 +311,5 @@ Easing `cubic-bezier(0.22, 1, 0.36, 1)`, sem curvas com ricochete. Com `prefers-
 - **Don't** pintar texto corrido de roxo nem usar roxo como fundo de painel.
 - **Don't** mostrar a arte da carta fora da Estação 4 e da Conclusão. Na abertura e no Hub, só a silhueta.
 - **Don't** inventar mecânicas, dados ou datas do X-BOT nem de qualquer estação em diagramas, fichas ou legendas.
-- **Don't** introduzir fonte nova, carregar a Inter ou usar texto visível abaixo de 11px.
+- **Don't** introduzir fonte nova, carregar a Inter ou usar texto visível abaixo de 12px.
 - **Don't** permitir rolagem horizontal entre 360 e 430px.

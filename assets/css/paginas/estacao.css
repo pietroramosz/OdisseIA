@@ -78,7 +78,7 @@
 .dossie-ficha dt {
   font-family: var(--fonte-titulo);
   font-weight: 600;
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--cor-texto-atenuado);
@@ -467,7 +467,7 @@
   transform: translateX(-50%);
   font-family: var(--fonte-titulo);
   font-weight: 600;
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
   letter-spacing: 0.04em;
   color: var(--cor-texto-atenuado);
 }

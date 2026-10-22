@@ -440,6 +440,51 @@ Depois do refinamento da Direção A, o site ainda tinha a cara de um template: 
 
 ---
 
+## 21/10/2026 — Acabamento dos cartões e auditoria de acessibilidade
+
+### Contexto
+
+Depois do "Arquivo de Missão", os cartões do Hub ainda pareciam caixas de texto soltas sob a rota: alturas desiguais, sem descrição e com o estado validado repetido (rótulo escondido e carimbo decorativo). Faltava também uma auditoria de acessibilidade completa.
+
+### O que mudou
+
+- **Cartões do Hub:** anatomia única, com faixa de estado, título, descrição curta, linha de estado com o registro "EST. 0N / 04" e barra de ação de 48px.
+  - Validada: faixa roxa e carimbo VALIDADA, agora o próprio rótulo lido.
+  - Próxima: moldura roxa, faixa de movimento, selo cheio e ação roxa.
+  - Bloqueada: faixa hachurada, cadeado e texto atenuado. O link continua levando à explicação de como desbloquear.
+  - No desktop, os quatro cartões dividem a mesma linha (subgrid), alinhando estado e ação; a folha de passos fica embaixo da próxima.
+  - Hover, toque e foco com resposta visível; o foco é uma moldura branca de 3px que segue o corte diagonal.
+- **Destinos finais:** mesma anatomia. Sem link, o detalhe vira texto de status, sem parecer botão.
+- **Abertura:** os passos de "Como funciona" viraram fichas ligadas por um conector tracejado; o último passo (o celular) leva a moldura roxa.
+- **`.ficha`:** novo contêiner de cartão do sistema, com moldura que acompanha o recorte diagonal. O próprio elemento tem a cor do fundo, então o texto continua legível mesmo se as camadas falharem.
+- **Acessibilidade:**
+  - link "Pular para o conteúdo" em todas as páginas;
+  - cartões com nome curto (título, estado, ação) e descrição separada;
+  - barras de progresso faladas como "2 de 4 estações validadas";
+  - a palavra-marca da abertura é lida como "OdisseIA", não "Odisse IA";
+  - a carta da Conclusão ganhou texto alternativo;
+  - texto mínimo subiu de 11px para 12px.
+- **Movimento reduzido:** além de desligar as animações, desliga os deslocamentos de hover e toque e mantém só as trocas de cor, para o estado de foco continuar perceptível.
+
+### Como foi verificado
+
+- 9 testes de unidade e 99 E2E em Chrome headless via `file://` (os 81 anteriores e 18 novos: link de pular, nomes acessíveis dos cartões, texto da barra de progresso, destinos dos links, desenho da rota, sequência dos carimbos e movimento reduzido).
+- Auditoria automática em 10 estados × 5 larguras (320, 360, 390, 768 e 1280px):
+  - sem rolagem horizontal, sem texto cortado e sem contraste abaixo de 4,5:1;
+  - sem alvos menores que 44px e sem saltos de título;
+  - menor texto com 12px.
+- Árvore de acessibilidade do Chrome lida página a página: landmarks, títulos, nomes de links, barras de progresso e a região `aria-live` da validação.
+- Espaçamento de texto ampliado (WCAG 1.4.12) sem cortes.
+- Detector do Impeccable: restam só os 2 avisos já aceitos dos separadores "—".
+
+### O que continua pendente
+
+- Leitor de tela real (NVDA, TalkBack, VoiceOver), celular real e outros navegadores: nada disso foi testado.
+- O zoom de 200% e 400% foi aproximado pelas larguras de 640 e 320px, sem zoom real do navegador.
+- O Chrome expõe os rótulos em caixa alta (ex.: "VALIDADA") como estão na tela; um leitor de tela pode soletrar algumas siglas.
+
+---
+
 ## Próximas entradas
 
 O DEVLOG só deve ganhar uma nova entrada quando houver algo realmente relevante, por exemplo:

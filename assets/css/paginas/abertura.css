@@ -162,28 +162,48 @@
   letter-spacing: -0.02em;
 }
 
+/* Três fichas ligadas pela rota: a linha passa por trás e aparece entre elas. */
 .protocolo__lista {
+  position: relative;
+  isolation: isolate;
   display: grid;
-  gap: var(--espaco-8);
+  gap: var(--espaco-6);
   margin: var(--espaco-8) 0 0;
   padding: 0;
   list-style: none;
 }
 
+.protocolo__lista::before {
+  content: "";
+  position: absolute;
+  z-index: -3;
+  top: 0;
+  bottom: 0;
+  left: var(--espaco-8);
+  border-left: 2px dashed var(--cor-destaque);
+}
+
 .protocolo__passo {
-  position: relative;
   display: grid;
-  grid-template-columns: 64px minmax(0, 1fr);
-  column-gap: var(--espaco-4);
-  align-items: start;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  padding: var(--espaco-4) var(--espaco-6) var(--espaco-6) var(--espaco-4);
+}
+
+/* O último passo é o digital: a moldura roxa marca onde o celular entra. */
+.protocolo__passo:last-child {
+  --moldura: var(--cor-destaque);
+  --miolo: var(--cor-superficie-alta);
 }
 
 .protocolo__numeral {
-  grid-row: 1 / span 2;
-  font-size: 5.5rem;
+  grid-row: 1;
+  font-size: 4.5rem;
 }
 
 .protocolo__icone {
+  grid-row: 1;
+  grid-column: 2;
   width: 40px;
   height: 40px;
   color: var(--cor-texto-secundario);
@@ -194,8 +214,11 @@
 }
 
 .protocolo__corpo {
-  grid-column: 2;
-  margin-top: var(--espaco-3);
+  grid-column: 1 / -1;
+  align-self: start;
+  margin-top: var(--espaco-4);
+  padding-top: var(--espaco-4);
+  border-top: 1px solid var(--cor-superficie-alta);
 }
 
 .protocolo__nome {
@@ -372,9 +395,6 @@
     width: min(100%, 22rem);
   }
 
-  .protocolo__lista {
-    gap: var(--espaco-12);
-  }
 }
 
 @media (min-width: 900px) {
@@ -447,34 +467,30 @@
 
   .protocolo__lista {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: var(--espaco-8);
+    gap: var(--espaco-6);
     margin-top: 0;
   }
 
+  .protocolo__lista::before {
+    top: 64px;
+    bottom: auto;
+    left: 0;
+    right: 0;
+    border-left: none;
+    border-top: 2px dashed var(--cor-destaque);
+  }
+
   .protocolo__passo {
-    grid-template-columns: minmax(0, 1fr) auto;
     grid-template-rows: auto 1fr;
-    align-items: start;
   }
 
   .protocolo__numeral {
-    grid-row: 1;
-    font-size: 7.5rem;
+    font-size: 6rem;
   }
 
   .protocolo__icone {
-    grid-row: 1;
-    grid-column: 2;
-    align-self: end;
     width: 48px;
     height: 48px;
-  }
-
-  .protocolo__corpo {
-    grid-column: 1 / -1;
-    margin-top: var(--espaco-4);
-    padding-top: var(--espaco-4);
-    border-top: 1px solid var(--cor-superficie-alta);
   }
 
   .jornada {

@@ -159,11 +159,7 @@
   column-gap: var(--espaco-3);
   color: inherit;
   text-decoration: none;
-}
-
-.cartao:focus-visible {
-  outline: 2px solid var(--cor-destaque);
-  outline-offset: var(--espaco-1);
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* Nó do trilho: engrenagem, número e o trecho até a próxima parada. */
@@ -171,6 +167,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-top: var(--espaco-2);
 }
 
 .marcador {
@@ -195,7 +192,7 @@
   border-left: 2px dashed var(--cor-apagado);
 }
 
-/* Trecho já percorrido: roxo sólido. Trecho até a próxima estação: roxo tracejado. */
+/* Trecho percorrido: roxo sólido. Até a próxima estação: roxo tracejado. */
 .estacao--liga-desbloqueada .estacao__no::after {
   border-left: 2px solid var(--cor-destaque);
 }
@@ -208,126 +205,224 @@
   content: none;
 }
 
+/* Próxima estação: o nó do trilho ganha um alvo roxo, para o trilho mostrar o estado sozinho. */
+.estacao--proxima .marcador {
+  box-shadow: 0 0 0 2px var(--cor-fundo), 0 0 0 4px var(--cor-destaque);
+}
+
+.estacao--bloqueada .marcador {
+  margin-top: var(--espaco-1);
+}
+
+/* ---------- Cartão: ficha de missão (.ficha em style.css) ----------
+   .cartao__faixa é a faixa de estado no topo: sólida (validada), linhas de movimento (próxima) ou
+   hachura (bloqueada). */
+
 .cartao__corpo {
-  position: relative;
-  isolation: isolate;
-  padding: var(--espaco-4) var(--espaco-6) var(--espaco-4) var(--espaco-4);
-  background: var(--cor-superficie);
-  clip-path: var(--recorte);
+  --faixa-altura: 6px;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  /* O conteúdo fica dentro da moldura: a barra de ação nunca pinta por cima dela (foco incluso). */
+  padding: calc(var(--faixa-altura) + var(--espaco-4)) var(--espessura) var(--espessura);
+  transition: transform 0.15s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.15s ease-out;
+}
+
+.cartao__faixa {
+  position: absolute;
+  z-index: 0;
+  top: var(--espessura);
+  left: calc(var(--espaco-3) + var(--espessura));
+  right: var(--espessura);
+  height: var(--faixa-altura);
+  background-color: var(--cor-apagado);
 }
 
 .estacao__titulo,
 .final__titulo {
   margin: 0;
+  padding: 0 var(--espaco-6) 0 var(--espaco-4);
   font-family: var(--fonte-titulo);
-  font-weight: 600;
-  font-size: 1.125rem;
-  line-height: 1.25;
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1.2;
+  text-wrap: balance;
 }
 
-.estacao__acao,
-.final__detalhe {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--espaco-2);
-  margin-top: var(--espaco-3);
-  font-family: var(--fonte-titulo);
-  font-weight: 600;
-  font-size: 0.875rem;
+.cartao__descricao {
+  margin: var(--espaco-2) 0 0;
+  padding: 0 var(--espaco-6) 0 var(--espaco-4);
+  font-size: 0.9375rem;
+  line-height: 1.45;
   color: var(--cor-texto-secundario);
 }
 
-/* Validada: o rótulo vira carimbo; o texto do rótulo continua para leitores de tela. */
-.estacao--desbloqueada .cartao__corpo {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  grid-template-areas:
-    "titulo titulo"
-    "acao carimbo";
-  align-items: end;
+/* Faixa de estado: selo à esquerda, registro da ficha à direita. */
+.cartao__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espaco-2) var(--espaco-3);
+  margin-top: var(--espaco-4);
+  padding: var(--espaco-3) var(--espaco-4);
+  border-top: 1px dashed var(--cor-superficie-alta);
 }
 
-/* Estado depois do título, como selo: nunca um rótulo acima do título. */
-.cartao__corpo .rotulo {
-  margin-top: var(--espaco-2);
+.cartao__estado {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espaco-2);
+  font-weight: 700;
 }
 
-.estacao--desbloqueada .rotulo {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
+.cartao__ficha {
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  color: var(--cor-texto-atenuado);
 }
 
-.estacao--desbloqueada .estacao__titulo {
-  grid-area: titulo;
-  margin-top: 0;
-}
-
-.estacao--desbloqueada .estacao__acao {
-  grid-area: acao;
-}
-
-.estacao__carimbo {
-  grid-area: carimbo;
-  margin-left: var(--espaco-3);
-}
-
-/* Próxima: faixa de linhas de movimento no topo, título grande e folha de passos anexa. */
-.estacao--proxima .cartao__corpo {
-  padding-top: calc(var(--espaco-4) + var(--espaco-4));
+/* Barra de ação: a base do cartão, sempre com altura de toque. */
+.estacao__acao,
+.final__detalhe {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espaco-3);
+  min-height: 48px;
+  margin-top: auto;
+  padding: var(--espaco-3) var(--espaco-6) var(--espaco-3) var(--espaco-4);
   background: var(--cor-superficie-alta);
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 0.9375rem;
+  letter-spacing: 0.02em;
+  color: var(--cor-texto);
 }
 
-.estacao--proxima .cartao__corpo::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: var(--espaco-4);
+.estacao__acao .seta,
+.final__detalhe .seta {
+  transition: transform 0.15s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* --- Validada: faixa cheia (como o segmento cheio da barra) e carimbo --- */
+
+.estacao--desbloqueada .cartao__faixa {
+  background-color: var(--cor-destaque);
+}
+
+.estacao--desbloqueada .cartao__estado {
+  padding: var(--espaco-1) var(--espaco-2);
+  border: 2px solid var(--cor-destaque);
+  box-shadow: inset 0 0 0 2px var(--cor-superficie), inset 0 0 0 3px var(--cor-destaque);
+  color: var(--cor-destaque);
+  letter-spacing: 0.14em;
+  transform: rotate(-3deg);
+}
+
+/* --- Próxima: moldura roxa, faixa de movimento, ação roxa: o maior destaque funcional --- */
+
+.estacao--proxima .cartao__corpo {
+  --moldura: var(--cor-destaque);
+  --espessura: 2px;
+  --miolo: var(--cor-superficie-alta);
+  --faixa-altura: 14px;
+}
+
+.estacao--proxima .cartao__faixa {
   background-color: var(--cor-destaque);
   -webkit-mask: var(--textura-movimento) center / 100% 100% no-repeat;
   mask: var(--textura-movimento) center / 100% 100% no-repeat;
 }
 
-.estacao--proxima .rotulo {
-  display: inline-block;
-  margin-top: var(--espaco-3);
-  padding: var(--espaco-1) var(--espaco-2);
-  background: var(--cor-destaque);
-  color: var(--cor-fundo);
-  font-weight: 700;
-  clip-path: var(--recorte-minimo);
-}
-
 .estacao--proxima .estacao__titulo {
-  font-weight: 700;
   font-size: 1.5rem;
-  line-height: 1.15;
+  line-height: 1.12;
 }
 
-.estacao--proxima .estacao__acao {
-  display: flex;
-  justify-content: space-between;
-  min-height: 44px;
-  margin-top: var(--espaco-4);
-  border-top: 1px solid var(--cor-apagado);
-  font-weight: 700;
-  font-size: 1rem;
+.estacao--proxima .cartao__descricao {
   color: var(--cor-texto);
 }
 
+.estacao--proxima .cartao__estado {
+  padding: var(--espaco-1) var(--espaco-2);
+  background: var(--cor-destaque);
+  color: var(--cor-fundo);
+  clip-path: var(--recorte-minimo);
+}
+
+.estacao--proxima .cartao__meta {
+  border-top-color: var(--cor-apagado);
+}
+
+.estacao--proxima .estacao__acao {
+  background: var(--cor-destaque);
+  color: var(--cor-fundo);
+  font-size: 1rem;
+}
+
+/* --- Bloqueada: indisponível, mas legível. Hachura só na faixa; cadeado no selo --- */
+
+.estacao--bloqueada .cartao__corpo,
+.final--bloqueado .cartao__corpo {
+  --moldura: var(--cor-superficie-alta);
+  --miolo: var(--cor-fundo);
+  --faixa-altura: 10px;
+}
+
+.estacao--bloqueada .cartao__faixa,
+.final--bloqueado .cartao__faixa {
+  background-color: var(--cor-apagado);
+  -webkit-mask: var(--textura-hachura) 0 0 / 10px 10px repeat;
+  mask: var(--textura-hachura) 0 0 / 10px 10px repeat;
+}
+
+.estacao--bloqueada .estacao__titulo,
+.final--bloqueado .final__titulo {
+  color: var(--cor-texto-secundario);
+}
+
+.estacao--bloqueada .cartao__descricao,
+.final--bloqueado .cartao__descricao {
+  color: var(--cor-texto-atenuado);
+}
+
+.estacao--bloqueada .cartao__estado,
+.final--bloqueado .cartao__estado {
+  color: var(--cor-texto-secundario);
+}
+
+.estacao--bloqueada .cartao__estado::before,
+.final--bloqueado .cartao__estado::before {
+  content: "";
+  width: 14px;
+  height: 14px;
+  background-color: currentColor;
+  -webkit-mask: var(--icone-cadeado) center / contain no-repeat;
+  mask: var(--icone-cadeado) center / contain no-repeat;
+}
+
+.estacao--bloqueada .estacao__acao {
+  background: none;
+  border-top: 1px solid var(--cor-superficie-alta);
+  color: var(--cor-texto-secundario);
+}
+
+.estacao--bloqueada .estacao__numero {
+  color: var(--cor-texto-atenuado);
+}
+
+/* Folha de passos presa ao cartão da próxima estação (fora do link, de propósito). */
 .estacao__passos {
   grid-column: 2;
   display: grid;
   gap: var(--espaco-2);
   margin: 0;
-  padding: var(--espaco-3) var(--espaco-4) var(--espaco-4);
+  padding: var(--espaco-4);
   background: var(--cor-superficie);
+  box-shadow: inset 0 0 0 1px var(--cor-superficie-alta);
   list-style: none;
   counter-reset: passo;
   clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--espaco-3)), calc(100% - var(--espaco-3)) 100%, 0 100%);
@@ -352,45 +447,42 @@
   color: var(--cor-destaque);
 }
 
-/* Bloqueada: silhueta hachurada, sem preenchimento sólido. */
-.estacao--bloqueada .cartao__corpo,
-.final--bloqueado .cartao__corpo {
-  background: var(--cor-fundo);
-  box-shadow: inset 0 0 0 1px var(--cor-superficie-alta);
+/* ---------- Interação: hover só melhora; foco e toque sempre visíveis ---------- */
+
+a.cartao:focus-visible {
+  outline: none;
 }
 
-.estacao--bloqueada .cartao__corpo::before,
-.final--bloqueado .cartao__corpo::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  background-color: var(--cor-superficie-alta);
-  -webkit-mask: var(--textura-hachura) 0 0 / 10px 10px repeat;
-  mask: var(--textura-hachura) 0 0 / 10px 10px repeat;
+/* Foco: a moldura engrossa em branco. Desenhada dentro do recorte, nunca é cortada. */
+a.cartao:focus-visible .cartao__corpo {
+  --moldura: var(--cor-texto);
+  --espessura: 3px;
 }
 
-.estacao--bloqueada .rotulo,
-.estacao--bloqueada .estacao__titulo,
-.estacao--bloqueada .estacao__acao,
-.estacao--bloqueada .estacao__numero,
-.final--bloqueado .rotulo,
-.final--bloqueado .final__titulo,
-.final--bloqueado .final__detalhe {
-  color: var(--cor-texto-atenuado);
+a.cartao:focus-visible .estacao__numero {
+  color: var(--cor-texto);
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 
-.estacao--bloqueada .marcador {
-  margin-top: var(--espaco-1);
+a.cartao:active .cartao__corpo {
+  transform: translateY(1px);
+  --miolo: var(--cor-superficie-escura);
 }
 
-/* Próxima estação: o nó do trilho ganha um alvo roxo, para o trilho mostrar o estado sozinho. */
-.estacao--proxima .marcador {
-  box-shadow: 0 0 0 2px var(--cor-fundo), 0 0 0 4px var(--cor-destaque);
-}
+@media (hover: hover) {
+  a.cartao:hover .cartao__corpo {
+    transform: translateY(-2px);
+    --miolo: var(--cor-superficie-alta);
+  }
 
-.estacao--bloqueada .seta {
-  display: none;
+  .estacao--bloqueada a.cartao:hover .cartao__corpo {
+    --miolo: var(--cor-superficie-escura);
+  }
+
+  a.cartao:hover .seta {
+    transform: translateX(3px);
+  }
 }
 
 /* ---------- Destino final: a chegada da rota ---------- */
@@ -426,7 +518,6 @@
   grid-template-columns: minmax(0, 1fr);
 }
 
-/* Em telas estreitas os dois destinos bloqueados empilham, para os textos não espremerem. */
 @media (max-width: 479px) {
   .finais {
     grid-template-columns: minmax(0, 1fr);
@@ -444,91 +535,81 @@
   height: 100%;
 }
 
-.final__titulo {
-  font-size: 1.25rem;
+/* Sem link, o detalhe é um status: texto simples sob um filete, nunca com cara de botão. */
+.final__detalhe--status {
+  min-height: 0;
+  background: none;
+  border-top: 1px solid var(--cor-superficie-alta);
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: var(--cor-texto-secundario);
 }
 
 /* X-BOT: a mesma silhueta de carta da abertura, em miniatura. */
-.final--xbot .cartao__corpo {
+.final--xbot .final__titulo,
+.final--xbot .cartao__descricao {
   padding-right: calc(var(--espaco-12) + var(--espaco-4));
 }
 
-.final--xbot .cartao__corpo::after {
+.final--xbot .cartao__corpo > .final__titulo::after {
   content: "";
   position: absolute;
-  top: var(--espaco-4);
-  right: var(--espaco-4);
-  width: 34px;
+  top: calc(var(--faixa-altura) + var(--espaco-4));
+  right: var(--espaco-6);
+  width: 30px;
   aspect-ratio: 220 / 307;
   box-shadow: inset 0 0 0 2px var(--cor-apagado);
   transform: rotate(-6deg);
 }
 
-.final--pendente .cartao__corpo {
-  box-shadow: inset 0 0 0 1px var(--cor-apagado);
+.final--pendente .cartao__faixa {
+  background-color: var(--cor-apagado);
 }
 
-.final--pendente .rotulo {
-  color: var(--cor-texto-atenuado);
+.final--pendente .cartao__estado {
+  color: var(--cor-texto-secundario);
 }
 
-.final--pendente .cartao__corpo::after {
+.final--pendente .cartao__estado::before {
+  content: "";
+  width: var(--espaco-3);
+  height: var(--espaco-3);
+  box-shadow: inset 0 0 0 2px currentColor;
+}
+
+.final--pendente .final__titulo::after {
   box-shadow: inset 0 0 0 2px var(--cor-destaque);
 }
 
-/* Conclusão disponível: o maior elemento da tela, com a faixa de movimento. */
+/* Conclusão disponível: mesma linguagem da próxima estação. */
 .final--principal .cartao__corpo {
-  padding: calc(var(--espaco-6) + var(--espaco-4)) var(--espaco-6) var(--espaco-4);
-  background: var(--cor-superficie-alta);
+  --moldura: var(--cor-destaque);
+  --espessura: 2px;
+  --miolo: var(--cor-superficie-alta);
+  --faixa-altura: 14px;
 }
 
-.final--principal .cartao__corpo::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: var(--espaco-6);
+.final--principal .cartao__faixa {
   background-color: var(--cor-destaque);
   -webkit-mask: var(--textura-movimento) center / 100% 100% no-repeat;
   mask: var(--textura-movimento) center / 100% 100% no-repeat;
 }
 
-.final--principal .rotulo {
-  display: inline-block;
-  margin-top: var(--espaco-3);
-  padding: var(--espaco-1) var(--espaco-2);
-  background: var(--cor-destaque);
-  color: var(--cor-fundo);
-  font-weight: 700;
-  clip-path: var(--recorte-minimo);
-}
-
 .final--principal .final__titulo {
-  font-weight: 700;
   font-size: 2rem;
 }
 
-.final--principal .final__detalhe {
-  display: flex;
-  justify-content: space-between;
-  min-height: 44px;
-  margin-top: var(--espaco-4);
-  border-top: 1px solid var(--cor-apagado);
-  font-weight: 700;
-  font-size: 1rem;
-  color: var(--cor-texto);
+.final--principal .cartao__estado {
+  padding: var(--espaco-1) var(--espaco-2);
+  background: var(--cor-destaque);
+  color: var(--cor-fundo);
+  clip-path: var(--recorte-minimo);
 }
 
-@media (hover: hover) {
-  a.cartao:hover .cartao__corpo {
-    background: var(--cor-superficie-alta);
-  }
-
-  .estacao--bloqueada a.cartao:hover .cartao__corpo {
-    background: var(--cor-superficie-escura);
-  }
+.final--principal .final__detalhe {
+  background: var(--cor-destaque);
+  color: var(--cor-fundo);
+  font-size: 1rem;
 }
 
 /* ---------- A partir de 900px: rota horizontal de quatro paradas ---------- */
@@ -558,26 +639,53 @@
     font-size: 6rem;
   }
 
+  /* Os quatro cartões da linha terminam juntos: ação sempre na base. */
+  /* Linha 1: os quatro cartões, todos com a altura do maior. Linha 2: a folha de passos,
+     só sob a próxima estação, sem esticar os outros cartões. */
   .estacoes {
     grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-rows: auto auto;
     column-gap: var(--espaco-4);
-    align-items: start;
   }
 
   .estacao {
+    grid-row: span 2;
     grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: subgrid;
     padding-bottom: 0;
   }
 
   .estacao > .cartao {
+    grid-row: 1;
     grid-template-columns: minmax(0, 1fr);
-    grid-template-rows: 72px auto;
+    grid-template-rows: 72px 1fr;
+  }
+
+  .estacao__passos {
+    grid-row: 2;
+    grid-column: 1;
+    align-self: start;
+  }
+
+  /* A meta desce para alinhar entre cartões; a margem da descrição garante o respiro
+     mínimo no cartão mais alto, onde o auto vale zero. */
+  .cartao__descricao {
+    margin-bottom: var(--espaco-4);
+  }
+
+  .cartao__meta {
+    margin-top: auto;
+  }
+
+  .cartao__meta + .estacao__acao {
+    margin-top: 0;
   }
 
   .estacao__no {
     flex-direction: row;
     align-items: center;
     gap: var(--espaco-2);
+    padding-top: 0;
   }
 
   .estacao__numero {
@@ -600,10 +708,6 @@
   .estacao--liga-proxima .estacao__no::after {
     border-left: none;
     border-top: 2px dashed var(--cor-destaque);
-  }
-
-  .estacao__passos {
-    grid-column: 1;
   }
 
   .destino {
