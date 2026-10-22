@@ -28,6 +28,7 @@
   --cor-texto-atenuado: #9d9daa;
   --cor-destaque: #cd5efa;
   --cor-apagado: #6f6f7d;
+  --cor-sobre-destaque: #0c0c10;
   --cor-grade: rgba(255, 255, 255, 0.04);
 
   --fonte-titulo: "Chakra Petch", system-ui, sans-serif;
@@ -82,6 +83,92 @@
   --textura-hachura: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10'%3E%3Cpath d='M-2 2L2 -2M0 10L10 0M8 12L12 8' stroke='black' stroke-width='1.2'/%3E%3C/svg%3E");
 }
 
+/* Preferências de acessibilidade (assets/js/acessibilidade.js). O script grava no <html> os
+   atributos data-tema, data-texto, data-contraste e data-movimento antes da primeira pintura.
+   Sem script, vale o tema escuro de cima.
+   O tema claro tem paleta própria: o roxo vira um tom mais fundo da mesma matiz, porque o
+   #cd5efa tem só 3,2:1 sobre branco e some como texto pequeno. Texto sobre roxo usa
+   --cor-sobre-destaque, que muda junto. */
+:root {
+  color-scheme: dark;
+}
+
+:root[data-tema="claro"] {
+  color-scheme: light;
+  --cor-fundo: #f5f3f8;
+  --cor-superficie: #ffffff;
+  --cor-superficie-escura: #ebe8f0;
+  --cor-superficie-alta: #e2deea;
+  --cor-texto: #17151c;
+  --cor-texto-secundario: #3d3a48;
+  --cor-texto-atenuado: #565263;
+  --cor-destaque: #8f26c7;
+  --cor-apagado: #6e6a7c;
+  --cor-sobre-destaque: #ffffff;
+  --cor-grade: rgba(23, 21, 28, 0.06);
+}
+
+/* Alto contraste: mais distância entre texto e fundo, quadros e traços mais firmes. */
+:root[data-contraste="alto"] {
+  --cor-fundo: #000000;
+  --cor-superficie: #0a0a0c;
+  --cor-superficie-escura: #000000;
+  --cor-superficie-alta: #22222c;
+  --cor-texto: #ffffff;
+  --cor-texto-secundario: #ffffff;
+  --cor-texto-atenuado: #e6e6ec;
+  --cor-apagado: #a9a9b6;
+  --cor-grade: rgba(255, 255, 255, 0.02);
+}
+
+:root[data-tema="claro"][data-contraste="alto"] {
+  --cor-fundo: #ffffff;
+  --cor-superficie: #ffffff;
+  --cor-superficie-escura: #f0f0f2;
+  --cor-superficie-alta: #d6d6dc;
+  --cor-texto: #000000;
+  --cor-texto-secundario: #000000;
+  --cor-texto-atenuado: #1f1f24;
+  --cor-destaque: #6a0fa0;
+  --cor-apagado: #55555f;
+  --cor-sobre-destaque: #ffffff;
+  --cor-grade: rgba(0, 0, 0, 0.03);
+}
+
+/* O quadro das fichas passa a ter a cor do texto, menos nos estados que já definem o seu. */
+:where(:root[data-contraste="alto"]) .ficha {
+  --moldura: var(--cor-texto);
+}
+
+:root[data-contraste="alto"] :focus-visible {
+  outline-width: 3px;
+}
+
+:root[data-contraste="alto"] a:not([class]) {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+/* Tamanho do texto: o corpo e os títulos usam rem, então tudo acompanha a raiz. */
+:root[data-texto="grande"] {
+  font-size: 115%;
+}
+
+:root[data-texto="extra"] {
+  font-size: 130%;
+}
+
+/* Troca de tema sem tranco: só enquanto a pessoa muda uma opção, nunca no carregamento. */
+@media (prefers-reduced-motion: no-preference) {
+  :root.a11y-transicao:not([data-movimento="reduzido"]),
+  :root.a11y-transicao:not([data-movimento="reduzido"]) *,
+  :root.a11y-transicao:not([data-movimento="reduzido"]) *::before,
+  :root.a11y-transicao:not([data-movimento="reduzido"]) *::after {
+    transition: background-color 0.2s ease-out, color 0.2s ease-out, border-color 0.2s ease-out,
+      fill 0.2s ease-out, stroke 0.2s ease-out !important;
+  }
+}
+
 * {
   box-sizing: border-box;
 }
@@ -114,7 +201,7 @@ body::before {
 
 ::selection {
   background: var(--cor-destaque);
-  color: var(--cor-fundo);
+  color: var(--cor-sobre-destaque);
 }
 
 a {
@@ -130,26 +217,31 @@ a {
   display: none !important;
 }
 
-/* Pular para o conteúdo: escondido até receber foco pelo teclado. */
+/* Pular para o conteúdo: fixo no centro do topo, escondido até receber foco pelo teclado.
+   Cores invertidas em relação à página (texto sobre fundo), então o contraste é o máximo do tema. */
 .pular {
-  position: absolute;
-  z-index: 10;
+  position: fixed;
+  z-index: 40;
   top: var(--espaco-2);
-  left: var(--espaco-2);
+  left: 50%;
+  max-width: calc(100vw - 2 * var(--gutter));
   padding: var(--espaco-3) var(--espaco-4);
-  background: var(--cor-destaque);
+  border: 2px solid var(--cor-destaque);
+  background: var(--cor-texto);
   color: var(--cor-fundo);
   font-family: var(--fonte-titulo);
   font-weight: 700;
   font-size: 1rem;
+  line-height: 1.2;
+  text-align: center;
   text-decoration: none;
-  transform: translateY(calc(-100% - var(--espaco-4)));
+  transform: translate(-50%, calc(-100% - var(--espaco-4)));
 }
 
 .pular:focus {
-  outline: 3px solid var(--cor-texto);
+  outline: 3px solid var(--cor-destaque);
   outline-offset: 2px;
-  transform: none;
+  transform: translate(-50%, 0);
 }
 
 /* O alvo do salto recebe foco por script de navegação, sem moldura própria. */
@@ -213,7 +305,7 @@ main:focus {
 
 .botao--principal {
   background: var(--cor-destaque);
-  color: var(--cor-fundo);
+  color: var(--cor-sobre-destaque);
 }
 
 .botao:focus-visible {
@@ -222,7 +314,7 @@ main:focus {
 }
 
 .botao--principal:focus-visible {
-  box-shadow: inset 0 0 0 3px var(--cor-fundo);
+  box-shadow: inset 0 0 0 3px var(--cor-sobre-destaque);
 }
 
 /* Seta desenhada (não glifo Unicode): herda a cor do texto. --voltar aponta para trás. */
@@ -495,5 +587,348 @@ main:focus {
   a.cartao:hover .cartao__corpo,
   a.cartao:hover .seta {
     transform: none;
+  }
+}
+
+/* Mesma regra, escolhida no painel de acessibilidade (data-movimento="reduzido"). */
+:root[data-movimento="reduzido"] *,
+:root[data-movimento="reduzido"] *::before,
+:root[data-movimento="reduzido"] *::after {
+  animation: none !important;
+  transition-property: color, background-color, border-color, box-shadow, opacity !important;
+  transition-duration: 0.12s !important;
+  scroll-behavior: auto !important;
+}
+
+:root[data-movimento="reduzido"] .botao:active,
+:root[data-movimento="reduzido"] a.cartao:active .cartao__corpo,
+:root[data-movimento="reduzido"] a.cartao:hover .cartao__corpo,
+:root[data-movimento="reduzido"] a.cartao:hover .seta {
+  transform: none;
+}
+
+/* ---------- Painel de acessibilidade (montado por assets/js/acessibilidade.js) ----------
+   Fica no topo da página, rolando com ela: um botão fixo poderia cobrir o item em foco. */
+.a11y {
+  position: absolute;
+  z-index: 20;
+  top: var(--espaco-2);
+  right: var(--gutter);
+}
+
+.a11y__abrir {
+  --moldura: var(--cor-apagado);
+  --miolo: var(--cor-superficie);
+  --recorte: var(--recorte-pequeno);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espaco-2);
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 var(--espaco-3);
+  border: 0;
+  color: var(--cor-texto);
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 0.875rem;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+}
+
+.a11y__abrir:focus-visible,
+.a11y__opcao input:focus-visible + .a11y__opcao-corpo {
+  outline: none;
+  --moldura: var(--cor-texto);
+  --espessura: 3px;
+}
+
+.a11y__abrir[aria-expanded="true"] {
+  --moldura: var(--cor-destaque);
+  --espessura: 2px;
+}
+
+.a11y__icone {
+  flex: none;
+  width: 20px;
+  height: 20px;
+}
+
+/* Em telas estreitas só o ícone fica à vista; o nome continua no botão, para leitores de tela. */
+.a11y__rotulo {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.a11y__painel {
+  --moldura: var(--cor-destaque);
+  --miolo: var(--cor-superficie);
+  position: absolute;
+  top: calc(100% + var(--espaco-2));
+  right: 0;
+  width: min(24rem, calc(100vw - 2 * var(--gutter)));
+  padding: var(--espaco-4);
+  color: var(--cor-texto);
+  font-size: 0.9375rem;
+}
+
+.a11y__topo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espaco-3);
+  margin-bottom: var(--espaco-4);
+}
+
+.a11y__titulo {
+  margin: 0;
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 1.125rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.a11y__fechar,
+.a11y__restaurar {
+  min-height: 44px;
+  padding: var(--espaco-2) var(--espaco-4);
+  border: 0;
+  font-size: 0.8125rem;
+  cursor: pointer;
+}
+
+.a11y__grupo {
+  margin-top: var(--espaco-4);
+  padding-top: var(--espaco-3);
+  border-top: 1px dashed var(--cor-apagado);
+}
+
+.a11y__grupo-nome {
+  margin: 0 0 var(--espaco-2);
+  color: var(--cor-texto-atenuado);
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.a11y__opcoes {
+  min-width: 0;
+  margin: 0 0 var(--espaco-3);
+  padding: 0;
+  border: 0;
+}
+
+.a11y__opcoes legend {
+  padding: 0;
+  margin-bottom: var(--espaco-2);
+  font-weight: 600;
+}
+
+.a11y__lista {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--espaco-2);
+}
+
+.a11y__opcao {
+  position: relative;
+  display: block;
+}
+
+.a11y__opcao input {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.a11y__opcao-corpo {
+  --moldura: var(--cor-apagado);
+  --miolo: var(--cor-superficie);
+  --espessura: 2px;
+  --recorte: var(--recorte-minimo);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--espaco-1);
+  min-height: 56px;
+  padding: var(--espaco-2);
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.a11y__opcao-corpo small {
+  color: var(--cor-texto-atenuado);
+  font-size: 0.75rem;
+}
+
+/* Selecionada: quadro roxo, miolo elevado, texto em negrito e o marcador cheio.
+   O marcador oco das demais deixa claro que o estado não depende só da cor. */
+.a11y__marca {
+  width: 10px;
+  height: 10px;
+  border: 2px solid var(--cor-apagado);
+}
+
+.a11y__opcao input:checked + .a11y__opcao-corpo {
+  --moldura: var(--cor-destaque);
+  --miolo: var(--cor-superficie-alta);
+  font-weight: 700;
+}
+
+.a11y__opcao input:checked + .a11y__opcao-corpo .a11y__marca {
+  border-color: var(--cor-destaque);
+  background: var(--cor-destaque);
+}
+
+@media (hover: hover) {
+  .a11y__opcao input:not(:checked):hover + .a11y__opcao-corpo {
+    --miolo: var(--cor-superficie-alta);
+  }
+}
+
+.a11y__chave {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espaco-3);
+  min-height: 48px;
+  cursor: pointer;
+}
+
+.a11y__chave input {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: inherit;
+}
+
+.a11y__chave-texto {
+  display: flex;
+  flex-direction: column;
+  font-weight: 600;
+}
+
+.a11y__nota {
+  color: var(--cor-texto-atenuado);
+  font-size: 0.75rem;
+  font-weight: 400;
+}
+
+.a11y__chave-estado {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espaco-2);
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.a11y__trilho {
+  position: relative;
+  flex: none;
+  width: 44px;
+  height: 24px;
+  border: 2px solid var(--cor-apagado);
+  background: var(--cor-superficie);
+}
+
+.a11y__trilho::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  background: var(--cor-apagado);
+  transition: transform 0.15s ease-out, background-color 0.15s ease-out;
+}
+
+.a11y__chave input:checked ~ .a11y__chave-estado .a11y__trilho {
+  border-color: var(--cor-destaque);
+  background: var(--cor-superficie-alta);
+}
+
+.a11y__chave input:checked ~ .a11y__chave-estado .a11y__trilho::after {
+  background: var(--cor-destaque);
+  transform: translateX(20px);
+}
+
+.a11y__chave input:focus-visible ~ .a11y__chave-estado .a11y__trilho {
+  outline: 3px solid var(--cor-texto);
+  outline-offset: 2px;
+}
+
+.a11y__chave input:disabled {
+  cursor: not-allowed;
+}
+
+.a11y__rodape {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--espaco-3);
+  margin-top: var(--espaco-4);
+  padding-top: var(--espaco-3);
+  border-top: 1px dashed var(--cor-apagado);
+}
+
+.a11y__status {
+  margin: 0;
+  color: var(--cor-texto-secundario);
+  font-size: 0.8125rem;
+}
+
+@media (min-width: 480px) {
+  .a11y__rotulo {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip-path: none;
+  }
+}
+
+/* Celular: o painel ocupa a largura útil abaixo do botão. */
+@media (max-width: 479px) {
+  .a11y {
+    position: static;
+  }
+
+  .a11y__abrir {
+    position: absolute;
+    z-index: 20;
+    top: var(--espaco-2);
+    right: var(--gutter);
+  }
+
+  .a11y__painel {
+    position: absolute;
+    z-index: 20;
+    top: calc(var(--espaco-2) + 44px + var(--espaco-2));
+    right: var(--gutter);
+    left: var(--gutter);
+    width: auto;
   }
 }

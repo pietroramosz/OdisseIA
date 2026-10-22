@@ -807,7 +807,7 @@
 .bloqueio--proxima .bloqueio__estado {
   border-color: var(--cor-destaque);
   background: var(--cor-destaque);
-  color: var(--cor-fundo);
+  color: var(--cor-sobre-destaque);
   transform: none;
 }
 

@@ -331,7 +331,7 @@
   margin: var(--espaco-3) 0 0;
   padding: var(--espaco-1) var(--espaco-2);
   background: var(--cor-destaque);
-  color: var(--cor-fundo);
+  color: var(--cor-sobre-destaque);
   font-family: var(--fonte-titulo);
   font-weight: 700;
   font-size: 0.75rem;

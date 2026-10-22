@@ -349,7 +349,7 @@
 .estacao--proxima .cartao__estado {
   padding: var(--espaco-1) var(--espaco-2);
   background: var(--cor-destaque);
-  color: var(--cor-fundo);
+  color: var(--cor-sobre-destaque);
   clip-path: var(--recorte-minimo);
 }
 
@@ -359,7 +359,7 @@
 
 .estacao--proxima .estacao__acao {
   background: var(--cor-destaque);
-  color: var(--cor-fundo);
+  color: var(--cor-sobre-destaque);
   font-size: 1rem;
 }
 
@@ -602,13 +602,13 @@ a.cartao:active .cartao__corpo {
 .final--principal .cartao__estado {
   padding: var(--espaco-1) var(--espaco-2);
   background: var(--cor-destaque);
-  color: var(--cor-fundo);
+  color: var(--cor-sobre-destaque);
   clip-path: var(--recorte-minimo);
 }
 
 .final--principal .final__detalhe {
   background: var(--cor-destaque);
-  color: var(--cor-fundo);
+  color: var(--cor-sobre-destaque);
   font-size: 1rem;
 }
 
