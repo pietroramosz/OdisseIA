@@ -382,6 +382,64 @@ Um diagnóstico visual do site renderizado (desktop 1280px e mobile 390px, Chrom
 
 ---
 
+## 21/10/2026 — Redesenho autoral: "Arquivo de Missão"
+
+### Contexto
+
+Depois do refinamento da Direção A, o site ainda tinha a cara de um template: título, parágrafo, botão roxo e cards na abertura; quatro cartões iguais no Hub; três estações com o mesmo esqueleto. Foi pedida uma direção de arte própria, que evoluísse a identidade do OdisseIA e do X-BOT sem abandoná-la. A decisão está na DEC-018.
+
+### O que foi feito
+
+- **Abertura:**
+  - palavra-marca monumental "Odisse/IA";
+  - rota esquemática das quatro estações descendo até a silhueta da carta do X-BOT numa explosão de linhas de velocidade;
+  - protocolo físico → digital com ícones desenhados, índice da jornada com numerais vazados e a recompensa mostrada só como silhueta;
+  - no celular, o botão "Iniciar jornada" fica logo abaixo da proposta.
+- **Hub:**
+  - virou rota: trilho vertical no celular, horizontal no desktop;
+  - estados com forma própria: carimbo VALIDADA, faixa de movimento e folha de passos na próxima estação, hachura na bloqueada;
+  - ganhou o link "Visão geral" (pendência antiga do PROJECT.md).
+- **Estações:**
+  - capa de dossiê com numeral gigante, ficha com fatos do próprio conteúdo e ilustração do assunto (quadra de Pong, rede de conexões, árvore de decisão);
+  - na Estação 1, escala 1950–2000 com os marcos na posição real; na Estação 2, escala 2001–2026 com as épocas dos capítulos;
+  - na Estação 3, a máquina de estados das quatro regras do capítulo, uma rota de pathfinding marcada como ilustração e uma escada de seis etapas;
+  - na Estação 4, a carta num palco de mangá;
+  - trilho da rota na margem a partir de 1100px;
+  - telas de bloqueio com hachura ou faixa de movimento.
+- **Conclusão:**
+  - explosão de foco atrás do placar 4/4 com o carimbo JORNADA CONCLUÍDA;
+  - a rota fechada com os quatro carimbos batendo em sequência;
+  - a carta revelada;
+  - acesso ao jogo ainda condicionado a uma `gameUrl` válida.
+- **Validação do QR:** o resultado virou um carimbo depois do título, e a ação principal vem primeiro.
+- **Sistema:**
+  - texturas de mangá como máscaras SVG coloridas pelos tokens;
+  - seta desenhada no lugar dos glifos ← e →;
+  - título sempre antes de rótulo ou selo;
+  - CSS dividido em uma base e uma folha por página (`assets/css/paginas/`).
+- **Rasters:** a origem foi registrada nos metadados das três imagens (verso da carta e engrenagens), sem alterar nenhum pixel.
+
+### Como foi verificado
+
+- **Testes antes de mudar:** testes de caracterização escritos fora do repositório, sem dependências nem infraestrutura nova.
+  - 9 de unidade (`node:test` sobre os próprios scripts): chave e contrato do progresso, os cinco resultados do QR, estados das estações, validação da `gameUrl`.
+  - 81 E2E em Chrome headless via `file://`: Hub, fluxo de QR entre páginas, estados de bloqueio, Conclusão, todos os 181 blocos de texto educativo preservados em ordem e console sem erros.
+  - Duas mutações propositais no código foram detectadas pelos testes.
+- **Capturas e auditoria:**
+  - capturas em 1280px e 390px de todas as páginas e estados, sem rolagem horizontal;
+  - auditoria de contraste sem falhas, alvos de toque de pelo menos 44px, foco visível testado com Tab e movimento desligado com `prefers-reduced-motion`.
+- **Detector e revisão:**
+  - o detector do Impeccable caiu de 38 para 2 apontamentos; os 2 restantes são os separadores "—" ocultos da linha do tempo, mantidos para leitores de tela;
+  - uma revisão independente pediu oito correções, todas aplicadas e conferidas, e terminou em "ship".
+
+### O que continua pendente
+
+- Teste em celular real, em outros navegadores e pelo WhatsApp: tudo foi verificado só em Chrome headless.
+- `gameUrl` e `downloadUrl` seguem `null`, então o X-BOT aparece como "aguardando liberação".
+- O roxo `#CD5EFA` continua provisório.
+
+---
+
 ## Próximas entradas
 
 O DEVLOG só deve ganhar uma nova entrada quando houver algo realmente relevante, por exemplo:

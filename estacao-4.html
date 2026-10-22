@@ -5,35 +5,43 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>OdisseIA — Estação 4</title>
   <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/paginas/estacao.css">
 </head>
 <body class="pagina-estacao" data-estacao="4">
-  <!-- Pictograma da estação: duas cartas com uma engrenagem, só linhas retas e quadrados. Decorativo. -->
-  <svg class="sprite" width="0" height="0" aria-hidden="true" focusable="false">
-    <symbol id="pictograma" viewBox="0 0 48 48">
-      <path d="M14 12V4H40L44 8V36H36"/>
-      <path d="M6 12H30L36 18V44H6Z"/>
-      <path d="M14 26H20L24 30V36L20 40H14L10 36V30Z"/>
-      <rect x="15" y="31" width="4" height="4" fill="currentColor" stroke="none"/>
-    </symbol>
-  </svg>
   <main>
     <!-- Conteúdo da estação: só aparece quando a estação está desbloqueada (app.js). -->
     <div id="conteudo-estacao" hidden>
-      <header class="terminal-hero">
-        <a class="terminal-voltar" href="hub.html"><span aria-hidden="true">←</span> Voltar ao Hub</a>
-        <div class="terminal-hero__painel">
+      <a class="terminal-voltar" href="hub.html"><span class="seta seta--voltar" aria-hidden="true"></span> Voltar ao Hub</a>
+      <aside class="dossie-rota" aria-hidden="true">
+        <p class="dossie-rota__titulo">ROTA</p>
+        <ol class="dossie-rota__lista">
+          <li class="dossie-rota__parada dossie-rota__parada--feita"><span class="dossie-rota__numero">01</span> ATÉ 1999</li>
+          <li class="dossie-rota__parada dossie-rota__parada--feita"><span class="dossie-rota__numero">02</span> 2001 → HOJE</li>
+          <li class="dossie-rota__parada dossie-rota__parada--feita"><span class="dossie-rota__numero">03</span> IA NOS JOGOS</li>
+          <li class="dossie-rota__parada dossie-rota__parada--atual"><span class="dossie-rota__numero">04</span> X-BOT</li>
+          <li class="dossie-rota__parada dossie-rota__parada--fim">CONCLUSÃO</li>
+        </ol>
+      </aside>
+      <header class="dossie-capa">
+        <span class="numeral-vazado dossie-capa__numeral" aria-hidden="true">04</span>
+        <div class="dossie-capa__texto">
+          <h1 class="titulo-estacao">Por trás do <span class="sem-quebra">X-BOT</span></h1>
           <p class="terminal-hero__rotulo">ESTAÇÃO <span class="terminal-hero__numero">04</span> / 04</p>
-          <h1 class="titulo-estacao">Por trás do X-BOT</h1>
-          <svg class="terminal-hero__pict" aria-hidden="true" focusable="false"><use href="#pictograma"/></svg>
+          <dl class="dossie-ficha">
+            <div class="dossie-ficha__item"><dt>Bastidores</dt><dd>02</dd></div>
+            <div class="dossie-ficha__item"><dt>Próxima etapa</dt><dd>Conclusão</dd></div>
+          </dl>
         </div>
       </header>
 
       <!-- Identidade: o verso da carta é estático, em tamanho de carta (ESTILO.md). -->
       <section class="briefing">
-        <p class="terminal-rotulo">IDENTIDADE</p>
         <h2 class="briefing__titulo">Um jogo de cartas feito para o OdisseIA</h2>
+        <p class="terminal-rotulo">IDENTIDADE</p>
         <div class="briefing__corpo">
           <figure class="carta-moldura">
+            <div class="carta-moldura__foco textura-foco" aria-hidden="true"></div>
+            <div class="carta-moldura__tom textura-reticula" aria-hidden="true"></div>
             <div class="carta-moldura__arte">
               <img src="assets/img/verso-carta.png" alt="Verso de uma carta do X-BOT: duas engrenagens cinza sobre fundo roxo, com o nome X-BOT escrito duas vezes." width="220" height="307" loading="lazy">
             </div>
@@ -45,8 +53,8 @@
       </section>
 
       <section class="capitulo">
-        <p class="terminal-rotulo capitulo__rotulo">BASTIDOR <span class="capitulo__numero">01</span></p>
         <h2 class="capitulo__titulo">Por que o X-BOT existe</h2>
+        <p class="terminal-rotulo capitulo__rotulo">BASTIDOR <span class="capitulo__numero">01</span></p>
         <div class="capitulo__corpo">
           <p>O OdisseIA percorre a história dos jogos e o uso da inteligência artificial neles. O X-BOT fecha esse percurso: além de falar sobre jogos, o projeto também desenvolveu um.</p>
           <p>Na Estação 3, você viu que, em jogos de cartas, uma inteligência artificial pode analisar jogadas, escolher cartas e controlar um adversário. O X-BOT é a ponte entre esses conceitos e um jogo de verdade.</p>
@@ -55,8 +63,8 @@
       </section>
 
       <section class="capitulo">
-        <p class="terminal-rotulo capitulo__rotulo">BASTIDOR <span class="capitulo__numero">02</span></p>
         <h2 class="capitulo__titulo">O que você vai encontrar no jogo</h2>
+        <p class="terminal-rotulo capitulo__rotulo">BASTIDOR <span class="capitulo__numero">02</span></p>
         <div class="capitulo__corpo">
           <p>Mecânicas, cartas e tecnologias entram nesta estação somente depois de confirmadas pelo grupo responsável, com base na versão final do jogo.</p>
           <!--
@@ -81,8 +89,8 @@
       </section>
 
       <section class="conexao">
-        <p class="terminal-rotulo">PRÓXIMA ETAPA</p>
         <h2 class="conexao__titulo">A Conclusão</h2>
+        <p class="terminal-rotulo">PRÓXIMA ETAPA</p>
         <p>Esta é a última estação do OdisseIA. O acesso ao X-BOT não fica aqui: ele faz parte da Conclusão, a etapa que fecha a jornada depois das quatro estações validadas.</p>
         <p>Volte ao Hub para seguir até a Conclusão.</p>
         <a class="botao botao--principal conexao__acao" href="hub.html">Voltar ao Hub</a>
@@ -91,12 +99,12 @@
 
     <!-- Mensagem de bloqueio: preenchida por app.js quando a estação é a próxima ou futura. -->
     <div id="estado-bloqueado" hidden>
-      <header class="terminal-hero terminal-hero--bloqueada">
-        <a class="terminal-voltar" href="hub.html"><span aria-hidden="true">←</span> Voltar ao Hub</a>
-        <div class="terminal-hero__painel">
+      <a class="terminal-voltar" href="hub.html"><span class="seta seta--voltar" aria-hidden="true"></span> Voltar ao Hub</a>
+      <header class="dossie-capa dossie-capa--bloqueada">
+        <span class="numeral-vazado dossie-capa__numeral" aria-hidden="true">04</span>
+        <div class="dossie-capa__texto">
+          <h1 class="titulo-estacao">Por trás do <span class="sem-quebra">X-BOT</span></h1>
           <p class="terminal-hero__rotulo">ESTAÇÃO <span class="terminal-hero__numero">04</span> / 04</p>
-          <h1 class="titulo-estacao">Por trás do X-BOT</h1>
-          <svg class="terminal-hero__pict" aria-hidden="true" focusable="false"><use href="#pictograma"/></svg>
         </div>
       </header>
       <section id="bloqueio-painel" class="bloqueio"></section>

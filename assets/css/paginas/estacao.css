@@ -1,0 +1,1334 @@
+/* Estações 1–4: cada estação é um dossiê. Capa com numeral gigante, ficha técnica e ilustração
+   própria; capítulos com numeral na margem; um diagrama do assunto (escala do tempo, rede,
+   máquina de estados); fechamento que liga à próxima etapa. Composição varia por data-estacao. */
+
+.pagina-estacao main {
+  max-width: calc(var(--palco) + 2 * var(--gutter));
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: var(--espaco-2) var(--gutter) var(--espaco-16);
+  background: var(--cor-fundo);
+  overflow-x: clip;
+}
+
+/* ---------- Capa do dossiê ---------- */
+
+.dossie-capa {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  padding-top: var(--espaco-12);
+}
+
+.dossie-capa__numeral {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  right: calc(-1 * var(--espaco-2));
+  font-size: 9.5rem;
+}
+
+.titulo-estacao {
+  max-width: 14ch;
+  margin: 0;
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: clamp(2.5rem, 11vw, 4.75rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+
+.terminal-hero__rotulo {
+  display: flex;
+  align-items: baseline;
+  gap: var(--espaco-2);
+  margin: var(--espaco-4) 0 0;
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  color: var(--cor-texto-secundario);
+}
+
+.terminal-hero__numero {
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: 0;
+  color: var(--cor-destaque);
+}
+
+/* Ficha técnica: só fatos tirados do próprio conteúdo (período, capítulos, marcos). */
+.dossie-ficha {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(6rem, 1fr));
+  margin: var(--espaco-6) 0 0;
+  border-top: 1px solid var(--cor-apagado);
+}
+
+.dossie-ficha__item {
+  padding: var(--espaco-3) var(--espaco-3) 0 0;
+}
+
+.dossie-ficha__item + .dossie-ficha__item {
+  padding-left: var(--espaco-3);
+  border-left: 1px solid var(--cor-superficie-alta);
+}
+
+.dossie-ficha dt {
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cor-texto-atenuado);
+}
+
+.dossie-ficha dd {
+  margin: var(--espaco-1) 0 0;
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 1.0625rem;
+  white-space: nowrap;
+  line-height: 1.1;
+}
+
+.dossie-capa__arte {
+  margin-top: var(--espaco-8);
+}
+
+.arte {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.arte__tela {
+  fill: var(--cor-superficie-escura);
+  stroke: var(--cor-apagado);
+  stroke-width: 1.5;
+}
+
+.arte__varredura {
+  stroke: var(--cor-superficie-alta);
+  stroke-width: 1;
+}
+
+.arte__rede {
+  stroke: var(--cor-apagado);
+  stroke-width: 2;
+  stroke-dasharray: 6 6;
+}
+
+.arte__borda,
+.arte__ligacao {
+  fill: none;
+  stroke: var(--cor-apagado);
+  stroke-width: 1.5;
+}
+
+.arte__ligacao--ativa,
+.arte__sinal {
+  fill: none;
+  stroke: var(--cor-destaque);
+  stroke-width: 2;
+}
+
+.arte__solido {
+  fill: var(--cor-texto);
+}
+
+.arte__rastro,
+.arte__bola {
+  fill: var(--cor-destaque);
+}
+
+.arte__trajetoria {
+  fill: none;
+  stroke: var(--cor-destaque);
+  stroke-width: 1.5;
+  stroke-dasharray: 2 6;
+  opacity: 0.7;
+}
+
+.arte__controle {
+  fill: var(--cor-fundo);
+  stroke: var(--cor-texto);
+  stroke-width: 2;
+}
+
+.arte__traco-fino {
+  fill: none;
+  stroke: var(--cor-texto);
+  stroke-width: 2;
+}
+
+.arte__no {
+  fill: var(--cor-fundo);
+  stroke: var(--cor-texto-secundario);
+  stroke-width: 1.5;
+}
+
+.arte__no--ativo {
+  fill: var(--cor-destaque);
+  stroke: var(--cor-destaque);
+}
+
+/* Capa bloqueada: o mesmo dossiê, ainda lacrado. */
+.dossie-capa--bloqueada .dossie-capa__numeral {
+  -webkit-text-stroke-color: var(--cor-superficie-alta);
+}
+
+/* ---------- Seções: o título abre; o rótulo é uma anotação de margem ---------- */
+
+.briefing,
+.capitulo,
+.linha-tempo,
+.conexao {
+  position: relative;
+  margin-top: var(--espaco-12);
+  padding-top: var(--espaco-6);
+  border-top: 1px solid var(--cor-apagado);
+}
+
+.terminal-rotulo {
+  position: absolute;
+  top: calc(-0.5em - 1px);
+  right: 0;
+  margin: 0;
+  padding-left: var(--espaco-2);
+  background: var(--cor-fundo);
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  font-size: 0.75rem;
+  line-height: 1;
+  letter-spacing: 0.12em;
+  color: var(--cor-texto-secundario);
+}
+
+.briefing > .terminal-rotulo,
+.linha-tempo > .terminal-rotulo {
+  display: none;
+}
+
+.briefing__titulo,
+.capitulo__titulo,
+.linha-tempo__titulo,
+.conexao__titulo {
+  margin: 0;
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 1.625rem;
+  line-height: 1.15;
+}
+
+.briefing__titulo {
+  font-size: 1.875rem;
+}
+
+.briefing p:not(.terminal-rotulo) {
+  margin: var(--espaco-4) 0 0;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+
+.briefing > p:not(.terminal-rotulo):first-of-type,
+.briefing__corpo > p:first-of-type {
+  font-size: 1.1875rem;
+  line-height: 1.5;
+}
+
+/* Capítulo: numeral grande à esquerda do título, nunca acima dele. */
+.capitulo {
+  display: grid;
+  grid-template-columns: 4.5rem minmax(0, 1fr);
+  column-gap: var(--espaco-3);
+  align-items: center;
+}
+
+.capitulo .capitulo__rotulo {
+  position: static;
+  grid-row: 1;
+  grid-column: 1;
+  display: grid;
+  gap: var(--espaco-1);
+  padding: 0;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  color: var(--cor-texto-atenuado);
+}
+
+.capitulo__numero {
+  font-weight: 700;
+  font-size: 3.25rem;
+  line-height: 0.85;
+  letter-spacing: -0.03em;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--cor-texto-atenuado);
+}
+
+.capitulo__titulo {
+  grid-row: 1;
+  grid-column: 2;
+}
+
+.capitulo__corpo {
+  grid-column: 1 / -1;
+  margin-top: var(--espaco-4);
+}
+
+.capitulo__corpo p {
+  margin: 0 0 var(--espaco-4);
+  line-height: 1.65;
+  color: var(--cor-texto-secundario);
+}
+
+.capitulo__corpo > p:first-child {
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  color: var(--cor-texto);
+}
+
+.capitulo__corpo > :last-child {
+  margin-bottom: 0;
+}
+
+.capitulo__corpo strong {
+  color: var(--cor-texto);
+}
+
+.capitulo__corpo ul {
+  display: grid;
+  gap: var(--espaco-2);
+  margin: 0 0 var(--espaco-4);
+  padding: 0;
+  list-style: none;
+}
+
+.capitulo__corpo li {
+  position: relative;
+  padding-left: var(--espaco-6);
+  line-height: 1.5;
+  color: var(--cor-texto-secundario);
+}
+
+.capitulo__corpo li::before {
+  content: "";
+  position: absolute;
+  left: var(--espaco-1);
+  top: calc(0.75em - var(--espaco-1));
+  width: var(--espaco-2);
+  height: var(--espaco-2);
+  background: var(--cor-destaque);
+}
+
+/* ---------- Figuras (diagramas do conteúdo) ---------- */
+
+.figura {
+  margin: var(--espaco-6) 0;
+  padding: var(--espaco-4);
+  background: var(--cor-superficie-escura);
+  clip-path: var(--recorte);
+}
+
+.figura__legenda {
+  margin-top: var(--espaco-3);
+  padding-top: var(--espaco-3);
+  border-top: 1px solid var(--cor-superficie-alta);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--cor-texto-atenuado);
+}
+
+.figura__estado {
+  fill: var(--cor-fundo);
+  stroke: var(--cor-texto);
+  stroke-width: 1.5;
+}
+
+.figura__nome {
+  text-anchor: middle;
+  font-size: 13px;
+}
+
+.figura__condicao {
+  font-size: 12px;
+  letter-spacing: 0.02em;
+}
+
+.figura__condicao--fim {
+  text-anchor: end;
+}
+
+.figura__ponta,
+.figura__chegada {
+  fill: var(--cor-destaque);
+}
+
+.figura__grade {
+  fill: none;
+  stroke: var(--cor-superficie-alta);
+  stroke-width: 1;
+}
+
+.figura__parede {
+  fill: var(--cor-apagado);
+  opacity: 0.55;
+}
+
+.figura__rota {
+  fill: none;
+  stroke: var(--cor-destaque);
+  stroke-width: 3;
+  stroke-linejoin: miter;
+}
+
+.figura__inicio {
+  fill: var(--cor-fundo);
+  stroke: var(--cor-texto);
+  stroke-width: 2;
+}
+
+/* ---------- Escala do tempo: cada marco na posição proporcional ao seu ano ---------- */
+
+.escala {
+  --faixa: calc(var(--fim) - var(--inicio));
+  margin: var(--espaco-6) 0 var(--espaco-8);
+  padding: var(--espaco-4) var(--espaco-4) var(--espaco-3);
+  background: var(--cor-superficie-escura);
+  clip-path: var(--recorte);
+}
+
+.escala__eixo,
+.escala__eras,
+.escala__decadas {
+  position: relative;
+}
+
+.escala__eixo {
+  height: 56px;
+  border-bottom: 2px solid var(--cor-texto-secundario);
+}
+
+.escala__marco {
+  position: absolute;
+  bottom: 0;
+  left: calc((var(--ano) - var(--inicio)) / var(--faixa) * 100%);
+  width: 3px;
+  height: 40px;
+  background: var(--cor-destaque);
+}
+
+.escala__marco:nth-child(even) {
+  height: 26px;
+}
+
+/* Intervalo (ex.: 2024–2026): barra horizontal do início ao fim. */
+.escala__marco[style*="--ate"] {
+  width: calc((var(--ate) - var(--ano)) / var(--faixa) * 100%);
+  height: 12px;
+  clip-path: var(--recorte-minimo);
+}
+
+.escala__eras {
+  height: 22px;
+  margin-top: var(--espaco-1);
+}
+
+.escala__era {
+  position: absolute;
+  left: calc((var(--de) - var(--inicio)) / var(--faixa) * 100%);
+  width: calc((var(--ate) - var(--de)) / var(--faixa) * 100% - 2px);
+  height: 100%;
+  padding: 0 var(--espaco-1);
+  overflow: hidden;
+  background: var(--cor-superficie-alta);
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  font-size: 0.6875rem;
+  line-height: 22px;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+  color: var(--cor-texto-secundario);
+}
+
+.escala__era:nth-child(even) {
+  background: var(--cor-superficie);
+}
+
+.escala__decadas {
+  height: 18px;
+  margin-top: var(--espaco-2);
+}
+
+.escala__decadas span {
+  position: absolute;
+  left: calc((var(--ano) - var(--inicio)) / var(--faixa) * 100%);
+  transform: translateX(-50%);
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  font-size: 0.6875rem;
+  letter-spacing: 0.04em;
+  color: var(--cor-texto-atenuado);
+}
+
+.escala__decadas span:first-child {
+  transform: none;
+}
+
+.escala__decadas span:last-child {
+  transform: translateX(-100%);
+}
+
+/* ---------- Linha do tempo: lista por época ---------- */
+
+.linha-tempo__lista {
+  margin: var(--espaco-4) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.linha-tempo__item {
+  display: grid;
+  grid-template-columns: 4.25rem 1fr;
+  column-gap: var(--espaco-3);
+}
+
+.linha-tempo__marca,
+.linha-tempo__lista--etapas .linha-tempo__item::before {
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 1.125rem;
+  line-height: 1.3;
+  text-align: right;
+  color: var(--cor-texto);
+}
+
+.linha-tempo__texto {
+  position: relative;
+  padding: 0 0 var(--espaco-3) var(--espaco-4);
+  border-left: 2px solid var(--cor-apagado);
+  line-height: 1.3;
+}
+
+.linha-tempo__texto::before {
+  content: "";
+  position: absolute;
+  left: -5px;
+  top: calc(0.65em - var(--espaco-1));
+  width: var(--espaco-2);
+  height: var(--espaco-2);
+  background: var(--cor-destaque);
+}
+
+.linha-tempo__item:last-child .linha-tempo__texto,
+.linha-tempo__item:has(+ .linha-tempo__item[data-era]) .linha-tempo__texto {
+  padding-bottom: var(--espaco-4);
+  border-left-color: transparent;
+}
+
+.linha-tempo__item[data-era]::before {
+  content: attr(data-era);
+  grid-column: 1 / -1;
+  margin-bottom: var(--espaco-2);
+  padding-top: var(--espaco-3);
+  border-top: 1px solid var(--cor-superficie-alta);
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  color: var(--cor-texto-secundario);
+}
+
+.linha-tempo__item[data-era]:first-child::before {
+  padding-top: 0;
+  border-top: none;
+}
+
+/* Estação 3: a sequência é uma escada, cada etapa um degrau acima da anterior. */
+.linha-tempo__lista--etapas {
+  display: grid;
+  gap: var(--espaco-2);
+  counter-reset: etapa;
+}
+
+.linha-tempo__lista--etapas .linha-tempo__item {
+  counter-increment: etapa;
+  grid-template-columns: var(--espaco-8) 1fr;
+  align-items: center;
+  margin-left: calc((var(--degrau, 0)) * 1px);
+  padding: var(--espaco-3) var(--espaco-4) var(--espaco-3) var(--espaco-3);
+  background: var(--cor-superficie);
+  clip-path: var(--recorte-pequeno);
+}
+
+.linha-tempo__lista--etapas .linha-tempo__item:nth-child(2) { --degrau: 12; }
+.linha-tempo__lista--etapas .linha-tempo__item:nth-child(3) { --degrau: 24; }
+.linha-tempo__lista--etapas .linha-tempo__item:nth-child(4) { --degrau: 36; }
+.linha-tempo__lista--etapas .linha-tempo__item:nth-child(5) { --degrau: 48; }
+.linha-tempo__lista--etapas .linha-tempo__item:nth-child(6) {
+  --degrau: 60;
+  background: var(--cor-superficie-alta);
+  box-shadow: inset 0 0 0 1px var(--cor-destaque);
+}
+
+.linha-tempo__lista--etapas .linha-tempo__item::before {
+  content: counter(etapa, decimal-leading-zero);
+  text-align: left;
+  color: var(--cor-destaque);
+}
+
+.linha-tempo__lista--etapas .linha-tempo__texto {
+  padding: 0;
+  border: none;
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  font-size: 1.0625rem;
+}
+
+.linha-tempo__lista--etapas .linha-tempo__texto::before {
+  content: none;
+}
+
+/* ---------- Próxima conexão ---------- */
+
+.conexao {
+  isolation: isolate;
+  padding: var(--espaco-8) var(--espaco-6) var(--espaco-6);
+  border-top: none;
+  background: var(--cor-superficie-alta);
+  clip-path: var(--recorte);
+}
+
+.conexao::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--espaco-4);
+  background-color: var(--cor-destaque);
+  -webkit-mask: var(--textura-movimento) center / 100% 100% no-repeat;
+  mask: var(--textura-movimento) center / 100% 100% no-repeat;
+}
+
+.conexao .terminal-rotulo {
+  position: static;
+  margin-top: var(--espaco-2);
+  padding: 0;
+  background: none;
+  color: var(--cor-texto-atenuado);
+}
+
+.conexao p:not(.terminal-rotulo) {
+  margin: var(--espaco-4) 0 0;
+  line-height: 1.6;
+  color: var(--cor-texto-secundario);
+}
+
+.conexao__acao {
+  margin-top: var(--espaco-6);
+}
+
+/* ---------- Estação 4: o universo do X-BOT irrompe ---------- */
+
+[data-estacao="4"] .dossie-capa::before {
+  content: "";
+  position: absolute;
+  z-index: -2;
+  top: 0;
+  right: calc(-1 * var(--gutter));
+  width: 78%;
+  height: calc(100% + var(--espaco-8));
+  background-color: var(--cor-destaque);
+  opacity: 0.8;
+  -webkit-mask: var(--textura-foco) 35% 45% / cover no-repeat;
+  mask: var(--textura-foco) 35% 45% / cover no-repeat;
+  clip-path: polygon(22% 0, 100% 0, 100% 100%, 0 100%);
+}
+
+[data-estacao="4"] .dossie-capa__numeral {
+  -webkit-text-stroke-color: var(--cor-destaque);
+}
+
+/* Contorno de letreiro: separa o título das linhas de foco que passam atrás. */
+[data-estacao="4"] .titulo-estacao,
+[data-estacao="4"] .dossie-ficha dd {
+  -webkit-text-stroke: 8px var(--cor-fundo);
+  paint-order: stroke fill;
+}
+
+.carta-moldura {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  justify-items: center;
+  margin: var(--espaco-6) calc(-1 * var(--gutter)) var(--espaco-6);
+  padding: var(--espaco-12) var(--espaco-4) var(--espaco-6);
+  overflow: hidden;
+  background: var(--cor-superficie-escura);
+}
+
+.carta-moldura__foco {
+  position: absolute;
+  z-index: -2;
+  inset: -20% -30%;
+  opacity: 0.85;
+}
+
+.carta-moldura__tom {
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  bottom: 0;
+  width: 55%;
+  height: 45%;
+  opacity: 0.4;
+  clip-path: polygon(0 30%, 100% 100%, 0 100%);
+}
+
+.carta-moldura__arte {
+  padding: var(--espaco-1);
+  background: var(--cor-fundo);
+  box-shadow: inset 0 0 0 2px var(--cor-texto);
+  transform: rotate(-5deg);
+}
+
+.carta-moldura img {
+  display: block;
+  width: 240px;
+  max-width: 100%;
+  height: auto;
+}
+
+.carta-moldura__legenda {
+  margin-top: var(--espaco-6);
+  padding: var(--espaco-1) var(--espaco-2);
+  background: var(--cor-fundo);
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  color: var(--cor-texto);
+}
+
+/* Bastidor em validação: ficha com tarjas. O texto continua legível; a tarja marca o que falta. */
+.capitulo__corpo .bloqueio {
+  position: relative;
+  margin-top: var(--espaco-6);
+  padding: var(--espaco-6);
+  background: var(--cor-superficie-escura);
+  box-shadow: inset 0 0 0 1px var(--cor-superficie-alta);
+}
+
+.capitulo__corpo .bloqueio__estado {
+  margin: 0 0 var(--espaco-4);
+}
+
+.capitulo__corpo .bloqueio__estado,
+.bloqueio__estado {
+  display: inline-block;
+  padding: var(--espaco-1) var(--espaco-2);
+  border: 2px solid currentColor;
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  color: var(--cor-destaque);
+  transform: rotate(-3deg);
+}
+
+.capitulo__corpo .bloqueio li {
+  display: grid;
+  grid-template-columns: auto minmax(2rem, 1fr);
+  align-items: center;
+  gap: var(--espaco-3);
+  color: var(--cor-texto);
+}
+
+.capitulo__corpo .bloqueio li::after {
+  content: "";
+  height: 10px;
+  background-color: var(--cor-superficie-alta);
+  -webkit-mask: var(--textura-hachura) 0 0 / 10px 10px repeat;
+  mask: var(--textura-hachura) 0 0 / 10px 10px repeat;
+}
+
+/* ---------- Telas de bloqueio ---------- */
+
+.bloqueio {
+  position: relative;
+  isolation: isolate;
+  margin-top: var(--espaco-8);
+  padding: var(--espaco-6);
+  clip-path: var(--recorte);
+}
+
+.bloqueio--proxima {
+  padding-top: calc(var(--espaco-6) + var(--espaco-4));
+  background: var(--cor-superficie-alta);
+}
+
+.bloqueio--proxima::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--espaco-4);
+  background-color: var(--cor-destaque);
+  -webkit-mask: var(--textura-movimento) center / 100% 100% no-repeat;
+  mask: var(--textura-movimento) center / 100% 100% no-repeat;
+}
+
+.bloqueio--futura {
+  background: var(--cor-fundo);
+  box-shadow: inset 0 0 0 1px var(--cor-superficie-alta);
+}
+
+.bloqueio--futura::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background-color: var(--cor-superficie-alta);
+  -webkit-mask: var(--textura-hachura) 0 0 / 10px 10px repeat;
+  mask: var(--textura-hachura) 0 0 / 10px 10px repeat;
+  opacity: 0.6;
+}
+
+/* Nas telas de bloqueio o estado vem depois do título. */
+.bloqueio > .bloqueio__estado {
+  margin-top: var(--espaco-3);
+}
+
+.bloqueio--proxima .bloqueio__estado {
+  border-color: var(--cor-destaque);
+  background: var(--cor-destaque);
+  color: var(--cor-fundo);
+  transform: none;
+}
+
+.bloqueio--futura .bloqueio__estado {
+  color: var(--cor-texto-atenuado);
+}
+
+.bloqueio__titulo {
+  margin: 0;
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 1.75rem;
+  line-height: 1.1;
+}
+
+.bloqueio__texto {
+  margin: var(--espaco-3) 0 0;
+  line-height: 1.5;
+  color: var(--cor-texto-secundario);
+}
+
+.bloqueio__passos {
+  display: grid;
+  gap: var(--espaco-3);
+  margin: var(--espaco-4) 0 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: passo;
+}
+
+.bloqueio__passos-item {
+  counter-increment: passo;
+  display: grid;
+  grid-template-columns: var(--espaco-8) minmax(0, 1fr);
+  align-items: center;
+  gap: var(--espaco-3);
+  min-height: var(--espaco-8);
+}
+
+.bloqueio__passos-item::before {
+  content: counter(passo, decimal-leading-zero);
+  display: grid;
+  place-items: center;
+  height: var(--espaco-8);
+  background: var(--cor-fundo);
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 0.875rem;
+  color: var(--cor-destaque);
+  clip-path: var(--recorte-pequeno);
+}
+
+.bloqueio__destino {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  column-gap: var(--espaco-3);
+  min-height: 44px;
+  margin-top: var(--espaco-4);
+  padding: var(--espaco-4);
+  background: var(--cor-superficie);
+  text-decoration: none;
+  clip-path: var(--recorte);
+}
+
+.bloqueio__destino-rotulo {
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--cor-texto-secundario);
+}
+
+.bloqueio__destino-nome {
+  grid-column: 1;
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 1.125rem;
+  line-height: 1.25;
+}
+
+.bloqueio__destino .seta {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.bloqueio__destino:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 3px var(--cor-texto);
+}
+
+.bloqueio__progresso {
+  margin-top: var(--espaco-6);
+  padding-top: var(--espaco-4);
+  border-top: 1px solid var(--cor-apagado);
+}
+
+.bloqueio__progresso-linha {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--espaco-3);
+  margin: 0 0 var(--espaco-3);
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--cor-texto-secundario);
+}
+
+.bloqueio__progresso-numero {
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 0.85;
+  letter-spacing: -0.02em;
+  color: var(--cor-texto);
+}
+
+.bloqueio__barra {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: var(--espaco-1);
+}
+
+.bloqueio__celula {
+  display: grid;
+  grid-template-rows: var(--espaco-3) auto;
+  gap: var(--espaco-2);
+}
+
+.bloqueio__segmento {
+  align-self: end;
+  height: var(--espaco-1);
+  background: var(--cor-apagado);
+}
+
+.bloqueio__celula--cheia .bloqueio__segmento {
+  height: var(--espaco-3);
+  background: var(--cor-destaque);
+  clip-path: var(--recorte-pequeno);
+}
+
+.bloqueio__numero {
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--cor-texto-atenuado);
+}
+
+.bloqueio__celula--cheia .bloqueio__numero {
+  color: var(--cor-texto);
+}
+
+@media (hover: hover) {
+  .bloqueio__destino:hover {
+    background: var(--cor-superficie-alta);
+  }
+}
+
+/* ---------- 600px+: respiro e figuras maiores ---------- */
+
+@media (min-width: 600px) {
+  .dossie-capa__numeral {
+    font-size: 13rem;
+  }
+
+  .capitulo {
+    grid-template-columns: 6rem minmax(0, 1fr);
+  }
+
+  .capitulo__numero {
+    font-size: 4.25rem;
+  }
+
+  .carta-moldura {
+    margin-left: 0;
+    margin-right: 0;
+    clip-path: var(--recorte);
+  }
+}
+
+/* ---------- 900px+: dossiê com coluna de margem, coluna de leitura e coluna de figura ---------- */
+
+@media (min-width: 900px) {
+  :root {
+    --gutter: var(--espaco-8);
+  }
+
+  .pagina-estacao main {
+    padding-top: var(--espaco-4);
+  }
+
+  .dossie-capa {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    column-gap: var(--espaco-12);
+    align-items: end;
+    padding-top: var(--espaco-16);
+  }
+
+  .dossie-capa__numeral {
+    top: var(--espaco-4);
+    right: auto;
+    left: calc(-1 * var(--espaco-2));
+    font-size: 17rem;
+  }
+
+  .dossie-capa--bloqueada {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .dossie-capa__texto {
+    padding-top: 9rem;
+  }
+
+  .dossie-capa--bloqueada .dossie-capa__texto {
+    padding-top: 10rem;
+  }
+
+  .dossie-capa__arte {
+    margin-top: 0;
+  }
+
+  .briefing,
+  .capitulo,
+  .linha-tempo {
+    display: grid;
+    grid-template-columns: 11rem minmax(0, 42rem) minmax(0, 1fr);
+    column-gap: var(--espaco-8);
+    align-items: start;
+    margin-top: var(--espaco-16);
+  }
+
+  .briefing > *,
+  .capitulo > *,
+  .linha-tempo > * {
+    grid-column: 2;
+  }
+
+  /* Rótulo de margem: na coluna da esquerda, alinhado ao título. */
+  .briefing > .terminal-rotulo,
+  .linha-tempo > .terminal-rotulo,
+  .capitulo > .capitulo__rotulo {
+    display: block;
+    position: static;
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    padding: var(--espaco-1) 0 0;
+    background: none;
+  }
+
+  .capitulo .capitulo__rotulo {
+    font-size: 0.75rem;
+  }
+
+  .capitulo__numero {
+    font-size: 5.5rem;
+  }
+
+  .capitulo__titulo {
+    grid-row: 1;
+    font-size: 2rem;
+  }
+
+  .capitulo__corpo {
+    grid-row: 2;
+  }
+
+  .briefing__titulo {
+    font-size: 2.5rem;
+  }
+
+  .briefing p:not(.terminal-rotulo),
+  .capitulo__corpo p,
+  .capitulo__corpo ul {
+    max-width: 62ch;
+  }
+
+  .briefing > p:not(.terminal-rotulo):first-of-type,
+  .briefing__corpo > p:first-of-type {
+    font-size: 1.375rem;
+  }
+
+  /* Figuras e escala avançam sobre a terceira coluna. */
+  .figura,
+  .escala {
+    grid-column: 2 / -1;
+    max-width: none;
+  }
+
+  .linha-tempo__lista--etapas {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    align-items: end;
+    grid-column: 2 / -1;
+    gap: var(--espaco-2);
+  }
+
+  .linha-tempo__lista--etapas .linha-tempo__item {
+    grid-template-columns: minmax(0, 1fr);
+    align-content: end;
+    align-items: start;
+    min-height: calc(6rem + var(--degrau, 0) * 1.6px);
+    margin-left: 0;
+    padding: var(--espaco-3);
+  }
+
+  .conexao {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    column-gap: var(--espaco-12);
+    margin-top: var(--espaco-16);
+    padding: var(--espaco-12) var(--espaco-8) var(--espaco-8);
+  }
+
+  .conexao > * {
+    grid-column: 1;
+  }
+
+  .conexao__titulo {
+    font-size: 2.5rem;
+  }
+
+  .conexao__acao {
+    grid-column: 2;
+    grid-row: 1 / span 4;
+    align-self: end;
+    justify-self: end;
+    width: min(100%, 18rem);
+  }
+
+  /* Composição própria por estação. */
+  [data-estacao="2"] .dossie-capa {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  [data-estacao="2"] .dossie-capa__texto {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    column-gap: var(--espaco-12);
+    align-items: end;
+  }
+
+  [data-estacao="2"] .dossie-ficha {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    align-self: end;
+  }
+
+  [data-estacao="2"] .dossie-capa__arte {
+    margin-top: var(--espaco-8);
+  }
+
+
+  [data-estacao="3"] .dossie-capa {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  }
+
+  [data-estacao="3"] .dossie-capa__arte {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  [data-estacao="3"] .dossie-capa__numeral {
+    left: auto;
+    right: calc(-1 * var(--espaco-2));
+  }
+
+  [data-estacao="4"] .briefing__corpo {
+    display: grid;
+    grid-template-columns: minmax(0, 20rem) minmax(0, 1fr);
+    column-gap: var(--espaco-8);
+    align-items: center;
+    grid-column: 2 / -1;
+  }
+
+  [data-estacao="4"] .carta-moldura {
+    grid-row: 1 / span 3;
+    margin: var(--espaco-6) 0 0;
+  }
+
+  .bloqueio {
+    max-width: 48rem;
+  }
+}
+
+/* ---------- 1100px+: a rota acompanha a leitura na coluna da direita ---------- */
+
+.dossie-rota {
+  display: none;
+}
+
+@media (min-width: 1100px) {
+  .pagina-estacao--desbloqueada #conteudo-estacao {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 9rem;
+    column-gap: var(--espaco-8);
+  }
+
+  .pagina-estacao--desbloqueada #conteudo-estacao > * {
+    grid-column: 1;
+  }
+
+  .pagina-estacao--desbloqueada #conteudo-estacao > .dossie-rota {
+    display: block;
+    grid-column: 2;
+    grid-row: 1 / span 30;
+    align-self: start;
+    position: sticky;
+    top: var(--espaco-8);
+    margin-top: 10rem;
+    /* Campo sólido: a explosão da Estação 4 nunca passa por trás dos rótulos do trilho. */
+    padding: var(--espaco-4);
+    background: var(--cor-fundo);
+    box-shadow: inset 0 0 0 1px var(--cor-superficie-alta);
+  }
+
+  .dossie-rota__titulo {
+    margin: 0 0 var(--espaco-4);
+    font-family: var(--fonte-titulo);
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.16em;
+    color: var(--cor-texto-atenuado);
+  }
+
+  .dossie-rota__lista {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .dossie-rota__parada {
+    position: relative;
+    padding: 0 0 var(--espaco-8) var(--espaco-6);
+    font-family: var(--fonte-titulo);
+    font-weight: 600;
+    font-size: 0.75rem;
+    line-height: 1.3;
+    letter-spacing: 0.06em;
+    color: var(--cor-texto-atenuado);
+  }
+
+  .dossie-rota__numero {
+    display: block;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--cor-texto-secundario);
+  }
+
+  /* Nó da parada. */
+  .dossie-rota__parada::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 3px;
+    width: 10px;
+    height: 10px;
+    background: var(--cor-fundo);
+    box-shadow: inset 0 0 0 1.5px var(--cor-apagado);
+  }
+
+  /* Trecho até a próxima parada: roxo sólido no que já foi percorrido, tracejado no resto. */
+  .dossie-rota__parada::after {
+    content: "";
+    position: absolute;
+    left: 4px;
+    top: 17px;
+    bottom: 0;
+    border-left: 2px dashed var(--cor-apagado);
+  }
+
+  .dossie-rota__parada--feita::before {
+    background: var(--cor-destaque);
+    box-shadow: none;
+  }
+
+  .dossie-rota__parada--feita::after {
+    border-left: 2px solid var(--cor-destaque);
+  }
+
+  .dossie-rota__parada--atual {
+    color: var(--cor-texto);
+  }
+
+  .dossie-rota__parada--atual .dossie-rota__numero {
+    font-size: 1.75rem;
+    line-height: 1;
+    color: var(--cor-destaque);
+  }
+
+  .dossie-rota__parada--atual::before {
+    left: -3px;
+    top: 4px;
+    width: 16px;
+    height: 16px;
+    background: var(--cor-destaque);
+    box-shadow: 0 0 0 3px var(--cor-fundo), 0 0 0 5px var(--cor-destaque);
+  }
+
+  .dossie-rota__parada--atual::after {
+    top: 26px;
+    border-left-color: var(--cor-destaque);
+  }
+
+  .dossie-rota__parada--fim {
+    padding-bottom: 0;
+  }
+
+  .dossie-rota__parada--fim::before {
+    width: 12px;
+    height: 16px;
+    top: 0;
+    transform: rotate(-8deg);
+  }
+
+  .dossie-rota__parada--fim::after {
+    content: none;
+  }
+}

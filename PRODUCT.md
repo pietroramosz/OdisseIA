@@ -48,12 +48,12 @@ A experiência não é "um site sobre a feira" nem "um jogo com um site de apoio
 - Tipografia: **Chakra Petch** SemiBold(600)/Bold(700), local em `assets/fonts/` (sem CDN), para títulos/rótulos/números; texto corrido em fonte de sistema. Inter guardada na pasta como alternativa futura, não carregada.
 - Motivo de forma único e repetido: cantos cortados em diagonal (cards, segmentos de barra).
 - Proibido: glow generalizado, gradiente excessivo, glassmorphism, emoji como ícone, hover como requisito, texto pequeno em contorno, fonte nova sem decisão explícita.
-- Exceção deliberada: a página de **Conclusão** é o único momento autorizado a ampliar cor/efeitos como recompensa visual, ainda dentro da paleta e das regras de contraste/movimento.
+- Energia de mangá crescente (DEC-018): linhas de velocidade, retícula e carimbos aparecem pouco na abertura, como faixa de movimento na próxima estação, como explosão na Estação 4 e na densidade máxima na **Conclusão**, que continua sendo o pico visual e o único lugar com sombra suave. Tudo dentro da paleta e das regras de contraste e movimento.
 
 ## Evidence on Hand
 
 - Documentação viva do projeto é fonte de verdade e deve ser tratada como tal: `README.md`, `PROJECT.md`, `DECISIONS.md`, `DESIGN.md` (sistema de design; substitui o antigo `docs/ESTILO.md`), `AI-WORKFLOW.md`, `DEVLOG.md`.
-- Decisões numeradas (`DEC-001` a `DEC-016`) registram o histórico de escolhas de produto, arquitetura e visual — qualquer mudança que contradiga uma DEC existente exige decisão explícita, não apenas uma preferência de implementação.
+- Decisões numeradas (`DEC-001` a `DEC-018`) registram o histórico de escolhas de produto, arquitetura e visual — qualquer mudança que contradiga uma DEC existente exige decisão explícita, não apenas uma preferência de implementação.
 - Nenhuma mecânica, carta, regra ou dado do X-BOT deve ser inventado ou documentado pelo site além do que realmente existir na versão final do jogo (DEC-007).
 
 ## Product Principles

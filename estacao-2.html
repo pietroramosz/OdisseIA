@@ -5,40 +5,73 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>OdisseIA — Estação 2</title>
   <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/paginas/estacao.css">
 </head>
 <body class="pagina-estacao" data-estacao="2">
-  <!-- Pictograma da estação: controle de videogame, só linhas retas e quadrados. Decorativo. -->
-  <svg class="sprite" width="0" height="0" aria-hidden="true" focusable="false">
-    <symbol id="pictograma" viewBox="0 0 48 48">
-      <path d="M4 24L11 13H37L44 24V35L39 40H34L29 33H19L14 40H9L4 35Z"/>
-      <path d="M14 21H22M18 17V25"/>
-      <rect x="30" y="19" width="4" height="4" fill="currentColor" stroke="none"/>
-      <rect x="36" y="24" width="4" height="4" fill="currentColor" stroke="none"/>
-    </symbol>
-  </svg>
   <main>
     <!-- Conteúdo da estação: só aparece quando a estação está desbloqueada (app.js). -->
     <div id="conteudo-estacao" hidden>
-      <header class="terminal-hero">
-        <a class="terminal-voltar" href="hub.html"><span aria-hidden="true">←</span> Voltar ao Hub</a>
-        <div class="terminal-hero__painel">
-          <p class="terminal-hero__rotulo">ESTAÇÃO <span class="terminal-hero__numero">02</span> / 04</p>
+      <a class="terminal-voltar" href="hub.html"><span class="seta seta--voltar" aria-hidden="true"></span> Voltar ao Hub</a>
+      <aside class="dossie-rota" aria-hidden="true">
+        <p class="dossie-rota__titulo">ROTA</p>
+        <ol class="dossie-rota__lista">
+          <li class="dossie-rota__parada dossie-rota__parada--feita"><span class="dossie-rota__numero">01</span> ATÉ 1999</li>
+          <li class="dossie-rota__parada dossie-rota__parada--atual"><span class="dossie-rota__numero">02</span> 2001 → HOJE</li>
+          <li class="dossie-rota__parada"><span class="dossie-rota__numero">03</span> IA NOS JOGOS</li>
+          <li class="dossie-rota__parada"><span class="dossie-rota__numero">04</span> X-BOT</li>
+          <li class="dossie-rota__parada dossie-rota__parada--fim">CONCLUSÃO</li>
+        </ol>
+      </aside>
+      <header class="dossie-capa">
+        <span class="numeral-vazado dossie-capa__numeral" aria-hidden="true">02</span>
+        <div class="dossie-capa__texto">
           <h1 class="titulo-estacao">Evolução dos jogos de 2001 até hoje</h1>
-          <svg class="terminal-hero__pict" aria-hidden="true" focusable="false"><use href="#pictograma"/></svg>
+          <p class="terminal-hero__rotulo">ESTAÇÃO <span class="terminal-hero__numero">02</span> / 04</p>
+          <dl class="dossie-ficha">
+            <div class="dossie-ficha__item"><dt>Período</dt><dd>2001–hoje</dd></div>
+            <div class="dossie-ficha__item"><dt>Capítulos</dt><dd>04</dd></div>
+            <div class="dossie-ficha__item"><dt>Marcos</dt><dd>12</dd></div>
+          </dl>
+        </div>
+        <div class="dossie-capa__arte" aria-hidden="true">
+          <svg class="arte" viewBox="0 0 640 200" focusable="false">
+            <path class="arte__tela" d="M14 6H626L636 16V184L626 194H14L4 184V16Z"/>
+            <path class="arte__ligacao" d="M320 100L218 42M320 100L214 150M320 100L422 38M320 100L430 158M320 100L320 26M118 70L218 42M118 70L214 150M118 70L40 120M520 60L422 38M520 60L600 120M520 60L430 158M70 170L214 150M40 120L70 170M560 170L430 158M560 170L600 120"/>
+            <path class="arte__ligacao arte__ligacao--ativa" d="M320 100L258 176M320 100L384 178M320 100L450 98M218 42L320 26L422 38M450 98L520 60M258 176L118 70"/>
+            <path class="arte__controle" d="M286 88L294 78H346L354 88V112L348 118H336L330 110H310L304 118H292L286 112Z"/>
+            <path class="arte__traco-fino" d="M300 96H312M306 90V102"/>
+            <rect class="arte__solido" x="330" y="92" width="5" height="5"/>
+            <rect class="arte__solido" x="338" y="98" width="5" height="5"/>
+            <rect class="arte__no" x="213" y="37" width="10" height="10"/>
+            <rect class="arte__no" x="209" y="145" width="10" height="10"/>
+            <rect class="arte__no" x="417" y="33" width="10" height="10"/>
+            <rect class="arte__no" x="425" y="153" width="10" height="10"/>
+            <rect class="arte__no" x="315" y="21" width="10" height="10"/>
+            <rect class="arte__no" x="113" y="65" width="10" height="10"/>
+            <rect class="arte__no" x="35" y="115" width="10" height="10"/>
+            <rect class="arte__no" x="65" y="165" width="10" height="10"/>
+            <rect class="arte__no" x="595" y="115" width="10" height="10"/>
+            <rect class="arte__no" x="555" y="165" width="10" height="10"/>
+            <rect class="arte__no arte__no--ativo" x="515" y="55" width="10" height="10"/>
+            <rect class="arte__no arte__no--ativo" x="253" y="171" width="10" height="10"/>
+            <rect class="arte__no arte__no--ativo" x="379" y="173" width="10" height="10"/>
+            <rect class="arte__no arte__no--ativo" x="445" y="93" width="10" height="10"/>
+            <path class="arte__sinal" d="M534 42L540 58L534 74M542 34L550 58L542 82"/>
+          </svg>
         </div>
       </header>
 
       <section class="briefing">
-        <p class="terminal-rotulo">BRIEFING</p>
         <h2 class="briefing__titulo">A era dos jogos conectados</h2>
+        <p class="terminal-rotulo">BRIEFING</p>
         <p>No começo dos anos 2000, uma nova fase dos videogames estava começando.</p>
         <p>Os consoles ficaram mais poderosos, os jogos passaram a apresentar mundos maiores e histórias mais elaboradas, a internet aproximou jogadores e novas formas de assistir, competir e interagir começaram a surgir.</p>
         <p>De 2001 até hoje, os videogames deixaram de ser apenas experiências individuais e passaram a fazer parte de grandes comunidades conectadas.</p>
       </section>
 
       <section class="capitulo">
-        <p class="terminal-rotulo capitulo__rotulo">CAPÍTULO <span class="capitulo__numero">01</span></p>
         <h2 class="capitulo__titulo">2001–2007: uma nova geração</h2>
+        <p class="terminal-rotulo capitulo__rotulo">CAPÍTULO <span class="capitulo__numero">01</span></p>
         <div class="capitulo__corpo">
           <p>A virada para essa nova geração começou com o <strong>PlayStation 2</strong>, lançado em 2000, e se consolidou com <strong>Xbox, Nintendo GameCube e Game Boy Advance</strong>, a partir de 2001.</p>
           <p>Nesse período, gráficos, controles, física e narrativas continuaram evoluindo.</p>
@@ -49,8 +82,8 @@
       </section>
 
       <section class="capitulo">
-        <p class="terminal-rotulo capitulo__rotulo">CAPÍTULO <span class="capitulo__numero">02</span></p>
         <h2 class="capitulo__titulo">2008–2013: internet, comunidades e transmissões</h2>
+        <p class="terminal-rotulo capitulo__rotulo">CAPÍTULO <span class="capitulo__numero">02</span></p>
         <div class="capitulo__corpo">
           <p>A internet passou a influenciar cada vez mais o sucesso e a evolução dos jogos.</p>
           <p><strong>GTA IV</strong> chamou atenção pelos sistemas de física. <strong>Minecraft</strong> começou como um projeto independente e cresceu junto de uma comunidade que compartilhava experiências e acompanhava suas atualizações.</p>
@@ -61,8 +94,8 @@
       </section>
 
       <section class="capitulo">
-        <p class="terminal-rotulo capitulo__rotulo">CAPÍTULO <span class="capitulo__numero">03</span></p>
         <h2 class="capitulo__titulo">2014–2019: mundos maiores e competição online</h2>
+        <p class="terminal-rotulo capitulo__rotulo">CAPÍTULO <span class="capitulo__numero">03</span></p>
         <div class="capitulo__corpo">
           <p>Os mundos abertos ficaram maiores, mais detalhados e mais conectados.</p>
           <p><strong>GTA V</strong> se destacou tanto pelo mundo aberto quanto pelo modo online.</p>
@@ -73,8 +106,8 @@
       </section>
 
       <section class="capitulo">
-        <p class="terminal-rotulo capitulo__rotulo">CAPÍTULO <span class="capitulo__numero">04</span></p>
         <h2 class="capitulo__titulo">2020 até hoje: jogar também é se conectar</h2>
+        <p class="terminal-rotulo capitulo__rotulo">CAPÍTULO <span class="capitulo__numero">04</span></p>
         <div class="capitulo__corpo">
           <p>Com o lançamento do <strong>PlayStation 5</strong> e do <strong>Xbox Series X|S</strong>, uma nova geração de consoles começou.</p>
           <p>Os SSDs ajudaram a reduzir os tempos de carregamento e aumentaram a velocidade com que os jogos conseguem acessar seus dados.</p>
@@ -87,8 +120,13 @@
       </section>
 
       <section class="linha-tempo">
-        <p class="terminal-rotulo">LINHA DO TEMPO</p>
         <h2 class="linha-tempo__titulo">Alguns marcos</h2>
+        <p class="terminal-rotulo">LINHA DO TEMPO</p>
+        <div class="escala" aria-hidden="true" style="--inicio: 2000; --fim: 2026">
+          <div class="escala__eixo"><span class="escala__marco" style="--ano: 2001"></span><span class="escala__marco" style="--ano: 2004"></span><span class="escala__marco" style="--ano: 2005"></span><span class="escala__marco" style="--ano: 2008"></span><span class="escala__marco" style="--ano: 2009"></span><span class="escala__marco" style="--ano: 2010"></span><span class="escala__marco" style="--ano: 2011"></span><span class="escala__marco" style="--ano: 2012"></span><span class="escala__marco" style="--ano: 2013"></span><span class="escala__marco" style="--ano: 2017"></span><span class="escala__marco" style="--ano: 2020"></span><span class="escala__marco" style="--ano: 2024; --ate: 2026"></span></div>
+          <div class="escala__eras"><span class="escala__era" style="--de: 2001; --ate: 2008">01–07</span><span class="escala__era" style="--de: 2008; --ate: 2014">08–13</span><span class="escala__era" style="--de: 2014; --ate: 2020">14–19</span><span class="escala__era" style="--de: 2020; --ate: 2026">20–hoje</span></div>
+          <div class="escala__decadas"><span style="--ano: 2000">2000</span><span style="--ano: 2010">2010</span><span style="--ano: 2020">2020</span><span style="--ano: 2026">2026</span></div>
+        </div>
         <ol class="linha-tempo__lista">
           <li class="linha-tempo__item" data-era="2001–2007"><strong class="linha-tempo__marca">2001</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">Xbox, GameCube e Game Boy Advance</span></li>
           <li class="linha-tempo__item"><strong class="linha-tempo__marca">2004</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">GTA San Andreas e World of Warcraft</span></li>
@@ -106,8 +144,8 @@
       </section>
 
       <section class="conexao">
-        <p class="terminal-rotulo">PRÓXIMA CONEXÃO</p>
         <h2 class="conexao__titulo">E depois?</h2>
+        <p class="terminal-rotulo">PRÓXIMA CONEXÃO</p>
         <p>Os videogames ficaram maiores, mais conectados e mais complexos.</p>
         <p>Mas enquanto gráficos, internet e hardware evoluíam, outra tecnologia também estava mudando silenciosamente a maneira como os jogos funcionavam.</p>
         <p>Na próxima estação, você vai conhecer a evolução da <strong>inteligência artificial nos videogames</strong>.</p>
@@ -117,12 +155,12 @@
 
     <!-- Mensagem de bloqueio: preenchida por app.js quando a estação é a próxima ou futura. -->
     <div id="estado-bloqueado" hidden>
-      <header class="terminal-hero terminal-hero--bloqueada">
-        <a class="terminal-voltar" href="hub.html"><span aria-hidden="true">←</span> Voltar ao Hub</a>
-        <div class="terminal-hero__painel">
-          <p class="terminal-hero__rotulo">ESTAÇÃO <span class="terminal-hero__numero">02</span> / 04</p>
+      <a class="terminal-voltar" href="hub.html"><span class="seta seta--voltar" aria-hidden="true"></span> Voltar ao Hub</a>
+      <header class="dossie-capa dossie-capa--bloqueada">
+        <span class="numeral-vazado dossie-capa__numeral" aria-hidden="true">02</span>
+        <div class="dossie-capa__texto">
           <h1 class="titulo-estacao">Evolução dos jogos de 2001 até hoje</h1>
-          <svg class="terminal-hero__pict" aria-hidden="true" focusable="false"><use href="#pictograma"/></svg>
+          <p class="terminal-hero__rotulo">ESTAÇÃO <span class="terminal-hero__numero">02</span> / 04</p>
         </div>
       </header>
       <section id="bloqueio-painel" class="bloqueio"></section>

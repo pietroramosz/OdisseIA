@@ -412,7 +412,7 @@ Esta seção guarda apenas trabalho concreto ainda aberto. Ela não substitui o 
 - [ ] Configurar os links finais para o X-BOT quando o grupo confirmar um endereço/build utilizável.
 - [ ] Decidir se a conclusão terá link para portfólio/PDF e confirmar o arquivo/endereço antes de adicioná-lo.
 - [ ] Preencher `gameUrl` quando houver endereço utilizável; decidir `downloadUrl` apenas se houver versão para download.
-- [ ] Adicionar no Hub um caminho claro de volta para a Visão geral (`index.html`).
+- [x] Adicionar no Hub um caminho claro de volta para a Visão geral (`index.html`).
 - [ ] Definir hospedagem e URL final antes de gerar ou imprimir os QR Codes definitivos.
 - [ ] Testar QR real pela câmera e abertura por WhatsApp/navegador interno.
 - [ ] Ampliar ou confirmar a orientação de “mesmo navegador”: hoje o Index já avisa, mas o problema ainda pode aparecer durante o fluxo de QR.

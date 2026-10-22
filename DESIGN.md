@@ -1,6 +1,6 @@
 ---
 name: OdisseIA
-description: Terminal editorial cyberpunk para a jornada física+digital de uma feira escolar
+description: Arquivo de missão com energia de mangá para a jornada física+digital de uma feira escolar
 colors:
   void-black: "#0c0c10"
   graphite-surface: "#16161d"
@@ -15,21 +15,21 @@ colors:
 typography:
   display:
     fontFamily: "Chakra Petch, system-ui, sans-serif"
-    fontSize: "2.75rem" # valor base (mobile); a progressão real por breakpoint está em "Typography > Hierarchy"
+    fontSize: "4.5rem" # valor base (mobile) da palavra-marca; a escala completa está em "Typography > Hierarchy"
     fontWeight: 700
-    lineHeight: 1.05
-    letterSpacing: "0.02em"
+    lineHeight: 0.84
+    letterSpacing: "-0.04em"
   headline:
     fontFamily: "Chakra Petch, system-ui, sans-serif"
-    fontSize: "1.75rem" # valor base (mobile); a progressão real por breakpoint está em "Typography > Hierarchy"
+    fontSize: "2.5rem" # valor base (mobile) do título de estação; a escala completa está em "Typography > Hierarchy"
     fontWeight: 700
-    lineHeight: 1.2
-    letterSpacing: "normal"
+    lineHeight: 0.95
+    letterSpacing: "-0.02em"
   title:
     fontFamily: "Chakra Petch, system-ui, sans-serif"
-    fontSize: "1.25rem"
-    fontWeight: 600
-    lineHeight: 1.3
+    fontSize: "1.625rem"
+    fontWeight: 700
+    lineHeight: 1.15
     letterSpacing: "normal"
   body:
     fontFamily: "system-ui, sans-serif"
@@ -41,7 +41,7 @@ typography:
     fontFamily: "Chakra Petch, system-ui, sans-serif"
     fontSize: "0.75rem"
     fontWeight: 600
-    lineHeight: 1.4
+    lineHeight: 1.3
     letterSpacing: "0.08em"
 spacing:
   "1": "4px"
@@ -51,32 +51,34 @@ spacing:
   "6": "24px"
   "8": "32px"
   "12": "48px"
+  "16": "64px"
+  "24": "96px"
 components:
   button-primary:
     backgroundColor: "{colors.cyber-purple}"
     textColor: "{colors.void-black}"
-    typography: "{typography.title}"
-    padding: "12px 16px"
-    height: "44px"
+    typography: "{typography.label}"
+    padding: "12px 24px"
+    height: "48px"
   button-secondary:
     backgroundColor: "{colors.graphite-surface-elevated}"
     textColor: "{colors.signal-white}"
-    typography: "{typography.title}"
-    padding: "12px 16px"
-    height: "44px"
+    typography: "{typography.label}"
+    padding: "12px 24px"
+    height: "48px"
   card-default:
     backgroundColor: "{colors.graphite-surface}"
     textColor: "{colors.signal-white}"
-    padding: "16px 32px 16px 16px"
-  card-elevated:
+    padding: "16px 24px 16px 16px"
+  card-next:
     backgroundColor: "{colors.graphite-surface-elevated}"
     textColor: "{colors.signal-white}"
-    padding: "16px 24px 24px"
-  card-dormant:
+    padding: "32px 24px 16px 16px"
+  card-locked:
     backgroundColor: "{colors.void-black}"
     textColor: "{colors.signal-white-muted}"
-    padding: "24px"
-  chip-label:
+    padding: "16px 24px 16px 16px"
+  chip-state:
     backgroundColor: "{colors.cyber-purple}"
     textColor: "{colors.void-black}"
     typography: "{typography.label}"
@@ -87,155 +89,212 @@ components:
 
 ## Overview
 
-**Creative North Star: "O Terminal Editorial"**
+**Creative North Star: "O Arquivo de Missão"**
 
-OdisseIA lê como um terminal técnico que decidiu contar uma história: a casca é toda recortes diagonais, rótulos numerados em caixa alta e hierarquia de grade — mas o miolo de cada tela é texto corrido, respirado, feito para ser lido em pé, num celular, em pé entre estações de uma feira. É cyberpunk sem neon: a estética vem da estrutura (recorte, contraste, numeração) e não de efeito (glow, gradiente, vidro). O roxo é raro e funcional — ele marca "isto é o próximo passo" ou "isto foi conquistado", nunca decoração.
+O OdisseIA é um arquivo de missão aberto página a página. Um traçado esquemático liga as quatro estações ao X-BOT. Na abertura ele é a rota inteira; no Hub, a posição do visitante; nas estações, um trilho na margem; na Conclusão, a rota fechada com quatro carimbos. Sobre esse esqueleto técnico, a energia de mangá do X-BOT (linhas de velocidade, retícula, silhuetas, carimbos) irrompe nos pontos de conquista e aumenta conforme a jornada avança: um pouco na abertura, uma faixa de movimento na próxima estação, uma explosão na Estação 4, a densidade máxima na Conclusão.
 
-O sistema não finge ser o HUD de um jogo. Ele é a documentação de campo dessa jornada: mais espaço, leitura mais fácil, texto mais longo do que o X-BOT teria dentro do próprio jogo — a mesma linguagem visual, numa chave mais limpa (DEC-011, DEC-013).
+Cada página tem composição própria: palavra-marca monumental na abertura, rota no Hub, um diagrama do assunto em cada estação, o placar 4/4 na Conclusão. Todas falam a mesma gramática: numerais gigantes vazados, linhas esquemáticas de nós quadrados, recorte diagonal e um único roxo.
 
-A única exceção deliberada é a Conclusão (`final.html`): o único momento em que o roxo e o movimento podem se abrir como recompensa visual, ainda dentro da mesma paleta e das mesmas regras de contraste.
+A direção está registrada como contrato em `.impeccable/surfaces/index-html.md` e como decisão em DEC-018.
 
 **Key Characteristics:**
-- Recorte diagonal como única assinatura de forma, repetida em cards, chips, botões e nós de trilho.
-- Hierarquia por numeração (`01 / 04`), não por decoração: rótulos pequenos, caixa alta, com `letter-spacing` aberto.
-- Roxo como "tinta rara": destaque, nunca cor de texto corrido.
-- Estados de acesso (bloqueada / próxima / desbloqueada) sempre legíveis por texto e tamanho, nunca só por cor.
-- Fundo quase preto com grade sutil em CSS, nunca atrás de texto de leitura.
+- Escala tipográfica de contraste extremo: palavra-marca e placar monumentais, texto de leitura em fonte de sistema.
+- Numerais vazados (só contorno) como planos de fundo: identificam sem competir com o título.
+- Linhas esquemáticas (traço de 1,5–2px, nós quadrados, tracejado = ainda não percorrido, sólido roxo = percorrido).
+- Texturas de mangá como máscaras SVG coloridas pelos tokens, nunca como imagem com cor própria.
+- O título sempre abre a seção. Estado e rótulo vêm depois, como selo ou anotação de margem.
 
 ## Colors
 
-Paleta cinza-grafite quase monocromática com um único acento roxo reservado para estado e progresso.
+Fundo quase preto, planos de grafite, branco-sinal para leitura e um único acento roxo. A paleta não mudou nesta direção. O que mudou foi o papel do roxo (ver Named Rules).
 
 ### Primary
-- **Cyber Purple** (`#cd5efa`, provisório — aguarda confirmação com a arte final do X-BOT): destaque, estado "próxima estação"/"desbloqueado", bordas internas de ênfase (`box-shadow: inset`), barra de progresso preenchida, chips de rótulo, moldura e carta na Conclusão.
+- **Cyber Purple** (`#cd5efa`, provisório até a confirmação com a arte final do X-BOT): tinta de estado (próxima estação, validada, progresso, selos e carimbos) e tinta de ilustração (linhas de velocidade, retícula, rota percorrida, nós ativos dos diagramas). Como letra, só em display: o "IA" da palavra-marca, o "4" do placar e os numerais de estação.
 
 ### Neutral
-- **Void Black** (`#0c0c10`): fundo base de toda a página; também cor de texto sobre chips roxos (alto contraste sobre `cyber-purple`).
-- **Graphite Surface** (`#16161d`): painel padrão (cards, cartões, linha do tempo) sobre o fundo.
-- **Graphite Surface Dim** (`#111116`): painel de estado "bloqueada"/resultado negativo — mais escuro que a superfície padrão, lê como "apagado".
-- **Elevated Graphite** (`#1f1f29`): painel em destaque (estação "próxima", hero da Conclusão, resultado de sucesso) — mais claro que a superfície padrão, lê como "em primeiro plano".
-- **Signal White** (`#f3f3f6`): texto principal, títulos, números de estado ativo.
-- **Signal White Secondary** (`#c2c2cc`): texto secundário, rótulos em estado neutro, corpo de parágrafo em painéis.
-- **Dormant Gray** (`#6f6f7d`): texto/ícone/traço em estado "apagado" mas ainda legível (segmento vazio da barra, traço de linha do tempo, borda).
-- **Signal White Muted** (`#9d9daa`): o degrau mais apagado — texto de estado "bloqueada"/"futura", abaixo até de Dormant Gray em ênfase.
-- **Grid Line** (`rgba(255,255,255,0.04)`): grade de fundo em `background-image`, opacidade mínima, nunca por trás de texto de leitura.
+- **Void Black** (`#0c0c10`): fundo de todas as páginas e cor de texto sobre roxo.
+- **Graphite Surface** (`#16161d`): painel padrão (cards, figuras, folha de passos).
+- **Graphite Surface Dim** (`#111116`): palco de ilustração, figura, escala do tempo e herói da Conclusão.
+- **Elevated Graphite** (`#1f1f29`): painel em destaque (próxima estação, Conclusão disponível, fechamento da estação). Também é a cor da hachura de "ainda fechado".
+- **Signal White** (`#f3f3f6`): títulos, texto de leitura principal, frase de abertura dos capítulos.
+- **Signal White Secondary** (`#c2c2cc`): explicação dos capítulos, rótulos, texto secundário.
+- **Signal White Muted** (`#9d9daa`): numerais vazados, estado bloqueado, legendas.
+- **Dormant Gray** (`#6f6f7d`): filetes, trilho não percorrido, traços de diagrama. Nunca é usado para texto.
+- **Grid Line** (`rgba(255,255,255,0.04)`): grade fixa de 32px atrás da página. As colunas de leitura têm fundo sólido e a escondem.
 
 ### Named Rules
-**The Rare Ink Rule.** Cyber Purple nunca é cor de texto corrido. Ele aparece em bordas de ênfase, chips, barra de progresso e no momento de recompensa da Conclusão — sempre como sinal de estado, nunca como preenchimento decorativo.
+**The State-and-Illustration Ink Rule.** O roxo tem dois papéis: sinal de estado (validada, próxima, progresso) e tinta de ilustração (linhas de velocidade, retícula, rota percorrida). Nunca é cor de texto corrido nem preenchimento de painel. Substitui a antiga "Rare Ink Rule" (DEC-018).
 
-**The Two-Dark Rule.** Existem dois tons de "escuro" com papéis opostos: Graphite Surface Dim marca "bloqueado/apagado", Elevated Graphite marca "em destaque/próximo". Nunca usar um no lugar do outro.
+**The Two-Dark Rule.** Graphite Surface Dim marca palco ou fechado; Elevated Graphite marca destaque ou próximo. Nunca usar um no lugar do outro.
+
+**The Token-Colored Texture Rule.** Retícula, linhas de foco, linhas de movimento, hachura, grade e seta são SVGs usados como `mask`, com `background-color` vindo de um token. Nenhuma textura carrega cor própria, então a troca do roxo provisório continua acontecendo num ponto só (DEC-013).
 
 ## Typography
 
-**Display/Title/Label Font:** Chakra Petch (pesos 600 e 700 apenas, hospedada localmente em `assets/fonts/chakra-petch/`, sem CDN)
-**Body Font:** fonte de sistema (`system-ui, sans-serif`)
+**Display/Title/Label Font:** Chakra Petch, pesos 600 e 700, local em `assets/fonts/chakra-petch/`, sem CDN.
+**Body Font:** fonte de sistema (`system-ui, sans-serif`).
 
-**Character:** Chakra Petch é usada só onde a interface fala como sistema — títulos, números, rótulos, botões. Texto corrido usa a fonte de sistema do dispositivo do visitante, priorizando legibilidade e carregamento imediato sobre identidade tipográfica no corpo do texto.
+**Character:** Chakra Petch fala como sistema e como letreiro: palavra-marca, títulos, numerais, rótulos, botões e carimbos. O texto de leitura usa a fonte do aparelho, que é legível e carrega na hora.
 
 ### Hierarchy
-- **Display** (700, 1.05): maior escala de título, em passos fixos por breakpoint de layout — o CSS não usa `clamp`, cada página define o tamanho em cada `@media`. Hero do Index (`.index-hero__titulo`): 2.75rem (base) → 3.5rem (≥768px) → 4.5rem (≥900px). Título do X-BOT na Conclusão (`.final-xbot__titulo`): 2.5rem (base) → 3.5rem (≥900px), sem passo em 768px.
-- **Headline** (700, 1.2): também em passos fixos, não `clamp`. Título da estação (`.titulo-estacao`): 1.75rem (base) → 2.25rem (≥768px); nas estações desbloqueadas, já em layout de dossiê (≥900px), cai para 2rem — a composição em duas colunas pede um título menor que o passo de 768px. Título da Conclusão (`.final-titulo`): 2rem (base) → 2.5rem (≥768px) → 2.75rem (≥900px).
-- **Title** (600, 1.25rem, 1.3): título de cartão/estação no Hub, título de capítulo e seção dentro de uma estação.
-- **Body** (400, 1.0625rem, 1.6): parágrafo de abertura (briefing) e corpo de capítulo; linha de 60–75ch em telas largas.
-- **Label** (600, 0.75rem, letter-spacing 0.08em, caixa alta): rótulo numerado (`01 / 04`), estado de acesso, selo de conquista — sempre o elemento que "fala como sistema".
+- **Monumental** (700, fluido com `clamp`):
+  - palavra-marca da abertura `.capa__titulo`: `clamp(4.5rem, 23vw, 11rem)`, linha 0.84;
+  - placar da Conclusão `.final-placar__feito`: `clamp(8rem, 42vw, 15rem)`;
+  - título do X-BOT `.final-xbot__titulo`: `clamp(3.5rem, 18vw, 6rem)`.
+- **Headline** (700, linha 0.95):
+  - título de estação `.titulo-estacao`: `clamp(2.5rem, 11vw, 4.75rem)`;
+  - título da Conclusão `.final-titulo`: `clamp(2.5rem, 11vw, 5rem)`, 4.75rem a partir de 900px.
+- **Numerais vazados** (700, só contorno de 1,5px, decorativos com `aria-hidden`):
+  - capa da estação: 9.5rem (base), 13rem (≥600px), 17rem (≥900px);
+  - capítulo: 3.25rem (base), 4.25rem (≥600px), 5.5rem (≥900px);
+  - índice da abertura: 4.5rem (base), 7.5rem (≥900px);
+  - resumo da Conclusão: 1.75rem (base), 3.5rem (≥900px).
+- **Title** (700, 1.625rem, linha 1.15):
+  - título de capítulo e de seção: 2rem a 2.5rem a partir de 900px;
+  - título de card no Hub: 1.125rem; o card da próxima estação usa 1.5rem.
+- **Body** (400, 1.0625rem, linha 1.6):
+  - corpo de leitura com no máximo 62ch;
+  - frase de abertura do briefing em 1.1875rem (1.375rem a partir de 900px);
+  - primeira frase de cada capítulo em Signal White, o resto em Signal White Secondary.
+- **Label** (600, 0.75rem, espaçamento 0.08–0.16em, caixa alta): ficha técnica, selos, carimbos e anotações de margem. Nada de texto visível abaixo de 11px.
 
 ### Named Rules
-**The Single Headline Rule.** Cada página tem um único título grande (Display ou Headline), com contraste forte contra o resto do conteúdo. Nenhuma outra manchete do mesmo peso/escala compete com ele na mesma tela.
+**The Heading-First Rule.** O título abre a seção. Rótulos de estado (PRÓXIMA ESTAÇÃO, BLOQUEADA, DESBLOQUEADO, SUCESSO) vêm depois dele, como selo. Rótulos de seção (BRIEFING, LINHA DO TEMPO) ficam na coluna de margem a partir de 900px e somem no celular. Nenhum rótulo acima de título.
 
-**The No New Font Rule.** Nenhuma fonte entra no projeto sem decisão explícita registrada. A Inter já está na pasta de fontes como alternativa futura e não deve ser carregada sem essa decisão.
+**The Hollow Numeral Rule.** Contorno sem preenchimento só em numerais grandes e decorativos (a partir de 1.75rem). Texto pequeno em contorno continua proibido.
+
+**The No New Font Rule.** Nenhuma fonte entra sem decisão explícita. A Inter continua na pasta como alternativa futura e não é carregada.
 
 ## Layout
 
-Mobile-first real: a leitura base é sempre uma coluna estreita (`main` com `max-width: 640px` por padrão), pensada para ser lida em pé, com um celular, entre estações físicas. Nenhuma página rola horizontalmente entre 360px e 430px de largura — a faixa real de celular usada na feira.
+Mobile-first: cada página foi composta primeiro a 390px e recomposta, não esticada, a partir de 900px. Nenhuma página rola na horizontal entre 360 e 430px.
 
-- **Espaçamento:** escala fechada em variáveis CSS — `--espaco-1` a `--espaco-12` (4, 8, 12, 16, 24, 32, 48px). Nenhum valor de espaçamento fora da escala.
-- **Grade de fundo:** linhas finíssimas (`--cor-grade`) repetidas a cada 32px, decorativas, nunca atrás de texto de leitura (cada página escopada aplica fundo sólido na coluna de main).
-- **Breakpoints reais do projeto:** `768px` (ajustes pontuais de tamanho de título) e `900px` (recomposições de layout — grade 2x2 do Hub, dossiê de duas colunas das Estações 1–3 e da Conclusão, canvas editorial do Index).
-- **Hub (≥900px):** grade 2x2 fixa para as quatro estações, independente do estado de progresso — nenhuma estação ocupa as duas colunas (DEC-015).
-- **Estações 1–3 desbloqueadas e Conclusão completa (≥900px):** dossiê técnico de até 832px — 160px de coluna de contexto (rótulo) + 32px de respiro + até 640px de coluna de conteúdo. É a largura compartilhada por qualquer página que siga o padrão "dossiê" (rótulo lateral + conteúdo), não uma medida exclusiva das Estações (DEC-016). Nada usa `order`; a ordem visual segue a ordem do DOM.
-- **Index (≥900px):** canvas editorial próprio de até 960px, com grid assimétrico por seção (hero 520px+400px, jornada 240px+680px) — não reaproveita a métrica do dossiê.
-- **Regra geral:** nenhuma outra expansão de desktop (ex: outra largura de canvas) entra sem decisão explícita — ver DEC-015 e DEC-016.
+- **Espaçamento:** escala fechada `--espaco-1` a `--espaco-24` (4, 8, 12, 16, 24, 32, 48, 64, 96px).
+- **Palco:** `--palco: 75rem` (1200px) de largura máxima, com `--gutter` de 16px no celular e 32px a partir de 900px.
+- **Breakpoints:**
+  - 480px: os destinos do Hub empilham abaixo dessa largura;
+  - 600px: respiro e numerais maiores;
+  - 900px: recomposição de todas as páginas;
+  - 1100px: trilho da rota nas estações.
+- **Abertura (≥900px):** palavra-marca na largura toda; proposta, frase das estações e CTA em 7 colunas à esquerda; rota nas 5 colunas da direita. No celular, o CTA fica logo abaixo da proposta, no primeiro terço da tela.
+- **Hub (≥900px):** rota horizontal de quatro paradas, com o trilho ligando os nós e os cards abaixo deles. Substitui a grade 2×2 (DEC-018 substitui DEC-015). No celular, trilho vertical.
+- **Estações (≥900px):** cada seção é uma grade com margem de 11rem, coluna de leitura de até 42rem e coluna livre (`1fr`) onde figuras e escala do tempo avançam. A partir de 1100px, a página ganha uma coluna de 9rem com o trilho da rota fixo (sticky). Substitui o dossiê de 832px (DEC-018 substitui DEC-016).
+- **Composições por estação** (via `[data-estacao]`):
+  - 1: capa com o texto à esquerda e a quadra de Pong à direita;
+  - 2: rede em faixa larga abaixo do título;
+  - 3: diagrama à esquerda e texto à direita;
+  - 4: explosão de foco atrás do numeral e a carta no briefing.
+- **Conclusão (≥900px):** herói em duas metades (título e placar), rota fechada horizontal, bloco do X-BOT com carta e texto lado a lado.
+- **Ordem do DOM:** nada usa `order`. Na abertura, o CTA vem antes da rota também no DOM.
 
 ## Elevation & Depth
 
-O sistema é flat por natureza: não existe biblioteca de `box-shadow` com blur. Profundidade e estado vêm de três mecanismos, nunca de sombra ambiente:
-1. **Camada de superfície** (Void Black → Graphite Surface Dim → Graphite Surface → Elevated Graphite): cada nível é literalmente uma cor mais clara, não uma sombra projetada.
-2. **Borda interna sólida** (`box-shadow: inset`, 1–4px, cor opaca): marca foco (`cartao:focus-visible`), ênfase de estado "próxima/desbloqueada" (barra lateral roxa) e moldura da carta na Conclusão. Nunca `blur`, sempre aresta dura.
-3. **Drop-shadow pontual só na carta do X-BOT** (`filter: drop-shadow`, cor do próprio roxo): única exceção com suavidade, porque é a única imagem fotográfica/ilustrada do sistema — tratada como objeto físico, não como painel de UI.
+O sistema continua plano. A profundidade vem de:
+1. **Camadas de superfície:** Void Black, Graphite Surface Dim, Graphite Surface, Elevated Graphite.
+2. **Planos sobrepostos:** numeral vazado atrás do título, retícula atrás da palavra-marca, explosão de foco atrás do placar e da carta, carimbo batido por cima do placar.
+3. **Borda interna sólida** (`box-shadow: inset`, 1–4px): foco, moldura da carta, carimbos, contorno de fechado.
+4. **Drop-shadow só na carta da Conclusão.**
 
 ### Named Rules
-**The Hard-Edge Rule.** Toda sombra estrutural do sistema é uma borda sólida (inset), nunca um blur difuso. Blur é reservado ao único objeto ilustrado do site (a carta do X-BOT).
+**The Hard-Edge Rule.** Toda sombra estrutural é aresta dura (inset). Blur só na carta revelada da Conclusão.
 
 ## Shapes
 
-Um motivo só, repetido: **o recorte diagonal** (`clip-path: polygon(...)`, token `--recorte`, cantos cortados em ~12px). Ele aparece em cards, chips de rótulo, botões, segmentos de barra preenchidos e nós do trilho de estação. Não existe `border-radius` em lugar nenhum do sistema — curva não faz parte do vocabulário de forma.
-
-O recorte tem duas escalas: o grande (`--espaco-3`, 12px) para painéis e cards; o pequeno (`--espaco-1`/`--espaco-2`, 4–8px) para chips, segmentos de barra e marcadores de passo — a diferença de escala do corte comunica hierarquia de contêiner.
+Um motivo de contêiner, o **recorte diagonal** (`--recorte` 12px, `--recorte-pequeno` 8px, `--recorte-minimo` 4px), em cards, botões, painéis, figuras, selos e segmentos de barra. Não existe `border-radius`. Diagonais extras só aparecem na ilustração: o corte das áreas de retícula e de foco, a inclinação dos carimbos e da carta, o octógono da explosão.
 
 ### Named Rules
-**The One Cut Rule.** Existe um motivo de forma — o recorte diagonal — e ele nunca compete com outro (sem cantos arredondados, sem recorte em outro ângulo, sem combinação de formas no mesmo componente).
+**The One Cut Rule.** O contêiner tem uma forma só. Ângulos e curvas, quando aparecem, pertencem à ilustração (trajetória da bola, carta inclinada), nunca à moldura da interface.
 
 ## Components
 
-Técnico e confiável: formas cortadas e precisas, cor rara e com propósito, estados sempre legíveis em texto — nada decorativo ou gratuito. Hover é sempre um bônus de desktop (`@media (hover: hover)`), nunca a única forma de entender um estado.
+### Gramática gráfica (`style.css`)
+- **Numeral vazado** (`.numeral-vazado`): contorno de 1,5px em Dormant Gray ou Signal White Muted. Na Estação 4 o contorno fica roxo.
+- **Texturas** (`.textura-reticula`, `.textura-foco`, `.textura-movimento`, `.textura-hachura`): máscaras SVG geradas com semente fixa e coloridas por token. A retícula e as linhas de foco marcam conquista; as linhas de movimento marcam "a seguir"; a hachura marca "ainda fechado".
+- **Carimbo** (`.carimbo` e variações por página): moldura dupla em aresta dura, Chakra 700 espaçado, levemente girado. Marca o que foi conquistado (VALIDADA, JORNADA CONCLUÍDA, SUCESSO).
+- **Esquema** (`.esquema__*`): linhas, nós e textos dos diagramas SVG.
+- **Seta** (`.seta`, `.seta--voltar`): ícone desenhado em SVG por máscara, que herda a cor do texto. Substitui os glifos ← e →.
+- **Cruz de registro** (`.registro`): marca de impressão no canto da capa.
+- **Sem quebra** (`.sem-quebra`): mantém nomes com hífen inteiros (ex.: "X-BOT" no título da Estação 4).
 
 ### Buttons
-- **Shape:** recorte diagonal (`--recorte`, 12px), sem borda.
-- **Primary** (`.botao--principal`): fundo Cyber Purple, texto Void Black, altura mínima 44px, padding `12px 16px`, peso 700, fonte Chakra Petch.
-- **Secondary** (`.botao`): fundo Elevated Graphite, texto Signal White, mesma forma e altura.
-- **Focus:** `box-shadow: inset 0 0 0 2px` na cor de texto (nunca outline cortado pelo clip-path).
+- **Forma:** recorte de 12px, altura mínima de 48px (56px nos CTAs principais), Chakra 700 em caixa alta, texto centralizado e balanceado.
+- **Primary** (`.botao--principal`): fundo roxo, texto Void Black.
+- **Secondary** (`.botao`): fundo Elevated Graphite. Sobre painel elevado, usa fundo Void Black com contorno de 1px.
+- **Focus:** aresta interna de 3px, porque o `clip-path` cortaria o outline.
 
-### Chips / Status Labels
-- **Rótulo numerado** (`.rotulo`): texto puro, sem fundo — caixa alta, Signal White Secondary (ou Signal White quando o estado está ativo).
-- **Selo de estado** (`.bloqueio__estado`, `.final-selo`): fundo Cyber Purple, texto Void Black, recorte pequeno (4px) — usado só para "próxima estação" e "conquistado na Conclusão". Nunca aparece em estado bloqueado.
-- **Marcador de estado** (quadrado de 8px antes do rótulo): cheio em Cyber Purple = validado/concluído (rótulo do Hub `.estacao--desbloqueada` e linha "Jornada" do status da Conclusão); vazado, só com contorno de 1px em Signal White Muted = pendente (linha "Acesso ao jogo"). A forma acompanha sempre o texto do rótulo, nunca o substitui (DEC-017).
+### Hub — rota
+- **Nó:**
+  - engrenagem acesa = validada; apagada = ainda não;
+  - a próxima estação ganha um alvo roxo em volta do nó;
+  - trecho sólido roxo = percorrido; tracejado roxo = até a próxima; tracejado cinza = futuro.
+- **Validada:** card de grafite e carimbo VALIDADA ao lado da ação. O rótulo de estado fica só para leitores de tela.
+- **Próxima:**
+  - card elevado com faixa de linhas de movimento no topo e título grande;
+  - selo PRÓXIMA ESTAÇÃO depois do título;
+  - folha anexa com os três passos reais.
+- **Bloqueada:** silhueta hachurada, texto atenuado, ação "Ver o que falta".
+- **Destino final:**
+  - Conclusão disponível: faixa de movimento e selo;
+  - X-BOT: miniatura da silhueta de carta;
+  - X-BOT sem `gameUrl` válida: contorno e "AGUARDANDO LIBERAÇÃO".
 
-### Cards / Containers
-- **Corner Style:** recorte diagonal (`--recorte`, 12px); sem borda visível no estado padrão.
-- **Background:** Graphite Surface (padrão) → Graphite Surface Dim (bloqueado/apagado) → Elevated Graphite (próximo/destaque).
-- **Shadow Strategy:** borda interna sólida roxa (`inset`) só no card em destaque; ver Elevation & Depth.
-- **Internal Padding:** escala de espaçamento do projeto, tipicamente `--espaco-4` a `--espaco-6`; o card "próxima estação" usa padding maior (`--espaco-6`/`--espaco-8`) para parecer fisicamente mais importante.
-
-### Navigation
-- **Link de voltar** (`.terminal-voltar`, `.final-voltar`): Chakra Petch 600, 0.875rem, Signal White Secondary em repouso, Signal White em hover/foco — altura mínima 44px, sem fundo, sem recorte.
-- **Nó de trilho do Hub** (`.estacao__no`): engrenagem (PNG, decorativa, `alt` vazio), número da estação e linha tracejada até o próximo nó; a linha vira sólida (apagado) quando a estação anterior foi desbloqueada e roxa sólida quando leva à próxima estação. Engrenagem acesa = conteúdo desbloqueado; apagada (PNG derivado da arte original, sem filtro CSS) = ainda bloqueado ou aguardando a próxima estação. Os dois PNGs têm fundo transparente e nenhum halo: o brilho difuso que a versão acesa trazia embutido foi removido do canal alfa em 21/10/2026, por contrariar "sem glow". **O estado da estação "próxima" nunca é comunicado só pela engrenagem ou só pela cor** — ele depende do rótulo PRÓXIMA ESTAÇÃO, do tamanho maior do card e da barra/borda roxa juntos; a engrenagem continua puramente decorativa.
-
-### Progress Bar
-- **Segmento vazio:** trilho fino (`--espaco-1`, 4px), cor Dormant Gray — forma reduzida, não só cor diferente.
-- **Segmento cheio:** bloco alto (`--espaco-3`, 12px) com recorte pequeno, cor Cyber Purple — a diferença de altura é o que comunica "preenchido", a cor reforça.
-
-### Station Pictogram
-Cada página de estação (1–4) tem um pictograma no hero (`.terminal-hero__pict`), em SVG inline no próprio HTML (um `<symbol id="pictograma">` por página, reutilizado com `<use href="#pictograma">` nos dois estados do hero). Só linhas retas, quadrados e chanfros, traço de 2px em `currentColor`, sem curvas, sem preenchimento além de quadrados pontuais: joystick (1), controle (2), árvore de decisão (3), cartas (4). Cor Signal White Muted no conteúdo aberto e Dormant Gray no hero bloqueado; nunca roxo. É decorativo (`aria-hidden`, sem `alt`) e não aparece no Hub nem na Conclusão (DEC-017). Em ≥900px divide a coluna de contexto com o número da estação.
-
-### Chapter Numeral, Lead and Timeline Eras
-- **Numeral do capítulo** (`.capitulo__numero`): Chakra Petch 700 em 2.25rem (2.75rem em ≥900px), Signal White Muted — identifica sem competir com o título do capítulo.
-- **Frase de abertura:** o primeiro parágrafo de cada capítulo (`.capitulo__corpo > p:first-child`) usa Signal White; o restante da explicação fica em Signal White Secondary. É só hierarquia, o texto não muda.
-- **Linha do tempo:** o ano é o numeral do marco (Chakra Petch 700, 1.125rem) e o nome do marco fica em Signal White. O primeiro marco de cada época leva `data-era="…"` e abre com um rótulo e um filete (`::before`). Os rótulos só repetem períodos já presentes na página (décadas dos anos do próprio marco ou o título do capítulo correspondente), sem conteúdo novo.
-
-### Conclusão — Status de acesso
-Quando `OdisseIAConfig.gameUrl` não é uma URL absoluta http(s) válida, a Conclusão mostra o painel `.final-status` no lugar do botão: duas linhas separadas, "Jornada: concluída · 4/4" (marcador cheio) e "Acesso ao jogo: aguardando liberação" (marcador vazado), mais uma nota. O botão "Jogar X-BOT" só existe com URL válida. O Hub aplica a mesma regra ao card do X-BOT (`.final--pendente`: contorno de 1px em Dormant Gray e rótulo "AGUARDANDO LIBERAÇÃO"). Jornada concluída e jogo acessível são estados diferentes e nunca se confundem na interface (DEC-017).
+### Estação — dossiê
+- **Capa** (`.dossie-capa`): numeral vazado gigante, título, "ESTAÇÃO 0N / 04", ficha técnica (`.dossie-ficha`) só com fatos do próprio conteúdo e ilustração SVG do assunto (`.dossie-capa__arte`).
+- **Capítulo:** numeral vazado à esquerda do título (na margem a partir de 900px), corpo com a frase de abertura em destaque e marcadores quadrados roxos nas listas.
+- **Figuras** (`.figura`): diagramas que desenham o próprio conteúdo, com legenda (`figcaption`):
+  - a máquina de estados das quatro regras da Estação 3;
+  - a rota de pathfinding, marcada como ilustração.
+- **Escala do tempo** (`.escala`):
+  - cada marco fica na posição proporcional ao ano (`--ano`, `--inicio`, `--fim`);
+  - faixas de época abaixo do eixo;
+  - intervalos como barra (2024–2026).
+- **Lista de marcos:** ano como numeral e rótulo de época no primeiro marco de cada época (`data-era`).
+- **Sequência da Estação 3:** escada de seis degraus; o último degrau tem contorno roxo.
+- **Trilho da rota** (`.dossie-rota`, a partir de 1100px): paradas anteriores cheias, parada atual grande, futuras tracejadas, terminando em CONCLUSÃO. É decorativo (`aria-hidden`) e só aparece no conteúdo desbloqueado.
+- **Bloqueio:**
+  - próxima: painel elevado com faixa de movimento, passos numerados e "Seu progresso";
+  - futura: painel hachurado com link para a próxima estação válida.
 
 ### X-BOT Card Image
-O verso da carta do X-BOT (`verso-carta.png`) só aparece em duas páginas, sempre em tamanho de carta (200–280px de largura), com `loading="lazy"` e dimensões declaradas:
-- **Estação 4** (`.carta-moldura`): a carta fica num painel Graphite Surface com o recorte do sistema, uma moldura de 1px em Dormant Gray ao redor da arte e a legenda "VERSO DA CARTA". Em ≥900px flutua à esquerda do texto de abertura. Sem roxo, sem rotação, sem sombra e sem textura: a moldura roxa e a sombra suave continuam exclusivas da Conclusão (DEC-017).
-- **Conclusão — X-BOT Card Reveal** (signature component, só nesta página): a mesma carta sobre um "palco" com textura diagonal repetida em baixa opacidade da própria cor de destaque; entra com leve rotação e `drop-shadow` colorido — o único momento do sistema em que uma sombra suave e um objeto ilustrado substituem o vocabulário plano do resto do site.
+O verso da carta (`verso-carta.png`) continua só na Estação 4 e na Conclusão, entre 200 e 280px de largura, com `loading="lazy"` e dimensões declaradas.
+- **Estação 4** (`.carta-moldura`): palco escuro com linhas de foco roxas e retícula no canto. A carta fica inclinada (-5°) em moldura branca de 2px, com a legenda VERSO DA CARTA. Sem drop-shadow.
+- **Conclusão** (`.final-xbot`): palco com linhas de foco, carta inclinada (-4°) com drop-shadow roxo e moldura roxa no bloco. É o único lugar com sombra suave.
+
+### Conclusão
+- **Herói:**
+  - explosão de linhas de foco atrás do placar 4/4;
+  - carimbo JORNADA CONCLUÍDA batido sobre o placar;
+  - título com contorno de letreiro (`paint-order: stroke fill`) para se separar das linhas.
+- **Resumo:** a rota fechada, uma linha roxa contínua pelas quatro engrenagens, com os carimbos VALIDADA batendo em sequência.
+- **Acesso ao jogo:** botão "Jogar X-BOT" só com `gameUrl` absoluta http(s). Sem ela, o painel `.final-status` mostra a jornada concluída (marcador cheio) separada do acesso pendente (marcador vazado e etiqueta "AGUARDANDO LIBERAÇÃO").
+
+### Validação do QR
+O resultado é um carimbo depois do título: roxo para sucesso e "já validada", cinza para fora de ordem, inválido e erro. O sucesso ganha linhas de foco no canto, cortadas na diagonal. A ação principal vem primeiro.
+
+## Motion
+O movimento é um gesto por página, sempre partindo de um estado já visível:
+- na abertura, a rota se desenha e as paradas entram;
+- na Conclusão, a explosão irrompe e os carimbos batem em sequência;
+- na validação, o carimbo bate.
+
+Easing `cubic-bezier(0.22, 1, 0.36, 1)`, sem curvas com ricochete. Com `prefers-reduced-motion: reduce`, todas as animações e transições desligam.
 
 ## Do's and Don'ts
 
 ### Do:
-- **Do** usar o recorte diagonal (`--recorte`) como única assinatura de forma em qualquer novo contêiner (card, botão, chip).
-- **Do** expressar estado (bloqueado/próximo/desbloqueado, sucesso/erro) por texto + tamanho + cor juntos, nunca só por cor (DEC-013).
-- **Do** comunicar o estado da estação "próxima" pelo rótulo (PRÓXIMA ESTAÇÃO), pelo tamanho do card e pela barra/borda roxa — nunca só pela engrenagem (ícone) ou só pela cor (DEC-013).
-- **Do** manter o roxo raro: destaque, borda, chip, barra — nunca bloco de texto corrido nem fundo de página inteira (exceto o momento único da Conclusão).
-- **Do** manter contraste mínimo 4,5:1 em texto e 3:1 em elementos de interface, alvos de toque de 44px e foco sempre visível, mesmo com o clip-path cortando o contorno.
-- **Do** respeitar `prefers-reduced-motion` em qualquer animação nova (o projeto já desliga todas as transições/animações nesse modo).
-- **Do** restringir o verso da carta do X-BOT à Estação 4 e à Conclusão, sempre em tamanho de carta (200–280px de largura), com `loading="lazy"` e dimensões declaradas.
+- **Do** abrir toda seção pelo título e pôr estado e rótulo depois, como selo ou anotação de margem.
+- **Do** expressar estado por texto, forma e cor juntos: carimbo, hachura, faixa de movimento, alvo no nó (DEC-013).
+- **Do** desenhar diagramas só com relações que o conteúdo afirma, e marcar como ilustração o que for exemplo.
+- **Do** usar texturas apenas pelas máscaras de `style.css`, coloridas por token.
+- **Do** manter contraste mínimo de 4,5:1 em texto, 3:1 em elementos de interface, alvos de 44px e foco sempre visível.
+- **Do** contornar títulos que passam sobre linhas de foco (`paint-order: stroke fill`).
 
 ### Don't:
-- **Don't** usar glow difuso, gradiente decorativo fora dos já existentes (textura da Conclusão), glassmorphism, `border-radius`, ou qualquer segunda linguagem de forma.
-- **Don't** usar emoji como ícone, nem depender de hover como único jeito de revelar informação em mobile.
-- **Don't** introduzir uma nova fonte, peso de fonte, ou carregar a Inter sem decisão explícita registrada.
-- **Don't** reusar a largura do canvas do Index (960px) para o dossiê de conteúdo desbloqueado, nem a largura do dossiê (832px) para o Index — são composições deliberadamente diferentes (DEC-015, DEC-016).
-- **Don't** usar texto pequeno em contorno (stroke/outline sem preenchimento) em nenhum tamanho de texto.
-- **Don't** permitir rolagem horizontal da página em larguras de viewport entre 360px e 430px (faixa real de celular usada na feira).
-- **Don't** aplicar o tratamento de "recompensa visual" (roxo ampliado, drop-shadow, textura, carta) fora da página de Conclusão.
+- **Don't** pôr rótulo, kicker ou selo acima de título.
+- **Don't** usar glifos Unicode (←, →, ✓) ou emoji como ícone. Use a `.seta` ou um SVG desenhado.
+- **Don't** usar glow difuso, gradiente decorativo, glassmorphism, `border-radius` ou uma segunda linguagem de contêiner.
+- **Don't** pintar texto corrido de roxo nem usar roxo como fundo de painel.
+- **Don't** mostrar a arte da carta fora da Estação 4 e da Conclusão. Na abertura e no Hub, só a silhueta.
+- **Don't** inventar mecânicas, dados ou datas do X-BOT nem de qualquer estação em diagramas, fichas ou legendas.
+- **Don't** introduzir fonte nova, carregar a Inter ou usar texto visível abaixo de 11px.
+- **Don't** permitir rolagem horizontal entre 360 e 430px.

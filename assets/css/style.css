@@ -1,4 +1,6 @@
-/* Estilo compartilhado do OdisseIA. Cores e espaçamentos ficam em :root. */
+/* Base compartilhada do OdisseIA: fontes, tokens, componentes comuns e a gramática gráfica do
+   "arquivo de missão" (linhas esquemáticas, numerais vazados, retícula, linhas de velocidade,
+   hachura e carimbos). Cada página carrega também a sua folha em assets/css/paginas/. */
 
 @font-face {
   font-family: "Chakra Petch";
@@ -38,6 +40,12 @@
   --espaco-6: 24px;
   --espaco-8: 32px;
   --espaco-12: 48px;
+  --espaco-16: 64px;
+  --espaco-24: 96px;
+
+  --leitura: 40rem;
+  --palco: 75rem;
+  --gutter: var(--espaco-4);
 
   --recorte: polygon(
     var(--espaco-3) 0,
@@ -47,2470 +55,123 @@
     0 100%,
     0 var(--espaco-3)
   );
+  --recorte-pequeno: polygon(
+    var(--espaco-2) 0,
+    100% 0,
+    100% calc(100% - var(--espaco-2)),
+    calc(100% - var(--espaco-2)) 100%,
+    0 100%,
+    0 var(--espaco-2)
+  );
+  --recorte-minimo: polygon(
+    var(--espaco-1) 0,
+    100% 0,
+    100% calc(100% - var(--espaco-1)),
+    calc(100% - var(--espaco-1)) 100%,
+    0 100%,
+    0 var(--espaco-1)
+  );
+
+  /* Texturas de mangá geradas como SVG e usadas como máscara: a cor vem sempre dos tokens. */
+  --textura-foco: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 1000' preserveAspectRatio='xMidYMid slice'%3E%3Cpath d='M1260 492.3L1260 504.4L955.8 499ZM1258.8 542.9L1258.5 547.5L791.7 517.4ZM1255.4 583.3L1254.1 594.7L788.4 534ZM1249.6 625.1L1248.3 633L823.5 555.7ZM1241.3 667.6L1237.1 685.2L802.4 572.2ZM1227 721.5L1223.3 733.4L943.5 639.1ZM1214.9 757.9L1213.7 761.2L844.9 625.3ZM1204.8 784.3L1202 791.2L836.6 637.7ZM1189.4 819.9L1181.1 837.2L818.1 652.5ZM1169.1 860.5L1166.9 864.5L840.3 684.6ZM1144.9 902.1L1140.5 909.1L718.3 637.8ZM1110.6 952.5L1104.4 960.8L766.9 700.6ZM1090.6 978.3L1085 985.2L858.5 793.8ZM1056.9 1017.2L1052.9 1021.4L688.9 676.7ZM1028.1 1046.6L1019.8 1054.4L802.7 818.1ZM991.5 1079.6L987.5 1083.1L748.9 795.6ZM971.8 1095.8L967.7 1099L777.9 853.5ZM932.8 1124.7L923.2 1131.3L697.8 790.2ZM898.4 1147.2L886.9 1154.2L645.6 741.2ZM863.8 1167.3L858.3 1170.2L637 753.7ZM827.7 1185.7L824.1 1187.4L623.1 759.4ZM789.9 1202.5L783.6 1205.1L625.6 808.2ZM740.2 1221L732.4 1223.6L614.9 851.1ZM697.8 1233.8L685.8 1237L590.9 848.4ZM647.4 1245.6L626.4 1249.4L565.9 859.5ZM614 1251.4L602.9 1253L561.7 928.3ZM569.6 1256.8L564.5 1257.3L538.9 939.4ZM522.7 1259.7L509.7 1259.9L507.3 840.3ZM495.9 1260L484.4 1259.8L495.4 851.7ZM441.8 1257.8L434.3 1257.2L475.1 804ZM396.9 1253L393.6 1252.5L455.1 822.9ZM353.5 1245.7L346.7 1244.4L436.9 813.8ZM307.2 1235.1L295.3 1231.9L407 843.1ZM265.3 1222.8L261.4 1221.6L368 902.7ZM223 1207.7L213.6 1204L345.3 887.7ZM176.6 1187.8L171.3 1185.3L372.5 768.5ZM134.9 1166.5L131.6 1164.8L378 721.4ZM127.7 1162.6L112.3 1153.7L371.6 722.3ZM70.9 1127.2L67.4 1124.8L325.4 753.6ZM40.9 1105.7L38.1 1103.5L245.2 834.6ZM9.2 1080.3L-7.9 1065.4L243.1 794.7ZM-24.3 1050.2L-33.3 1041.5L256.4 751.4ZM-53.5 1020.8L-55.7 1018.5L198.8 782.3ZM-79.8 991.4L-82.5 988.2L259.3 702.9ZM-119.6 940.1L-126.6 930.1L129.2 758.9ZM-136.8 914.9L-141.4 907.7L270.6 647.6ZM-157.9 880.4L-161.1 874.8L174.3 686.5ZM-177.6 844.2L-187.2 824.5L74.1 708.7ZM-200.1 795.7L-202.4 790.3L140.9 650ZM-219.1 745.9L-221.8 737.9L53.7 649.9ZM-226.4 723.5L-228 718.1L59.4 633.8ZM-237.9 682L-239.9 673.6L74.5 602.4ZM-247.3 638.5L-248.3 632.6L69 578.1ZM-254.3 592.6L-254.7 589.6L61.5 553ZM-258 554.6L-259 539.7L81.2 526.1ZM-259.9 489.9L-259.8 484.6L87.7 493.1ZM-259.2 466L-257.8 442.6L57.1 473.3ZM-253.6 401.5L-253.1 398.1L144.4 452.7ZM-250.4 379.4L-248.6 368.8L81 429.6ZM-239.2 323.6L-236.1 310.7L142 411.2ZM-226.3 276.2L-224.7 271.2L181.1 400.5ZM-218.7 253L-217.4 249.2L126.3 370.5ZM-202 208.8L-194.9 192.1L138.6 345ZM-176.4 153.4L-174.3 149.4L246.8 369.3ZM-172.2 145.4L-162.1 126.8L180.4 325.7ZM-143.1 95.1L-140.8 91.4L263.2 350ZM-116.7 55.9L-114.4 52.7L126.3 229.4ZM-87.2 17.5L-77.5 5.9L201 249.3ZM-59.4 -14.4L-55.4 -18.8L176.9 200.6ZM-20.6 -53.7L-17.6 -56.5L185.7 163.9ZM-5.9 -67.1L7.9 -79.2L296.7 266.5ZM39 -104.3L47.5 -110.6L343.6 291.9ZM70.6 -127.1L83 -135.4L296.2 196ZM97.2 -144.5L100.2 -146.4L354.5 266ZM150.1 -174.7L154.1 -176.7L350.5 209.7ZM186.5 -192.3L195.8 -196.4L320.5 96.4ZM205.1 -200.4L217.1 -205.4L380.8 210ZM247.6 -216.9L270.2 -224.4L412.8 239.4ZM303.6 -234.2L307 -235.1L378.7 42.4ZM328 -240.3L340.7 -243.1L413.8 113.9ZM392.9 -252.4L400.3 -253.4L448.2 122.5ZM432.7 -257L437.7 -257.4L466.9 113.3ZM484.6 -259.8L490.9 -259.9L495.2 201.9ZM529.6 -259.4L535.6 -259.2L515.1 147.8ZM561.6 -257.5L574.7 -256.3L533.7 126ZM591.5 -254.5L598.4 -253.6L550.3 100.8ZM648.6 -245.3L660.9 -242.8L567.2 176.7ZM696 -234.3L708.5 -230.8L608.2 108.1ZM720 -227.5L723 -226.6L583.7 225.2ZM775.9 -208.2L778.7 -207.1L658.7 94.9ZM809 -194.3L823.8 -187.5L606.1 268.3ZM863.5 -167.4L867.1 -165.5L644.2 237ZM886.2 -154.5L904.9 -143.2L658.6 239.8ZM911.7 -138.8L935.2 -123.1L644.5 284.7ZM952.1 -110.9L965.3 -100.9L685.3 255.3ZM985.2 -85L987.6 -83L728.7 225.4ZM1032.4 -42.4L1040.5 -34.3L760.1 239ZM1058.9 -15L1063.2 -10.3L845 184.7ZM1079.2 8L1082.5 11.8L780 263.7ZM1103.7 38.4L1115 53.5L780.8 290.8ZM1133.1 79.6L1135.3 82.9L846.9 270.9ZM1165.2 132.4L1172.6 146.2L866 302.7ZM1174.2 149.1L1177.1 154.8L883.5 302.4ZM1204.5 215L1206.8 220.6L900.1 340ZM1213.9 239.2L1222.7 264.9L873.1 371.2ZM1229.5 286.8L1234.5 304.8L797.9 416.9ZM1236.4 312.2L1238.6 320.8L891.9 402.5ZM1249.3 373L1250.2 378.4L951.5 425.1ZM1253.8 403.1L1254.5 408.8L776.9 465.5ZM1258 444.4L1258.8 456.5L794.8 480.7Z'/%3E%3C/svg%3E");
+  --textura-movimento: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 400' preserveAspectRatio='none'%3E%3Cpath d='M510.8 5.9L953.6 4.5L953.6 7.2ZM330.1 15.3L949.7 14.1L949.7 16.5ZM358.2 20.8L902.3 16L902.3 25.7ZM437 30.3L906.6 29.4L906.6 31.2ZM83.8 40.5L885.8 39.8L885.8 41.2ZM248.3 45.9L947.2 43.5L947.2 48.3ZM277.8 54.3L1000 51.1L1000 57.5ZM293.7 61.3L905.8 60.1L905.8 62.4ZM96.4 72.3L917.5 68.5L917.5 76.1ZM598.4 81.2L971.2 80.3L971.2 82.1ZM504.9 90L916.2 89.2L916.2 90.8ZM306.1 98.5L991.9 97.6L991.9 99.4ZM315.2 108.5L904.2 107.8L904.2 109.2ZM524.6 116.3L915.8 113L915.8 119.6ZM293.9 125.3L907.1 124.6L907.1 125.9ZM140.7 135L900.6 133.4L900.6 136.6ZM564.9 145.8L938.2 143.8L938.2 147.9ZM434.4 151.8L940.6 150.5L940.6 153ZM365.9 158.4L974.5 156.9L974.5 159.9ZM685.7 171.8L988.2 170.8L988.2 172.9ZM506 176L942.5 175.3L942.5 176.7ZM84.2 186.1L908.7 185.1L908.7 187ZM558.6 193.2L925.4 190.7L925.4 195.6ZM221.7 202L955.3 200.7L955.3 203.4ZM506.3 209.9L997.8 206.3L997.8 213.6ZM560.5 220.9L990.1 218.9L990.1 222.9ZM609.3 233L882.8 232L882.8 234ZM698.8 238.2L974.3 237.5L974.3 238.9ZM258.8 247.3L959.4 246.7L959.4 248ZM716.4 254.8L977.5 254.1L977.5 255.5ZM438.8 261.7L909 260.3L909 263.1ZM328.3 272.5L889.6 271.5L889.6 273.4ZM187.9 280.2L893.4 278.4L893.4 282ZM340.2 289.8L988.6 286.8L988.6 292.7ZM497.4 299.7L896.6 299L896.6 300.4ZM332.3 309.4L931.7 308.8L931.7 310ZM186 314.3L950 310.3L950 318.3ZM126.7 327.7L922.7 326.4L922.7 329.1ZM350.9 333.8L888.1 331.8L888.1 335.7ZM649.2 342.4L996.3 341.8L996.3 343.1ZM392.9 348.2L941.3 345.1L941.3 351.3ZM697.7 359.4L924.7 357.6L924.7 361.2ZM598.2 366.1L999.4 362.1L999.4 370.1ZM570.2 376.8L908.1 375.2L908.1 378.4ZM330.1 388.3L942.6 385.4L942.6 391.2ZM391.2 394.4L883.8 393.7L883.8 395.1Z'/%3E%3C/svg%3E");
+  --textura-reticula: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Ccircle cx='4' cy='4' r='1.7'/%3E%3C/svg%3E");
+  --textura-grade: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Cpath d='M0 0.5H32M0.5 0V32' stroke='black' stroke-width='1'/%3E%3C/svg%3E");
+  --icone-seta: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M1.5 8H14M9 3L14 8L9 13' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='square'/%3E%3C/svg%3E");
+  --textura-hachura: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10'%3E%3Cpath d='M-2 2L2 -2M0 10L10 0M8 12L12 8' stroke='black' stroke-width='1.2'/%3E%3C/svg%3E");
 }
 
 * {
   box-sizing: border-box;
 }
 
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
 body {
   margin: 0;
+  min-height: 100vh;
   background-color: var(--cor-fundo);
-  background-image:
-    linear-gradient(var(--cor-grade) 1px, transparent 1px),
-    linear-gradient(90deg, var(--cor-grade) 1px, transparent 1px);
-  background-size: var(--espaco-8) var(--espaco-8);
   color: var(--cor-texto);
   font-family: var(--fonte-corpo);
   line-height: 1.5;
 }
 
-.cabecalho,
-main {
-  max-width: 640px;
-  margin: 0 auto;
-  padding-left: var(--espaco-4);
-  padding-right: var(--espaco-4);
-}
-
-.cabecalho {
-  padding-top: var(--espaco-8);
-  padding-bottom: var(--espaco-4);
-}
-
-main {
-  padding-bottom: var(--espaco-8);
-}
-
-.titulo-marca {
-  margin: 0;
-  font-family: var(--fonte-titulo);
-  font-weight: 700;
-  font-size: 2rem;
-  letter-spacing: 0.04em;
-}
-
-.progresso {
-  margin-bottom: var(--espaco-6);
-}
-
-.progresso__texto {
-  margin: 0 0 var(--espaco-3);
-  font-family: var(--fonte-titulo);
-  font-weight: 600;
-  font-size: 1.125rem;
-}
-
-.progresso__numero {
-  font-weight: 700;
-  font-size: 1.75rem;
-  line-height: 1;
-}
-
-.barra {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--espaco-1);
-}
-
-.barra__segmento {
-  height: var(--espaco-3);
-  background: var(--cor-apagado);
-  clip-path: polygon(
-    var(--espaco-2) 0,
-    100% 0,
-    100% calc(100% - var(--espaco-2)),
-    calc(100% - var(--espaco-2)) 100%,
-    0 100%,
-    0 var(--espaco-2)
-  );
-  transition: background-color 0.4s ease;
-}
-
-.barra__segmento--cheio {
-  background: var(--cor-destaque);
-  box-shadow: none;
-}
-
-.estacoes,
-.finais {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: var(--espaco-3);
-}
-
-.finais {
-  margin-top: var(--espaco-6);
-}
-
-.cartao {
-  display: flex;
-  align-items: center;
-  gap: var(--espaco-4);
-  min-height: 44px;
-  padding: var(--espaco-4) var(--espaco-8) var(--espaco-4) var(--espaco-4);
-  background: var(--cor-superficie);
-  color: var(--cor-texto);
-  text-decoration: none;
-  clip-path: var(--recorte);
-}
-
-.cartao:focus-visible {
-  outline: none;
-  box-shadow: inset 0 0 0 2px var(--cor-destaque);
-}
-
-.cartao__corpo {
-  min-width: 0;
-}
-
-.rotulo {
-  display: block;
-  margin: 0 0 var(--espaco-2);
-  font-family: var(--fonte-titulo);
-  font-weight: 600;
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
-  color: var(--cor-texto-secundario);
-}
-
-.marcador {
-  flex: none;
-  width: 56px;
-  height: 56px;
-}
-
-.estacao__titulo,
-.final__titulo {
-  margin: 0;
-  font-family: var(--fonte-titulo);
-  font-weight: 600;
-  font-size: 1.25rem;
-}
-
-.estacao__nome,
-.final__detalhe {
-  display: block;
-  margin-top: var(--espaco-1);
-  color: var(--cor-texto-secundario);
-  font-size: 0.95rem;
-}
-
-.estacao__acao {
-  display: block;
-  margin-top: var(--espaco-2);
-  font-family: var(--fonte-titulo);
-  font-weight: 600;
-  font-size: 0.875rem;
-}
-
-.estacao--desbloqueada .rotulo {
-  color: var(--cor-texto);
-}
-
-.estacao--proxima .cartao {
-  padding: var(--espaco-6) var(--espaco-8) var(--espaco-6) var(--espaco-6);
-  background: var(--cor-superficie-alta);
-  box-shadow: inset var(--espaco-1) 0 0 var(--cor-destaque);
-}
-
-.estacao--proxima .rotulo {
-  color: var(--cor-texto);
-}
-
-.estacao--proxima .estacao__titulo {
-  font-weight: 700;
-  font-size: 1.75rem;
-}
-
-.estacao--bloqueada .cartao {
-  background: var(--cor-superficie-escura);
-}
-
-.estacao--bloqueada .estacao__titulo {
-  color: var(--cor-texto-secundario);
-}
-
-.estacao--bloqueada .estacao__acao {
-  color: var(--cor-texto-atenuado);
-}
-
-.final--bloqueado .cartao {
-  background: var(--cor-superficie-escura);
-}
-
-.final--bloqueado .final__titulo {
-  color: var(--cor-texto-secundario);
-}
-
-/* Hub: painel de status, trilho das estações e destino final.
-   Tudo escopado em .pagina-hub para não mudar as outras páginas. */
-
-.pagina-hub .visualmente-oculto {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
-}
-
-.pagina-hub .cabecalho {
-  padding-bottom: var(--espaco-6);
-}
-
-.pagina-hub .painel-status {
-  padding: var(--espaco-4) var(--espaco-6) var(--espaco-6);
-  background: var(--cor-superficie);
-  clip-path: var(--recorte);
-}
-
-.pagina-hub .painel-status .titulo-marca {
-  padding-bottom: var(--espaco-3);
-  margin-bottom: var(--espaco-4);
-  border-bottom: 1px solid var(--cor-superficie-alta);
-}
-
-.pagina-hub .progresso {
-  margin: 0;
-}
-
-.pagina-hub .progresso__texto {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: var(--espaco-3);
-  margin: 0 0 var(--espaco-3);
-}
-
-.pagina-hub .progresso__rotulo,
-.pagina-hub .barra__numero,
-.pagina-hub .destino__titulo {
-  font-family: var(--fonte-titulo);
-  font-weight: 600;
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
-  color: var(--cor-texto-secundario);
-}
-
-.pagina-hub .progresso__numero {
-  font-size: 2rem;
-}
-
-.pagina-hub .barra__celula {
-  display: grid;
-  grid-template-rows: var(--espaco-3) auto;
-  gap: var(--espaco-2);
-}
-
-/* Segmento vazio = trilho fino; cheio = bloco alto roxo. A diferença é de forma, não só de cor. */
-.pagina-hub .barra__segmento:not(.barra__segmento--cheio) {
-  align-self: end;
-  height: var(--espaco-1);
-  clip-path: none;
-}
-
-.pagina-hub .barra__numero {
-  color: var(--cor-texto-atenuado);
-}
-
-.pagina-hub .barra__celula--cheia .barra__numero {
-  color: var(--cor-texto);
-}
-
-.pagina-hub .estacoes {
-  gap: var(--espaco-4);
-}
-
-.pagina-hub .cartao,
-.pagina-hub .estacao .cartao {
-  display: flex;
-  align-items: stretch;
-  gap: var(--espaco-3);
-  padding: 0;
-  background: none;
-  box-shadow: none;
-  clip-path: none;
-}
-
-.pagina-hub .cartao:focus-visible {
-  outline: 2px solid var(--cor-destaque);
-  outline-offset: var(--espaco-1);
-  box-shadow: none;
-}
-
-.pagina-hub .cartao__corpo {
-  flex: 1;
-  padding: var(--espaco-3) var(--espaco-6) var(--espaco-3) var(--espaco-4);
-  background: var(--cor-superficie);
-  clip-path: var(--recorte);
-}
-
-.pagina-hub .rotulo {
-  margin-bottom: var(--espaco-1);
-}
-
-/* Nó do trilho: engrenagem, número da estação e a linha até a próxima. */
-.pagina-hub .estacao__no {
-  flex: none;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 56px;
-}
-
-.pagina-hub .marcador {
-  width: 44px;
-  height: 44px;
-}
-
-.pagina-hub .estacao--proxima .marcador {
-  width: 56px;
-  height: 56px;
-}
-
-.pagina-hub .estacao--bloqueada .marcador {
-  width: 36px;
-  height: 36px;
-  margin-top: var(--espaco-1);
-}
-
-.pagina-hub .estacao__numero {
-  margin-top: var(--espaco-1);
-  font-family: var(--fonte-titulo);
-  font-weight: 700;
-  font-size: 1.375rem;
-  line-height: 1;
-  color: var(--cor-texto);
-}
-
-.pagina-hub .estacao--proxima .estacao__numero {
-  font-size: 1.75rem;
-}
-
-.pagina-hub .estacao--bloqueada .estacao__numero {
-  color: var(--cor-texto-atenuado);
-}
-
-.pagina-hub .estacao__no::after {
+/* Grade de fundo fixa; as colunas de leitura têm fundo sólido e a escondem. */
+body::before {
   content: "";
-  flex: 1;
-  min-height: var(--espaco-3);
-  margin-top: var(--espaco-2);
-  margin-bottom: calc(-1 * var(--espaco-4));
-  border-left: 2px dashed var(--cor-apagado);
-}
-
-.pagina-hub .estacao--liga-desbloqueada .estacao__no::after {
-  border-left: 2px solid var(--cor-texto-atenuado);
-}
-
-.pagina-hub .estacao--liga-proxima .estacao__no::after {
-  border-left: 2px solid var(--cor-destaque);
-}
-
-.pagina-hub .estacao:last-child .estacao__no::after {
-  content: none;
-}
-
-.pagina-hub .estacao__titulo {
-  font-size: 1.0625rem;
-  font-weight: 600;
-  line-height: 1.3;
-}
-
-.pagina-hub .estacao__acao,
-.pagina-hub .final__detalhe {
-  display: flex;
-  align-items: center;
-  gap: var(--espaco-2);
-  margin-top: var(--espaco-2);
-  font-family: var(--fonte-titulo);
-  font-weight: 600;
-  font-size: 0.875rem;
-  color: var(--cor-texto-secundario);
-}
-
-/* Próxima estação: o elemento principal da tela. */
-.pagina-hub .estacao--proxima .cartao__corpo,
-.pagina-hub .final--principal .cartao__corpo {
-  padding: var(--espaco-4) var(--espaco-6) 0;
-  background: var(--cor-superficie-alta);
-  box-shadow: inset var(--espaco-1) 0 0 var(--cor-destaque);
-}
-
-.pagina-hub .estacao--proxima .rotulo,
-.pagina-hub .final--principal .rotulo {
-  display: inline-block;
-  margin-bottom: var(--espaco-3);
-  padding: var(--espaco-1) var(--espaco-2);
-  background: var(--cor-destaque);
-  color: var(--cor-fundo);
-  clip-path: polygon(
-    var(--espaco-1) 0,
-    100% 0,
-    100% calc(100% - var(--espaco-1)),
-    calc(100% - var(--espaco-1)) 100%,
-    0 100%,
-    0 var(--espaco-1)
-  );
-}
-
-.pagina-hub .estacao--proxima .estacao__titulo,
-.pagina-hub .final--principal .final__titulo {
-  font-weight: 700;
-  font-size: 1.375rem;
-  line-height: 1.2;
-}
-
-.pagina-hub .estacao--proxima .estacao__acao,
-.pagina-hub .final--principal .final__detalhe {
-  justify-content: space-between;
-  min-height: 44px;
-  margin-top: var(--espaco-4);
-  border-top: 1px solid var(--cor-apagado);
-  font-weight: 700;
-  font-size: 1rem;
-  color: var(--cor-texto);
-}
-
-/* Bloqueada: dormente. Sem painel preenchido, só o recorte sobre o fundo. */
-.pagina-hub .estacao--bloqueada .cartao__corpo,
-.pagina-hub .final--bloqueado .cartao__corpo {
-  background: var(--cor-fundo);
-  box-shadow: inset 0 0 0 1px var(--cor-superficie-alta);
-}
-
-.pagina-hub .estacao--bloqueada .rotulo,
-.pagina-hub .estacao--bloqueada .estacao__titulo,
-.pagina-hub .estacao--bloqueada .estacao__acao,
-.pagina-hub .final--bloqueado .rotulo,
-.pagina-hub .final--bloqueado .final__detalhe {
-  color: var(--cor-texto-atenuado);
-}
-
-.pagina-hub .estacao--bloqueada .seta {
-  display: none;
-}
-
-/* O cartão preenche toda a célula da grade, para os cartões de uma linha terminarem juntos. */
-.pagina-hub .estacao > .cartao {
-  height: 100%;
-}
-
-/* Estação validada: quadrado roxo antes do rótulo (estado por forma, texto e cor). */
-.pagina-hub .estacao--desbloqueada .rotulo::before {
-  content: "";
-  display: inline-block;
-  width: var(--espaco-2);
-  height: var(--espaco-2);
-  margin-right: var(--espaco-2);
-  background: var(--cor-destaque);
-  clip-path: polygon(
-    var(--espaco-1) 0,
-    100% 0,
-    100% calc(100% - var(--espaco-1)),
-    calc(100% - var(--espaco-1)) 100%,
-    0 100%,
-    0 var(--espaco-1)
-  );
-}
-
-/* X-BOT desbloqueado pela jornada, mas sem gameUrl válida: contorno fino e rótulo apagado. */
-.pagina-hub .final--pendente .cartao__corpo {
-  box-shadow: inset 0 0 0 1px var(--cor-apagado);
-}
-
-.pagina-hub .final--pendente .rotulo {
-  color: var(--cor-texto-atenuado);
-}
-
-/* Destino final: separado do trilho. */
-.pagina-hub .destino {
-  margin-top: var(--espaco-8);
-}
-
-.pagina-hub .destino__titulo {
-  display: flex;
-  align-items: center;
-  gap: var(--espaco-3);
-  margin: 0 0 var(--espaco-3);
-}
-
-.pagina-hub .destino__titulo::after {
-  content: "";
-  flex: 1;
-  border-top: 1px solid var(--cor-apagado);
-}
-
-.pagina-hub .finais {
-  grid-template-columns: 1fr 1fr;
-  margin-top: 0;
-}
-
-.pagina-hub .finais--completa {
-  grid-template-columns: 1fr;
-}
-
-.pagina-hub .final .cartao,
-.pagina-hub .final .cartao__corpo {
-  display: block;
-  height: 100%;
-}
-
-.pagina-hub .final .cartao__corpo {
-  padding: var(--espaco-3) var(--espaco-4);
-}
-
-.pagina-hub .final--principal .cartao__corpo {
-  padding: var(--espaco-4) var(--espaco-6) 0;
-}
-
-@media (hover: hover) {
-  .pagina-hub a.cartao:hover .cartao__corpo {
-    background: var(--cor-superficie-alta);
-  }
-
-  .pagina-hub .estacao--bloqueada a.cartao:hover .cartao__corpo {
-    background: var(--cor-superficie-escura);
-  }
-}
-
-.pagina-estacao .cabecalho {
-  padding-bottom: var(--espaco-6);
-}
-
-.titulo-estacao {
-  margin: var(--espaco-2) 0 0;
-  font-family: var(--fonte-titulo);
-  font-weight: 700;
-  font-size: 1.75rem;
-  line-height: 1.2;
-}
-
-.estacao-intro {
-  margin-bottom: var(--espaco-8);
-}
-
-.bloco {
-  padding-top: var(--espaco-6);
-  margin-top: var(--espaco-6);
-  border-top: 1px solid var(--cor-grade);
-}
-
-.bloco__titulo {
-  margin: 0 0 var(--espaco-3);
-  font-family: var(--fonte-titulo);
-  font-weight: 600;
-  font-size: 1.25rem;
-  line-height: 1.3;
-}
-
-.estacao-cards {
-  padding-top: var(--espaco-6);
-  margin-top: var(--espaco-6);
-  border-top: 1px solid var(--cor-grade);
-}
-
-.cartoes {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: var(--espaco-3);
-}
-
-.cartoes__item {
-  min-height: 44px;
-  padding: var(--espaco-4);
-  background: var(--cor-superficie);
-  clip-path: var(--recorte);
-}
-
-.estacao-fechamento {
-  padding-top: var(--espaco-6);
-  margin-top: var(--espaco-8);
-  border-top: 1px solid var(--cor-grade);
-}
-
-/* Estações 1 a 3: Terminal Editorial (hero, briefing, capítulos, linha do tempo,
-   próxima conexão) e mensagem de bloqueio. Tudo escopado em .pagina-estacao. */
-
-.pagina-estacao [hidden] {
-  display: none !important;
-}
-
-.pagina-estacao .visualmente-oculto {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
-}
-
-/* Fundo sólido na coluna: a grade nunca fica atrás do texto de leitura. */
-.pagina-estacao main {
-  min-height: 100vh;
-  padding-top: var(--espaco-4);
-  padding-bottom: var(--espaco-12);
-  background: var(--cor-fundo);
-}
-
-.pagina-estacao .terminal-rotulo,
-.pagina-estacao .terminal-hero__rotulo,
-.pagina-estacao .bloqueio__estado,
-.pagina-estacao .bloqueio__destino-rotulo {
-  margin: 0 0 var(--espaco-2);
-  font-family: var(--fonte-titulo);
-  font-weight: 600;
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
-  color: var(--cor-texto-secundario);
-}
-
-.pagina-estacao .terminal-voltar {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--espaco-2);
-  min-height: 44px;
-  margin-bottom: var(--espaco-2);
-  font-family: var(--fonte-titulo);
-  font-weight: 600;
-  font-size: 0.875rem;
-  color: var(--cor-texto-secundario);
-  text-decoration: none;
-}
-
-.pagina-estacao .terminal-voltar:focus-visible {
-  outline: 2px solid var(--cor-destaque);
-  outline-offset: var(--espaco-1);
-}
-
-/* Sprite SVG da página: só guarda o <symbol> do pictograma e nunca ocupa espaço. */
-.sprite {
-  position: absolute;
-  width: 0;
-  height: 0;
-  overflow: hidden;
-}
-
-/* Hero: número da estação forte, nome como título. A faixa roxa marca conteúdo aberto.
-   O pictograma (cinza, só linhas retas) ocupa a coluna da direita. */
-.pagina-estacao .terminal-hero__painel {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  column-gap: var(--espaco-4);
-  align-items: start;
-  padding: var(--espaco-4) var(--espaco-6) var(--espaco-6);
-  background: var(--cor-superficie);
-  clip-path: var(--recorte);
-  box-shadow: inset var(--espaco-1) 0 0 var(--cor-destaque);
-}
-
-.pagina-estacao .terminal-hero--bloqueada .terminal-hero__painel {
-  box-shadow: none;
-}
-
-.pagina-estacao .terminal-hero__rotulo {
-  grid-column: 1;
-  grid-row: 1;
-}
-
-.pagina-estacao .terminal-hero .titulo-estacao {
-  grid-column: 1 / -1;
-  grid-row: 2;
-}
-
-.pagina-estacao .terminal-hero__pict {
-  grid-column: 2;
-  grid-row: 1;
-  width: 40px;
-  height: 40px;
-  color: var(--cor-texto-atenuado);
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 2;
-  stroke-linejoin: miter;
-  stroke-linecap: square;
-}
-
-.pagina-estacao .terminal-hero--bloqueada .terminal-hero__pict {
-  color: var(--cor-apagado);
-}
-
-.pagina-estacao .terminal-hero__numero {
-  font-weight: 700;
-  font-size: 1.75rem;
-  line-height: 1;
-  letter-spacing: 0.02em;
-  color: var(--cor-texto);
-}
-
-.pagina-estacao .terminal-hero .titulo-estacao {
-  margin: var(--espaco-2) 0 0;
-}
-
-/* Briefing: abertura em texto maior, marcada por um fio lateral. */
-.pagina-estacao .briefing {
-  margin-top: var(--espaco-8);
-  padding-left: var(--espaco-4);
-  border-left: 2px solid var(--cor-apagado);
-}
-
-.pagina-estacao .briefing__titulo,
-.pagina-estacao .capitulo__titulo,
-.pagina-estacao .linha-tempo__titulo,
-.pagina-estacao .conexao__titulo,
-.pagina-estacao .bloqueio__titulo {
-  margin: 0 0 var(--espaco-3);
-  font-family: var(--fonte-titulo);
-  font-weight: 700;
-  font-size: 1.375rem;
-  line-height: 1.25;
-}
-
-.pagina-estacao .briefing p:not(.terminal-rotulo) {
-  margin: 0 0 var(--espaco-3);
-  font-size: 1.0625rem;
-  line-height: 1.6;
-}
-
-.pagina-estacao .briefing p:last-child,
-.pagina-estacao .capitulo__corpo > :last-child,
-.pagina-estacao .conexao p:last-of-type {
-  margin-bottom: 0;
-}
-
-/* Capítulos: sem painel, para a leitura respirar; o rótulo numerado abre cada um. */
-.pagina-estacao .capitulo {
-  margin-top: calc(var(--espaco-8) + var(--espaco-2));
-}
-
-.pagina-estacao .capitulo__rotulo {
-  display: flex;
-  align-items: baseline;
-  gap: var(--espaco-2);
-}
-
-.pagina-estacao .capitulo__rotulo::after {
-  content: "";
-  flex: 1;
-  margin-left: var(--espaco-2);
-  border-top: 1px solid var(--cor-apagado);
-}
-
-.pagina-estacao .capitulo__numero {
-  font-weight: 700;
-  font-size: 2.25rem;
-  line-height: 1;
-  color: var(--cor-texto-atenuado);
-}
-
-.pagina-estacao .capitulo__corpo p {
-  margin: 0 0 var(--espaco-4);
-  line-height: 1.65;
-  color: var(--cor-texto-secundario);
-}
-
-/* A frase de abertura do capítulo é a frase-chave: maior e mais clara que a explicação. */
-.pagina-estacao .capitulo__corpo > p:first-child {
-  font-size: 1.0625rem;
-  line-height: 1.55;
-  color: var(--cor-texto);
-}
-
-.pagina-estacao .capitulo__corpo strong {
-  color: var(--cor-texto);
-}
-
-.pagina-estacao .capitulo__corpo ul {
-  display: grid;
-  gap: var(--espaco-2);
-  margin: 0 0 var(--espaco-4);
-  padding: 0;
-  list-style: none;
-}
-
-.pagina-estacao .capitulo__corpo li {
-  position: relative;
-  padding-left: var(--espaco-6);
-  line-height: 1.5;
-  color: var(--cor-texto-secundario);
-}
-
-.pagina-estacao .capitulo__corpo li::before {
-  content: "";
-  position: absolute;
-  left: var(--espaco-1);
-  top: calc(0.75em - var(--espaco-1));
-  width: var(--espaco-2);
-  height: var(--espaco-2);
-  background: var(--cor-apagado);
-}
-
-/* Linha do tempo: todos os itens, em trilho vertical compacto. */
-.pagina-estacao .linha-tempo {
-  margin-top: calc(var(--espaco-8) + var(--espaco-2));
-  padding: var(--espaco-6) var(--espaco-4);
-  background: var(--cor-superficie);
-  clip-path: var(--recorte);
-}
-
-.pagina-estacao .linha-tempo__titulo {
-  margin-bottom: var(--espaco-4);
-}
-
-.pagina-estacao .linha-tempo__lista {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-/* Coluna estreita para anos de 4 dígitos; um intervalo ("2024–2026") quebra após o traço. */
-.pagina-estacao .linha-tempo__item {
-  display: grid;
-  grid-template-columns: 4rem 1fr;
-  column-gap: var(--espaco-3);
-}
-
-/* O ano é o numeral do marco; o nome do marco fica em branco ao lado. */
-.pagina-estacao .linha-tempo__marca,
-.pagina-estacao .linha-tempo__lista--etapas .linha-tempo__item::before {
-  font-family: var(--fonte-titulo);
-  font-weight: 700;
-  font-size: 1.125rem;
-  line-height: 1.3;
-  text-align: right;
-  color: var(--cor-texto);
-}
-
-.pagina-estacao .linha-tempo__texto {
-  position: relative;
-  padding: 0 0 var(--espaco-3) var(--espaco-4);
-  border-left: 2px solid var(--cor-apagado);
-  line-height: 1.3;
-  color: var(--cor-texto);
-}
-
-/* O último marco de uma época não desenha o trilho até o filete da época seguinte. */
-.pagina-estacao .linha-tempo__item:has(+ .linha-tempo__item[data-era]) .linha-tempo__texto {
-  padding-bottom: var(--espaco-4);
-  border-left-color: transparent;
-}
-
-/* Início de cada época: rótulo com filete, ocupando as duas colunas. O texto vem de data-era. */
-.pagina-estacao .linha-tempo__item[data-era]::before {
-  content: attr(data-era);
-  grid-column: 1 / -1;
-  margin-bottom: var(--espaco-2);
-  padding-top: var(--espaco-3);
-  border-top: 1px solid var(--cor-apagado);
-  font-family: var(--fonte-titulo);
-  font-weight: 600;
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
-  color: var(--cor-texto-secundario);
-}
-
-.pagina-estacao .linha-tempo__item[data-era]:first-child::before {
-  padding-top: 0;
-  border-top: none;
-}
-
-.pagina-estacao .linha-tempo__texto::before {
-  content: "";
-  position: absolute;
-  left: -5px;
-  top: calc(0.7em - var(--espaco-1));
-  width: var(--espaco-2);
-  height: var(--espaco-2);
-  background: var(--cor-texto-atenuado);
-}
-
-.pagina-estacao .linha-tempo__item:last-child .linha-tempo__texto {
-  padding-bottom: 0;
-  border-left-color: transparent;
-}
-
-.pagina-estacao .linha-tempo__lista--etapas {
-  counter-reset: etapa;
-}
-
-.pagina-estacao .linha-tempo__lista--etapas .linha-tempo__item {
-  grid-template-columns: var(--espaco-8) 1fr;
-}
-
-.pagina-estacao .linha-tempo__lista--etapas .linha-tempo__item::before {
-  counter-increment: etapa;
-  content: counter(etapa, decimal-leading-zero);
-  color: var(--cor-texto-atenuado);
-}
-
-.pagina-estacao .linha-tempo__lista--etapas .linha-tempo__texto {
-  padding-bottom: var(--espaco-6);
-  font-family: var(--fonte-titulo);
-  font-weight: 600;
-  color: var(--cor-texto);
-}
-
-/* Próxima conexão: fechamento em painel, com saída para o Hub. */
-.pagina-estacao .conexao {
-  margin-top: calc(var(--espaco-8) + var(--espaco-2));
-  padding: var(--espaco-6);
-  background: var(--cor-superficie-alta);
-  clip-path: var(--recorte);
-}
-
-.pagina-estacao .conexao p:not(.terminal-rotulo) {
-  margin: 0 0 var(--espaco-3);
-  line-height: 1.6;
-}
-
-.pagina-estacao .conexao__acao {
-  margin-top: var(--espaco-6);
-}
-
-/* Bloqueio: próxima = painel em destaque com passos; futura = painel dormente. */
-.pagina-estacao .bloqueio {
-  margin-top: var(--espaco-6);
-  padding: var(--espaco-6);
-  clip-path: var(--recorte);
-}
-
-.pagina-estacao .bloqueio--proxima {
-  background: var(--cor-superficie-alta);
-  box-shadow: inset var(--espaco-1) 0 0 var(--cor-destaque);
-}
-
-.pagina-estacao .bloqueio--futura {
-  background: var(--cor-fundo);
-  box-shadow: inset 0 0 0 1px var(--cor-superficie-alta);
-}
-
-.pagina-estacao .bloqueio__estado {
-  display: inline-block;
-  margin-bottom: var(--espaco-3);
-}
-
-.pagina-estacao .bloqueio--proxima .bloqueio__estado {
-  padding: var(--espaco-1) var(--espaco-2);
-  background: var(--cor-destaque);
-  color: var(--cor-fundo);
-  clip-path: polygon(
-    var(--espaco-1) 0,
-    100% 0,
-    100% calc(100% - var(--espaco-1)),
-    calc(100% - var(--espaco-1)) 100%,
-    0 100%,
-    0 var(--espaco-1)
-  );
-}
-
-.pagina-estacao .bloqueio--futura .bloqueio__estado,
-.pagina-estacao .bloqueio--futura .bloqueio__titulo {
-  color: var(--cor-texto-atenuado);
-}
-
-.pagina-estacao .bloqueio__texto {
-  margin: 0 0 var(--espaco-4);
-  color: var(--cor-texto-secundario);
-}
-
-.pagina-estacao .bloqueio__passos {
-  display: grid;
-  gap: var(--espaco-3);
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  counter-reset: passo;
-}
-
-.pagina-estacao .bloqueio__passo {
-  counter-increment: passo;
-  display: grid;
-  grid-template-columns: var(--espaco-8) 1fr;
-  align-items: center;
-  gap: var(--espaco-3);
-  min-height: var(--espaco-8);
-}
-
-.pagina-estacao .bloqueio__passo::before {
-  content: counter(passo, decimal-leading-zero);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: var(--espaco-8);
-  background: var(--cor-fundo);
-  font-family: var(--fonte-titulo);
-  font-weight: 700;
-  font-size: 0.875rem;
-  clip-path: polygon(
-    var(--espaco-2) 0,
-    100% 0,
-    100% calc(100% - var(--espaco-2)),
-    calc(100% - var(--espaco-2)) 100%,
-    0 100%,
-    0 var(--espaco-2)
-  );
-}
-
-.pagina-estacao .bloqueio__destino {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: center;
-  column-gap: var(--espaco-3);
-  min-height: 44px;
-  padding: var(--espaco-4);
-  background: var(--cor-superficie);
-  color: var(--cor-texto);
-  text-decoration: none;
-  clip-path: var(--recorte);
-}
-
-.pagina-estacao .bloqueio__destino-rotulo {
-  grid-column: 1;
-  margin: 0;
-}
-
-.pagina-estacao .bloqueio__destino-nome {
-  grid-column: 1;
-  font-family: var(--fonte-titulo);
-  font-weight: 600;
-  font-size: 1.0625rem;
-  line-height: 1.3;
-}
-
-.pagina-estacao .bloqueio__destino .seta {
-  grid-column: 2;
-  grid-row: 1 / span 2;
-  font-family: var(--fonte-titulo);
-  font-weight: 700;
-}
-
-.pagina-estacao .bloqueio__destino:focus-visible {
-  outline: none;
-  box-shadow: inset 0 0 0 2px var(--cor-texto);
-}
-
-/* Onde o visitante está na jornada: mesma barra do Hub (cheio = bloco alto, vazio = trilho fino). */
-.pagina-estacao .bloqueio__progresso {
-  margin-top: var(--espaco-6);
-  padding-top: var(--espaco-4);
-  border-top: 1px solid var(--cor-apagado);
-}
-
-.pagina-estacao .bloqueio__progresso-linha {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: var(--espaco-3);
-  margin: 0 0 var(--espaco-3);
-  font-family: var(--fonte-titulo);
-  font-weight: 600;
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
-  color: var(--cor-texto-secundario);
-}
-
-.pagina-estacao .bloqueio__progresso-numero {
-  font-weight: 700;
-  font-size: 1.375rem;
-  line-height: 1;
-  letter-spacing: 0;
-  color: var(--cor-texto);
-}
-
-.pagina-estacao .bloqueio__barra {
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: 1fr;
-  gap: var(--espaco-1);
-}
-
-.pagina-estacao .bloqueio__celula {
-  display: grid;
-  grid-template-rows: var(--espaco-3) auto;
-  gap: var(--espaco-2);
-}
-
-.pagina-estacao .bloqueio__segmento {
-  align-self: end;
-  height: var(--espaco-1);
-  background: var(--cor-apagado);
-}
-
-.pagina-estacao .bloqueio__celula--cheia .bloqueio__segmento {
-  height: var(--espaco-3);
-  background: var(--cor-destaque);
-  clip-path: polygon(
-    var(--espaco-2) 0,
-    100% 0,
-    100% calc(100% - var(--espaco-2)),
-    calc(100% - var(--espaco-2)) 100%,
-    0 100%,
-    0 var(--espaco-2)
-  );
-}
-
-.pagina-estacao .bloqueio__numero {
-  font-family: var(--fonte-titulo);
-  font-weight: 600;
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
-  color: var(--cor-texto-atenuado);
-}
-
-.pagina-estacao .bloqueio__celula--cheia .bloqueio__numero {
-  color: var(--cor-texto);
-}
-
-/* Estação 4: verso da carta em moldura de painel cinza com o recorte do sistema.
-   A moldura roxa, a rotação e a sombra continuam exclusivas da Conclusão. */
-.pagina-estacao .carta-moldura {
-  display: grid;
-  justify-items: center;
-  margin: 0 0 var(--espaco-4);
-  padding: var(--espaco-4);
-  background: var(--cor-superficie);
-  clip-path: var(--recorte);
-}
-
-.pagina-estacao .carta-moldura__arte {
-  padding: var(--espaco-1);
-  box-shadow: inset 0 0 0 1px var(--cor-apagado);
-}
-
-.pagina-estacao .carta-moldura img {
-  display: block;
-  width: 220px;
-  max-width: 100%;
-  height: auto;
-}
-
-.pagina-estacao .carta-moldura__legenda {
-  margin-top: var(--espaco-3);
-  font-family: var(--fonte-titulo);
-  font-weight: 600;
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
-  color: var(--cor-texto-secundario);
-}
-
-@media (hover: hover) {
-  .pagina-estacao .terminal-voltar:hover {
-    color: var(--cor-texto);
-  }
-
-  .pagina-estacao .bloqueio__destino:hover {
-    background: var(--cor-superficie-alta);
-  }
-}
-
-@media (min-width: 768px) {
-  .pagina-estacao .terminal-hero .titulo-estacao {
-    font-size: 2.25rem;
-  }
-}
-
-/* Desktop, só com conteúdo desbloqueado: dossiê técnico compacto em duas colunas —
-   160px de contexto, 32px de respiro e até 640px de conteúdo (832px no total). Cada
-   rótulo cai na coluna 1 e o resto da seção na coluna 2, na ordem do DOM; nada usa `order`. */
-@media (min-width: 900px) {
-  .pagina-estacao--desbloqueada {
-    --dossie-contexto: 160px;
-    --dossie-respiro: var(--espaco-8);
-  }
-
-  .pagina-estacao.pagina-estacao--desbloqueada main {
-    max-width: calc(832px + 2 * var(--espaco-4));
-    padding-top: var(--espaco-6);
-  }
-
-  .pagina-estacao--desbloqueada .briefing,
-  .pagina-estacao--desbloqueada .capitulo,
-  .pagina-estacao--desbloqueada .linha-tempo,
-  .pagina-estacao--desbloqueada .conexao {
-    display: grid;
-    grid-template-columns: var(--dossie-contexto) minmax(0, 640px);
-    column-gap: var(--dossie-respiro);
-    align-items: start;
-  }
-
-  .pagina-estacao--desbloqueada .briefing > *,
-  .pagina-estacao--desbloqueada .capitulo > *,
-  .pagina-estacao--desbloqueada .linha-tempo > *,
-  .pagina-estacao--desbloqueada .conexao > * {
-    grid-column: 2;
-  }
-
-  /* O rótulo ocupa as linhas do título e do primeiro bloco, para não empurrar o corpo. */
-  .pagina-estacao.pagina-estacao--desbloqueada .terminal-rotulo {
-    grid-column: 1;
-    grid-row: span 2;
-    margin: 0;
-  }
-
-  /* Texto corrido numa medida confortável; títulos e módulos usam a coluna inteira. */
-  .pagina-estacao.pagina-estacao--desbloqueada .briefing p:not(.terminal-rotulo),
-  .pagina-estacao.pagina-estacao--desbloqueada .capitulo__corpo p,
-  .pagina-estacao.pagina-estacao--desbloqueada .capitulo__corpo ul,
-  .pagina-estacao.pagina-estacao--desbloqueada .conexao p:not(.terminal-rotulo) {
-    max-width: 60ch;
-  }
-
-  /* Hero: cabeçalho técnico compacto. Número de identidade à esquerda, título à direita,
-     alinhado à coluna de conteúdo (o padding do painel sai da coluna de contexto). */
-  .pagina-estacao--desbloqueada .terminal-hero__painel {
-    display: grid;
-    grid-template-columns: calc(var(--dossie-contexto) - var(--espaco-6)) minmax(0, 640px);
-    column-gap: var(--dossie-respiro);
-    align-items: center;
-    padding-top: var(--espaco-6);
-    padding-bottom: var(--espaco-6);
-  }
-
-  .pagina-estacao.pagina-estacao--desbloqueada .terminal-hero__rotulo {
-    margin: 0;
-  }
-
-  .pagina-estacao.pagina-estacao--desbloqueada .terminal-hero__numero {
-    display: block;
-    margin: var(--espaco-1) 0;
-    font-size: 2.75rem;
-  }
-
-  .pagina-estacao.pagina-estacao--desbloqueada .terminal-hero .titulo-estacao {
-    grid-column: 2;
-    grid-row: 1;
-    margin: 0;
-    font-size: 2rem;
-  }
-
-  /* O pictograma divide a coluna de contexto com o número: número à esquerda, desenho à direita. */
-  .pagina-estacao.pagina-estacao--desbloqueada .terminal-hero__pict {
-    grid-column: 1;
-    grid-row: 1;
-    align-self: center;
-    justify-self: end;
-    width: 56px;
-    height: 56px;
-  }
-
-  /* Briefing: logo abaixo do hero, sem o fio lateral do celular nem separador. */
-  .pagina-estacao--desbloqueada .briefing {
-    margin-top: var(--espaco-6);
-    padding-left: 0;
-    border-left: none;
-  }
-
-  .pagina-estacao.pagina-estacao--desbloqueada .briefing p:not(.terminal-rotulo) {
-    font-size: 1.1875rem;
-  }
-
-  /* Seções abertas: o espaço entre módulos encolhe e a linha fina sai da seção inteira
-     para o topo do título, cobrindo só a coluna de conteúdo. */
-  .pagina-estacao.pagina-estacao--desbloqueada .capitulo,
-  .pagina-estacao.pagina-estacao--desbloqueada .linha-tempo,
-  .pagina-estacao.pagina-estacao--desbloqueada .conexao {
-    margin-top: var(--espaco-8);
-    padding: 0;
-    background: none;
-    clip-path: none;
-  }
-
-  .pagina-estacao.pagina-estacao--desbloqueada .capitulo__titulo,
-  .pagina-estacao.pagina-estacao--desbloqueada .linha-tempo__titulo,
-  .pagina-estacao.pagina-estacao--desbloqueada .conexao__titulo {
-    padding-top: var(--espaco-6);
-    border-top: 1px solid var(--cor-apagado);
-  }
-
-  .pagina-estacao.pagina-estacao--desbloqueada .capitulo .terminal-rotulo,
-  .pagina-estacao.pagina-estacao--desbloqueada .linha-tempo .terminal-rotulo,
-  .pagina-estacao.pagina-estacao--desbloqueada .conexao .terminal-rotulo {
-    padding-top: var(--espaco-6);
-  }
-
-  /* Capítulos: o título lidera; o número identifica, sem competir. */
-  .pagina-estacao.pagina-estacao--desbloqueada .capitulo__rotulo {
-    display: block;
-  }
-
-  .pagina-estacao.pagina-estacao--desbloqueada .capitulo__rotulo::after {
-    content: none;
-  }
-
-  .pagina-estacao.pagina-estacao--desbloqueada .capitulo__numero {
-    display: block;
-    margin-top: var(--espaco-1);
-    font-size: 2.75rem;
-    color: var(--cor-texto-atenuado);
-  }
-
-  .pagina-estacao.pagina-estacao--desbloqueada .capitulo__titulo {
-    font-size: 1.5rem;
-  }
-
-  /* Linha do tempo: o painel-instrumento é só a lista, mais estreito que a coluna. */
-  .pagina-estacao.pagina-estacao--desbloqueada .linha-tempo__titulo {
-    margin-bottom: var(--espaco-4);
-  }
-
-  .pagina-estacao.pagina-estacao--desbloqueada .linha-tempo__lista {
-    max-width: 540px;
-    padding: var(--espaco-4) var(--espaco-6);
-    background: var(--cor-superficie);
-    clip-path: var(--recorte);
-  }
-
-  .pagina-estacao.pagina-estacao--desbloqueada .linha-tempo__item {
-    grid-template-columns: 5.25rem 1fr;
-  }
-
-  .pagina-estacao.pagina-estacao--desbloqueada .linha-tempo__lista--etapas .linha-tempo__item {
-    grid-template-columns: var(--espaco-8) 1fr;
-  }
-
-  /* Próxima conexão: fechamento aberto e compacto; o botão não ocupa a coluna inteira. */
-  .pagina-estacao.pagina-estacao--desbloqueada .conexao__acao {
-    justify-self: start;
-    width: calc(8 * var(--espaco-8));
-  }
-
-  /* Estação 4: a carta flutua à esquerda do texto, em vez de abrir uma faixa só para ela. */
-  .pagina-estacao--desbloqueada .briefing__corpo {
-    display: flow-root;
-  }
-
-  .pagina-estacao--desbloqueada .carta-moldura {
-    float: left;
-    justify-items: start;
-    margin: var(--espaco-1) var(--espaco-6) var(--espaco-4) 0;
-  }
-
-  .pagina-estacao--desbloqueada .carta-moldura img {
-    width: 200px;
-  }
-}
-
-/* Index: porta de entrada estática. Hero e "Como funciona" são os únicos painéis;
-   o resto é tipografia, número e linha. Tudo escopado em .pagina-index. */
-
-.pagina-index .visualmente-oculto {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
-}
-
-/* Fundo sólido na coluna: a grade nunca fica atrás do texto de leitura. */
-.pagina-index main {
-  min-height: 100vh;
-  padding-top: var(--espaco-6);
-  padding-bottom: var(--espaco-12);
-  background: var(--cor-fundo);
-}
-
-.pagina-index .index-rotulo,
-.pagina-index .index-secao {
-  margin: 0 0 var(--espaco-2);
-  font-family: var(--fonte-titulo);
-  font-weight: 600;
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
-  color: var(--cor-texto-secundario);
-}
-
-.pagina-index .index-cta {
-  min-height: 52px;
-  margin-top: var(--espaco-6);
-  font-weight: 700;
-  letter-spacing: 0.08em;
-}
-
-/* Hero: nome, proposta, tamanho da jornada e a ação para começar. */
-.pagina-index .index-hero {
-  padding: var(--espaco-6);
-  background: var(--cor-superficie);
-  clip-path: var(--recorte);
-}
-
-.pagina-index .index-hero__titulo {
-  margin: 0;
-  font-family: var(--fonte-titulo);
-  font-weight: 700;
-  font-size: 2.75rem;
-  line-height: 1.05;
-  letter-spacing: 0.02em;
-}
-
-.pagina-index .index-hero__proposta {
-  margin: var(--espaco-3) 0 0;
-  font-size: 1.125rem;
-  line-height: 1.5;
-}
-
-.pagina-index .index-hero__jornada {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  align-items: center;
-  column-gap: var(--espaco-4);
-  margin: var(--espaco-6) 0 0;
-  padding-top: var(--espaco-4);
-  border-top: 1px solid var(--cor-superficie-alta);
-  font-family: var(--fonte-titulo);
-  font-weight: 600;
-  color: var(--cor-texto-secundario);
-}
-
-.pagina-index .index-hero__numero {
-  font-weight: 700;
-  font-size: 4.5rem;
-  line-height: 0.85;
-  color: var(--cor-texto);
-}
-
-.pagina-index .index-hero__unidade {
-  color: var(--cor-texto);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-/* Como funciona: uma sequência só, ligada por um trilho (vertical no celular). */
-.pagina-index .index-passos {
-  margin-top: var(--espaco-8);
-  padding: var(--espaco-6);
-  background: var(--cor-superficie);
-  clip-path: var(--recorte);
-}
-
-.pagina-index .index-passos__lista {
-  margin: var(--espaco-4) 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.pagina-index .index-passo {
-  position: relative;
-  display: grid;
-  grid-template-columns: 40px 1fr;
-  column-gap: var(--espaco-4);
-  padding-bottom: var(--espaco-6);
-}
-
-.pagina-index .index-passo:last-child {
-  padding-bottom: 0;
-}
-
-.pagina-index .index-passo::before {
-  content: "";
-  position: absolute;
-  top: 40px;
-  bottom: 0;
-  left: 19px;
-  border-left: 2px solid var(--cor-destaque);
-}
-
-.pagina-index .index-passo:last-child::before {
-  content: none;
-}
-
-.pagina-index .index-passo__numero {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 40px;
-  background: var(--cor-fundo);
-  font-family: var(--fonte-titulo);
-  font-weight: 700;
-  font-size: 0.9375rem;
-  clip-path: polygon(
-    var(--espaco-2) 0,
-    100% 0,
-    100% calc(100% - var(--espaco-2)),
-    calc(100% - var(--espaco-2)) 100%,
-    0 100%,
-    0 var(--espaco-2)
-  );
-}
-
-.pagina-index .index-passo__titulo {
-  display: block;
-  margin-top: var(--espaco-2);
-  font-family: var(--fonte-titulo);
-  font-weight: 700;
-  font-size: 0.875rem;
-  line-height: 1.3;
-  letter-spacing: 0.06em;
-}
-
-.pagina-index .index-passo__texto {
-  margin: var(--espaco-1) 0 0;
-  line-height: 1.5;
-  color: var(--cor-texto-secundario);
-}
-
-/* Aviso secundário do passo 03: informação, não um quarto passo. */
-.pagina-index .index-passo__nota {
-  margin: var(--espaco-3) 0 0;
-  padding-left: var(--espaco-3);
-  border-left: 2px solid var(--cor-apagado);
-  font-size: 0.875rem;
-  line-height: 1.5;
-  color: var(--cor-texto-atenuado);
-}
-
-/* A jornada e o destino: sem painel, só rótulo com linha, números e texto. */
-.pagina-index .index-jornada,
-.pagina-index .index-destino {
-  margin-top: var(--espaco-12);
-}
-
-.pagina-index .index-secao {
-  display: flex;
-  align-items: center;
-  gap: var(--espaco-3);
-}
-
-.pagina-index .index-secao::after {
-  content: "";
-  flex: 1;
-  border-top: 1px solid var(--cor-apagado);
-}
-
-.pagina-index .index-jornada__lista {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.pagina-index .index-jornada__item {
-  display: grid;
-  grid-template-columns: 56px 1fr;
-  align-items: baseline;
-  column-gap: var(--espaco-4);
-  padding: var(--espaco-3) 0;
-  border-bottom: 1px solid var(--cor-superficie-alta);
-}
-
-.pagina-index .index-jornada__item:last-child {
-  border-bottom: none;
-}
-
-.pagina-index .index-jornada__numero {
-  font-family: var(--fonte-titulo);
-  font-weight: 700;
-  font-size: 1.75rem;
-  line-height: 1;
-}
-
-.pagina-index .index-jornada__nome {
-  font-family: var(--fonte-titulo);
-  font-weight: 600;
-  font-size: 1.0625rem;
-  line-height: 1.3;
-}
-
-.pagina-index .index-destino__texto {
-  margin: var(--espaco-1) 0 0;
-  line-height: 1.6;
-  color: var(--cor-texto-secundario);
-}
-
-.pagina-index .index-final {
-  margin-top: var(--espaco-8);
-}
-
-@media (min-width: 768px) {
-  .pagina-index main {
-    padding-top: var(--espaco-12);
-  }
-
-  .pagina-index .index-hero {
-    padding: var(--espaco-8);
-  }
-
-  .pagina-index .index-hero__titulo {
-    font-size: 3.5rem;
-  }
-
-  .pagina-index .index-passos {
-    padding: var(--espaco-8);
-  }
-
-  /* Trilho horizontal: as três etapas lado a lado. */
-  .pagina-index .index-passos__lista {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    column-gap: var(--espaco-4);
-  }
-
-  .pagina-index .index-passo {
-    grid-template-columns: 1fr;
-    align-content: start;
-    padding-bottom: 0;
-  }
-
-  .pagina-index .index-passo::before {
-    top: 19px;
-    bottom: auto;
-    left: 40px;
-    right: calc(-1 * var(--espaco-4));
-    border-left: none;
-    border-top: 2px solid var(--cor-destaque);
-  }
-
-  .pagina-index .index-passo__numero {
-    width: 40px;
-  }
-
-  .pagina-index .index-passo__titulo {
-    margin-top: var(--espaco-3);
-  }
-}
-
-/* Metadado da jornada: só aparece no desktop. */
-.pagina-index .index-secao__detalhe {
-  display: none;
-}
-
-/* Desktop: canvas de 960px com distribuição própria por seção. Grid assimétrico,
-   tudo na ordem do DOM; nada usa `order`. */
-@media (min-width: 900px) {
-  .pagina-index main {
-    max-width: calc(960px + 2 * var(--espaco-4));
-    padding-top: var(--espaco-12);
-  }
-
-  /* Hero aberto: marca, proposta e CTA à esquerda; "4 estações" tipográfico à direita. */
-  .pagina-index .index-hero {
-    display: grid;
-    grid-template-columns: minmax(0, 520px) 400px;
-    column-gap: 40px;
-    row-gap: var(--espaco-8);
-    align-items: center;
-    padding: 0 0 var(--espaco-12);
-    background: none;
-    clip-path: none;
-    border-bottom: 1px solid var(--cor-apagado);
-  }
-
-  .pagina-index .index-hero__titulo {
-    font-size: 4.5rem;
-  }
-
-  .pagina-index .index-hero__proposta {
-    max-width: 62ch;
-    font-size: 1.25rem;
-  }
-
-  .pagina-index .index-hero__jornada {
-    grid-column: 2;
-    grid-row: 1;
-    display: block;
-    margin: 0;
-    padding: 0 0 0 var(--espaco-8);
-    border-top: none;
-    border-left: 1px solid var(--cor-apagado);
-    font-family: var(--fonte-corpo);
-    font-weight: 400;
-    font-size: 1.125rem;
-    line-height: 1.5;
-  }
-
-  .pagina-index .index-hero__numero {
-    display: block;
-    font-family: var(--fonte-titulo);
-    font-size: 7.5rem;
-    line-height: 0.9;
-  }
-
-  .pagina-index .index-hero__frase,
-  .pagina-index .index-hero__unidade {
-    display: block;
-  }
-
-  .pagina-index .index-hero__unidade {
-    margin: var(--espaco-2) 0 var(--espaco-3);
-    font-family: var(--fonte-titulo);
-    font-weight: 700;
-    font-size: 1.5rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--cor-texto);
-  }
-
-  .pagina-index .index-cta {
-    width: min(100%, 320px);
-    margin-top: 0;
-  }
-
-  /* Como funciona: uma faixa, com o passo 02 um pouco mais largo. */
-  .pagina-index .index-passos {
-    margin-top: var(--espaco-12);
-  }
-
-  .pagina-index .index-passos__lista {
-    grid-template-columns: 1fr 1.3fr 1fr;
-    column-gap: var(--espaco-6);
-  }
-
-  .pagina-index .index-passo::before {
-    right: calc(-1 * var(--espaco-6));
-  }
-
-  .pagina-index .index-passo__texto {
-    max-width: 62ch;
-  }
-
-  /* A jornada: dossiê — rótulo e metadado à esquerda, lista à direita. */
-  .pagina-index .index-jornada {
-    display: grid;
-    grid-template-columns: 240px minmax(0, 680px);
-    column-gap: 40px;
-    align-items: start;
-    padding-top: var(--espaco-8);
-    border-top: 1px solid var(--cor-apagado);
-  }
-
-  .pagina-index .index-jornada .index-secao {
-    display: block;
-    margin: 0;
-  }
-
-  .pagina-index .index-jornada .index-secao::after {
-    content: none;
-  }
-
-  .pagina-index .index-secao__detalhe {
-    display: block;
-    margin-top: var(--espaco-2);
-    color: var(--cor-texto-atenuado);
-  }
-
-  .pagina-index .index-jornada__item {
-    grid-template-columns: 72px 1fr;
-    padding: var(--espaco-4) 0;
-  }
-
-  .pagina-index .index-jornada__item:first-child {
-    padding-top: 0;
-  }
-
-  .pagina-index .index-jornada__numero {
-    font-size: 2.25rem;
-  }
-
-  .pagina-index .index-jornada__nome {
-    font-size: 1.25rem;
-  }
-
-  /* Destino final e CTA deslocados para a coluna de conteúdo: um fechamento diferente. */
-  .pagina-index .index-destino,
-  .pagina-index .index-final {
-    margin-left: 280px;
-  }
-
-  .pagina-index .index-destino__texto {
-    max-width: 62ch;
-  }
-}
-
-/* Conclusão: o pico visual da jornada (ESTILO.md). Mais roxo, a carta do X-BOT e uma
-   entrada curta, sempre a partir dos mesmos tokens e recortes. Os tons suaves de roxo
-   saem de --cor-destaque via color-mix. Tudo escopado em .pagina-final. */
-
-.pagina-final [hidden] {
-  display: none !important;
-}
-
-.pagina-final .visualmente-oculto {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
-}
-
-/* Fundo sólido na coluna: a grade nunca fica atrás do texto de leitura. */
-.pagina-final main {
-  min-height: 100vh;
-  padding-top: var(--espaco-4);
-  padding-bottom: var(--espaco-12);
-  background: var(--cor-fundo);
-}
-
-.pagina-final .final-voltar {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--espaco-2);
-  min-height: 44px;
-  margin-bottom: var(--espaco-2);
-  font-family: var(--fonte-titulo);
-  font-weight: 600;
-  font-size: 0.875rem;
-  color: var(--cor-texto-secundario);
-  text-decoration: none;
-}
-
-.pagina-final .final-voltar:focus-visible {
-  outline: 2px solid var(--cor-destaque);
-  outline-offset: var(--espaco-1);
-}
-
-.pagina-final .final-marca {
-  margin: 0;
-  font-family: var(--fonte-titulo);
-  font-weight: 700;
-  font-size: 1.125rem;
-  letter-spacing: 0.04em;
-}
-
-.pagina-final .final-selo,
-.pagina-final .final-secao,
-.pagina-final .final-placar__rotulo,
-.pagina-final .final-barra__numero,
-.pagina-final .final-jornada__estado,
-.pagina-final .final-bloqueio__estado,
-.pagina-final .final-bloqueio__rotulo {
-  font-family: var(--fonte-titulo);
-  font-weight: 600;
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
-  color: var(--cor-texto-secundario);
-}
-
-/* Selo roxo: o mesmo da estação próxima no Hub, aqui marcando o que foi conquistado. */
-.pagina-final .final-selo {
-  display: inline-block;
-  margin: 0;
-  padding: var(--espaco-1) var(--espaco-2);
-  background: var(--cor-destaque);
-  color: var(--cor-fundo);
-  font-weight: 700;
-  clip-path: polygon(
-    var(--espaco-1) 0,
-    100% 0,
-    100% calc(100% - var(--espaco-1)),
-    calc(100% - var(--espaco-1)) 100%,
-    0 100%,
-    0 var(--espaco-1)
-  );
-}
-
-.pagina-final .final-secao {
-  display: flex;
-  align-items: center;
-  gap: var(--espaco-3);
-  margin: 0 0 var(--espaco-2);
-}
-
-.pagina-final .final-secao::after {
-  content: "";
-  flex: 1;
-  border-top: 1px solid var(--cor-apagado);
-}
-
-/* Barra de progresso: cheia = bloco alto roxo, vazia = trilho fino (forma, não só cor). */
-.pagina-final .final-barra {
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: 1fr;
-  gap: var(--espaco-1);
-}
-
-.pagina-final .final-barra__celula {
-  display: grid;
-  grid-template-rows: var(--espaco-3) auto;
-  gap: var(--espaco-2);
-}
-
-.pagina-final .final-barra__segmento {
-  align-self: end;
-  height: var(--espaco-1);
-  background: var(--cor-apagado);
-}
-
-.pagina-final .final-barra__celula--cheia .final-barra__segmento {
-  height: var(--espaco-3);
-  background: var(--cor-destaque);
-  clip-path: polygon(
-    var(--espaco-2) 0,
-    100% 0,
-    100% calc(100% - var(--espaco-2)),
-    calc(100% - var(--espaco-2)) 100%,
-    0 100%,
-    0 var(--espaco-2)
-  );
-}
-
-.pagina-final .final-barra__numero {
-  color: var(--cor-texto-atenuado);
-}
-
-.pagina-final .final-barra__celula--cheia .final-barra__numero {
-  color: var(--cor-texto);
-}
-
-/* Hero da conclusão: faixa diagonal roxa no topo, título e placar 4 / 4. */
-.pagina-final .final-hero {
-  position: relative;
-  padding: calc(var(--espaco-3) + var(--espaco-6)) var(--espaco-6) var(--espaco-6);
-  background: var(--cor-superficie-alta);
-  clip-path: var(--recorte);
-  animation: entrar 0.4s ease both;
-}
-
-.pagina-final .final-hero::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: var(--espaco-3);
-  background: repeating-linear-gradient(
-    135deg,
-    var(--cor-destaque) 0 var(--espaco-2),
-    color-mix(in srgb, var(--cor-destaque) 35%, transparent) var(--espaco-2) var(--espaco-4)
-  );
-}
-
-.pagina-final .final-hero__topo {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--espaco-3);
-  padding-bottom: var(--espaco-4);
-  border-bottom: 1px solid var(--cor-apagado);
-}
-
-.pagina-final .final-titulo {
-  margin: var(--espaco-6) 0 var(--espaco-3);
-  font-family: var(--fonte-titulo);
-  font-weight: 700;
-  font-size: 2rem;
-  line-height: 1.15;
-}
-
-.pagina-final .final-hero__descricao {
-  margin: 0;
-  font-size: 1.0625rem;
-  line-height: 1.6;
-  color: var(--cor-texto-secundario);
-}
-
-.pagina-final .final-placar {
-  margin-top: var(--espaco-6);
-  padding-top: var(--espaco-4);
-  border-top: 1px solid var(--cor-apagado);
-}
-
-.pagina-final .final-placar__numero {
-  display: flex;
-  align-items: baseline;
-  margin: 0;
-  font-family: var(--fonte-titulo);
-  font-weight: 700;
-  line-height: 1;
-}
-
-.pagina-final .final-placar__feito {
-  font-size: 4.5rem;
-  color: var(--cor-destaque);
-}
-
-.pagina-final .final-placar__total {
-  font-size: 2rem;
-  white-space: pre;
-}
-
-.pagina-final .final-placar__rotulo {
-  margin: var(--espaco-2) 0 var(--espaco-4);
-  color: var(--cor-texto);
-}
-
-/* Na conclusão, os quatro blocos acendem em sequência (desligado com movimento reduzido). */
-.pagina-final--completa .final-barra__celula--cheia .final-barra__segmento {
-  transform-origin: left center;
-  animation: final-preencher 0.35s ease-out both;
-}
-
-.pagina-final--completa .final-barra__celula:nth-child(1) .final-barra__segmento { animation-delay: 0.3s; }
-.pagina-final--completa .final-barra__celula:nth-child(2) .final-barra__segmento { animation-delay: 0.45s; }
-.pagina-final--completa .final-barra__celula:nth-child(3) .final-barra__segmento { animation-delay: 0.6s; }
-.pagina-final--completa .final-barra__celula:nth-child(4) .final-barra__segmento { animation-delay: 0.75s; }
-
-/* Resumo: as estações validadas, em lista tipográfica sem painel. */
-.pagina-final .final-jornada {
-  margin-top: var(--espaco-12);
-}
-
-.pagina-final .final-jornada__lista {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.pagina-final .final-jornada__item {
-  display: grid;
-  grid-template-columns: var(--espaco-8) var(--espaco-8) minmax(0, 1fr);
-  grid-template-areas:
-    "marcador numero nome"
-    "marcador numero estado";
-  align-items: center;
-  column-gap: var(--espaco-3);
-  padding: var(--espaco-3) 0;
-  border-bottom: 1px solid var(--cor-superficie-alta);
-}
-
-.pagina-final .final-jornada__item:last-child {
-  border-bottom: none;
-}
-
-.pagina-final .final-jornada__marcador {
-  grid-area: marcador;
-  width: var(--espaco-8);
-  height: var(--espaco-8);
-}
-
-.pagina-final .final-jornada__numero {
-  grid-area: numero;
-  font-family: var(--fonte-titulo);
-  font-weight: 700;
-  font-size: 1.375rem;
-  line-height: 1;
-}
-
-.pagina-final .final-jornada__nome {
-  grid-area: nome;
-  font-family: var(--fonte-titulo);
-  font-weight: 600;
-  font-size: 1rem;
-  line-height: 1.3;
-}
-
-.pagina-final .final-jornada__estado {
-  grid-area: estado;
-  margin-top: var(--espaco-1);
-  color: var(--cor-texto-atenuado);
-}
-
-/* X-BOT: o clímax. Moldura roxa, carta sobre um palco listrado e a ação de jogar. */
-.pagina-final .final-xbot {
-  position: relative;
-  margin-top: var(--espaco-12);
-  background: var(--cor-superficie);
-  clip-path: var(--recorte);
-  animation: entrar 0.4s ease 0.2s both;
-}
-
-/* Moldura por cima do palco e do corpo (um box-shadow no próprio bloco ficaria atrás do palco). */
-.pagina-final .final-xbot::after {
-  content: "";
-  position: absolute;
+  position: fixed;
   inset: 0;
-  box-shadow: inset 0 0 0 2px var(--cor-destaque);
+  z-index: -1;
+  background-color: var(--cor-grade);
+  -webkit-mask: var(--textura-grade);
+  mask: var(--textura-grade);
   pointer-events: none;
 }
 
-.pagina-final .final-xbot__palco {
-  display: flex;
-  justify-content: center;
-  padding: var(--espaco-8) var(--espaco-6);
-  background: repeating-linear-gradient(
-    135deg,
-    color-mix(in srgb, var(--cor-destaque) 14%, transparent) 0 1px,
-    transparent 1px var(--espaco-3)
-  ), var(--cor-superficie-escura);
-  border-bottom: 1px solid var(--cor-apagado);
+::selection {
+  background: var(--cor-destaque);
+  color: var(--cor-fundo);
 }
 
-.pagina-final .final-xbot__carta {
-  display: block;
-  width: 220px;
-  max-width: 100%;
-  height: auto;
-  transform: rotate(-3deg);
-  filter: drop-shadow(0 var(--espaco-3) var(--espaco-6) color-mix(in srgb, var(--cor-destaque) 30%, transparent));
-  animation: final-carta 0.6s ease-out 0.35s both;
+a {
+  color: inherit;
 }
 
-.pagina-final .final-xbot__corpo {
-  padding: var(--espaco-6);
+:focus-visible {
+  outline: 2px solid var(--cor-destaque);
+  outline-offset: var(--espaco-1);
 }
 
-.pagina-final .final-xbot__titulo {
-  margin: var(--espaco-3) 0 var(--espaco-2);
-  font-family: var(--fonte-titulo);
-  font-weight: 700;
-  font-size: 2.5rem;
-  line-height: 1;
-  letter-spacing: 0.04em;
+[hidden] {
+  display: none !important;
 }
 
-.pagina-final .final-xbot__texto {
-  margin: 0 0 var(--espaco-6);
-  line-height: 1.6;
-  color: var(--cor-texto-secundario);
+/* Nome próprio que não pode quebrar no hífen (ex.: X-BOT). */
+.sem-quebra {
+  white-space: nowrap;
 }
 
-.pagina-final .final-acoes {
-  display: grid;
-  gap: var(--espaco-3);
+.visualmente-oculto {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
-.pagina-final .final-acoes__jogar {
-  min-height: 56px;
-  font-weight: 700;
-  font-size: 1.125rem;
-  letter-spacing: 0.06em;
-}
-
-/* Sem gameUrl válida: painel de status, nunca um botão sem destino. Jornada concluída
-   (quadrado cheio) e acesso ao jogo (quadrado vazio) são duas linhas separadas. */
-.pagina-final .final-status {
-  padding: var(--espaco-4);
-  background: var(--cor-fundo);
-  clip-path: var(--recorte);
-}
-
-.pagina-final .final-status__linha {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--espaco-1) var(--espaco-3);
+/* Rótulo de sistema: caixa alta, espaçado, sempre acompanhando um conteúdo, nunca sozinho. */
+.rotulo {
   margin: 0;
-  padding: var(--espaco-3) 0;
-}
-
-.pagina-final .final-status__linha:first-child {
-  padding-top: 0;
-  border-bottom: 1px solid var(--cor-superficie-alta);
-}
-
-.pagina-final .final-status__rotulo {
-  display: flex;
-  align-items: center;
-  gap: var(--espaco-2);
   font-family: var(--fonte-titulo);
   font-weight: 600;
   font-size: 0.75rem;
   letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: var(--cor-texto-secundario);
 }
 
-.pagina-final .final-status__rotulo::before {
-  content: "";
-  flex: none;
-  width: var(--espaco-2);
-  height: var(--espaco-2);
-  background: var(--cor-destaque);
-}
-
-.pagina-final .final-status__linha--pendente .final-status__rotulo::before {
-  background: none;
-  box-shadow: inset 0 0 0 1px var(--cor-texto-atenuado);
-}
-
-.pagina-final .final-status__valor {
-  font-family: var(--fonte-titulo);
-  font-weight: 700;
-  font-size: 0.875rem;
-  letter-spacing: 0.04em;
-  color: var(--cor-texto);
-}
-
-.pagina-final .final-status__linha--pendente .final-status__valor {
-  color: var(--cor-texto-secundario);
-}
-
-.pagina-final .final-status__nota {
-  margin: var(--espaco-3) 0 0;
-  padding-top: var(--espaco-3);
-  border-top: 1px solid var(--cor-superficie-alta);
-  font-size: 0.9375rem;
-  line-height: 1.5;
-  color: var(--cor-texto-secundario);
-}
-
-.pagina-final .final-saida {
-  display: grid;
-  margin-top: var(--espaco-8);
-}
-
-/* Acesso antecipado: painel neutro, sem roxo de recompensa; só o progresso real. */
-.pagina-final .final-bloqueio {
-  padding: var(--espaco-6);
-  background: var(--cor-superficie);
-  clip-path: var(--recorte);
-}
-
-.pagina-final .final-marca__pagina {
-  font-weight: 600;
-  color: var(--cor-texto-atenuado);
-}
-
-.pagina-final .final-bloqueio__estado {
-  display: inline-block;
-  margin: var(--espaco-6) 0 var(--espaco-3);
-  padding: var(--espaco-1) var(--espaco-2);
-  box-shadow: inset 0 0 0 1px var(--cor-texto-atenuado);
-}
-
-.pagina-final .final-bloqueio__titulo {
-  margin: 0 0 var(--espaco-3);
-  font-family: var(--fonte-titulo);
-  font-weight: 700;
-  font-size: 1.75rem;
-  line-height: 1.2;
-}
-
-.pagina-final .final-bloqueio__texto {
-  margin: 0 0 var(--espaco-6);
-  line-height: 1.6;
-  color: var(--cor-texto-secundario);
-}
-
-.pagina-final .final-bloqueio__progresso {
-  padding: var(--espaco-4);
-  background: var(--cor-fundo);
-  clip-path: var(--recorte);
-}
-
-.pagina-final .final-bloqueio__linha {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: var(--espaco-3);
-  margin: 0 0 var(--espaco-3);
-}
-
-.pagina-final .final-bloqueio__numero {
-  font-family: var(--fonte-titulo);
-  font-weight: 700;
-  font-size: 1.75rem;
-  line-height: 1;
-}
-
-.pagina-final .final-bloqueio__acao {
-  margin-top: var(--espaco-6);
-}
-
-@keyframes final-preencher {
-  from {
-    transform: scaleX(0);
-  }
-  to {
-    transform: none;
-  }
-}
-
-@keyframes final-carta {
-  from {
-    opacity: 0;
-    transform: translateY(var(--espaco-4)) rotate(-8deg);
-  }
-  to {
-    opacity: 1;
-    transform: rotate(-3deg);
-  }
-}
-
-@media (hover: hover) {
-  .pagina-final .final-voltar:hover {
-    color: var(--cor-texto);
-  }
-}
-
-@media (min-width: 768px) {
-  .pagina-final .final-titulo {
-    font-size: 2.5rem;
-  }
-}
-
-/* Desktop, só na conclusão: mesma largura do dossiê das estações (832px). Hero com placar à direita,
-   resumo em duas colunas e X-BOT com a carta ao lado do texto. Ordem do DOM mantida. */
-@media (min-width: 900px) {
-  .pagina-final.pagina-final--completa main {
-    max-width: calc(832px + 2 * var(--espaco-4));
-    padding-top: var(--espaco-6);
-  }
-
-  .pagina-final .final-hero {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 240px;
-    column-gap: 40px;
-    align-items: end;
-    padding: calc(var(--espaco-3) + var(--espaco-8)) 40px 40px;
-  }
-
-  .pagina-final .final-hero__topo {
-    grid-column: 1 / -1;
-  }
-
-  .pagina-final .final-titulo {
-    font-size: 2.75rem;
-  }
-
-  .pagina-final .final-hero__descricao {
-    max-width: 52ch;
-    font-size: 1.1875rem;
-  }
-
-  .pagina-final .final-placar {
-    margin-top: var(--espaco-6);
-    padding: 0 0 0 var(--espaco-8);
-    border-top: none;
-    border-left: 1px solid var(--cor-apagado);
-  }
-
-  .pagina-final .final-placar__feito {
-    font-size: 6rem;
-  }
-
-  .pagina-final .final-jornada {
-    display: grid;
-    grid-template-columns: 160px minmax(0, 1fr);
-    column-gap: var(--espaco-8);
-    align-items: start;
-  }
-
-  .pagina-final .final-jornada .final-secao {
-    display: block;
-    margin: 0;
-    padding-top: var(--espaco-4);
-  }
-
-  .pagina-final .final-jornada .final-secao::after {
-    content: none;
-  }
-
-  .pagina-final .final-jornada__item {
-    grid-template-columns: var(--espaco-8) var(--espaco-12) minmax(0, 1fr) auto;
-    grid-template-areas: "marcador numero nome estado";
-    padding: var(--espaco-4) 0;
-  }
-
-  .pagina-final .final-jornada__numero {
-    font-size: 1.75rem;
-  }
-
-  .pagina-final .final-jornada__nome {
-    font-size: 1.125rem;
-  }
-
-  .pagina-final .final-jornada__estado {
-    margin-top: 0;
-  }
-
-  .pagina-final .final-xbot {
-    display: grid;
-    grid-template-columns: 320px minmax(0, 1fr);
-  }
-
-  .pagina-final .final-xbot__palco {
-    align-items: center;
-    padding: 40px var(--espaco-8);
-    border-bottom: none;
-    border-right: 1px solid var(--cor-apagado);
-  }
-
-  .pagina-final .final-xbot__corpo {
-    align-self: center;
-    padding: 40px;
-  }
-
-  .pagina-final .final-xbot__titulo {
-    font-size: 3.5rem;
-  }
-
-  .pagina-final .final-xbot__carta {
-    width: 240px;
-  }
-
-  .pagina-final .final-acoes {
-    max-width: 320px;
-  }
-
-  .pagina-final .final-saida {
-    justify-content: start;
-  }
-
-  .pagina-final .final-saida .botao {
-    width: calc(8 * var(--espaco-8));
-  }
-
-  .pagina-final .final-bloqueio {
-    padding: var(--espaco-8);
-  }
-}
-
-.pagina-validar main {
-  padding-top: var(--espaco-8);
-}
-
-.resultado {
-  padding: var(--espaco-6);
-  background: var(--cor-superficie);
-  clip-path: var(--recorte);
-  animation: entrar 0.4s ease both;
-}
-
-.resultado--sucesso {
-  background: var(--cor-superficie-alta);
-  box-shadow: inset var(--espaco-1) 0 0 var(--cor-destaque);
-}
-
-.resultado--erro-armazenamento,
-.resultado--invalido,
-.resultado--fora-de-ordem {
-  background: var(--cor-superficie-escura);
-}
-
-.resultado__titulo {
-  margin: var(--espaco-2) 0 0;
-  font-family: var(--fonte-titulo);
-  font-weight: 700;
-  font-size: 1.75rem;
-  line-height: 1.2;
-}
-
-.resultado__texto,
-.resultado__secundario {
-  margin: var(--espaco-3) 0 0;
-}
-
-.resultado__secundario {
-  color: var(--cor-texto-secundario);
-  font-size: 0.95rem;
-}
-
-.acoes {
-  display: grid;
-  gap: var(--espaco-3);
-  margin-top: var(--espaco-6);
-}
-
+/* Botões: recorte diagonal, sem borda. O foco é uma aresta interna (o clip-path cortaria o outline). */
 .botao {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 44px;
-  padding: var(--espaco-3) var(--espaco-4);
+  gap: var(--espaco-3);
+  min-height: 48px;
+  padding: var(--espaco-3) var(--espaco-6);
   background: var(--cor-superficie-alta);
   color: var(--cor-texto);
   font-family: var(--fonte-titulo);
-  font-weight: 600;
+  font-weight: 700;
   font-size: 1rem;
+  letter-spacing: 0.06em;
+  text-align: center;
+  text-wrap: balance;
   text-decoration: none;
+  text-transform: uppercase;
   clip-path: var(--recorte);
 }
 
@@ -2521,13 +182,206 @@ main {
 
 .botao:focus-visible {
   outline: none;
-  box-shadow: inset 0 0 0 2px var(--cor-texto);
+  box-shadow: inset 0 0 0 3px var(--cor-texto);
 }
+
+.botao--principal:focus-visible {
+  box-shadow: inset 0 0 0 3px var(--cor-fundo);
+}
+
+/* Seta desenhada (não glifo Unicode): herda a cor do texto. --voltar aponta para trás. */
+.seta {
+  display: inline-block;
+  flex: none;
+  width: 1em;
+  height: 1em;
+  background-color: currentColor;
+  -webkit-mask: var(--icone-seta) center / contain no-repeat;
+  mask: var(--icone-seta) center / contain no-repeat;
+}
+
+.seta--voltar {
+  transform: scaleX(-1);
+}
+
+/* Link de volta ao Hub, igual em todas as páginas internas. */
+.terminal-voltar,
+.final-voltar {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espaco-2);
+  min-height: 44px;
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  font-size: 0.875rem;
+  letter-spacing: 0.04em;
+  color: var(--cor-texto-secundario);
+  text-decoration: none;
+}
+
+@media (hover: hover) {
+  .botao:hover {
+    background: var(--cor-texto);
+    color: var(--cor-fundo);
+  }
+
+  .terminal-voltar:hover,
+  .final-voltar:hover {
+    color: var(--cor-texto);
+  }
+}
+
+/* ---------- Gramática gráfica ---------- */
+
+/* Numeral gigante vazado: plano de fundo tipográfico, sempre decorativo (aria-hidden). */
+.numeral-vazado {
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  line-height: 0.8;
+  letter-spacing: -0.03em;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--cor-apagado);
+  user-select: none;
+}
+
+/* Retícula de mangá: pontos na cor de destaque. */
+.textura-reticula {
+  background-color: var(--cor-destaque);
+  -webkit-mask: var(--textura-reticula) 0 0 / 8px 8px repeat;
+  mask: var(--textura-reticula) 0 0 / 8px 8px repeat;
+}
+
+/* Linhas de foco convergindo para o centro. */
+.textura-foco {
+  background-color: var(--cor-destaque);
+  -webkit-mask: var(--textura-foco) center / cover no-repeat;
+  mask: var(--textura-foco) center / cover no-repeat;
+}
+
+/* Linhas de movimento horizontais, grossas à direita. */
+.textura-movimento {
+  background-color: var(--cor-destaque);
+  -webkit-mask: var(--textura-movimento) center / 100% 100% no-repeat;
+  mask: var(--textura-movimento) center / 100% 100% no-repeat;
+}
+
+/* Hachura diagonal: marca o que ainda está fechado. */
+.textura-hachura {
+  background-color: var(--cor-superficie-alta);
+  -webkit-mask: var(--textura-hachura) 0 0 / 10px 10px repeat;
+  mask: var(--textura-hachura) 0 0 / 10px 10px repeat;
+}
+
+/* Carimbo: o selo de conquista da jornada (estação validada, jornada concluída). */
+.carimbo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espaco-2);
+  padding: var(--espaco-1) var(--espaco-2);
+  border: 2px solid currentColor;
+  box-shadow: inset 0 0 0 2px var(--cor-fundo), inset 0 0 0 3px currentColor;
+  color: var(--cor-destaque);
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 0.75rem;
+  line-height: 1.2;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transform: rotate(-4deg);
+}
+
+/* Linhas esquemáticas dos diagramas (SVG): traço fino, nós quadrados, rótulos técnicos. */
+.esquema {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.esquema__linha {
+  fill: none;
+  stroke: var(--cor-apagado);
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke;
+}
+
+.esquema__linha--ativa {
+  stroke: var(--cor-destaque);
+  stroke-width: 2;
+}
+
+.esquema__no {
+  fill: var(--cor-fundo);
+  stroke: var(--cor-texto);
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke;
+}
+
+.esquema__no--cheio {
+  fill: var(--cor-destaque);
+  stroke: var(--cor-destaque);
+}
+
+.esquema__texto {
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  fill: var(--cor-texto-secundario);
+}
+
+.esquema__texto--forte {
+  font-weight: 700;
+  fill: var(--cor-texto);
+}
+
+.esquema__texto--destaque {
+  fill: var(--cor-destaque);
+}
+
+.esquema__traco {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linejoin: miter;
+  stroke-linecap: square;
+}
+
+/* Cruz de registro: marca de impressão no canto de um plano. */
+.registro {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+}
+
+.registro::before,
+.registro::after {
+  content: "";
+  position: absolute;
+  background: var(--cor-apagado);
+}
+
+.registro::before {
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+}
+
+.registro::after {
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+}
+
+/* ---------- Movimento: um gesto por página, sempre a partir de um estado já visível ---------- */
 
 @keyframes entrar {
   from {
     opacity: 0;
-    transform: translateY(var(--espaco-2));
+    transform: translateY(var(--espaco-3));
   }
   to {
     opacity: 1;
@@ -2535,24 +389,38 @@ main {
   }
 }
 
-@media (min-width: 900px) {
-  .pagina-hub .cabecalho,
-  .pagina-hub main {
-    max-width: 900px;
+@keyframes tracar {
+  from {
+    stroke-dashoffset: var(--comprimento, 1000);
   }
-
-  .pagina-hub .estacoes,
-  .pagina-hub .finais {
-    grid-template-columns: 1fr 1fr;
+  to {
+    stroke-dashoffset: 0;
   }
+}
 
-  .pagina-hub .finais--completa {
-    grid-template-columns: 1fr;
+@keyframes carimbar {
+  0% {
+    opacity: 0;
+    transform: scale(1.6) rotate(-14deg);
   }
+  60% {
+    opacity: 1;
+    transform: scale(0.94) rotate(var(--giro, -4deg));
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(var(--giro, -4deg));
+  }
+}
 
-  /* Na grade 2x2 não há sequência vertical: o trilho some, o nó fica. */
-  .pagina-hub .estacao__no::after {
-    content: none;
+@keyframes irromper {
+  from {
+    opacity: 0;
+    transform: scale(0.82);
+  }
+  to {
+    opacity: 1;
+    transform: none;
   }
 }
 

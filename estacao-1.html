@@ -5,40 +5,68 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>OdisseIA — Estação 1</title>
   <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/paginas/estacao.css">
 </head>
 <body class="pagina-estacao" data-estacao="1">
-  <!-- Pictograma da estação: joystick de fliperama, só linhas retas e quadrados. Decorativo. -->
-  <svg class="sprite" width="0" height="0" aria-hidden="true" focusable="false">
-    <symbol id="pictograma" viewBox="0 0 48 48">
-      <path d="M24 25V14"/>
-      <rect x="19" y="6" width="10" height="9" fill="currentColor" stroke="none"/>
-      <path d="M5 42V32L10 26H38L43 32V42Z"/>
-      <rect x="28" y="32" width="5" height="5" fill="currentColor" stroke="none"/>
-      <rect x="36" y="32" width="5" height="5" fill="currentColor" stroke="none"/>
-    </symbol>
-  </svg>
   <main>
     <!-- Conteúdo da estação: só aparece quando a estação está desbloqueada (app.js). -->
     <div id="conteudo-estacao" hidden>
-      <header class="terminal-hero">
-        <a class="terminal-voltar" href="hub.html"><span aria-hidden="true">←</span> Voltar ao Hub</a>
-        <div class="terminal-hero__painel">
-          <p class="terminal-hero__rotulo">ESTAÇÃO <span class="terminal-hero__numero">01</span> / 04</p>
+      <a class="terminal-voltar" href="hub.html"><span class="seta seta--voltar" aria-hidden="true"></span> Voltar ao Hub</a>
+      <aside class="dossie-rota" aria-hidden="true">
+        <p class="dossie-rota__titulo">ROTA</p>
+        <ol class="dossie-rota__lista">
+          <li class="dossie-rota__parada dossie-rota__parada--atual"><span class="dossie-rota__numero">01</span> ATÉ 1999</li>
+          <li class="dossie-rota__parada"><span class="dossie-rota__numero">02</span> 2001 → HOJE</li>
+          <li class="dossie-rota__parada"><span class="dossie-rota__numero">03</span> IA NOS JOGOS</li>
+          <li class="dossie-rota__parada"><span class="dossie-rota__numero">04</span> X-BOT</li>
+          <li class="dossie-rota__parada dossie-rota__parada--fim">CONCLUSÃO</li>
+        </ol>
+      </aside>
+      <header class="dossie-capa">
+        <span class="numeral-vazado dossie-capa__numeral" aria-hidden="true">01</span>
+        <div class="dossie-capa__texto">
           <h1 class="titulo-estacao">Evolução dos jogos até 1999</h1>
-          <svg class="terminal-hero__pict" aria-hidden="true" focusable="false"><use href="#pictograma"/></svg>
+          <p class="terminal-hero__rotulo">ESTAÇÃO <span class="terminal-hero__numero">01</span> / 04</p>
+          <dl class="dossie-ficha">
+            <div class="dossie-ficha__item"><dt>Período</dt><dd>1950–1999</dd></div>
+            <div class="dossie-ficha__item"><dt>Capítulos</dt><dd>04</dd></div>
+            <div class="dossie-ficha__item"><dt>Marcos</dt><dd>15</dd></div>
+          </dl>
+        </div>
+        <div class="dossie-capa__arte" aria-hidden="true">
+          <svg class="arte" viewBox="0 0 320 200" focusable="false">
+            <defs>
+              <pattern id="varredura" width="4" height="5" patternUnits="userSpaceOnUse"><path d="M0 0.5H4" class="arte__varredura"/></pattern>
+            </defs>
+            <path class="arte__tela" d="M14 6H306L316 16V184L306 194H14L4 184V16Z"/>
+            <rect x="10" y="12" width="300" height="176" fill="url(#varredura)"/>
+            <path class="arte__rede" d="M160 22V178"/>
+            <path class="arte__borda" d="M24 22H296M24 178H296"/>
+            <rect class="arte__solido" x="34" y="58" width="7" height="42"/>
+            <rect class="arte__solido" x="279" y="112" width="7" height="42"/>
+            <rect class="arte__rastro" x="62" y="64" width="7" height="7" opacity="0.18"/>
+            <rect class="arte__rastro" x="94" y="74" width="7" height="7" opacity="0.3"/>
+            <rect class="arte__rastro" x="126" y="84" width="7" height="7" opacity="0.45"/>
+            <rect class="arte__rastro" x="158" y="94" width="7" height="7" opacity="0.6"/>
+            <rect class="arte__rastro" x="190" y="104" width="7" height="7" opacity="0.78"/>
+            <rect class="arte__bola" x="222" y="112" width="11" height="11"/>
+            <path class="arte__trajetoria" d="M41 70L227 117"/>
+            <text class="esquema__texto" x="24" y="44">1972</text>
+            <text class="esquema__texto" x="246" y="44">1999</text>
+          </svg>
         </div>
       </header>
 
       <section class="briefing">
-        <p class="terminal-rotulo">BRIEFING</p>
         <h2 class="briefing__titulo">Do laboratório ao videogame</h2>
+        <p class="terminal-rotulo">BRIEFING</p>
         <p>Os videogames que conhecemos hoje nasceram de experiências muito mais simples. Antes dos consoles domésticos, dos gráficos em 3D e dos grandes mundos virtuais, computadores enormes e caros já eram utilizados para testar novas formas de interação.</p>
         <p>Ao longo de algumas décadas, os jogos saíram dos laboratórios, chegaram aos fliperamas, entraram nas casas e se transformaram em uma parte importante da cultura.</p>
       </section>
 
       <section class="capitulo">
-        <p class="terminal-rotulo capitulo__rotulo">CAPÍTULO <span class="capitulo__numero">01</span></p>
         <h2 class="capitulo__titulo">Os primeiros experimentos</h2>
+        <p class="terminal-rotulo capitulo__rotulo">CAPÍTULO <span class="capitulo__numero">01</span></p>
         <div class="capitulo__corpo">
           <p>Nos anos 1950, computadores eram usados principalmente em pesquisas. Mesmo assim, projetos como <strong>Bertie the Brain, OXO e Tennis for Two</strong> mostraram que essas máquinas também poderiam ser usadas para jogar.</p>
           <p>Em 1961 começou o desenvolvimento de <strong>Spacewar!</strong>, lançado e popularizado em 1962. Nele, dois jogadores controlavam naves espaciais e disputavam uma batalha em tempo real.</p>
@@ -47,8 +75,8 @@
       </section>
 
       <section class="capitulo">
-        <p class="terminal-rotulo capitulo__rotulo">CAPÍTULO <span class="capitulo__numero">02</span></p>
         <h2 class="capitulo__titulo">Dos laboratórios aos arcades</h2>
+        <p class="terminal-rotulo capitulo__rotulo">CAPÍTULO <span class="capitulo__numero">02</span></p>
         <div class="capitulo__corpo">
           <p>Nos anos 1970, os jogos começaram a alcançar um público maior.</p>
           <p><strong>Computer Space</strong> foi uma das primeiras tentativas de transformar esse tipo de experiência em um produto comercial. Pouco depois, <strong>Pong</strong>, lançado em 1972, ajudou a popularizar os videogames.</p>
@@ -58,8 +86,8 @@
       </section>
 
       <section class="capitulo">
-        <p class="terminal-rotulo capitulo__rotulo">CAPÍTULO <span class="capitulo__numero">03</span></p>
         <h2 class="capitulo__titulo">Anos 80: crescimento, crise e recuperação</h2>
+        <p class="terminal-rotulo capitulo__rotulo">CAPÍTULO <span class="capitulo__numero">03</span></p>
         <div class="capitulo__corpo">
           <p>Durante os anos 1980 surgiram jogos que se tornaram símbolos da história dos videogames.</p>
           <p><strong>Pac-Man, Tetris e Super Mario Bros.</strong> marcaram gerações com personagens, músicas e mecânicas facilmente reconhecíveis.</p>
@@ -69,8 +97,8 @@
       </section>
 
       <section class="capitulo">
-        <p class="terminal-rotulo capitulo__rotulo">CAPÍTULO <span class="capitulo__numero">04</span></p>
         <h2 class="capitulo__titulo">Anos 90: tecnologia e cultura</h2>
+        <p class="terminal-rotulo capitulo__rotulo">CAPÍTULO <span class="capitulo__numero">04</span></p>
         <div class="capitulo__corpo">
           <p>Os anos 1990 marcaram uma das maiores transformações dos videogames.</p>
           <p>Consoles como <strong>PlayStation e Nintendo 64</strong> ajudaram a popularizar ambientes em 3D, mudando a maneira como os jogadores exploravam os cenários.</p>
@@ -81,8 +109,13 @@
       </section>
 
       <section class="linha-tempo">
-        <p class="terminal-rotulo">LINHA DO TEMPO</p>
         <h2 class="linha-tempo__titulo">Alguns marcos</h2>
+        <p class="terminal-rotulo">LINHA DO TEMPO</p>
+        <div class="escala" aria-hidden="true" style="--inicio: 1950; --fim: 2000">
+          <div class="escala__eixo"><span class="escala__marco" style="--ano: 1950"></span><span class="escala__marco" style="--ano: 1952"></span><span class="escala__marco" style="--ano: 1958"></span><span class="escala__marco" style="--ano: 1961"></span><span class="escala__marco" style="--ano: 1962"></span><span class="escala__marco" style="--ano: 1972"></span><span class="escala__marco" style="--ano: 1975"></span><span class="escala__marco" style="--ano: 1977"></span><span class="escala__marco" style="--ano: 1978"></span><span class="escala__marco" style="--ano: 1980"></span><span class="escala__marco" style="--ano: 1983"></span><span class="escala__marco" style="--ano: 1984"></span><span class="escala__marco" style="--ano: 1985"></span><span class="escala__marco" style="--ano: 1994"></span><span class="escala__marco" style="--ano: 1996"></span></div>
+          <div class="escala__eras"><span class="escala__era" style="--de: 1950; --ate: 1970">50–60</span><span class="escala__era" style="--de: 1970; --ate: 1980">70</span><span class="escala__era" style="--de: 1980; --ate: 1990">80</span><span class="escala__era" style="--de: 1990; --ate: 2000">90</span></div>
+          <div class="escala__decadas"><span style="--ano: 1950">1950</span><span style="--ano: 1960">1960</span><span style="--ano: 1970">1970</span><span style="--ano: 1980">1980</span><span style="--ano: 1990">1990</span><span style="--ano: 2000">2000</span></div>
+        </div>
         <ol class="linha-tempo__lista">
           <li class="linha-tempo__item" data-era="ANOS 1950–60"><strong class="linha-tempo__marca">1950</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">Bertie the Brain</span></li>
           <li class="linha-tempo__item"><strong class="linha-tempo__marca">1952</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">OXO</span></li>
@@ -103,8 +136,8 @@
       </section>
 
       <section class="conexao">
-        <p class="terminal-rotulo">PRÓXIMA CONEXÃO</p>
         <h2 class="conexao__titulo">E depois?</h2>
+        <p class="terminal-rotulo">PRÓXIMA CONEXÃO</p>
         <p>Até o fim dos anos 1990, os videogames já tinham saído dos laboratórios, conquistado os arcades, chegado às casas e avançado para ambientes tridimensionais.</p>
         <p>Na próxima estação, você vai acompanhar o que aconteceu quando novas gerações de consoles, internet, jogos online e mundos cada vez maiores começaram a transformar ainda mais essa indústria.</p>
         <a class="botao botao--principal conexao__acao" href="hub.html">Voltar ao Hub</a>
@@ -113,12 +146,12 @@
 
     <!-- Mensagem de bloqueio: preenchida por app.js quando a estação é a próxima ou futura. -->
     <div id="estado-bloqueado" hidden>
-      <header class="terminal-hero terminal-hero--bloqueada">
-        <a class="terminal-voltar" href="hub.html"><span aria-hidden="true">←</span> Voltar ao Hub</a>
-        <div class="terminal-hero__painel">
-          <p class="terminal-hero__rotulo">ESTAÇÃO <span class="terminal-hero__numero">01</span> / 04</p>
+      <a class="terminal-voltar" href="hub.html"><span class="seta seta--voltar" aria-hidden="true"></span> Voltar ao Hub</a>
+      <header class="dossie-capa dossie-capa--bloqueada">
+        <span class="numeral-vazado dossie-capa__numeral" aria-hidden="true">01</span>
+        <div class="dossie-capa__texto">
           <h1 class="titulo-estacao">Evolução dos jogos até 1999</h1>
-          <svg class="terminal-hero__pict" aria-hidden="true" focusable="false"><use href="#pictograma"/></svg>
+          <p class="terminal-hero__rotulo">ESTAÇÃO <span class="terminal-hero__numero">01</span> / 04</p>
         </div>
       </header>
       <section id="bloqueio-painel" class="bloqueio"></section>

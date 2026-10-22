@@ -111,9 +111,6 @@ function criarCardEstacao(numero, estado, estadoSeguinte) {
   if (estadoSeguinte) {
     item.classList.add("estacao--liga-" + estadoSeguinte);
   }
-  if (numero === OdisseIAConfig.totalEstacoes && estado === "desbloqueada") {
-    item.classList.add("estacao--final");
-  }
 
   const cartao = document.createElement("a");
   cartao.className = "cartao";
@@ -144,8 +141,15 @@ function criarCardEstacao(numero, estado, estadoSeguinte) {
   const corpo = document.createElement("div");
   corpo.className = "cartao__corpo";
 
-  corpo.appendChild(criarTexto("p", "rotulo", ESTACAO_ROTULOS[estado]));
+  // O título abre o cartão; o estado vem depois, como selo (nunca um rótulo acima do título).
   corpo.appendChild(criarTexto("h2", "estacao__titulo", ESTACOES_NOMES[numero - 1]));
+  corpo.appendChild(criarTexto("p", "rotulo", ESTACAO_ROTULOS[estado]));
+  // O carimbo repete visualmente o rótulo de estado, que já está no nome acessível do link.
+  if (estado === "desbloqueada") {
+    const carimbo = criarTexto("span", "carimbo estacao__carimbo", "VALIDADA");
+    carimbo.setAttribute("aria-hidden", "true");
+    corpo.appendChild(carimbo);
+  }
 
   const acao = criarTexto("span", "estacao__acao", ESTACAO_ACOES[estado]);
   acao.appendChild(criarSeta());
@@ -153,7 +157,29 @@ function criarCardEstacao(numero, estado, estadoSeguinte) {
 
   cartao.appendChild(corpo);
   item.appendChild(cartao);
+
+  // Os passos ficam fora do link para não alongar o nome acessível do cartão.
+  if (estado === "proxima") {
+    item.appendChild(criarListaPassos("estacao__passos", numero));
+  }
   return item;
+}
+
+function passosDesbloqueio(numero) {
+  return [
+    "Visite a Estação " + doisDigitos(numero) + " na feira.",
+    "Acompanhe a apresentação.",
+    "Valide o QR Code da estação."
+  ];
+}
+
+function criarListaPassos(classe, numero) {
+  const passos = document.createElement("ol");
+  passos.className = classe;
+  passosDesbloqueio(numero).forEach(function (texto) {
+    passos.appendChild(criarTexto("li", classe + "-item", texto));
+  });
+  return passos;
 }
 
 function renderizarFinais(completa) {
@@ -162,6 +188,7 @@ function renderizarFinais(completa) {
   lista.classList.toggle("finais--completa", completa);
 
   lista.appendChild(criarCardFinal({
+    tipo: "conclusao",
     titulo: "Conclusão",
     href: completa ? "final.html" : null,
     bloqueado: !completa,
@@ -173,6 +200,7 @@ function renderizarFinais(completa) {
   // Concluir a jornada desbloqueia o X-BOT; só uma URL válida o torna acessível.
   const acessivel = completa && urlAcessivel(OdisseIAConfig.gameUrl);
   lista.appendChild(criarCardFinal({
+    tipo: "xbot",
     titulo: "X-BOT",
     href: null,
     bloqueado: !completa,
@@ -186,7 +214,7 @@ function renderizarFinais(completa) {
 
 function criarCardFinal(dados) {
   const item = document.createElement("li");
-  item.className = "final"
+  item.className = "final final--" + dados.tipo
     + (dados.bloqueado ? " final--bloqueado" : "")
     + (dados.pendente ? " final--pendente" : "")
     + (dados.principal ? " final--principal" : "");
@@ -199,8 +227,8 @@ function criarCardFinal(dados) {
 
   const corpo = document.createElement("div");
   corpo.className = "cartao__corpo";
-  corpo.appendChild(criarTexto("p", "rotulo", dados.rotulo));
   corpo.appendChild(criarTexto("h3", "final__titulo", dados.titulo));
+  corpo.appendChild(criarTexto("p", "rotulo", dados.rotulo));
 
   const detalhe = criarTexto("span", "final__detalhe", dados.detalhe);
   if (dados.href) {
@@ -214,7 +242,7 @@ function criarCardFinal(dados) {
 }
 
 function criarSeta() {
-  const seta = criarTexto("span", "seta", "→");
+  const seta = criarTexto("span", "seta", "");
   seta.setAttribute("aria-hidden", "true");
   return seta;
 }
@@ -277,8 +305,8 @@ function renderizarValidacao() {
 
   area.textContent = "";
   area.className = "resultado resultado--" + resultado;
-  area.appendChild(criarTexto("p", "rotulo", rotulo));
   area.appendChild(criarTexto("h2", "resultado__titulo", titulo));
+  area.appendChild(criarTexto("p", "rotulo", rotulo));
 
   textos.forEach(function (texto, indice) {
     const classe = indice === 0 ? "resultado__texto" : "resultado__secundario";
@@ -287,9 +315,12 @@ function renderizarValidacao() {
 
   const grupo = document.createElement("div");
   grupo.className = "acoes";
-  acoes.forEach(function (acao) {
-    grupo.appendChild(criarBotao(acao));
-  });
+  // A ação principal vem primeiro, no alcance do polegar.
+  acoes.filter(function (acao) { return acao.principal; })
+    .concat(acoes.filter(function (acao) { return !acao.principal; }))
+    .forEach(function (acao) {
+      grupo.appendChild(criarBotao(acao));
+    });
   area.appendChild(grupo);
 }
 
@@ -341,26 +372,17 @@ function renderizarBloqueio(numero, estado, proximaValida, total) {
   painel.className = "bloqueio bloqueio--" + estado;
 
   if (estado === "proxima") {
-    painel.appendChild(criarTexto("p", "bloqueio__estado", "PRÓXIMA ESTAÇÃO"));
     painel.appendChild(criarTexto("h2", "bloqueio__titulo", "Esta é a sua próxima estação"));
+    painel.appendChild(criarTexto("p", "bloqueio__estado", "PRÓXIMA ESTAÇÃO"));
     painel.appendChild(criarTexto("p", "bloqueio__texto", "O conteúdo é liberado depois da visita presencial:"));
 
-    const passos = document.createElement("ol");
-    passos.className = "bloqueio__passos";
-    [
-      "Visite a Estação " + doisDigitos(numero) + " na feira.",
-      "Acompanhe a apresentação.",
-      "Valide o QR Code da estação."
-    ].forEach(function (texto) {
-      passos.appendChild(criarTexto("li", "bloqueio__passo", texto));
-    });
-    painel.appendChild(passos);
+    painel.appendChild(criarListaPassos("bloqueio__passos", numero));
     painel.appendChild(criarProgressoBloqueio(proximaValida - 1, total));
     return;
   }
 
-  painel.appendChild(criarTexto("p", "bloqueio__estado", "BLOQUEADA"));
   painel.appendChild(criarTexto("h2", "bloqueio__titulo", "Estação ainda bloqueada"));
+  painel.appendChild(criarTexto("p", "bloqueio__estado", "BLOQUEADA"));
   painel.appendChild(criarTexto("p", "bloqueio__texto", "Antes dela, faltam etapas anteriores da jornada. A próxima estação válida é:"));
 
   const destino = document.createElement("a");

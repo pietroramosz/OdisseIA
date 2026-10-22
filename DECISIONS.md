@@ -378,7 +378,7 @@ O QR da estação N abre validar.html?estacao=N. Cinco resultados possíveis: su
 
 ## DEC-015 — Hub desktop em grade 2x2
 
-**Status:** aceita e implementada
+**Status:** substituída pela DEC-018 (21/10/2026): o Hub passou a ser uma rota horizontal de quatro paradas
 
 ### Contexto
 
@@ -405,7 +405,7 @@ Quatro estações formam naturalmente duas linhas de duas colunas. Isso deixa a 
 
 ## DEC-016 — Dossiê de 832px é compartilhado por qualquer página de conteúdo desbloqueado
 
-**Status:** aceita, registrada agora (20/10/2026) a partir de uma implementação já existente
+**Status:** substituída pela DEC-018 (21/10/2026): as estações usam grade de margem, leitura e figura, sem a largura fixa de 832px. Registrada originalmente em 20/10/2026 a partir de uma implementação já existente
 
 ### Contexto
 
@@ -454,4 +454,60 @@ As páginas de estação eram texto cinza em template repetido, o Hub repetia qu
 - DEC-015 (Hub 2×2) e DEC-016 (dossiê de 832px) não mudam. O alinhamento dos cards do Hub foi uma correção de execução.
 - `assets/img/engrenagem-acesa.png` teve o halo difuso removido do canal alfa (geometria, cores e tamanho preservados). É correção de execução, não mudança de regra: a regra "sem glow" já existia.
 - Uma versão mais expressiva (Direção B) exigiria rever a DEC-011, a DEC-013 e várias regras do `DESIGN.md`, e continua fora de escopo.
+
+---
+
+## DEC-018 — Redesenho autoral: "Arquivo de Missão" com energia de mangá
+
+**Status:** aceita e implementada (21/10/2026). Substitui a DEC-015 e a DEC-016, revisa a DEC-012 e partes da DEC-017.
+
+### Contexto
+
+Foi pedido um redesenho com identidade forte e direção de arte própria: composições elaboradas, recursos gráficos autorais e páginas desenhadas para este projeto. A identidade existente (grafite, roxo, Chakra Petch, geometria) e o universo do X-BOT (arte roxa de mangá, linhas de velocidade, engrenagens) deviam evoluir, não ser abandonados.
+
+Algumas regras anteriores impediam o resultado. A grade 2×2 fazia do Hub quatro cartões iguais. O esqueleto idêntico das estações fazia todas parecerem o mesmo template. A "Rare Ink Rule" proibia o roxo justamente onde o X-BOT é roxo: na ilustração.
+
+### Decisão
+
+1. **Direção "Arquivo de Missão".**
+   - Um traçado esquemático liga as quatro estações ao X-BOT: rota completa na abertura, posição do visitante no Hub, trilho na margem das estações e rota fechada com carimbos na Conclusão.
+   - A energia de mangá (linhas de velocidade, retícula, silhuetas, carimbos) cresce ao longo da jornada.
+   - O contrato da direção está em `.impeccable/surfaces/index-html.md`.
+2. **Roxo como tinta de estado e de ilustração.** O roxo pode colorir ilustrações (linhas de velocidade, retícula, rota percorrida, nós ativos) e letras de display: o "IA" da palavra-marca, o "4" do placar, os numerais de estação. Continua proibido em texto corrido e como fundo de painel. Substitui a "Rare Ink Rule".
+3. **Texturas como máscaras coloridas por token.** Retícula, linhas de foco e de movimento, hachura, grade e a seta são SVGs usados como `mask`, com cor vinda dos tokens. Assim a troca do roxo provisório continua num ponto só (mantém a DEC-013).
+4. **Hub como rota (substitui a DEC-015).**
+   - Trilho vertical no celular; rota horizontal de quatro paradas a partir de 900px.
+   - Cada estado tem forma própria: validada (carimbo), próxima (faixa de movimento e folha de passos), bloqueada (hachura).
+   - O Hub ganhou o link "Visão geral" para `index.html`.
+5. **Estações com composição própria (revisa a DEC-012 e substitui a DEC-016).**
+   - O que se mantém: o conteúdo no HTML, a ordem dos blocos (capa, briefing, capítulos, linha do tempo ou sequência, conexão) e os componentes compartilhados.
+   - O que cada estação ganha: ilustração e diagrama do próprio assunto, e uma composição de capa diferente (via `data-estacao`).
+   - Diagramas por estação:
+     - Estação 1: quadra de Pong e escala 1950–2000 com os marcos na posição real;
+     - Estação 2: rede de conexões e escala 2001–2026 com as épocas dos capítulos;
+     - Estação 3: máquina de estados das quatro regras do capítulo, rota de pathfinding marcada como ilustração e escada de seis etapas;
+     - Estação 4: a carta em palco de mangá.
+   - A partir de 900px, a largura de 832px dá lugar a uma grade de margem (11rem), leitura (até 42rem) e coluna livre para figuras. A partir de 1100px entra o trilho da rota.
+6. **Título primeiro.** Nenhum rótulo ou selo acima de título. Estados (PRÓXIMA ESTAÇÃO, BLOQUEADA, DESBLOQUEADO, SUCESSO) vêm depois do título. Rótulos de seção ficam na margem a partir de 900px e somem no celular.
+7. **Carta do X-BOT (revisa a DEC-017).**
+   - A carta continua só na Estação 4 e na Conclusão.
+   - Na Estação 4 ganha palco com linhas de foco e retícula, inclinação e moldura branca, mas sem drop-shadow.
+   - A sombra suave continua exclusiva da Conclusão.
+   - Os pictogramas pequenos da DEC-017 deram lugar às ilustrações de capa.
+8. **Ícones desenhados.** As setas ← e → em Unicode viraram um ícone SVG (`.seta`).
+9. **CSS por página.** `assets/css/style.css` virou a base compartilhada: tokens, fontes, componentes e gramática gráfica. Cada página carrega também a sua folha em `assets/css/paginas/`. As páginas continuam herdando da base (mantém a DEC-013), e nenhum arquivo cresce além de cerca de 1.300 linhas.
+
+### O que não muda
+
+- Paleta, com `#CD5EFA` provisório (DEC-011, DEC-013); Chakra Petch 600/700 sem fonte nova; sem framework, CDN ou build; funcionamento via `file://` (DEC-010).
+- Fluxo das estações, validação dos QR Codes (DEC-014), chave `odisseia:progresso` e contrato do progresso.
+- O acesso ao X-BOT só vira botão com `gameUrl` absoluta http(s) (DEC-017). Sem ela, o estado pendente é mostrado como tal.
+- Nenhum diagrama, ficha ou legenda inventa dados. As fichas trazem só período, número de capítulos, número de marcos e etapas, tirados do próprio conteúdo.
+
+### Consequências
+
+- `DESIGN.md` foi reescrito para o novo sistema, incluindo as regras nomeadas novas.
+- A verificação usou testes de caracterização fora do repositório: unidade com `node:test` e E2E em Chrome headless via `file://`, incluindo um teste de preservação de todos os blocos de texto educativo.
+- O teste em celular real e em outros navegadores continua pendente.
+- Uma mudança futura de paleta continua num ponto só: os tokens de `style.css`.
 
