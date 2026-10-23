@@ -30,7 +30,7 @@ Durante o desenvolvimento, usamos quatro estados para evitar confusão:
 - **Implementado:** já existe no código;
 - **Validado:** foi implementado e testado no fluxo esperado.
 
-Situação revisada em 23/10/2026 (identidade azul, `gameUrl` e acessibilidade; testado só em Chrome headless):
+Situação revisada em 23/10/2026 (identidade grafite com traçado azul, acesso ao X-B0T, `gameUrl` e acessibilidade; testado só em Chrome headless):
 
 - **Validado:** sistema de progresso (`progresso.js`), testado no console, incluindo dado corrompido e número decimal.
 - **Implementado e testado em emulador e no celular:** Hub (`hub.html`), nos estados 0 a 4.
@@ -316,16 +316,13 @@ Alguns princípios que guiam o design:
 
 O site e o X-B0T devem parecer partes da mesma experiência, cada um com a sua cor.
 
-Desde 23/10/2026 (DEC-020), o OdisseIA é azul, para conversar com a sala da feira, e o roxo é a cor do X-B0T.
+Desde 23/10/2026 (DEC-023), a base é grafite, escura e neutra, com três cores de função fixa:
 
-A base visual utiliza principalmente:
+- azul intermediário da sala (`#142146`) só em traçados, linhas, trilhos, separadores e molduras de módulos;
+- branco-sinal como tinta de estado e ênfase (concluído, próxima estação, botão principal);
+- roxo (`#CD5EFA`, provisório) só nas partes ligadas ao jogo X-B0T.
 
-- azul da sala (`#031634`), azul intermediário (`#142146`) e azul do logo (`#242B57`);
-- um azul-luz como cor de estado e destaque;
-- roxo (`#CD5EFA`, provisório) só nas partes ligadas ao jogo;
-- elementos tecnológicos, contraste forte e interface limpa.
-
-As engrenagens das quatro estações são azuis; a do X-B0T é roxa. O roxo não é usado como cor geral do site nem em textos longos.
+As engrenagens das estações são clara (validada) e cinza (ainda não); a do X-B0T é roxa. O azul nunca é fundo de painel nem cor de texto, e o roxo não é usado como cor geral do site.
 
 Como a experiência é mobile-first, legibilidade e contraste têm prioridade sobre efeitos visuais.
 
@@ -417,9 +414,9 @@ Esta seção guarda apenas trabalho concreto ainda aberto. Ela não substitui o 
 - [ ] Ampliar ou confirmar a orientação de “mesmo navegador”: hoje o Index já avisa, mas o problema ainda pode aparecer durante o fluxo de QR.
 - [ ] Fazer um teste completo em celular do fluxo: visão geral → Hub → QR1 → 1 → QR2 → 2 → QR3 → 3 → QR4 → 4 → conclusão → X-B0T.
 - [ ] Confirmar a cor final do X-B0T; enquanto isso, `#CD5EFA` continua provisório.
-- [ ] Confirmar com o grupo a alteração editorial na Estação 4 (DEC-020): o texto de herança visual deixou de citar "o cinza".
+- [ ] Confirmar com o grupo a alteração editorial na Estação 4 (DEC-020) e o texto novo do Bastidores 02 (DEC-023).
+- [ ] Testar em celular real o acesso ao X-B0T pelo Hub e pela Conclusão e o aviso "vire o aparelho na horizontal".
 - [ ] Testar o painel de acessibilidade no computador da escola (DEC-022) e, se possível, com o armazenamento do navegador bloqueado.
-- [ ] Regenerar `.impeccable/design.json`, que ainda descreve a paleta anterior.
 
 ### Risco operacional
 

@@ -44,7 +44,7 @@ A experiência não é "um site sobre a feira" nem "um jogo com um site de apoio
 ## Brand Commitments
 
 - Nome do projeto: **OdisseIA**. Jogo final: **X-B0T**.
-- Identidade visual azul (DEC-020), alinhada à sala da feira (#031634, #142146, #242B57), com o **roxo** (`#CD5EFA`, provisório) reservado ao X-B0T — nunca cor dominante em texto corrido.
+- Identidade visual (DEC-023): base grafite, escura e neutra; o azul #142146 só em traçados, linhas, trilhos e molduras; o branco-sinal como tinta de estado; o **roxo** (`#CD5EFA`, provisório) reservado ao X-B0T — nunca cor dominante em texto corrido, e nunca fora das partes do jogo.
 - Tipografia: **Chakra Petch** SemiBold(600)/Bold(700), local em `assets/fonts/` (sem CDN), para títulos/rótulos/números; texto corrido em fonte de sistema. Inter guardada na pasta como alternativa futura, não carregada.
 - Motivo de forma único e repetido: cantos cortados em diagonal (cards, segmentos de barra).
 - Proibido: glow generalizado, gradiente excessivo, glassmorphism, emoji como ícone, hover como requisito, texto pequeno em contorno, fonte nova sem decisão explícita.
@@ -53,7 +53,7 @@ A experiência não é "um site sobre a feira" nem "um jogo com um site de apoio
 ## Evidence on Hand
 
 - Documentação viva do projeto é fonte de verdade e deve ser tratada como tal: `README.md`, `PROJECT.md`, `DECISIONS.md`, `DESIGN.md` (sistema de design; substitui o antigo `docs/ESTILO.md`), `AI-WORKFLOW.md`, `DEVLOG.md`.
-- Decisões numeradas (`DEC-001` a `DEC-022`) registram o histórico de escolhas de produto, arquitetura e visual — qualquer mudança que contradiga uma DEC existente exige decisão explícita, não apenas uma preferência de implementação.
+- Decisões numeradas (`DEC-001` a `DEC-023`) registram o histórico de escolhas de produto, arquitetura e visual — qualquer mudança que contradiga uma DEC existente exige decisão explícita, não apenas uma preferência de implementação.
 - Nenhuma mecânica, carta, regra ou dado do X-B0T deve ser inventado ou documentado pelo site além do que realmente existir na versão final do jogo (DEC-007).
 
 ## Product Principles

@@ -362,6 +362,12 @@
   gap: var(--espaco-3);
 }
 
+/* O aviso de giro (style.css) fica alinhado ao texto do bloco, logo acima do botão. */
+.final-acoes .aviso-giro {
+  padding-left: 0;
+  padding-right: 0;
+}
+
 .final-acoes__jogar {
   min-height: 56px;
   font-size: 1.125rem;

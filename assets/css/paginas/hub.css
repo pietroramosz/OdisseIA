@@ -50,7 +50,8 @@
 }
 
 .titulo-marca__ia {
-  color: var(--cor-destaque);
+  color: transparent;
+  -webkit-text-stroke: 0.04em var(--cor-texto);
 }
 
 .titulo-marca__pagina {
@@ -198,11 +199,11 @@
 
 /* Trecho percorrido: roxo sólido. Até a próxima estação: roxo tracejado. */
 .estacao--liga-desbloqueada .estacao__no::after {
-  border-left: 2px solid var(--cor-destaque);
+  border-left: 3px solid var(--cor-azul);
 }
 
 .estacao--liga-proxima .estacao__no::after {
-  border-left: 2px dashed var(--cor-destaque);
+  border-left: 3px dashed var(--cor-azul);
 }
 
 .estacao:last-child .estacao__no::after {
@@ -549,8 +550,14 @@ a.cartao:active .cartao__corpo {
   color: var(--cor-texto-secundario);
 }
 
-/* X-B0T: o destino com identidade própria. Roxo na moldura, na faixa, no selo e na engrenagem
-   (as engrenagens das estações são azuis); o resto do cartão segue a linguagem do Hub. */
+/* X-B0T: o único destino com a cor do jogo (roxo) e a engrenagem roxa. Os outros cartões do Hub
+   seguem a linguagem grafite. Com a jornada concluída e a gameUrl configurada o cartão é um link para
+   o jogo; antes disso é só status, sem ação. */
+.final--xbot {
+  --cor-destaque: var(--cor-xbot);
+  --cor-sobre-destaque: var(--cor-sobre-xbot);
+}
+
 .final--xbot .cartao__corpo {
   --moldura: var(--cor-xbot);
   --espessura: 2px;
@@ -558,7 +565,7 @@ a.cartao:active .cartao__corpo {
 
 .final--xbot .final__titulo,
 .final--xbot .cartao__descricao {
-  padding-right: calc(var(--espaco-16) + var(--espaco-6));
+  padding-right: calc(var(--espaco-16) + var(--espaco-4));
 }
 
 .final__engrenagem {
@@ -574,12 +581,15 @@ a.cartao:active .cartao__corpo {
   background-color: var(--cor-xbot);
 }
 
+/* Bloqueado: a moldura roxa fica apagada, para não disputar atenção com a próxima estação. */
+.final--xbot.final--bloqueado .cartao__corpo {
+  --moldura: color-mix(in srgb, var(--cor-xbot) 42%, var(--cor-fundo));
+}
+
 .final--xbot.final--bloqueado .cartao__faixa {
-  background-color: var(--cor-xbot);
   opacity: 0.55;
 }
 
-/* Desbloqueado: selo roxo cheio, como o selo da próxima estação, mas na cor do jogo. */
 .final--xbot:not(.final--bloqueado) .cartao__estado {
   padding: var(--espaco-1) var(--espaco-2);
   background: var(--cor-xbot);
@@ -587,23 +597,25 @@ a.cartao:active .cartao__corpo {
   clip-path: var(--recorte-minimo);
 }
 
-.final--xbot.final--bloqueado .cartao__estado {
-  color: var(--cor-texto-secundario);
-}
-
 .final--xbot.final--bloqueado .cartao__estado::before {
   color: var(--cor-xbot);
 }
 
-.final--pendente .cartao__estado::before {
-  content: none;
-}
-
-/* Aguardando liberação: o mesmo selo, só contornado. */
+/* Aguardando liberação (jornada concluída, mas sem gameUrl): o mesmo selo, só contornado. */
 .final--xbot.final--pendente .cartao__estado {
   background: none;
   color: var(--cor-xbot);
   box-shadow: inset 0 0 0 2px var(--cor-xbot);
+}
+
+.final--xbot a.cartao .final__detalhe {
+  background: var(--cor-xbot);
+  color: var(--cor-sobre-xbot);
+}
+
+/* O aviso de giro (style.css) fica dentro do cartão, entre o selo de estado e a ação. */
+.cartao__corpo > .aviso-giro {
+  border-top: 1px dashed var(--cor-apagado);
 }
 
 /* Conclusão disponível: mesma linguagem da próxima estação. */
@@ -645,33 +657,11 @@ a.cartao:active .cartao__corpo {
     grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
     column-gap: var(--espaco-12);
     align-items: end;
-    padding: var(--espaco-12) var(--espaco-12) var(--espaco-8);
-  }
-
-  /* Retícula azul no canto da palavra-marca: o mesmo gesto da abertura. */
-  .painel-status::before {
-    content: "";
-    position: absolute;
-    z-index: -1;
-    left: 0;
-    bottom: 0;
-    width: 38%;
-    height: 70%;
-    background-color: var(--cor-destaque);
-    opacity: 0.16;
-    -webkit-mask: var(--textura-reticula) 0 0 / 8px 8px repeat;
-    mask: var(--textura-reticula) 0 0 / 8px 8px repeat;
-    clip-path: polygon(0 0, 100% 100%, 0 100%);
+    padding: var(--espaco-8);
   }
 
   .titulo-marca {
-    font-size: clamp(3.5rem, 6.4vw, 7.5rem);
-    letter-spacing: -0.03em;
-  }
-
-  .titulo-marca__pagina {
-    margin-top: var(--espaco-4);
-    font-size: 0.875rem;
+    font-size: 3.5rem;
   }
 
   .progresso {
@@ -679,106 +669,7 @@ a.cartao:active .cartao__corpo {
   }
 
   .progresso__numero {
-    font-size: clamp(6rem, 10vw, 11rem);
-  }
-
-  .barra {
-    gap: var(--espaco-2);
-  }
-
-  .barra__celula {
-    grid-template-rows: var(--espaco-4) auto;
-  }
-
-  .barra__segmento {
-    height: var(--espaco-1);
-  }
-
-  .barra__segmento--cheio {
-    height: var(--espaco-4);
-    clip-path: var(--recorte);
-  }
-
-  /* A rota é um palco: fundo mais fundo, grade própria, e as quatro paradas sobre ele. */
-  .rota {
-    position: relative;
-    isolation: isolate;
-    margin-top: var(--espaco-12);
-    padding: var(--espaco-8) clamp(var(--espaco-3), 2vw, var(--espaco-6)) var(--espaco-8);
-    background: var(--cor-superficie-escura);
-    clip-path: var(--recorte);
-  }
-
-  .rota::before {
-    content: "";
-    position: absolute;
-    z-index: -1;
-    inset: 0;
-    background-color: var(--cor-linha);
-    opacity: 0.55;
-    -webkit-mask: var(--textura-grade);
-    mask: var(--textura-grade);
-  }
-
-  .marcador {
-    width: 64px;
-    height: 64px;
-  }
-
-  .estacao--proxima .marcador {
-    width: 76px;
-    height: 76px;
-  }
-
-  .estacao--bloqueada .marcador {
-    width: 52px;
-    height: 52px;
-    margin-top: 0;
-  }
-
-  .estacao--proxima .marcador {
-    box-shadow: 0 0 0 2px var(--cor-superficie-escura), 0 0 0 4px var(--cor-destaque);
-  }
-
-  .estacao__numero {
-    font-size: 2.25rem;
-    letter-spacing: -0.02em;
-  }
-
-  /* Trilho: grosso onde já passou, tracejado até a próxima, fino e apagado no futuro. */
-  .estacao__no::after {
-    border-top-width: 2px;
-  }
-
-  .estacao--liga-desbloqueada .estacao__no::after {
-    border-top-width: 4px;
-  }
-
-  .estacao--liga-proxima .estacao__no::after {
-    border-top-width: 4px;
-  }
-
-  .estacao > .cartao {
-    grid-template-rows: 88px 1fr;
-  }
-
-  /* A próxima estação sobe: o cartão é o maior e o único que se projeta para cima do alinhamento. */
-  .estacao--proxima > .cartao .cartao__corpo {
-    margin-top: calc(-1 * var(--espaco-3));
-  }
-
-  .estacao__titulo,
-  .final__titulo {
-    font-size: clamp(1.125rem, 1.75vw, 1.375rem);
-    overflow-wrap: anywhere;
-  }
-
-  .estacao--proxima .estacao__titulo {
-    font-size: clamp(1.25rem, 2.1vw, 1.75rem);
-  }
-
-  .cartao__descricao {
-    font-size: 1rem;
+    font-size: 6rem;
   }
 
   /* Os quatro cartões da linha terminam juntos: ação sempre na base. */
@@ -844,12 +735,12 @@ a.cartao:active .cartao__corpo {
 
   .estacao--liga-desbloqueada .estacao__no::after {
     border-left: none;
-    border-top: 2px solid var(--cor-destaque);
+    border-top: 4px solid var(--cor-azul);
   }
 
   .estacao--liga-proxima .estacao__no::after {
     border-left: none;
-    border-top: 2px dashed var(--cor-destaque);
+    border-top: 4px dashed var(--cor-azul);
   }
 
   .destino {

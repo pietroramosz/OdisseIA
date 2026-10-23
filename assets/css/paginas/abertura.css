@@ -9,8 +9,8 @@
   overflow-x: clip;
 }
 
-/* O X-B0T é o único ponto roxo da abertura: a explosão e a carta no fim da rota, a silhueta do
-   destino e a quarta linha do índice. O resto do site é azul. */
+/* O X-B0T é o único ponto roxo da abertura: a carta e a explosão no fim da rota, a silhueta do
+   destino e a quarta linha do índice. O resto da página é grafite, branco-sinal e o azul de traçado. */
 .capa__explosao,
 .capa__xbot,
 .destino__palco,
@@ -60,10 +60,12 @@
   letter-spacing: -0.04em;
 }
 
+/* "IA": só o contorno, na mesma gramática dos numerais vazados. É texto grande (a partir de 3rem). */
 .capa__ia {
   justify-self: end;
   margin-right: var(--espaco-2);
-  color: var(--cor-destaque);
+  color: transparent;
+  -webkit-text-stroke: 0.028em var(--cor-texto);
 }
 
 .capa__proposta {

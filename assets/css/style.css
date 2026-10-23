@@ -18,31 +18,31 @@
   font-display: swap;
 }
 
-/* Identidade azul do OdisseIA, a partir das cores da sala da feira: azul da sala (#031634), azul
-   intermediário (#142146) e azul do logo (#242b57). O roxo é do X-B0T: aparece só onde o jogo é o
-   assunto (--cor-xbot), nunca como cor geral do site. Uma troca de cor acontece neste bloco. */
+/* Identidade do OdisseIA: base grafite, escura e neutra. Cada cor tem uma função:
+   - grafite (fundo e superfícies) e branco-sinal (texto e ênfase) formam a interface;
+   - --cor-azul (#142146, o azul intermediário da sala) desenha traçados, filetes, trilhos, molduras
+     de módulos, grade e texturas: a estrutura que antes era roxa. Nunca é fundo de painel;
+   - --cor-destaque é a tinta de estado e de ênfase (concluído, próximo, botão principal): branco-sinal;
+   - --cor-xbot (#cd5efa) é só do X-B0T: onde o jogo é o assunto, a cor de destaque é trocada por ele.
+   Uma troca de cor acontece neste bloco. */
 :root {
-  --azul-sala: #031634;
-  --azul-meio: #142146;
-  --azul-logo: #242b57;
-
-  --cor-fundo: var(--azul-sala);
-  --cor-superficie: #0b1d40;
-  --cor-superficie-escura: #020f26;
-  --cor-superficie-alta: var(--azul-meio);
-  --cor-linha: var(--azul-logo);
-  --cor-texto: #eef3ff;
-  --cor-texto-secundario: #c3cde6;
-  --cor-texto-atenuado: #9fadd0;
-  --cor-destaque: #5b9cff;
-  --cor-apagado: #6c80b3;
-  --cor-sobre-destaque: #031634;
-  --cor-grade: rgba(130, 165, 255, 0.05);
+  --cor-fundo: #0c0c10;
+  --cor-superficie: #16161d;
+  --cor-superficie-escura: #111116;
+  --cor-superficie-alta: #1f1f29;
+  --cor-texto: #f3f3f6;
+  --cor-texto-secundario: #c2c2cc;
+  --cor-texto-atenuado: #9d9daa;
+  --cor-destaque: #f3f3f6;
+  --cor-sobre-destaque: #0c0c10;
+  --cor-apagado: #6f6f7d;
+  --cor-azul: #142146;
+  --cor-grade: rgba(255, 255, 255, 0.04);
 
   --cor-xbot: #cd5efa;
-  --cor-sobre-xbot: #12051a;
-  /* O azul do site, resolvido na raiz: áreas de uma estação ou do X-B0T que re-pintam
-     --cor-destaque usam --cor-marca para devolver a navegação da jornada ao azul. */
+  --cor-sobre-xbot: #0c0c10;
+  /* A cor de ênfase da jornada, resolvida na raiz: as áreas do X-B0T re-pintam --cor-destaque e a
+     navegação a devolve com --cor-marca. */
   --cor-marca: var(--cor-destaque);
   --cor-sobre-marca: var(--cor-sobre-destaque);
 
@@ -115,49 +115,49 @@
 
 :root[data-tema="claro"] {
   color-scheme: light;
-  --cor-fundo: #f2f5fb;
+  --cor-fundo: #f5f3f8;
   --cor-superficie: #ffffff;
-  --cor-superficie-escura: #e6ebf6;
-  --cor-superficie-alta: #d9e0f0;
-  --cor-linha: #c4cde4;
-  --cor-texto: #0a1530;
-  --cor-texto-secundario: #2d3a5c;
-  --cor-texto-atenuado: #4a5780;
-  --cor-destaque: #1c56c4;
-  --cor-apagado: #66749c;
+  --cor-superficie-escura: #ebe8f0;
+  --cor-superficie-alta: #e2deea;
+  --cor-texto: #17151c;
+  --cor-texto-secundario: #3d3a48;
+  --cor-texto-atenuado: #565263;
+  --cor-destaque: #17151c;
   --cor-sobre-destaque: #ffffff;
-  --cor-grade: rgba(10, 21, 48, 0.06);
+  --cor-apagado: #6e6a7c;
+  --cor-azul: #b7c0dc;
+  --cor-grade: rgba(23, 21, 28, 0.06);
   --cor-xbot: #8f26c7;
   --cor-sobre-xbot: #ffffff;
 }
 
 /* Alto contraste: mais distância entre texto e fundo, quadros e traços mais firmes. */
 :root[data-contraste="alto"] {
-  --cor-fundo: #000814;
-  --cor-superficie: #020c1e;
+  --cor-fundo: #000000;
+  --cor-superficie: #0a0a0c;
   --cor-superficie-escura: #000000;
-  --cor-superficie-alta: #14224a;
-  --cor-linha: #3a4a8a;
+  --cor-superficie-alta: #22222c;
   --cor-texto: #ffffff;
   --cor-texto-secundario: #ffffff;
-  --cor-texto-atenuado: #e3eaff;
-  --cor-destaque: #8bb8ff;
-  --cor-apagado: #a6b6e0;
+  --cor-texto-atenuado: #e6e6ec;
+  --cor-destaque: #ffffff;
+  --cor-apagado: #a9a9b6;
+  --cor-azul: #3a4a8a;
   --cor-grade: rgba(255, 255, 255, 0.02);
 }
 
 :root[data-tema="claro"][data-contraste="alto"] {
   --cor-fundo: #ffffff;
   --cor-superficie: #ffffff;
-  --cor-superficie-escura: #eef1f8;
-  --cor-superficie-alta: #d3dbee;
-  --cor-linha: #8a98c0;
+  --cor-superficie-escura: #f0f0f2;
+  --cor-superficie-alta: #d6d6dc;
   --cor-texto: #000000;
   --cor-texto-secundario: #000000;
-  --cor-texto-atenuado: #14203f;
-  --cor-destaque: #0b3a9a;
-  --cor-apagado: #4a5780;
+  --cor-texto-atenuado: #1f1f24;
+  --cor-destaque: #000000;
   --cor-sobre-destaque: #ffffff;
+  --cor-apagado: #55555f;
+  --cor-azul: #7b88b8;
   --cor-grade: rgba(0, 0, 0, 0.03);
   --cor-xbot: #6a0fa0;
 }
@@ -380,6 +380,33 @@ p .zero::after {
   box-shadow: inset 0 0 0 3px var(--cor-sobre-destaque);
 }
 
+/* Aviso para jogar no celular ("vire o aparelho na horizontal"). Só aparece em tela pequena e com o
+   aparelho na vertical: no desktop e com o celular já deitado o parágrafo não é exibido. Não força
+   a rotação nem bloqueia o acesso ao jogo. */
+.aviso-giro {
+  display: none;
+}
+
+@media (max-width: 899px) and (orientation: portrait) {
+  .aviso-giro {
+    display: flex;
+    align-items: center;
+    gap: var(--espaco-3);
+    margin: 0;
+    padding: var(--espaco-3) var(--espaco-4);
+    font-size: 0.9375rem;
+    line-height: 1.4;
+    color: var(--cor-texto);
+  }
+
+  .aviso-giro__icone {
+    flex: none;
+    width: 34px;
+    height: 34px;
+    color: var(--cor-xbot);
+  }
+}
+
 /* Seta desenhada (não glifo Unicode): herda a cor do texto. --voltar aponta para trás. */
 .seta {
   display: inline-block;
@@ -438,23 +465,23 @@ p .zero::after {
   pointer-events: none;
 }
 
-/* Retícula de mangá: pontos na cor de destaque. */
+/* Retícula de mangá: pontos no azul de traçado. */
 .textura-reticula {
-  background-color: var(--cor-destaque);
+  background-color: var(--cor-azul);
   -webkit-mask: var(--textura-reticula) 0 0 / 8px 8px repeat;
   mask: var(--textura-reticula) 0 0 / 8px 8px repeat;
 }
 
 /* Linhas de foco convergindo para o centro. */
 .textura-foco {
-  background-color: var(--cor-destaque);
+  background-color: var(--cor-azul);
   -webkit-mask: var(--textura-foco) center / cover no-repeat;
   mask: var(--textura-foco) center / cover no-repeat;
 }
 
 /* Linhas de movimento horizontais, grossas à direita. */
 .textura-movimento {
-  background-color: var(--cor-destaque);
+  background-color: var(--cor-azul);
   -webkit-mask: var(--textura-movimento) center / 100% 100% no-repeat;
   mask: var(--textura-movimento) center / 100% 100% no-repeat;
 }
@@ -772,20 +799,63 @@ p .zero::after {
   cursor: pointer;
 }
 
-.a11y__grupo {
-  margin-top: var(--espaco-4);
+/* Os dois controles diretos: filas de interruptor, uma embaixo da outra, sem agrupamentos. */
+.a11y__chaves {
+  display: grid;
+  gap: var(--espaco-1);
+}
+
+.a11y__nota {
+  color: var(--cor-texto-atenuado);
+  font-size: 0.75rem;
+  font-weight: 400;
+}
+
+/* Tema e tamanho do texto continuam disponíveis, recolhidos. */
+.a11y__mais {
+  margin-top: var(--espaco-3);
   padding-top: var(--espaco-3);
   border-top: 1px dashed var(--cor-apagado);
 }
 
-.a11y__grupo-nome {
-  margin: 0 0 var(--espaco-2);
-  color: var(--cor-texto-atenuado);
+.a11y__mais-titulo {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--cor-texto-secundario);
   font-family: var(--fonte-titulo);
   font-weight: 600;
-  font-size: 0.75rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  font-size: 0.8125rem;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+}
+
+.a11y__mais-titulo::after {
+  content: "";
+  flex: none;
+  width: 0.5em;
+  height: 0.5em;
+  margin-left: auto;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg) translate(-2px, -2px);
+}
+
+.a11y__mais[open] > .a11y__mais-titulo::after {
+  transform: rotate(-135deg) translate(-2px, -2px);
+}
+
+.a11y__mais-titulo:focus-visible {
+  outline: 3px solid var(--cor-texto);
+  outline-offset: 2px;
+}
+
+.a11y__mais[open] > .a11y__mais-titulo {
+  margin-bottom: var(--espaco-2);
+}
+
+.a11y__mais .a11y__restaurar {
+  margin-top: var(--espaco-2);
 }
 
 .a11y__opcoes {
@@ -948,18 +1018,8 @@ p .zero::after {
   cursor: not-allowed;
 }
 
-.a11y__rodape {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--espaco-3);
-  margin-top: var(--espaco-4);
-  padding-top: var(--espaco-3);
-  border-top: 1px dashed var(--cor-apagado);
-}
-
 .a11y__status {
-  margin: 0;
+  margin: var(--espaco-2) 0 0;
   color: var(--cor-texto-secundario);
   font-size: 0.8125rem;
 }

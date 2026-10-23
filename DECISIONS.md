@@ -553,7 +553,7 @@ Depois da DEC-018, as quatro estações ainda liam como o mesmo documento: só t
 
 ## DEC-020 — Identidade azul do OdisseIA; o roxo fica com o X-B0T
 
-**Status:** aceita e implementada (23/10/2026). Revisa a paleta da DEC-011 e da DEC-013; mantém o resto da DEC-018 e da DEC-019.
+**Status:** aceita e implementada (23/10/2026); **revisada no mesmo dia pela DEC-023**, que devolveu a base grafite e restringiu o azul ao traçado. O que continua valendo: o roxo é só do X-B0T (item 2), a grafia X-B0T com zero (item 7) e o resto abaixo que a DEC-023 não cita. Os itens 1, 3, 4 e 5 foram substituídos, e o 6 foi ajustado (sem a barra lateral no primeiro parágrafo, sem rótulos que repetem títulos e sem módulos que repetem o texto).
 
 ### Contexto
 
@@ -623,3 +623,40 @@ No computador da escola, "Reduzir animações" não podia ser desligada. A inves
 ### Limitação
 
 Se o navegador da escola bloquear o `localStorage`, nenhuma preferência persiste entre páginas (o painel avisa que a escolha vale só nesta página). Isso não foi observado nem testado naquele computador.
+
+---
+
+## DEC-023 — Base grafite, azul #142146 só no traçado e roxo só no X-B0T
+
+**Status:** aceita e implementada (23/10/2026). Revisa a DEC-020 (paleta azul). A DEC-021 (largura e escala) e a DEC-022 (movimento) continuam valendo.
+
+### Contexto
+
+A DEC-020 pintou o site de azul de ponta a ponta (fundos, cartões, acentos, engrenagens) e misturou azul e roxo no Hub e na abertura sem uma regra clara. Pedido da equipe: recuperar a base grafite da versão anterior, usar o #142146 só no que antes era traço roxo e reservar o #CD5EFA ao X-B0T.
+
+### Decisão
+
+1. **Base grafite neutra de volta:** fundo `#0c0c10`, superfícies `#16161d`, `#111116` e `#1f1f29`, texto `#f3f3f6`, apagado `#6f6f7d`, os mesmos valores do commit 7f51320. Os temas claro e de alto contraste voltaram à base anterior.
+2. **Três cores, três funções:**
+   - **Azul de traçado `#142146` (`--cor-azul`):** filetes e separadores de seção, trilho do Hub e trilho da rota nas estações, molduras de módulos, grade, retícula, linhas de velocidade e de foco, marca-texto sob nomes e conceitos. Nunca é fundo de painel, cartão ou página, nem cor de texto.
+   - **Branco-sinal (`--cor-destaque`):** estado e ênfase (validada, próxima estação, progresso, botão principal, foco). É o que a cor roxa fazia antes nesses papéis.
+   - **Roxo `#CD5EFA` (`--cor-xbot`):** só onde o jogo é o assunto: cartão, engrenagem e selo do X-B0T no Hub, carta e explosão da abertura, silhueta do destino, quarta linha do índice, Estação 4 e bloco do jogo na Conclusão. A navegação da jornada continua na cor do site (`--cor-marca`).
+3. **Engrenagens:** validada = `engrenagem-clara.png` (prata, derivada da roxa por dessaturação); ainda não = a cinza original. As azuis da DEC-020 foram apagadas. A roxa original é só do X-B0T.
+4. **Contraste do azul:** o #142146 sobre o grafite tem 1,2:1. Por isso desenha só o que é decorativo ou estrutural, em traços de 2 a 4px, e nenhuma informação depende dele: o estado do Hub está nas engrenagens, nos selos e no texto. Informação que precisa ser vista usa branco-sinal ou apagado. A auditoria de contraste de texto passa nos quatro temas.
+5. **Marca:** o "IA" da palavra-marca voltou a se distinguir do "Odisse" só por contorno (mesma gramática dos numerais vazados).
+6. **Hub e abertura:** voltam à composição do commit 7f51320, com as correções da DEC-021 (largura) e da DEC-022 (movimento) e o acesso real ao X-B0T (abaixo). O herói maior e o palco escuro da rota da DEC-020 foram retirados.
+7. **Acesso ao X-B0T no Hub:** o cartão do X-B0T, à direita da Conclusão, é bloqueado até 4/4 (cadeado, engrenagem cinza, moldura roxa apagada). Com 4/4 e `OdisseIAConfig.gameUrl` válida (http/https absoluta) ele vira um link para o jogo, **na mesma aba**. Sem URL válida o cartão fica como "AGUARDANDO LIBERAÇÃO", sem link. A URL continua só em `config.js`. O acesso ao jogo continua sendo uma consequência do progresso já salvo: nenhuma navegação comum o libera.
+8. **Aviso de giro:** "Para jogar pelo celular, vire o aparelho na horizontal." aparece junto ao acesso liberado (cartão do Hub e acima do botão "Jogar X-B0T" na Conclusão), só com menos de 900px e na vertical. Não força a rotação nem bloqueia o acesso. Entra na descrição do link apenas enquanto é exibido.
+9. **Painel de acessibilidade compacto:** dois interruptores diretos, "Reduzir animações" e "Alto contraste". Tema, tamanho do texto e "Restaurar padrão" ficam em "Mais opções", recolhido. O comportamento da DEC-022 foi mantido: o interruptor mostra o que vale agora, nunca fica travado, e mexer nele grava a escolha explícita, que vence o sistema. O seletor de três opções (Sistema, Reduzir, Completas) saiu da interface; o valor `"sistema"` continua existindo na gravação, como "sem escolha".
+10. **Estação 3 simplificada:** os quatro módulos ilustrados (Utility AI, aprendizado, novos desafios, tecnologias juntas) foram removidos porque repetiam o parágrafo vizinho palavra por palavra; a chave "continuam úteis" do percurso também. Os dois diagramas que explicam algo (máquina de estados e rota de pathfinding) ficam, com no máximo 28rem de largura; o de pathfinding vai para a coluna lateral em telas largas e o da máquina de estados, que tem texto, fica no fluxo.
+11. **Texto das estações:** módulos que repetiam o parágrafo foram retirados ou perderam o trecho citado (Estações 1, 2 e 4); rótulos de seção que repetiam o título (BRIEFING, LINHA DO TEMPO, SEQUÊNCIA, PRÓXIMA CONEXÃO, IDENTIDADE) saíram; "apresentado na pesquisa" saiu da Estação 3; o primeiro parágrafo do capítulo 1 da Estação 2 voltou ao texto de `docs/OdisseIA_Conteudo_Site_Estacoes.md` (a versão anterior acrescentava "lançado em 2000"). Em telas largas o texto de leitura passa a 1,125rem e 66 caracteres por linha.
+12. **Estação 4, Bastidores 02:** recebe o relato do desenvolvedor principal (inspiração em Yu-Gi-Oh! e Pokémon, mecânicas próprias, demonstração na feira em formulação condicional) e um link para o site do jogo, preenchido por `app.js` a partir de `gameUrl` (oculto sem URL válida; mesma aba). O módulo "EM VALIDAÇÃO" e sua lista continuam, porque regras, cartas e papel da IA ainda dependem de confirmação.
+
+### O que não muda
+
+Fluxo, `progresso.js`, `qr.js`, chave `odisseia:progresso`, regras de desbloqueio, `downloadUrl: null`, HTML/CSS/JS puros e `file://`.
+
+### Pendências para a equipe
+
+- Confirmar a alteração editorial da Estação 4 já registrada na DEC-020 e o texto novo do Bastidores 02.
+- Confirmar se o roxo `#CD5EFA` e a URL do jogo são os definitivos.

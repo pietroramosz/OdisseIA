@@ -131,10 +131,10 @@ function criarCardEstacao(numero, estado, estadoSeguinte) {
   const marcador = document.createElement("img");
   marcador.className = "marcador";
   marcador.alt = "";
-  // Engrenagens azuis: a identidade do OdisseIA. As roxas são do X-B0T.
+  // Engrenagem clara = validada, cinza = ainda não. A roxa é só do X-B0T.
   marcador.src = estado === "desbloqueada"
-    ? "assets/img/engrenagem-azul-acesa.png"
-    : "assets/img/engrenagem-azul-apagada.png";
+    ? "assets/img/engrenagem-clara.png"
+    : "assets/img/engrenagem-apagada.png";
   marcador.width = ESTACAO_MARCADOR_TAMANHO[estado];
   marcador.height = ESTACAO_MARCADOR_TAMANHO[estado];
   no.appendChild(marcador);
@@ -216,19 +216,21 @@ function renderizarFinais(completa) {
     detalhe: completa ? "Ver conclusão" : "Disponível após a 4ª estação"
   }));
 
-  // Concluir a jornada desbloqueia o X-B0T; só uma URL válida o torna acessível.
+  // Concluir a jornada desbloqueia o X-B0T; só uma URL válida de OdisseIAConfig.gameUrl o torna um
+  // link (na mesma aba). Antes da conclusão, ou sem URL, o cartão é só status: nunca há link quebrado.
   const acessivel = completa && urlAcessivel(OdisseIAConfig.gameUrl);
   lista.appendChild(criarCardFinal({
     tipo: "xbot",
     titulo: "X-B0T",
     descricao: "O jogo digital de cartas desenvolvido para o OdisseIA.",
-    href: null,
+    href: acessivel ? OdisseIAConfig.gameUrl.trim() : null,
     bloqueado: !completa,
     pendente: completa && !acessivel,
+    aviso: acessivel,
     rotulo: !completa ? "BLOQUEADO" : (acessivel ? "DESBLOQUEADO" : "AGUARDANDO LIBERAÇÃO"),
     detalhe: !completa
       ? "Disponível após a conclusão"
-      : (acessivel ? "Disponível na Conclusão" : "Em breve")
+      : (acessivel ? "Jogar X-B0T" : "Em breve")
   }));
 }
 
@@ -271,17 +273,82 @@ function criarCardFinal(dados) {
   meta.appendChild(criarTexto("p", "rotulo cartao__estado", dados.rotulo, id + "-estado"));
   corpo.appendChild(meta);
 
+  // Aviso para jogar no celular: aparece antes do acesso, junto à ação.
+  if (dados.aviso) {
+    corpo.appendChild(criarAvisoGiro(id + "-aviso"));
+  }
+
   const detalhe = criarTexto("span", dados.href ? "final__detalhe" : "final__detalhe final__detalhe--status", dados.detalhe, id + "-detalhe");
   if (dados.href) {
     detalhe.appendChild(criarSeta());
     cartao.setAttribute("aria-labelledby", [id + "-titulo", id + "-estado", id + "-detalhe"].join(" "));
-    cartao.setAttribute("aria-describedby", id + "-descricao");
+    if (dados.aviso) {
+      descreverComAviso(cartao, id);
+    } else {
+      cartao.setAttribute("aria-describedby", id + "-descricao");
+    }
   }
   corpo.appendChild(detalhe);
 
   cartao.appendChild(corpo);
   item.appendChild(cartao);
   return item;
+}
+
+// O aviso só é exibido pelo CSS em tela pequena e na vertical; no desktop e com o aparelho deitado
+// o parágrafo fica oculto (e fora da leitura de tela). Não força a rotação nem bloqueia o acesso.
+const AVISO_GIRO = "Para jogar pelo celular, vire o aparelho na horizontal.";
+const CONSULTA_AVISO_GIRO = "(max-width: 899px) and (orientation: portrait)";
+
+// O aviso entra na descrição do link só enquanto ele é exibido (a mesma condição do CSS): um
+// aria-describedby apontando para um parágrafo oculto seria lido também no desktop.
+function descreverComAviso(link, id) {
+  const consulta = typeof window.matchMedia === "function" ? window.matchMedia(CONSULTA_AVISO_GIRO) : null;
+  function atualizar() {
+    link.setAttribute("aria-describedby", id + "-descricao" + (consulta && consulta.matches ? " " + id + "-aviso" : ""));
+  }
+  atualizar();
+  if (consulta) {
+    if (consulta.addEventListener) {
+      consulta.addEventListener("change", atualizar);
+    } else if (consulta.addListener) {
+      consulta.addListener(atualizar);
+    }
+  }
+}
+
+function criarAvisoGiro(id) {
+  const ns = "http://www.w3.org/2000/svg";
+  const aviso = document.createElement("p");
+  aviso.className = "aviso-giro";
+  if (id) {
+    aviso.id = id;
+  }
+
+  const icone = document.createElementNS(ns, "svg");
+  icone.setAttribute("class", "aviso-giro__icone");
+  icone.setAttribute("viewBox", "0 0 28 28");
+  icone.setAttribute("aria-hidden", "true");
+  icone.setAttribute("focusable", "false");
+  // Celular em pé (tracejado) girando para deitado (cheio).
+  [
+    { d: "M5 8H9V20H5Z", dash: "2 2" },
+    { d: "M12 11H24V19H12ZM12 14V16", dash: null }
+  ].forEach(function (forma) {
+    const caminho = document.createElementNS(ns, "path");
+    caminho.setAttribute("d", forma.d);
+    caminho.setAttribute("fill", "none");
+    caminho.setAttribute("stroke", "currentColor");
+    caminho.setAttribute("stroke-width", "1.8");
+    caminho.setAttribute("stroke-linejoin", "miter");
+    if (forma.dash) {
+      caminho.setAttribute("stroke-dasharray", forma.dash);
+    }
+    icone.appendChild(caminho);
+  });
+  aviso.appendChild(icone);
+  aviso.appendChild(document.createTextNode(AVISO_GIRO));
+  return aviso;
 }
 
 function criarSeta() {
@@ -295,16 +362,18 @@ function doisDigitos(numero) {
 }
 
 // O zero de X-B0T leva uma barra nos títulos e botões (classe .zero em style.css).
+// Tudo vai dentro de um único span: um pai flex com gap não pode separar o nome em pedaços.
 function textoComZero(elemento, texto) {
-  const partes = texto.split("X-B0T");
-  partes.forEach(function (parte, indice) {
+  const envoltorio = document.createElement("span");
+  texto.split("X-B0T").forEach(function (parte, indice) {
     if (indice > 0) {
-      elemento.appendChild(document.createTextNode("X-B"));
-      elemento.appendChild(criarTexto("span", "zero", "0"));
-      elemento.appendChild(document.createTextNode("T"));
+      envoltorio.appendChild(document.createTextNode("X-B"));
+      envoltorio.appendChild(criarTexto("span", "zero", "0"));
+      envoltorio.appendChild(document.createTextNode("T"));
     }
-    elemento.appendChild(document.createTextNode(parte));
+    envoltorio.appendChild(document.createTextNode(parte));
   });
+  elemento.appendChild(envoltorio);
 }
 
 function criarTexto(tag, classe, texto, id) {
@@ -398,9 +467,7 @@ function criarBotao(acao) {
   const botao = document.createElement("a");
   botao.className = "botao" + (acao.principal ? " botao--principal" : "");
   botao.href = acao.href;
-  const rotulo = document.createElement("span");
-  textoComZero(rotulo, acao.texto);
-  botao.appendChild(rotulo);
+  textoComZero(botao, acao.texto);
   return botao;
 }
 
@@ -431,11 +498,29 @@ function renderizarPaginaEstacao() {
 
   if (estado === "desbloqueada") {
     document.getElementById("conteudo-estacao").hidden = false;
+    prepararLinkJogo();
     return;
   }
 
   renderizarBloqueio(numero, estado, ultima + 1, total);
   document.getElementById("estado-bloqueado").hidden = false;
+}
+
+// Links para o site do jogo dentro do conteúdo das estações: o endereço vem só de
+// OdisseIAConfig.gameUrl. Sem uma URL válida o trecho continua oculto, então nunca há link quebrado.
+// Abrem na mesma aba, como o acesso ao jogo no Hub e na Conclusão.
+function prepararLinkJogo() {
+  const acessivel = urlAcessivel(OdisseIAConfig.gameUrl);
+  document.querySelectorAll("[data-link-jogo]").forEach(function (bloco) {
+    const link = bloco.querySelector("a");
+    if (acessivel && link) {
+      link.href = OdisseIAConfig.gameUrl.trim();
+      link.rel = "noopener";
+      bloco.hidden = false;
+    } else {
+      bloco.hidden = true;
+    }
+  });
 }
 
 function renderizarBloqueio(numero, estado, proximaValida, total) {
@@ -549,7 +634,7 @@ function renderizarEstacoesValidadas(total) {
 
     const marcador = document.createElement("img");
     marcador.className = "final-jornada__marcador";
-    marcador.src = "assets/img/engrenagem-azul-acesa.png";
+    marcador.src = "assets/img/engrenagem-clara.png";
     marcador.alt = "";
     marcador.width = 32;
     marcador.height = 32;
@@ -584,6 +669,7 @@ function renderizarAcessoXbot() {
   area.textContent = "";
 
   if (urlAcessivel(OdisseIAConfig.gameUrl)) {
+    area.appendChild(criarAvisoGiro());
     const jogar = criarBotao({ href: OdisseIAConfig.gameUrl.trim(), texto: "Jogar X-B0T", principal: true });
     jogar.classList.add("final-acoes__jogar");
     jogar.rel = "noopener";

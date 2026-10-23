@@ -1,6 +1,8 @@
 // Preferências globais de acessibilidade: tema, tamanho do texto, alto contraste e animações.
 // Movimento: "sistema" (padrão) segue prefers-reduced-motion; "reduzido" e "normal" são escolhas
-// explícitas e sempre vencem a preferência do sistema, nos dois sentidos.
+// explícitas e sempre vencem a preferência do sistema, nos dois sentidos. No painel isso aparece como
+// um interruptor simples ("Reduzir animações"): ele mostra o que vale agora e, ao ser mexido, grava a
+// escolha explícita. "Restaurar padrão" volta a seguir o sistema.
 // Carregado no <head> de cada página para aplicar as escolhas antes da primeira pintura e evitar
 // o clarão do tema escuro. O painel é montado depois, quando o documento está pronto.
 // Chave própria no localStorage, independente do progresso: "odisseia:acessibilidade".
@@ -147,7 +149,7 @@
   let painel = null;
   let status = null;
   let entradas = null;
-  let detalheSistema = null;
+  let nota = null;
 
   function elemento(tag, classe, texto) {
     const item = document.createElement(tag);
@@ -211,7 +213,7 @@
     return conjunto;
   }
 
-  function criarChave(nome, texto, id) {
+  function criarChave(nome, texto, id, converter) {
     const rotulo = elemento("label", "a11y__chave");
     const entrada = elemento("input");
     entrada.type = "checkbox";
@@ -230,22 +232,9 @@
     rotulo.appendChild(estado);
 
     entrada.addEventListener("change", function () {
-      mudar(nome, entrada.checked);
+      mudar(nome, converter ? converter(entrada.checked) : entrada.checked);
     });
     return { rotulo: rotulo, entrada: entrada, descricao: descricao };
-  }
-
-  function criarGrupo(id, nome, filhos) {
-    const bloco = elemento("div", "a11y__grupo");
-    bloco.setAttribute("role", "group");
-    bloco.setAttribute("aria-labelledby", id);
-    const titulo = elemento("p", "a11y__grupo-nome", nome);
-    titulo.id = id;
-    bloco.appendChild(titulo);
-    filhos.forEach(function (filho) {
-      bloco.appendChild(filho);
-    });
-    return bloco;
   }
 
   function montarPainel() {
@@ -281,6 +270,23 @@
     topo.appendChild(fechar);
     painel.appendChild(topo);
 
+    // Os dois controles diretos ficam à vista; tema e tamanho do texto, que já existiam, ficam em
+    // "Mais opções" para o painel continuar simples.
+    const movimento = criarChave("movimento", "Reduzir animações", "a11y-movimento", function (ligado) {
+      return ligado ? "reduzido" : "normal";
+    });
+    nota = elemento("span", "a11y__nota");
+    nota.id = "a11y-nota-movimento";
+    movimento.descricao.appendChild(nota);
+    movimento.entrada.setAttribute("aria-describedby", "a11y-nota-movimento");
+    const contraste = criarChave("contraste", "Alto contraste", "a11y-contraste");
+    const chaves = elemento("div", "a11y__chaves");
+    chaves.appendChild(movimento.rotulo);
+    chaves.appendChild(contraste.rotulo);
+    painel.appendChild(chaves);
+
+    const mais = elemento("details", "a11y__mais");
+    mais.appendChild(elemento("summary", "a11y__mais-titulo", "Mais opções"));
     const temas = grupoDeOpcoes("tema", "Tema", [
       { valor: "escuro", texto: "Escuro" },
       { valor: "claro", texto: "Claro" },
@@ -291,27 +297,16 @@
       { valor: "grande", texto: "Grande", detalhe: "115%" },
       { valor: "extra", texto: "Extra grande", detalhe: "130%" }
     ], preferencias.texto);
-    painel.appendChild(criarGrupo("a11y-g-aparencia", "Aparência", [temas, textos]));
-
-    const contraste = criarChave("contraste", "Alto contraste", "a11y-contraste");
-    painel.appendChild(criarGrupo("a11y-g-percepcao", "Percepção", [contraste.rotulo]));
-
-    const movimento = grupoDeOpcoes("movimento", "Animações", [
-      { valor: "sistema", texto: "Sistema", detalhe: "completas" },
-      { valor: "reduzido", texto: "Reduzir" },
-      { valor: "normal", texto: "Completas" }
-    ], preferencias.movimento);
-    painel.appendChild(criarGrupo("a11y-g-conforto", "Conforto", [movimento]));
-
-    const rodape = elemento("div", "a11y__rodape");
+    mais.appendChild(temas);
+    mais.appendChild(textos);
     const restaurar = elemento("button", "botao a11y__restaurar", "Restaurar padrão");
     restaurar.type = "button";
     restaurar.addEventListener("click", restaurarPadrao);
-    rodape.appendChild(restaurar);
+    mais.appendChild(restaurar);
+    painel.appendChild(mais);
     status = elemento("p", "a11y__status");
     status.setAttribute("role", "status");
-    rodape.appendChild(status);
-    painel.appendChild(rodape);
+    painel.appendChild(status);
 
     caixa.appendChild(painel);
 
@@ -327,9 +322,8 @@
       tema: painel.querySelectorAll("input[name='a11y-tema']"),
       texto: painel.querySelectorAll("input[name='a11y-texto']"),
       contraste: contraste.entrada,
-      movimento: painel.querySelectorAll("input[name='a11y-movimento']")
+      movimento: movimento.entrada
     };
-    detalheSistema = painel.querySelector("input[name='a11y-movimento'][value='sistema'] + .a11y__opcao-corpo small");
     atualizarControles();
 
     botao.addEventListener("click", function () {
@@ -364,7 +358,8 @@
   function abrirPainel() {
     painel.hidden = false;
     botao.setAttribute("aria-expanded", "true");
-    const primeira = painel.querySelector("input:checked") || painel.querySelector("button");
+    // O primeiro interruptor: o que as pessoas vêm mudar, e nunca um item dentro de "Mais opções" fechado.
+    const primeira = painel.querySelector(".a11y__chaves input");
     if (primeira) primeira.focus();
   }
 
@@ -397,11 +392,21 @@
     if (!entradas) return;
     marcarGrupo(entradas.tema, preferencias.tema);
     marcarGrupo(entradas.texto, preferencias.texto);
-    marcarGrupo(entradas.movimento, preferencias.movimento);
     entradas.contraste.checked = preferencias.contraste;
-    detalheSistema.textContent = movimentoEfetivo("sistema") === "reduzido" ? "reduzidas" : "completas";
-    entradas.contraste.parentNode.querySelector(".a11y__chave-valor").textContent =
-      entradas.contraste.checked ? "Ativado" : "Desativado";
+    // O interruptor mostra o que vale agora (escolha explícita ou, sem escolha, o sistema) e nunca
+    // fica travado: mexer nele grava a escolha da pessoa, que vence a do sistema.
+    const doSistema = Boolean(consultaMovimento && consultaMovimento.matches);
+    entradas.movimento.checked = movimentoEfetivo(preferencias.movimento) === "reduzido";
+    if (preferencias.movimento === "sistema") {
+      nota.textContent = doSistema ? "Ativado pelo sistema" : "";
+    } else {
+      nota.textContent = doSistema && preferencias.movimento === "normal"
+        ? "Animações mantidas por você" : "";
+    }
+    [entradas.contraste, entradas.movimento].forEach(function (entrada) {
+      entrada.parentNode.querySelector(".a11y__chave-valor").textContent =
+        entrada.checked ? "Ativado" : "Desativado";
+    });
   }
 
   function marcarGrupo(lista, valor) {

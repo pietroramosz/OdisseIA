@@ -58,7 +58,6 @@
 
       <section class="briefing">
         <h2 class="briefing__titulo">Das regras à inteligência artificial</h2>
-        <p class="terminal-rotulo">BRIEFING</p>
         <p>A inteligência artificial está presente nos videogames há muito mais tempo do que ferramentas modernas como o ChatGPT.</p>
         <p>Desde os primeiros jogos, desenvolvedores já precisavam criar maneiras de fazer o computador responder às ações do jogador.</p>
         <p>No início, esses comportamentos eram extremamente simples. Com o tempo, surgiram técnicas capazes de organizar decisões, encontrar caminhos, analisar situações e até gerar novos conteúdos.</p>
@@ -79,7 +78,7 @@
           </ul>
           <p>As <strong>máquinas de estados</strong> organizam essas ações em diferentes situações.</p>
           <p>Um personagem pode estar patrulhando, perceber o jogador, começar a persegui-lo e depois mudar novamente de comportamento.</p>
-          <figure class="figura">
+          <figure class="figura figura--legivel">
             <svg class="esquema figura__esquema" viewBox="0 0 340 240" aria-hidden="true" focusable="false">
               <defs>
                 <marker id="seta-estado" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L8 4L0 8Z" class="figura__ponta"/></marker>
@@ -105,7 +104,7 @@
               <text class="esquema__texto figura__condicao" x="68" y="160">não encontra</text>
               <text class="esquema__texto figura__condicao" x="68" y="173">o jogador</text>
             </svg>
-            <figcaption class="figura__legenda">As quatro regras acima organizadas como uma máquina de estados: cada seta é a condição que leva ao próximo comportamento.</figcaption>
+            <figcaption class="figura__legenda">As quatro regras como uma máquina de estados: cada seta é a condição que leva ao próximo comportamento.</figcaption>
           </figure>
         </div>
       </section>
@@ -117,7 +116,7 @@
           <p>Quando os cenários ficaram maiores, os personagens também precisaram aprender a navegar por eles.</p>
           <p>O <strong>pathfinding</strong> permite encontrar rotas pelo ambiente, desviando de paredes e outros obstáculos.</p>
           <p>O algoritmo <strong>A*</strong> é um exemplo de técnica usada para calcular caminhos.</p>
-          <figure class="figura">
+          <figure class="figura" style="--ancora: 3">
             <svg class="esquema figura__esquema" viewBox="0 0 340 160" aria-hidden="true" focusable="false">
               <defs>
                 <pattern id="grade-rota" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0.5H0.5V20" class="figura__grade"/></pattern>
@@ -130,27 +129,12 @@
               <text class="esquema__texto esquema__texto--forte" x="26" y="114">A</text>
               <text class="esquema__texto esquema__texto--destaque" x="306" y="76">B</text>
             </svg>
-            <figcaption class="figura__legenda">Ilustração: uma rota de A até B que contorna as paredes de uma grade, o tipo de problema que o pathfinding resolve.</figcaption>
+            <figcaption class="figura__legenda">Ilustração: uma rota de A até B que contorna as paredes de uma grade.</figcaption>
           </figure>
           <p>Com jogos mais complexos, também surgiram formas mais avançadas de organizar decisões.</p>
           <p>As <strong>Behavior Trees</strong> estruturam comportamentos como uma árvore de possibilidades.</p>
           <p>Já a <strong>Utility AI</strong> pode atribuir prioridades às ações disponíveis. Um personagem com pouca vida, por exemplo, pode considerar que se proteger ou se curar é mais importante do que continuar atacando.</p>
           <p>NPCs também podem utilizar esses sistemas para executar rotinas, como trabalhar, conversar, descansar, patrulhar ou reagir a acontecimentos do mundo.</p>
-          <div class="ficha nota nota--conceito" role="group" aria-labelledby="nota-3-1" style="--ancora: 5">
-            <h3 class="nota__titulo" id="nota-3-1">Utility AI: o que pesa mais</h3>
-            <p class="nota__texto">se proteger ou se curar é mais importante do que continuar atacando</p>
-            <svg class="nota__arte" viewBox="0 0 240 112" aria-hidden="true" focusable="false">
-              <rect class="nota__ativa" x="8" y="10" width="224" height="38"/>
-              <rect class="nota__no nota__no--ativo" x="8" y="10" width="38" height="38"/>
-              <text class="nota__rotulo nota__rotulo--cheio" x="27" y="36" text-anchor="middle">1</text>
-              <text class="nota__rotulo nota__rotulo--forte" x="56" y="34">SE PROTEGER OU SE CURAR</text>
-              <path class="nota__linha" d="M120 52V60M114 55L120 61L126 55"/>
-              <rect class="nota__linha" x="8" y="64" width="224" height="38"/>
-              <rect class="nota__no" x="8" y="64" width="38" height="38"/>
-              <text class="nota__rotulo" x="27" y="90" text-anchor="middle">2</text>
-              <text class="nota__rotulo" x="56" y="88">CONTINUAR ATACANDO</text>
-            </svg>
-          </div>
         </div>
       </section>
 
@@ -160,23 +144,9 @@
         <div class="capitulo__corpo">
           <p>O <strong>Machine Learning</strong>, ou aprendizado de máquina, permite que sistemas encontrem padrões a partir de dados e experiências.</p>
           <p>Nos jogos, essas técnicas podem ser utilizadas para analisar comportamentos, estudar estratégias, treinar agentes ou ajudar a ajustar desafios.</p>
-          <p>Um exemplo conhecido apresentado na pesquisa é o <strong>AlphaGo</strong>, que combinou aprendizado de máquina e técnicas de busca para jogar Go.</p>
+          <p>Um exemplo conhecido é o <strong>AlphaGo</strong>, que combinou aprendizado de máquina e técnicas de busca para jogar Go.</p>
           <p>Também existem sistemas adaptativos capazes de alterar comportamentos ou desafios de acordo com as ações do jogador.</p>
           <p>Isso não significa necessariamente que todo inimigo esteja "aprendendo" como uma pessoa. Muitas vezes, o sistema está apenas utilizando regras e informações previamente definidas para responder de maneiras diferentes.</p>
-          <div class="ficha nota nota--cautela" role="group" aria-labelledby="nota-3-2" style="--ancora: 2">
-            <h3 class="nota__titulo" id="nota-3-2">Aprendendo como uma pessoa?</h3>
-            <p class="nota__texto">Muitas vezes, o sistema está apenas utilizando regras e informações previamente definidas para responder de maneiras diferentes</p>
-            <svg class="nota__arte" viewBox="0 0 240 104" aria-hidden="true" focusable="false">
-              <rect class="nota__no" x="8" y="8" width="96" height="28"/>
-              <text class="nota__rotulo" x="56" y="26" text-anchor="middle">REGRAS</text>
-              <rect class="nota__no" x="8" y="68" width="96" height="28"/>
-              <text class="nota__rotulo" x="56" y="86" text-anchor="middle">INFORMAÇÕES</text>
-              <path class="nota__ativa" d="M104 22H124V52H144M104 82H124V52"/>
-              <path class="nota__no nota__no--ativo" d="M152 30H232V74H146V36Z"/>
-              <text class="nota__rotulo nota__rotulo--cheio" x="190" y="49" text-anchor="middle">RESPOSTAS</text>
-              <text class="nota__rotulo nota__rotulo--cheio" x="190" y="64" text-anchor="middle">DIFERENTES</text>
-            </svg>
-          </div>
         </div>
       </section>
 
@@ -200,34 +170,11 @@
           <p>A IA tradicional, portanto, não desapareceu.</p>
           <p>Regras, máquinas de estados, pathfinding, Behavior Trees e outras técnicas continuam úteis porque oferecem controle e previsibilidade.</p>
           <p>Em muitos casos, tecnologias diferentes podem trabalhar juntas.</p>
-          <div class="ficha nota nota--ideia" role="group" aria-labelledby="nota-3-4" style="--ancora: 3; --vao: 3">
-            <h3 class="nota__titulo" id="nota-3-4">Novos desafios</h3>
-            <p class="nota__texto">O conteúdo gerado precisa continuar coerente com o mundo do jogo, respeitar suas regras e não prejudicar o equilíbrio da experiência</p>
-            <svg class="nota__arte" viewBox="0 0 240 120" aria-hidden="true" focusable="false">
-              <path class="nota__linha" d="M8 8H232V112H8Z" stroke-dasharray="6 5"/>
-              <path class="nota__ativa" d="M36 60H70M70 60L110 24M70 60L110 42M70 60L110 60M70 60L110 78M70 60L110 96"/>
-              <rect class="nota__no nota__no--ativo" x="20" y="48" width="24" height="24"/>
-              <rect class="nota__no" x="110" y="18" width="12" height="12"/><rect class="nota__no" x="110" y="36" width="12" height="12"/><rect class="nota__no" x="110" y="54" width="12" height="12"/><rect class="nota__no" x="110" y="72" width="12" height="12"/><rect class="nota__no" x="110" y="90" width="12" height="12"/>
-              <text class="nota__rotulo" x="140" y="64">MUNDO DO JOGO</text>
-            </svg>
-          </div>
-          <div class="ficha nota nota--conexao" role="group" aria-labelledby="nota-3-3" style="--ancora: 6">
-            <h3 class="nota__titulo" id="nota-3-3">Tecnologias que trabalham juntas</h3>
-            <p class="nota__texto">continuam úteis porque oferecem controle e previsibilidade</p>
-            <p class="nota__texto">tecnologias diferentes podem trabalhar juntas</p>
-            <svg class="nota__arte" viewBox="0 0 240 112" aria-hidden="true" focusable="false">
-              <path class="nota__ativa" d="M28 32Q44 6 60 32M76 32Q92 58 108 32M124 32Q140 6 156 32M172 32Q188 58 204 32"/>
-              <rect class="nota__no nota__no--ativo" x="12" y="24" width="16" height="16"/><rect class="nota__no" x="60" y="24" width="16" height="16"/><rect class="nota__no" x="108" y="24" width="16" height="16"/><rect class="nota__no" x="156" y="24" width="16" height="16"/><rect class="nota__no nota__no--ativo" x="204" y="24" width="16" height="16"/>
-              <path class="nota__linha" d="M12 70V80H220V70"/>
-              <text class="nota__rotulo" x="116" y="102" text-anchor="middle">CONTROLE E PREVISIBILIDADE</text>
-            </svg>
-          </div>
         </div>
       </section>
 
       <section class="linha-tempo linha-tempo--percurso">
         <h2 class="linha-tempo__titulo">A evolução em uma sequência</h2>
-        <p class="terminal-rotulo">SEQUÊNCIA</p>
         <ol class="percurso">
           <li class="etapa" style="--i: 0"><span class="etapa__nome">Regras simples</span></li>
           <li class="etapa" style="--i: 1"><span class="etapa__nome">Máquinas de estados</span></li>
@@ -236,12 +183,10 @@
           <li class="etapa" style="--i: 4"><span class="etapa__nome">Machine Learning</span></li>
           <li class="etapa" style="--i: 5"><span class="etapa__nome">IA generativa</span></li>
         </ol>
-        <p class="percurso__chave" aria-hidden="true">continuam úteis</p>
       </section>
 
       <section class="conexao">
         <h2 class="conexao__titulo">E o X-B<span class="zero">0</span>T?</h2>
-        <p class="terminal-rotulo">PRÓXIMA CONEXÃO</p>
         <p>Em jogos de cartas, uma inteligência artificial pode analisar jogadas, escolher cartas e controlar um adversário.</p>
         <p>Esses conceitos ajudam a criar uma ponte entre esta estação e o <strong>X-B0T</strong>, jogo desenvolvido para o OdisseIA.</p>
         <p>Isso não significa que todas as técnicas apresentadas aqui estejam implementadas no X-B0T. A tecnologia utilizada no jogo depende do que for realmente concluído pelo grupo responsável.</p>

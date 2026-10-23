@@ -17,7 +17,7 @@ OWN-WORLD: Fundo quase preto com planos de grafite. Branco-sinal para leitura. R
 
 STORY: O visitante vê a rota inteira na abertura, se localiza nela no Hub, lê cada estação como um dossiê (capítulos em fluxo, módulos complementares na margem, uma linha do tempo ou um percurso do próprio assunto), entra no universo do X-B0T na Estação 4, onde a carta é um artefato num palco de linhas de foco, e recebe na Conclusão o carimbo das quatro estações e a carta revelada.
 
-FIRST VIEWPORT: Mobile, 390px: faixa de registro no topo; "Odisse/IA" em escala monumental, alinhado à esquerda e com "IA" em azul-luz (o roxo ficou só no X-B0T, DEC-020); proposta; CTA largo logo abaixo, dentro dos primeiros 600px; rota em diagonal com os nós 01–04 descendo até a silhueta de carta com linhas de velocidade. Desktop: palavra-marca em 7 colunas à esquerda e rota cruzando as 5 colunas da direita até a explosão do X-B0T.
+FIRST VIEWPORT: Mobile, 390px: faixa de registro no topo; "Odisse/IA" em escala monumental, alinhado à esquerda e com "IA" só em contorno (o roxo é do X-B0T e o azul #142146 é só traçado, DEC-023); proposta; CTA largo logo abaixo, dentro dos primeiros 600px; rota em diagonal com os nós 01–04 descendo até a silhueta de carta com linhas de velocidade. Desktop: palavra-marca em 7 colunas à esquerda e rota cruzando as 5 colunas da direita até a explosão do X-B0T.
 
 FORM: Code-led. Estações redesenhadas na DEC-019, sobre a mesma direção. Direção fixada pelo brief do usuário; a rolagem do concept-seed foi dispensada e não há referência de seed (seed: none, rolagem dispensada por direção fixada, não por indisponibilidade).
 

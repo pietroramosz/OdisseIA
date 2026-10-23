@@ -120,32 +120,14 @@
 }
 
 .nota--marco {
-  --moldura: var(--cor-destaque);
+  --moldura: var(--cor-azul);
   --espessura: 2px;
 }
 
 /* Conexão: o diagrama vai primeiro, o ano ou o título assinam por baixo. */
-.nota--conexao {
-  --miolo: var(--cor-superficie-alta);
-}
-
-.nota--conexao .nota__arte {
-  grid-row: 1;
-  padding-bottom: var(--espaco-2);
-  border-bottom: 1px dashed var(--cor-apagado);
-}
-
-.nota--conexao .nota__titulo {
-  grid-row: 2;
-}
-
-.nota--conexao .nota__selo {
-  grid-row: 2;
-}
-
 /* Órbita: o assunto no centro e o que vem dele em volta. */
 .nota--orbita {
-  --moldura: var(--cor-destaque);
+  --moldura: var(--cor-azul);
   --miolo: var(--cor-fundo);
   --espessura: 2px;
   padding-top: var(--espaco-6);
@@ -161,119 +143,21 @@
 }
 
 /* Ideia-chave: a frase do capítulo em corpo grande. */
-.nota--ideia {
-  --moldura: var(--cor-destaque);
-  --miolo: var(--cor-superficie-alta);
-  --espessura: 2px;
-  padding: var(--espaco-6) var(--espaco-6) var(--espaco-4);
-}
-
-.nota--ideia .nota__titulo {
-  font-size: 0.8125rem;
-  line-height: 1.4;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--cor-destaque);
-}
-
-.nota--ideia p.nota__texto {
-  font-family: var(--fonte-titulo);
-  font-weight: 600;
-  font-size: 1.1875rem;
-  line-height: 1.35;
-  color: var(--cor-texto);
-}
-
-.nota--ideia .nota__arte {
-  max-width: 14rem;
-  margin: var(--espaco-2) auto 0;
-}
-
 /* Conceito: o termo técnico e a ilustração que o resume. */
-.nota--conceito {
-  --miolo: var(--cor-superficie-escura);
-}
-
 /* Cautela: o que não deve ser entendido ao pé da letra. */
-.nota--cautela {
-  --moldura: var(--cor-texto-atenuado);
-  --miolo: var(--cor-fundo);
-  --espessura: 2px;
-}
-
-.nota--cautela .nota__titulo::before {
-  content: "";
-  display: inline-block;
-  width: 1.5rem;
-  height: 0.75rem;
-  margin-right: var(--espaco-2);
-  background-color: var(--cor-destaque);
-  -webkit-mask: var(--textura-hachura) 0 0 / 10px 10px repeat;
-  mask: var(--textura-hachura) 0 0 / 10px 10px repeat;
-}
-
 /* Herança (Estação 4): o que o site herdou do X-B0T. */
-.nota--heranca {
-  --moldura: var(--cor-destaque);
-  --miolo: var(--cor-superficie-escura);
-  --espessura: 2px;
-  grid-template-columns: minmax(0, 1fr) 6rem;
-  align-items: start;
-}
-
-.nota--heranca .nota__engrenagem {
-  grid-column: 2;
-  grid-row: 1 / span 2;
-  width: 6rem;
-  height: auto;
-}
-
-.nota--heranca .nota__titulo {
-  grid-column: 1;
-}
-
-.nota--heranca p.nota__texto {
-  grid-column: 1;
-  grid-row: 2;
-}
-
-.nota--heranca .nota__fichas {
-  grid-row: 3;
-}
-
-.nota__fichas {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--espaco-2);
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.nota .nota__fichas li {
-  margin: 0;
-  padding: var(--espaco-1) var(--espaco-2);
-  background: var(--cor-superficie-alta);
-  clip-path: var(--recorte-minimo);
-  font-family: var(--fonte-titulo);
-  font-weight: 600;
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--cor-texto);
-}
-
-.nota .nota__fichas li::before {
-  content: none;
-}
-
 /* Status (Estação 4): o que ainda não foi confirmado, sem afirmar nada. */
 .nota--status {
   --moldura: var(--cor-apagado);
   --miolo: var(--cor-fundo);
 }
 
+/* O selo desce para uma linha própria: na coluna estreita ele cobriria o título. */
 .nota--status .nota__selo {
+  grid-column: 1;
+  grid-row: 2;
+  justify-self: start;
+  margin: var(--espaco-1) 0 var(--espaco-2);
   padding: var(--espaco-1) var(--espaco-2);
   border: 2px solid currentColor;
   color: var(--cor-texto-atenuado);
@@ -485,10 +369,6 @@
   font-size: 0.75rem;
   letter-spacing: 0.1em;
   color: var(--cor-destaque);
-}
-
-.percurso__chave {
-  display: none;
 }
 
 /* ---------- Estação 4: o palco da carta ---------- */
@@ -733,23 +613,6 @@
     background: none;
     border-top: 2px solid var(--cor-destaque);
     border-left: 2px solid var(--cor-destaque);
-  }
-
-  .percurso__chave {
-    display: block;
-    grid-column: 2 / -1;
-    width: calc((100% - 5 * var(--espaco-4)) / 6 * 4 + 3 * var(--espaco-4));
-    margin: var(--espaco-4) 0 0;
-    padding: var(--espaco-1) var(--espaco-3) var(--espaco-2);
-    border: 2px solid var(--cor-apagado);
-    border-top: none;
-    font-family: var(--fonte-titulo);
-    font-weight: 600;
-    font-size: 0.75rem;
-    letter-spacing: 0.12em;
-    text-align: center;
-    text-transform: uppercase;
-    color: var(--cor-texto-atenuado);
   }
 }
 

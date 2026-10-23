@@ -12,25 +12,20 @@
   overflow-x: clip;
 }
 
-/* Cada estação tem a sua luz dentro da família azul: gelo (1), azul do site (2), pervinca (3).
-   A Estação 4 é do X-B0T e usa o roxo do jogo. O alto contraste mantém o azul único do tema. */
-:root:not([data-contraste="alto"]) body[data-estacao="1"] { --cor-destaque: #4fd0f5; }
-:root:not([data-contraste="alto"]) body[data-estacao="3"] { --cor-destaque: #9aa8ff; }
-:root:not([data-contraste="alto"]) body[data-estacao="4"] {
+/* A Estação 4 é do X-B0T: a capa e os módulos do jogo usam o roxo dele no lugar da cor de ênfase.
+   A navegação da jornada (trilho, painel de acessibilidade, fechamento) continua na cor do site. */
+body[data-estacao="4"] {
   --cor-destaque: var(--cor-xbot);
   --cor-sobre-destaque: var(--cor-sobre-xbot);
 }
-/* A navegação da jornada (trilho, painel de acessibilidade, fechamento) continua azul. */
-.dossie-rota,
-.conexao,
-.a11y,
-.pular {
+
+body[data-estacao="4"] .dossie-rota,
+body[data-estacao="4"] .conexao,
+body[data-estacao="4"] .a11y,
+body[data-estacao="4"] .pular {
   --cor-destaque: var(--cor-marca);
   --cor-sobre-destaque: var(--cor-sobre-marca);
 }
-
-:root[data-tema="claro"]:not([data-contraste="alto"]) body[data-estacao="1"] { --cor-destaque: #086585; }
-:root[data-tema="claro"]:not([data-contraste="alto"]) body[data-estacao="3"] { --cor-destaque: #4a4fd1; }
 
 /* ---------- Capa do dossiê ----------
    Numeral, texto e arte são áreas de uma grade: nada é posicionado por deslocamento. */
@@ -236,27 +231,7 @@
   position: relative;
   margin-top: var(--espaco-12);
   padding-top: var(--espaco-6);
-  border-top: 1px solid var(--cor-apagado);
-}
-
-.briefing,
-.capitulo,
-.linha-tempo,
-.conexao {
-  border-top-color: var(--cor-linha);
-}
-
-/* Traço de abertura: o filete da seção ganha um trecho na cor da estação. */
-.briefing::before,
-.capitulo::before,
-.linha-tempo::before {
-  content: "";
-  position: absolute;
-  top: -2px;
-  left: 0;
-  width: 4.5rem;
-  height: 3px;
-  background: var(--cor-destaque);
+  border-top: 2px solid var(--cor-azul);
 }
 
 .terminal-rotulo {
@@ -332,7 +307,7 @@
   line-height: 0.85;
   letter-spacing: -0.03em;
   color: transparent;
-  -webkit-text-stroke: 1.5px var(--cor-destaque);
+  -webkit-text-stroke: 1.5px var(--cor-texto-atenuado);
 }
 
 .capitulo__titulo {
@@ -353,35 +328,23 @@
 
 /* Abertura do capítulo: a primeira frase é a tese, em corpo maior e com uma barra de margem. */
 .capitulo__corpo > p:first-child {
-  position: relative;
-  padding-left: var(--espaco-4);
   font-size: 1.1875rem;
   line-height: 1.5;
   color: var(--cor-texto);
-}
-
-.capitulo__corpo > p:first-child::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0.3em;
-  bottom: 0.3em;
-  width: 3px;
-  background: var(--cor-destaque);
 }
 
 .capitulo__corpo > :last-child {
   margin-bottom: 0;
 }
 
-/* Nomes e conceitos: marca-texto discreta sob a palavra, na cor da estação. */
+/* Nomes e conceitos: marca-texto discreta sob a palavra, no azul de traçado. */
 .capitulo__corpo strong,
 .briefing strong {
   color: var(--cor-texto);
-  background-image: linear-gradient(color-mix(in srgb, var(--cor-destaque) 28%, transparent), color-mix(in srgb, var(--cor-destaque) 28%, transparent));
+  background-image: linear-gradient(var(--cor-azul), var(--cor-azul));
   background-repeat: no-repeat;
-  background-position: 0 92%;
-  background-size: 100% 0.32em;
+  background-position: 0 88%;
+  background-size: 100% 0.5em;
 }
 
 .capitulo__corpo > ul {
@@ -406,12 +369,39 @@
   top: calc(0.75em - var(--espaco-1));
   width: var(--espaco-2);
   height: var(--espaco-2);
-  background: var(--cor-destaque);
+  background: var(--cor-texto-atenuado);
+}
+
+/* Link para o site do jogo (Estação 4): uma ação de texto, não um botão. */
+.link-jogo {
+  margin: 0 0 var(--espaco-4);
+}
+
+.link-jogo a {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espaco-2);
+  min-height: 44px;
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+  color: var(--cor-texto);
+  text-decoration: underline;
+  text-decoration-color: var(--cor-destaque);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.3em;
+}
+
+.link-jogo .zero::after {
+  content: "";
 }
 
 /* ---------- Figuras (diagramas do conteúdo) ---------- */
 
+/* Diagramas ilustram uma ideia: ficam com o tamanho da ideia, nunca esticados até a largura da tela. */
 .figura {
+  max-width: 28rem;
   margin: var(--espaco-6) 0;
   padding: var(--espaco-4);
   background: var(--cor-superficie-escura);
@@ -494,7 +484,7 @@
   left: 0;
   right: 0;
   height: var(--espaco-4);
-  background-color: var(--cor-destaque);
+  background-color: var(--cor-azul);
   -webkit-mask: var(--textura-movimento) center / 100% 100% no-repeat;
   mask: var(--textura-movimento) center / 100% 100% no-repeat;
 }
@@ -540,7 +530,7 @@
   left: 0;
   right: 0;
   height: var(--espaco-4);
-  background-color: var(--cor-destaque);
+  background-color: var(--cor-azul);
   -webkit-mask: var(--textura-movimento) center / 100% 100% no-repeat;
   mask: var(--textura-movimento) center / 100% 100% no-repeat;
 }
@@ -832,6 +822,7 @@
   }
 
   [data-estacao="2"] .dossie-capa__arte {
+    max-width: 62rem;
     margin-top: var(--espaco-8);
   }
 
@@ -930,7 +921,7 @@
   .briefing p:not(.terminal-rotulo),
   .capitulo__corpo p,
   .capitulo__corpo > ul {
-    max-width: 62ch;
+    max-width: 66ch;
   }
 
   .briefing > p:not(.terminal-rotulo):first-of-type,
@@ -982,6 +973,31 @@
 
 /* ---------- 1100px+: margem mais larga e coluna lateral maior ---------- */
 
+/* Em telas largas o texto cresce junto com a coluna (66ch, dentro dos 65–75 confortáveis). */
+@media (min-width: 1100px) {
+  .capitulo__corpo p,
+  .capitulo__corpo > ul,
+  .briefing p:not(.terminal-rotulo) {
+    font-size: 1.125rem;
+  }
+
+  .capitulo__corpo > p:first-child {
+    font-size: 1.3125rem;
+  }
+}
+
+/* Com a coluna lateral larga, o diagrama fica ao lado do trecho que ilustra, como um módulo. */
+@media (min-width: 1360px) {
+  /* Diagramas com texto (--legivel) ficam no fluxo, com 28rem: na coluna lateral o texto encolheria. */
+  .capitulo__corpo > .figura:not(.figura--legivel) {
+    grid-column: 2;
+    grid-row: var(--ancora, 1) / span var(--vao, 12);
+    align-self: start;
+    max-width: none;
+    margin: 0;
+  }
+}
+
 @media (min-width: 1100px) {
   .pagina-estacao {
     --margem: 9rem;
@@ -990,7 +1006,7 @@
   .briefing,
   .capitulo,
   .linha-tempo {
-    grid-template-columns: var(--margem) minmax(0, 40rem) minmax(15rem, 1fr);
+    grid-template-columns: var(--margem) minmax(0, 44rem) minmax(15rem, 1fr);
   }
 }
 
@@ -1086,7 +1102,7 @@
   }
 
   .dossie-rota__parada--feita::after {
-    border-left: 2px solid var(--cor-destaque);
+    border-left: 3px solid var(--cor-azul);
   }
 
   .dossie-rota__parada--atual {
@@ -1110,7 +1126,7 @@
 
   .dossie-rota__parada--atual::after {
     top: 26px;
-    border-left-color: var(--cor-destaque);
+    border-left-color: var(--cor-azul);
   }
 
   .dossie-rota__parada--fim {

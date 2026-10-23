@@ -549,6 +549,39 @@ A sala da feira será azul, o Hub desktop não convencia, os textos das estaçõ
 
 ---
 
+## 23/10/2026 (2) — Grafite de volta, azul só no traçado, acesso ao X-B0T no Hub (DEC-023)
+
+### Contexto
+
+A identidade azul da DEC-020 ficou longe do pretendido: azul demais, mistura de azul e roxo no Hub e na abertura, Estação 3 carregada e textos repetitivos. A preview pública (GitHub Pages) já mostrava esse commit (cc37b34), idêntico aos arquivos de CSS e JS conferidos.
+
+### O que mudou
+
+- **Cores:** base grafite do commit 7f51320; #142146 só em traçados, trilhos, filetes, molduras de módulo e texturas; branco-sinal como tinta de estado; roxo só no X-B0T. Engrenagens: clara e cinza nas estações, roxa no X-B0T.
+- **Hub e abertura:** composição de 7f51320 com as correções de largura e movimento; cartão do X-B0T com moldura roxa que apaga quando bloqueado.
+- **X-B0T no Hub:** vira link para `gameUrl` (mesma aba) só com 4/4 e URL válida; aviso "Para jogar pelo celular, vire o aparelho na horizontal." no Hub e na Conclusão.
+- **Acessibilidade:** painel volta a dois interruptores diretos; tema e texto em "Mais opções".
+- **Estação 3:** sem os módulos redundantes, diagramas limitados; texto das Estações 1 a 4 sem repetições; Bastidores 02 com o relato do desenvolvedor e link para o site do jogo.
+- **Documentação:** `DESIGN.md` e `.impeccable/design.json` refeitos para a nova identidade.
+
+### Como foi verificado
+
+- Os testes da rodada anterior foram atualizados e repetidos, e foram somados testes novos, todos fora do repositório (Chrome headless via `file://`):
+  - jornada, progresso, QR e acesso ao X-B0T com 0 a 4 estações, `gameUrl` nula, vazia, relativa e de outro protocolo: 133 + 39 verificações;
+  - aviso de giro em 390x800, 360x740, 768x1024 (visível) e em 844x390, 1280x800, 1920x1080 (oculto), texto exato, posição e legibilidade;
+  - painel de acessibilidade: dois interruptores, teclado, persistência, dados antigos e "Mais opções": 49 verificações;
+  - movimento: 52 verificações; rolagem horizontal e contraste de texto em 4 temas: 333 verificações;
+  - auditoria de paleta: nenhum roxo fora de contextos do X-B0T, nenhum fundo grande em #142146, tokens da base grafite: 84 verificações;
+  - imagens e SVGs em 6 larguras, sem corte nem ampliação.
+- Três revisões independentes por subagentes (design, conteúdo, regressões). Os achados materiais foram tratados; os demais estão em DECISIONS (DEC-023).
+
+### O que continua pendente
+
+- Celular real, leitor de tela e outros navegadores. O comportamento do aviso foi verificado por emulação de tela e orientação.
+- Confirmação da equipe sobre os textos da Estação 4 e sobre o roxo e a URL do jogo.
+
+---
+
 ## Próximas entradas
 
 O DEVLOG só deve ganhar uma nova entrada quando houver algo realmente relevante, por exemplo:
