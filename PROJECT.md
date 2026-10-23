@@ -30,7 +30,7 @@ Durante o desenvolvimento, usamos quatro estados para evitar confusão:
 - **Implementado:** já existe no código;
 - **Validado:** foi implementado e testado no fluxo esperado.
 
-Situação revisada em 23/10/2026 (identidade grafite com traçado azul, acesso ao X-B0T, `gameUrl` e acessibilidade; testado só em Chrome headless):
+Situação revisada em 23/10/2026 (identidade azul sobre grafite, scanner de QR, carta do X-B0T, `gameUrl` e acessibilidade; testado só em Chrome headless):
 
 - **Validado:** sistema de progresso (`progresso.js`), testado no console, incluindo dado corrompido e número decimal.
 - **Implementado e testado em emulador e no celular:** Hub (`hub.html`), nos estados 0 a 4.
@@ -316,13 +316,13 @@ Alguns princípios que guiam o design:
 
 O site e o X-B0T devem parecer partes da mesma experiência, cada um com a sua cor.
 
-Desde 23/10/2026 (DEC-023), a base é grafite, escura e neutra, com três cores de função fixa:
+Desde 23/10/2026 (DEC-024), a base é grafite, escura e neutra, com o azul como acento principal e o roxo reservado ao jogo:
 
-- azul intermediário da sala (`#142146`) só em traçados, linhas, trilhos, separadores e molduras de módulos;
-- branco-sinal como tinta de estado e ênfase (concluído, próxima estação, botão principal);
-- roxo (`#CD5EFA`, provisório) só nas partes ligadas ao jogo X-B0T.
+- azul de acento (`#5b8cff`) para estados, progresso, ações e foco; azul de linha (`#3558c4`) para linhas, trilhos e molduras; o azul intermediário da sala (`#142146`) como referência escura da escala;
+- branco só para texto;
+- roxo (`#CD5EFA`, provisório) só nas partes ligadas ao X-B0T.
 
-As engrenagens das estações são clara (validada) e cinza (ainda não); a do X-B0T é roxa. O azul nunca é fundo de painel nem cor de texto, e o roxo não é usado como cor geral do site.
+As engrenagens das estações são azuis (validada) e cinza (ainda não); a do X-B0T é roxa. O azul nunca é fundo de painel nem cor de texto corrido, e o roxo não é usado como cor geral do site.
 
 Como a experiência é mobile-first, legibilidade e contraste têm prioridade sobre efeitos visuais.
 
@@ -416,6 +416,8 @@ Esta seção guarda apenas trabalho concreto ainda aberto. Ela não substitui o 
 - [ ] Confirmar a cor final do X-B0T; enquanto isso, `#CD5EFA` continua provisório.
 - [ ] Confirmar com o grupo a alteração editorial na Estação 4 (DEC-020) e o texto novo do Bastidores 02 (DEC-023).
 - [ ] Testar em celular real o acesso ao X-B0T pelo Hub e pela Conclusão e o aviso "vire o aparelho na horizontal".
+- [ ] Testar a leitura real de QR pelo scanner (Chrome/Android, em HTTPS) e pelo app Câmera do iPhone, com os QR Codes impressos (DEC-024).
+- [ ] Decidir se entra uma cópia local de uma biblioteca de decodificação de QR para o scanner funcionar também no Safari do iOS e no Firefox (hoje eles usam o app Câmera).
 - [ ] Testar o painel de acessibilidade no computador da escola (DEC-022) e, se possível, com o armazenamento do navegador bloqueado.
 
 ### Risco operacional

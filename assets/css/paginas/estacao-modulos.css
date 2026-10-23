@@ -120,14 +120,14 @@
 }
 
 .nota--marco {
-  --moldura: var(--cor-azul);
+  --moldura: var(--cor-azul-linha);
   --espessura: 2px;
 }
 
 /* Conexão: o diagrama vai primeiro, o ano ou o título assinam por baixo. */
 /* Órbita: o assunto no centro e o que vem dele em volta. */
 .nota--orbita {
-  --moldura: var(--cor-azul);
+  --moldura: var(--cor-azul-linha);
   --miolo: var(--cor-fundo);
   --espessura: 2px;
   padding-top: var(--espaco-6);
@@ -146,46 +146,291 @@
 /* Conceito: o termo técnico e a ilustração que o resume. */
 /* Cautela: o que não deve ser entendido ao pé da letra. */
 /* Herança (Estação 4): o que o site herdou do X-B0T. */
-/* Status (Estação 4): o que ainda não foi confirmado, sem afirmar nada. */
-.nota--status {
-  --moldura: var(--cor-apagado);
-  --miolo: var(--cor-fundo);
+/* Origem do X-B0T (Estação 4): o relato de como o jogo nasceu, no lugar do antigo card de pendências.
+   Tipografia como estrutura: a frase de abertura em corpo grande, o desenvolvimento em texto comum e
+   uma faixa de linhas de movimento no topo (a assinatura dos cards do jogo). Nada mais. */
+.nota--origem {
+  --moldura: var(--cor-xbot);
+  --espessura: 2px;
+  --miolo: var(--cor-superficie);
+  display: block;
+  padding: calc(14px + var(--espaco-6)) var(--espaco-6) var(--espaco-6);
 }
 
-/* O selo desce para uma linha própria: na coluna estreita ele cobriria o título. */
-.nota--status .nota__selo {
-  grid-column: 1;
-  grid-row: 2;
-  justify-self: start;
-  margin: var(--espaco-1) 0 var(--espaco-2);
-  padding: var(--espaco-1) var(--espaco-2);
-  border: 2px solid currentColor;
-  color: var(--cor-texto-atenuado);
-  transform: rotate(-3deg);
-}
-
-.nota__lista {
-  display: grid;
-  gap: var(--espaco-3);
+.nota--origem > p {
   margin: 0;
-  padding: 0;
-  list-style: none;
 }
 
-.nota .nota__lista li {
-  display: grid;
-  grid-template-columns: auto minmax(2rem, 1fr);
-  align-items: center;
-  gap: var(--espaco-3);
-  margin: 0;
-  padding: 0;
-  line-height: 1.35;
+.origem__faixa {
+  position: absolute;
+  top: 2px;
+  left: calc(var(--espaco-3) + 2px);
+  right: 2px;
+  height: 14px;
+  background-color: var(--cor-xbot);
+}
+
+.origem__destaque {
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: clamp(1.375rem, 2.2vw, 1.75rem);
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+.origem__destaque strong {
   color: var(--cor-texto);
+  background-image: linear-gradient(color-mix(in srgb, var(--cor-xbot) 38%, transparent), color-mix(in srgb, var(--cor-xbot) 38%, transparent));
+  background-repeat: no-repeat;
+  background-position: 0 90%;
+  background-size: 100% 0.4em;
 }
 
-.nota .nota__lista li::before {
-  content: none;
+.origem__texto {
+  margin-top: var(--espaco-4) !important;
+  line-height: 1.6;
+  color: var(--cor-texto-secundario);
 }
+
+/* ---------- Carta de acesso ao site do jogo (Estação 4) ----------
+   Uma carta com frente e verso. A frente convida a virar; o verso, que é a arte real do jogo, leva ao
+   site. O palco repete a gramática da capa (linhas de foco, em roxo): é o momento do jogo na estação. */
+
+.carta-acesso {
+  display: grid;
+  justify-items: center;
+  gap: var(--espaco-3);
+  margin: var(--espaco-8) 0;
+}
+
+.carta-acesso[hidden] {
+  display: none;
+}
+
+.carta-acesso__palco {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  padding: var(--espaco-12) var(--espaco-4);
+  background: var(--cor-superficie-escura);
+  clip-path: var(--recorte);
+  overflow: hidden;
+}
+
+.carta-acesso__foco {
+  position: absolute;
+  z-index: -1;
+  inset: -25%;
+  background-color: var(--cor-xbot);
+  opacity: 0.5;
+  -webkit-mask: var(--textura-foco) center / cover no-repeat;
+  mask: var(--textura-foco) center / cover no-repeat;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.6s ease-out;
+}
+
+.carta-acesso[data-lancando] .carta-acesso__foco {
+  transform: scale(1.5);
+  opacity: 1;
+}
+
+.carta {
+  width: min(70%, 15rem);
+  aspect-ratio: 468 / 654;
+  perspective: 1400px;
+  transform: rotate(-3deg);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.carta[data-estado="verso"] {
+  transform: rotate(0deg);
+}
+
+.carta__giro {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.carta[data-estado="verso"] .carta__giro {
+  transform: rotateY(180deg);
+}
+
+.carta__face {
+  position: absolute;
+  inset: 0;
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  color: var(--cor-texto);
+  font: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  clip-path: var(--recorte);
+}
+
+.carta__face--frente {
+  background: var(--cor-superficie);
+}
+
+.carta__face--verso {
+  background: var(--cor-fundo);
+  transform: rotateY(180deg);
+}
+
+/* Foco: aresta interna branca, porque o clip-path cortaria o outline. */
+.carta__face:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 4px var(--cor-texto);
+}
+
+.carta__moldura {
+  position: absolute;
+  inset: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--espaco-6) var(--espaco-3) var(--espaco-4);
+  box-shadow: inset 0 0 0 2px var(--cor-xbot);
+  clip-path: var(--recorte-pequeno);
+  text-align: center;
+}
+
+.carta__emblema {
+  width: 52%;
+  height: auto;
+}
+
+.carta__nome {
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: clamp(1.75rem, 8vw, 2.25rem);
+  line-height: 1;
+}
+
+.carta__virar {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espaco-2);
+  padding: var(--espaco-2) var(--espaco-3);
+  background: var(--cor-xbot);
+  color: var(--cor-sobre-xbot);
+  clip-path: var(--recorte-minimo);
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 0.8125rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.carta__arte {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.carta__acao {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--espaco-2);
+  min-height: 3.25rem;
+  padding: var(--espaco-2) var(--espaco-3);
+  background: var(--cor-xbot);
+  color: var(--cor-sobre-xbot);
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 0.875rem;
+  line-height: 1.15;
+  letter-spacing: 0.04em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.carta__acao .zero::after {
+  border-top-color: currentColor;
+}
+
+@media (hover: hover) {
+  .carta__face--frente:hover {
+    background: var(--cor-superficie-alta);
+  }
+
+  .carta[data-estado="frente"]:hover {
+    transform: rotate(-1deg) translateY(-6px);
+  }
+
+  .carta__face--verso:hover .carta__acao {
+    background: var(--cor-texto);
+  }
+}
+
+/* O lançamento: a carta avança e some no portal de linhas de foco, e a página muda. */
+@keyframes carta-lancar {
+  0% { transform: rotate(0deg) scale(1); opacity: 1; }
+  55% { transform: rotate(0deg) scale(1.1); opacity: 1; }
+  100% { transform: rotate(0deg) scale(1.55); opacity: 0; }
+}
+
+.carta-acesso[data-lancando] .carta {
+  animation: carta-lancar 0.62s cubic-bezier(0.55, 0, 0.55, 0.2) forwards;
+}
+
+.carta-acesso__dica {
+  margin: 0;
+  max-width: 34ch;
+  font-size: 0.9375rem;
+  line-height: 1.4;
+  text-align: center;
+  color: var(--cor-texto-secundario);
+}
+
+.carta-acesso__voltar {
+  min-height: 44px;
+  padding: var(--espaco-2) var(--espaco-4);
+  border: 0;
+  background: none;
+  color: var(--cor-texto-atenuado);
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  font-size: 0.8125rem;
+  letter-spacing: 0.06em;
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+  cursor: pointer;
+}
+
+.carta-acesso__voltar[hidden] {
+  display: none;
+}
+
+.carta-acesso__voltar:focus-visible {
+  outline: 3px solid var(--cor-texto);
+  outline-offset: 2px;
+}
+
+@media (min-width: 900px) {
+  .carta {
+    width: min(100%, 19rem);
+  }
+
+  .carta-acesso__palco {
+    padding: var(--espaco-16) var(--espaco-8);
+  }
+}
+
 
 .nota .nota__lista li::after {
   content: "";

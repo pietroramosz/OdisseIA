@@ -67,8 +67,9 @@ Atualmente, estão implementados:
 - `index.html` como porta de entrada estática, sem JavaScript nem dependência de progresso;
 - Estações 1–4 com conteúdo, três estados de acesso e linguagem editorial compartilhada;
 - página de conclusão (`final.html`), com estados de jornada completa/incompleta e botão "Jogar X-B0T" a partir de `gameUrl`;
-- identidade grafite com traçado azul (#142146, a cor da sala da feira), branco-sinal como tinta de estado e o roxo reservado ao X-B0T;
-- painel de acessibilidade compacto, com interruptores de reduzir animações e alto contraste e, em "Mais opções", tema e tamanho do texto;
+- identidade grafite com o azul (escala do #142146, a cor da sala da feira) como acento principal e o roxo reservado ao X-B0T;
+- painel de acessibilidade com todos os controles à vista (animações, alto contraste, tema, tamanho do texto e restaurar);
+- scanner de QR Code pela câmera (Chrome/Android; no Safari do iOS e no Firefox o QR é lido pelo app Câmera) que valida as estações pelas mesmas regras de `validar.html`;
 - acesso ao X-B0T pelo Hub e pela Conclusão a partir de `gameUrl`, liberado só com as quatro estações validadas, com aviso para jogar no celular na horizontal.
 
 O sistema de progresso já foi testado manualmente e versionado na branch `dev`.

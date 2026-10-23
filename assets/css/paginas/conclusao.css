@@ -284,6 +284,7 @@
 .final-xbot {
   /* Tudo neste bloco é do X-B0T: moldura, linhas de foco, sombra da carta e o botão de jogar. */
   --cor-destaque: var(--cor-xbot);
+  --cor-azul-linha: var(--cor-xbot);
   --cor-sobre-destaque: var(--cor-sobre-xbot);
   position: relative;
   margin-top: var(--espaco-12);

@@ -33,7 +33,7 @@ A experiência não é "um site sobre a feira" nem "um jogo com um site de apoio
 - Stack travada em HTML/CSS/JS puro, sem framework, sem backend, sem CDN (DEC-003, DEC-008) — revisitar só se surgir necessidade real.
 - Configuração central em JS puro (`const OdisseIAConfig = {...}`), carregada via `<script>` comum, não ES module, para funcionar em `file://` (DEC-010). Demais scripts (`progresso.js`, `qr.js`, `app.js`) seguem o mesmo padrão.
 - Progresso: `{ versao: 1, ultimaEstacaoDesbloqueada: 0 }` (0 a 4), derivando os demais estados de UI desse valor sempre que possível. Não é mecanismo de segurança (DEC-004, DEC-006) — nada crítico deve depender só do frontend.
-- QR: cada QR abre `validar.html?estacao=N`; só o QR da próxima estação na ordem avança o progresso (DEC-014). Cinco resultados possíveis: sucesso, repetido, fora de ordem, inválido, erro de armazenamento.
+- QR: cada QR abre `validar.html?estacao=N`; só o QR da próxima estação na ordem avança o progresso (DEC-014). O scanner pela câmera (DEC-024) reaproveita `resultadoParaEstacao()` de `qr.js` e nunca abre a URL lida. Cinco resultados possíveis: sucesso, repetido, fora de ordem, inválido, erro de armazenamento.
 - Conteúdo das 4 estações é escrito direto no HTML (`estacao-1.html`–`estacao-4.html`), sem arquivo de dados nem geração por JS (DEC-012); esqueleto das 4 páginas deve ser idêntico.
 - Páginas atuais: `index.html` (porta de entrada estática, sem JS, sem progresso), `hub.html` (estados 0–4), `validar.html`, `estacao-1.html`–`estacao-4.html`, `final.html` (conclusão).
 - **Estação 4 e `final.html` (Conclusão) já estão implementadas** — não tratar como pendentes de implementação. Implementado ≠ validado: nenhuma das duas foi testada no fluxo físico completo da feira, e a jornada completa (visão geral → Hub → 4 estações → conclusão → X-B0T) ainda não foi validada ponta a ponta.
@@ -44,7 +44,7 @@ A experiência não é "um site sobre a feira" nem "um jogo com um site de apoio
 ## Brand Commitments
 
 - Nome do projeto: **OdisseIA**. Jogo final: **X-B0T**.
-- Identidade visual (DEC-023): base grafite, escura e neutra; o azul #142146 só em traçados, linhas, trilhos e molduras; o branco-sinal como tinta de estado; o **roxo** (`#CD5EFA`, provisório) reservado ao X-B0T — nunca cor dominante em texto corrido, e nunca fora das partes do jogo.
+- Identidade visual (DEC-024): base grafite, escura e neutra; o azul (escala do #142146, acento #5b8cff) como acento principal; o branco só para texto; o **roxo** (`#CD5EFA`, provisório) reservado ao X-B0T — nunca cor dominante em texto corrido, e nunca fora das partes do jogo.
 - Tipografia: **Chakra Petch** SemiBold(600)/Bold(700), local em `assets/fonts/` (sem CDN), para títulos/rótulos/números; texto corrido em fonte de sistema. Inter guardada na pasta como alternativa futura, não carregada.
 - Motivo de forma único e repetido: cantos cortados em diagonal (cards, segmentos de barra).
 - Proibido: glow generalizado, gradiente excessivo, glassmorphism, emoji como ícone, hover como requisito, texto pequeno em contorno, fonte nova sem decisão explícita.
@@ -53,7 +53,7 @@ A experiência não é "um site sobre a feira" nem "um jogo com um site de apoio
 ## Evidence on Hand
 
 - Documentação viva do projeto é fonte de verdade e deve ser tratada como tal: `README.md`, `PROJECT.md`, `DECISIONS.md`, `DESIGN.md` (sistema de design; substitui o antigo `docs/ESTILO.md`), `AI-WORKFLOW.md`, `DEVLOG.md`.
-- Decisões numeradas (`DEC-001` a `DEC-023`) registram o histórico de escolhas de produto, arquitetura e visual — qualquer mudança que contradiga uma DEC existente exige decisão explícita, não apenas uma preferência de implementação.
+- Decisões numeradas (`DEC-001` a `DEC-024`) registram o histórico de escolhas de produto, arquitetura e visual — qualquer mudança que contradiga uma DEC existente exige decisão explícita, não apenas uma preferência de implementação.
 - Nenhuma mecânica, carta, regra ou dado do X-B0T deve ser inventado ou documentado pelo site além do que realmente existir na versão final do jogo (DEC-007).
 
 ## Product Principles

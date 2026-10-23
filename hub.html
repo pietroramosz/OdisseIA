@@ -6,6 +6,7 @@
   <title>OdisseIA — Hub</title>
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/paginas/hub.css">
+  <link rel="stylesheet" href="assets/css/scanner.css">
   <script src="assets/js/acessibilidade.js"></script>
 </head>
 <body class="pagina-hub">
@@ -23,6 +24,9 @@
   </header>
 
   <main id="conteudo-principal" tabindex="-1">
+    <!-- Acesso ao scanner de QR Code: preenchido por app.js a partir do progresso. -->
+    <section id="hub-scan" class="scan-acesso ficha" aria-labelledby="hub-scan-titulo"></section>
+
     <section class="rota" aria-label="Estações">
       <ol id="lista-estacoes" class="estacoes"></ol>
     </section>
@@ -36,6 +40,7 @@
   <script src="assets/js/config.js"></script>
   <script src="assets/js/progresso.js"></script>
   <script src="assets/js/qr.js"></script>
+  <script src="assets/js/scanner.js"></script>
   <script src="assets/js/app.js"></script>
 </body>
 </html>

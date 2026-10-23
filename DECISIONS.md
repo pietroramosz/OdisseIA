@@ -628,7 +628,7 @@ Se o navegador da escola bloquear o `localStorage`, nenhuma preferência persist
 
 ## DEC-023 — Base grafite, azul #142146 só no traçado e roxo só no X-B0T
 
-**Status:** aceita e implementada (23/10/2026). Revisa a DEC-020 (paleta azul). A DEC-021 (largura e escala) e a DEC-022 (movimento) continuam valendo.
+**Status:** aceita e implementada (23/10/2026); **a paleta foi revista pela DEC-024** (o azul passou a ser o acento principal). Continuam valendo os itens 4 a 12 (exceto o que a DEC-024 troca: engrenagem clara, painel com "Mais opções" e a Estação 4). A DEC-021 (largura e escala) e a DEC-022 (movimento) continuam valendo.
 
 ### Contexto
 
@@ -660,3 +660,52 @@ Fluxo, `progresso.js`, `qr.js`, chave `odisseia:progresso`, regras de desbloquei
 
 - Confirmar a alteração editorial da Estação 4 já registrada na DEC-020 e o texto novo do Bastidores 02.
 - Confirmar se o roxo `#CD5EFA` e a URL do jogo são os definitivos.
+
+---
+
+## DEC-024 — Azul como acento principal, painel de acessibilidade à vista, scanner de QR Code e carta do X-B0T
+
+**Status:** aceita e implementada (23/10/2026). Substitui os itens de cor da DEC-023 (1 a 5), o painel com "Mais opções" (item 9) e o conteúdo do Bastidor 02 (item 12). Mantém o resto da DEC-023 e as DEC-021 e DEC-022.
+
+### Contexto
+
+A DEC-023 devolveu o grafite, mas deixou o branco como cor de estado e o #142146 quase invisível sobre ele (1,2:1): o branco virou o acento dominante e o azul "mal aparecia". Pedido: o azul deve ocupar o lugar do roxo, com o grafite como base e o roxo só no X-B0T. Também: o "Mais opções" do painel de acessibilidade incomodou, a dinâmica do site não convencia, a Estação 4 precisava de uma apresentação melhor do jogo e faltava ler os QR Codes pela câmera.
+
+### Decisão
+
+1. **Escala de azul da mesma matiz (~226°), com o #142146 como referência escura:** `--cor-azul` #142146 (fundos sutis), `--cor-azul-linha` #3558c4 (linhas, trilhos, separadores, molduras de módulo, texturas; 3,1:1 sobre o grafite), `--cor-destaque` #5b8cff (estado, progresso, ação, foco; 6,2:1, texto escuro sobre ele) e `--cor-azul-claro` #8fb0ff (hover). Tema claro: acento #2a55d6 (6,2:1 sobre branco). Alto contraste: #9db8ff (escuro) e #0b3a9a (claro). A base grafite não muda.
+2. **Papéis:** o azul de acento volta a fazer o que o roxo fazia (barras de progresso, próxima estação, carimbo VALIDADA, botão principal, trilho percorrido, nós ativos, numerais de capítulo, "IA" da marca). O branco é só texto. Medido nas páginas renderizadas: 85 a 95% de pixels grafite, 0,4 a 6,2% de azul de acento, 0,9 a 3,2% de branco.
+3. **Roxo só no X-B0T:** as áreas do jogo re-pintam `--cor-destaque` e `--cor-azul-linha` com `--cor-xbot` (cartão, engrenagem, carta e explosão da abertura, Estação 4 inteira, bloco do jogo na Conclusão). A navegação (trilho da rota, painel de acessibilidade, scanner, fechamento das páginas, barra de leitura) volta ao azul com `--cor-marca` e `--cor-marca-linha`.
+4. **Engrenagens:** validada = `engrenagem-azul.png` (derivada da roxa por troca de matiz); ainda não = a cinza original. A prateada da DEC-023 foi removida.
+5. **Painel de acessibilidade, tudo à vista:** o "Mais opções" saiu. O painel mostra de uma vez "Reduzir animações", "Alto contraste", "Tema", "Tamanho do texto" e "Restaurar padrão", em cerca de 430px. Nenhuma função foi removida; a persistência, a compatibilidade com dados antigos, a prioridade da escolha manual e o suporte a `prefers-reduced-motion` são os da DEC-022.
+6. **Dinâmica (diagnóstico → direção):** as páginas eram blocos sem conexão (troca seca, Hub estático, nenhuma ação óbvia "agora", estação bloqueada e fim de conteúdo sem próximo passo). A direção foi **fazer a jornada ter uma próxima ação sempre visível e responder a ela com movimento proporcional**:
+   - painel "Próximo QR Code" no Hub, logo depois do herói, com o QR esperado e o botão de escanear; com 4/4 vira ponte para a Conclusão;
+   - o Hub se monta ao abrir (barras que enchem, trilho que se estende, engrenagens que acendem, cartões em sequência, ~1,1s);
+   - troca de página com fade curto (View Transitions entre documentos), barra de leitura nas estações, scanner que sobe;
+   - a próxima estação deixa de ter duas ações sólidas concorrentes: o botão do QR é a única ação cheia; a barra do cartão fica na superfície;
+   - os passos de desbloqueio saíram do cartão da próxima estação (duplicavam o painel e abriam um vazio na linha); continuam nas telas de bloqueio;
+   - fim das Estações 1 a 3: "Voltar ao Hub" e uma orientação para continuar a jornada física.
+   Tudo respeita `data-movimento`; nada altera progresso, QR ou desbloqueio.
+7. **Estação 4:**
+   - o card de pendências ("Ainda não confirmado", "EM VALIDAÇÃO") foi substituído pelo card de origem do X-B0T, com o relato do desenvolvedor principal (inspiração em Yu-Gi-Oh! e Pokémon, mecânicas próprias);
+   - o texto principal ficou com a explicação sobre o site do jogo, o acesso e a observação sobre o que ainda depende de confirmação;
+   - o acesso é uma carta digital com frente e verso (ver DESIGN.md): virar, ativar o verso, animação curta e redirecionamento na mesma aba para `OdisseIAConfig.gameUrl`; sem URL válida a carta não aparece;
+   - o "Bastidor 02" não lista mais as pendências (como funciona uma partida, cartas, IA, instruções); a observação "só entram aqui depois de confirmados" continua.
+8. **Scanner de QR Code pela câmera** (`assets/js/scanner.js`, `assets/css/scanner.css`):
+   - Abre num `<dialog>` a partir de botões `data-escanear` no Hub, nas telas de bloqueio e no fim das estações. Explica o uso da câmera e **só a pede depois de "Abrir câmera"**, preferindo a traseira. Não há upload nem leitura de arquivos; os quadros ficam na memória e nada é gravado ou enviado.
+   - **Regras de validação reaproveitadas:** o scanner só extrai o número da estação do QR e chama `resultadoParaEstacao()` de `qr.js`, a mesma função de `validar.html`. `progresso.js` e `qr.js` não foram alterados. O QR da estação N libera a estação N; só o QR da próxima na ordem avança; repetido e fora de ordem não alteram nada; ler o conteúdo de uma estação não substitui a visita física à próxima.
+   - **Formato oficial:** só vale um link completo http(s), sem credenciais, que termine em `/validar.html` com o único parâmetro `estacao` entre 1 e 4. O endereço não é comparado (o QR impresso pode apontar para a hospedagem final), mas **nada é aberto**: o texto lido só serve para obter o número. Qualquer outra coisa é "QR Code inválido".
+   - **Ciclo de vida da câmera:** todas as trilhas são paradas ao cancelar, fechar, ler, Esc, trocar de aba e sair da página (inclusive bfcache). Pedidos atrasados de câmera (cancelou, reabriu, aba oculta) são descartados e a trilha que chegar é parada na hora.
+   - **Textos:** nenhuma tela manda escanear o QR da estação seguinte; a orientação sempre liga o código ao orientador ("entregue pelo orientador") e à visita física.
+9. **Compatibilidade (verificada em caniuse):** o scanner usa a API nativa `BarcodeDetector`. Ela existe no Chrome e no Samsung Internet do Android (e ChromeOS/macOS), **não existe no Safari do iOS** (só atrás de uma opção desligada) **nem no Firefox**. Nesses navegadores o scanner não liga a câmera e explica que o app Câmera do celular lê o mesmo QR Code (que é um link para `validar.html`) e cai no mesmo fluxo de validação, no navegador em que o Hub foi aberto. A leitura dentro do site no iOS exigiria uma biblioteca de decodificação de QR (por exemplo uma cópia local de jsQR, ~130 KB, Apache-2.0), o que conflita com a regra de não adicionar dependências. **Isso não foi feito e depende de aprovação**; o ponto de troca é `criarDecodificador()` em `scanner.js`.
+10. **Limitação de ambiente:** a câmera exige contexto seguro. Em `file://` o Chrome a libera para teste, mas o alvo é a versão em HTTPS (GitHub Pages ou hospedagem final).
+
+### O que não muda
+
+Fluxo, `progresso.js`, `qr.js`, chave `odisseia:progresso`, regras de desbloqueio e ordem, `downloadUrl: null`, HTML/CSS/JS puros, sem CDN nem backend, `file://` para as páginas.
+
+### Pendências para a equipe
+
+- Aprovar (ou não) a cópia local de uma biblioteca de decodificação para o iOS; sem ela o fluxo no iPhone usa o app Câmera.
+- Testar a leitura real em Chrome/Android e o fluxo do app Câmera no iPhone, com os QR Codes impressos.
+- Confirmar o texto do card de origem e do acesso ao site do jogo (a frase sobre a demonstração está em formulação condicional).

@@ -582,6 +582,37 @@ A identidade azul da DEC-020 ficou longe do pretendido: azul demais, mistura de 
 
 ---
 
+## 23/10/2026 (3) — Azul como acento, scanner de QR, carta do X-B0T e dinâmica (DEC-024)
+
+### Contexto
+
+O branco tinha assumido o papel de acento e o azul quase não aparecia; o "Mais opções" do painel de acessibilidade incomodou; o site parecia um conjunto de blocos sem conexão; a Estação 4 precisava apresentar o jogo melhor; faltava ler os QR Codes pela câmera.
+
+### O que mudou
+
+- **Identidade:** escala de azul do #142146 (profundo, linha #3558c4, acento #5b8cff, claro #8fb0ff) no lugar do branco como acento; grafite como base; roxo só no X-B0T, inclusive as linhas e texturas das áreas do jogo; engrenagem azul das estações.
+- **Acessibilidade:** painel com todos os controles à vista.
+- **Dinâmica:** painel "Próximo QR Code" no Hub, Hub que se monta ao abrir, troca de página em fade, barra de leitura nas estações, orientação ao fim das estações e telas de bloqueio com a ação certa.
+- **Estação 4:** card de origem do X-B0T no lugar do card de pendências; carta digital com frente e verso que leva ao site do jogo.
+- **Scanner:** leitura pela câmera com `BarcodeDetector`, reaproveitando `resultadoParaEstacao()`; no iOS e no Firefox explica o app Câmera.
+
+### Como foi verificado
+
+- Testes em Chrome headless (fora do repositório), com câmera falsa do Chrome para o ciclo de vida e um decodificador simulado para a leitura (o Chrome do Windows de teste não tem `BarcodeDetector`):
+  - scanner e Hub/estações: 140 verificações (interpretação de 25 textos de QR, QR1 a QR4, fora de ordem, repetido, inválidos, 4/4, permissão negada, sem câmera, câmera ocupada, sem leitor, Esc, X, troca de aba, pagehide, três corridas de pedido atrasado, estados de 0/4 a 4/4);
+  - carta e Bastidor 02: 33 verificações (teclado, toque, movimento reduzido, mesma aba, sem URL);
+  - painel de acessibilidade: 53 verificações; jornada e progresso: 133; movimento: 52; paleta: 84; layout e contraste: 333;
+  - uma mutação proposital (remover a proteção de sessão) foi detectada pelos testes de corrida.
+- Duas revisões independentes por subagentes (design/dinâmica e scanner/carta/acessibilidade); os achados materiais foram tratados.
+
+### O que continua pendente
+
+- A leitura real de um QR por câmera não foi testada: depende de um celular com Chrome/Android e dos QR Codes impressos, em HTTPS.
+- Safari do iOS e Firefox não têm `BarcodeDetector`: usam o app Câmera. Biblioteca de decodificação local para o iOS aguarda aprovação.
+- Celular real, leitor de tela e outros navegadores continuam sem teste.
+
+---
+
 ## Próximas entradas
 
 O DEVLOG só deve ganhar uma nova entrada quando houver algo realmente relevante, por exemplo:

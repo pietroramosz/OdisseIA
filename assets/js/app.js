@@ -59,8 +59,59 @@ function renderizarHub() {
   const completa = jornadaCompleta();
 
   renderizarProgresso(ultima, total);
+  renderizarAcessoScanner(ultima, total);
   renderizarEstacoes(ultima, total);
   renderizarFinais(completa);
+}
+
+// Botão que abre o scanner (scanner.js escuta qualquer elemento com data-escanear).
+function criarBotaoScanner(texto, classe) {
+  const botao = document.createElement("button");
+  botao.type = "button";
+  botao.className = "botao " + (classe || "");
+  botao.setAttribute("data-escanear", "");
+  botao.appendChild(criarTexto("span", "", texto));
+  return botao;
+}
+
+// Ponto de acesso do Hub: diz qual é o próximo QR Code, de onde ele vem e como a validação funciona.
+// Só apresenta o fluxo; quem valida é o scanner, com as regras de qr.js.
+function renderizarAcessoScanner(ultima, total) {
+  const area = document.getElementById("hub-scan");
+  area.textContent = "";
+  area.classList.toggle("scan-acesso--completa", ultima >= total);
+
+  const texto = document.createElement("div");
+  texto.className = "scan-acesso__texto";
+
+  if (ultima >= total) {
+    texto.appendChild(criarTexto("h2", "scan-acesso__titulo", "Jornada concluída", "hub-scan-titulo"));
+    texto.appendChild(criarTexto("p", "scan-acesso__descricao", "As quatro estações foram validadas. Não há mais QR Codes para escanear: siga para a Conclusão."));
+    const ir = document.createElement("a");
+    ir.className = "botao botao--principal scan-acesso__acao";
+    ir.href = "final.html";
+    ir.appendChild(criarTexto("span", "", "Ver a Conclusão"));
+    texto.appendChild(ir);
+    area.appendChild(texto);
+    return;
+  }
+
+  const proxima = doisDigitos(ultima + 1);
+  texto.appendChild(criarTexto("h2", "scan-acesso__titulo", "Próximo QR Code: Estação " + proxima, "hub-scan-titulo"));
+  texto.appendChild(criarTexto("p", "scan-acesso__descricao", "Termine a visita à Estação " + proxima + " na feira. O orientador entrega o QR Code dela: escaneie para liberar o conteúdo digital."));
+  texto.appendChild(criarBotaoScanner("Escanear QR da Estação " + proxima, "botao--principal scan-acesso__acao"));
+  area.appendChild(texto);
+
+  const regras = document.createElement("ul");
+  regras.className = "scan-acesso__regras";
+  [
+    "Escanear o QR Code é o que valida a sua passagem pela estação.",
+    "Cada código libera só a estação física correspondente, e as estações abrem em ordem.",
+    "Abrir uma página pelo Hub não libera nada."
+  ].forEach(function (linha) {
+    regras.appendChild(criarTexto("li", "", linha));
+  });
+  area.appendChild(regras);
 }
 
 function renderizarProgresso(ultima, total) {
@@ -133,7 +184,7 @@ function criarCardEstacao(numero, estado, estadoSeguinte) {
   marcador.alt = "";
   // Engrenagem clara = validada, cinza = ainda não. A roxa é só do X-B0T.
   marcador.src = estado === "desbloqueada"
-    ? "assets/img/engrenagem-clara.png"
+    ? "assets/img/engrenagem-azul.png"
     : "assets/img/engrenagem-apagada.png";
   marcador.width = ESTACAO_MARCADOR_TAMANHO[estado];
   marcador.height = ESTACAO_MARCADOR_TAMANHO[estado];
@@ -176,10 +227,8 @@ function criarCardEstacao(numero, estado, estadoSeguinte) {
   cartao.setAttribute("aria-describedby", id + "-descricao");
   item.appendChild(cartao);
 
-  // Os passos ficam fora do link para não alongar o nome acessível do cartão.
-  if (estado === "proxima") {
-    item.appendChild(criarListaPassos("estacao__passos", numero));
-  }
+  // Os passos de desbloqueio ficam no painel do QR (logo acima da rota) e na tela de bloqueio da
+  // estação; repeti-los sob o cartão só abria um vazio na linha e duplicava a orientação.
   return item;
 }
 
@@ -187,7 +236,7 @@ function passosDesbloqueio(numero) {
   return [
     "Visite a Estação " + doisDigitos(numero) + " na feira.",
     "Acompanhe a apresentação.",
-    "Valide o QR Code da estação."
+    "Escaneie o QR Code que o orientador entregar."
   ];
 }
 
@@ -498,7 +547,8 @@ function renderizarPaginaEstacao() {
 
   if (estado === "desbloqueada") {
     document.getElementById("conteudo-estacao").hidden = false;
-    prepararLinkJogo();
+    prepararCartaAcesso();
+    prepararProximoPasso();
     return;
   }
 
@@ -506,20 +556,86 @@ function renderizarPaginaEstacao() {
   document.getElementById("estado-bloqueado").hidden = false;
 }
 
-// Links para o site do jogo dentro do conteúdo das estações: o endereço vem só de
-// OdisseIAConfig.gameUrl. Sem uma URL válida o trecho continua oculto, então nunca há link quebrado.
-// Abrem na mesma aba, como o acesso ao jogo no Hub e na Conclusão.
-function prepararLinkJogo() {
+// Carta de acesso ao site do jogo (Estação 4). O destino vem só de OdisseIAConfig.gameUrl; sem uma URL
+// válida a carta fica oculta, então nunca há acesso quebrado. Dois passos: virar a carta (descobrir o
+// verso) e ativar o verso, que faz uma animação curta e abre o site na mesma aba. A frente é um
+// <button> e o verso um <a>: funcionam com toque, mouse e teclado; a face escondida fica inert.
+function movimentoReduzido() {
+  return document.documentElement.getAttribute("data-movimento") === "reduzido";
+}
+
+function prepararCartaAcesso() {
   const acessivel = urlAcessivel(OdisseIAConfig.gameUrl);
-  document.querySelectorAll("[data-link-jogo]").forEach(function (bloco) {
-    const link = bloco.querySelector("a");
-    if (acessivel && link) {
-      link.href = OdisseIAConfig.gameUrl.trim();
-      link.rel = "noopener";
-      bloco.hidden = false;
-    } else {
-      bloco.hidden = true;
+  document.querySelectorAll("[data-carta-acesso]").forEach(function (secao) {
+    if (!acessivel) {
+      secao.hidden = true;
+      return;
     }
+    const carta = secao.querySelector(".carta");
+    const frente = secao.querySelector("[data-virar]");
+    const verso = secao.querySelector("[data-ativar]");
+    const voltar = secao.querySelector("[data-desvirar]");
+    const dica = secao.querySelector("[data-dica]");
+    const destino = OdisseIAConfig.gameUrl.trim();
+    verso.href = destino;
+    verso.rel = "noopener";
+
+    function mostrar(estado, focar) {
+      const noVerso = estado === "verso";
+      carta.setAttribute("data-estado", estado);
+      frente.inert = noVerso;
+      frente.setAttribute("aria-hidden", noVerso ? "true" : "false");
+      frente.tabIndex = noVerso ? -1 : 0;
+      verso.inert = !noVerso;
+      verso.setAttribute("aria-hidden", noVerso ? "false" : "true");
+      verso.tabIndex = noVerso ? 0 : -1;
+      voltar.hidden = !noVerso;
+      dica.textContent = noVerso
+        ? "Selecione o verso da carta para conhecer o site do X-B0T."
+        : "Vire a carta para descobrir o acesso ao site do jogo.";
+      if (focar) {
+        (noVerso ? verso : frente).focus({ preventScroll: true });
+      }
+    }
+
+    frente.addEventListener("click", function () {
+      mostrar("verso", true);
+    });
+    voltar.addEventListener("click", function () {
+      mostrar("frente", true);
+    });
+    secao.addEventListener("keydown", function (evento) {
+      if (evento.key === "Escape" && carta.getAttribute("data-estado") === "verso") {
+        mostrar("frente", true);
+      }
+    });
+    verso.addEventListener("click", function (evento) {
+      // Com Ctrl, Shift, Alt, Cmd ou botão do meio, o navegador faz o que a pessoa pediu.
+      if (evento.defaultPrevented || evento.button !== 0 || evento.ctrlKey || evento.metaKey || evento.shiftKey || evento.altKey) {
+        return;
+      }
+      evento.preventDefault();
+      if (secao.hasAttribute("data-lancando")) {
+        return;
+      }
+      if (movimentoReduzido()) {
+        window.location.assign(destino);
+        return;
+      }
+      secao.setAttribute("data-lancando", "");
+      window.setTimeout(function () {
+        window.location.assign(destino);
+      }, 620);
+    });
+    // Voltando pelo histórico, a carta reaparece inteira (e virada para a frente).
+    window.addEventListener("pageshow", function (evento) {
+      if (evento.persisted) {
+        secao.removeAttribute("data-lancando");
+        mostrar("frente", false);
+      }
+    });
+    mostrar("frente", false);
+    secao.hidden = false;
   });
 }
 
@@ -534,6 +650,7 @@ function renderizarBloqueio(numero, estado, proximaValida, total) {
     painel.appendChild(criarTexto("p", "bloqueio__texto", "O conteúdo é liberado depois da visita presencial:"));
 
     painel.appendChild(criarListaPassos("bloqueio__passos", numero));
+    painel.appendChild(criarAcaoEscanear(proximaValida, "Quando o orientador entregar o QR Code da Estação " + doisDigitos(proximaValida) + ", escaneie para liberar o conteúdo digital dela."));
     painel.appendChild(criarProgressoBloqueio(proximaValida - 1, total));
     return;
   }
@@ -550,7 +667,35 @@ function renderizarBloqueio(numero, estado, proximaValida, total) {
   destino.appendChild(criarTexto("span", "bloqueio__destino-nome", ESTACOES_NOMES[proximaValida - 1]));
   destino.appendChild(criarSeta());
   painel.appendChild(destino);
+  painel.appendChild(criarAcaoEscanear(proximaValida, "Para liberar esta estação, termine as anteriores na feira, em ordem. O próximo QR Code a escanear é o da Estação " + doisDigitos(proximaValida) + "."));
   painel.appendChild(criarProgressoBloqueio(proximaValida - 1, total));
+}
+
+// Texto de orientação + botão do scanner, nas telas de bloqueio.
+function criarAcaoEscanear(estacaoEsperada, orientacao) {
+  const bloco = document.createElement("div");
+  bloco.className = "bloqueio__scan";
+  bloco.appendChild(criarTexto("p", "bloqueio__scan-texto", orientacao));
+  bloco.appendChild(criarBotaoScanner("Escanear QR da Estação " + doisDigitos(estacaoEsperada), "botao--principal"));
+  return bloco;
+}
+
+// Fim do conteúdo de uma estação liberada: orienta a continuar a jornada física. Não manda
+// escanear o QR da próxima estação: ele só existe depois da visita física a ela.
+function prepararProximoPasso() {
+  const numero = Number(document.body.dataset.estacao);
+  const ultima = obterProgresso().ultimaEstacaoDesbloqueada;
+  document.querySelectorAll("[data-proximo-passo]").forEach(function (bloco) {
+    bloco.textContent = "";
+    if (ultima !== numero || numero >= OdisseIAConfig.totalEstacoes) {
+      bloco.hidden = true;
+      return;
+    }
+    const proxima = doisDigitos(numero + 1);
+    bloco.appendChild(criarTexto("p", "conexao__proximo-texto", "Próximo passo na feira: visite a Estação " + proxima + ". Quando o orientador entregar o QR Code dela, volte ao Hub ou escaneie por aqui."));
+    bloco.appendChild(criarBotaoScanner("Já recebi o QR Code da Estação " + proxima, "conexao__escanear"));
+    bloco.hidden = false;
+  });
 }
 
 // Mostra onde o visitante está na jornada; só lê o progresso já calculado.
@@ -634,7 +779,7 @@ function renderizarEstacoesValidadas(total) {
 
     const marcador = document.createElement("img");
     marcador.className = "final-jornada__marcador";
-    marcador.src = "assets/img/engrenagem-clara.png";
+    marcador.src = "assets/img/engrenagem-azul.png";
     marcador.alt = "";
     marcador.width = 32;
     marcador.height = 32;

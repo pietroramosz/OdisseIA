@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/paginas/estacao.css">
   <link rel="stylesheet" href="assets/css/paginas/estacao-modulos.css">
+  <link rel="stylesheet" href="assets/css/scanner.css">
   <script src="assets/js/acessibilidade.js"></script>
 </head>
 <body class="pagina-estacao" data-estacao="4">
@@ -69,10 +70,31 @@
         <h2 class="capitulo__titulo">O que você vai encontrar no jogo</h2>
         <p class="terminal-rotulo capitulo__rotulo">BASTIDOR <span class="capitulo__numero">02</span></p>
         <div class="capitulo__corpo">
-          <p>O X-B0T nasceu de referências conhecidas, como Yu-Gi-Oh! e Pokémon. Mas a equipe foi além da inspiração: criou mecânicas próprias para trazer novas possibilidades e uma experiência diferente durante as partidas.</p>
           <p>No site do jogo, você pode conhecer melhor suas funcionalidades. E, se acompanhou a demonstração na feira, já teve a oportunidade de ver essas ideias em ação e entender como uma partida acontece na prática.</p>
-          <!-- O endereço vem de OdisseIAConfig.gameUrl (app.js preenche o link e só o mostra se a URL for válida). -->
-          <p class="link-jogo" data-link-jogo hidden><a href="#"><span>Conhecer o site do X-B<span class="zero">0</span>T</span><span class="seta" aria-hidden="true"></span></a></p>
+          <!-- Acesso ao site do jogo: a carta só aparece se OdisseIAConfig.gameUrl for uma URL válida (app.js
+               preenche o destino e cuida do foco, do toque e do movimento reduzido). Sem JavaScript fica oculta. -->
+          <section class="carta-acesso" data-carta-acesso aria-label="Acesso ao site do X-B0T" hidden>
+            <div class="carta-acesso__palco">
+              <span class="carta-acesso__foco" aria-hidden="true"></span>
+              <div class="carta" data-estado="frente">
+                <div class="carta__giro">
+                  <button type="button" class="carta__face carta__face--frente" data-virar aria-describedby="carta-dica">
+                    <span class="carta__moldura">
+                      <img class="carta__emblema" src="assets/img/engrenagem-acesa.png" alt="" width="256" height="256">
+                      <span class="carta__nome">X-B<span class="zero">0</span>T</span>
+                      <span class="carta__virar">Virar a carta <span class="seta" aria-hidden="true"></span></span>
+                    </span>
+                  </button>
+                  <a class="carta__face carta__face--verso" href="#" data-ativar inert aria-hidden="true" tabindex="-1">
+                    <img class="carta__arte" src="assets/img/verso-carta.png" alt="" width="468" height="654">
+                    <span class="carta__acao"><span>Conhecer o site do X-B<span class="zero">0</span>T</span><span class="seta" aria-hidden="true"></span></span>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <p id="carta-dica" class="carta-acesso__dica" role="status" data-dica>Vire a carta para descobrir o acesso ao site do jogo.</p>
+            <button type="button" class="carta-acesso__voltar" data-desvirar hidden>Virar de volta</button>
+          </section>
           <p>As regras, as cartas e o papel da inteligência artificial só entram aqui depois de confirmados pelo grupo responsável, com base na versão final do jogo.</p>
           <!--
             PENDENTE: preencher só com o que estiver confirmado pelo grupo do X-B0T
@@ -82,15 +104,10 @@
             duração da partida e instruções básicas. Não afirmar Minimax, MCTS, Machine
             Learning nem IA generativa sem confirmação no código ou pelo grupo.
           -->
-          <div class="ficha nota nota--status" role="group" aria-labelledby="nota-4-3" data-origem="conteudo-original" style="--ancora: 1">
-            <h3 class="nota__titulo" id="nota-4-3">Ainda não confirmado</h3>
-            <p class="nota__selo">EM VALIDAÇÃO</p>
-            <ul class="nota__lista">
-              <li>Como funciona uma partida</li>
-              <li>As cartas</li>
-              <li>O papel da inteligência artificial no jogo</li>
-              <li>Instruções básicas para jogar</li>
-            </ul>
+          <div class="ficha nota nota--origem" role="group" aria-label="Origem do X-B0T" style="--ancora: 1; --vao: 7">
+            <span class="origem__faixa textura-movimento" aria-hidden="true"></span>
+            <p class="origem__destaque">O X-B0T nasceu de referências conhecidas, como <strong class="sem-quebra">Yu-Gi-Oh!</strong> e <strong>Pokémon</strong>.</p>
+            <p class="origem__texto">Mas a equipe foi além da inspiração: criou mecânicas próprias para trazer novas possibilidades e uma experiência diferente durante as partidas.</p>
           </div>
         </div>
       </section>
@@ -119,6 +136,7 @@
   <script src="assets/js/config.js"></script>
   <script src="assets/js/progresso.js"></script>
   <script src="assets/js/qr.js"></script>
+  <script src="assets/js/scanner.js"></script>
   <script src="assets/js/app.js"></script>
 </body>
 </html>

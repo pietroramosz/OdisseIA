@@ -18,12 +18,16 @@
   font-display: swap;
 }
 
-/* Identidade do OdisseIA: base grafite, escura e neutra. Cada cor tem uma função:
-   - grafite (fundo e superfícies) e branco-sinal (texto e ênfase) formam a interface;
-   - --cor-azul (#142146, o azul intermediário da sala) desenha traçados, filetes, trilhos, molduras
-     de módulos, grade e texturas: a estrutura que antes era roxa. Nunca é fundo de painel;
-   - --cor-destaque é a tinta de estado e de ênfase (concluído, próximo, botão principal): branco-sinal;
-   - --cor-xbot (#cd5efa) é só do X-B0T: onde o jogo é o assunto, a cor de destaque é trocada por ele.
+/* Identidade do OdisseIA: base grafite escura e neutra, com o azul como acento principal e o roxo
+   reservado ao X-B0T (DEC-024). Cada cor tem uma função:
+   - grafite (fundo e superfícies) e branco-sinal (texto) formam a base;
+   - o azul nasce do #142146, o azul intermediário da sala da feira, que é escuro demais para
+     aparecer sobre o grafite. Por isso a escala tem quatro passos da mesma matiz (~226°):
+       --cor-azul        #142146  referência escura: fundos sutis, marca-texto, hachura
+       --cor-azul-linha  #3558c4  linhas, trilhos, separadores, texturas e molduras (3,1:1)
+       --cor-destaque    #5b8cff  acento: estados, progresso, ações, foco (6,2:1; texto escuro sobre ele)
+       --cor-azul-claro  #8fb0ff  hover e texto de acento sobre superfícies elevadas (9,1:1)
+   - --cor-xbot (#cd5efa) é só do X-B0T: onde o jogo é o assunto, --cor-destaque é trocado por ele.
    Uma troca de cor acontece neste bloco. */
 :root {
   --cor-fundo: #0c0c10;
@@ -33,11 +37,14 @@
   --cor-texto: #f3f3f6;
   --cor-texto-secundario: #c2c2cc;
   --cor-texto-atenuado: #9d9daa;
-  --cor-destaque: #f3f3f6;
-  --cor-sobre-destaque: #0c0c10;
   --cor-apagado: #6f6f7d;
-  --cor-azul: #142146;
   --cor-grade: rgba(255, 255, 255, 0.04);
+
+  --cor-azul: #142146;
+  --cor-azul-linha: #3558c4;
+  --cor-destaque: #5b8cff;
+  --cor-sobre-destaque: #0c0c10;
+  --cor-azul-claro: #8fb0ff;
 
   --cor-xbot: #cd5efa;
   --cor-sobre-xbot: #0c0c10;
@@ -45,6 +52,7 @@
      navegação a devolve com --cor-marca. */
   --cor-marca: var(--cor-destaque);
   --cor-sobre-marca: var(--cor-sobre-destaque);
+  --cor-marca-linha: var(--cor-azul-linha);
 
   --escala-tela: 1;
 
@@ -122,10 +130,12 @@
   --cor-texto: #17151c;
   --cor-texto-secundario: #3d3a48;
   --cor-texto-atenuado: #565263;
-  --cor-destaque: #17151c;
+  --cor-destaque: #2a55d6;
   --cor-sobre-destaque: #ffffff;
   --cor-apagado: #6e6a7c;
-  --cor-azul: #b7c0dc;
+  --cor-azul: #c9d4f4;
+  --cor-azul-linha: #6f8ce0;
+  --cor-azul-claro: #1c3fb0;
   --cor-grade: rgba(23, 21, 28, 0.06);
   --cor-xbot: #8f26c7;
   --cor-sobre-xbot: #ffffff;
@@ -140,9 +150,11 @@
   --cor-texto: #ffffff;
   --cor-texto-secundario: #ffffff;
   --cor-texto-atenuado: #e6e6ec;
-  --cor-destaque: #ffffff;
+  --cor-destaque: #9db8ff;
   --cor-apagado: #a9a9b6;
-  --cor-azul: #3a4a8a;
+  --cor-azul: #1b2c63;
+  --cor-azul-linha: #6f93ff;
+  --cor-azul-claro: #c4d4ff;
   --cor-grade: rgba(255, 255, 255, 0.02);
 }
 
@@ -154,10 +166,12 @@
   --cor-texto: #000000;
   --cor-texto-secundario: #000000;
   --cor-texto-atenuado: #1f1f24;
-  --cor-destaque: #000000;
+  --cor-destaque: #0b3a9a;
   --cor-sobre-destaque: #ffffff;
   --cor-apagado: #55555f;
-  --cor-azul: #7b88b8;
+  --cor-azul: #b9c8f2;
+  --cor-azul-linha: #2a55d6;
+  --cor-azul-claro: #0b3a9a;
   --cor-grade: rgba(0, 0, 0, 0.03);
   --cor-xbot: #6a0fa0;
 }
@@ -465,23 +479,23 @@ p .zero::after {
   pointer-events: none;
 }
 
-/* Retícula de mangá: pontos no azul de traçado. */
+/* Retícula de mangá: pontos no azul de linha. */
 .textura-reticula {
-  background-color: var(--cor-azul);
+  background-color: var(--cor-azul-linha);
   -webkit-mask: var(--textura-reticula) 0 0 / 8px 8px repeat;
   mask: var(--textura-reticula) 0 0 / 8px 8px repeat;
 }
 
 /* Linhas de foco convergindo para o centro. */
 .textura-foco {
-  background-color: var(--cor-azul);
+  background-color: var(--cor-azul-linha);
   -webkit-mask: var(--textura-foco) center / cover no-repeat;
   mask: var(--textura-foco) center / cover no-repeat;
 }
 
 /* Linhas de movimento horizontais, grossas à direita. */
 .textura-movimento {
-  background-color: var(--cor-azul);
+  background-color: var(--cor-azul-linha);
   -webkit-mask: var(--textura-movimento) center / 100% 100% no-repeat;
   mask: var(--textura-movimento) center / 100% 100% no-repeat;
 }
@@ -663,6 +677,29 @@ p .zero::after {
   }
 }
 
+/* Navegação fluida: as páginas se encontram em vez de trocar com um corte seco. Transição entre
+   documentos do mesmo site (Chrome, Edge e Safari recentes; nos demais a troca é a de sempre). A
+   página sai em fade curto e a nova sobe uns poucos pixels. Sem efeito em file://. */
+@view-transition {
+  navigation: auto;
+}
+
+@keyframes pagina-sair {
+  to { opacity: 0; }
+}
+
+@keyframes pagina-entrar {
+  from { opacity: 0; translate: 0 10px; }
+}
+
+::view-transition-old(root) {
+  animation: pagina-sair 0.16s ease-in both;
+}
+
+::view-transition-new(root) {
+  animation: pagina-entrar 0.34s cubic-bezier(0.22, 1, 0.36, 1) 0.06s both;
+}
+
 /* Movimento reduzido: sem deslocamento nem coreografia; o conteúdo já nasce no estado final.
    A resposta às interações continua, só em cor e opacidade, rápida e sem movimento.
    Quem decide é acessibilidade.js, que grava data-movimento="reduzido" ou "normal" no <html>:
@@ -676,6 +713,12 @@ p .zero::after {
   transition-property: color, background-color, border-color, box-shadow, opacity !important;
   transition-duration: 0.12s !important;
   scroll-behavior: auto !important;
+}
+
+:root[data-movimento="reduzido"]::view-transition-group(*),
+:root[data-movimento="reduzido"]::view-transition-old(*),
+:root[data-movimento="reduzido"]::view-transition-new(*) {
+  animation: none !important;
 }
 
 :root[data-movimento="reduzido"] .botao:active,
@@ -694,6 +737,12 @@ p .zero::after {
     transition-property: color, background-color, border-color, box-shadow, opacity !important;
     transition-duration: 0.12s !important;
     scroll-behavior: auto !important;
+  }
+
+  :root:not([data-movimento])::view-transition-group(*),
+  :root:not([data-movimento])::view-transition-old(*),
+  :root:not([data-movimento])::view-transition-new(*) {
+    animation: none !important;
   }
 
   :root:not([data-movimento]) .botao:active,
@@ -774,7 +823,7 @@ p .zero::after {
 
 .a11y__topo {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
   justify-content: space-between;
   gap: var(--espaco-3);
@@ -799,63 +848,29 @@ p .zero::after {
   cursor: pointer;
 }
 
-/* Os dois controles diretos: filas de interruptor, uma embaixo da outra, sem agrupamentos. */
+.a11y__fechar {
+  flex: none;
+  width: auto;
+  padding: var(--espaco-2) var(--espaco-3);
+}
+
+.a11y__restaurar {
+  width: 100%;
+}
+
+/* Painel compacto, tudo à vista: dois interruptores, tema, tamanho do texto e restaurar. */
 .a11y__chaves {
   display: grid;
   gap: var(--espaco-1);
+  margin-bottom: var(--espaco-3);
+  padding-bottom: var(--espaco-3);
+  border-bottom: 1px dashed var(--cor-apagado);
 }
 
 .a11y__nota {
   color: var(--cor-texto-atenuado);
   font-size: 0.75rem;
   font-weight: 400;
-}
-
-/* Tema e tamanho do texto continuam disponíveis, recolhidos. */
-.a11y__mais {
-  margin-top: var(--espaco-3);
-  padding-top: var(--espaco-3);
-  border-top: 1px dashed var(--cor-apagado);
-}
-
-.a11y__mais-titulo {
-  display: flex;
-  align-items: center;
-  min-height: 44px;
-  color: var(--cor-texto-secundario);
-  font-family: var(--fonte-titulo);
-  font-weight: 600;
-  font-size: 0.8125rem;
-  letter-spacing: 0.04em;
-  cursor: pointer;
-}
-
-.a11y__mais-titulo::after {
-  content: "";
-  flex: none;
-  width: 0.5em;
-  height: 0.5em;
-  margin-left: auto;
-  border-right: 2px solid currentColor;
-  border-bottom: 2px solid currentColor;
-  transform: rotate(45deg) translate(-2px, -2px);
-}
-
-.a11y__mais[open] > .a11y__mais-titulo::after {
-  transform: rotate(-135deg) translate(-2px, -2px);
-}
-
-.a11y__mais-titulo:focus-visible {
-  outline: 3px solid var(--cor-texto);
-  outline-offset: 2px;
-}
-
-.a11y__mais[open] > .a11y__mais-titulo {
-  margin-bottom: var(--espaco-2);
-}
-
-.a11y__mais .a11y__restaurar {
-  margin-top: var(--espaco-2);
 }
 
 .a11y__opcoes {
@@ -866,6 +881,11 @@ p .zero::after {
 }
 
 .a11y__opcoes legend {
+  color: var(--cor-texto-atenuado);
+  font-family: var(--fonte-titulo);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   padding: 0;
   margin-bottom: var(--espaco-2);
   font-weight: 600;
@@ -903,8 +923,8 @@ p .zero::after {
   align-items: center;
   justify-content: center;
   gap: var(--espaco-1);
-  min-height: 56px;
-  padding: var(--espaco-2);
+  min-height: 48px;
+  padding: var(--espaco-1) var(--espaco-2);
   font-weight: 600;
   line-height: 1.2;
   text-align: center;

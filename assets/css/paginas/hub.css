@@ -50,8 +50,7 @@
 }
 
 .titulo-marca__ia {
-  color: transparent;
-  -webkit-text-stroke: 0.04em var(--cor-texto);
+  color: var(--cor-destaque);
 }
 
 .titulo-marca__pagina {
@@ -129,6 +128,80 @@
   color: var(--cor-texto);
 }
 
+/* ---------- Acesso ao scanner: a próxima ação da jornada ---------- */
+
+.scan-acesso {
+  --moldura: var(--cor-azul-linha);
+  --espessura: 2px;
+  --miolo: var(--cor-superficie);
+  display: grid;
+  gap: var(--espaco-6);
+  margin-top: var(--espaco-8);
+  padding: var(--espaco-6);
+}
+
+.scan-acesso__texto {
+  display: grid;
+  gap: var(--espaco-3);
+  align-content: start;
+  justify-items: start;
+}
+
+.scan-acesso__titulo {
+  margin: 0;
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+.scan-acesso__descricao {
+  max-width: 46ch;
+  margin: 0;
+  line-height: 1.55;
+  color: var(--cor-texto-secundario);
+}
+
+.scan-acesso__acao {
+  width: 100%;
+  margin-top: var(--espaco-2);
+}
+
+.scan-acesso__regras {
+  display: grid;
+  gap: var(--espaco-3);
+  margin: 0;
+  padding: var(--espaco-4) 0 0;
+  border-top: 1px dashed var(--cor-apagado);
+  list-style: none;
+  counter-reset: regra;
+}
+
+.scan-acesso__regras li {
+  counter-increment: regra;
+  display: grid;
+  grid-template-columns: var(--espaco-6) minmax(0, 1fr);
+  gap: var(--espaco-2);
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  color: var(--cor-texto-secundario);
+}
+
+.scan-acesso__regras li::before {
+  content: counter(regra, decimal-leading-zero);
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 0.75rem;
+  line-height: 1.8;
+  color: var(--cor-destaque);
+}
+
+/* Jornada concluída: o painel vira a ponte para a Conclusão. */
+.scan-acesso--completa {
+  --moldura: var(--cor-destaque);
+}
+
 /* ---------- Rota das estações ---------- */
 
 .rota {
@@ -199,11 +272,11 @@
 
 /* Trecho percorrido: roxo sólido. Até a próxima estação: roxo tracejado. */
 .estacao--liga-desbloqueada .estacao__no::after {
-  border-left: 3px solid var(--cor-azul);
+  border-left: 3px solid var(--cor-destaque);
 }
 
 .estacao--liga-proxima .estacao__no::after {
-  border-left: 3px dashed var(--cor-azul);
+  border-left: 3px dashed var(--cor-destaque);
 }
 
 .estacao:last-child .estacao__no::after {
@@ -362,9 +435,10 @@
   border-top-color: var(--cor-apagado);
 }
 
+/* A ação sólida da página é o botão do QR; a barra do cartão fica na superfície, com o texto em azul. */
 .estacao--proxima .estacao__acao {
-  background: var(--cor-destaque);
-  color: var(--cor-sobre-destaque);
+  background: var(--cor-superficie-escura);
+  color: var(--cor-destaque);
   font-size: 1rem;
 }
 
@@ -419,37 +493,75 @@
   color: var(--cor-texto-atenuado);
 }
 
-/* Folha de passos presa ao cartão da próxima estação (fora do link, de propósito). */
-.estacao__passos {
-  grid-column: 2;
-  display: grid;
-  gap: var(--espaco-2);
-  margin: 0;
-  padding: var(--espaco-4);
-  background: var(--cor-superficie);
-  box-shadow: inset 0 0 0 1px var(--cor-superficie-alta);
-  list-style: none;
-  counter-reset: passo;
-  clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--espaco-3)), calc(100% - var(--espaco-3)) 100%, 0 100%);
+/* ---------- Entrada: a jornada se monta, na ordem em que se lê ----------
+   O painel do QR, o progresso que enche, o trilho que se estende, as engrenagens que acendem e os
+   cartões que entram um a um. Dura cerca de 1,1s, uma vez, e parte do estado final visível. */
+
+@keyframes preencher {
+  from { transform: scaleX(0); }
 }
 
-.estacao__passos-item {
-  counter-increment: passo;
-  display: grid;
-  grid-template-columns: var(--espaco-6) minmax(0, 1fr);
-  align-items: baseline;
-  gap: var(--espaco-2);
-  font-size: 0.9375rem;
-  line-height: 1.4;
-  color: var(--cor-texto-secundario);
+@keyframes estender {
+  from { clip-path: inset(0 100% 0 0); }
 }
 
-.estacao__passos-item::before {
-  content: counter(passo, decimal-leading-zero);
-  font-family: var(--fonte-titulo);
-  font-weight: 700;
-  font-size: 0.75rem;
-  color: var(--cor-destaque);
+@keyframes estender-vertical {
+  from { clip-path: inset(0 0 100% 0); }
+}
+
+@keyframes acender {
+  from { opacity: 0.35; transform: scale(0.6); }
+}
+
+.scan-acesso,
+.destino {
+  animation: entrar 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.destino {
+  animation-delay: 0.65s;
+}
+
+.estacao {
+  animation: entrar 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.estacao:nth-child(1) { --ordem: 0; }
+.estacao:nth-child(2) { --ordem: 1; }
+.estacao:nth-child(3) { --ordem: 2; }
+.estacao:nth-child(4) { --ordem: 3; }
+
+.estacao {
+  animation-delay: calc(0.18s + var(--ordem, 0) * 0.1s);
+}
+
+.barra__segmento--cheio {
+  transform-origin: left;
+  animation: preencher 0.5s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+
+.barra__celula:nth-child(1) .barra__segmento--cheio { animation-delay: 0.1s; }
+.barra__celula:nth-child(2) .barra__segmento--cheio { animation-delay: 0.22s; }
+.barra__celula:nth-child(3) .barra__segmento--cheio { animation-delay: 0.34s; }
+.barra__celula:nth-child(4) .barra__segmento--cheio { animation-delay: 0.46s; }
+
+.estacao--desbloqueada .marcador,
+.estacao--proxima .marcador {
+  animation: acender 0.45s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+  animation-delay: calc(0.3s + var(--ordem, 0) * 0.1s);
+}
+
+.estacao--liga-desbloqueada .estacao__no::after,
+.estacao--liga-proxima .estacao__no::after {
+  animation: estender-vertical 0.5s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+  animation-delay: calc(0.4s + var(--ordem, 0) * 0.1s);
+}
+
+@media (min-width: 900px) {
+  .estacao--liga-desbloqueada .estacao__no::after,
+  .estacao--liga-proxima .estacao__no::after {
+    animation-name: estender;
+  }
 }
 
 /* ---------- Interação: hover só melhora; foco e toque sempre visíveis ---------- */
@@ -555,6 +667,7 @@ a.cartao:active .cartao__corpo {
    o jogo; antes disso é só status, sem ação. */
 .final--xbot {
   --cor-destaque: var(--cor-xbot);
+  --cor-azul-linha: var(--cor-xbot);
   --cor-sobre-destaque: var(--cor-sobre-xbot);
 }
 
@@ -652,6 +765,28 @@ a.cartao:active .cartao__corpo {
 /* ---------- A partir de 900px: rota horizontal de quatro paradas ---------- */
 
 @media (min-width: 900px) {
+  .scan-acesso {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    column-gap: var(--espaco-12);
+    align-items: center;
+    padding: var(--espaco-8);
+  }
+
+  .scan-acesso--completa {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .scan-acesso__acao {
+    width: auto;
+    min-width: 18rem;
+  }
+
+  .scan-acesso__regras {
+    padding: 0 0 0 var(--espaco-8);
+    border-top: 0;
+    border-left: 1px dashed var(--cor-apagado);
+  }
+
   .painel-status {
     display: grid;
     grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
@@ -694,12 +829,6 @@ a.cartao:active .cartao__corpo {
     grid-template-rows: 72px 1fr;
   }
 
-  .estacao__passos {
-    grid-row: 2;
-    grid-column: 1;
-    align-self: start;
-  }
-
   /* A meta desce para alinhar entre cartões; a margem da descrição garante o respiro
      mínimo no cartão mais alto, onde o auto vale zero. */
   .cartao__descricao {
@@ -735,12 +864,12 @@ a.cartao:active .cartao__corpo {
 
   .estacao--liga-desbloqueada .estacao__no::after {
     border-left: none;
-    border-top: 4px solid var(--cor-azul);
+    border-top: 4px solid var(--cor-destaque);
   }
 
   .estacao--liga-proxima .estacao__no::after {
     border-left: none;
-    border-top: 4px dashed var(--cor-azul);
+    border-top: 4px dashed var(--cor-destaque);
   }
 
   .destino {

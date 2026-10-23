@@ -270,8 +270,8 @@
     topo.appendChild(fechar);
     painel.appendChild(topo);
 
-    // Os dois controles diretos ficam à vista; tema e tamanho do texto, que já existiam, ficam em
-    // "Mais opções" para o painel continuar simples.
+    // Todos os controles ficam à vista, sem seção recolhida: os dois interruptores no topo, depois
+    // tema e tamanho do texto em linhas compactas e, por fim, restaurar o padrão.
     const movimento = criarChave("movimento", "Reduzir animações", "a11y-movimento", function (ligado) {
       return ligado ? "reduzido" : "normal";
     });
@@ -285,8 +285,6 @@
     chaves.appendChild(contraste.rotulo);
     painel.appendChild(chaves);
 
-    const mais = elemento("details", "a11y__mais");
-    mais.appendChild(elemento("summary", "a11y__mais-titulo", "Mais opções"));
     const temas = grupoDeOpcoes("tema", "Tema", [
       { valor: "escuro", texto: "Escuro" },
       { valor: "claro", texto: "Claro" },
@@ -297,13 +295,12 @@
       { valor: "grande", texto: "Grande", detalhe: "115%" },
       { valor: "extra", texto: "Extra grande", detalhe: "130%" }
     ], preferencias.texto);
-    mais.appendChild(temas);
-    mais.appendChild(textos);
+    painel.appendChild(temas);
+    painel.appendChild(textos);
     const restaurar = elemento("button", "botao a11y__restaurar", "Restaurar padrão");
     restaurar.type = "button";
     restaurar.addEventListener("click", restaurarPadrao);
-    mais.appendChild(restaurar);
-    painel.appendChild(mais);
+    painel.appendChild(restaurar);
     status = elemento("p", "a11y__status");
     status.setAttribute("role", "status");
     painel.appendChild(status);
@@ -358,7 +355,7 @@
   function abrirPainel() {
     painel.hidden = false;
     botao.setAttribute("aria-expanded", "true");
-    // O primeiro interruptor: o que as pessoas vêm mudar, e nunca um item dentro de "Mais opções" fechado.
+    // O primeiro interruptor: o controle que mais se usa.
     const primeira = painel.querySelector(".a11y__chaves input");
     if (primeira) primeira.focus();
   }

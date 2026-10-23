@@ -16,6 +16,7 @@
    A navegação da jornada (trilho, painel de acessibilidade, fechamento) continua na cor do site. */
 body[data-estacao="4"] {
   --cor-destaque: var(--cor-xbot);
+  --cor-azul-linha: var(--cor-xbot);
   --cor-sobre-destaque: var(--cor-sobre-xbot);
 }
 
@@ -24,7 +25,33 @@ body[data-estacao="4"] .conexao,
 body[data-estacao="4"] .a11y,
 body[data-estacao="4"] .pular {
   --cor-destaque: var(--cor-marca);
+  --cor-azul-linha: var(--cor-marca-linha);
   --cor-sobre-destaque: var(--cor-sobre-marca);
+}
+
+/* Barra de leitura: um fio de 3px no topo que acompanha a rolagem da estação. Mostra, sem texto, quanto
+   falta para o fim do conteúdo. Fica na cor do site (--cor-marca), mesmo na Estação 4. Só com
+   animation-timeline; sem suporte, ou com movimento reduzido, não aparece. */
+@supports (animation-timeline: scroll()) {
+  .pagina-estacao--desbloqueada::after {
+    content: "";
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--cor-marca);
+    transform: scaleX(0);
+    transform-origin: left;
+    animation: leitura linear both;
+    animation-timeline: scroll(root);
+    pointer-events: none;
+  }
+}
+
+@keyframes leitura {
+  to { transform: scaleX(1); }
 }
 
 /* ---------- Capa do dossiê ----------
@@ -218,6 +245,11 @@ body[data-estacao="4"] .pular {
 }
 
 /* Capa bloqueada: o mesmo dossiê, ainda lacrado. */
+/* O numeral monumental da capa já nasce no azul de linha (roxo na Estação 4, pelo escopo da página). */
+.dossie-capa:not(.dossie-capa--bloqueada) .dossie-capa__numeral {
+  -webkit-text-stroke-color: var(--cor-azul-linha);
+}
+
 .dossie-capa--bloqueada .dossie-capa__numeral {
   -webkit-text-stroke-color: var(--cor-superficie-alta);
 }
@@ -231,7 +263,7 @@ body[data-estacao="4"] .pular {
   position: relative;
   margin-top: var(--espaco-12);
   padding-top: var(--espaco-6);
-  border-top: 2px solid var(--cor-azul);
+  border-top: 2px solid var(--cor-azul-linha);
 }
 
 .terminal-rotulo {
@@ -307,7 +339,7 @@ body[data-estacao="4"] .pular {
   line-height: 0.85;
   letter-spacing: -0.03em;
   color: transparent;
-  -webkit-text-stroke: 1.5px var(--cor-texto-atenuado);
+  -webkit-text-stroke: 1.5px var(--cor-destaque);
 }
 
 .capitulo__titulo {
@@ -341,10 +373,10 @@ body[data-estacao="4"] .pular {
 .capitulo__corpo strong,
 .briefing strong {
   color: var(--cor-texto);
-  background-image: linear-gradient(var(--cor-azul), var(--cor-azul));
+  background-image: linear-gradient(color-mix(in srgb, var(--cor-destaque) 30%, transparent), color-mix(in srgb, var(--cor-destaque) 30%, transparent));
   background-repeat: no-repeat;
-  background-position: 0 88%;
-  background-size: 100% 0.5em;
+  background-position: 0 90%;
+  background-size: 100% 0.4em;
 }
 
 .capitulo__corpo > ul {
@@ -369,32 +401,7 @@ body[data-estacao="4"] .pular {
   top: calc(0.75em - var(--espaco-1));
   width: var(--espaco-2);
   height: var(--espaco-2);
-  background: var(--cor-texto-atenuado);
-}
-
-/* Link para o site do jogo (Estação 4): uma ação de texto, não um botão. */
-.link-jogo {
-  margin: 0 0 var(--espaco-4);
-}
-
-.link-jogo a {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--espaco-2);
-  min-height: 44px;
-  font-family: var(--fonte-titulo);
-  font-weight: 700;
-  font-size: 1rem;
-  letter-spacing: 0.02em;
-  color: var(--cor-texto);
-  text-decoration: underline;
-  text-decoration-color: var(--cor-destaque);
-  text-decoration-thickness: 2px;
-  text-underline-offset: 0.3em;
-}
-
-.link-jogo .zero::after {
-  content: "";
+  background: var(--cor-destaque);
 }
 
 /* ---------- Figuras (diagramas do conteúdo) ---------- */
@@ -484,7 +491,7 @@ body[data-estacao="4"] .pular {
   left: 0;
   right: 0;
   height: var(--espaco-4);
-  background-color: var(--cor-azul);
+  background-color: var(--cor-destaque);
   -webkit-mask: var(--textura-movimento) center / 100% 100% no-repeat;
   mask: var(--textura-movimento) center / 100% 100% no-repeat;
 }
@@ -501,6 +508,30 @@ body[data-estacao="4"] .pular {
   margin: var(--espaco-4) 0 0;
   line-height: 1.6;
   color: var(--cor-texto-secundario);
+}
+
+/* Orientação para continuar a jornada física, antes de "Voltar ao Hub". */
+.conexao__proximo {
+  display: grid;
+  gap: var(--espaco-3);
+  justify-items: start;
+  margin-top: var(--espaco-4);
+}
+
+.conexao__proximo-texto {
+  margin: 0 !important;
+  padding: var(--espaco-3) var(--espaco-4);
+  background: var(--cor-fundo);
+  box-shadow: inset 0 0 0 1px var(--cor-azul-linha);
+  line-height: 1.5;
+  color: var(--cor-texto);
+}
+
+.conexao__escanear {
+  min-height: 44px;
+  background: none;
+  box-shadow: inset 0 0 0 2px var(--cor-destaque);
+  color: var(--cor-destaque);
 }
 
 .conexao__acao {
@@ -530,7 +561,7 @@ body[data-estacao="4"] .pular {
   left: 0;
   right: 0;
   height: var(--espaco-4);
-  background-color: var(--cor-azul);
+  background-color: var(--cor-destaque);
   -webkit-mask: var(--textura-movimento) center / 100% 100% no-repeat;
   mask: var(--textura-movimento) center / 100% 100% no-repeat;
 }
@@ -590,6 +621,21 @@ body[data-estacao="4"] .pular {
 
 .bloqueio__texto {
   margin: var(--espaco-3) 0 0;
+  line-height: 1.5;
+  color: var(--cor-texto-secundario);
+}
+
+/* Ação de escanear nas telas de bloqueio: o texto diz qual QR Code vale agora. */
+.bloqueio__scan {
+  display: grid;
+  gap: var(--espaco-3);
+  margin-top: var(--espaco-6);
+  padding-top: var(--espaco-4);
+  border-top: 1px dashed var(--cor-apagado);
+}
+
+.bloqueio__scan-texto {
+  margin: 0;
   line-height: 1.5;
   color: var(--cor-texto-secundario);
 }
@@ -1102,7 +1148,7 @@ body[data-estacao="4"] .pular {
   }
 
   .dossie-rota__parada--feita::after {
-    border-left: 3px solid var(--cor-azul);
+    border-left: 3px solid var(--cor-destaque);
   }
 
   .dossie-rota__parada--atual {
@@ -1126,7 +1172,7 @@ body[data-estacao="4"] .pular {
 
   .dossie-rota__parada--atual::after {
     top: 26px;
-    border-left-color: var(--cor-azul);
+    border-left-color: var(--cor-destaque);
   }
 
   .dossie-rota__parada--fim {

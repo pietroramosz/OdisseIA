@@ -16,6 +16,7 @@
 .destino__palco,
 .jornada__item--xbot {
   --cor-destaque: var(--cor-xbot);
+  --cor-azul-linha: var(--cor-xbot);
   --cor-sobre-destaque: var(--cor-sobre-xbot);
 }
 
@@ -60,12 +61,11 @@
   letter-spacing: -0.04em;
 }
 
-/* "IA": só o contorno, na mesma gramática dos numerais vazados. É texto grande (a partir de 3rem). */
+/* "IA": o azul de acento, a única cor da palavra-marca. */
 .capa__ia {
   justify-self: end;
   margin-right: var(--espaco-2);
-  color: transparent;
-  -webkit-text-stroke: 0.028em var(--cor-texto);
+  color: var(--cor-destaque);
 }
 
 .capa__proposta {
