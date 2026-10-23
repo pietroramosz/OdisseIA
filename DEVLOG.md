@@ -275,7 +275,7 @@ O Hub e as páginas seguintes passam a ter uma direção visual comum antes do i
 - Hub com identidade visual inicial, testado nos estados 0 a 4, em emulador e no celular.
 - validar.html e qr.js com os cinco resultados, testados por console e por URL. O progresso só avança com o QR na ordem certa.
 - GitHub Pages ligado na branch dev apenas para teste. A hospedagem final não foi decidida.
-- O jogo passa a se chamar X-BOT (nos documentos anteriores aparece como Robot TCG).
+- O jogo passa a se chamar X-B0T (nos documentos anteriores aparece como Robot TCG).
 
 ### O que descobrimos
 
@@ -283,7 +283,7 @@ O progresso é por navegador. Um QR aberto em navegador diferente do Hub cai em 
 
 ### Ainda não validado
 
-Leitura de QR real pela câmera, abertura de dentro do WhatsApp, conteúdo das estações, conclusão e integração com o X-BOT.
+Leitura de QR real pela câmera, abertura de dentro do WhatsApp, conteúdo das estações, conclusão e integração com o X-B0T.
 
 ---
 
@@ -292,7 +292,7 @@ Leitura de QR real pela câmera, abertura de dentro do WhatsApp, conteúdo das e
 ### O que foi feito
 
 - Foram adicionados os assets `engrenagem-acesa.png`, `engrenagem-apagada.png` e `verso-carta.png`.
-- O nome X-BOT foi sincronizado no Hub, na configuração e no placeholder da conclusão.
+- O nome X-B0T foi sincronizado no Hub, na configuração e no placeholder da conclusão.
 - O roxo de destaque passou para `#CD5EFA`, ainda tratado como provisório até confirmação com a identidade final do jogo.
 - O Hub passou a usar as engrenagens em PNG e recebeu grade de fundo sutil.
 - No desktop, o Hub passou a usar largura de até 900px e grade 2x2 para as quatro estações.
@@ -320,7 +320,7 @@ Essa etapa também mostrou a necessidade de manter o guia de estilo sincronizado
 
 A jornada deixou de ter apenas Hub e validação funcionando. Agora já existe uma entrada real e conteúdo navegável nas três primeiras estações.
 
-O principal gargalo do projeto passa a estar nas partes que dependem da reta final da experiência: Estação 4, conclusão, X-BOT, hospedagem definitiva e testes físicos de QR.
+O principal gargalo do projeto passa a estar nas partes que dependem da reta final da experiência: Estação 4, conclusão, X-B0T, hospedagem definitiva e testes físicos de QR.
 
 ---
 
@@ -328,13 +328,13 @@ O principal gargalo do projeto passa a estar nas partes que dependem da reta fin
 
 ### O que foi feito
 
-- `estacao-4.html` passou a ter uma página própria para a estação ligada ao X-BOT.
-- `final.html` passou a apresentar os estados de jornada completa/incompleta e a área de acesso ao X-BOT.
+- `estacao-4.html` passou a ter uma página própria para a estação ligada ao X-B0T.
+- `final.html` passou a apresentar os estados de jornada completa/incompleta e a área de acesso ao X-B0T.
 - A implementação das páginas não significa que a integração com o jogo esteja concluída: `gameUrl` e `downloadUrl` ainda dependem de endereços confirmados.
 
 ### O que continua pendente
 
-- Confirmar com o grupo as informações finais do X-BOT e um endereço/build utilizável.
+- Confirmar com o grupo as informações finais do X-B0T e um endereço/build utilizável.
 - Decidir se a conclusão também deve oferecer acesso a um portfólio/PDF.
 - Testar os QR Codes físicos com câmera real e abertura pelo WhatsApp/navegador interno.
 - Decidir como orientar visitantes cujo QR abre em navegador diferente daquele usado no Hub.
@@ -360,11 +360,11 @@ Um diagnóstico visual do site renderizado (desktop 1280px e mobile 390px, Chrom
 
 ### O que foi feito
 
-- Hub: cards preenchem a grade; quadrado roxo marca a estação validada; rótulos de ação passaram a descrever a ação real ("Ver como desbloquear", "Ver o que falta"); o card do X-BOT mostra "AGUARDANDO LIBERAÇÃO" enquanto não houver `gameUrl` válida.
+- Hub: cards preenchem a grade; quadrado roxo marca a estação validada; rótulos de ação passaram a descrever a ação real ("Ver como desbloquear", "Ver o que falta"); o card do X-B0T mostra "AGUARDANDO LIBERAÇÃO" enquanto não houver `gameUrl` válida.
 - Estações 1–4: pictograma SVG inline cinza no hero, numeral de capítulo maior, primeira frase de cada capítulo em destaque, linha do tempo com ano como numeral e rótulos de época (Estações 1 e 2).
 - Estações bloqueadas: faixa "Seu progresso" com a mesma barra do Hub, no lugar de um grande vazio.
 - Estação 4: carta com painel, recorte e moldura cinza; no desktop fica ao lado do texto.
-- Conclusão: painel de status separando "Jornada concluída" de "Acesso ao jogo"; o botão "Jogar X-BOT" só aparece com URL absoluta http(s) válida; carta um pouco maior no desktop.
+- Conclusão: painel de status separando "Jornada concluída" de "Acesso ao jogo"; o botão "Jogar X-B0T" só aparece com URL absoluta http(s) válida; carta um pouco maior no desktop.
 - Index: o "4" do hero fica em 72px no mobile, ao lado da frase.
 - `engrenagem-acesa.png`: halo removido só do canal alfa; geometria, cores e tamanho preservados.
 - `DESIGN.md` e `DECISIONS.md` (DEC-017) atualizados com as regras que mudaram.
@@ -376,9 +376,9 @@ Um diagnóstico visual do site renderizado (desktop 1280px e mobile 390px, Chrom
 
 ### O que continua pendente
 
-- `gameUrl` e `downloadUrl` seguem `null`: o X-BOT aparece como "aguardando liberação" até haver endereço oficial.
+- `gameUrl` e `downloadUrl` seguem `null`: o X-B0T aparece como "aguardando liberação" até haver endereço oficial.
 - A validação foi feita em Chrome headless, por servidor local e por `file://`. Não houve teste em celular real, em outros navegadores, com câmera de QR nem pelo WhatsApp.
-- O roxo `#CD5EFA` continua provisório até a confirmação com a arte final do X-BOT.
+- O roxo `#CD5EFA` continua provisório até a confirmação com a arte final do X-B0T.
 
 ---
 
@@ -386,13 +386,13 @@ Um diagnóstico visual do site renderizado (desktop 1280px e mobile 390px, Chrom
 
 ### Contexto
 
-Depois do refinamento da Direção A, o site ainda tinha a cara de um template: título, parágrafo, botão roxo e cards na abertura; quatro cartões iguais no Hub; três estações com o mesmo esqueleto. Foi pedida uma direção de arte própria, que evoluísse a identidade do OdisseIA e do X-BOT sem abandoná-la. A decisão está na DEC-018.
+Depois do refinamento da Direção A, o site ainda tinha a cara de um template: título, parágrafo, botão roxo e cards na abertura; quatro cartões iguais no Hub; três estações com o mesmo esqueleto. Foi pedida uma direção de arte própria, que evoluísse a identidade do OdisseIA e do X-B0T sem abandoná-la. A decisão está na DEC-018.
 
 ### O que foi feito
 
 - **Abertura:**
   - palavra-marca monumental "Odisse/IA";
-  - rota esquemática das quatro estações descendo até a silhueta da carta do X-BOT numa explosão de linhas de velocidade;
+  - rota esquemática das quatro estações descendo até a silhueta da carta do X-B0T numa explosão de linhas de velocidade;
   - protocolo físico → digital com ícones desenhados, índice da jornada com numerais vazados e a recompensa mostrada só como silhueta;
   - no celular, o botão "Iniciar jornada" fica logo abaixo da proposta.
 - **Hub:**
@@ -435,7 +435,7 @@ Depois do refinamento da Direção A, o site ainda tinha a cara de um template: 
 ### O que continua pendente
 
 - Teste em celular real, em outros navegadores e pelo WhatsApp: tudo foi verificado só em Chrome headless.
-- `gameUrl` e `downloadUrl` seguem `null`, então o X-BOT aparece como "aguardando liberação".
+- `gameUrl` e `downloadUrl` seguem `null`, então o X-B0T aparece como "aguardando liberação".
 - O roxo `#CD5EFA` continua provisório.
 
 ---
@@ -511,7 +511,41 @@ As quatro estações ainda pareciam o mesmo documento de texto. A coluna lateral
 
 - Celular real, leitor de tela e outros navegadores: nada disso foi testado.
 - As animações ligadas à rolagem usam `animation-timeline`; em navegadores sem suporte a página fica estática.
-- O roxo `#CD5EFA` continua provisório, e o X-BOT segue "em validação".
+- O roxo `#CD5EFA` continua provisório, e o X-B0T segue "em validação".
+
+---
+
+## 23/10/2026 — Identidade azul, Hub, leitura das estações e acessibilidade (DEC-020 a DEC-022)
+
+### Contexto
+
+A sala da feira será azul, o Hub desktop não convencia, os textos das estações pareciam crus, as laterais do desktop sobravam, a animação da Estação 2 não estava boa e, no computador da escola, não era possível desligar "Reduzir animações".
+
+### O que mudou
+
+- **Identidade azul (DEC-020):** nova paleta a partir de #031634, #142146 e #242b57; o roxo ficou como cor do X-B0T; engrenagens azuis para as estações; luz própria para cada estação.
+- **Hub:** herói e placar maiores, palco da rota com engrenagens maiores, próxima estação projetada e destino final com o X-B0T em roxo.
+- **Estações:** abertura de capítulo com tese em destaque, marca-texto nos conceitos, filetes na cor da estação, numeral fixo na margem, primeira frase do briefing como abertura em telas largas.
+- **Largura (DEC-021):** 93% da tela no desktop, escala por tamanho de tela, coluna lateral que cresce.
+- **Estação 2:** a rede da capa agora é um sinal que sai do controle e se espalha em quatro voltas, com os nós surgindo quando a linha chega e as conexões ativas acendendo por último (cerca de 2,2s, uma vez).
+- **Acessibilidade (DEC-022):** movimento com Sistema, Reduzir e Completas; a escolha da pessoa vence o sistema.
+- **X-B0T:** `gameUrl` = https://robot-tcg.netlify.app/ (respondeu 200); `downloadUrl` continua `null`. Grafia corrigida para X-B0T no site e na documentação, com a barra no zero dos títulos.
+- Uma alteração editorial na Estação 4 (ver DEC-020), que precisa de confirmação.
+
+### Como foi verificado
+
+- Testes escritos fora do repositório, sem dependências, em Chrome headless via `file://`:
+  - jornada, progresso, QR (sequência, repetido, fora de ordem, 6 entradas inválidas), Hub nos estados 0 a 4, bloqueio de cada estação em cada progresso, Conclusão, botão do jogo, `downloadUrl` nulo: 133 verificações;
+  - rolagem horizontal em 14 larguras (360 a 2560px) em 14 páginas/estados, ocupação de 93% da largura, medida de leitura e contraste de texto em 4 temas × 2 larguras × 14 páginas/estados, mais o painel aberto: 333 verificações (a auditoria foi validada com uma mutação proposital);
+  - movimento: 6 combinações de sistema e escolha em 8 páginas, mais o caso sem script: 52 verificações;
+  - painel de acessibilidade: sistema ligado e desligado, escolha manual, recarga, voltar a "Sistema", restaurar padrão, dado antigo e JSON inválido.
+- Comparação do texto das páginas com o último commit: única diferença real de conteúdo na Estação 4.
+
+### O que continua pendente
+
+- Celular real, leitor de tela e outros navegadores: tudo foi verificado só em Chrome headless. Em especial, o computador da escola não foi reproduzido: a causa foi reproduzida com a preferência do sistema emulada.
+- `.impeccable/design.json` precisa ser regenerado.
+- O roxo `#cd5efa` e o conteúdo da Estação 4 continuam dependendo do grupo do X-B0T.
 
 ---
 
@@ -520,7 +554,7 @@ As quatro estações ainda pareciam o mesmo documento de texto. A coluna lateral
 O DEVLOG só deve ganhar uma nova entrada quando houver algo realmente relevante, por exemplo:
 
 - Estação 4 integrada;
-- integração do X-BOT;
+- integração do X-B0T;
 - definição da URL final e deploy definitivo;
 - testes físicos de QR e fluxo completo;
 - problema técnico importante;

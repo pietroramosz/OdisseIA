@@ -1,4 +1,6 @@
 // Preferências globais de acessibilidade: tema, tamanho do texto, alto contraste e animações.
+// Movimento: "sistema" (padrão) segue prefers-reduced-motion; "reduzido" e "normal" são escolhas
+// explícitas e sempre vencem a preferência do sistema, nos dois sentidos.
 // Carregado no <head> de cada página para aplicar as escolhas antes da primeira pintura e evitar
 // o clarão do tema escuro. O painel é montado depois, quando o documento está pronto.
 // Chave própria no localStorage, independente do progresso: "odisseia:acessibilidade".
@@ -7,9 +9,10 @@
 
   const CHAVE = "odisseia:acessibilidade";
   const VERSAO = 1;
-  const PADRAO = { tema: "escuro", texto: "padrao", contraste: false, movimento: false };
+  const PADRAO = { tema: "escuro", texto: "padrao", contraste: false, movimento: "sistema" };
   const TEMAS = ["escuro", "claro", "sistema"];
   const TEXTOS = ["padrao", "grande", "extra"];
+  const MOVIMENTOS = ["sistema", "reduzido", "normal"];
 
   const raiz = document.documentElement;
   const consultaClaro = criarConsulta("(prefers-color-scheme: light)");
@@ -27,6 +30,9 @@
   }
   if (consultaMovimento) {
     ouvir(consultaMovimento, function () {
+      if (preferencias.movimento === "sistema") {
+        aplicar(preferencias, false);
+      }
       atualizarControles();
     });
   }
@@ -57,7 +63,9 @@
       if (TEMAS.indexOf(dados.tema) !== -1) lidas.tema = dados.tema;
       if (TEXTOS.indexOf(dados.texto) !== -1) lidas.texto = dados.texto;
       if (dados.contraste === true) lidas.contraste = true;
-      if (dados.movimento === true) lidas.movimento = true;
+      // true vem da versão anterior, que só tinha liga/desliga; false equivale a "sem escolha".
+      if (dados.movimento === true) lidas.movimento = "reduzido";
+      if (MOVIMENTOS.indexOf(dados.movimento) !== -1) lidas.movimento = dados.movimento;
     }
     return lidas;
   }
@@ -102,6 +110,14 @@
     return tema;
   }
 
+  // O que vale de fato agora: a escolha explícita, ou o sistema quando não há escolha.
+  function movimentoEfetivo(escolha) {
+    if (escolha === "sistema") {
+      return consultaMovimento && consultaMovimento.matches ? "reduzido" : "normal";
+    }
+    return escolha;
+  }
+
   // Só escreve atributos no <html>: o CSS faz o resto. "animar" liga a troca suave de cores.
   function aplicar(valores, animar) {
     if (animar) {
@@ -113,7 +129,8 @@
     raiz.setAttribute("data-tema", temaEfetivo(valores.tema));
     definirAtributo("data-texto", valores.texto === "padrao" ? null : valores.texto);
     definirAtributo("data-contraste", valores.contraste ? "alto" : null);
-    definirAtributo("data-movimento", valores.movimento ? "reduzido" : null);
+    // Sempre presente ("reduzido" ou "normal"): o CSS só recorre à mídia do sistema se o script falhar.
+    raiz.setAttribute("data-movimento", movimentoEfetivo(valores.movimento));
   }
 
   function definirAtributo(nome, valor) {
@@ -130,7 +147,7 @@
   let painel = null;
   let status = null;
   let entradas = null;
-  let nota = null;
+  let detalheSistema = null;
 
   function elemento(tag, classe, texto) {
     const item = document.createElement(tag);
@@ -279,12 +296,12 @@
     const contraste = criarChave("contraste", "Alto contraste", "a11y-contraste");
     painel.appendChild(criarGrupo("a11y-g-percepcao", "Percepção", [contraste.rotulo]));
 
-    const movimento = criarChave("movimento", "Reduzir animações", "a11y-movimento");
-    nota = elemento("span", "a11y__nota");
-    nota.id = "a11y-nota-movimento";
-    movimento.descricao.appendChild(nota);
-    movimento.entrada.setAttribute("aria-describedby", "a11y-nota-movimento");
-    painel.appendChild(criarGrupo("a11y-g-conforto", "Conforto", [movimento.rotulo]));
+    const movimento = grupoDeOpcoes("movimento", "Animações", [
+      { valor: "sistema", texto: "Sistema", detalhe: "completas" },
+      { valor: "reduzido", texto: "Reduzir" },
+      { valor: "normal", texto: "Completas" }
+    ], preferencias.movimento);
+    painel.appendChild(criarGrupo("a11y-g-conforto", "Conforto", [movimento]));
 
     const rodape = elemento("div", "a11y__rodape");
     const restaurar = elemento("button", "botao a11y__restaurar", "Restaurar padrão");
@@ -310,8 +327,9 @@
       tema: painel.querySelectorAll("input[name='a11y-tema']"),
       texto: painel.querySelectorAll("input[name='a11y-texto']"),
       contraste: contraste.entrada,
-      movimento: movimento.entrada
+      movimento: painel.querySelectorAll("input[name='a11y-movimento']")
     };
+    detalheSistema = painel.querySelector("input[name='a11y-movimento'][value='sistema'] + .a11y__opcao-corpo small");
     atualizarControles();
 
     botao.addEventListener("click", function () {
@@ -373,21 +391,17 @@
     status.textContent = "Preferências restauradas ao padrão.";
   }
 
-  // Reflete o estado atual nos controles. Se o sistema já pede menos movimento, a opção aparece
-  // ativada e travada: a preferência do sistema nunca é desfeita pelo site.
+  // Reflete o estado atual nos controles. "Sistema" mostra o que o sistema pede agora, e as outras
+  // opções nunca ficam travadas: a escolha da pessoa sempre vale mais que a do sistema.
   function atualizarControles() {
     if (!entradas) return;
     marcarGrupo(entradas.tema, preferencias.tema);
     marcarGrupo(entradas.texto, preferencias.texto);
+    marcarGrupo(entradas.movimento, preferencias.movimento);
     entradas.contraste.checked = preferencias.contraste;
-    const doSistema = Boolean(consultaMovimento && consultaMovimento.matches);
-    entradas.movimento.checked = preferencias.movimento || doSistema;
-    entradas.movimento.disabled = doSistema;
-    nota.textContent = doSistema ? "Ativado pela preferência do sistema" : "";
-    [entradas.contraste, entradas.movimento].forEach(function (entrada) {
-      const valor = entrada.parentNode.querySelector(".a11y__chave-valor");
-      valor.textContent = entrada.checked ? "Ativado" : "Desativado";
-    });
+    detalheSistema.textContent = movimentoEfetivo("sistema") === "reduzido" ? "reduzidas" : "completas";
+    entradas.contraste.parentNode.querySelector(".a11y__chave-valor").textContent =
+      entradas.contraste.checked ? "Ativado" : "Desativado";
   }
 
   function marcarGrupo(lista, valor) {

@@ -1,5 +1,5 @@
 /* Conclusão: o clímax. Explosão de linhas de foco em volta do placar 4/4, carimbo da jornada,
-   passaporte com as quatro estações carimbadas e a carta do X-BOT revelada. O acesso ao jogo
+   passaporte com as quatro estações carimbadas e a carta do X-B0T revelada. O acesso ao jogo
    só vira botão com gameUrl válida; sem ela, o painel de status diz a verdade. */
 
 .pagina-final main {
@@ -279,9 +279,12 @@
 .final-jornada__item:nth-child(3) .final-jornada__estado { animation-delay: 1.3s; --giro: -3deg; }
 .final-jornada__item:nth-child(4) .final-jornada__estado { animation-delay: 1.5s; --giro: 7deg; }
 
-/* ---------- X-BOT revelado ---------- */
+/* ---------- X-B0T revelado ---------- */
 
 .final-xbot {
+  /* Tudo neste bloco é do X-B0T: moldura, linhas de foco, sombra da carta e o botão de jogar. */
+  --cor-destaque: var(--cor-xbot);
+  --cor-sobre-destaque: var(--cor-sobre-xbot);
   position: relative;
   margin-top: var(--espaco-12);
   background: var(--cor-superficie);
@@ -539,10 +542,6 @@
 
 
 @media (min-width: 900px) {
-  :root {
-    --gutter: var(--espaco-8);
-  }
-
   .final-hero {
     grid-template-columns: minmax(0, 6fr) minmax(0, 6fr);
     column-gap: var(--espaco-8);

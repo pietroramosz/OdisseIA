@@ -290,7 +290,7 @@ Esse padrão deve ser seguido pelos outros arquivos JS do projeto (progresso.js,
 
 ## DEC-011 — Identidade visual do site alinhada ao Robot TCG
 
-**Status:** aceita
+**Status:** aceita; a paleta foi revisada pela DEC-020 (o site passou a ser azul, o roxo ficou como cor do X-B0T)
 
 ### Contexto
 
@@ -339,7 +339,7 @@ O conteúdo de cada estação fica escrito diretamente no HTML (estacao-1.html a
 
 ## DEC-013 — Identidade visual do Hub
 
-**Status:** aceita (valores de cor provisórios)
+**Status:** aceita (valores de cor provisórios); as cores foram revisadas pela DEC-020, e a regra de ter um ponto único de troca de cor continua valendo
 
 ### Contexto
 
@@ -352,11 +352,11 @@ A DEC-011 define a direção (cyberpunk limpo, cinza/preto com roxo de destaque)
 - Motivo de forma: cantos cortados em diagonal nos cards e nos segmentos da barra.
 - Escala de espaçamento em variáveis CSS (4, 8, 12, 16, 24, 32 e 48 px).
 - Estados (bloqueada, próxima, desbloqueada) distinguíveis por texto, tamanho e ícone, não só por cor. Nada depende de hover.
-- A engrenagem SVG foi usada como placeholder na primeira implementação. Em 04/10/2026, ela foi substituída por PNGs derivados da arte do X-BOT para os estados aceso e apagado, sem filtro CSS.
+- A engrenagem SVG foi usada como placeholder na primeira implementação. Em 04/10/2026, ela foi substituída por PNGs derivados da arte do X-B0T para os estados aceso e apagado, sem filtro CSS.
 
 ### Consequências
 
-- As cores finais dependem dos hex do X-BOT. Ficam em variáveis CSS em :root, então a troca é num ponto só.
+- As cores finais dependem dos hex do X-B0T. Ficam em variáveis CSS em :root, então a troca é num ponto só.
 - As outras páginas devem herdar do style.css, sem estilos próprios divergentes.
 
 ---
@@ -439,7 +439,7 @@ Um diagnóstico visual de 21/10/2026 comparou duas direções: refinar a identid
 
 1. **Pictograma de estação.** As páginas das Estações 1–4 ganham um pictograma decorativo no hero, em SVG inline no HTML, só com linhas retas e quadrados, em cinza (nunca roxo). Ele não entra no Hub nem na Conclusão, para o Hub não virar uma grade de cartões com ícone.
 2. **Carta na Estação 4.** O `DESIGN.md` dizia "sem tratamento especial". Passa a valer um painel com o recorte do sistema, moldura de 1px em cinza e legenda. A moldura roxa, a rotação, a sombra e a textura continuam exclusivas da Conclusão, e o limite de 200–280px de largura e as duas páginas permitidas não mudam.
-3. **Jornada concluída é diferente de jogo acessível.** O X-BOT só é tratado como acessível, no Hub e na Conclusão, quando `gameUrl` é uma URL absoluta http(s) válida. Sem isso, o X-BOT continua "desbloqueado" como recompensa, mas o acesso aparece como "aguardando liberação", sem botão. `gameUrl` e `downloadUrl` não foram alterados.
+3. **Jornada concluída é diferente de jogo acessível.** O X-B0T só é tratado como acessível, no Hub e na Conclusão, quando `gameUrl` é uma URL absoluta http(s) válida. Sem isso, o X-B0T continua "desbloqueado" como recompensa, mas o acesso aparece como "aguardando liberação", sem botão. `gameUrl` e `downloadUrl` não foram alterados.
 4. **Rótulos de ação do Hub descrevem a ação real.** Estação próxima: "Ver como desbloquear". Estação bloqueada: "Ver o que falta". Ambas abrem a tela de bloqueio, não o conteúdo. Estação validada: "Ver conteúdo". Os destinos dos links são os mesmos de antes.
 5. **Hierarquia nas estações.** Numerais de capítulo maiores, primeira frase de cada capítulo em destaque e rótulos de época na linha do tempo (só períodos já presentes no conteúdo).
 
@@ -463,14 +463,14 @@ As páginas de estação eram texto cinza em template repetido, o Hub repetia qu
 
 ### Contexto
 
-Foi pedido um redesenho com identidade forte e direção de arte própria: composições elaboradas, recursos gráficos autorais e páginas desenhadas para este projeto. A identidade existente (grafite, roxo, Chakra Petch, geometria) e o universo do X-BOT (arte roxa de mangá, linhas de velocidade, engrenagens) deviam evoluir, não ser abandonados.
+Foi pedido um redesenho com identidade forte e direção de arte própria: composições elaboradas, recursos gráficos autorais e páginas desenhadas para este projeto. A identidade existente (grafite, roxo, Chakra Petch, geometria) e o universo do X-B0T (arte roxa de mangá, linhas de velocidade, engrenagens) deviam evoluir, não ser abandonados.
 
-Algumas regras anteriores impediam o resultado. A grade 2×2 fazia do Hub quatro cartões iguais. O esqueleto idêntico das estações fazia todas parecerem o mesmo template. A "Rare Ink Rule" proibia o roxo justamente onde o X-BOT é roxo: na ilustração.
+Algumas regras anteriores impediam o resultado. A grade 2×2 fazia do Hub quatro cartões iguais. O esqueleto idêntico das estações fazia todas parecerem o mesmo template. A "Rare Ink Rule" proibia o roxo justamente onde o X-B0T é roxo: na ilustração.
 
 ### Decisão
 
 1. **Direção "Arquivo de Missão".**
-   - Um traçado esquemático liga as quatro estações ao X-BOT: rota completa na abertura, posição do visitante no Hub, trilho na margem das estações e rota fechada com carimbos na Conclusão.
+   - Um traçado esquemático liga as quatro estações ao X-B0T: rota completa na abertura, posição do visitante no Hub, trilho na margem das estações e rota fechada com carimbos na Conclusão.
    - A energia de mangá (linhas de velocidade, retícula, silhuetas, carimbos) cresce ao longo da jornada.
    - O contrato da direção está em `.impeccable/surfaces/index-html.md`.
 2. **Roxo como tinta de estado e de ilustração.** O roxo pode colorir ilustrações (linhas de velocidade, retícula, rota percorrida, nós ativos) e letras de display: o "IA" da palavra-marca, o "4" do placar, os numerais de estação. Continua proibido em texto corrido e como fundo de painel. Substitui a "Rare Ink Rule".
@@ -489,7 +489,7 @@ Algumas regras anteriores impediam o resultado. A grade 2×2 fazia do Hub quatro
      - Estação 4: a carta em palco de mangá.
    - A partir de 900px, a largura de 832px dá lugar a uma grade de margem (11rem), leitura (até 42rem) e coluna livre para figuras. A partir de 1100px entra o trilho da rota.
 6. **Título primeiro.** Nenhum rótulo ou selo acima de título. Estados (PRÓXIMA ESTAÇÃO, BLOQUEADA, DESBLOQUEADO, SUCESSO) vêm depois do título. Rótulos de seção ficam na margem a partir de 900px e somem no celular.
-7. **Carta do X-BOT (revisa a DEC-017).**
+7. **Carta do X-B0T (revisa a DEC-017).**
    - A carta continua só na Estação 4 e na Conclusão.
    - Na Estação 4 ganha palco com linhas de foco e retícula, inclinação e moldura branca, mas sem drop-shadow.
    - A sombra suave continua exclusiva da Conclusão.
@@ -501,7 +501,7 @@ Algumas regras anteriores impediam o resultado. A grade 2×2 fazia do Hub quatro
 
 - Paleta, com `#CD5EFA` provisório (DEC-011, DEC-013); Chakra Petch 600/700 sem fonte nova; sem framework, CDN ou build; funcionamento via `file://` (DEC-010).
 - Fluxo das estações, validação dos QR Codes (DEC-014), chave `odisseia:progresso` e contrato do progresso.
-- O acesso ao X-BOT só vira botão com `gameUrl` absoluta http(s) (DEC-017). Sem ela, o estado pendente é mostrado como tal.
+- O acesso ao X-B0T só vira botão com `gameUrl` absoluta http(s) (DEC-017). Sem ela, o estado pendente é mostrado como tal.
 - Nenhum diagrama, ficha ou legenda inventa dados. As fichas trazem só período, número de capítulos, número de marcos e etapas, tirados do próprio conteúdo.
 
 ### Consequências
@@ -539,7 +539,7 @@ Depois da DEC-018, as quatro estações ainda liam como o mesmo documento: só t
 ### O que não muda
 
 - Conteúdo educativo, ordem dos capítulos, estados de bloqueio, fluxo das estações, QR Codes, `odisseia:progresso` e desbloqueio sequencial.
-- Estado do X-BOT: o conteúdo em validação continua "em validação"; `gameUrl` e `downloadUrl` seguem `null`. Nada novo é afirmado sobre o jogo.
+- Estado do X-B0T: o conteúdo em validação continua "em validação"; `gameUrl` e `downloadUrl` seguem `null`. Nada novo é afirmado sobre o jogo.
 - HTML, CSS e JavaScript puros, sem dependência; `file://`; paleta, Chakra Petch e recorte diagonal como único contêiner.
 - Nenhum JavaScript novo foi adicionado: o movimento é CSS.
 
@@ -548,3 +548,78 @@ Depois da DEC-018, as quatro estações ainda liam como o mesmo documento: só t
 - O CSS das estações foi dividido para respeitar o limite de cerca de 1.300 linhas por arquivo (DEC-018, item 9): `estacao.css` (capa em grade, capítulos, telas de bloqueio, trilho) e `estacao-modulos.css` (módulos, linha do tempo, percurso, palco da carta e movimento), carregado depois dele.
 - `DESIGN.md`, `.impeccable/surfaces/index-html.md` e `.impeccable/design.json` foram atualizados para este sistema.
 - A verificação usou testes fora do repositório (unidade, E2E por Chrome headless via `file://`), incluindo conferência de fatos dos módulos, unicidade dos marcos, geometria da capa da Estação 4, movimento e auditoria de contraste. Teste em celular real, leitor de tela e outros navegadores continua pendente.
+
+---
+
+## DEC-020 — Identidade azul do OdisseIA; o roxo fica com o X-B0T
+
+**Status:** aceita e implementada (23/10/2026). Revisa a paleta da DEC-011 e da DEC-013; mantém o resto da DEC-018 e da DEC-019.
+
+### Contexto
+
+A sala da feira será azul. O site precisava conversar com esse ambiente sem perder personalidade, e o X-B0T precisava continuar reconhecível como um jogo à parte, com a sua própria cor.
+
+### Decisão
+
+1. **Paleta azul a partir das cores da sala:** azul da sala `#031634` (fundo), azul intermediário `#142146` (superfície em destaque) e azul do logo `#242b57` (filetes decorativos). Texto, superfícies e o azul-luz de estado (`#5b9cff`) nascem delas. Todos os pares de texto foram medidos: mínimo de 4,5:1 nos quatro temas (escuro, claro, e os dois em alto contraste).
+2. **O roxo é do X-B0T (`--cor-xbot`, `#cd5efa`, ainda provisório).** Aparece no cartão e na engrenagem do X-B0T no Hub, na carta e na explosão no fim da rota da abertura, na silhueta do destino final, na capa e nos módulos da Estação 4 e no bloco do X-B0T da Conclusão. A navegação da jornada continua azul em todos esses lugares (`--cor-marca`).
+3. **Engrenagens:** as quatro estações usam engrenagens azuis (`engrenagem-azul-acesa.png` e `engrenagem-azul-apagada.png`), geradas das originais por troca de matiz, sem alterar a geometria nem o tamanho. As roxas originais ficam só para o X-B0T.
+4. **Luz por estação:** dentro da família azul, a Estação 1 usa gelo (`#4fd0f5`), a 2 o azul-luz e a 3 pervinca (`#9aa8ff`). A 4 usa o roxo do jogo. O alto contraste mantém um azul só.
+5. **Hub reorganizado no desktop:** herói maior (palavra-marca e placar de progresso monumentais), rota num palco próprio com engrenagens maiores e trilho mais grosso onde já foi percorrido, cartão da próxima estação projetado acima dos outros e destino final com a Conclusão em azul e o X-B0T em roxo.
+6. **Leitura nas estações:** abertura do capítulo com a primeira frase em corpo maior e barra na cor da estação, nomes e conceitos com marca-texto discreto, filete de abertura em cada seção, numeral do capítulo fixo na margem durante a leitura e, em telas largas, a primeira frase do briefing como abertura da estação. Nenhum texto foi reescrito por causa disso.
+7. **Grafia:** o nome oficial é **X-B0T**, com zero. Na Chakra Petch o zero é quase igual à letra O, então em títulos e botões ele leva uma barra desenhada em CSS (`.zero`).
+
+### Alterações editoriais (únicas em texto educativo)
+
+- **Estação 4, seção Identidade.** "O cinza, o roxo e os cantos cortados que acompanham você desde o Hub vêm do X-B0T" deixou de ser verdadeiro com a nova paleta. Passou a "Os cantos cortados que acompanham você desde o Hub vêm do X-B0T, e o roxo desta estação é a cor do jogo". O marcador "cinza" do módulo foi retirado. O restante do parágrafo (as engrenagens saíram da mesma arte do verso da carta) continua igual. **Precisa de confirmação do grupo.**
+
+### O que não muda
+
+Fluxo, progresso (`odisseia:progresso`), QR Codes, regras de desbloqueio, conteúdo científico, HTML/CSS/JS puros, `file://`.
+
+### Consequências
+
+- `.impeccable/design.json` ainda descreve a paleta anterior e precisa ser regenerado com a ferramenta.
+- O roxo `#cd5efa` continua dependendo da confirmação do grupo do X-B0T.
+
+---
+
+## DEC-021 — Área útil de 92–94% da tela e escala por tamanho de tela
+
+**Status:** aceita e implementada (23/10/2026). Substitui a largura fixa de 75rem (84rem nas estações) da DEC-018 e da DEC-019.
+
+### Contexto
+
+Em monitores desktop as laterais ficavam largas demais: 75rem é 62% de uma tela de 1920px, e a coluna lateral das estações parava em 21rem.
+
+### Decisão
+
+1. A margem lateral é fluida (`--gutter: clamp(1rem, 3.4vw, 3.5rem)`) e o palco vai até 108rem, o que dá 93% da largura em 1280, 1440 e 1920px, e cerca de 84% em 2560px. Vale para todas as páginas.
+2. A raiz cresce em monitores grandes (`--escala-tela`: 1,125 a partir de 1600px e 1,25 a partir de 2200px), então texto e espaços acompanham a largura extra. O tamanho de texto do painel de acessibilidade multiplica essa escala.
+3. Texto corrido continua com 62 caracteres por linha no máximo (medido: até ~75ch em 1920px, com a escala). O espaço extra vai para a coluna lateral dos módulos (até 26rem), para figuras, linha do tempo e percurso.
+
+### Consequências
+
+- Nenhuma página rola na horizontal entre 360 e 2560px (testado em 14 larguras).
+- A validação de QR mantém a coluna estreita de 36rem, de propósito.
+
+---
+
+## DEC-022 — Movimento: o sistema é o padrão, a escolha do usuário vence
+
+**Status:** aceita e implementada (23/10/2026). Corrige o comportamento do painel de acessibilidade.
+
+### Contexto
+
+No computador da escola, "Reduzir animações" não podia ser desligada. A investigação reproduziu o problema: quando o sistema pede movimento reduzido, o painel mostrava o interruptor ligado e desabilitado (`disabled`), nada era gravado e o CSS desligava as animações por `@media (prefers-reduced-motion: reduce)`, sem nenhuma forma de a pessoa religá-las. Em outro computador, sem a preferência do sistema, tudo funcionava. Era um defeito de projeto, não um problema da máquina da escola.
+
+### Decisão
+
+1. O movimento tem três opções, como o tema: **Sistema** (padrão, segue `prefers-reduced-motion`, inclusive mudanças em tempo real), **Reduzir** e **Completas**. Nenhuma fica travada.
+2. A escolha explícita é gravada em `odisseia:acessibilidade` (`movimento: "sistema" | "reduzido" | "normal"`) e vence o sistema nos dois sentidos. Dados antigos (`movimento: true`) viram "Reduzir"; `false` ou ausente vira "Sistema".
+3. O script grava sempre `data-movimento="reduzido"` ou `"normal"` no `<html>` antes da primeira pintura. O CSS só corta animações por esse atributo; a mídia do sistema vale apenas se o script não rodar. As animações das Estações (antes atrás de `prefers-reduced-motion: no-preference`) deixaram de ter essa condição.
+4. A opção "Sistema" mostra o que o sistema pede agora ("reduzidas" ou "completas").
+
+### Limitação
+
+Se o navegador da escola bloquear o `localStorage`, nenhuma preferência persiste entre páginas (o painel avisa que a escolha vale só nesta página). Isso não foi observado nem testado naquele computador.

@@ -1,5 +1,5 @@
 /* Abertura (index.html): a capa do arquivo de missão. Palavra-marca monumental, rota esquemática
-   até o X-BOT, protocolo em três passos, índice da jornada e a silhueta da recompensa. */
+   até o X-B0T, protocolo em três passos, índice da jornada e a silhueta da recompensa. */
 
 .pagina-index main {
   max-width: calc(var(--palco) + 2 * var(--gutter));
@@ -7,6 +7,16 @@
   padding: 0 var(--gutter) var(--espaco-16);
   background: var(--cor-fundo);
   overflow-x: clip;
+}
+
+/* O X-B0T é o único ponto roxo da abertura: a explosão e a carta no fim da rota, a silhueta do
+   destino e a quarta linha do índice. O resto do site é azul. */
+.capa__explosao,
+.capa__xbot,
+.destino__palco,
+.jornada__item--xbot {
+  --cor-destaque: var(--cor-xbot);
+  --cor-sobre-destaque: var(--cor-sobre-xbot);
 }
 
 /* ---------- Capa ---------- */
@@ -398,10 +408,6 @@
 }
 
 @media (min-width: 900px) {
-  :root {
-    --gutter: var(--espaco-8);
-  }
-
   .capa {
     grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
     grid-template-areas:

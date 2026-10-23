@@ -3,11 +3,6 @@
    módulos complementares (.nota) na coluna lateral; uma linha do tempo única (ou o percurso, na
    Estação 3); fechamento que liga à próxima etapa. Módulos, linha do tempo, percurso, palco da carta e movimento ficam em estacao-modulos.css. */
 
-/* Mais largura útil nas estações: a coluna lateral dos módulos precisa dela. */
-.pagina-estacao {
-  --palco: 84rem;
-}
-
 .pagina-estacao main {
   max-width: calc(var(--palco) + 2 * var(--gutter));
   min-height: 100vh;
@@ -16,6 +11,26 @@
   background: var(--cor-fundo);
   overflow-x: clip;
 }
+
+/* Cada estação tem a sua luz dentro da família azul: gelo (1), azul do site (2), pervinca (3).
+   A Estação 4 é do X-B0T e usa o roxo do jogo. O alto contraste mantém o azul único do tema. */
+:root:not([data-contraste="alto"]) body[data-estacao="1"] { --cor-destaque: #4fd0f5; }
+:root:not([data-contraste="alto"]) body[data-estacao="3"] { --cor-destaque: #9aa8ff; }
+:root:not([data-contraste="alto"]) body[data-estacao="4"] {
+  --cor-destaque: var(--cor-xbot);
+  --cor-sobre-destaque: var(--cor-sobre-xbot);
+}
+/* A navegação da jornada (trilho, painel de acessibilidade, fechamento) continua azul. */
+.dossie-rota,
+.conexao,
+.a11y,
+.pular {
+  --cor-destaque: var(--cor-marca);
+  --cor-sobre-destaque: var(--cor-sobre-marca);
+}
+
+:root[data-tema="claro"]:not([data-contraste="alto"]) body[data-estacao="1"] { --cor-destaque: #086585; }
+:root[data-tema="claro"]:not([data-contraste="alto"]) body[data-estacao="3"] { --cor-destaque: #4a4fd1; }
 
 /* ---------- Capa do dossiê ----------
    Numeral, texto e arte são áreas de uma grade: nada é posicionado por deslocamento. */
@@ -224,6 +239,26 @@
   border-top: 1px solid var(--cor-apagado);
 }
 
+.briefing,
+.capitulo,
+.linha-tempo,
+.conexao {
+  border-top-color: var(--cor-linha);
+}
+
+/* Traço de abertura: o filete da seção ganha um trecho na cor da estação. */
+.briefing::before,
+.capitulo::before,
+.linha-tempo::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: 0;
+  width: 4.5rem;
+  height: 3px;
+  background: var(--cor-destaque);
+}
+
 .terminal-rotulo {
   position: absolute;
   top: calc(-0.5em - 1px);
@@ -297,7 +332,7 @@
   line-height: 0.85;
   letter-spacing: -0.03em;
   color: transparent;
-  -webkit-text-stroke: 1.5px var(--cor-texto-atenuado);
+  -webkit-text-stroke: 1.5px var(--cor-destaque);
 }
 
 .capitulo__titulo {
@@ -312,22 +347,41 @@
 
 .capitulo__corpo p {
   margin: 0 0 var(--espaco-4);
-  line-height: 1.65;
+  line-height: 1.7;
   color: var(--cor-texto-secundario);
 }
 
+/* Abertura do capítulo: a primeira frase é a tese, em corpo maior e com uma barra de margem. */
 .capitulo__corpo > p:first-child {
-  font-size: 1.0625rem;
-  line-height: 1.55;
+  position: relative;
+  padding-left: var(--espaco-4);
+  font-size: 1.1875rem;
+  line-height: 1.5;
   color: var(--cor-texto);
+}
+
+.capitulo__corpo > p:first-child::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.3em;
+  bottom: 0.3em;
+  width: 3px;
+  background: var(--cor-destaque);
 }
 
 .capitulo__corpo > :last-child {
   margin-bottom: 0;
 }
 
-.capitulo__corpo strong {
+/* Nomes e conceitos: marca-texto discreta sob a palavra, na cor da estação. */
+.capitulo__corpo strong,
+.briefing strong {
   color: var(--cor-texto);
+  background-image: linear-gradient(color-mix(in srgb, var(--cor-destaque) 28%, transparent), color-mix(in srgb, var(--cor-destaque) 28%, transparent));
+  background-repeat: no-repeat;
+  background-position: 0 92%;
+  background-size: 100% 0.32em;
 }
 
 .capitulo__corpo > ul {
@@ -715,10 +769,6 @@
    das duas últimas colunas. */
 
 @media (min-width: 900px) {
-  :root {
-    --gutter: var(--espaco-8);
-  }
-
   .pagina-estacao {
     --margem: 7rem;
   }
@@ -756,7 +806,7 @@
   }
 
   .titulo-estacao {
-    font-size: clamp(3rem, 5.2vw, 4.75rem);
+    font-size: clamp(3rem, 5.6vw, 5.5rem);
   }
 
   /* Estação 2: a rede ocupa a largura toda, abaixo do título. */
@@ -828,6 +878,13 @@
     background: none;
   }
 
+  /* O numeral do capítulo acompanha a leitura: fica à vista enquanto o capítulo é percorrido. */
+  .capitulo > .capitulo__rotulo {
+    position: sticky;
+    top: var(--espaco-8);
+    align-self: start;
+  }
+
   .capitulo > .capitulo__titulo {
     grid-column: 2;
     grid-row: 1;
@@ -881,6 +938,19 @@
     font-size: 1.375rem;
   }
 
+  /* Em telas largas a primeira frase do briefing é a abertura da estação: grande, atravessa as duas
+     colunas e dá o tom antes do texto corrido. */
+  @media (min-width: 1100px) {
+    .briefing > p:not(.terminal-rotulo):first-of-type {
+      grid-column: 2 / -1;
+      max-width: 42ch;
+      font-size: clamp(1.625rem, 2.1vw, 2.125rem);
+      line-height: 1.28;
+      letter-spacing: -0.005em;
+      color: var(--cor-texto);
+    }
+  }
+
   .conexao {
     display: grid;
     grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
@@ -920,7 +990,7 @@
   .briefing,
   .capitulo,
   .linha-tempo {
-    grid-template-columns: var(--margem) minmax(0, 38rem) minmax(14rem, 21rem);
+    grid-template-columns: var(--margem) minmax(0, 40rem) minmax(15rem, 1fr);
   }
 }
 

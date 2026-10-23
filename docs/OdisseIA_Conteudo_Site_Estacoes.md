@@ -8,7 +8,7 @@
 >
 > **Não alterar o significado, não adicionar fatos e não resumir por conta própria.**
 >
-> A **Estação 4 — X-BOT** ainda não possui copy definitiva, pois depende das mecânicas e funcionalidades realmente implementadas no jogo.
+> A **Estação 4 — X-B0T** ainda não possui copy definitiva, pois depende das mecânicas e funcionalidades realmente implementadas no jogo.
 
 ---
 
@@ -266,19 +266,19 @@ Em muitos casos, tecnologias diferentes podem trabalhar juntas.
 ↓  
 **IA generativa**
 
-## E o X-BOT?
+## E o X-B0T?
 
 Em jogos de cartas, uma inteligência artificial pode analisar jogadas, escolher cartas e controlar um adversário.
 
-Esses conceitos ajudam a criar uma ponte entre esta estação e o **X-BOT**, jogo desenvolvido para o OdisseIA.
+Esses conceitos ajudam a criar uma ponte entre esta estação e o **X-B0T**, jogo desenvolvido para o OdisseIA.
 
-Isso não significa que todas as técnicas apresentadas aqui estejam implementadas no X-BOT. A tecnologia utilizada no jogo depende do que for realmente concluído pelo grupo responsável.
+Isso não significa que todas as técnicas apresentadas aqui estejam implementadas no X-B0T. A tecnologia utilizada no jogo depende do que for realmente concluído pelo grupo responsável.
 
 Na próxima estação, você poderá conhecer essa aplicação na prática.
 
 ---
 
-# Estação 4 — X-BOT
+# Estação 4 — X-B0T
 
 > **Status: copy definitiva pendente.**
 >
@@ -292,7 +292,7 @@ Na próxima estação, você poderá conhecer essa aplicação na prática.
 > - IA generativa;
 > - qualquer outra técnica que ainda não tenha sido confirmada no código ou pelo grupo responsável.
 >
-> Quando o estado final do X-BOT estiver definido, atualizar esta seção com:
+> Quando o estado final do X-B0T estiver definido, atualizar esta seção com:
 >
 > - conceito do jogo;
 > - objetivo da partida;

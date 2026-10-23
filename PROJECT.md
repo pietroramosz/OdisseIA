@@ -15,7 +15,7 @@ O **OdisseIA** é um projeto para uma feira escolar que combina:
 - QR Codes;
 - progressão entre etapas;
 - acesso pelo celular do visitante;
-- integração com o jogo **X-BOT** (antes chamado Robot TCG).
+- integração com o jogo **X-B0T** (antes chamado Robot TCG).
 
 O site não foi pensado para substituir a apresentação física. Ele funciona como uma extensão da experiência, ajudando a conectar as estações e oferecendo conteúdo e interações que fazem sentido no celular.
 
@@ -30,16 +30,16 @@ Durante o desenvolvimento, usamos quatro estados para evitar confusão:
 - **Implementado:** já existe no código;
 - **Validado:** foi implementado e testado no fluxo esperado.
 
-Situação revisada em 21/10/2026:
+Situação revisada em 23/10/2026 (identidade azul, `gameUrl` e acessibilidade; testado só em Chrome headless):
 
 - **Validado:** sistema de progresso (`progresso.js`), testado no console, incluindo dado corrompido e número decimal.
 - **Implementado e testado em emulador e no celular:** Hub (`hub.html`), nos estados 0 a 4.
 - **Implementado e revisado:** `index.html` como porta de entrada estática, sem JavaScript e sem dependência de `localStorage`.
 - **Implementadas e revisadas:** Estações 1–3 com conteúdo, estados `desbloqueada`, `próxima` e `futura`, além da composição editorial compartilhada.
-- **Implementada:** Estação 4 (`estacao-4.html`), com página própria ligada ao X-BOT; o conteúdo deve continuar fiel às informações confirmadas pelo grupo do jogo.
-- **Implementada:** `final.html`, com estados de jornada completa/incompleta e área de acesso ao X-BOT; os links finais ainda dependem de configuração.
+- **Implementada:** Estação 4 (`estacao-4.html`), com página própria ligada ao X-B0T; o conteúdo deve continuar fiel às informações confirmadas pelo grupo do jogo.
+- **Implementada:** `final.html`, com estados de jornada completa/incompleta e área de acesso ao X-B0T; o botão "Jogar X-B0T" usa a `gameUrl` configurada (https://robot-tcg.netlify.app/); `downloadUrl` continua nulo.
 - **Implementado e testado por console e URL, ainda não validado com câmera real nem com WhatsApp:** validação de QR (`validar.html` e `qr.js`).
-- **Ainda pendente:** integração funcional com o X-BOT, hospedagem final, QR Codes definitivos e teste físico completo da jornada.
+- **Ainda pendente:** confirmação do endereço final do X-B0T, hospedagem final, QR Codes definitivos e teste físico completo da jornada.
 
 ---
 
@@ -85,13 +85,13 @@ A linha conceitual atual passa por:
 
 O conteúdo final continua dependente da versão aprovada da apresentação da estação.
 
-### Estação 4 — X-BOT
+### Estação 4 — X-B0T
 
-A quarta estação apresenta o **X-BOT**, jogo desenvolvido por outro núcleo do projeto.
+A quarta estação apresenta o **X-B0T**, jogo desenvolvido por outro núcleo do projeto.
 
 O site deve mostrar apenas mecânicas e tecnologias que realmente existirem na versão final do jogo.
 
-As regras internas, balanceamento, cartas, energia, IA adversária e outras decisões do X-BOT continuam sob responsabilidade do grupo responsável pelo jogo.
+As regras internas, balanceamento, cartas, energia, IA adversária e outras decisões do X-B0T continuam sob responsabilidade do grupo responsável pelo jogo.
 
 ---
 
@@ -131,8 +131,8 @@ Também existe uma estrutura de `assets` para organizar CSS, JavaScript e imagen
 - `index.html` — visão geral e porta de entrada estática da experiência; não lê nem altera progresso;
 - `hub.html` — central das estações e representação do progresso;
 - `validar.html` — página usada pelo fluxo de validação dos QR Codes;
-- `estacao-1.html` a `estacao-4.html` — páginas das estações e seus estados de acesso; a Estação 4 é dedicada ao X-BOT;
-- `final.html` — conclusão da jornada, com estados de acesso e área destinada ao link do X-BOT.
+- `estacao-1.html` a `estacao-4.html` — páginas das estações e seus estados de acesso; a Estação 4 é dedicada ao X-B0T;
+- `final.html` — conclusão da jornada, com estados de acesso e área destinada ao link do X-B0T.
 
 A existência dessas páginas não significa que todas as funcionalidades internas já estejam finalizadas.
 
@@ -157,7 +157,7 @@ Estação 4
 ↓
 Conclusão
 ↓
-X-BOT
+X-B0T
 ```
 
 A experiência física e a experiência digital estão ligadas pelos QR Codes.
@@ -314,19 +314,18 @@ Alguns princípios que guiam o design:
 
 ## 12. Identidade visual
 
-O site e o X-BOT devem parecer partes da mesma experiência.
+O site e o X-B0T devem parecer partes da mesma experiência, cada um com a sua cor.
 
-A identidade definida combina tecnologia e jogos com uma estética cyberpunk mais limpa, sem exagerar em efeitos que prejudiquem a leitura.
+Desde 23/10/2026 (DEC-020), o OdisseIA é azul, para conversar com a sala da feira, e o roxo é a cor do X-B0T.
 
 A base visual utiliza principalmente:
 
-- tons de cinza;
-- roxo como cor de destaque;
-- elementos tecnológicos;
-- contraste forte;
-- interface limpa.
+- azul da sala (`#031634`), azul intermediário (`#142146`) e azul do logo (`#242B57`);
+- um azul-luz como cor de estado e destaque;
+- roxo (`#CD5EFA`, provisório) só nas partes ligadas ao jogo;
+- elementos tecnológicos, contraste forte e interface limpa.
 
-O roxo deve aparecer principalmente em destaques, estados, bordas, ícones e componentes interativos, e não como cor dominante em textos longos.
+As engrenagens das quatro estações são azuis; a do X-B0T é roxa. O roxo não é usado como cor geral do site nem em textos longos.
 
 Como a experiência é mobile-first, legibilidade e contraste têm prioridade sobre efeitos visuais.
 
@@ -338,7 +337,7 @@ Estados importantes da interface também não devem depender exclusivamente de c
 
 O conteúdo digital é construído junto com as apresentações físicas.
 
-As Estações 1–4 possuem páginas implementadas e estados de acesso. A precisão do conteúdo da Estação 4 continua dependente das informações confirmadas sobre o X-BOT.
+As Estações 1–4 possuem páginas implementadas e estados de acesso. A precisão do conteúdo da Estação 4 continua dependente das informações confirmadas sobre o X-B0T.
 
 Algumas regras que seguimos:
 
@@ -351,11 +350,11 @@ Decisões pequenas de conteúdo não precisam virar registros técnicos.
 
 ---
 
-## 14. Integração com o X-BOT
+## 14. Integração com o X-B0T
 
 Para evitar confusão entre os grupos, as responsabilidades foram separadas.
 
-### Grupo do X-BOT
+### Grupo do X-B0T
 
 Cuida de:
 
@@ -377,7 +376,7 @@ Cuida de:
 - desbloqueio dentro do fluxo;
 - documentação apenas do que realmente existir na versão final.
 
-A página de conclusão deve informar que o X-BOT foi desbloqueado e conduzir o visitante para o jogo quando a integração estiver pronta.
+A página de conclusão deve informar que o X-B0T foi desbloqueado e conduzir o visitante para o jogo quando a integração estiver pronta.
 
 ---
 
@@ -405,19 +404,22 @@ Esta seção guarda apenas trabalho concreto ainda aberto. Ela não substitui o 
 
 ### Necessárias para fechar a experiência da feira
 
-- [x] Implementar a página da Estação 4 ligada ao X-BOT; revisar o conteúdo conforme as informações confirmadas pelo grupo.
-- [ ] Obter um status/build utilizável do X-BOT para destravar a integração da Estação 4 e da conclusão.
-- [ ] Resolver a duplicação de nome entre “Estação 4 — X-BOT” e o card final do jogo, sem renomear nada antes da decisão.
+- [x] Implementar a página da Estação 4 ligada ao X-B0T; revisar o conteúdo conforme as informações confirmadas pelo grupo.
+- [ ] Obter um status/build utilizável do X-B0T para destravar a integração da Estação 4 e da conclusão.
+- [ ] Resolver a duplicação de nome entre “Estação 4 — X-B0T” e o card final do jogo, sem renomear nada antes da decisão.
 - [x] Implementar a página de conclusão e os estados de jornada completa/incompleta.
-- [ ] Configurar os links finais para o X-BOT quando o grupo confirmar um endereço/build utilizável.
+- [x] Link do X-B0T configurado na Conclusão (botão "Jogar X-B0T" a partir de `gameUrl`). Falta confirmar com o grupo se esse é o endereço final.
 - [ ] Decidir se a conclusão terá link para portfólio/PDF e confirmar o arquivo/endereço antes de adicioná-lo.
-- [ ] Preencher `gameUrl` quando houver endereço utilizável; decidir `downloadUrl` apenas se houver versão para download.
+- [x] `gameUrl` preenchida com https://robot-tcg.netlify.app/ (23/10/2026). `downloadUrl` continua `null`; decidir só se houver versão para download.
 - [x] Adicionar no Hub um caminho claro de volta para a Visão geral (`index.html`).
 - [ ] Definir hospedagem e URL final antes de gerar ou imprimir os QR Codes definitivos.
 - [ ] Testar QR real pela câmera e abertura por WhatsApp/navegador interno.
 - [ ] Ampliar ou confirmar a orientação de “mesmo navegador”: hoje o Index já avisa, mas o problema ainda pode aparecer durante o fluxo de QR.
-- [ ] Fazer um teste completo em celular do fluxo: visão geral → Hub → QR1 → 1 → QR2 → 2 → QR3 → 3 → QR4 → 4 → conclusão → X-BOT.
-- [ ] Confirmar a cor final do X-BOT; enquanto isso, `#CD5EFA` continua provisório.
+- [ ] Fazer um teste completo em celular do fluxo: visão geral → Hub → QR1 → 1 → QR2 → 2 → QR3 → 3 → QR4 → 4 → conclusão → X-B0T.
+- [ ] Confirmar a cor final do X-B0T; enquanto isso, `#CD5EFA` continua provisório.
+- [ ] Confirmar com o grupo a alteração editorial na Estação 4 (DEC-020): o texto de herança visual deixou de citar "o cinza".
+- [ ] Testar o painel de acessibilidade no computador da escola (DEC-022) e, se possível, com o armazenamento do navegador bloqueado.
+- [ ] Regenerar `.impeccable/design.json`, que ainda descreve a paleta anterior.
 
 ### Risco operacional
 
@@ -425,10 +427,10 @@ Esta seção guarda apenas trabalho concreto ainda aberto. Ela não substitui o 
 
 ### A avaliar antes da versão final
 
-- créditos da equipe e do grupo do X-BOT;
+- créditos da equipe e do grupo do X-B0T;
 - favicon;
 - comportamento do site depois da feira;
-- necessidade de tutorial/instruções do X-BOT.
+- necessidade de tutorial/instruções do X-B0T.
 
 Não serão criados prazos artificiais para esses itens. Se algum deles virar requisito, entra na lista principal com contexto e, quando necessário, data.
 ---

@@ -219,8 +219,8 @@
       "name": "Primary Button",
       "kind": "button",
       "refersTo": "button-primary",
-      "description": "Ação principal (ex.: jogar X-BOT na Conclusão, só com gameUrl válida).",
-      "html": "<a class=\"ds-btn\" href=\"#\">JOGAR X-BOT</a>",
+      "description": "Ação principal (ex.: jogar X-B0T na Conclusão, só com gameUrl válida).",
+      "html": "<a class=\"ds-btn\" href=\"#\">JOGAR X-B0T</a>",
       "css": ".ds-btn { display: flex; align-items: center; justify-content: center; min-height: 48px; padding: 12px 24px; background: #cd5efa; color: #0c0c10; font-family: 'Chakra Petch', system-ui, sans-serif; font-weight: 700; font-size: 1rem; letter-spacing: 0.06em; text-decoration: none; clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px); } .ds-btn:focus-visible { outline: none; box-shadow: inset 0 0 0 3px #f3f3f6; }"
     },
     {
@@ -244,7 +244,7 @@
       "kind": "card",
       "refersTo": "card-locked",
       "description": "Cartão bloqueado: miolo no fundo, faixa hachurada, cadeado, texto atenuado. Continua levando à explicação de como desbloquear.",
-      "html": "<a class=\"ds-bloq\" href=\"#\"><strong>X-BOT</strong><span>BLOQUEADA</span></a>",
+      "html": "<a class=\"ds-bloq\" href=\"#\"><strong>X-B0T</strong><span>BLOQUEADA</span></a>",
       "css": ".ds-bloq { display: grid; gap: 8px; padding: 20px 16px 16px; background: #0c0c10; color: #9d9daa; text-decoration: none; box-shadow: inset 0 0 0 1px #1f1f29; clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px); } .ds-bloq strong { font-family: 'Chakra Petch', system-ui, sans-serif; font-size: 1.25rem; } .ds-bloq span { font-family: 'Chakra Petch', system-ui, sans-serif; font-weight: 700; font-size: 0.75rem; letter-spacing: 0.08em; }"
     },
     {
@@ -306,7 +306,7 @@
   ],
   "narrative": {
     "northStar": "O Arquivo de Missão",
-    "overview": "O OdisseIA é um arquivo de missão aberto página a página. Um traçado esquemático liga as quatro estações ao X-BOT: na abertura é a rota inteira, no Hub a posição do visitante, nas estações um trilho na margem e uma linha do tempo ou um percurso do próprio assunto, na Conclusão a rota fechada com quatro carimbos. Sobre esse esqueleto técnico, a energia de mangá do X-BOT (linhas de velocidade, retícula, silhuetas, carimbos) irrompe nos pontos de conquista e cresce com a jornada: um pouco na abertura, uma faixa de movimento na próxima estação, o palco da carta na Estação 4, a densidade máxima na Conclusão.\n\nCada estação é um dossiê editorial: capítulos em fluxo de leitura, módulos complementares na coluna lateral (ficha com moldura, uma forma por tipo de conteúdo) e um movimento próprio. Os capítulos continuam capítulos; o card complementa, nunca embala a página inteira.\n\nO roxo é tinta com origem e direção: sinal de estado e tinta de ilustração (linhas que saem de um objeto real, rota percorrida, nós ativos). Nunca é texto corrido nem painel.",
+    "overview": "O OdisseIA é um arquivo de missão aberto página a página. Um traçado esquemático liga as quatro estações ao X-B0T: na abertura é a rota inteira, no Hub a posição do visitante, nas estações um trilho na margem e uma linha do tempo ou um percurso do próprio assunto, na Conclusão a rota fechada com quatro carimbos. Sobre esse esqueleto técnico, a energia de mangá do X-B0T (linhas de velocidade, retícula, silhuetas, carimbos) irrompe nos pontos de conquista e cresce com a jornada: um pouco na abertura, uma faixa de movimento na próxima estação, o palco da carta na Estação 4, a densidade máxima na Conclusão.\n\nCada estação é um dossiê editorial: capítulos em fluxo de leitura, módulos complementares na coluna lateral (ficha com moldura, uma forma por tipo de conteúdo) e um movimento próprio. Os capítulos continuam capítulos; o card complementa, nunca embala a página inteira.\n\nO roxo é tinta com origem e direção: sinal de estado e tinta de ilustração (linhas que saem de um objeto real, rota percorrida, nós ativos). Nunca é texto corrido nem painel.",
     "keyCharacteristics": [
       "Escala tipográfica de contraste extremo: palavra-marca, placar e numerais monumentais; texto de leitura em fonte de sistema.",
       "Numerais vazados como linhas da grade da capa, na mesma borda do título.",
@@ -376,7 +376,7 @@
       "Don't usar glifos Unicode ou emoji como ícone; use a .seta ou um SVG desenhado.",
       "Don't pintar texto corrido de roxo nem usar roxo como fundo de painel.",
       "Don't mostrar a arte da carta fora da Estação 4 e da Conclusão, nem a sombra suave fora da Conclusão.",
-      "Don't inventar mecânicas, dados ou datas do X-BOT nem de qualquer estação em diagramas, módulos ou legendas.",
+      "Don't inventar mecânicas, dados ou datas do X-B0T nem de qualquer estação em diagramas, módulos ou legendas.",
       "Don't introduzir fonte nova, carregar a Inter ou usar texto visível abaixo de 12px.",
       "Don't permitir rolagem horizontal entre 360 e 430px."
     ]

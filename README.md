@@ -2,7 +2,7 @@
 
 O **OdisseIA** é um projeto criado para uma feira escolar que mistura uma experiência física, dividida em estações, com uma parte digital acessada pelo celular dos visitantes.
 
-A ideia do site é acompanhar o percurso da feira, complementar as apresentações de cada estação e conectar tudo em uma experiência única. O projeto também inclui o **X-BOT**, um jogo digital que será desbloqueado ao final da jornada.
+A ideia do site é acompanhar o percurso da feira, complementar as apresentações de cada estação e conectar tudo em uma experiência única. O projeto também inclui o **X-B0T**, um jogo digital que será desbloqueado ao final da jornada.
 
 > **Status atual:** em desenvolvimento.  
 > A fundação, o sistema de progresso, o Hub, a validação dos QR Codes, a visão geral, as Estações 1–4 e a Conclusão já possuem implementação real na branch `dev`.
@@ -16,7 +16,7 @@ Atualmente, o OdisseIA está dividido em **quatro estações físicas**:
 1. **Estação 1 — Evolução dos jogos até 1999**
 2. **Estação 2 — Evolução dos jogos de 2001 até hoje**
 3. **Estação 3 — Inteligência Artificial nos jogos**
-4. **Estação 4 — X-BOT**
+4. **Estação 4 — X-B0T**
 
 O fluxo oficial da experiência digital é:
 
@@ -35,7 +35,7 @@ Estação 4
 ↓
 Conclusão
 ↓
-X-BOT
+X-B0T
 ```
 
 Cada estação física possui um **QR Code** próprio.
@@ -66,7 +66,9 @@ Atualmente, estão implementados:
 - validação dos QR Codes por `validar.html` e `qr.js`;
 - `index.html` como porta de entrada estática, sem JavaScript nem dependência de progresso;
 - Estações 1–4 com conteúdo, três estados de acesso e linguagem editorial compartilhada;
-- página de conclusão (`final.html`), com estados de jornada completa/incompleta e área de acesso ao X-BOT.
+- página de conclusão (`final.html`), com estados de jornada completa/incompleta e botão "Jogar X-B0T" a partir de `gameUrl`;
+- identidade visual azul, alinhada à sala da feira, com o roxo reservado ao X-B0T;
+- painel de acessibilidade (tema, tamanho de texto, alto contraste e animações: Sistema, Reduzir ou Completas).
 
 O sistema de progresso já foi testado manualmente e versionado na branch `dev`.
 
@@ -76,12 +78,12 @@ O sistema de progresso já foi testado manualmente e versionado na branch `dev`.
 
 Entre os próximos passos estão:
 
-- integração funcional com o X-BOT;
+- confirmação com o grupo do X-B0T do endereço final do jogo (o link atual, https://robot-tcg.netlify.app/, já está em `gameUrl`; `downloadUrl` segue vazio);
 - hospedagem definitiva;
 - QR Codes finais;
 - testes físicos da experiência completa da feira.
 
-Alguns detalhes da Estação 4 e da Conclusão continuam dependendo diretamente da versão final do X-BOT.
+Alguns detalhes da Estação 4 e da Conclusão continuam dependendo diretamente da versão final do X-B0T.
 
 ---
 
@@ -100,7 +102,7 @@ A stack inicial do site foi mantida simples:
 
 A ideia é não adicionar frameworks, backend ou outras tecnologias só para deixar o projeto mais complexo. Se surgir uma necessidade real, isso pode ser revisto depois.
 
-O X-BOT é tratado separadamente, porque possui seu próprio desenvolvimento.
+O X-B0T é tratado separadamente, porque possui seu próprio desenvolvimento.
 
 ---
 
@@ -139,6 +141,6 @@ O projeto já saiu da fase de planejamento puro e entrou em implementação.
 
 A fundação, o sistema de progresso, o Hub, a validação dos QR Codes, a visão geral, as Estações 1–4 e a Conclusão já formam a base funcional e editorial atual do site.
 
-Ainda faltam principalmente a integração funcional com o X-BOT, a hospedagem definitiva, os QR Codes finais e os testes físicos do fluxo da feira.
+Ainda faltam principalmente a confirmação do endereço final do X-B0T, a hospedagem definitiva, os QR Codes finais e os testes físicos do fluxo da feira.
 
 Screenshots, demonstração, instruções de execução e links públicos serão adicionados quando essas partes realmente existirem.

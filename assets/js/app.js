@@ -4,7 +4,7 @@ const ESTACOES_NOMES = [
   "Evolução dos jogos até 1999",
   "Evolução dos jogos de 2001 até hoje",
   "Inteligência Artificial nos jogos",
-  "X-BOT"
+  "X-B0T"
 ];
 
 // Descrição curta de cada cartão: o título do briefing da própria estação.
@@ -28,7 +28,7 @@ const ESTACAO_ACOES = {
   bloqueada: "Ver o que falta"
 };
 
-// O X-BOT só é tratado como acessível com uma URL absoluta http(s) em gameUrl.
+// O X-B0T só é tratado como acessível com uma URL absoluta http(s) em gameUrl.
 // Valores vazios, com espaços no meio, relativos ou de outro protocolo ficam como pendentes.
 function urlAcessivel(valor) {
   if (typeof valor !== "string") {
@@ -131,9 +131,10 @@ function criarCardEstacao(numero, estado, estadoSeguinte) {
   const marcador = document.createElement("img");
   marcador.className = "marcador";
   marcador.alt = "";
+  // Engrenagens azuis: a identidade do OdisseIA. As roxas são do X-B0T.
   marcador.src = estado === "desbloqueada"
-    ? "assets/img/engrenagem-acesa.png"
-    : "assets/img/engrenagem-apagada.png";
+    ? "assets/img/engrenagem-azul-acesa.png"
+    : "assets/img/engrenagem-azul-apagada.png";
   marcador.width = ESTACAO_MARCADOR_TAMANHO[estado];
   marcador.height = ESTACAO_MARCADOR_TAMANHO[estado];
   no.appendChild(marcador);
@@ -215,11 +216,11 @@ function renderizarFinais(completa) {
     detalhe: completa ? "Ver conclusão" : "Disponível após a 4ª estação"
   }));
 
-  // Concluir a jornada desbloqueia o X-BOT; só uma URL válida o torna acessível.
+  // Concluir a jornada desbloqueia o X-B0T; só uma URL válida o torna acessível.
   const acessivel = completa && urlAcessivel(OdisseIAConfig.gameUrl);
   lista.appendChild(criarCardFinal({
     tipo: "xbot",
-    titulo: "X-BOT",
+    titulo: "X-B0T",
     descricao: "O jogo digital de cartas desenvolvido para o OdisseIA.",
     href: null,
     bloqueado: !completa,
@@ -254,6 +255,17 @@ function criarCardFinal(dados) {
   corpo.appendChild(criarTexto("h3", "final__titulo", dados.titulo, id + "-titulo"));
   corpo.appendChild(criarTexto("p", "cartao__descricao", dados.descricao, id + "-descricao"));
 
+  // O X-B0T é o único destino com identidade própria: a engrenagem roxa do jogo.
+  if (dados.tipo === "xbot") {
+    const engrenagem = document.createElement("img");
+    engrenagem.className = "final__engrenagem";
+    engrenagem.alt = "";
+    engrenagem.src = dados.bloqueado ? "assets/img/engrenagem-apagada.png" : "assets/img/engrenagem-acesa.png";
+    engrenagem.width = 64;
+    engrenagem.height = 64;
+    corpo.appendChild(engrenagem);
+  }
+
   const meta = document.createElement("div");
   meta.className = "cartao__meta";
   meta.appendChild(criarTexto("p", "rotulo cartao__estado", dados.rotulo, id + "-estado"));
@@ -282,10 +294,27 @@ function doisDigitos(numero) {
   return (numero < 10 ? "0" : "") + numero;
 }
 
+// O zero de X-B0T leva uma barra nos títulos e botões (classe .zero em style.css).
+function textoComZero(elemento, texto) {
+  const partes = texto.split("X-B0T");
+  partes.forEach(function (parte, indice) {
+    if (indice > 0) {
+      elemento.appendChild(document.createTextNode("X-B"));
+      elemento.appendChild(criarTexto("span", "zero", "0"));
+      elemento.appendChild(document.createTextNode("T"));
+    }
+    elemento.appendChild(document.createTextNode(parte));
+  });
+}
+
 function criarTexto(tag, classe, texto, id) {
   const elemento = document.createElement(tag);
   elemento.className = classe;
-  elemento.textContent = texto;
+  if (texto.indexOf("X-B0T") !== -1) {
+    textoComZero(elemento, texto);
+  } else {
+    elemento.textContent = texto;
+  }
   if (id) {
     elemento.id = id;
   }
@@ -369,7 +398,9 @@ function criarBotao(acao) {
   const botao = document.createElement("a");
   botao.className = "botao" + (acao.principal ? " botao--principal" : "");
   botao.href = acao.href;
-  botao.textContent = acao.texto;
+  const rotulo = document.createElement("span");
+  textoComZero(rotulo, acao.texto);
+  botao.appendChild(rotulo);
   return botao;
 }
 
@@ -518,7 +549,7 @@ function renderizarEstacoesValidadas(total) {
 
     const marcador = document.createElement("img");
     marcador.className = "final-jornada__marcador";
-    marcador.src = "assets/img/engrenagem-acesa.png";
+    marcador.src = "assets/img/engrenagem-azul-acesa.png";
     marcador.alt = "";
     marcador.width = 32;
     marcador.height = 32;
@@ -529,10 +560,10 @@ function renderizarEstacoesValidadas(total) {
     item.appendChild(numero);
 
     // No resumo final, a Estação 4 usa o título editorial;
-    // o nome no Hub continua "X-BOT".
+    // o nome no Hub continua "X-B0T".
     let nomeEstacao = ESTACOES_NOMES[n - 1];
     if (n === 4) {
-      nomeEstacao = "Por trás do X-BOT";
+      nomeEstacao = "Por trás do X-B0T";
     }
 
     const nome = document.createElement("span");
@@ -546,22 +577,25 @@ function renderizarEstacoesValidadas(total) {
   }
 }
 
-// Jornada concluída e jogo acessível são coisas diferentes: sem uma gameUrl válida o X-BOT
+// Jornada concluída e jogo acessível são coisas diferentes: sem uma gameUrl válida o X-B0T
 // continua desbloqueado como recompensa, mas o acesso fica marcado como pendente, sem botão.
 function renderizarAcessoXbot() {
   const area = document.getElementById("xbot-acesso");
   area.textContent = "";
 
   if (urlAcessivel(OdisseIAConfig.gameUrl)) {
-    const jogar = criarBotao({ href: OdisseIAConfig.gameUrl.trim(), texto: "Jogar X-BOT", principal: true });
+    const jogar = criarBotao({ href: OdisseIAConfig.gameUrl.trim(), texto: "Jogar X-B0T", principal: true });
     jogar.classList.add("final-acoes__jogar");
+    jogar.rel = "noopener";
     area.appendChild(jogar);
   } else {
     area.appendChild(criarStatusAcesso(document.getElementById("conclusao-total").textContent));
   }
 
   if (urlAcessivel(OdisseIAConfig.downloadUrl)) {
-    area.appendChild(criarBotao({ href: OdisseIAConfig.downloadUrl.trim(), texto: "Baixar X-BOT", principal: false }));
+    const baixar = criarBotao({ href: OdisseIAConfig.downloadUrl.trim(), texto: "Baixar X-B0T", principal: false });
+    baixar.rel = "noopener";
+    area.appendChild(baixar);
   }
 }
 

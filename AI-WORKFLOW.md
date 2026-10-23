@@ -43,7 +43,7 @@ Pietro participa principalmente de:
 - usar Git e GitHub;
 - assumir responsabilidade pelo resultado final.
 
-Quando alguma parte depende de outro grupo, como o X-BOT, essa responsabilidade continua com os integrantes daquele grupo.
+Quando alguma parte depende de outro grupo, como o X-B0T, essa responsabilidade continua com os integrantes daquele grupo.
 
 ---
 
@@ -180,7 +180,7 @@ Durante o planejamento percebemos um problema: se o site começasse a documentar
 
 Por isso, decidimos separar as responsabilidades.
 
-O grupo do jogo cuida das mecânicas e da implementação. O site recebe apenas as informações finais necessárias para integrar e apresentar o X-BOT.
+O grupo do jogo cuida das mecânicas e da implementação. O site recebe apenas as informações finais necessárias para integrar e apresentar o X-B0T.
 
 Essa decisão também virou uma regra de documentação: **planejado não é o mesmo que implementado**.
 

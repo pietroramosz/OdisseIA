@@ -18,18 +18,35 @@
   font-display: swap;
 }
 
+/* Identidade azul do OdisseIA, a partir das cores da sala da feira: azul da sala (#031634), azul
+   intermediário (#142146) e azul do logo (#242b57). O roxo é do X-B0T: aparece só onde o jogo é o
+   assunto (--cor-xbot), nunca como cor geral do site. Uma troca de cor acontece neste bloco. */
 :root {
-  --cor-fundo: #0c0c10;
-  --cor-superficie: #16161d;
-  --cor-superficie-escura: #111116;
-  --cor-superficie-alta: #1f1f29;
-  --cor-texto: #f3f3f6;
-  --cor-texto-secundario: #c2c2cc;
-  --cor-texto-atenuado: #9d9daa;
-  --cor-destaque: #cd5efa;
-  --cor-apagado: #6f6f7d;
-  --cor-sobre-destaque: #0c0c10;
-  --cor-grade: rgba(255, 255, 255, 0.04);
+  --azul-sala: #031634;
+  --azul-meio: #142146;
+  --azul-logo: #242b57;
+
+  --cor-fundo: var(--azul-sala);
+  --cor-superficie: #0b1d40;
+  --cor-superficie-escura: #020f26;
+  --cor-superficie-alta: var(--azul-meio);
+  --cor-linha: var(--azul-logo);
+  --cor-texto: #eef3ff;
+  --cor-texto-secundario: #c3cde6;
+  --cor-texto-atenuado: #9fadd0;
+  --cor-destaque: #5b9cff;
+  --cor-apagado: #6c80b3;
+  --cor-sobre-destaque: #031634;
+  --cor-grade: rgba(130, 165, 255, 0.05);
+
+  --cor-xbot: #cd5efa;
+  --cor-sobre-xbot: #12051a;
+  /* O azul do site, resolvido na raiz: áreas de uma estação ou do X-B0T que re-pintam
+     --cor-destaque usam --cor-marca para devolver a navegação da jornada ao azul. */
+  --cor-marca: var(--cor-destaque);
+  --cor-sobre-marca: var(--cor-sobre-destaque);
+
+  --escala-tela: 1;
 
   --fonte-titulo: "Chakra Petch", system-ui, sans-serif;
   --fonte-corpo: system-ui, sans-serif;
@@ -45,8 +62,11 @@
   --espaco-24: 96px;
 
   --leitura: 40rem;
-  --palco: 75rem;
-  --gutter: var(--espaco-4);
+  /* Área útil: a viewport menos a margem (--gutter), até um teto para monitores muito largos.
+     A margem cresce com a tela (16px no celular, cerca de 3,4% da largura no desktop, até 56px),
+     então o conteúdo ocupa entre 92% e 94% da janela até o teto de 108rem (1728px). */
+  --palco: 108rem;
+  --gutter: clamp(1rem, 3.4vw, 3.5rem);
 
   --recorte: polygon(
     var(--espaco-3) 0,
@@ -95,44 +115,51 @@
 
 :root[data-tema="claro"] {
   color-scheme: light;
-  --cor-fundo: #f5f3f8;
+  --cor-fundo: #f2f5fb;
   --cor-superficie: #ffffff;
-  --cor-superficie-escura: #ebe8f0;
-  --cor-superficie-alta: #e2deea;
-  --cor-texto: #17151c;
-  --cor-texto-secundario: #3d3a48;
-  --cor-texto-atenuado: #565263;
-  --cor-destaque: #8f26c7;
-  --cor-apagado: #6e6a7c;
+  --cor-superficie-escura: #e6ebf6;
+  --cor-superficie-alta: #d9e0f0;
+  --cor-linha: #c4cde4;
+  --cor-texto: #0a1530;
+  --cor-texto-secundario: #2d3a5c;
+  --cor-texto-atenuado: #4a5780;
+  --cor-destaque: #1c56c4;
+  --cor-apagado: #66749c;
   --cor-sobre-destaque: #ffffff;
-  --cor-grade: rgba(23, 21, 28, 0.06);
+  --cor-grade: rgba(10, 21, 48, 0.06);
+  --cor-xbot: #8f26c7;
+  --cor-sobre-xbot: #ffffff;
 }
 
 /* Alto contraste: mais distância entre texto e fundo, quadros e traços mais firmes. */
 :root[data-contraste="alto"] {
-  --cor-fundo: #000000;
-  --cor-superficie: #0a0a0c;
+  --cor-fundo: #000814;
+  --cor-superficie: #020c1e;
   --cor-superficie-escura: #000000;
-  --cor-superficie-alta: #22222c;
+  --cor-superficie-alta: #14224a;
+  --cor-linha: #3a4a8a;
   --cor-texto: #ffffff;
   --cor-texto-secundario: #ffffff;
-  --cor-texto-atenuado: #e6e6ec;
-  --cor-apagado: #a9a9b6;
+  --cor-texto-atenuado: #e3eaff;
+  --cor-destaque: #8bb8ff;
+  --cor-apagado: #a6b6e0;
   --cor-grade: rgba(255, 255, 255, 0.02);
 }
 
 :root[data-tema="claro"][data-contraste="alto"] {
   --cor-fundo: #ffffff;
   --cor-superficie: #ffffff;
-  --cor-superficie-escura: #f0f0f2;
-  --cor-superficie-alta: #d6d6dc;
+  --cor-superficie-escura: #eef1f8;
+  --cor-superficie-alta: #d3dbee;
+  --cor-linha: #8a98c0;
   --cor-texto: #000000;
   --cor-texto-secundario: #000000;
-  --cor-texto-atenuado: #1f1f24;
-  --cor-destaque: #6a0fa0;
-  --cor-apagado: #55555f;
+  --cor-texto-atenuado: #14203f;
+  --cor-destaque: #0b3a9a;
+  --cor-apagado: #4a5780;
   --cor-sobre-destaque: #ffffff;
   --cor-grade: rgba(0, 0, 0, 0.03);
+  --cor-xbot: #6a0fa0;
 }
 
 /* O quadro das fichas passa a ter a cor do texto, menos nos estados que já definem o seu. */
@@ -149,24 +176,36 @@
   text-underline-offset: 0.2em;
 }
 
-/* Tamanho do texto: o corpo e os títulos usam rem, então tudo acompanha a raiz. */
+/* Tamanho do texto: o corpo e os títulos usam rem, então tudo acompanha a raiz.
+   Em monitores grandes a raiz cresce (--escala-tela) e a escolha do painel multiplica essa escala,
+   então o desktop de 1920px não parece uma tela de 1280px esticada com margens. */
 :root[data-texto="grande"] {
-  font-size: 115%;
+  font-size: calc(var(--escala-tela) * 115%);
 }
 
 :root[data-texto="extra"] {
-  font-size: 130%;
+  font-size: calc(var(--escala-tela) * 130%);
+}
+
+@media (min-width: 1600px) {
+  :root {
+    --escala-tela: 1.125;
+  }
+}
+
+@media (min-width: 2200px) {
+  :root {
+    --escala-tela: 1.25;
+  }
 }
 
 /* Troca de tema sem tranco: só enquanto a pessoa muda uma opção, nunca no carregamento. */
-@media (prefers-reduced-motion: no-preference) {
-  :root.a11y-transicao:not([data-movimento="reduzido"]),
-  :root.a11y-transicao:not([data-movimento="reduzido"]) *,
-  :root.a11y-transicao:not([data-movimento="reduzido"]) *::before,
-  :root.a11y-transicao:not([data-movimento="reduzido"]) *::after {
-    transition: background-color 0.2s ease-out, color 0.2s ease-out, border-color 0.2s ease-out,
-      fill 0.2s ease-out, stroke 0.2s ease-out !important;
-  }
+:root.a11y-transicao:not([data-movimento="reduzido"]),
+:root.a11y-transicao:not([data-movimento="reduzido"]) *,
+:root.a11y-transicao:not([data-movimento="reduzido"]) *::before,
+:root.a11y-transicao:not([data-movimento="reduzido"]) *::after {
+  transition: background-color 0.2s ease-out, color 0.2s ease-out, border-color 0.2s ease-out,
+    fill 0.2s ease-out, stroke 0.2s ease-out !important;
 }
 
 * {
@@ -176,6 +215,7 @@
 html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  font-size: calc(var(--escala-tela) * 100%);
 }
 
 body {
@@ -251,9 +291,30 @@ main:focus {
   outline: none;
 }
 
-/* Nome próprio que não pode quebrar no hífen (ex.: X-BOT). */
+/* Nome próprio que não pode quebrar no hífen (ex.: X-B0T). */
 .sem-quebra {
   white-space: nowrap;
+}
+
+/* O zero do nome X-B0T: na Chakra Petch ele é quase igual à letra O, então ganha uma barra para o
+   nome oficial ser lido com zero. Só nas fontes de título, nunca no texto corrido. */
+.zero {
+  position: relative;
+}
+
+.zero::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0.78em;
+  margin-left: -0.39em;
+  border-top: 0.075em solid currentColor;
+  transform: rotate(-62deg);
+}
+
+p .zero::after {
+  content: none;
 }
 
 .visualmente-oculto {
@@ -576,26 +637,11 @@ main:focus {
 }
 
 /* Movimento reduzido: sem deslocamento nem coreografia; o conteúdo já nasce no estado final.
-   A resposta às interações continua, só em cor e opacidade, rápida e sem movimento. */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation: none !important;
-    transition-property: color, background-color, border-color, box-shadow, opacity !important;
-    transition-duration: 0.12s !important;
-    scroll-behavior: auto !important;
-  }
-
-  .botao:active,
-  a.cartao:active .cartao__corpo,
-  a.cartao:hover .cartao__corpo,
-  a.cartao:hover .seta {
-    transform: none;
-  }
-}
-
-/* Mesma regra, escolhida no painel de acessibilidade (data-movimento="reduzido"). */
+   A resposta às interações continua, só em cor e opacidade, rápida e sem movimento.
+   Quem decide é acessibilidade.js, que grava data-movimento="reduzido" ou "normal" no <html>:
+   a escolha manual do painel vence o sistema, nos dois sentidos. Nenhuma regra de animação do
+   site deve depender de prefers-reduced-motion por conta própria, ou a escolha "Completas"
+   não conseguiria religar o movimento num computador que pede menos. */
 :root[data-movimento="reduzido"] *,
 :root[data-movimento="reduzido"] *::before,
 :root[data-movimento="reduzido"] *::after {
@@ -610,6 +656,25 @@ main:focus {
 :root[data-movimento="reduzido"] a.cartao:hover .cartao__corpo,
 :root[data-movimento="reduzido"] a.cartao:hover .seta {
   transform: none;
+}
+
+/* Sem script, o atributo não existe: vale então a preferência do sistema. */
+@media (prefers-reduced-motion: reduce) {
+  :root:not([data-movimento]) *,
+  :root:not([data-movimento]) *::before,
+  :root:not([data-movimento]) *::after {
+    animation: none !important;
+    transition-property: color, background-color, border-color, box-shadow, opacity !important;
+    transition-duration: 0.12s !important;
+    scroll-behavior: auto !important;
+  }
+
+  :root:not([data-movimento]) .botao:active,
+  :root:not([data-movimento]) a.cartao:active .cartao__corpo,
+  :root:not([data-movimento]) a.cartao:hover .cartao__corpo,
+  :root:not([data-movimento]) a.cartao:hover .seta {
+    transform: none;
+  }
 }
 
 /* ---------- Painel de acessibilidade (montado por assets/js/acessibilidade.js) ----------
@@ -831,12 +896,6 @@ main:focus {
   display: flex;
   flex-direction: column;
   font-weight: 600;
-}
-
-.a11y__nota {
-  color: var(--cor-texto-atenuado);
-  font-size: 0.75rem;
-  font-weight: 400;
 }
 
 .a11y__chave-estado {

@@ -212,7 +212,7 @@
   mask: var(--textura-hachura) 0 0 / 10px 10px repeat;
 }
 
-/* Herança (Estação 4): o que o site herdou do X-BOT. */
+/* Herança (Estação 4): o que o site herdou do X-B0T. */
 .nota--heranca {
   --moldura: var(--cor-destaque);
   --miolo: var(--cor-superficie-escura);
@@ -753,6 +753,14 @@
   }
 }
 
+/* Coluna lateral larga: o módulo cresce junto com ela, até um limite. */
+@media (min-width: 1100px) {
+  .capitulo__corpo > .nota,
+  .briefing__corpo > .nota {
+    max-width: 26rem;
+  }
+}
+
 /* ---------- Movimento ----------
    Um gesto por estação, sempre partindo de um estado já visível e terminando no estado estático:
    S1 acende a linha do tempo conforme a rolagem; S2 traça a rede de conexões da capa; S3 liga as
@@ -775,19 +783,28 @@
   to { background-color: var(--cor-destaque); transform: none; }
 }
 
+/* Estação 2: o sinal sai do controle e se espalha pela rede. As linhas são traçadas do centro para
+   as pontas, em voltas sucessivas (--t é o atraso e --d a duração de cada trecho, em segundos); os
+   nós surgem quando a linha chega; por fim as conexões ativas acendem na cor de destaque. */
 @keyframes rede-tracar {
   from { stroke-dasharray: 1; stroke-dashoffset: 1; }
   to { stroke-dasharray: 1; stroke-dashoffset: 0; }
 }
 
 @keyframes rede-surgir {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from { opacity: 0; transform: scale(0.4); }
+  to { opacity: 1; transform: none; }
 }
 
-@keyframes rede-ativar {
-  from { transform: scale(0); }
-  to { transform: none; }
+@keyframes rede-acender {
+  0% { fill: var(--cor-fundo); stroke: var(--cor-texto-secundario); transform: none; }
+  45% { transform: scale(1.7); }
+  100% { fill: var(--cor-destaque); stroke: var(--cor-destaque); transform: none; }
+}
+
+@keyframes rede-sinal {
+  from { opacity: 0; transform: translateX(-0.5rem); }
+  to { opacity: 1; transform: none; }
 }
 
 @keyframes percurso-ligar {
@@ -831,82 +848,76 @@
   to { opacity: 1; transform: none; }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  /* Estação 2: a rede da capa é traçada, depois os nós ativos acendem um a um. */
-  [data-estacao="2"] .arte__ligacao {
-    animation: rede-tracar 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.1s backwards;
-  }
+/* Estação 2: a rede da capa, trecho a trecho. */
+[data-estacao="2"] .arte__ligacao {
+  animation: rede-tracar calc(var(--d, 0.5) * 1s) cubic-bezier(0.22, 1, 0.36, 1) calc(var(--t, 0) * 1s) backwards;
+}
 
-  [data-estacao="2"] .arte__ligacao--ativa {
-    animation-duration: 0.9s;
-    animation-delay: 0.9s;
-  }
+[data-estacao="2"] .arte__no {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: rede-surgir 0.3s cubic-bezier(0.22, 1, 0.36, 1) calc(var(--t, 0) * 1s) backwards;
+}
 
-  [data-estacao="2"] .arte__no:not(.arte__no--ativo) {
-    animation: rede-surgir 0.5s ease-out 0.3s backwards;
-  }
+/* Os nós ativos chegam cinza e acendem quando a conexão ativa os alcança. */
+[data-estacao="2"] .arte__no--ativo {
+  animation:
+    rede-surgir 0.3s cubic-bezier(0.22, 1, 0.36, 1) calc(var(--t, 0) * 1s) backwards,
+    rede-acender 0.5s ease-out calc(var(--ac, 0) * 1s) backwards;
+}
 
-  [data-estacao="2"] .arte__no--ativo {
-    transform-box: fill-box;
-    transform-origin: center;
-    animation: rede-ativar 0.4s cubic-bezier(0.16, 1, 0.3, 1) calc(1.5s + var(--k, 0) * 0.14s) backwards;
-  }
+[data-estacao="2"] .arte__sinal {
+  animation: rede-sinal 0.4s ease-out 1.85s backwards;
+}
 
-  [data-estacao="2"] .arte__sinal {
-    animation: rede-surgir 0.5s ease-out 2.1s backwards;
-  }
+/* Estação 4: numeral, foco, carta e leque entram em sequência, como o quadro de uma página de mangá. */
+[data-estacao="4"] .dossie-capa__numeral {
+  animation: palco-numeral 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
 
-  /* Estação 4: numeral, foco, carta e leque entram em sequência, como o quadro de uma página de mangá. */
-  [data-estacao="4"] .dossie-capa__numeral {
-    animation: palco-numeral 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards;
-  }
+.palco-carta__foco {
+  animation: palco-irromper 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.15s backwards;
+}
 
-  .palco-carta__foco {
-    animation: palco-irromper 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.15s backwards;
-  }
+.palco-carta__carta {
+  animation: palco-pousar 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.45s backwards;
+}
 
-  .palco-carta__carta {
-    animation: palco-pousar 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.45s backwards;
-  }
+.palco-carta__pilha span {
+  animation: palco-abrir 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.85s backwards;
+}
 
-  .palco-carta__pilha span {
-    animation: palco-abrir 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.85s backwards;
-  }
-
-  .palco-carta__etiqueta {
-    animation: palco-etiqueta 0.4s ease-out 1.1s backwards;
-  }
+.palco-carta__etiqueta {
+  animation: palco-etiqueta 0.4s ease-out 1.1s backwards;
 }
 
 /* Estações 1 e 3: o movimento acompanha a rolagem. Sem suporte, a página fica estática e completa. */
 @supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    [data-estacao="1"] .rota-tempo::after {
-      animation: tempo-tracar linear both;
-      animation-timeline: view();
-      animation-range: entry 5% cover 60%;
-    }
-
-    [data-estacao="1"] .marco::before {
-      animation: tempo-acender linear both;
-      animation-timeline: view();
-      animation-range: entry 55% entry 100%;
-    }
-
-    [data-estacao="3"] .etapa::after {
-      animation: percurso-ligar linear both;
-      animation-timeline: view();
-      animation-range: entry 40% entry 100%;
-    }
-
-    [data-estacao="3"] .etapa::before {
-      animation: percurso-acender linear both;
-      animation-timeline: view();
-      animation-range: entry 35% entry 85%;
-    }
+  [data-estacao="1"] .rota-tempo::after {
+    animation: tempo-tracar linear both;
+    animation-timeline: view();
+    animation-range: entry 5% cover 60%;
   }
 
-  @media (prefers-reduced-motion: no-preference) and (min-width: 900px) {
+  [data-estacao="1"] .marco::before {
+    animation: tempo-acender linear both;
+    animation-timeline: view();
+    animation-range: entry 55% entry 100%;
+  }
+
+  [data-estacao="3"] .etapa::after {
+    animation: percurso-ligar linear both;
+    animation-timeline: view();
+    animation-range: entry 40% entry 100%;
+  }
+
+  [data-estacao="3"] .etapa::before {
+    animation: percurso-acender linear both;
+    animation-timeline: view();
+    animation-range: entry 35% entry 85%;
+  }
+
+  @media (min-width: 900px) {
     [data-estacao="1"] .rota-tempo::after {
       animation-name: tempo-tracar-h;
     }
