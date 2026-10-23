@@ -511,3 +511,40 @@ Algumas regras anteriores impediam o resultado. A grade 2×2 fazia do Hub quatro
 - O teste em celular real e em outros navegadores continua pendente.
 - Uma mudança futura de paleta continua num ponto só: os tokens de `style.css`.
 
+---
+
+## DEC-019 — Estações editoriais: módulos complementares, linha do tempo única e capa da Estação 4
+
+**Status:** aceita e implementada (22/10/2026). Refina a DEC-018 (estações) e revisa a DEC-017 (carta da Estação 4). Não muda nenhuma outra regra.
+
+### Contexto
+
+Depois da DEC-018, as quatro estações ainda liam como o mesmo documento: só texto em fluxo e figuras soltas. No desktop, a terceira coluna da grade (a que sobrava depois das colunas de margem e de leitura) media cerca de 112px e ficava vazia. A Estação 1 e a Estação 2 mostravam os mesmos marcos duas vezes (escala horizontal e lista vertical). Na Estação 4, o numeral e a textura roxa eram posicionados por `calc()` e deslocamentos, e as linhas de foco apontavam para o meio de uma coluna vazia.
+
+### Decisão
+
+1. **Módulos editoriais (`.nota`).** Cada estação ganha módulos complementares (três em cada uma; quatro na Estação 3).
+   - O módulo é sempre uma `.ficha`: moldura, título (h3), selo opcional, um ou dois trechos curtos do próprio capítulo e uma ilustração SVG.
+   - A forma muda com o conteúdo: marco (o ano como monumento), conexão (diagrama primeiro), órbita, ideia-chave, conceito, cautela e, na Estação 4, herança e status.
+   - **Os capítulos continuam capítulos**, com título e texto em fluxo. O módulo nunca os substitui, nunca é aninhado e nunca repete o parágrafo vizinho palavra por palavra.
+   - **Só fatos que já estão na página.** Os trechos são citações literais do capítulo, conferidas por teste (sem diferenciar maiúsculas e pontuação). A única exceção é o painel "em validação" da Estação 4, que é o conteúdo original movido para dentro do módulo.
+2. **Espaço lateral (revisa a DEC-018, item 5).** A grade dos capítulos passa a ser margem, leitura (até 38rem) e coluna lateral (13,5 a 21rem). O palco das estações sobe de 75rem para 84rem e o trilho da rota só aparece a partir de 1360px, para a coluna lateral ter largura útil. O módulo ocupa a coluna lateral à altura do parágrafo que destaca (`--ancora`); no celular entra no fluxo, logo depois dele. A coluna de leitura não é alargada.
+3. **Linha do tempo única (Estações 1 e 2).** A escala proporcional por ano e a lista repetida foram removidas. No lugar, uma espinha só com os marcos agrupados por época: horizontal no desktop, vertical no celular. Cada acontecimento aparece uma vez; os 15 e os 12 marcos foram preservados.
+4. **Percurso (Estação 3).** A escada de seis caixas iguais virou um caminho conectado: desktop em escada ascendente com nós que crescem e trechos que entram na etapa seguinte pela esquerda; celular em linha vertical.
+5. **Capa da Estação 4 (revisa a DEC-017 e a DEC-018, item 7).** A carta sai da seção Identidade e vai para a capa, num palco: verso inclinado, leque de cartas por baixo, etiqueta de arquivo e linhas de foco que saem do centro da carta. O numeral passa a ser uma linha da grade, na mesma borda esquerda do título. A carta carrega sem `loading="lazy"` (está acima da dobra). Continua só na Estação 4 e na Conclusão, sem sombra suave.
+6. **Capa das estações em grade.** Numeral, texto e arte são áreas de `grid-template-areas` em todas as estações. O título ganha um contorno da cor do fundo para cortar as linhas do numeral atrás das letras.
+7. **Movimento por estação.** Um gesto por página, partindo de um estado já visível: Estação 1 acende a linha do tempo conforme a rolagem; Estação 2 traça a rede da capa; Estação 3 liga as etapas do percurso; Estação 4 revela numeral, foco, carta e leque. As Estações 1 e 3 usam `animation-timeline: view()` dentro de `@supports`, sem JavaScript; as 2 e 4 usam keyframes por tempo. Todas desligam com `prefers-reduced-motion` e com "Reduzir animações" do painel, e o estado final é o estado padrão do CSS.
+8. **Regras antigas revogadas.** A terceira coluna livre para "figuras e escala do tempo" (DEC-018, item 5), o diagrama de escala proporcional da Estação 1 e da 2, e a carta em `.carta-moldura` dentro do briefing da Estação 4.
+
+### O que não muda
+
+- Conteúdo educativo, ordem dos capítulos, estados de bloqueio, fluxo das estações, QR Codes, `odisseia:progresso` e desbloqueio sequencial.
+- Estado do X-BOT: o conteúdo em validação continua "em validação"; `gameUrl` e `downloadUrl` seguem `null`. Nada novo é afirmado sobre o jogo.
+- HTML, CSS e JavaScript puros, sem dependência; `file://`; paleta, Chakra Petch e recorte diagonal como único contêiner.
+- Nenhum JavaScript novo foi adicionado: o movimento é CSS.
+
+### Consequências
+
+- O CSS das estações foi dividido para respeitar o limite de cerca de 1.300 linhas por arquivo (DEC-018, item 9): `estacao.css` (capa em grade, capítulos, telas de bloqueio, trilho) e `estacao-modulos.css` (módulos, linha do tempo, percurso, palco da carta e movimento), carregado depois dele.
+- `DESIGN.md`, `.impeccable/surfaces/index-html.md` e `.impeccable/design.json` foram atualizados para este sistema.
+- A verificação usou testes fora do repositório (unidade, E2E por Chrome headless via `file://`), incluindo conferência de fatos dos módulos, unicidade dos marcos, geometria da capa da Estação 4, movimento e auditoria de contraste. Teste em celular real, leitor de tela e outros navegadores continua pendente.

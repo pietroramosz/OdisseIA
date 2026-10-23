@@ -485,6 +485,36 @@ Depois do "Arquivo de Missão", os cartões do Hub ainda pareciam caixas de text
 
 ---
 
+## 22/10/2026 — Estações editoriais (DEC-019)
+
+### Contexto
+
+As quatro estações ainda pareciam o mesmo documento de texto. A coluna lateral do desktop ficava vazia, os marcos das Estações 1 e 2 apareciam duas vezes e a capa da Estação 4 tinha um numeral e linhas de foco soltos.
+
+### O que mudou
+
+- **Módulos editoriais:** três cards complementares por estação (quatro na Estação 3), que mudam de forma com o conteúdo (marco, conexão, órbita, ideia-chave, conceito, cautela, herança, status). Usam só trechos literais da própria página, e os capítulos continuam em fluxo de leitura.
+- **Desktop:** os módulos ocupam a coluna lateral, ao lado do parágrafo que destacam; no celular entram no fluxo.
+- **Linha do tempo única** nas Estações 1 e 2, agrupada por época, sem repetir nenhum dos 15 e 12 marcos.
+- **Percurso** na Estação 3: as seis etapas como caminho conectado, em escada.
+- **Estação 4:** a carta foi para a capa, num palco com leque de cartas, etiqueta de arquivo e linhas de foco saindo dela; o numeral é uma linha da grade, alinhado ao título.
+- **Movimento próprio** em cada estação, em CSS puro, com alternativa para movimento reduzido.
+- **Documentação:** DEC-019, `DESIGN.md`, contrato da superfície e `design.json` (que ainda descrevia o antigo "Terminal Editorial") atualizados.
+
+### Como foi verificado
+
+- Testes escritos antes da implementação e vistos falhando (141 verificações), depois verdes; mutações propositais (fato inventado, movimento renomeado, módulo fora da coluna lateral) foram detectadas.
+- Chrome headless via `file://`: composição, sobreposição, medida de leitura, fatos dos módulos, marcos únicos, geometria da capa da Estação 4 em seis larguras, movimento (sistema e painel) e auditoria de contraste, alvos e rolagem em três temas e três larguras.
+- Capturas de 390px e 1440px de todas as páginas principais examinadas e refinadas.
+
+### O que continua pendente
+
+- Celular real, leitor de tela e outros navegadores: nada disso foi testado.
+- As animações ligadas à rolagem usam `animation-timeline`; em navegadores sem suporte a página fica estática.
+- O roxo `#CD5EFA` continua provisório, e o X-BOT segue "em validação".
+
+---
+
 ## Próximas entradas
 
 O DEVLOG só deve ganhar uma nova entrada quando houver algo realmente relevante, por exemplo:

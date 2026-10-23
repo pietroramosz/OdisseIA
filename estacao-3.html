@@ -6,6 +6,7 @@
   <title>OdisseIA — Estação 3</title>
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/paginas/estacao.css">
+  <link rel="stylesheet" href="assets/css/paginas/estacao-modulos.css">
   <script src="assets/js/acessibilidade.js"></script>
 </head>
 <body class="pagina-estacao" data-estacao="3">
@@ -135,6 +136,21 @@
           <p>As <strong>Behavior Trees</strong> estruturam comportamentos como uma árvore de possibilidades.</p>
           <p>Já a <strong>Utility AI</strong> pode atribuir prioridades às ações disponíveis. Um personagem com pouca vida, por exemplo, pode considerar que se proteger ou se curar é mais importante do que continuar atacando.</p>
           <p>NPCs também podem utilizar esses sistemas para executar rotinas, como trabalhar, conversar, descansar, patrulhar ou reagir a acontecimentos do mundo.</p>
+          <div class="ficha nota nota--conceito" role="group" aria-labelledby="nota-3-1" style="--ancora: 5">
+            <h3 class="nota__titulo" id="nota-3-1">Utility AI: o que pesa mais</h3>
+            <p class="nota__texto">se proteger ou se curar é mais importante do que continuar atacando</p>
+            <svg class="nota__arte" viewBox="0 0 240 112" aria-hidden="true" focusable="false">
+              <rect class="nota__ativa" x="8" y="10" width="224" height="38"/>
+              <rect class="nota__no nota__no--ativo" x="8" y="10" width="38" height="38"/>
+              <text class="nota__rotulo nota__rotulo--cheio" x="27" y="36" text-anchor="middle">1</text>
+              <text class="nota__rotulo nota__rotulo--forte" x="56" y="34">SE PROTEGER OU SE CURAR</text>
+              <path class="nota__linha" d="M120 52V60M114 55L120 61L126 55"/>
+              <rect class="nota__linha" x="8" y="64" width="224" height="38"/>
+              <rect class="nota__no" x="8" y="64" width="38" height="38"/>
+              <text class="nota__rotulo" x="27" y="90" text-anchor="middle">2</text>
+              <text class="nota__rotulo" x="56" y="88">CONTINUAR ATACANDO</text>
+            </svg>
+          </div>
         </div>
       </section>
 
@@ -147,6 +163,20 @@
           <p>Um exemplo conhecido apresentado na pesquisa é o <strong>AlphaGo</strong>, que combinou aprendizado de máquina e técnicas de busca para jogar Go.</p>
           <p>Também existem sistemas adaptativos capazes de alterar comportamentos ou desafios de acordo com as ações do jogador.</p>
           <p>Isso não significa necessariamente que todo inimigo esteja "aprendendo" como uma pessoa. Muitas vezes, o sistema está apenas utilizando regras e informações previamente definidas para responder de maneiras diferentes.</p>
+          <div class="ficha nota nota--cautela" role="group" aria-labelledby="nota-3-2" style="--ancora: 2">
+            <h3 class="nota__titulo" id="nota-3-2">Aprendendo como uma pessoa?</h3>
+            <p class="nota__texto">Muitas vezes, o sistema está apenas utilizando regras e informações previamente definidas para responder de maneiras diferentes</p>
+            <svg class="nota__arte" viewBox="0 0 240 104" aria-hidden="true" focusable="false">
+              <rect class="nota__no" x="8" y="8" width="96" height="28"/>
+              <text class="nota__rotulo" x="56" y="26" text-anchor="middle">REGRAS</text>
+              <rect class="nota__no" x="8" y="68" width="96" height="28"/>
+              <text class="nota__rotulo" x="56" y="86" text-anchor="middle">INFORMAÇÕES</text>
+              <path class="nota__ativa" d="M104 22H124V52H144M104 82H124V52"/>
+              <path class="nota__no nota__no--ativo" d="M152 30H232V74H146V36Z"/>
+              <text class="nota__rotulo nota__rotulo--cheio" x="190" y="49" text-anchor="middle">RESPOSTAS</text>
+              <text class="nota__rotulo nota__rotulo--cheio" x="190" y="64" text-anchor="middle">DIFERENTES</text>
+            </svg>
+          </div>
         </div>
       </section>
 
@@ -170,20 +200,43 @@
           <p>A IA tradicional, portanto, não desapareceu.</p>
           <p>Regras, máquinas de estados, pathfinding, Behavior Trees e outras técnicas continuam úteis porque oferecem controle e previsibilidade.</p>
           <p>Em muitos casos, tecnologias diferentes podem trabalhar juntas.</p>
+          <div class="ficha nota nota--ideia" role="group" aria-labelledby="nota-3-4" style="--ancora: 3; --vao: 3">
+            <h3 class="nota__titulo" id="nota-3-4">Novos desafios</h3>
+            <p class="nota__texto">O conteúdo gerado precisa continuar coerente com o mundo do jogo, respeitar suas regras e não prejudicar o equilíbrio da experiência</p>
+            <svg class="nota__arte" viewBox="0 0 240 120" aria-hidden="true" focusable="false">
+              <path class="nota__linha" d="M8 8H232V112H8Z" stroke-dasharray="6 5"/>
+              <path class="nota__ativa" d="M36 60H70M70 60L110 24M70 60L110 42M70 60L110 60M70 60L110 78M70 60L110 96"/>
+              <rect class="nota__no nota__no--ativo" x="20" y="48" width="24" height="24"/>
+              <rect class="nota__no" x="110" y="18" width="12" height="12"/><rect class="nota__no" x="110" y="36" width="12" height="12"/><rect class="nota__no" x="110" y="54" width="12" height="12"/><rect class="nota__no" x="110" y="72" width="12" height="12"/><rect class="nota__no" x="110" y="90" width="12" height="12"/>
+              <text class="nota__rotulo" x="140" y="64">MUNDO DO JOGO</text>
+            </svg>
+          </div>
+          <div class="ficha nota nota--conexao" role="group" aria-labelledby="nota-3-3" style="--ancora: 6">
+            <h3 class="nota__titulo" id="nota-3-3">Tecnologias que trabalham juntas</h3>
+            <p class="nota__texto">continuam úteis porque oferecem controle e previsibilidade</p>
+            <p class="nota__texto">tecnologias diferentes podem trabalhar juntas</p>
+            <svg class="nota__arte" viewBox="0 0 240 112" aria-hidden="true" focusable="false">
+              <path class="nota__ativa" d="M28 32Q44 6 60 32M76 32Q92 58 108 32M124 32Q140 6 156 32M172 32Q188 58 204 32"/>
+              <rect class="nota__no nota__no--ativo" x="12" y="24" width="16" height="16"/><rect class="nota__no" x="60" y="24" width="16" height="16"/><rect class="nota__no" x="108" y="24" width="16" height="16"/><rect class="nota__no" x="156" y="24" width="16" height="16"/><rect class="nota__no nota__no--ativo" x="204" y="24" width="16" height="16"/>
+              <path class="nota__linha" d="M12 70V80H220V70"/>
+              <text class="nota__rotulo" x="116" y="102" text-anchor="middle">CONTROLE E PREVISIBILIDADE</text>
+            </svg>
+          </div>
         </div>
       </section>
 
-      <section class="linha-tempo">
+      <section class="linha-tempo linha-tempo--percurso">
         <h2 class="linha-tempo__titulo">A evolução em uma sequência</h2>
         <p class="terminal-rotulo">SEQUÊNCIA</p>
-        <ol class="linha-tempo__lista linha-tempo__lista--etapas">
-          <li class="linha-tempo__item"><span class="linha-tempo__texto">Regras simples</span></li>
-          <li class="linha-tempo__item"><span class="linha-tempo__texto">Máquinas de estados</span></li>
-          <li class="linha-tempo__item"><span class="linha-tempo__texto">Pathfinding e navegação</span></li>
-          <li class="linha-tempo__item"><span class="linha-tempo__texto">Behavior Trees e Utility AI</span></li>
-          <li class="linha-tempo__item"><span class="linha-tempo__texto">Machine Learning</span></li>
-          <li class="linha-tempo__item"><span class="linha-tempo__texto">IA generativa</span></li>
+        <ol class="percurso">
+          <li class="etapa" style="--i: 0"><span class="etapa__nome">Regras simples</span></li>
+          <li class="etapa" style="--i: 1"><span class="etapa__nome">Máquinas de estados</span></li>
+          <li class="etapa" style="--i: 2"><span class="etapa__nome">Pathfinding e navegação</span></li>
+          <li class="etapa" style="--i: 3"><span class="etapa__nome">Behavior Trees e Utility AI</span></li>
+          <li class="etapa" style="--i: 4"><span class="etapa__nome">Machine Learning</span></li>
+          <li class="etapa" style="--i: 5"><span class="etapa__nome">IA generativa</span></li>
         </ol>
+        <p class="percurso__chave" aria-hidden="true">continuam úteis</p>
       </section>
 
       <section class="conexao">

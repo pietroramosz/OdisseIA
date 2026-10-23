@@ -1,0 +1,918 @@
+/* Módulos das estações (DEC-019): módulos editoriais (.nota), linha do tempo única (Estações 1 e 2),
+   percurso (Estação 3), palco da carta (Estação 4) e o movimento próprio de cada estação.
+   Carrega depois de estacao.css, que traz a capa, os capítulos, a grade e as telas de bloqueio. */
+
+/* ---------- Módulos editoriais (.nota) ----------
+   Complementam a leitura: destacam uma ideia, um marco, um conceito ou uma conexão que já está no
+   texto do capítulo. Uma gramática só (ficha, título, texto, arte) e uma forma por tipo de
+   conteúdo. Nunca substituem o capítulo nem aninham outro módulo. No celular entram no fluxo, logo
+   depois do parágrafo que destacam; no desktop ocupam a coluna lateral, alinhados a ele. */
+
+.nota {
+  --moldura: var(--cor-apagado);
+  --miolo: var(--cor-superficie);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-content: start;
+  gap: var(--espaco-3);
+  margin: var(--espaco-6) 0;
+  padding: var(--espaco-4);
+  color: var(--cor-texto-secundario);
+}
+
+.nota > * {
+  grid-column: 1 / -1;
+  min-width: 0;
+}
+
+.nota .nota__titulo {
+  grid-column: 1;
+  grid-row: 1;
+  margin: 0;
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 1.1875rem;
+  line-height: 1.25;
+  color: var(--cor-texto);
+  text-wrap: balance;
+}
+
+.nota .nota__selo {
+  grid-column: 2;
+  grid-row: 1;
+  margin: 0;
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  color: var(--cor-destaque);
+}
+
+.nota p.nota__texto {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--cor-texto-secundario);
+}
+
+/* Os módulos citam trechos do capítulo; o trecho abre com maiúscula. */
+.nota p.nota__texto::first-letter {
+  text-transform: uppercase;
+}
+
+.nota__arte {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Traços das ilustrações dos módulos: mesmas regras da arte de capa. */
+.nota__linha {
+  fill: none;
+  stroke: var(--cor-apagado);
+  stroke-width: 1.5;
+}
+
+.nota__ativa {
+  fill: none;
+  stroke: var(--cor-destaque);
+  stroke-width: 2;
+}
+
+.nota__cheio {
+  fill: var(--cor-destaque);
+}
+
+.nota__no {
+  fill: var(--cor-superficie-escura);
+  stroke: var(--cor-texto-secundario);
+  stroke-width: 1.5;
+}
+
+.nota__no--ativo {
+  fill: var(--cor-destaque);
+  stroke: var(--cor-destaque);
+}
+
+.nota__rotulo {
+  fill: var(--cor-texto-secundario);
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+}
+
+.nota__rotulo--forte {
+  fill: var(--cor-texto);
+}
+
+.nota__rotulo--cheio {
+  fill: var(--cor-sobre-destaque);
+  font-weight: 700;
+}
+
+/* Marco: o ano é o monumento do módulo. */
+.nota--marco .nota__selo {
+  align-self: end;
+  font-size: clamp(2.5rem, 7vw, 3.5rem);
+  line-height: 0.8;
+  letter-spacing: -0.04em;
+}
+
+.nota--marco {
+  --moldura: var(--cor-destaque);
+  --espessura: 2px;
+}
+
+/* Conexão: o diagrama vai primeiro, o ano ou o título assinam por baixo. */
+.nota--conexao {
+  --miolo: var(--cor-superficie-alta);
+}
+
+.nota--conexao .nota__arte {
+  grid-row: 1;
+  padding-bottom: var(--espaco-2);
+  border-bottom: 1px dashed var(--cor-apagado);
+}
+
+.nota--conexao .nota__titulo {
+  grid-row: 2;
+}
+
+.nota--conexao .nota__selo {
+  grid-row: 2;
+}
+
+/* Órbita: o assunto no centro e o que vem dele em volta. */
+.nota--orbita {
+  --moldura: var(--cor-destaque);
+  --miolo: var(--cor-fundo);
+  --espessura: 2px;
+  padding-top: var(--espaco-6);
+}
+
+.nota--orbita .nota__arte {
+  grid-row: 1;
+}
+
+.nota--orbita .nota__titulo {
+  grid-row: 2;
+  grid-column: 1 / -1;
+}
+
+/* Ideia-chave: a frase do capítulo em corpo grande. */
+.nota--ideia {
+  --moldura: var(--cor-destaque);
+  --miolo: var(--cor-superficie-alta);
+  --espessura: 2px;
+  padding: var(--espaco-6) var(--espaco-6) var(--espaco-4);
+}
+
+.nota--ideia .nota__titulo {
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cor-destaque);
+}
+
+.nota--ideia p.nota__texto {
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  font-size: 1.1875rem;
+  line-height: 1.35;
+  color: var(--cor-texto);
+}
+
+.nota--ideia .nota__arte {
+  max-width: 14rem;
+  margin: var(--espaco-2) auto 0;
+}
+
+/* Conceito: o termo técnico e a ilustração que o resume. */
+.nota--conceito {
+  --miolo: var(--cor-superficie-escura);
+}
+
+/* Cautela: o que não deve ser entendido ao pé da letra. */
+.nota--cautela {
+  --moldura: var(--cor-texto-atenuado);
+  --miolo: var(--cor-fundo);
+  --espessura: 2px;
+}
+
+.nota--cautela .nota__titulo::before {
+  content: "";
+  display: inline-block;
+  width: 1.5rem;
+  height: 0.75rem;
+  margin-right: var(--espaco-2);
+  background-color: var(--cor-destaque);
+  -webkit-mask: var(--textura-hachura) 0 0 / 10px 10px repeat;
+  mask: var(--textura-hachura) 0 0 / 10px 10px repeat;
+}
+
+/* Herança (Estação 4): o que o site herdou do X-BOT. */
+.nota--heranca {
+  --moldura: var(--cor-destaque);
+  --miolo: var(--cor-superficie-escura);
+  --espessura: 2px;
+  grid-template-columns: minmax(0, 1fr) 6rem;
+  align-items: start;
+}
+
+.nota--heranca .nota__engrenagem {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  width: 6rem;
+  height: auto;
+}
+
+.nota--heranca .nota__titulo {
+  grid-column: 1;
+}
+
+.nota--heranca p.nota__texto {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.nota--heranca .nota__fichas {
+  grid-row: 3;
+}
+
+.nota__fichas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espaco-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nota .nota__fichas li {
+  margin: 0;
+  padding: var(--espaco-1) var(--espaco-2);
+  background: var(--cor-superficie-alta);
+  clip-path: var(--recorte-minimo);
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cor-texto);
+}
+
+.nota .nota__fichas li::before {
+  content: none;
+}
+
+/* Status (Estação 4): o que ainda não foi confirmado, sem afirmar nada. */
+.nota--status {
+  --moldura: var(--cor-apagado);
+  --miolo: var(--cor-fundo);
+}
+
+.nota--status .nota__selo {
+  padding: var(--espaco-1) var(--espaco-2);
+  border: 2px solid currentColor;
+  color: var(--cor-texto-atenuado);
+  transform: rotate(-3deg);
+}
+
+.nota__lista {
+  display: grid;
+  gap: var(--espaco-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nota .nota__lista li {
+  display: grid;
+  grid-template-columns: auto minmax(2rem, 1fr);
+  align-items: center;
+  gap: var(--espaco-3);
+  margin: 0;
+  padding: 0;
+  line-height: 1.35;
+  color: var(--cor-texto);
+}
+
+.nota .nota__lista li::before {
+  content: none;
+}
+
+.nota .nota__lista li::after {
+  content: "";
+  height: 10px;
+  background-color: var(--cor-superficie-alta);
+  -webkit-mask: var(--textura-hachura) 0 0 / 10px 10px repeat;
+  mask: var(--textura-hachura) 0 0 / 10px 10px repeat;
+}
+
+/* ---------- Linha do tempo: uma espinha só, marcos agrupados por época ----------
+   Cada acontecimento aparece uma vez. No celular a espinha é vertical; no desktop, horizontal,
+   com as épocas lado a lado e hastes em alturas alternadas. */
+
+.rota-tempo {
+  position: relative;
+  display: grid;
+  gap: var(--espaco-8);
+  margin: var(--espaco-8) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* A espinha cinza e, por cima, o trecho percorrido em roxo. */
+.rota-tempo::before,
+.rota-tempo::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 5px;
+  width: 2px;
+  pointer-events: none;
+}
+
+.rota-tempo::before {
+  background: var(--cor-apagado);
+}
+
+.rota-tempo::after {
+  background: var(--cor-destaque);
+  transform-origin: top;
+}
+
+.epoca {
+  position: relative;
+  padding-left: var(--espaco-6);
+}
+
+/* Nó da época sobre a espinha (acima do traço roxo, que é pintado depois). */
+.epoca::before {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  top: 0.4rem;
+  width: 12px;
+  height: 12px;
+  background: var(--cor-fundo);
+  box-shadow: inset 0 0 0 2px var(--cor-destaque);
+}
+
+.epoca__nome {
+  margin: 0;
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.marcos {
+  display: grid;
+  gap: var(--espaco-3);
+  margin: var(--espaco-4) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.marco {
+  position: relative;
+  display: grid;
+  grid-template-columns: 4.75rem minmax(0, 1fr);
+  column-gap: var(--espaco-3);
+  align-items: baseline;
+}
+
+/* Nó do marco, na espinha. */
+.marco::before {
+  content: "";
+  position: absolute;
+  left: calc(-1 * var(--espaco-6) + 3px);
+  top: 0.55em;
+  width: 6px;
+  height: 6px;
+  background: var(--cor-destaque);
+}
+
+.marco__ano {
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1.2;
+  color: var(--cor-texto);
+}
+
+.marco__nome {
+  line-height: 1.35;
+  color: var(--cor-texto-secundario);
+}
+
+/* ---------- Percurso (Estação 3): as técnicas de IA como um caminho conectado ---------- */
+
+.percurso {
+  --no-max: 2.25rem;
+  display: grid;
+  margin: var(--espaco-8) 0 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: etapa;
+}
+
+.etapa {
+  --no: calc(1rem + var(--i) * 0.25rem);
+  position: relative;
+  counter-increment: etapa;
+  display: grid;
+  grid-template-columns: var(--no-max) minmax(0, 1fr);
+  column-gap: var(--espaco-3);
+  align-items: center;
+  padding-bottom: var(--espaco-6);
+}
+
+.etapa:last-child {
+  padding-bottom: 0;
+}
+
+.etapa::before {
+  content: "";
+  position: relative;
+  z-index: 1;
+  justify-self: center;
+  width: var(--no);
+  height: var(--no);
+  background: var(--cor-destaque);
+}
+
+.etapa:last-child::before {
+  box-shadow: 0 0 0 3px var(--cor-fundo), 0 0 0 5px var(--cor-destaque);
+}
+
+/* Trecho até a próxima etapa. */
+.etapa::after {
+  content: "";
+  position: absolute;
+  left: calc(var(--no-max) / 2 - 1px);
+  top: calc(var(--no-max) / 2);
+  bottom: calc(var(--no-max) / -2);
+  width: 2px;
+  background: var(--cor-destaque);
+}
+
+.etapa:last-child::after {
+  content: none;
+}
+
+.etapa__nome {
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 1.125rem;
+  line-height: 1.3;
+  color: var(--cor-texto);
+}
+
+.etapa__nome::before {
+  content: counter(etapa, decimal-leading-zero);
+  display: block;
+  margin-bottom: 2px;
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  color: var(--cor-destaque);
+}
+
+.percurso__chave {
+  display: none;
+}
+
+/* ---------- Estação 4: o palco da carta ---------- */
+
+[data-estacao="4"] .dossie-capa__numeral {
+  -webkit-text-stroke-color: var(--cor-destaque);
+}
+
+.palco-carta {
+  --carta-w: min(56%, 14rem);
+  grid-area: palco;
+  position: relative;
+  isolation: isolate;
+  margin: var(--espaco-8) calc(-1 * var(--gutter)) 0;
+  aspect-ratio: 1 / 1.08;
+  overflow: clip;
+  background: var(--cor-superficie-escura);
+}
+
+/* As linhas de foco partem do centro do palco, onde está a carta: é para ela que conduzem. */
+.palco-carta__foco {
+  position: absolute;
+  z-index: -3;
+  inset: 0;
+  background-color: var(--cor-destaque);
+  -webkit-mask: var(--textura-foco) 50% 50% / auto 150% no-repeat;
+  mask: var(--textura-foco) 50% 50% / auto 150% no-repeat;
+  pointer-events: none;
+}
+
+.palco-carta__reticula {
+  position: absolute;
+  z-index: -2;
+  left: 0;
+  bottom: 0;
+  width: 48%;
+  height: 40%;
+  opacity: 0.45;
+  clip-path: polygon(0 35%, 100% 100%, 0 100%);
+  pointer-events: none;
+}
+
+/* A pilha: duas cartas abertas em leque por baixo da carta do verso. */
+.palco-carta__pilha span {
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  left: 50%;
+  width: var(--carta-w);
+  aspect-ratio: 468 / 654;
+  background: var(--cor-fundo);
+  box-shadow: inset 0 0 0 2px var(--cor-apagado);
+  transform: translate(-50%, -50%) rotate(var(--giro));
+}
+
+.palco-carta__pilha span:nth-child(1) {
+  --giro: 8deg;
+}
+
+.palco-carta__pilha span:nth-child(2) {
+  --giro: 16deg;
+}
+
+.palco-carta__carta {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--carta-w);
+  padding: var(--espaco-1);
+  background: var(--cor-fundo);
+  box-shadow: inset 0 0 0 2px var(--cor-texto);
+  transform: translate(-50%, -50%) rotate(-5deg);
+}
+
+.palco-carta__carta img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Etiqueta de arquivo: o verso é um objeto catalogado. */
+.palco-carta__etiqueta {
+  position: absolute;
+  left: var(--espaco-4);
+  bottom: var(--espaco-4);
+  padding: var(--espaco-2) var(--espaco-3);
+  background: var(--cor-texto);
+  color: var(--cor-fundo);
+  clip-path: var(--recorte-minimo);
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+}
+
+/* ---------- 600px+ ---------- */
+
+@media (min-width: 600px) {
+  /* No tablet o módulo não estica até a largura da página. */
+  .nota {
+    max-width: 30rem;
+    margin: var(--espaco-8) 0;
+  }
+
+  .palco-carta {
+    --carta-w: min(44%, 15rem);
+    margin-right: 0;
+    margin-left: 0;
+    aspect-ratio: 1 / 0.9;
+    clip-path: var(--recorte);
+  }
+}
+
+/* ---------- 900px+: coluna lateral, espinha horizontal e escada do percurso ---------- */
+
+@media (min-width: 900px) {
+  .palco-carta {
+    --carta-w: min(52%, 17rem);
+    margin: 0;
+    aspect-ratio: 1 / 1;
+    align-self: stretch;
+  }
+
+  .capitulo__corpo > .nota,
+  .briefing__corpo > .nota {
+    grid-column: 2;
+    /* Muitas linhas (quase todas vazias): a altura que o módulo pede se reparte entre elas e não
+       abre vãos entre os parágrafos. */
+    grid-row: var(--ancora, 1) / span var(--vao, 12);
+    align-self: start;
+    width: 100%;
+    max-width: 21rem;
+    margin: 0;
+  }
+
+  /* Linha do tempo: espinha horizontal, épocas lado a lado, hastes em alturas alternadas. */
+  .linha-tempo > .rota-tempo,
+  .linha-tempo > .percurso {
+    grid-column: 2 / -1;
+  }
+
+  .rota-tempo {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0 var(--espaco-6);
+    margin-top: var(--espaco-6);
+  }
+
+  .rota-tempo::before,
+  .rota-tempo::after {
+    top: 0;
+    right: 0;
+    bottom: auto;
+    left: 0;
+    width: auto;
+    height: 2px;
+  }
+
+  .rota-tempo::after {
+    transform-origin: left;
+  }
+
+  .epoca {
+    --haste: 2.75rem;
+    padding: var(--haste) 0 0;
+  }
+
+  .epoca:nth-child(even) {
+    --haste: 5.75rem;
+  }
+
+  .epoca::before {
+    top: -5px;
+    left: -5px;
+  }
+
+  .epoca::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2px;
+    height: var(--haste);
+    background: var(--cor-apagado);
+  }
+
+  .epoca__nome {
+    font-size: clamp(1.375rem, 2vw, 1.875rem);
+  }
+
+  .marcos {
+    gap: var(--espaco-4);
+  }
+
+  .marco {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 2px;
+    padding-left: var(--espaco-4);
+    border-left: 2px solid var(--cor-superficie-alta);
+  }
+
+  .marco::before {
+    left: -5px;
+    top: 0.6rem;
+  }
+
+  .marco__ano {
+    font-size: 1.5rem;
+  }
+
+  /* Percurso: uma escada ascendente; cada trecho sai da etapa, avança e sobe até a próxima. */
+  .percurso {
+    --degrau: 2.5rem;
+    --subida: calc(var(--degrau) - 0.125rem);
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    column-gap: var(--espaco-4);
+    align-items: start;
+    margin-top: var(--espaco-6);
+  }
+
+  .etapa {
+    --no-prox: calc(1rem + (var(--i) + 1) * 0.25rem);
+    display: block;
+    margin-top: calc((5 - var(--i)) * var(--degrau));
+    padding: 0;
+  }
+
+  .etapa::before {
+    display: block;
+    justify-self: start;
+    margin-bottom: var(--espaco-3);
+  }
+
+  /* O trecho sobe a partir do centro do nó e entra na etapa seguinte pela esquerda, por espaço
+     livre: nunca passa sobre o numeral ou o nome da etapa seguinte. */
+  .etapa::after {
+    top: calc(var(--no) / 2 - var(--subida) - 1px);
+    right: auto;
+    bottom: auto;
+    left: calc(var(--no) / 2 - 1px);
+    width: calc(100% + var(--espaco-4) - var(--no) / 2 + 1px);
+    height: var(--subida);
+    background: none;
+    border-top: 2px solid var(--cor-destaque);
+    border-left: 2px solid var(--cor-destaque);
+  }
+
+  .percurso__chave {
+    display: block;
+    grid-column: 2 / -1;
+    width: calc((100% - 5 * var(--espaco-4)) / 6 * 4 + 3 * var(--espaco-4));
+    margin: var(--espaco-4) 0 0;
+    padding: var(--espaco-1) var(--espaco-3) var(--espaco-2);
+    border: 2px solid var(--cor-apagado);
+    border-top: none;
+    font-family: var(--fonte-titulo);
+    font-weight: 600;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-align: center;
+    text-transform: uppercase;
+    color: var(--cor-texto-atenuado);
+  }
+}
+
+/* ---------- Movimento ----------
+   Um gesto por estação, sempre partindo de um estado já visível e terminando no estado estático:
+   S1 acende a linha do tempo conforme a rolagem; S2 traça a rede de conexões da capa; S3 liga as
+   etapas do percurso; S4 revela numeral, foco e carta. Os nomes dos keyframes levam o prefixo da
+   estação. Sem movimento (sistema ou painel de acessibilidade), nada disso roda: o estado final é
+   o estado padrão do CSS. */
+
+@keyframes tempo-tracar {
+  from { transform: scaleY(0); }
+  to { transform: none; }
+}
+
+@keyframes tempo-tracar-h {
+  from { transform: scaleX(0); }
+  to { transform: none; }
+}
+
+@keyframes tempo-acender {
+  from { background-color: var(--cor-apagado); transform: scale(0.5); }
+  to { background-color: var(--cor-destaque); transform: none; }
+}
+
+@keyframes rede-tracar {
+  from { stroke-dasharray: 1; stroke-dashoffset: 1; }
+  to { stroke-dasharray: 1; stroke-dashoffset: 0; }
+}
+
+@keyframes rede-surgir {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes rede-ativar {
+  from { transform: scale(0); }
+  to { transform: none; }
+}
+
+@keyframes percurso-ligar {
+  from { clip-path: inset(0 0 100% 0); }
+  to { clip-path: inset(0); }
+}
+
+@keyframes percurso-ligar-h {
+  from { clip-path: inset(100% 100% 0 0); }
+  to { clip-path: inset(0); }
+}
+
+@keyframes percurso-acender {
+  from { background-color: var(--cor-apagado); transform: scale(0.5); }
+  to { background-color: var(--cor-destaque); transform: none; }
+}
+
+@keyframes palco-numeral {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0); }
+}
+
+@keyframes palco-irromper {
+  from { opacity: 0; transform: scale(0.55); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes palco-pousar {
+  from { opacity: 0; transform: translate(-50%, -68%) rotate(-16deg) scale(1.1); }
+  55% { opacity: 1; }
+  to { opacity: 1; transform: translate(-50%, -50%) rotate(-5deg); }
+}
+
+@keyframes palco-abrir {
+  from { transform: translate(-50%, -50%) rotate(-5deg); }
+  to { transform: translate(-50%, -50%) rotate(var(--giro)); }
+}
+
+@keyframes palco-etiqueta {
+  from { opacity: 0; transform: translateX(-0.75rem); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Estação 2: a rede da capa é traçada, depois os nós ativos acendem um a um. */
+  [data-estacao="2"] .arte__ligacao {
+    animation: rede-tracar 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.1s backwards;
+  }
+
+  [data-estacao="2"] .arte__ligacao--ativa {
+    animation-duration: 0.9s;
+    animation-delay: 0.9s;
+  }
+
+  [data-estacao="2"] .arte__no:not(.arte__no--ativo) {
+    animation: rede-surgir 0.5s ease-out 0.3s backwards;
+  }
+
+  [data-estacao="2"] .arte__no--ativo {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: rede-ativar 0.4s cubic-bezier(0.16, 1, 0.3, 1) calc(1.5s + var(--k, 0) * 0.14s) backwards;
+  }
+
+  [data-estacao="2"] .arte__sinal {
+    animation: rede-surgir 0.5s ease-out 2.1s backwards;
+  }
+
+  /* Estação 4: numeral, foco, carta e leque entram em sequência, como o quadro de uma página de mangá. */
+  [data-estacao="4"] .dossie-capa__numeral {
+    animation: palco-numeral 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+  }
+
+  .palco-carta__foco {
+    animation: palco-irromper 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.15s backwards;
+  }
+
+  .palco-carta__carta {
+    animation: palco-pousar 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.45s backwards;
+  }
+
+  .palco-carta__pilha span {
+    animation: palco-abrir 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.85s backwards;
+  }
+
+  .palco-carta__etiqueta {
+    animation: palco-etiqueta 0.4s ease-out 1.1s backwards;
+  }
+}
+
+/* Estações 1 e 3: o movimento acompanha a rolagem. Sem suporte, a página fica estática e completa. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    [data-estacao="1"] .rota-tempo::after {
+      animation: tempo-tracar linear both;
+      animation-timeline: view();
+      animation-range: entry 5% cover 60%;
+    }
+
+    [data-estacao="1"] .marco::before {
+      animation: tempo-acender linear both;
+      animation-timeline: view();
+      animation-range: entry 55% entry 100%;
+    }
+
+    [data-estacao="3"] .etapa::after {
+      animation: percurso-ligar linear both;
+      animation-timeline: view();
+      animation-range: entry 40% entry 100%;
+    }
+
+    [data-estacao="3"] .etapa::before {
+      animation: percurso-acender linear both;
+      animation-timeline: view();
+      animation-range: entry 35% entry 85%;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) and (min-width: 900px) {
+    [data-estacao="1"] .rota-tempo::after {
+      animation-name: tempo-tracar-h;
+    }
+
+    [data-estacao="3"] .etapa::after {
+      animation-name: percurso-ligar-h;
+    }
+  }
+}

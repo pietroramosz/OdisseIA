@@ -53,7 +53,7 @@ A experiência não é "um site sobre a feira" nem "um jogo com um site de apoio
 ## Evidence on Hand
 
 - Documentação viva do projeto é fonte de verdade e deve ser tratada como tal: `README.md`, `PROJECT.md`, `DECISIONS.md`, `DESIGN.md` (sistema de design; substitui o antigo `docs/ESTILO.md`), `AI-WORKFLOW.md`, `DEVLOG.md`.
-- Decisões numeradas (`DEC-001` a `DEC-018`) registram o histórico de escolhas de produto, arquitetura e visual — qualquer mudança que contradiga uma DEC existente exige decisão explícita, não apenas uma preferência de implementação.
+- Decisões numeradas (`DEC-001` a `DEC-019`) registram o histórico de escolhas de produto, arquitetura e visual — qualquer mudança que contradiga uma DEC existente exige decisão explícita, não apenas uma preferência de implementação.
 - Nenhuma mecânica, carta, regra ou dado do X-BOT deve ser inventado ou documentado pelo site além do que realmente existir na versão final do jogo (DEC-007).
 
 ## Product Principles

@@ -93,7 +93,7 @@ components:
 
 O OdisseIA é um arquivo de missão aberto página a página. Um traçado esquemático liga as quatro estações ao X-BOT. Na abertura ele é a rota inteira; no Hub, a posição do visitante; nas estações, um trilho na margem; na Conclusão, a rota fechada com quatro carimbos. Sobre esse esqueleto técnico, a energia de mangá do X-BOT (linhas de velocidade, retícula, silhuetas, carimbos) irrompe nos pontos de conquista e aumenta conforme a jornada avança: um pouco na abertura, uma faixa de movimento na próxima estação, uma explosão na Estação 4, a densidade máxima na Conclusão.
 
-Cada página tem composição própria: palavra-marca monumental na abertura, rota no Hub, um diagrama do assunto em cada estação, o placar 4/4 na Conclusão. Todas falam a mesma gramática: numerais gigantes vazados, linhas esquemáticas de nós quadrados, recorte diagonal e um único roxo.
+Cada página tem composição própria: palavra-marca monumental na abertura, rota no Hub, em cada estação uma capa com motivo próprio, um percurso do assunto e módulos editoriais, o placar 4/4 na Conclusão. Todas falam a mesma gramática: numerais gigantes vazados, linhas esquemáticas de nós quadrados, recorte diagonal e um único roxo.
 
 A direção está registrada como contrato em `.impeccable/surfaces/index-html.md` e como decisão em DEC-018.
 
@@ -121,6 +121,9 @@ Fundo quase preto, planos de grafite, branco-sinal para leitura e um único acen
 - **Signal White Muted** (`#9d9daa`): numerais vazados, estado bloqueado, legendas.
 - **Dormant Gray** (`#6f6f7d`): filetes, trilho não percorrido, traços de diagrama. Nunca é usado para texto.
 - **Grid Line** (`rgba(255,255,255,0.04)`): grade fixa de 32px atrás da página. As colunas de leitura têm fundo sólido e a escondem.
+
+### Temas
+O tema escuro é o padrão e a identidade. O tema claro tem paleta própria (fundo `#f5f3f8`, superfícies brancas, texto `#17151c`) e usa um tom mais fundo da mesma matiz do roxo (`#8f26c7`), porque o `#cd5efa` tem só 3,2:1 sobre branco. Texto sobre roxo usa `--cor-sobre-destaque`, que muda junto. O alto contraste existe nos dois temas. As escolhas (tema, tamanho de texto, contraste, movimento) vêm do painel de acessibilidade e ficam em `odisseia:acessibilidade`.
 
 ### Named Rules
 **The State-and-Illustration Ink Rule.** O roxo tem dois papéis: sinal de estado (validada, próxima, progresso) e tinta de ilustração (linhas de velocidade, retícula, rota percorrida). Nunca é cor de texto corrido nem preenchimento de painel. Substitui a antiga "Rare Ink Rule" (DEC-018).
@@ -170,22 +173,24 @@ Fundo quase preto, planos de grafite, branco-sinal para leitura e um único acen
 Mobile-first: cada página foi composta primeiro a 390px e recomposta, não esticada, a partir de 900px. Nenhuma página rola na horizontal entre 360 e 430px.
 
 - **Espaçamento:** escala fechada `--espaco-1` a `--espaco-24` (4, 8, 12, 16, 24, 32, 48, 64, 96px).
-- **Palco:** `--palco: 75rem` (1200px) de largura máxima, com `--gutter` de 16px no celular e 32px a partir de 900px.
+- **Palco:** `--palco: 75rem` (1200px) de largura máxima, com `--gutter` de 16px no celular e 32px a partir de 900px. Nas estações o palco é de 84rem, porque a coluna lateral dos módulos precisa de largura útil.
 - **Breakpoints:**
   - 480px: os destinos do Hub empilham abaixo dessa largura;
   - 600px: respiro e numerais maiores;
   - 900px: recomposição de todas as páginas;
-  - 1100px: trilho da rota nas estações.
+  - 1100px: margem de 9rem e coluna lateral maior nas estações;
+  - 1360px: trilho da rota nas estações.
 - **Abertura (≥900px):** palavra-marca na largura toda; proposta, frase das estações e CTA em 7 colunas à esquerda; rota nas 5 colunas da direita. No celular, o CTA fica logo abaixo da proposta, no primeiro terço da tela.
 - **Hub (≥900px):** rota horizontal de quatro paradas, com o trilho ligando os nós e os cards abaixo deles. Substitui a grade 2×2 (DEC-018 substitui DEC-015). No celular, trilho vertical.
-- **Estações (≥900px):** cada seção é uma grade com margem de 11rem, coluna de leitura de até 42rem e coluna livre (`1fr`) onde figuras e escala do tempo avançam. A partir de 1100px, a página ganha uma coluna de 9rem com o trilho da rota fixo (sticky). Substitui o dossiê de 832px (DEC-018 substitui DEC-016).
+- **Estações (≥900px):** capítulos e briefing são grades de margem (rótulo, 7rem; 9rem a partir de 1100px), coluna de leitura (até 38rem) e coluna lateral (13,5 a 21rem). Os módulos (`.nota`) ficam na coluna lateral, à altura do parágrafo que destacam; figuras, linha do tempo e percurso usam a largura das duas últimas colunas. A coluna de leitura nunca é alargada para preencher a tela. A partir de 1360px, a página ganha uma coluna de 9rem com o trilho da rota fixo (sticky). Substitui o dossiê de 832px (DEC-018 substitui DEC-016) e a terceira coluna vazia (DEC-019).
+- **Capa das estações:** numeral, texto e arte são áreas de uma grade (`grid-template-areas`), nunca posições por deslocamento. O numeral é uma linha da grade sobre o título, na mesma borda esquerda.
 - **Composições por estação** (via `[data-estacao]`):
-  - 1: capa com o texto à esquerda e a quadra de Pong à direita;
-  - 2: rede em faixa larga abaixo do título;
-  - 3: diagrama à esquerda e texto à direita;
-  - 4: explosão de foco atrás do numeral e a carta no briefing.
+  - 1: texto à esquerda, quadra de Pong à direita; linha do tempo horizontal de quatro épocas;
+  - 2: rede de conexões em faixa larga abaixo do título; linha do tempo horizontal de quatro épocas;
+  - 3: árvore de decisão à esquerda, numeral e título à direita; percurso em escada ascendente;
+  - 4: numeral e título à esquerda, palco da carta à direita (a carta com as linhas de foco saindo dela). No celular, o palco vem depois do título, de borda a borda.
 - **Conclusão (≥900px):** herói em duas metades (título e placar), rota fechada horizontal, bloco do X-BOT com carta e texto lado a lado.
-- **Ordem do DOM:** nada usa `order`. Na abertura, o CTA vem antes da rota também no DOM.
+- **Ordem do DOM:** nada usa `order`. Na abertura, o CTA vem antes da rota também no DOM. Nas estações, cada módulo vem logo depois do parágrafo que destaca; no desktop a posição na grade (`--ancora`) o põe ao lado dele, sem mudar a ordem de leitura.
 
 ## Elevation & Depth
 
@@ -213,6 +218,15 @@ Um motivo de contêiner, o **recorte diagonal** (`--recorte` 12px, `--recorte-pe
 - **Carimbo** (desenhado em cada página: estado do cartão no Hub, Conclusão, validação): moldura dupla em aresta dura, Chakra 700 espaçado, levemente girado. Marca o que foi conquistado (VALIDADA, JORNADA CONCLUÍDA, SUCESSO). No Hub, o carimbo é o próprio rótulo de estado, visível e lido, sem cópia escondida.
 - **Ficha** (`.ficha`): o cartão do sistema, em três camadas. O elemento tem a cor do miolo (`--miolo`), então o texto continua legível se as camadas falharem; `::before` pinta a moldura (`--moldura`) e `::after` repinta o miolo recuado em `--espessura`, para a moldura seguir também o corte diagonal. Usada nos cartões do Hub e nos passos de "Como funciona" da abertura. Os dois pseudo-elementos ficam reservados para a ficha; detalhes extras vêm de elementos próprios (ex.: `.cartao__faixa`).
 - **Pular para o conteúdo** (`.pular`): primeiro link de toda página, só aparece com foco e leva ao `<main id="conteudo">`.
+- **Módulo editorial** (`.nota`, sempre uma `.ficha`): complementa o capítulo e nunca o substitui. Título (h3), selo opcional (ano ou estado), um ou dois trechos curtos tirados literalmente do capítulo e uma ilustração SVG. Uma gramática, uma forma por tipo de conteúdo:
+  - `--marco`: o ano é o monumento do módulo, moldura roxa;
+  - `--conexao`: o diagrama vai primeiro (A liga a B);
+  - `--orbita`: o assunto no centro, o que vem dele em volta;
+  - `--ideia`: a frase do capítulo em corpo grande, miolo elevado;
+  - `--conceito`: o termo técnico e a ilustração que o resume;
+  - `--cautela`: o que não deve ser entendido ao pé da letra (Estação 3);
+  - `--heranca` e `--status` (Estação 4): o que o site herdou do X-BOT e o que ainda não foi confirmado.
+  - Regras: só fatos que já estão na página (o teste confere trecho a trecho); no máximo um módulo por trecho do capítulo; sem módulo dentro de módulo; sem repetir o parágrafo vizinho palavra por palavra, só condensar.
 - **Esquema** (`.esquema__*`): linhas, nós e textos dos diagramas SVG.
 - **Seta** (`.seta`, `.seta--voltar`): ícone desenhado em SVG por máscara, que herda a cor do texto. Substitui os glifos ← e →.
 - **Cruz de registro** (`.registro`): marca de impressão no canto da capa.
@@ -252,25 +266,25 @@ Um motivo de contêiner, o **recorte diagonal** (`--recorte` 12px, `--recorte-pe
   - X-BOT sem `gameUrl` válida: marcador vazado e "AGUARDANDO LIBERAÇÃO", sem botão.
 
 ### Estação — dossiê
-- **Capa** (`.dossie-capa`): numeral vazado gigante, título, "ESTAÇÃO 0N / 04", ficha técnica (`.dossie-ficha`) só com fatos do próprio conteúdo e ilustração SVG do assunto (`.dossie-capa__arte`).
+- **Capa** (`.dossie-capa`): numeral vazado gigante, título, "ESTAÇÃO 0N / 04", ficha técnica (`.dossie-ficha`) só com fatos do próprio conteúdo e ilustração SVG do assunto (`.dossie-capa__arte`). O título leva um contorno da cor do fundo (`paint-order: stroke fill`) que corta as linhas do numeral atrás das letras.
 - **Capítulo:** numeral vazado à esquerda do título (na margem a partir de 900px), corpo com a frase de abertura em destaque e marcadores quadrados roxos nas listas.
 - **Figuras** (`.figura`): diagramas que desenham o próprio conteúdo, com legenda (`figcaption`):
   - a máquina de estados das quatro regras da Estação 3;
   - a rota de pathfinding, marcada como ilustração.
-- **Escala do tempo** (`.escala`):
-  - cada marco fica na posição proporcional ao ano (`--ano`, `--inicio`, `--fim`);
-  - faixas de época abaixo do eixo;
-  - intervalos como barra (2024–2026).
-- **Lista de marcos:** ano como numeral e rótulo de época no primeiro marco de cada época (`data-era`).
-- **Sequência da Estação 3:** escada de seis degraus; o último degrau tem contorno roxo.
-- **Trilho da rota** (`.dossie-rota`, a partir de 1100px): paradas anteriores cheias, parada atual grande, futuras tracejadas, terminando em CONCLUSÃO. É decorativo (`aria-hidden`) e só aparece no conteúdo desbloqueado.
+- **Linha do tempo** (`.rota-tempo`, Estações 1 e 2): uma espinha só, e cada acontecimento aparece uma vez.
+  - Os marcos são agrupados por época (`.epoca`, com h3); cada marco é ano + nome, sem card.
+  - Desktop: espinha horizontal, épocas lado a lado com hastes em alturas alternadas.
+  - Celular: espinha vertical conectada, nós quadrados em cada época e marco.
+  - A escala proporcional por ano e a lista repetida foram removidas (DEC-019).
+- **Percurso** (`.percurso`, Estação 3): as seis etapas como um caminho. Desktop: escada ascendente, nós que crescem e trechos que sobem de uma etapa e entram na seguinte pela esquerda; o último nó tem anel roxo e uma chave "continuam úteis" cobre as quatro primeiras. Celular: linha vertical. As etapas não são caixas.
+- **Trilho da rota** (`.dossie-rota`, a partir de 1360px): paradas anteriores cheias, parada atual grande, futuras tracejadas, terminando em CONCLUSÃO. É decorativo (`aria-hidden`) e só aparece no conteúdo desbloqueado.
 - **Bloqueio:**
   - próxima: painel elevado com faixa de movimento, passos numerados e "Seu progresso";
   - futura: painel hachurado com link para a próxima estação válida.
 
 ### X-BOT Card Image
-O verso da carta (`verso-carta.png`) continua só na Estação 4 e na Conclusão, entre 200 e 280px de largura, com `loading="lazy"` e dimensões declaradas.
-- **Estação 4** (`.carta-moldura`): palco escuro com linhas de foco roxas e retícula no canto. A carta fica inclinada (-5°) em moldura branca de 2px, com a legenda VERSO DA CARTA. Sem drop-shadow.
+O verso da carta (`verso-carta.png`) continua só na Estação 4 e na Conclusão, entre 200 e 280px de largura e com dimensões declaradas. Na Estação 4 ele está na capa, acima da dobra, então carrega sem `loading="lazy"`; na Conclusão continua lazy.
+- **Estação 4** (`.palco-carta`): a carta é um artefato num palco. O verso inclinado (-5°) em moldura branca de 2px, duas cartas abertas em leque por baixo, as linhas de foco saindo do centro da carta (é para ela que conduzem), retícula no canto e uma etiqueta de arquivo "VERSO DA CARTA". Sem drop-shadow. Desktop: palco quadrado na coluna direita; celular: palco de borda a borda depois do título.
 - **Conclusão** (`.final-xbot`): palco com linhas de foco, carta inclinada (-4°) com drop-shadow roxo e moldura roxa no bloco. É o único lugar com sombra suave.
 
 ### Conclusão
@@ -287,12 +301,18 @@ O resultado é um carimbo depois do título: roxo para sucesso e "já validada",
 ## Motion
 O movimento é um gesto por página, sempre partindo de um estado já visível:
 - na abertura, a rota se desenha e as paradas entram;
+- Estação 1: a linha do tempo acende conforme a rolagem (a espinha se traça e cada marco vira roxo ao passar);
+- Estação 2: a rede da capa é traçada e os nós ativos acendem um a um;
+- Estação 3: as etapas do percurso se ligam em sequência, conforme a rolagem;
+- Estação 4: numeral, linhas de foco, carta e leque entram em sequência, como o quadro de uma página de mangá;
 - na Conclusão, a explosão irrompe e os carimbos batem em sequência;
 - na validação, o carimbo bate.
 
+Os gestos das Estações 1 e 3 usam `animation-timeline: view()` dentro de `@supports`, sem JavaScript; sem suporte, a página fica estática e completa. Os keyframes levam o prefixo da estação (`tempo-`, `rede-`, `percurso-`, `palco-`), e nenhuma estação usa o gesto de outra.
+
 Fora desses gestos, só respostas de interação: cartões e botões que sobem no hover e descem no toque, setas que avançam (0,15s).
 
-Easing `cubic-bezier(0.22, 1, 0.36, 1)`, sem curvas com ricochete. Com `prefers-reduced-motion: reduce`, todas as animações e deslocamentos desligam: a rota já aparece desenhada e os carimbos já batidos. Ficam só trocas de cor, borda e opacidade em 0,12s, para o hover e o foco continuarem perceptíveis.
+Easing `cubic-bezier(0.22, 1, 0.36, 1)`, sem curvas com ricochete. Com `prefers-reduced-motion: reduce` ou com "Reduzir animações" no painel de acessibilidade, todas as animações e deslocamentos desligam: a rota já aparece desenhada, a linha do tempo acesa, o percurso ligado e os carimbos já batidos. Ficam só trocas de cor, borda e opacidade em 0,12s, para o hover e o foco continuarem perceptíveis.
 
 ## Do's and Don'ts
 
@@ -307,6 +327,9 @@ Easing `cubic-bezier(0.22, 1, 0.36, 1)`, sem curvas com ricochete. Com `prefers-
 ### Don't:
 - **Don't** pôr rótulo, kicker ou selo acima de título.
 - **Don't** usar glifos Unicode (←, →, ✓) ou emoji como ícone. Use a `.seta` ou um SVG desenhado.
+- **Don't** transformar capítulos em cards, aninhar módulos nem pôr o mesmo módulo oito vezes: o card complementa o capítulo e muda de forma com o conteúdo.
+- **Don't** posicionar numeral ou arte da capa por `calc()` e deslocamentos: use as áreas da grade.
+- **Don't** pôr linhas de foco que não partam de um objeto real da composição (a carta, o numeral).
 - **Don't** usar glow difuso, gradiente decorativo, glassmorphism, `border-radius` ou uma segunda linguagem de contêiner.
 - **Don't** pintar texto corrido de roxo nem usar roxo como fundo de painel.
 - **Don't** mostrar a arte da carta fora da Estação 4 e da Conclusão. Na abertura e no Hub, só a silhueta.

@@ -6,6 +6,7 @@
   <title>OdisseIA — Estação 4</title>
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/paginas/estacao.css">
+  <link rel="stylesheet" href="assets/css/paginas/estacao-modulos.css">
   <script src="assets/js/acessibilidade.js"></script>
 </head>
 <body class="pagina-estacao" data-estacao="4">
@@ -34,23 +35,34 @@
             <div class="dossie-ficha__item"><dt>Próxima etapa</dt><dd>Conclusão</dd></div>
           </dl>
         </div>
+        <!-- Palco da carta: as linhas de foco partem do centro da carta; o verso é estático, em tamanho de carta. -->
+        <figure class="palco-carta">
+          <div class="palco-carta__foco textura-foco" aria-hidden="true"></div>
+          <div class="palco-carta__reticula textura-reticula" aria-hidden="true"></div>
+          <div class="palco-carta__pilha" aria-hidden="true"><span></span><span></span></div>
+          <div class="palco-carta__carta">
+            <img src="assets/img/verso-carta.png" alt="Verso de uma carta do X-BOT: duas engrenagens cinza sobre fundo roxo, com o nome X-BOT escrito duas vezes." width="220" height="307">
+          </div>
+          <figcaption class="palco-carta__etiqueta">VERSO DA CARTA</figcaption>
+        </figure>
       </header>
 
-      <!-- Identidade: o verso da carta é estático, em tamanho de carta (ESTILO.md). -->
       <section class="briefing">
         <h2 class="briefing__titulo">Um jogo de cartas feito para o OdisseIA</h2>
         <p class="terminal-rotulo">IDENTIDADE</p>
         <div class="briefing__corpo">
-          <figure class="carta-moldura">
-            <div class="carta-moldura__foco textura-foco" aria-hidden="true"></div>
-            <div class="carta-moldura__tom textura-reticula" aria-hidden="true"></div>
-            <div class="carta-moldura__arte">
-              <img src="assets/img/verso-carta.png" alt="Verso de uma carta do X-BOT: duas engrenagens cinza sobre fundo roxo, com o nome X-BOT escrito duas vezes." width="220" height="307" loading="lazy">
-            </div>
-            <figcaption class="carta-moldura__legenda">VERSO DA CARTA</figcaption>
-          </figure>
           <p>O X-BOT é um jogo digital de cartas, com robôs e estética cyberpunk, desenvolvido por outro grupo do OdisseIA para esta jornada.</p>
           <p>O cinza, o roxo e os cantos cortados que acompanham você desde o Hub vêm do X-BOT. As engrenagens que marcam o seu progresso saíram da mesma arte deste verso de carta.</p>
+          <div class="ficha nota nota--heranca" role="group" aria-labelledby="nota-4-1" style="--ancora: 1">
+            <h3 class="nota__titulo" id="nota-4-1">Do X-BOT para o site</h3>
+            <img class="nota__engrenagem" src="assets/img/engrenagem-acesa.png" alt="" width="256" height="256">
+            <p class="nota__texto">saíram da mesma arte deste verso de carta</p>
+            <ul class="nota__fichas" aria-label="O que o site herdou">
+              <li>cinza</li>
+              <li>roxo</li>
+              <li>cantos cortados</li>
+            </ul>
+          </div>
         </div>
       </section>
 
@@ -61,6 +73,19 @@
           <p>O OdisseIA percorre a história dos jogos e o uso da inteligência artificial neles. O X-BOT fecha esse percurso: além de falar sobre jogos, o projeto também desenvolveu um.</p>
           <p>Na Estação 3, você viu que, em jogos de cartas, uma inteligência artificial pode analisar jogadas, escolher cartas e controlar um adversário. O X-BOT é a ponte entre esses conceitos e um jogo de verdade.</p>
           <p>Isso não significa que todas as técnicas apresentadas na Estação 3 estejam no X-BOT. O que o jogo realmente usa depende do que for concluído pelo grupo responsável, e só aparece aqui depois de confirmado.</p>
+          <div class="ficha nota nota--conexao" role="group" aria-labelledby="nota-4-2" style="--ancora: 2">
+            <h3 class="nota__titulo" id="nota-4-2">Da Estação 3 ao jogo</h3>
+            <p class="nota__texto">uma inteligência artificial pode analisar jogadas, escolher cartas e controlar um adversário</p>
+            <p class="nota__texto">O X-BOT é a ponte entre esses conceitos e um jogo de verdade</p>
+            <p class="nota__texto">Isso não significa que todas as técnicas apresentadas na Estação 3 estejam no X-BOT</p>
+            <svg class="nota__arte" viewBox="0 0 240 76" aria-hidden="true" focusable="false">
+              <path class="nota__no" d="M8 24H92V54H8Z"/>
+              <text class="nota__rotulo" x="50" y="43" text-anchor="middle">ESTAÇÃO 03</text>
+              <path class="nota__ativa" d="M92 28Q124 -2 156 28"/>
+              <path class="nota__no nota__no--ativo" d="M156 24H232V54H156Z"/>
+              <text class="nota__rotulo nota__rotulo--cheio" x="194" y="43" text-anchor="middle">X-BOT</text>
+            </svg>
+          </div>
         </div>
       </section>
 
@@ -77,10 +102,11 @@
             duração da partida e instruções básicas. Não afirmar Minimax, MCTS, Machine
             Learning nem IA generativa sem confirmação no código ou pelo grupo.
           -->
-          <div class="bloqueio bloqueio--futura">
-            <p class="bloqueio__estado">EM VALIDAÇÃO</p>
-            <p class="bloqueio__texto">Conteúdo em validação com o grupo responsável pelo X-BOT.</p>
-            <ul>
+          <div class="ficha nota nota--status" role="group" aria-labelledby="nota-4-3" data-origem="conteudo-original" style="--ancora: 1">
+            <h3 class="nota__titulo" id="nota-4-3">Ainda não confirmado</h3>
+            <p class="nota__selo">EM VALIDAÇÃO</p>
+            <p class="nota__texto">Conteúdo em validação com o grupo responsável pelo X-BOT.</p>
+            <ul class="nota__lista">
               <li>Como funciona uma partida</li>
               <li>As cartas</li>
               <li>O papel da inteligência artificial no jogo</li>

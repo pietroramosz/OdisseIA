@@ -6,6 +6,7 @@
   <title>OdisseIA — Estação 2</title>
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/paginas/estacao.css">
+  <link rel="stylesheet" href="assets/css/paginas/estacao-modulos.css">
   <script src="assets/js/acessibilidade.js"></script>
 </head>
 <body class="pagina-estacao" data-estacao="2">
@@ -38,8 +39,8 @@
         <div class="dossie-capa__arte" aria-hidden="true">
           <svg class="arte" viewBox="0 0 640 200" focusable="false">
             <path class="arte__tela" d="M14 6H626L636 16V184L626 194H14L4 184V16Z"/>
-            <path class="arte__ligacao" d="M320 100L218 42M320 100L214 150M320 100L422 38M320 100L430 158M320 100L320 26M118 70L218 42M118 70L214 150M118 70L40 120M520 60L422 38M520 60L600 120M520 60L430 158M70 170L214 150M40 120L70 170M560 170L430 158M560 170L600 120"/>
-            <path class="arte__ligacao arte__ligacao--ativa" d="M320 100L258 176M320 100L384 178M320 100L450 98M218 42L320 26L422 38M450 98L520 60M258 176L118 70"/>
+            <path class="arte__ligacao" pathLength="1" d="M320 100L218 42M320 100L214 150M320 100L422 38M320 100L430 158M320 100L320 26M118 70L218 42M118 70L214 150M118 70L40 120M520 60L422 38M520 60L600 120M520 60L430 158M70 170L214 150M40 120L70 170M560 170L430 158M560 170L600 120"/>
+            <path class="arte__ligacao arte__ligacao--ativa" pathLength="1" d="M320 100L258 176M320 100L384 178M320 100L450 98M218 42L320 26L422 38M450 98L520 60M258 176L118 70"/>
             <path class="arte__controle" d="M286 88L294 78H346L354 88V112L348 118H336L330 110H310L304 118H292L286 112Z"/>
             <path class="arte__traco-fino" d="M300 96H312M306 90V102"/>
             <rect class="arte__solido" x="330" y="92" width="5" height="5"/>
@@ -54,10 +55,10 @@
             <rect class="arte__no" x="65" y="165" width="10" height="10"/>
             <rect class="arte__no" x="595" y="115" width="10" height="10"/>
             <rect class="arte__no" x="555" y="165" width="10" height="10"/>
-            <rect class="arte__no arte__no--ativo" x="515" y="55" width="10" height="10"/>
-            <rect class="arte__no arte__no--ativo" x="253" y="171" width="10" height="10"/>
-            <rect class="arte__no arte__no--ativo" x="379" y="173" width="10" height="10"/>
-            <rect class="arte__no arte__no--ativo" x="445" y="93" width="10" height="10"/>
+            <rect class="arte__no arte__no--ativo" style="--k: 0" x="515" y="55" width="10" height="10"/>
+            <rect class="arte__no arte__no--ativo" style="--k: 1" x="253" y="171" width="10" height="10"/>
+            <rect class="arte__no arte__no--ativo" style="--k: 2" x="379" y="173" width="10" height="10"/>
+            <rect class="arte__no arte__no--ativo" style="--k: 3" x="445" y="93" width="10" height="10"/>
             <path class="arte__sinal" d="M534 42L540 58L534 74M542 34L550 58L542 82"/>
           </svg>
         </div>
@@ -80,6 +81,20 @@
           <p>Jogos como <strong>GTA San Andreas, God of War, Guitar Hero e World of Warcraft</strong> mostraram diferentes caminhos para essa evolução.</p>
           <p>Os mundos abertos deram aos jogadores mais liberdade para explorar, enquanto histórias mais elaboradas aumentaram a participação do jogador nos acontecimentos.</p>
           <p>As <strong>lan houses</strong> também ganharam muita importância, principalmente como espaços de encontro. Ao mesmo tempo, competições de jogos começaram a se profissionalizar e a construir as bases dos eSports.</p>
+          <div class="ficha nota nota--conexao" role="group" aria-labelledby="nota-2-1" style="--ancora: 3">
+            <h3 class="nota__titulo" id="nota-2-1">Lan houses: espaços de encontro</h3>
+            <p class="nota__texto">competições de jogos começaram a se profissionalizar e a construir as bases dos eSports</p>
+            <svg class="nota__arte" viewBox="0 0 240 108" aria-hidden="true" focusable="false">
+              <path class="nota__linha" d="M50 44L22 20M50 44L78 20M50 44L22 68M50 44L78 68"/>
+              <rect class="nota__no nota__no--ativo" x="40" y="34" width="20" height="20"/>
+              <rect class="nota__no" x="14" y="12" width="16" height="16"/><rect class="nota__no" x="70" y="12" width="16" height="16"/>
+              <rect class="nota__no" x="14" y="60" width="16" height="16"/><rect class="nota__no" x="70" y="60" width="16" height="16"/>
+              <path class="nota__ativa" d="M102 44H154M146 38L154 44L146 50"/>
+              <path class="nota__no nota__no--ativo" d="M168 22H220V66H162V28Z"/>
+              <text class="nota__rotulo nota__rotulo--cheio" x="191" y="49" text-anchor="middle">ESPORTS</text>
+              <text class="nota__rotulo" x="50" y="100" text-anchor="middle">LAN HOUSES</text>
+            </svg>
+          </div>
         </div>
       </section>
 
@@ -91,6 +106,18 @@
           <p><strong>GTA IV</strong> chamou atenção pelos sistemas de física. <strong>Minecraft</strong> começou como um projeto independente e cresceu junto de uma comunidade que compartilhava experiências e acompanhava suas atualizações.</p>
           <p><strong>StarCraft II</strong> ajudou a fortalecer o cenário competitivo.</p>
           <p>Em 2011 surgiu a <strong>Twitch</strong>, plataforma dedicada às transmissões de jogos. Assistir outras pessoas jogando e acompanhar campeonatos passou a fazer parte da experiência dos videogames.</p>
+          <div class="ficha nota nota--marco" role="group" aria-labelledby="nota-2-2" style="--ancora: 3">
+            <h3 class="nota__titulo" id="nota-2-2">Twitch</h3>
+            <p class="nota__selo">2011</p>
+            <p class="nota__texto">plataforma dedicada às transmissões de jogos</p>
+            <p class="nota__texto">Assistir outras pessoas jogando e acompanhar campeonatos passou a fazer parte da experiência dos videogames</p>
+            <svg class="nota__arte" viewBox="0 0 240 92" aria-hidden="true" focusable="false">
+              <path class="nota__linha" d="M60 8H180L186 14V62L180 68H60L54 62V14Z"/>
+              <path class="nota__linha" d="M120 68V80M96 82H144"/>
+              <path class="nota__cheio" d="M112 24V52L138 38Z"/>
+              <path class="nota__ativa" d="M34 26Q20 38 34 50M18 16Q-2 38 18 60M206 26Q220 38 206 50M222 16Q242 38 222 60"/>
+            </svg>
+          </div>
           <p>O período também marcou a retomada do interesse pela realidade virtual, com projetos como o <strong>Oculus Rift</strong>, e o crescimento de jogos com apresentações mais cinematográficas, como <strong>The Last of Us</strong>.</p>
         </div>
       </section>
@@ -118,30 +145,55 @@
           <p>Os celulares também se consolidaram como plataformas importantes, com títulos como <strong>Free Fire, PUBG Mobile e Genshin Impact</strong>.</p>
           <p>Hoje, tecnologias como <strong>inteligência artificial, ray tracing e realidade virtual</strong> continuam ampliando as possibilidades dos jogos.</p>
           <p>A principal mudança, porém, vai além dos gráficos: os videogames transformaram a maneira como jogamos, contamos histórias, competimos, assistimos e interagimos com pessoas ao redor do mundo.</p>
+          <div class="ficha nota nota--ideia" role="group" aria-labelledby="nota-2-3" style="--ancora: 5">
+            <h3 class="nota__titulo" id="nota-2-3">Além dos gráficos</h3>
+            <p class="nota__texto">A principal mudança, porém, vai além dos gráficos: os videogames transformaram a maneira como jogamos, contamos histórias, competimos, assistimos e interagimos com pessoas ao redor do mundo.</p>
+            <svg class="nota__arte" viewBox="0 0 240 120" aria-hidden="true" focusable="false">
+              <path class="nota__linha" d="M120 60L216 60M120 60L188 93M120 60L120 106M120 60L52 93M120 60L24 60M120 60L52 27M120 60L120 14M120 60L188 27"/>
+              <rect class="nota__no" x="111" y="101" width="10" height="10"/><rect class="nota__no" x="47" y="88" width="10" height="10"/><rect class="nota__no" x="19" y="55" width="10" height="10"/><rect class="nota__no" x="47" y="22" width="10" height="10"/><rect class="nota__no" x="115" y="9" width="10" height="10"/><rect class="nota__no" x="183" y="22" width="10" height="10"/><rect class="nota__no" x="183" y="88" width="10" height="10"/>
+              <path class="nota__ativa" d="M120 60L216 60"/><rect class="nota__no nota__no--ativo" x="211" y="55" width="10" height="10"/>
+              <rect class="nota__no nota__no--ativo" x="108" y="48" width="24" height="24"/>
+            </svg>
+          </div>
         </div>
       </section>
 
       <section class="linha-tempo">
         <h2 class="linha-tempo__titulo">Alguns marcos</h2>
         <p class="terminal-rotulo">LINHA DO TEMPO</p>
-        <div class="escala" aria-hidden="true" style="--inicio: 2000; --fim: 2026">
-          <div class="escala__eixo"><span class="escala__marco" style="--ano: 2001"></span><span class="escala__marco" style="--ano: 2004"></span><span class="escala__marco" style="--ano: 2005"></span><span class="escala__marco" style="--ano: 2008"></span><span class="escala__marco" style="--ano: 2009"></span><span class="escala__marco" style="--ano: 2010"></span><span class="escala__marco" style="--ano: 2011"></span><span class="escala__marco" style="--ano: 2012"></span><span class="escala__marco" style="--ano: 2013"></span><span class="escala__marco" style="--ano: 2017"></span><span class="escala__marco" style="--ano: 2020"></span><span class="escala__marco" style="--ano: 2024; --ate: 2026"></span></div>
-          <div class="escala__eras"><span class="escala__era" style="--de: 2001; --ate: 2008">01–07</span><span class="escala__era" style="--de: 2008; --ate: 2014">08–13</span><span class="escala__era" style="--de: 2014; --ate: 2020">14–19</span><span class="escala__era" style="--de: 2020; --ate: 2026">20–hoje</span></div>
-          <div class="escala__decadas"><span style="--ano: 2000">2000</span><span style="--ano: 2010">2010</span><span style="--ano: 2020">2020</span><span style="--ano: 2026">2026</span></div>
-        </div>
-        <ol class="linha-tempo__lista">
-          <li class="linha-tempo__item" data-era="2001–2007"><strong class="linha-tempo__marca">2001</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">Xbox, GameCube e Game Boy Advance</span></li>
-          <li class="linha-tempo__item"><strong class="linha-tempo__marca">2004</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">GTA San Andreas e World of Warcraft</span></li>
-          <li class="linha-tempo__item"><strong class="linha-tempo__marca">2005</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">God of War e Guitar Hero</span></li>
-          <li class="linha-tempo__item" data-era="2008–2013"><strong class="linha-tempo__marca">2008</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">GTA IV</span></li>
-          <li class="linha-tempo__item"><strong class="linha-tempo__marca">2009</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">Minecraft</span></li>
-          <li class="linha-tempo__item"><strong class="linha-tempo__marca">2010</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">StarCraft II</span></li>
-          <li class="linha-tempo__item"><strong class="linha-tempo__marca">2011</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">Twitch</span></li>
-          <li class="linha-tempo__item"><strong class="linha-tempo__marca">2012</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">Oculus Rift</span></li>
-          <li class="linha-tempo__item"><strong class="linha-tempo__marca">2013</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">The Last of Us</span></li>
-          <li class="linha-tempo__item" data-era="2014–2019"><strong class="linha-tempo__marca">2017</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">crescimento do Battle Royale</span></li>
-          <li class="linha-tempo__item" data-era="2020 ATÉ HOJE"><strong class="linha-tempo__marca">2020</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">PlayStation 5 e Xbox Series X|S</span></li>
-          <li class="linha-tempo__item"><strong class="linha-tempo__marca">2024–2026</strong><span class="visualmente-oculto"> — </span><span class="linha-tempo__texto">IA, realidade virtual e novas tecnologias continuam avançando</span></li>
+        <ol class="rota-tempo">
+          <li class="epoca" style="--n: 3">
+            <h3 class="epoca__nome">2001–2007</h3>
+            <ol class="marcos">
+              <li class="marco"><strong class="marco__ano">2001</strong><span class="visualmente-oculto"> — </span><span class="marco__nome">Xbox, GameCube e Game Boy Advance</span></li>
+              <li class="marco"><strong class="marco__ano">2004</strong><span class="visualmente-oculto"> — </span><span class="marco__nome">GTA San Andreas e World of Warcraft</span></li>
+              <li class="marco"><strong class="marco__ano">2005</strong><span class="visualmente-oculto"> — </span><span class="marco__nome">God of War e Guitar Hero</span></li>
+            </ol>
+          </li>
+          <li class="epoca" style="--n: 6">
+            <h3 class="epoca__nome">2008–2013</h3>
+            <ol class="marcos">
+              <li class="marco"><strong class="marco__ano">2008</strong><span class="visualmente-oculto"> — </span><span class="marco__nome">GTA IV</span></li>
+              <li class="marco"><strong class="marco__ano">2009</strong><span class="visualmente-oculto"> — </span><span class="marco__nome">Minecraft</span></li>
+              <li class="marco"><strong class="marco__ano">2010</strong><span class="visualmente-oculto"> — </span><span class="marco__nome">StarCraft II</span></li>
+              <li class="marco"><strong class="marco__ano">2011</strong><span class="visualmente-oculto"> — </span><span class="marco__nome">Twitch</span></li>
+              <li class="marco"><strong class="marco__ano">2012</strong><span class="visualmente-oculto"> — </span><span class="marco__nome">Oculus Rift</span></li>
+              <li class="marco"><strong class="marco__ano">2013</strong><span class="visualmente-oculto"> — </span><span class="marco__nome">The Last of Us</span></li>
+            </ol>
+          </li>
+          <li class="epoca" style="--n: 1">
+            <h3 class="epoca__nome">2014–2019</h3>
+            <ol class="marcos">
+              <li class="marco"><strong class="marco__ano">2017</strong><span class="visualmente-oculto"> — </span><span class="marco__nome">crescimento do Battle Royale</span></li>
+            </ol>
+          </li>
+          <li class="epoca" style="--n: 2">
+            <h3 class="epoca__nome">2020 até hoje</h3>
+            <ol class="marcos">
+              <li class="marco"><strong class="marco__ano">2020</strong><span class="visualmente-oculto"> — </span><span class="marco__nome">PlayStation 5 e Xbox Series X|S</span></li>
+              <li class="marco"><strong class="marco__ano">2024–2026</strong><span class="visualmente-oculto"> — </span><span class="marco__nome">IA, realidade virtual e novas tecnologias continuam avançando</span></li>
+            </ol>
+          </li>
         </ol>
       </section>
 
