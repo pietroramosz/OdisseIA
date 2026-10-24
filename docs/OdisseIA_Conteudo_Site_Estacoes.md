@@ -309,7 +309,7 @@ Na próxima estação, você poderá conhecer essa aplicação na prática.
 > - IA generativa;
 > - qualquer outra técnica que ainda não tenha sido confirmada no código ou pelo grupo responsável.
 >
-> **Linha do tempo da página (sem datas):** a página mostra "A trajetória do X-B0T" só com o que ela já afirma (referências, mecânicas próprias, demonstração na feira e site, e um último ponto "a confirmar"). Não existe nenhuma data do jogo na documentação. Se o grupo quiser uma linha do tempo datada, precisa fornecer as datas (início do desenvolvimento, protótipo, demonstração na feira) e o que já está confirmado.
+> **Linha do tempo da página (sem datas):** a página mostra "A trajetória do X-B0T" só com o que ela já afirma (referências, mecânicas próprias, e demonstração na feira e site). Não há ponto de "a confirmar": o grupo explica o que falta durante a apresentação. Não existe nenhuma data do jogo na documentação. Se o grupo quiser uma linha do tempo datada, precisa fornecer as datas (início do desenvolvimento, protótipo, demonstração na feira) e o que já está confirmado.
 >
 > Quando o estado final do X-B0T estiver definido, atualizar esta seção com:
 >

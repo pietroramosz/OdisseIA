@@ -21,6 +21,11 @@
   letter-spacing: 0.02em;
 }
 
+/* Mesma palavra-marca do Hub e da abertura: "IA" no azul de acento. */
+.titulo-marca__ia {
+  color: var(--cor-destaque);
+}
+
 .pagina-validar main {
   padding-top: var(--espaco-6);
   padding-bottom: var(--espaco-16);

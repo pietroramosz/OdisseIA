@@ -824,3 +824,27 @@ Só a Estação 1 tinha uma linha do tempo completa (DEC-027). A 2 tinha a lista
 ### O que não muda
 
 `progresso.js`, `qr.js`, `config.js`, scanner, chave `odisseia:progresso`, regras de ordem e desbloqueio, fluxo de navegação, conteúdo dos capítulos, HTML/CSS/JS puros, caminhos relativos para o GitHub Pages em `/OdisseIA/`.
+
+---
+
+## DEC-030 — Acabamento das linhas do tempo das Estações 3 e 4 e da palavra-marca
+
+### Contexto
+
+Na revisão final, a linha do tempo da Estação 3 estava carregada (quatro linhas por etapa, três acentos azuis competindo, escada apertada em telas médias) e a da Estação 4 trazia um ponto "A confirmar" que o grupo prefere explicar na apresentação. A palavra-marca da validação do QR era a única toda branca.
+
+### Decisão
+
+1. **Estação 4:** o ponto "A confirmar" sai e nada entra no lugar. A trajetória fica com três pontos (referências, mecânicas próprias, na feira e no site) e a espinha termina no último (`--antes: 3`; modificador `.rota-tempo--trajetoria`, que substitui `--quatro`). A frase sobre regras, cartas e IA continua só no texto do bastidor 02.
+2. **Estação 3:**
+   - a escada ascendente só aparece a partir de 1200px (seis colunas de pelo menos ~130px); abaixo disso, a lista vertical na coluna de leitura;
+   - o contador (`01`, `02`…) fica na mesma linha do nome na lista vertical e acima dele na escada;
+   - a data vira uma frase curta sob o nome ("1968 artigo do algoritmo A*") e fica dentro do bloco clicável, na ordem nome, data, "No capítulo 0N";
+   - o nome da etapa não leva mais sublinhado (o "No capítulo 0N" com seta é o sinal de link, como nas outras estações) e o espaço entre etapas passa de 24 para 32px;
+   - a nota sob a linha é a versão enxuta: "As técnicas surgiram em épocas diferentes e continuam em uso; por isso, nem todas têm uma data definida. Referências: A* — Hart, Nilsson e Raphael (IEEE, 1968); Halo 2 e Behavior Trees — 2004, descritos por Damián Isla (GDC, 2005); AlphaGo contra Lee Sedol — março de 2016 (DeepMind)." As fontes completas continuam em `docs/OdisseIA_Conteudo_Site_Estacoes.md`.
+3. **Identidade:** a palavra-marca da validação do QR passa a ter o "IA" em azul, como no Hub e na abertura, e a barra de rolagem usa a paleta (`scrollbar-color` em azul de linha sobre o fundo, fina). Nada mais foi alterado: a revisão de todas as páginas não achou outros defeitos reais de alinhamento, espaçamento ou estado interativo.
+4. **Verificação de regressão:** as Estações 1 e 2, o Hub, a abertura e a Conclusão foram capturadas em 390px e 1440px antes e depois (com movimento reduzido) e ficaram idênticas byte a byte. As mudanças de CSS ficaram restritas a seletores da Estação 3 (`.etapa*`, `.percurso`) e da Estação 4 (`.rota-tempo--trajetoria`), mais o `html` (barra de rolagem).
+
+### O que não muda
+
+`progresso.js`, `qr.js`, `config.js`, scanner, chave `odisseia:progresso`, regras de ordem e desbloqueio, navegação, conteúdo dos capítulos, Estações 1 e 2, HTML/CSS/JS puros, caminhos relativos para o GitHub Pages em `/OdisseIA/`.

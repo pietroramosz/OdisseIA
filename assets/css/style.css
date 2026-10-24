@@ -232,6 +232,12 @@ html {
   font-size: calc(var(--escala-tela) * 100%);
 }
 
+/* Barra de rolagem na paleta do site (linha azul sobre o fundo), fina e discreta. */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--cor-azul-linha) var(--cor-fundo);
+}
+
 /* Rolagem suave nos links âncora (ex.: da linha do tempo ao capítulo). Só com movimento normal:
    acessibilidade.js grava data-movimento antes da primeira pintura, e "reduzido" nunca anima. */
 :root[data-movimento="normal"] {

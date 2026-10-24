@@ -603,15 +603,15 @@
   background: var(--cor-fundo);
 }
 
-/* A espinha vertical termina no nó final (o ano 2000 da Estação 1, "Em aberto" da 2, "A confirmar"
-   da 4), e não no fim do texto dele. --antes é a linha da grade onde o último item começa: 5 nas
-   Estações 1 e 2 (quatro épocas e o fim) e 4 na Estação 4 (o último item é o próprio fim). */
+/* A espinha vertical termina no último nó (o ano 2000 da Estação 1, "Em aberto" da 2, "Na feira e no
+   site" da 4), e não no fim do texto dele. --antes é a linha da grade onde o último item começa: 5 nas
+   Estações 1 e 2 (quatro épocas e o fim) e 3 na Estação 4 (três pontos, o último é o próprio fim). */
 .rota-tempo--fim {
   --antes: 5;
 }
 
-.rota-tempo--quatro {
-  --antes: 4;
+.rota-tempo--trajetoria {
+  --antes: 3;
 }
 
 .rota-tempo--fim::before,
@@ -621,7 +621,7 @@
 }
 
 /* Estação 4: cada época tem uma frase própria, então o bloco de texto é mais largo que o do fim da 1. */
-.rota-tempo--quatro .epoca__nota {
+.rota-tempo--trajetoria .epoca__nota {
   max-width: 32ch;
 }
 
@@ -652,7 +652,7 @@
   grid-template-columns: var(--no-max) minmax(0, 1fr);
   column-gap: var(--espaco-3);
   align-items: center;
-  padding-bottom: var(--espaco-6);
+  padding-bottom: var(--espaco-8);
 }
 
 .etapa:last-child {
@@ -698,16 +698,17 @@
 
 .etapa__nome::before {
   content: counter(etapa, decimal-leading-zero);
-  display: block;
-  margin-bottom: 2px;
+  display: inline;
+  margin-right: var(--espaco-2);
   font-weight: 600;
   font-size: 0.75rem;
   letter-spacing: 0.1em;
   color: var(--cor-destaque);
 }
 
-/* Etapa com link: o nome leva ao capítulo que a explica, com o mesmo gesto dos anos clicáveis da
-   linha do tempo da Estação 1 (sublinhado, "No capítulo 0N" e seta para cima). */
+/* Etapa com link: o bloco inteiro (nome, data e "No capítulo 0N" com seta para cima) leva ao capítulo
+   que a explica. O sinal de que é link é o "No capítulo 0N": o nome não leva sublinhado, para a escada
+   não ficar carregada. */
 .etapa__link {
   display: block;
   padding-block: var(--espaco-1);
@@ -715,30 +716,24 @@
   text-decoration: none;
 }
 
-.etapa__link .etapa__nome {
-  text-decoration: underline;
-  text-decoration-color: var(--cor-destaque);
-  text-decoration-thickness: 2px;
-  text-underline-offset: 0.2em;
-}
-
-/* "No capítulo 0N" sempre na linha de baixo, mesmo quando o nome é curto. */
+/* "No capítulo 0N" sempre numa linha própria, depois da data. */
 .etapa__link .marco__destino {
   display: flex;
-  margin-top: var(--espaco-1);
+  margin-top: var(--espaco-2);
 }
 
-/* O contador "01" vem antes do nome; o sublinhado cobre só o nome. */
-.etapa__link .etapa__nome::before {
-  text-decoration: none;
-}
-
-/* Marco datado de uma etapa: ano e acontecimento, como nos marcos das Estações 1 e 2. */
+/* Data de uma etapa: ano e acontecimento na mesma frase, discretos sob o nome. */
 .etapa__marco {
   grid-column: 2;
-  display: grid;
-  gap: 2px;
-  margin: var(--espaco-2) 0 0;
+  margin: var(--espaco-1) 0 0;
+  font-size: 0.9375rem;
+  line-height: 1.35;
+  color: var(--cor-texto-secundario);
+}
+
+.etapa__marco .marco__ano {
+  margin-right: var(--espaco-1);
+  font-size: 1rem;
 }
 
 .linha-tempo__fonte {
@@ -913,8 +908,8 @@
     grid-template-columns: repeat(4, minmax(0, 1fr)) minmax(0, 0.7fr);
   }
 
-  .rota-tempo--quatro {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+  .rota-tempo--trajetoria {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .rota-tempo--fim::before,
@@ -980,8 +975,12 @@
   .marco__ano {
     font-size: 1.5rem;
   }
+}
 
-  /* Percurso: uma escada ascendente; cada trecho sai da etapa, avança e sobe até a próxima. */
+/* Percurso (Estação 3): a escada ascendente só cabe em telas largas (seis colunas de pelo menos
+   ~130px). Abaixo de 1200px a lista vertical, na coluna de leitura, é mais clara e menos apertada.
+   Cada trecho da escada sai da etapa, avança e sobe até a próxima. */
+@media (min-width: 1200px) {
   .percurso {
     --degrau: 2.5rem;
     --subida: calc(var(--degrau) - 0.125rem);
@@ -1002,6 +1001,12 @@
     display: block;
     justify-self: start;
     margin-bottom: var(--espaco-3);
+  }
+
+  /* Na escada o contador vem acima do nome. */
+  .etapa__nome::before {
+    display: block;
+    margin: 0 0 2px;
   }
 
   /* O trecho sobe a partir do centro do nó e entra na etapa seguinte pela esquerda, por espaço
@@ -1187,7 +1192,9 @@
     [data-estacao="1"] .rota-tempo::after {
       animation-name: tempo-tracar-h;
     }
+  }
 
+  @media (min-width: 1200px) {
     [data-estacao="3"] .etapa::after {
       animation-name: percurso-ligar-h;
     }

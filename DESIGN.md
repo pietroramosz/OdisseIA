@@ -310,9 +310,9 @@ Um motivo de contêiner, o **recorte diagonal** (`--recorte` 12px, `--recorte-pe
   - a rota de pathfinding, marcada como ilustração.
 - **Linha do tempo** (uma por estação, mesma gramática: espinha, nós quadrados, anos em Chakra, "No capítulo 0N" com seta para cima; no máximo um link por capítulo; composição por assunto, DEC-029):
   - **Estação 2:** os marcos de 2001 a 2026 com quatro anos linkados e o final "Em aberto" (nó tracejado, `.epoca--aberta`): a evolução continua.
-  - **Estação 3:** a escada do percurso é a linha do tempo. Etapas linkadas (`.etapa__link`) e três marcos datados (`.etapa__marco`: 1968, 2004, 2016); as demais etapas ficam sem data e uma nota (`.linha-tempo__fonte`) explica e cita as fontes.
-  - **Estação 4:** "A trajetória do X-B0T", em roxo e sem datas (`.rota-tempo--quatro`): referências, mecânicas próprias, demonstração e site, e um último ponto tracejado "A confirmar".
-  - A espinha termina no último nó (`--antes`: 5 nas Estações 1 e 2, 4 na 4).
+  - **Estação 3:** a escada do percurso é a linha do tempo, só a partir de 1200px; abaixo disso, uma lista vertical na coluna de leitura (contador na linha do nome, 32px entre etapas). Etapas linkadas (`.etapa__link`, sem sublinhado no nome: o sinal é o "No capítulo 0N") e três datas (`.etapa__marco`: 1968, 2004, 2016, dentro do bloco clicável, na ordem nome, data, link); as demais etapas ficam sem data e uma nota curta (`.linha-tempo__fonte`) explica e cita as referências.
+  - **Estação 4:** "A trajetória do X-B0T", em roxo e sem datas (`.rota-tempo--trajetoria`): referências, mecânicas próprias, e na feira e no site. Não há ponto de "a confirmar": o grupo explica isso na apresentação.
+  - A espinha termina no último nó (`--antes`: 5 nas Estações 1 e 2, 3 na 4).
 - **Linha do tempo** (`.rota-tempo`, Estações 1 e 2): uma espinha só, e cada acontecimento aparece uma vez.
   - Na Estação 1 (`.rota-tempo--fim`) o ano 2000 fecha a espinha (`.epoca--fim`: nó de alvo azul e uma frase de fim). É o limite da estação, não um marco, e a espinha termina nesse nó.
   - Marcos com link (`.marco--ligado`, um por capítulo: 1962, 1972, 1983, 1994): o link ocupa a linha inteira por subgrid, o ano é sublinhado e a linha "No capítulo 0N" com seta para cima diz o destino. Os capítulos têm `id` e `scroll-margin-top`, e o capítulo de chegada acende a linha de abertura (`:target`).
