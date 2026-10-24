@@ -118,7 +118,10 @@ function renderizarProgresso(ultima, total) {
   const texto = document.getElementById("progresso-texto");
   texto.textContent = "";
   texto.appendChild(criarTexto("span", "progresso__rotulo", "PROGRESSO DA JORNADA"));
-  texto.appendChild(criarTexto("span", "progresso__numero", ultima + "/" + total));
+  // "2/4": o feito em destaque e o total mais discreto. O texto continua sendo "2/4".
+  const numero = criarTexto("span", "progresso__numero", String(ultima));
+  numero.appendChild(criarTexto("span", "progresso__total", "/" + total));
+  texto.appendChild(numero);
 
   const barra = document.getElementById("progresso-barra");
   marcarProgresso(barra, ultima, total);

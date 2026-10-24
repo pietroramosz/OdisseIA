@@ -91,6 +91,11 @@
   letter-spacing: -0.03em;
 }
 
+/* O total ("/4") recua: o que importa é quantas estações já foram validadas. */
+.progresso__total {
+  color: var(--cor-texto-atenuado);
+}
+
 .barra {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -205,7 +210,12 @@
 /* ---------- Rota das estações ---------- */
 
 .rota {
-  margin-top: var(--espaco-8);
+  margin-top: var(--espaco-12);
+}
+
+/* Mesmo título de seção do "Destino final" (.destino__titulo, mais abaixo). */
+.rota__titulo {
+  margin-bottom: var(--espaco-6);
 }
 
 .estacoes,
@@ -600,6 +610,16 @@ a.cartao:active .cartao__corpo {
   a.cartao:hover .seta {
     transform: translateX(3px);
   }
+
+  /* A engrenagem de uma estação validada gira um pouco sob o cursor. A da próxima estação tem o
+     anel de alvo (box-shadow) e a das bloqueadas é dormente: ambas ficam paradas. */
+  .estacao--desbloqueada .marcador {
+    transition: rotate 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  :root:not([data-movimento="reduzido"]) .estacao--desbloqueada a.cartao:hover .marcador {
+    rotate: 30deg;
+  }
 }
 
 /* ---------- Destino final: a chegada da rota ---------- */
@@ -829,6 +849,23 @@ a.cartao:active .cartao__corpo {
     grid-template-rows: 72px 1fr;
   }
 
+  /* A faixa de estado muda de altura por estado (6, 10 e 14px); o título começa sempre abaixo da
+     maior, para os quatro cartões da linha alinharem título e descrição. */
+  .estacao .cartao__corpo {
+    padding-top: calc(14px + var(--espaco-4));
+  }
+
+  /* Os títulos reservam duas linhas: as descrições dos quatro cartões começam na mesma altura.
+     O da próxima estação é maior, mas cabe nas mesmas duas linhas (2 × 1,1 × 1,375rem). */
+  .estacao__titulo {
+    min-height: 3rem;
+  }
+
+  .estacao--proxima .estacao__titulo {
+    font-size: 1.375rem;
+    line-height: 1.1;
+  }
+
   /* A meta desce para alinhar entre cartões; a margem da descrição garante o respiro
      mínimo no cartão mais alto, onde o auto vale zero. */
   .cartao__descricao {
@@ -836,6 +873,7 @@ a.cartao:active .cartao__corpo {
   }
 
   .cartao__meta {
+    min-height: 3.5rem;
     margin-top: auto;
   }
 
@@ -880,15 +918,27 @@ a.cartao:active .cartao__corpo {
     margin-top: var(--espaco-16);
   }
 
+  /* Título de seção: no lugar do filete horizontal do celular, o bloco curto de azul que também
+     marca os títulos de briefing das estações. */
   .destino__titulo {
     display: block;
     margin: 0;
-    font-size: 2.5rem;
-    line-height: 0.95;
+    font-size: 1.875rem;
+    line-height: 1;
   }
 
   .destino__titulo::after {
-    content: none;
+    display: block;
+    flex: none;
+    width: 3.5rem;
+    height: 4px;
+    margin-top: var(--espaco-3);
+    border-top: 0;
+    background: var(--cor-destaque);
+  }
+
+  .rota__titulo {
+    margin-bottom: var(--espaco-8);
   }
 
   .finais--completa {

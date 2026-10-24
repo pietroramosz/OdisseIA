@@ -9,18 +9,20 @@
   <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/paginas/abertura.css">
+  <link rel="stylesheet" href="assets/css/bigode.css">
   <script src="assets/js/acessibilidade.js"></script>
 </head>
 <body class="pagina-index">
   <a class="pular" href="#conteudo-principal">Pular para o conteúdo</a>
-  <!-- Porta de entrada estática: não lê progresso e não carrega scripts. -->
+  <!-- Porta de entrada estática: não lê progresso. Os únicos scripts são o painel de acessibilidade e o
+       easter egg da marca (bigode.js), que não mexem na jornada. -->
   <main id="conteudo-principal" tabindex="-1" class="abertura">
     <section class="capa" aria-labelledby="index-titulo">
       <div class="capa__tom textura-reticula" aria-hidden="true"></div>
       <span class="registro capa__registro-a" aria-hidden="true"></span>
       <span class="registro capa__registro-b" aria-hidden="true"></span>
 
-      <h1 id="index-titulo" class="capa__titulo" aria-label="OdisseIA"><span class="capa__odisse">Odisse</span><span class="capa__ia">IA</span></h1>
+      <h1 id="index-titulo" class="capa__titulo" aria-label="OdisseIA" data-bigode><span class="capa__odisse">Odisse</span><span class="capa__ia">IA</span></h1>
       <p class="capa__proposta">Uma jornada pela evolução dos videogames, da inteligência artificial e das ideias que transformaram a forma de jogar.</p>
       <a class="botao botao--principal capa__cta" href="hub.html">INICIAR JORNADA</a>
 
@@ -125,5 +127,6 @@
       </div>
     </section>
   </main>
+  <script src="assets/js/bigode.js"></script>
 </body>
 </html>

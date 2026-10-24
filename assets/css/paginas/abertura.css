@@ -374,7 +374,7 @@
   background: var(--cor-fundo);
   font-family: var(--fonte-titulo);
   font-weight: 700;
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
   letter-spacing: 0.16em;
   color: var(--cor-texto-secundario);
 }

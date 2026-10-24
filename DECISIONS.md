@@ -752,3 +752,24 @@ Mesmo com animações (DEC-025), as Estações 1 e 2 liam como texto corrido: ce
 ### O que não muda
 
 `progresso.js`, `qr.js`, `config.js`, scanner, chave `odisseia:progresso`, regras de ordem e desbloqueio, HTML/CSS/JS puros.
+
+---
+
+## DEC-027 — Linha do tempo da Estação 1 até 2000, marcos com link, controle de texto e easter egg "VOCÊ É BIGODE"
+
+### Contexto
+
+A linha do tempo da Estação 1 terminava sem fecho: no desktop a espinha seguia até a borda da página depois de "Anos 1990" e, no celular, a lista acabava em 1996. O PROJECT.md dizia "a linha do tempo termina em 1999"; a direção desta rodada fixou o limite em 2000. O controle "Tamanho do texto" do painel de acessibilidade tinha o conteúdo colado nas bordas e a terceira opção ("Extra grande") ficava mais alta que as outras. O Hub tinha descrições e estados desalinhados entre os quatro cartões. A abertura e o Hub prometiam um easter egg que não existia.
+
+### Decisão
+
+1. **Linha do tempo da Estação 1 termina em 2000.** O ano 2000 fecha a espinha como limite da estação (nó de alvo azul e a frase "Aqui termina a linha do tempo desta estação."), não como marco: nenhum fato novo, nenhum evento de 2000 e nenhum depois. Os 15 marcos e a ficha "Período 1950–1999" não mudam; o conteúdo de 2000 em diante continua na Estação 2. A espinha termina no nó (grade com a coluna do 2000; no celular, por `grid-row` e `bottom` negativo).
+2. **Marcos com link, um por capítulo:** 1962 (Spacewar!), 1972 (Pong), 1983 (crise dos videogames) e 1994 (PlayStation) levam a `#cap-experimentos`, `#cap-arcades`, `#cap-anos-80` e `#cap-anos-90`. Os anos vizinhos (1961, 1975, 1977, 1984, 1985, 1996…) não são link, para não haver alvos apertados lado a lado. O link ocupa a linha inteira (52–73px de altura), o ano é sublinhado e uma linha "No capítulo 0N" com seta para cima diz para onde vai (a seta aponta para cima porque os capítulos vêm antes da linha do tempo). `scroll-margin-top` mantém o título do capítulo à vista, a linha de abertura do capítulo-alvo passa para o azul de acento (`:target`) e a rolagem suave só vale com `data-movimento="normal"`.
+3. **Controle de tamanho do texto:** padding interno de 12px/8px, 12px entre as opções, as três opções com a mesma altura (`display: flex` no rótulo e `flex: 1` no corpo), grupos mais afastados. Funcionamento inalterado.
+4. **Hub (só visual, sem tocar no progresso):** o "/4" do placar recua (o feito é o destaque); título de seção "Estações" no mesmo padrão do "Destino final" (no desktop, o bloco azul curto dos títulos de briefing no lugar do filete); títulos de duas linhas reservadas, padding superior fixo e faixa de estado com altura mínima, então título, descrição e estado alinham nos quatro cartões; a engrenagem de uma estação validada gira 30° no hover (não a da próxima, que tem o anel de alvo, nem as bloqueadas).
+5. **Easter egg "VOCÊ É BIGODE"** (`assets/js/bigode.js` e `assets/css/bigode.css`): cinco cliques com no máximo 700ms entre eles na marca (`[data-bigode]` no h1 da abertura e do Hub) abrem um `<dialog>` em tela cheia: linhas de foco que irrompem, carimbo de recorte diagonal que bate, as letras de BIGODE em sequência e a frase "Palavra dada, palavra cumprida." Fecha com o botão, Esc ou clicando fora. Não lê nem grava progresso, não mexe em links e não usa biblioteca. `index.html` deixa de ser "sem scripts": carrega também `bigode.js`, que não toca na jornada. Cores só por tokens (azul; o roxo continua do X-B0T) e movimento por `data-movimento`.
+6. **Polimento:** o selo "BLOQUEADO" do destino na abertura passa de 11px para 12px.
+
+### O que não muda
+
+`progresso.js`, `qr.js`, `config.js`, scanner, chave `odisseia:progresso`, regras de ordem e desbloqueio, conteúdo histórico, HTML/CSS/JS puros.

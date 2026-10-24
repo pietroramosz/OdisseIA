@@ -71,7 +71,7 @@
         <p>Ao longo de algumas décadas, os jogos saíram dos laboratórios, chegaram aos fliperamas, entraram nas casas e se transformaram em uma parte importante da cultura.</p>
       </section>
 
-      <section class="capitulo">
+      <section class="capitulo" id="cap-experimentos">
         <h2 class="capitulo__titulo">Os primeiros experimentos</h2>
         <p class="terminal-rotulo capitulo__rotulo">CAPÍTULO <span class="capitulo__numero">01</span></p>
         <div class="capitulo__corpo">
@@ -94,7 +94,7 @@
         </div>
       </section>
 
-      <section class="capitulo">
+      <section class="capitulo" id="cap-arcades">
         <h2 class="capitulo__titulo">Dos laboratórios aos arcades</h2>
         <p class="terminal-rotulo capitulo__rotulo">CAPÍTULO <span class="capitulo__numero">02</span></p>
         <div class="capitulo__corpo">
@@ -120,7 +120,7 @@
         </div>
       </section>
 
-      <section class="capitulo">
+      <section class="capitulo" id="cap-anos-80">
         <h2 class="capitulo__titulo">Anos 80: crescimento, crise e recuperação</h2>
         <p class="terminal-rotulo capitulo__rotulo">CAPÍTULO <span class="capitulo__numero">03</span></p>
         <div class="capitulo__corpo">
@@ -144,7 +144,7 @@
         </div>
       </section>
 
-      <section class="capitulo">
+      <section class="capitulo" id="cap-anos-90">
         <h2 class="capitulo__titulo">Anos 90: tecnologia e cultura</h2>
         <p class="terminal-rotulo capitulo__rotulo">CAPÍTULO <span class="capitulo__numero">04</span></p>
         <div class="capitulo__corpo">
@@ -179,9 +179,9 @@
         </div>
       </section>
 
-      <section class="linha-tempo">
+      <section class="linha-tempo" id="marcos">
         <h2 class="linha-tempo__titulo">Alguns marcos</h2>
-        <ol class="rota-tempo">
+        <ol class="rota-tempo rota-tempo--fim">
           <li class="epoca" style="--n: 5">
             <h3 class="epoca__nome">Anos 1950–60</h3>
             <ol class="marcos">
@@ -189,13 +189,13 @@
               <li class="marco"><strong class="marco__ano">1952</strong><span class="visualmente-oculto"> — </span><span class="marco__nome">OXO</span></li>
               <li class="marco"><strong class="marco__ano">1958</strong><span class="visualmente-oculto"> — </span><span class="marco__nome">Tennis for Two</span></li>
               <li class="marco"><strong class="marco__ano">1961</strong><span class="visualmente-oculto"> — </span><span class="marco__nome">início do desenvolvimento de Spacewar!</span></li>
-              <li class="marco"><strong class="marco__ano">1962</strong><span class="visualmente-oculto"> — </span><span class="marco__nome">lançamento e popularização de Spacewar!</span></li>
+              <li class="marco marco--ligado"><a class="marco__link" href="#cap-experimentos"><strong class="marco__ano">1962</strong><span class="visualmente-oculto"> — </span><span class="marco__nome">lançamento e popularização de Spacewar!</span><span class="marco__destino">No capítulo 01 <span class="seta" aria-hidden="true"></span></span></a></li>
             </ol>
           </li>
           <li class="epoca" style="--n: 4">
             <h3 class="epoca__nome">Anos 1970</h3>
             <ol class="marcos">
-              <li class="marco"><strong class="marco__ano">1972</strong><span class="visualmente-oculto"> — </span><span class="marco__nome">Pong</span></li>
+              <li class="marco marco--ligado"><a class="marco__link" href="#cap-arcades"><strong class="marco__ano">1972</strong><span class="visualmente-oculto"> — </span><span class="marco__nome">Pong</span><span class="marco__destino">No capítulo 02 <span class="seta" aria-hidden="true"></span></span></a></li>
               <li class="marco"><strong class="marco__ano">1975</strong><span class="visualmente-oculto"> — </span><span class="marco__nome">Gun Fight</span></li>
               <li class="marco"><strong class="marco__ano">1977</strong><span class="visualmente-oculto"> — </span><span class="marco__nome">Atari 2600</span></li>
               <li class="marco"><strong class="marco__ano">1978</strong><span class="visualmente-oculto"> — </span><span class="marco__nome">Space Invaders</span></li>
@@ -205,7 +205,7 @@
             <h3 class="epoca__nome">Anos 1980</h3>
             <ol class="marcos">
               <li class="marco"><strong class="marco__ano">1980</strong><span class="visualmente-oculto"> — </span><span class="marco__nome">Pac-Man</span></li>
-              <li class="marco"><strong class="marco__ano">1983</strong><span class="visualmente-oculto"> — </span><span class="marco__nome">crise dos videogames</span></li>
+              <li class="marco marco--ligado"><a class="marco__link" href="#cap-anos-80"><strong class="marco__ano">1983</strong><span class="visualmente-oculto"> — </span><span class="marco__nome">crise dos videogames</span><span class="marco__destino">No capítulo 03 <span class="seta" aria-hidden="true"></span></span></a></li>
               <li class="marco"><strong class="marco__ano">1984</strong><span class="visualmente-oculto"> — </span><span class="marco__nome">Tetris</span></li>
               <li class="marco"><strong class="marco__ano">1985</strong><span class="visualmente-oculto"> — </span><span class="marco__nome">Super Mario Bros.</span></li>
             </ol>
@@ -213,9 +213,13 @@
           <li class="epoca" style="--n: 2">
             <h3 class="epoca__nome">Anos 1990</h3>
             <ol class="marcos">
-              <li class="marco"><strong class="marco__ano">1994</strong><span class="visualmente-oculto"> — </span><span class="marco__nome">PlayStation</span></li>
+              <li class="marco marco--ligado"><a class="marco__link" href="#cap-anos-90"><strong class="marco__ano">1994</strong><span class="visualmente-oculto"> — </span><span class="marco__nome">PlayStation</span><span class="marco__destino">No capítulo 04 <span class="seta" aria-hidden="true"></span></span></a></li>
               <li class="marco"><strong class="marco__ano">1996</strong><span class="visualmente-oculto"> — </span><span class="marco__nome">Nintendo 64</span></li>
             </ol>
+          </li>
+          <li class="epoca epoca--fim">
+            <h3 class="epoca__nome">2000</h3>
+            <p class="epoca__nota">Aqui termina a linha do tempo desta estação.</p>
           </li>
         </ol>
       </section>

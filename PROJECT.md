@@ -53,8 +53,8 @@ A primeira estação cobre a evolução dos jogos até 1999.
 
 Algumas definições importantes:
 
-- a linha do tempo termina em 1999;
-- conteúdos de 2000 ficam para a estação seguinte;
+- a linha do tempo termina em 2000, como limite da estação (DEC-027): o ano 2000 fecha a linha, sem marco próprio;
+- o conteúdo histórico da estação vai até 1999 e o de 2000 em diante fica para a estação seguinte;
 - o site deve complementar a apresentação física em vez de repetir exatamente o mesmo conteúdo.
 
 ### Estação 2 — Evolução dos jogos de 2001 até hoje

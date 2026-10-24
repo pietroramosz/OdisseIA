@@ -327,6 +327,7 @@ body[data-estacao="4"] .pular {
 
 /* Capítulo: numeral grande à esquerda do título, nunca acima dele. */
 .capitulo {
+  scroll-margin-top: var(--espaco-6);
   display: grid;
   grid-template-columns: 4.5rem minmax(0, 1fr);
   column-gap: var(--espaco-3);

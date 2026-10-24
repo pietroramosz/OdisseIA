@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/paginas/hub.css">
   <link rel="stylesheet" href="assets/css/scanner.css">
+  <link rel="stylesheet" href="assets/css/bigode.css">
   <script src="assets/js/acessibilidade.js"></script>
 </head>
 <body class="pagina-hub">
@@ -17,7 +18,7 @@
   <header class="cabecalho">
     <a class="terminal-voltar hub-visao" href="index.html"><span class="seta seta--voltar" aria-hidden="true"></span> Visão geral</a>
     <div class="painel-status">
-      <h1 id="titulo-odisseia" class="titulo-marca">Odisse<span class="titulo-marca__ia">IA</span> <span class="titulo-marca__pagina">Rota da jornada</span></h1>
+      <h1 id="titulo-odisseia" class="titulo-marca" data-bigode>Odisse<span class="titulo-marca__ia">IA</span> <span class="titulo-marca__pagina">Rota da jornada</span></h1>
       <section class="progresso" aria-label="Progresso">
         <p id="progresso-texto" class="progresso__texto"></p>
         <div id="progresso-barra" class="barra" role="progressbar" aria-label="Progresso da jornada" aria-valuemin="0" aria-valuemax="4" aria-valuenow="0"></div>
@@ -30,7 +31,8 @@
     <!-- Acesso ao scanner de QR Code: preenchido por app.js a partir do progresso. -->
     <section id="hub-scan" class="scan-acesso ficha" aria-labelledby="hub-scan-titulo"></section>
 
-    <section class="rota" aria-label="Estações">
+    <section class="rota" aria-labelledby="rota-titulo">
+      <h2 id="rota-titulo" class="destino__titulo rota__titulo">ESTAÇÕES</h2>
       <ol id="lista-estacoes" class="estacoes"></ol>
     </section>
 
@@ -45,5 +47,6 @@
   <script src="assets/js/qr.js"></script>
   <script src="assets/js/scanner.js"></script>
   <script src="assets/js/app.js"></script>
+  <script src="assets/js/bigode.js"></script>
 </body>
 </html>

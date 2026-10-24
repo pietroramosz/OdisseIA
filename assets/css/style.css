@@ -232,6 +232,12 @@ html {
   font-size: calc(var(--escala-tela) * 100%);
 }
 
+/* Rolagem suave nos links âncora (ex.: da linha do tempo ao capítulo). Só com movimento normal:
+   acessibilidade.js grava data-movimento antes da primeira pintura, e "reduzido" nunca anima. */
+:root[data-movimento="normal"] {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   min-height: 100vh;
@@ -895,7 +901,7 @@ p .zero::after {
 
 .a11y__opcoes {
   min-width: 0;
-  margin: 0 0 var(--espaco-3);
+  margin: 0 0 var(--espaco-4);
   padding: 0;
   border: 0;
 }
@@ -907,19 +913,20 @@ p .zero::after {
   letter-spacing: 0.12em;
   text-transform: uppercase;
   padding: 0;
-  margin-bottom: var(--espaco-2);
+  margin-bottom: var(--espaco-3);
   font-weight: 600;
 }
 
 .a11y__lista {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--espaco-2);
+  gap: var(--espaco-3);
 }
 
+/* As três opções da linha têm a mesma altura, mesmo quando um nome quebra em duas linhas. */
 .a11y__opcao {
   position: relative;
-  display: block;
+  display: flex;
 }
 
 .a11y__opcao input {
@@ -939,19 +946,23 @@ p .zero::after {
   --espessura: 2px;
   --recorte: var(--recorte-minimo);
   display: flex;
+  flex: 1;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: var(--espaco-1);
-  min-height: 48px;
-  padding: var(--espaco-1) var(--espaco-2);
+  gap: var(--espaco-2);
+  min-width: 0;
+  min-height: 56px;
+  padding: var(--espaco-3) var(--espaco-2);
   font-weight: 600;
   line-height: 1.2;
   text-align: center;
+  text-wrap: balance;
   overflow-wrap: anywhere;
 }
 
 .a11y__opcao-corpo small {
+  margin-top: calc(-1 * var(--espaco-1));
   color: var(--cor-texto-atenuado);
   font-size: 0.75rem;
 }
