@@ -30,15 +30,15 @@ Durante o desenvolvimento, usamos quatro estados para evitar confusão:
 - **Implementado:** já existe no código;
 - **Validado:** foi implementado e testado no fluxo esperado.
 
-Situação revisada em 23/10/2026 (identidade azul sobre grafite, scanner de QR, carta do X-B0T, `gameUrl` e acessibilidade; testado só em Chrome headless):
+Situação revisada em 24/10/2026 (identidade azul sobre grafite, tema claro refinado, três animações das estações, scanner de QR, carta do X-B0T, `gameUrl` e acessibilidade). Os testes funcionais de QR Codes, progressão, códigos repetidos e fora de ordem, temas e animações foram feitos e funcionam, e a leitura do QR pela câmera de um celular pede para abrir o link e o acesso funciona após a confirmação (relato do responsável; detalhes no DEVLOG). As verificações automatizadas rodaram em Chrome headless:
 
 - **Validado:** sistema de progresso (`progresso.js`), testado no console, incluindo dado corrompido e número decimal.
 - **Implementado e testado em emulador e no celular:** Hub (`hub.html`), nos estados 0 a 4.
-- **Implementado e revisado:** `index.html` como porta de entrada estática, sem JavaScript e sem dependência de `localStorage`.
+- **Implementado e revisado:** `index.html` como porta de entrada estática. Não depende do progresso (não lê nem grava `odisseia:progresso`), mas carrega JavaScript: `acessibilidade.js` (tema, tamanho do texto, contraste e movimento, salvos em `odisseia:acessibilidade`) e `bigode.js` (easter egg, que não toca em `localStorage`).
 - **Implementadas e revisadas:** Estações 1–3 com conteúdo, estados `desbloqueada`, `próxima` e `futura`, além da composição editorial compartilhada.
 - **Implementada:** Estação 4 (`estacao-4.html`), com página própria ligada ao X-B0T; o conteúdo deve continuar fiel às informações confirmadas pelo grupo do jogo.
 - **Implementada:** `final.html`, com estados de jornada completa/incompleta e área de acesso ao X-B0T; o botão "Jogar X-B0T" usa a `gameUrl` configurada (https://robot-tcg.netlify.app/); `downloadUrl` continua nulo.
-- **Implementado e testado por console e URL, ainda não validado com câmera real nem com WhatsApp:** validação de QR (`validar.html` e `qr.js`).
+- **Implementado e testado por console, por URL e com a câmera de um celular (o link abre após a confirmação; repetido e fora de ordem funcionam), ainda sem teste com WhatsApp/navegador interno nem com os QR Codes definitivos:** validação de QR (`validar.html` e `qr.js`).
 - **Ainda pendente:** confirmação do endereço final do X-B0T, hospedagem final, QR Codes definitivos e teste físico completo da jornada.
 
 ---
@@ -227,7 +227,7 @@ A função dele é validar que o visitante chegou àquela estação física e en
 
 Por isso, o progresso não deve avançar apenas porque alguém abriu diretamente uma página.
 
-A validação digital já está implementada em `validar.html` e `qr.js`. O que ainda falta é validar o fluxo físico com QR real pela câmera, testar a abertura por aplicativos como o WhatsApp e gerar/imprimir os QR Codes definitivos depois que a URL final estiver fechada.
+A validação digital já está implementada em `validar.html` e `qr.js`. A leitura pela câmera de um celular já foi testada (ela pede para abrir o link, e o acesso funciona após a confirmação). O que ainda falta é validar o fluxo físico com os QR Codes definitivos, testar a abertura por aplicativos como o WhatsApp e gerar/imprimir esses QR Codes depois que a URL final estiver fechada.
 
 O QR Code faz parte da lógica da experiência, mas não deve ser tratado como mecanismo de segurança real.
 
@@ -394,7 +394,7 @@ A ideia é manter o projeto simples enquanto isso for suficiente.
 
 ## 16. Pendências atuais
 
-**Última revisão:** 21/10/2026\
+**Última revisão:** 24/10/2026\
 **Data externa principal:** feira em **29/10/2026**.
 
 Esta seção guarda apenas trabalho concreto ainda aberto. Ela não substitui o DEVLOG: quando uma pendência relevante for concluída, ela sai daqui e pode virar um marco no histórico.
@@ -410,7 +410,8 @@ Esta seção guarda apenas trabalho concreto ainda aberto. Ela não substitui o 
 - [x] `gameUrl` preenchida com https://robot-tcg.netlify.app/ (23/10/2026). `downloadUrl` continua `null`; decidir só se houver versão para download.
 - [x] Adicionar no Hub um caminho claro de volta para a Visão geral (`index.html`).
 - [ ] Definir hospedagem e URL final antes de gerar ou imprimir os QR Codes definitivos.
-- [ ] Testar QR real pela câmera e abertura por WhatsApp/navegador interno.
+- [x] Leitura de QR pela câmera de um celular: pede para abrir o link e o acesso funciona após a confirmação (24/10/2026).
+- [ ] Testar a abertura por WhatsApp/navegador interno.
 - [ ] Ampliar ou confirmar a orientação de “mesmo navegador”: hoje o Index já avisa, mas o problema ainda pode aparecer durante o fluxo de QR.
 - [ ] Fazer um teste completo em celular do fluxo: visão geral → Hub → QR1 → 1 → QR2 → 2 → QR3 → 3 → QR4 → 4 → conclusão → X-B0T.
 - [ ] Confirmar a cor final do X-B0T; enquanto isso, `#CD5EFA` continua provisório.

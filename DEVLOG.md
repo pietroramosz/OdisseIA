@@ -310,7 +310,7 @@ Essa etapa também mostrou a necessidade de manter o guia de estilo sincronizado
 
 ### O que foi feito
 
-- `index.html` deixou de ser placeholder e passou a funcionar como porta de entrada estática, com Hero, explicação da jornada, quatro estações, destino final e CTAs. A página não carrega JavaScript e não depende de `localStorage`.
+- `index.html` deixou de ser placeholder e passou a funcionar como porta de entrada estática, com Hero, explicação da jornada, quatro estações, destino final e CTAs. A página não depende do progresso. (Correção de 24/10/2026: ela não é isenta de JavaScript; carrega `acessibilidade.js` e `bigode.js`, e o primeiro usa a chave própria `odisseia:acessibilidade` no `localStorage`. O que ela nunca faz é ler ou gravar `odisseia:progresso`.)
 - As Estações 1–3 foram consolidadas no formato “Terminal Editorial”, com conteúdo real, estados `desbloqueada`, `próxima` e `futura`, retorno ao Hub e tratamento visual compartilhado.
 - A implementação das três estações foi revisada quanto a estados, copy, CSS e acessibilidade.
 - O desktop deixou de apenas esticar a composição mobile: as Estações 1–3 passaram a usar um dossiê técnico compacto de até 832px, enquanto o Index ganhou uma composição editorial própria de até 960px.
@@ -610,6 +610,35 @@ O branco tinha assumido o papel de acento e o azul quase não aparecia; o "Mais 
 - A leitura real de um QR por câmera não foi testada: depende de um celular com Chrome/Android e dos QR Codes impressos, em HTTPS.
 - Safari do iOS e Firefox não têm `BarcodeDetector`: usam o app Câmera. Biblioteca de decodificação local para o iOS aguarda aprovação.
 - Celular real, leitor de tela e outros navegadores continuam sem teste.
+
+---
+
+## 24/10/2026 — Tema claro refinado, três animações das visualizações e testes funcionais
+
+### Contexto
+
+No tema claro, as superfícies eram brancas sobre um fundo quase branco, e bordas, divisórias e contornos tracejados quase não se viam. As visualizações da crise de 1983 (Estação 1), da Twitch (Estação 2) e do pathfinding (Estação 3) estavam estáticas ou só acompanhavam a rolagem, sem mostrar a sequência que contam.
+
+### O que mudou
+
+- **Tema claro** (`style.css`): paleta própria com camadas de fundo cinza-azulado (`#e6e9f0`), superfícies off-white (`#f4f5f9`), palco e "fechado" mais escuros (`#d9dde8`) e destaque num tom do azul (`#dde6f8`). Dois tokens novos, `--cor-filete` (bordas, divisórias, molduras, contorno do botão secundário) e `--cor-hachura`, que no escuro valem o mesmo que antes e no claro têm valor próprio. As bordas deixaram de usar `--cor-superficie-alta`, que passa a ser só preenchimento. O azul e o roxo do X-B0T foram mantidos.
+- **Três animações por tempo**, disparadas uma vez ao chegar à tela por `assets/js/cenas.js` (que só marca `data-cena`; o CSS, na seção "Cenas" de `estacao-editorial.css`, desenha):
+  - Estação 1: a curva da crise de 1983 sobe, cai, marca 1983 e se recupera com o NES, com os mesmos pontos de antes;
+  - Estação 2: as quatro curvas de ondas da Twitch são reveladas do centro para fora, nos dois lados, e acendem aos poucos;
+  - Estação 3: as células examinadas pelo A* aparecem em ondas e depois a rota de A até B se traça. A ordem das células foi calculada offline com um A* (Manhattan) sobre a grade da figura (61 células examinadas, rota de 22 passos, igual à que já estava desenhada). A legenda da figura foi atualizada.
+- Sem `cenas.js` ou com movimento reduzido (sistema ou painel) as figuras ficam completas e paradas.
+- `DESIGN.md`, `README.md`, `PROJECT.md` e `PRODUCT.md` foram corrigidos: o `index.html` não depende do progresso, mas carrega JavaScript (acessibilidade e easter egg); o destino do link "Pular para o conteúdo" é `#conteudo-principal`; a descrição do movimento passou a distinguir os três mecanismos (tempo só em CSS, rolagem só em CSS e `cenas.js`).
+
+### Como foi verificado
+
+- **Testes funcionais manuais (relato do responsável):** QR Codes, progressão, códigos repetidos e fora de ordem, temas e animações funcionam. Em um celular, a leitura do QR pela câmera pede para abrir o link, e o acesso funciona após a confirmação.
+- **Verificações automatizadas em Chrome headless** (fora do repositório): 8 páginas em 6 larguras (360 a 1440px) nos dois temas, sem rolagem horizontal nem erro de console; comparação pixel a pixel do tema escuro com a versão anterior, sem diferença além das células e da legenda do A* e de 2 a 8 pixels de antisserrilhado nas ondas da Twitch; movimento reduzido por preferência do sistema e pelo painel (as figuras ficam completas e a escolha "normal" do painel religa a animação); quadros das três cenas ao longo do tempo nos dois temas, em 390 e 1280px.
+
+### O que continua pendente
+
+- Abertura por WhatsApp/navegador interno, leitura com os QR Codes definitivos e teste físico completo do fluxo (visão geral até o X-B0T).
+- Safari, Firefox e leitor de tela continuam sem teste das animações e do tema claro.
+- Não há uma DEC nova no `DECISIONS.md` para o tema claro e as cenas.
 
 ---
 

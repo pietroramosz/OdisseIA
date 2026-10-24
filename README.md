@@ -64,7 +64,7 @@ Atualmente, estão implementados:
 - limite de progresso até a quarta estação;
 - Hub com estados 0 a 4;
 - validação dos QR Codes por `validar.html` e `qr.js`;
-- `index.html` como porta de entrada estática, sem JavaScript nem dependência de progresso;
+- `index.html` como porta de entrada estática, que não lê nem grava o progresso (`odisseia:progresso`); carrega só os scripts de acessibilidade (`acessibilidade.js`, que usa a chave própria `odisseia:acessibilidade`) e do easter egg da marca (`bigode.js`);
 - Estações 1–4 com conteúdo, três estados de acesso e linguagem editorial compartilhada;
 - página de conclusão (`final.html`), com estados de jornada completa/incompleta e botão "Jogar X-B0T" a partir de `gameUrl`;
 - identidade grafite com o azul (escala do #142146, a cor da sala da feira) como acento principal e o roxo reservado ao X-B0T;
