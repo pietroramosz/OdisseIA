@@ -1,4 +1,4 @@
-/* Validação do QR: o resultado é um carimbo. Sucesso e "já validada" carimbam em roxo;
+/* Validação do QR: o resultado é um carimbo. Sucesso e "já validada" carimbam em azul;
    fora de ordem, inválido e erro ficam em cinza, com hachura de "ainda fechado". */
 
 .cabecalho,
@@ -86,7 +86,7 @@
   box-shadow: inset 0 0 0 3px var(--cor-texto);
 }
 
-/* Sucesso: linhas de foco atrás do carimbo roxo. */
+/* Sucesso: linhas de foco atrás do carimbo azul. */
 .resultado--sucesso,
 .resultado--repetido {
   background: var(--cor-superficie-alta);

@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>OdisseIA — Estação 1</title>
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/img/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/paginas/estacao.css">
   <link rel="stylesheet" href="assets/css/paginas/estacao-modulos.css">
@@ -48,11 +51,11 @@
             <path class="arte__borda" d="M24 22H296M24 178H296"/>
             <rect class="arte__solido" x="34" y="58" width="7" height="42"/>
             <rect class="arte__solido" x="279" y="112" width="7" height="42"/>
-            <rect class="arte__rastro" x="62" y="64" width="7" height="7" opacity="0.18"/>
-            <rect class="arte__rastro" x="94" y="74" width="7" height="7" opacity="0.3"/>
-            <rect class="arte__rastro" x="126" y="84" width="7" height="7" opacity="0.45"/>
-            <rect class="arte__rastro" x="158" y="94" width="7" height="7" opacity="0.6"/>
-            <rect class="arte__rastro" x="190" y="104" width="7" height="7" opacity="0.78"/>
+            <rect class="arte__rastro" style="--k: 0" x="62" y="64" width="7" height="7" opacity="0.18"/>
+            <rect class="arte__rastro" style="--k: 1" x="94" y="74" width="7" height="7" opacity="0.3"/>
+            <rect class="arte__rastro" style="--k: 2" x="126" y="84" width="7" height="7" opacity="0.45"/>
+            <rect class="arte__rastro" style="--k: 3" x="158" y="94" width="7" height="7" opacity="0.6"/>
+            <rect class="arte__rastro" style="--k: 4" x="190" y="104" width="7" height="7" opacity="0.78"/>
             <rect class="arte__bola" x="222" y="112" width="11" height="11"/>
             <path class="arte__trajetoria" d="M41 70L227 117"/>
             <text class="esquema__texto" x="24" y="44">1972</text>
@@ -172,11 +175,15 @@
       </section>
 
       <section class="conexao">
+        <span class="numeral-vazado conexao__numeral" aria-hidden="true">02</span>
         <h2 class="conexao__titulo">E depois?</h2>
         <p>Até o fim dos anos 1990, os videogames já tinham saído dos laboratórios, conquistado os arcades, chegado às casas e avançado para ambientes tridimensionais.</p>
         <p>Na próxima estação, você vai acompanhar o que aconteceu quando novas gerações de consoles, internet, jogos online e mundos cada vez maiores começaram a transformar ainda mais essa indústria.</p>
         <div class="conexao__proximo" data-proximo-passo hidden></div>
-        <a class="botao botao--principal conexao__acao" href="hub.html">Voltar ao Hub</a>
+        <div class="conexao__acoes">
+          <div class="conexao__avanco" data-proxima-estacao></div>
+          <a class="botao botao--principal conexao__voltar" data-voltar-hub href="hub.html">Voltar ao Hub</a>
+        </div>
       </section>
     </div>
 

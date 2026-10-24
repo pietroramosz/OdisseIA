@@ -103,7 +103,7 @@
   gap: var(--espaco-2);
 }
 
-/* Vazio = trilho fino; cheio = bloco alto roxo. A diferença é de forma, não só de cor. */
+/* Vazio = trilho fino; cheio = bloco alto azul. A diferença é de forma, não só de cor. */
 .barra__segmento {
   align-self: end;
   height: var(--espaco-1);
@@ -270,7 +270,7 @@
   border-left: 2px dashed var(--cor-apagado);
 }
 
-/* Trecho percorrido: roxo sólido. Até a próxima estação: roxo tracejado. */
+/* Trecho percorrido: azul sólido. Até a próxima estação: azul tracejado. */
 .estacao--liga-desbloqueada .estacao__no::after {
   border-left: 3px solid var(--cor-destaque);
 }
@@ -283,7 +283,7 @@
   content: none;
 }
 
-/* Próxima estação: o nó do trilho ganha um alvo roxo, para o trilho mostrar o estado sozinho. */
+/* Próxima estação: o nó do trilho ganha um alvo azul, para o trilho mostrar o estado sozinho. */
 .estacao--proxima .marcador {
   box-shadow: 0 0 0 2px var(--cor-fundo), 0 0 0 4px var(--cor-destaque);
 }

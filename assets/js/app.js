@@ -549,6 +549,14 @@ function renderizarPaginaEstacao() {
     document.getElementById("conteudo-estacao").hidden = false;
     prepararCartaAcesso();
     prepararProximoPasso();
+    prepararProximaEstacao();
+    // Voltando pelo histórico (cache de página), o estado do botão é lido de novo do progresso.
+    window.addEventListener("pageshow", function (evento) {
+      if (evento.persisted) {
+        prepararProximoPasso();
+        prepararProximaEstacao();
+      }
+    });
     return;
   }
 
@@ -695,6 +703,61 @@ function prepararProximoPasso() {
     bloco.appendChild(criarTexto("p", "conexao__proximo-texto", "Próximo passo na feira: visite a Estação " + proxima + ". Quando o orientador entregar o QR Code dela, volte ao Hub ou escaneie por aqui."));
     bloco.appendChild(criarBotaoScanner("Já recebi o QR Code da Estação " + proxima, "conexao__escanear"));
     bloco.hidden = false;
+  });
+}
+
+// Botão de avanço no fim do conteúdo: leva à estação seguinte (ou à Conclusão, na Estação 4) só
+// quando o progresso já a liberou. Lê o progresso por estacaoDesbloqueada() e jornadaCompleta(),
+// de progresso.js; nunca grava e não é um caminho para desbloquear: o QR Code continua sendo o único.
+// Bloqueado, é um botão desabilitado (aria-disabled, que continua focável para ser lido) com a
+// orientação ao lado. O link do Hub fica como ação principal enquanto o avanço não está liberado.
+function prepararProximaEstacao() {
+  const numero = Number(document.body.dataset.estacao);
+  const total = OdisseIAConfig.totalEstacoes;
+  const ultimaEstacao = numero >= total;
+  const proxima = numero + 1;
+  const liberada = ultimaEstacao ? jornadaCompleta() : estacaoDesbloqueada(proxima);
+  const destino = ultimaEstacao
+    ? { href: "final.html", texto: "Ver a Conclusão", dica: "A Conclusão abre depois das quatro estações validadas." }
+    : {
+        href: "estacao-" + proxima + ".html",
+        texto: "Ir para a Estação " + doisDigitos(proxima),
+        dica: "Para liberar: visite a Estação " + doisDigitos(proxima) + " na feira e receba o QR Code com o orientador."
+      };
+
+  document.querySelectorAll("[data-proxima-estacao]").forEach(function (slot) {
+    slot.textContent = "";
+    slot.classList.toggle("conexao__avanco--liberado", liberada);
+
+    const hub = slot.parentElement ? slot.parentElement.querySelector("[data-voltar-hub]") : null;
+    if (hub) {
+      hub.classList.toggle("botao--principal", !liberada);
+    }
+
+    if (liberada) {
+      const link = document.createElement("a");
+      link.className = "botao botao--principal conexao__avancar";
+      link.href = destino.href;
+      link.appendChild(criarTexto("span", "", destino.texto));
+      link.appendChild(criarSeta());
+      slot.appendChild(link);
+      return;
+    }
+
+    const botao = document.createElement("button");
+    botao.type = "button";
+    botao.className = "botao conexao__avancar conexao__avancar--bloqueado";
+    botao.setAttribute("aria-disabled", "true");
+    botao.setAttribute("aria-describedby", "avancar-dica");
+    const cadeado = criarTexto("span", "conexao__cadeado", "");
+    cadeado.setAttribute("aria-hidden", "true");
+    botao.appendChild(cadeado);
+    botao.appendChild(criarTexto("span", "", destino.texto));
+    botao.addEventListener("click", function (evento) {
+      evento.preventDefault();
+    });
+    slot.appendChild(botao);
+    slot.appendChild(criarTexto("p", "conexao__dica", destino.dica, "avancar-dica"));
   });
 }
 

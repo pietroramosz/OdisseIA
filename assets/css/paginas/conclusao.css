@@ -133,7 +133,7 @@
   animation: carimbar 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.6s both;
 }
 
-/* Barra: cheia = bloco alto roxo, vazia = trilho fino. */
+/* Barra: cheia = bloco alto azul, vazia = trilho fino. */
 .final-barra {
   display: grid;
   grid-auto-flow: column;

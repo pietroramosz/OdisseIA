@@ -161,6 +161,7 @@ body[data-estacao="4"] .pular {
   font-size: 1.0625rem;
   white-space: nowrap;
   line-height: 1.1;
+  color: var(--cor-destaque);
 }
 
 .dossie-capa__arte {
@@ -301,6 +302,17 @@ body[data-estacao="4"] .pular {
   font-size: 1.875rem;
 }
 
+/* Marca de título: um bloco curto no azul de acento sob o título do briefing. */
+.briefing__titulo::after {
+  content: "";
+  display: block;
+  width: 3.5rem;
+  height: 4px;
+  margin-top: var(--espaco-3);
+  background: var(--cor-destaque);
+  transform-origin: left;
+}
+
 .briefing p:not(.terminal-rotulo) {
   margin: var(--espaco-4) 0 0;
   font-size: 1.0625rem;
@@ -358,8 +370,10 @@ body[data-estacao="4"] .pular {
   color: var(--cor-texto-secundario);
 }
 
-/* Abertura do capítulo: a primeira frase é a tese, em corpo maior e com uma barra de margem. */
+/* Abertura do capítulo: a primeira frase é a tese, em corpo maior e com uma barra de margem no azul de traçado. */
 .capitulo__corpo > p:first-child {
+  padding-left: var(--espaco-4);
+  border-left: 3px solid var(--cor-azul-linha);
   font-size: 1.1875rem;
   line-height: 1.5;
   color: var(--cor-texto);
@@ -534,8 +548,91 @@ body[data-estacao="4"] .pular {
   color: var(--cor-destaque);
 }
 
-.conexao__acao {
+/* Ações do fim do conteúdo: avançar (próxima estação ou Conclusão, só se o progresso já liberou) e
+   voltar ao Hub. Sem script, fica só o link do Hub, que é a ação principal. */
+.conexao__acoes {
+  display: grid;
+  gap: var(--espaco-3);
   margin-top: var(--espaco-6);
+}
+
+.conexao__avanco {
+  display: grid;
+  gap: var(--espaco-2);
+}
+
+.conexao__avanco:empty {
+  display: none;
+}
+
+.conexao__avancar {
+  width: 100%;
+}
+
+.conexao__avancar .seta {
+  transition: transform 0.15s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Bloqueado: o botão existe e é lido, mas não leva a lugar nenhum. Hachura de "ainda fechado", cadeado
+   e texto atenuado: o estado não depende só da cor. */
+.conexao__avancar--bloqueado {
+  position: relative;
+  isolation: isolate;
+  background: var(--cor-fundo);
+  color: var(--cor-texto-atenuado);
+  box-shadow: inset 0 0 0 1px var(--cor-apagado);
+  cursor: not-allowed;
+}
+
+.conexao__avancar--bloqueado::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background-color: var(--cor-superficie-alta);
+  -webkit-mask: var(--textura-hachura) 0 0 / 10px 10px repeat;
+  mask: var(--textura-hachura) 0 0 / 10px 10px repeat;
+  opacity: 0.7;
+}
+
+.conexao__cadeado {
+  flex: none;
+  width: 1.125em;
+  height: 1.125em;
+  background-color: currentColor;
+  -webkit-mask: var(--icone-cadeado) center / contain no-repeat;
+  mask: var(--icone-cadeado) center / contain no-repeat;
+}
+
+.conexao p.conexao__dica {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  color: var(--cor-texto-secundario);
+}
+
+/* Numeral vazado da próxima estação: o fecho aponta para onde a jornada segue. */
+.conexao__numeral {
+  position: absolute;
+  z-index: -1;
+  top: var(--espaco-6);
+  right: var(--espaco-4);
+  font-size: 4.5rem;
+  -webkit-text-stroke-color: var(--cor-azul-linha);
+}
+
+/* O Hub deixa de ser a ação principal quando o avanço está liberado: botão escuro com contorno, a
+   forma do botão secundário sobre painel elevado. */
+.conexao__voltar:not(.botao--principal) {
+  background: var(--cor-fundo);
+  box-shadow: inset 0 0 0 1px var(--cor-apagado);
+}
+
+@media (hover: hover) {
+  .conexao__voltar:not(.botao--principal):hover {
+    background: var(--cor-texto);
+    color: var(--cor-fundo);
+  }
 }
 
 /* ---------- Telas de bloqueio ---------- */
@@ -872,13 +969,8 @@ body[data-estacao="4"] .pular {
     margin-top: var(--espaco-8);
   }
 
-  /* Estação 3: a árvore à esquerda, numeral e título à direita. */
-  [data-estacao="3"] .dossie-capa:not(.dossie-capa--bloqueada) {
-    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-    grid-template-areas:
-      "arte numeral"
-      "arte texto";
-  }
+  /* Estação 3: numeral e título à esquerda, a árvore de decisão à direita (a grade padrão da capa,
+     como nas Estações 1 e 4). */
 
   /* Estação 4: o palco da carta ocupa a coluna direita, ao lado de numeral e título. */
   [data-estacao="4"] .dossie-capa:not(.dossie-capa--bloqueada) {
@@ -1004,12 +1096,24 @@ body[data-estacao="4"] .pular {
     font-size: 2.5rem;
   }
 
-  .conexao__acao {
+  .conexao__acoes {
     grid-column: 2;
-    grid-row: 1 / span 4;
+    grid-row: 2 / span 4;
     align-self: end;
     justify-self: end;
-    width: min(100%, 18rem);
+    width: min(100%, 20rem);
+    margin-top: 0;
+  }
+
+  /* No desktop o numeral é um item da grade, acima das ações: os dois nunca se sobrepõem. */
+  .conexao__numeral {
+    position: static;
+    grid-column: 2;
+    grid-row: 1;
+    align-self: start;
+    justify-self: end;
+    margin-top: calc(-1 * var(--espaco-4));
+    font-size: 5.5rem;
   }
 
   .bloqueio {
@@ -1032,14 +1136,24 @@ body[data-estacao="4"] .pular {
   }
 }
 
-/* Com a coluna lateral larga, o diagrama fica ao lado do trecho que ilustra, como um módulo. */
-@media (min-width: 1360px) {
-  /* Diagramas com texto (--legivel) ficam no fluxo, com 28rem: na coluna lateral o texto encolheria. */
-  .capitulo__corpo > .figura:not(.figura--legivel) {
+/* Com a coluna lateral larga, o diagrama fica à direita do trecho que ilustra, como um módulo. A
+   Estação 3 reserva a coluna lateral para as figuras (texto à esquerda, imagem à direita): a coluna de
+   leitura encolhe para 27rem e a lateral cresce, para o texto do diagrama continuar legível (12px ou
+   mais). Abaixo de 1100px as figuras seguem no fluxo, abaixo do texto. */
+@media (min-width: 1100px) {
+  [data-estacao="3"] .capitulo {
+    grid-template-columns: var(--margem) minmax(0, 27rem) minmax(22rem, 1fr);
+  }
+
+  [data-estacao="3"] .capitulo > .capitulo__titulo {
+    grid-column: 2 / -1;
+  }
+
+  .capitulo__corpo > .figura {
     grid-column: 2;
     grid-row: var(--ancora, 1) / span var(--vao, 12);
     align-self: start;
-    max-width: none;
+    max-width: 34rem;
     margin: 0;
   }
 }
@@ -1132,7 +1246,7 @@ body[data-estacao="4"] .pular {
     box-shadow: inset 0 0 0 1.5px var(--cor-apagado);
   }
 
-  /* Trecho até a próxima parada: roxo sólido no que já foi percorrido, tracejado no resto. */
+  /* Trecho até a próxima parada: destaque sólido no que já foi percorrido, tracejado no resto. */
   .dossie-rota__parada::after {
     content: "";
     position: absolute;

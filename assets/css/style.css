@@ -123,20 +123,20 @@
 
 :root[data-tema="claro"] {
   color-scheme: light;
-  --cor-fundo: #f5f3f8;
+  --cor-fundo: #f3f5fa;
   --cor-superficie: #ffffff;
-  --cor-superficie-escura: #ebe8f0;
-  --cor-superficie-alta: #e2deea;
-  --cor-texto: #17151c;
-  --cor-texto-secundario: #3d3a48;
-  --cor-texto-atenuado: #565263;
+  --cor-superficie-escura: #e9edf5;
+  --cor-superficie-alta: #dde3ef;
+  --cor-texto: #14171f;
+  --cor-texto-secundario: #353a49;
+  --cor-texto-atenuado: #4f5568;
   --cor-destaque: #2a55d6;
   --cor-sobre-destaque: #ffffff;
-  --cor-apagado: #6e6a7c;
+  --cor-apagado: #686f82;
   --cor-azul: #c9d4f4;
   --cor-azul-linha: #6f8ce0;
   --cor-azul-claro: #1c3fb0;
-  --cor-grade: rgba(23, 21, 28, 0.06);
+  --cor-grade: rgba(20, 23, 31, 0.06);
   --cor-xbot: #8f26c7;
   --cor-sobre-xbot: #ffffff;
 }
@@ -724,8 +724,18 @@ p .zero::after {
 :root[data-movimento="reduzido"] .botao:active,
 :root[data-movimento="reduzido"] a.cartao:active .cartao__corpo,
 :root[data-movimento="reduzido"] a.cartao:hover .cartao__corpo,
-:root[data-movimento="reduzido"] a.cartao:hover .seta {
+:root[data-movimento="reduzido"] a.cartao:hover .seta,
+:root[data-movimento="reduzido"] .nota:hover,
+:root[data-movimento="reduzido"] .figura:hover,
+:root[data-movimento="reduzido"] .conexao__avancar:hover .seta,
+:root[data-movimento="reduzido"] .epoca:hover::before,
+:root[data-movimento="reduzido"] .marco:hover::before,
+:root[data-movimento="reduzido"] .botao:not(.conexao__avancar--bloqueado):hover {
   transform: none;
+}
+
+:root[data-movimento="reduzido"] .terminal-voltar:hover .seta--voltar {
+  transform: scaleX(-1);
 }
 
 /* Sem script, o atributo não existe: vale então a preferência do sistema. */
@@ -748,8 +758,18 @@ p .zero::after {
   :root:not([data-movimento]) .botao:active,
   :root:not([data-movimento]) a.cartao:active .cartao__corpo,
   :root:not([data-movimento]) a.cartao:hover .cartao__corpo,
-  :root:not([data-movimento]) a.cartao:hover .seta {
+  :root:not([data-movimento]) a.cartao:hover .seta,
+  :root:not([data-movimento]) .nota:hover,
+  :root:not([data-movimento]) .figura:hover,
+  :root:not([data-movimento]) .conexao__avancar:hover .seta,
+  :root:not([data-movimento]) .epoca:hover::before,
+  :root:not([data-movimento]) .marco:hover::before,
+  :root:not([data-movimento]) .botao:not(.conexao__avancar--bloqueado):hover {
     transform: none;
+  }
+
+  :root:not([data-movimento]) .terminal-voltar:hover .seta--voltar {
+    transform: scaleX(-1);
   }
 }
 

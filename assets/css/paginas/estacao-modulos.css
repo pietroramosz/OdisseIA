@@ -453,7 +453,7 @@
   list-style: none;
 }
 
-/* A espinha cinza e, por cima, o trecho percorrido em roxo. */
+/* A espinha cinza e, por cima, o trecho percorrido na cor de destaque. */
 .rota-tempo::before,
 .rota-tempo::after {
   content: "";
@@ -479,7 +479,7 @@
   padding-left: var(--espaco-6);
 }
 
-/* Nó da época sobre a espinha (acima do traço roxo, que é pintado depois). */
+/* Nó da época sobre a espinha (acima do traço de destaque, que é pintado depois). */
 .epoca::before {
   content: "";
   position: absolute;
@@ -1033,5 +1033,333 @@
     [data-estacao="3"] .etapa::after {
       animation-name: percurso-ligar-h;
     }
+  }
+}
+
+/* ---------- Entrada das estações e continuidade da leitura ----------
+   Toda animação parte de um estado já visível (fill-mode backwards ou, na rolagem, both dentro de
+   @supports): sem suporte ou sem script a página fica estática e completa. Com movimento reduzido
+   (data-movimento, em style.css) nada disto roda. Cada estação tem o seu sotaque; os keyframes
+   comuns levam o prefixo "estacao-". */
+
+@keyframes estacao-entrar {
+  from { opacity: 0; transform: translateY(1.25rem); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes estacao-numeral {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0); }
+}
+
+@keyframes estacao-ficha-linha {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0); }
+}
+
+@keyframes estacao-arte {
+  from { opacity: 0; transform: translateY(1.5rem) scale(0.97); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes estacao-marca {
+  from { transform: scaleX(0); }
+  to { transform: none; }
+}
+
+@keyframes estacao-revelar {
+  from { opacity: 0; transform: translateY(1rem); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes estacao-texto {
+  from { opacity: 0.4; transform: translateY(0.625rem); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Capa, em sequência: numeral, título, "ESTAÇÃO 0N / 04", ficha técnica e, em paralelo, a arte. */
+.dossie-capa:not(.dossie-capa--bloqueada) .dossie-capa__numeral {
+  animation: estacao-numeral 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+.dossie-capa:not(.dossie-capa--bloqueada) .titulo-estacao {
+  animation: estacao-entrar 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.12s backwards;
+}
+
+.dossie-capa:not(.dossie-capa--bloqueada) .terminal-hero__rotulo {
+  animation: estacao-entrar 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.26s backwards;
+}
+
+.dossie-ficha {
+  animation: estacao-ficha-linha 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.34s backwards;
+}
+
+.dossie-ficha__item {
+  animation: estacao-entrar 0.45s cubic-bezier(0.22, 1, 0.36, 1) calc(0.42s + var(--i, 0) * 0.07s) backwards;
+}
+
+.dossie-ficha__item:nth-child(2) { --i: 1; }
+.dossie-ficha__item:nth-child(3) { --i: 2; }
+
+.dossie-capa__arte {
+  animation: estacao-arte 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.18s backwards;
+}
+
+.briefing__titulo::after {
+  animation: estacao-marca 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.7s backwards;
+}
+
+/* Estação 1, o arcade: a bola cruza a quadra aos saltos (steps), deixando o rastro; as pás chegam
+   à posição e o título é "digitado" na tela, como placar de fliperama. */
+@keyframes arcade-escrever {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+
+@keyframes arcade-bola {
+  from { transform: translate(-181px, -47px); opacity: 0; }
+  12% { opacity: 1; }
+  to { transform: none; opacity: 1; }
+}
+
+@keyframes arcade-rastro {
+  from { opacity: 0; }
+}
+
+@keyframes arcade-pala-esquerda {
+  from { transform: translateY(26px); }
+  to { transform: none; }
+}
+
+@keyframes arcade-pala-direita {
+  from { transform: translateY(-30px); }
+  to { transform: none; }
+}
+
+[data-estacao="1"] .dossie-capa:not(.dossie-capa--bloqueada) .titulo-estacao {
+  animation: arcade-escrever 0.7s steps(18, end) 0.15s backwards;
+}
+
+[data-estacao="1"] .arte__bola {
+  animation: arcade-bola 0.9s steps(14, end) 0.5s backwards;
+}
+
+[data-estacao="1"] .arte__rastro {
+  animation: arcade-rastro 0.12s steps(1, end) calc(0.6s + var(--k, 0) * 0.15s) backwards;
+}
+
+[data-estacao="1"] .arte__solido:nth-of-type(2) {
+  animation: arcade-pala-esquerda 0.5s steps(8, end) 0.3s backwards;
+}
+
+[data-estacao="1"] .arte__solido:nth-of-type(3) {
+  animation: arcade-pala-direita 0.5s steps(8, end) 0.3s backwards;
+}
+
+[data-estacao="1"] .arte__trajetoria {
+  animation: arcade-rastro 0.5s ease-out 1s backwards;
+}
+
+/* Estação 3, a árvore: as ligações se traçam do topo para baixo; os nós aparecem por nível; o caminho
+   ativo acende por último e termina no delta, que pousa. */
+@keyframes arvore-tracar {
+  from { stroke-dasharray: 1; stroke-dashoffset: 1; }
+  to { stroke-dasharray: 1; stroke-dashoffset: 0; }
+}
+
+@keyframes arvore-no {
+  from { opacity: 0; transform: scale(0.4); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes arvore-delta {
+  from { opacity: 0; transform: translateY(-14px); }
+  60% { opacity: 1; transform: translateY(2px); }
+  to { opacity: 1; transform: none; }
+}
+
+[data-estacao="3"] .arte__ligacao {
+  animation: arvore-tracar 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.35s backwards;
+}
+
+[data-estacao="3"] .arte__ligacao--ativa {
+  animation-delay: 1.15s;
+  animation-duration: 0.8s;
+}
+
+[data-estacao="3"] .arte__no,
+[data-estacao="3"] rect.arte__bola {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: arvore-no 0.3s cubic-bezier(0.22, 1, 0.36, 1) 0.3s backwards;
+}
+
+[data-estacao="3"] .arte__no[width="24"] { animation-delay: 0.55s; }
+[data-estacao="3"] .arte__no[width="18"] { animation-delay: 0.8s; }
+
+[data-estacao="3"] .arte__delta {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: arvore-delta 0.5s cubic-bezier(0.22, 1, 0.36, 1) 1.8s backwards;
+}
+
+/* Estação 4: o delta de retícula do palco cresce a partir do canto, depois do leque de cartas. */
+@keyframes palco-delta {
+  from { clip-path: polygon(0 100%, 0 100%, 0 100%); }
+  to { clip-path: polygon(0 35%, 100% 100%, 0 100%); }
+}
+
+.palco-carta__reticula {
+  animation: palco-delta 0.6s cubic-bezier(0.22, 1, 0.36, 1) 1s backwards;
+}
+
+/* Rolagem: a linha de abertura de cada seção se traça, os títulos sobem e os textos, figuras e módulos
+   entram à medida que chegam à tela. Só onde há animation-timeline; o que já está à vista na carga
+   aparece completo. */
+@supports (animation-timeline: view()) {
+  .briefing,
+  .capitulo,
+  .linha-tempo {
+    border-top-color: transparent;
+  }
+
+  .briefing::before,
+  .capitulo::before,
+  .linha-tempo::before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    right: 0;
+    left: 0;
+    height: 2px;
+    background: var(--cor-azul-linha);
+    transform-origin: left;
+    animation: estacao-marca linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 30%;
+  }
+
+  .briefing__titulo,
+  .capitulo__titulo,
+  .linha-tempo__titulo,
+  .conexao__titulo,
+  .capitulo > .capitulo__rotulo {
+    animation: estacao-revelar linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 60%;
+  }
+
+  .briefing p,
+  .capitulo__corpo > p,
+  .capitulo__corpo > ul,
+  .conexao > p {
+    animation: estacao-texto linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 45%;
+  }
+
+  .capitulo__corpo > .figura,
+  .capitulo__corpo > .nota,
+  .rota-tempo,
+  .percurso {
+    animation: estacao-revelar linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 40%;
+  }
+
+  /* Estação 2: o sinal chega à linha do tempo. Os nós das épocas se acendem e cada marco entra pela
+     esquerda, como o sinal que se espalha pela rede da capa. */
+  [data-estacao="2"] .epoca::before {
+    transform-origin: center;
+    animation: rede-surgir linear both;
+    animation-timeline: view();
+    animation-range: entry 10% entry 70%;
+  }
+
+  [data-estacao="2"] .marco,
+  [data-estacao="2"] .epoca__nome {
+    animation: rede-sinal linear both;
+    animation-timeline: view();
+    animation-range: entry 5% entry 65%;
+  }
+}
+
+/* Microinterações: respostas curtas ao mouse e ao foco. Em movimento reduzido, style.css as devolve
+   a trocas de cor. */
+.capitulo__corpo strong,
+.briefing strong {
+  transition: background-size 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.marco__ano,
+.epoca__nome,
+.etapa__nome {
+  transition: color 0.15s ease-out;
+}
+
+.epoca::before,
+.marco::before {
+  transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.nota,
+.figura {
+  transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.terminal-voltar .seta {
+  transition: transform 0.15s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (hover: hover) {
+  .capitulo__corpo strong:hover,
+  .briefing strong:hover {
+    background-size: 100% 1.1em;
+  }
+
+  .marco:hover .marco__ano,
+  .epoca:hover .epoca__nome,
+  .etapa:hover .etapa__nome {
+    color: var(--cor-destaque);
+  }
+
+  .epoca:hover::before,
+  .marco:hover::before {
+    transform: scale(1.5);
+  }
+
+  .nota:hover,
+  .figura:hover {
+    transform: translateY(-3px);
+  }
+
+  .conexao__avancar:not(.conexao__avancar--bloqueado):hover .seta {
+    transform: translateX(4px);
+  }
+
+  .conexao__avancar--bloqueado:hover {
+    background: var(--cor-fundo);
+    color: var(--cor-texto-atenuado);
+  }
+
+  .terminal-voltar:hover .seta--voltar {
+    transform: translateX(-3px) scaleX(-1);
+  }
+
+  .botao:not(.conexao__avancar--bloqueado):hover {
+    transform: translateY(-2px);
+  }
+}
+
+.conexao__avancar:not(.conexao__avancar--bloqueado):focus-visible .seta {
+  transform: translateX(4px);
+}
+
+/* Impressão e PDF: o conteúdo sai completo, sem estados intermediários de rolagem. */
+@media print {
+  .pagina-estacao *,
+  .pagina-estacao *::before,
+  .pagina-estacao *::after {
+    animation: none !important;
   }
 }

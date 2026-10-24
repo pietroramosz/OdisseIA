@@ -709,3 +709,24 @@ Fluxo, `progresso.js`, `qr.js`, chave `odisseia:progresso`, regras de desbloquei
 - Aprovar (ou não) a cópia local de uma biblioteca de decodificação para o iOS; sem ela o fluxo no iPhone usa o app Câmera.
 - Testar a leitura real em Chrome/Android e o fluxo do app Câmera no iPhone, com os QR Codes impressos.
 - Confirmar o texto do card de origem e do acesso ao site do jogo (a frase sobre a demonstração está em formulação condicional).
+
+---
+
+## DEC-025 — Entrada dinâmica das estações, figuras da Estação 3 à direita, avanço pelo progresso e correção do roxo no tema claro
+
+### Contexto
+
+As Estações 1 e 2 liam como documentos estáticos; na Estação 3 o diagrama do capítulo ficava abaixo do texto; o fim das estações só tinha "Voltar ao Hub"; havia tons lilases fora do X-B0T; as abas não tinham ícone próprio.
+
+### Decisão
+
+1. **Entrada e leitura:** sequência de capa comum a todas as estações e um sotaque por estação (arcade, sinal, árvore, palco). Revelações por rolagem só dentro de `@supports (animation-timeline: view())`; sem suporte, ou com movimento reduzido (`data-movimento`, DEC-022), nada anima e nada fica escondido. Impressão desliga as animações.
+2. **Estação 3:** a capa passa a ter texto à esquerda e árvore à direita; a partir de 1100px as duas figuras dos capítulos ficam à direita do texto (coluna de leitura de 27rem, coluna lateral maior, para o texto do diagrama continuar com 12px ou mais). Abaixo de 1100px a leitura continua vertical.
+3. **Delta:** o triângulo de retícula do palco da Estação 4 (`.palco-carta__reticula`, `clip-path` triangular) e o delta final da árvore da Estação 3 (`.arte__delta`) foram preservados sem alteração de forma; ganharam só uma entrada animada.
+4. **Avanço:** botão "Ir para a Estação 0N" (ou "Ver a Conclusão", na Estação 4) calculado a partir de `obterProgresso()` (via `estacaoDesbloqueada()` e `jornadaCompleta()`). Bloqueado é um botão `aria-disabled` com a orientação de visita física e QR do orientador. Não grava nada e não substitui o QR.
+5. **Cor:** os neutros do tema claro tinham matiz lilás (`#f5f3f8`, `#e2deea`…) e liam como roxo na abertura e nas estações; passaram a azul-acinzentados. Comentários que ainda diziam "roxo" para elementos azuis foram corrigidos. O roxo `#cd5efa` continua só nas áreas do X-B0T.
+6. **Favicon:** SVG local (grafite e azul, a rota da jornada), com PNG de 32px e `apple-touch-icon` de reserva.
+
+### O que não muda
+
+`progresso.js`, `qr.js`, `config.js`, scanner, chave `odisseia:progresso`, regras de ordem e desbloqueio, HTML/CSS/JS puros.

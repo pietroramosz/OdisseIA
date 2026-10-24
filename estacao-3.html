@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>OdisseIA — Estação 3</title>
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/img/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/paginas/estacao.css">
   <link rel="stylesheet" href="assets/css/paginas/estacao-modulos.css">
@@ -39,8 +42,8 @@
         <div class="dossie-capa__arte" aria-hidden="true">
           <svg class="arte" viewBox="0 0 320 200" focusable="false">
             <path class="arte__tela" d="M14 6H306L316 16V184L306 194H14L4 184V16Z"/>
-            <path class="arte__ligacao" d="M160 44V60M70 60H250M70 60V76M160 60V76M250 60V76M70 100V116M40 116H100M40 116V132M100 116V132M160 100V116M130 116H190M130 116V132M190 116V132M250 100V116M220 116H280M220 116V132"/>
-            <path class="arte__ligacao arte__ligacao--ativa" d="M160 44V60H250V76M250 100V116H280V132M280 156V170"/>
+            <path class="arte__ligacao" pathLength="1" d="M160 44V60M70 60H250M70 60V76M160 60V76M250 60V76M70 100V116M40 116H100M40 116V132M100 116V132M160 100V116M130 116H190M130 116V132M190 116V132M250 100V116M220 116H280M220 116V132"/>
+            <path class="arte__ligacao arte__ligacao--ativa" pathLength="1" d="M160 44V60H250V76M250 100V116H280V132M280 156V170"/>
             <rect class="arte__solido arte__bola" x="148" y="20" width="24" height="24"/>
             <rect class="arte__no" x="58" y="76" width="24" height="24"/>
             <rect class="arte__no" x="148" y="76" width="24" height="24"/>
@@ -52,7 +55,7 @@
             <rect class="arte__no" x="211" y="132" width="18" height="18"/>
             <rect class="arte__no arte__no--ativo" x="271" y="132" width="18" height="18"/>
             <path class="arte__traco-fino" d="M154 32H166M160 26V38"/>
-            <path class="arte__bola" d="M272 170H288L280 184Z"/>
+            <path class="arte__bola arte__delta" d="M272 170H288L280 184Z"/>
           </svg>
         </div>
       </header>
@@ -79,7 +82,7 @@
           </ul>
           <p>As <strong>máquinas de estados</strong> organizam essas ações em diferentes situações.</p>
           <p>Um personagem pode estar patrulhando, perceber o jogador, começar a persegui-lo e depois mudar novamente de comportamento.</p>
-          <figure class="figura figura--legivel">
+          <figure class="figura figura--legivel" style="--ancora: 3">
             <svg class="esquema figura__esquema" viewBox="0 0 340 240" aria-hidden="true" focusable="false">
               <defs>
                 <marker id="seta-estado" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L8 4L0 8Z" class="figura__ponta"/></marker>
@@ -187,13 +190,17 @@
       </section>
 
       <section class="conexao">
+        <span class="numeral-vazado conexao__numeral" aria-hidden="true">04</span>
         <h2 class="conexao__titulo">E o X-B<span class="zero">0</span>T?</h2>
         <p>Em jogos de cartas, uma inteligência artificial pode analisar jogadas, escolher cartas e controlar um adversário.</p>
         <p>Esses conceitos ajudam a criar uma ponte entre esta estação e o <strong>X-B0T</strong>, jogo desenvolvido para o OdisseIA.</p>
         <p>Isso não significa que todas as técnicas apresentadas aqui estejam implementadas no X-B0T. A tecnologia utilizada no jogo depende do que for realmente concluído pelo grupo responsável.</p>
         <p>Na próxima estação, você poderá conhecer essa aplicação na prática.</p>
         <div class="conexao__proximo" data-proximo-passo hidden></div>
-        <a class="botao botao--principal conexao__acao" href="hub.html">Voltar ao Hub</a>
+        <div class="conexao__acoes">
+          <div class="conexao__avanco" data-proxima-estacao></div>
+          <a class="botao botao--principal conexao__voltar" data-voltar-hub href="hub.html">Voltar ao Hub</a>
+        </div>
       </section>
     </div>
 

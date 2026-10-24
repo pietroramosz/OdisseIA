@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>OdisseIA — Estação 2</title>
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/img/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/paginas/estacao.css">
   <link rel="stylesheet" href="assets/css/paginas/estacao-modulos.css">
@@ -190,12 +193,16 @@
       </section>
 
       <section class="conexao">
+        <span class="numeral-vazado conexao__numeral" aria-hidden="true">03</span>
         <h2 class="conexao__titulo">E depois?</h2>
         <p>Os videogames ficaram maiores, mais conectados e mais complexos.</p>
         <p>Mas enquanto gráficos, internet e hardware evoluíam, outra tecnologia também estava mudando silenciosamente a maneira como os jogos funcionavam.</p>
         <p>Na próxima estação, você vai conhecer a evolução da <strong>inteligência artificial nos videogames</strong>.</p>
         <div class="conexao__proximo" data-proximo-passo hidden></div>
-        <a class="botao botao--principal conexao__acao" href="hub.html">Voltar ao Hub</a>
+        <div class="conexao__acoes">
+          <div class="conexao__avanco" data-proxima-estacao></div>
+          <a class="botao botao--principal conexao__voltar" data-voltar-hub href="hub.html">Voltar ao Hub</a>
+        </div>
       </section>
     </div>
 
