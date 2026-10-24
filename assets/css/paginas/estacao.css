@@ -262,7 +262,7 @@ body[data-estacao="4"] .pular {
 .linha-tempo,
 .conexao {
   position: relative;
-  margin-top: var(--espaco-12);
+  margin-top: var(--espaco-8);
   padding-top: var(--espaco-6);
   border-top: 2px solid var(--cor-azul-linha);
 }
@@ -370,10 +370,8 @@ body[data-estacao="4"] .pular {
   color: var(--cor-texto-secundario);
 }
 
-/* Abertura do capítulo: a primeira frase é a tese, em corpo maior e com uma barra de margem no azul de traçado. */
+/* Abertura do capítulo: a primeira frase é a tese, em corpo maior e em texto pleno. */
 .capitulo__corpo > p:first-child {
-  padding-left: var(--espaco-4);
-  border-left: 3px solid var(--cor-azul-linha);
   font-size: 1.1875rem;
   line-height: 1.5;
   color: var(--cor-texto);
@@ -444,14 +442,25 @@ body[data-estacao="4"] .pular {
   stroke-width: 1.5;
 }
 
-.figura__nome {
-  text-anchor: middle;
-  font-size: 13px;
+/* Texto de SVG com 12px ou mais também no celular de 360px (o diagrama encolhe com a largura). */
+.figura__esquema .esquema__texto {
+  font-size: 14.5px;
 }
 
-.figura__condicao {
-  font-size: 12px;
+.figura__nome,
+.figura__esquema .figura__nome {
+  text-anchor: middle;
+  font-size: 14px;
+}
+
+.figura__condicao,
+.figura__esquema .figura__condicao {
+  font-size: 14.5px;
   letter-spacing: 0.02em;
+}
+
+.arte .esquema__texto {
+  font-size: 12.5px;
 }
 
 .figura__condicao--fim {

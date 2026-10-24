@@ -730,3 +730,25 @@ As Estações 1 e 2 liam como documentos estáticos; na Estação 3 o diagrama d
 ### O que não muda
 
 `progresso.js`, `qr.js`, `config.js`, scanner, chave `odisseia:progresso`, regras de ordem e desbloqueio, HTML/CSS/JS puros.
+
+---
+
+## DEC-026 — Composição editorial das Estações 1 e 2, refinos da 3 e polimento da 4
+
+### Contexto
+
+Mesmo com animações (DEC-025), as Estações 1 e 2 liam como texto corrido: cerca de 40% da largura ficava vazia no desktop, os quatro capítulos tinham a mesma aparência e o Pokémon e a Twitch eram módulos pequenos demais para o peso que têm no conteúdo.
+
+### Decisão
+
+1. **Placas** (`.placa`): uma ilustração por trecho que a pede, sem moldura de cartão, na coluna lateral do desktop e como pausa no fluxo do celular. Só representam o que o parágrafo vizinho diz e levam legenda de "Ilustração". As sete placas de S1 e S2 e a de S3 estão listadas no DESIGN.md.
+2. **Palcos editoriais** (`.palco-editorial`): o módulo do Pokémon (`nota--orbita`) e o da Twitch (`nota--marco`) saíram da coluna lateral e viraram composições de largura de capítulo, com a frase do próprio texto em corpo grande. O texto foi mantido palavra por palavra (só o título e o selo "2011" do módulo da Twitch, que repetiam o parágrafo, deram lugar ao numeral e à frase). Isso revisa a regra "um módulo nunca repete o parágrafo" da DEC-019 para o caso de composição e não de módulo.
+3. **Ritmo:** a abertura dos capítulos perde a barra colorida de 3px (borda lateral acima de 1px) e fica só em corpo maior e texto pleno; o espaço vertical entre seções cai no celular (2rem); a lista de sete itens da Estação 3 passa a duas colunas a partir de 600px; a frase "A IA tradicional, portanto, não desapareceu." ganha destaque de fecho.
+4. **Movimento:** o texto de leitura deixa de se animar (a rodada anterior esmaecia parágrafos ao entrar, uma mesma entrada para todo o conteúdo). Ficam a linha de abertura das seções, os títulos e o desenho de cada placa por rolagem, com `view-timeline` por figura e `--i` para escalonar.
+5. **Legibilidade:** todo texto de SVG das estações passa a ter 12px ou mais já renderizado em telas de 360px (diagramas da Estação 3 e rótulos da capa).
+6. **Estação 4:** preservada. Só perde a barra lateral roxa dos parágrafos de abertura, como as demais.
+7. **Hospedagem:** GitHub Pages em `/OdisseIA/`. Todos os caminhos são relativos; verificado com um servidor que só responde sob esse prefixo e com caixa exata.
+
+### O que não muda
+
+`progresso.js`, `qr.js`, `config.js`, scanner, chave `odisseia:progresso`, regras de ordem e desbloqueio, HTML/CSS/JS puros.

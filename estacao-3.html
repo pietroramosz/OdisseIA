@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/paginas/estacao.css">
   <link rel="stylesheet" href="assets/css/paginas/estacao-modulos.css">
+  <link rel="stylesheet" href="assets/css/paginas/estacao-editorial.css">
   <link rel="stylesheet" href="assets/css/scanner.css">
   <script src="assets/js/acessibilidade.js"></script>
 </head>
@@ -99,14 +100,14 @@
               <text class="esquema__texto esquema__texto--forte figura__nome" x="65" y="122">PATRULHAR</text>
               <text class="esquema__texto esquema__texto--forte figura__nome" x="285" y="122">ATACAR</text>
               <text class="esquema__texto esquema__texto--forte figura__nome" x="175" y="201">FUGIR</text>
-              <text class="esquema__texto figura__condicao" x="68" y="74">detecta o</text>
-              <text class="esquema__texto figura__condicao" x="68" y="87">jogador</text>
+              <text class="esquema__texto figura__condicao" x="73" y="74">detecta o</text>
+              <text class="esquema__texto figura__condicao" x="73" y="87">jogador</text>
               <text class="esquema__texto figura__condicao figura__condicao--fim" x="272" y="74">está</text>
               <text class="esquema__texto figura__condicao figura__condicao--fim" x="272" y="87">próximo</text>
               <text class="esquema__texto figura__condicao figura__condicao--fim" x="272" y="160">está em</text>
               <text class="esquema__texto figura__condicao figura__condicao--fim" x="272" y="173">perigo</text>
-              <text class="esquema__texto figura__condicao" x="68" y="160">não encontra</text>
-              <text class="esquema__texto figura__condicao" x="68" y="173">o jogador</text>
+              <text class="esquema__texto figura__condicao" x="73" y="160">não encontra</text>
+              <text class="esquema__texto figura__condicao" x="73" y="173">o jogador</text>
             </svg>
             <figcaption class="figura__legenda">As quatro regras como uma máquina de estados: cada seta é a condição que leva ao próximo comportamento.</figcaption>
           </figure>
@@ -148,6 +149,19 @@
         <div class="capitulo__corpo">
           <p>O <strong>Machine Learning</strong>, ou aprendizado de máquina, permite que sistemas encontrem padrões a partir de dados e experiências.</p>
           <p>Nos jogos, essas técnicas podem ser utilizadas para analisar comportamentos, estudar estratégias, treinar agentes ou ajudar a ajustar desafios.</p>
+          <figure class="placa placa--aprender" style="--ancora: 1">
+            <svg class="placa__svg" viewBox="0 0 260 150" aria-hidden="true" focusable="false">
+              <path class="p-no" d="M14 30h8v8h-8ZM40 62h8v8h-8ZM22 96h8v8h-8ZM58 24h8v8h-8ZM64 100h8v8h-8ZM34 124h8v8h-8ZM70 66h8v8h-8ZM50 46h8v8h-8Z"/>
+              <path class="p-ativa p-tracar" pathLength="1" style="--i: 0" d="M92 76H132M122 66L134 76L122 86"/>
+              <path class="p-no p-surgir" style="--i: 1" d="M170 24h8v8h-8ZM184 40h8v8h-8ZM204 28h8v8h-8ZM190 56h8v8h-8Z"/>
+              <path class="p-no p-surgir" style="--i: 2" d="M172 98h8v8h-8ZM194 110h8v8h-8ZM214 96h8v8h-8ZM200 124h8v8h-8ZM224 118h8v8h-8Z"/>
+              <path class="p-ativa p-surgir" style="--i: 3" d="M160 16H216L222 22V66L216 72H166L160 66Z"/>
+              <path class="p-ativa p-surgir" style="--i: 4" d="M162 90H236L242 96V134L236 140H168L162 134Z"/>
+              <text class="p-texto p-texto--meio" x="46" y="146">DADOS</text>
+              <text class="p-texto p-texto--meio" x="202" y="12">PADRÕES</text>
+            </svg>
+            <figcaption class="placa__legenda">Ilustração: padrões encontrados a partir de dados e experiências.</figcaption>
+          </figure>
           <p>Um exemplo conhecido é o <strong>AlphaGo</strong>, que combinou aprendizado de máquina e técnicas de busca para jogar Go.</p>
           <p>Também existem sistemas adaptativos capazes de alterar comportamentos ou desafios de acordo com as ações do jogador.</p>
           <p>Isso não significa necessariamente que todo inimigo esteja "aprendendo" como uma pessoa. Muitas vezes, o sistema está apenas utilizando regras e informações previamente definidas para responder de maneiras diferentes.</p>
@@ -160,7 +174,7 @@
         <div class="capitulo__corpo">
           <p>A <strong>IA generativa</strong> amplia novamente as possibilidades.</p>
           <p>Em vez de apenas escolher uma ação, esses sistemas podem ajudar a produzir novos conteúdos, como:</p>
-          <ul>
+          <ul class="lista-curta">
             <li>diálogos;</li>
             <li>histórias;</li>
             <li>personagens;</li>
@@ -171,7 +185,9 @@
           </ul>
           <p>Isso pode permitir experiências mais variadas, mas também cria novos desafios.</p>
           <p>O conteúdo gerado precisa continuar coerente com o mundo do jogo, respeitar suas regras e não prejudicar o equilíbrio da experiência.</p>
-          <p>A IA tradicional, portanto, não desapareceu.</p>
+          <div class="palco-editorial palco-editorial--fecho">
+            <p class="palco-editorial__frase">A IA tradicional, portanto, não desapareceu.</p>
+          </div>
           <p>Regras, máquinas de estados, pathfinding, Behavior Trees e outras técnicas continuam úteis porque oferecem controle e previsibilidade.</p>
           <p>Em muitos casos, tecnologias diferentes podem trabalhar juntas.</p>
         </div>

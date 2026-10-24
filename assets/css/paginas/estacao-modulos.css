@@ -1072,11 +1072,6 @@
   to { opacity: 1; transform: none; }
 }
 
-@keyframes estacao-texto {
-  from { opacity: 0.4; transform: translateY(0.625rem); }
-  to { opacity: 1; transform: none; }
-}
-
 /* Capa, em sequência: numeral, título, "ESTAÇÃO 0N / 04", ficha técnica e, em paralelo, a arte. */
 .dossie-capa:not(.dossie-capa--bloqueada) .dossie-capa__numeral {
   animation: estacao-numeral 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards;
@@ -1213,9 +1208,10 @@
   animation: palco-delta 0.6s cubic-bezier(0.22, 1, 0.36, 1) 1s backwards;
 }
 
-/* Rolagem: a linha de abertura de cada seção se traça, os títulos sobem e os textos, figuras e módulos
-   entram à medida que chegam à tela. Só onde há animation-timeline; o que já está à vista na carga
-   aparece completo. */
+/* Rolagem: a linha de abertura de cada seção se traça e os títulos sobem ao chegar à tela. O texto de
+   leitura nunca se anima (não atrasa nem esmaece o que se lê); cada ilustração se desenha sozinha
+   (estacao-editorial.css). Só onde há animation-timeline; o que já está à vista na carga aparece
+   completo. */
 @supports (animation-timeline: view()) {
   .briefing,
   .capitulo,
@@ -1242,29 +1238,10 @@
   .briefing__titulo,
   .capitulo__titulo,
   .linha-tempo__titulo,
-  .conexao__titulo,
   .capitulo > .capitulo__rotulo {
     animation: estacao-revelar linear both;
     animation-timeline: view();
     animation-range: entry 0% entry 60%;
-  }
-
-  .briefing p,
-  .capitulo__corpo > p,
-  .capitulo__corpo > ul,
-  .conexao > p {
-    animation: estacao-texto linear both;
-    animation-timeline: view();
-    animation-range: entry 0% entry 45%;
-  }
-
-  .capitulo__corpo > .figura,
-  .capitulo__corpo > .nota,
-  .rota-tempo,
-  .percurso {
-    animation: estacao-revelar linear both;
-    animation-timeline: view();
-    animation-range: entry 0% entry 40%;
   }
 
   /* Estação 2: o sinal chega à linha do tempo. Os nós das épocas se acendem e cada marco entra pela

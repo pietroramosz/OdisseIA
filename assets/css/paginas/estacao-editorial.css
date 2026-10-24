@@ -1,0 +1,344 @@
+/* Composição editorial das estações (DEC-026). Carrega depois de estacao-modulos.css.
+   Duas peças, ambas feitas só com o conteúdo que já está na página:
+   - placa (.placa): ilustração de um trecho do capítulo, traço direto sobre o fundo da página, sem
+     moldura de cartão. No desktop ocupa a coluna lateral, alinhada ao parágrafo que ilustra; no
+     celular entra no fluxo, logo depois dele, e faz a pausa visual entre blocos de texto;
+   - palco editorial (.palco-editorial): o momento marcante de um capítulo (Pokémon na Estação 1,
+     Twitch na Estação 2). O texto vira corpo grande e divide a largura com uma ilustração própria.
+   Todo desenho é SVG com traços dos tokens de cor; a legenda marca o que é ilustração. */
+
+/* ---------- Traços das ilustrações ---------- */
+
+.placa__svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.p-linha,
+.p-forte,
+.p-ativa {
+  fill: none;
+}
+
+.p-linha {
+  stroke: var(--cor-apagado);
+  stroke-width: 1.5;
+}
+
+.p-forte {
+  stroke: var(--cor-texto);
+  stroke-width: 2;
+  stroke-linejoin: miter;
+}
+
+.p-ativa {
+  stroke: var(--cor-destaque);
+  stroke-width: 2;
+  stroke-linejoin: miter;
+}
+
+.p-pontilhado {
+  stroke-dasharray: 2 6;
+}
+
+.p-cheio {
+  fill: var(--cor-destaque);
+}
+
+.p-no {
+  fill: var(--cor-fundo);
+  stroke: var(--cor-texto-secundario);
+  stroke-width: 1.5;
+}
+
+.p-grade {
+  fill: none;
+  stroke: var(--cor-superficie-alta);
+  stroke-width: 1;
+}
+
+.p-terreno {
+  fill: var(--cor-superficie-alta);
+  opacity: 0.7;
+}
+
+.p-texto {
+  fill: var(--cor-texto-secundario);
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+}
+
+.palco-editorial .p-texto {
+  font-size: 13px;
+}
+
+.p-texto--forte {
+  fill: var(--cor-texto);
+}
+
+.p-texto--sobre {
+  fill: var(--cor-sobre-destaque);
+}
+
+.p-texto--meio {
+  text-anchor: middle;
+}
+
+.p-texto--fim {
+  text-anchor: end;
+}
+
+/* ---------- Placa ---------- */
+
+.placa {
+  width: min(100%, 17rem);
+  margin: var(--espaco-4) 0;
+}
+
+.placa__legenda {
+  margin: var(--espaco-2) 0 0;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: var(--cor-texto-atenuado);
+}
+
+/* ---------- Palco editorial ---------- */
+
+.palco-editorial {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  gap: var(--espaco-6);
+  margin: var(--espaco-8) 0;
+}
+
+.palco-editorial .palco-editorial__frase {
+  margin: 0;
+  max-width: 30ch;
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 6.4vw, 1.875rem);
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  color: var(--cor-texto);
+  text-wrap: balance;
+}
+
+.palco-editorial .palco-editorial__texto p:not(.palco-editorial__frase) {
+  max-width: 40ch;
+  margin: var(--espaco-4) 0 0;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--cor-texto-secundario);
+}
+
+.palco-editorial__arte {
+  margin: 0;
+}
+
+.palco-editorial__arte .placa__svg {
+  max-width: 22rem;
+  margin-inline: auto;
+}
+
+.palco-editorial .p-texto--grande {
+  font-size: 16px;
+  letter-spacing: 0.06em;
+}
+
+.palco-editorial__arte .placa__legenda {
+  max-width: 22rem;
+  margin-inline: auto;
+}
+
+.palco-editorial__numeral {
+  display: block;
+  font-size: clamp(4.5rem, 20vw, 7rem);
+  -webkit-text-stroke-color: var(--cor-destaque);
+}
+
+/* Fecho: uma frase só, em corpo grande, sob um filete. */
+.palco-editorial--fecho {
+  margin-top: var(--espaco-8);
+  padding-top: var(--espaco-6);
+  border-top: 1px solid var(--cor-apagado);
+}
+
+.palco-editorial--fecho .palco-editorial__frase {
+  max-width: 36ch;
+  font-size: clamp(1.375rem, 5.6vw, 1.75rem);
+  line-height: 1.2;
+}
+
+/* Estação 3: lista curta (diálogos, histórias…) em duas colunas quando há largura. */
+.lista-curta {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+/* ---------- Microinterações ---------- */
+
+.p-satelite .p-no {
+  transition: fill 0.15s ease-out, stroke 0.15s ease-out;
+}
+
+.p-satelite .p-texto {
+  transition: fill 0.15s ease-out;
+}
+
+@media (hover: hover) {
+  .p-satelite:hover .p-no {
+    fill: var(--cor-destaque);
+    stroke: var(--cor-destaque);
+  }
+
+  .p-satelite:hover .p-texto {
+    fill: var(--cor-destaque);
+  }
+}
+
+/* ---------- Entrada: as ilustrações se desenham quando chegam à tela ----------
+   Cada figura declara a própria linha do tempo de rolagem e as peças dela se escalonam por --i, dentro
+   da mesma chegada: traços se traçam, nós surgem, pontos acendem. Sem animation-timeline, ou com
+   movimento reduzido, a ilustração fica completa e parada. */
+
+@keyframes placa-tracar {
+  from { stroke-dasharray: 1; stroke-dashoffset: 1; }
+  to { stroke-dasharray: 1; stroke-dashoffset: 0; }
+}
+
+@keyframes placa-surgir {
+  from { opacity: 0; transform: scale(0.5); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes placa-acender {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@supports (animation-timeline: view()) {
+  .placa,
+  .palco-editorial__arte {
+    view-timeline: --placa block;
+  }
+
+  .p-tracar,
+  .p-surgir,
+  .p-acender {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation-timeline: --placa;
+    animation-fill-mode: both;
+    animation-timing-function: linear;
+    animation-range: entry calc(5% + var(--i, 0) * 6%) entry calc(40% + var(--i, 0) * 6%);
+  }
+
+  .p-tracar {
+    animation-name: placa-tracar;
+  }
+
+  .p-surgir {
+    animation-name: placa-surgir;
+  }
+
+  .p-acender {
+    animation-name: placa-acender;
+  }
+}
+
+/* ---------- 600px+ ---------- */
+
+@media (min-width: 600px) {
+  .lista-curta {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--espaco-6);
+    max-width: 30rem;
+  }
+}
+
+/* ---------- 900px+: ilustração na coluna lateral; o palco divide a largura ---------- */
+
+@media (min-width: 900px) {
+  .capitulo__corpo > .placa {
+    grid-column: 2;
+    grid-row: var(--ancora, 1) / span var(--vao, 12);
+    align-self: start;
+    width: 100%;
+    max-width: 24rem;
+    margin: 0;
+  }
+
+  .capitulo__corpo > .palco-editorial {
+    grid-column: 1 / -1;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    align-items: center;
+    column-gap: var(--espaco-8);
+    margin: var(--espaco-8) 0;
+  }
+
+  .palco-editorial .palco-editorial__frase {
+    font-size: clamp(1.75rem, 2.5vw, 2.5rem);
+  }
+
+  .palco-editorial__arte .placa__svg,
+  .palco-editorial__arte .placa__legenda {
+    max-width: 28rem;
+    margin-inline: 0;
+  }
+
+  .palco-editorial--cultura {
+    grid-template-areas: "texto arte";
+  }
+
+  .palco-editorial--cultura .palco-editorial__texto {
+    grid-area: texto;
+  }
+
+  .palco-editorial--cultura .palco-editorial__arte {
+    grid-area: arte;
+  }
+
+  /* Twitch: a transmissão à esquerda, o ano e a frase à direita, o inverso da Estação 1. */
+  .palco-editorial--transmissao {
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    grid-template-areas:
+      "arte numero"
+      "arte texto";
+    align-items: end;
+  }
+
+  .palco-editorial--transmissao .palco-editorial__arte {
+    grid-area: arte;
+    align-self: center;
+  }
+
+  .palco-editorial--transmissao .palco-editorial__numeral {
+    grid-area: numero;
+  }
+
+  .palco-editorial--transmissao .palco-editorial__texto {
+    grid-area: texto;
+  }
+
+  .palco-editorial--fecho {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .palco-editorial--fecho .palco-editorial__frase {
+    font-size: clamp(1.75rem, 2.8vw, 2.5rem);
+  }
+
+  .palco-editorial__numeral {
+    font-size: clamp(6rem, 9vw, 9rem);
+  }
+}
+
+@media (min-width: 1100px) {
+  .capitulo__corpo > .placa {
+    max-width: 28rem;
+  }
+}
