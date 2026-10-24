@@ -250,6 +250,80 @@
   }
 }
 
+/* ---------- Cenas: três visualizações que se desenham uma vez, ao chegar à tela ----------
+   Crise de 1983 (Estação 1), ondas da Twitch (Estação 2) e rota do A* (Estação 3). Diferente das
+   placas acima, que acompanham a rolagem, estas rodam por tempo, porque contam uma sequência
+   (subir, cair, recuperar; explorar e então traçar). cenas.js põe data-cena="espera" no que ainda
+   não apareceu e "toca" quando chega; sem o script, ou com movimento reduzido, o atributo não
+   existe e a ilustração fica completa e parada. Cada peça escolhe o próprio momento: --t é o
+   atraso e --d a duração, em segundos, e --e a curva. */
+
+@keyframes cena-tracar {
+  from { stroke-dasharray: 1; stroke-dashoffset: 1; }
+  to { stroke-dasharray: 1; stroke-dashoffset: 0; }
+}
+
+@keyframes cena-acender {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes cena-surgir {
+  from { opacity: 0; transform: scale(0.5); }
+  to { opacity: 1; transform: none; }
+}
+
+/* A onda acende enquanto se desenha: parte do azul de linha, passa pelo azul claro (com um halo
+   curto) e assenta no azul de acento. O halo só existe no meio do caminho. */
+@keyframes cena-iluminar {
+  0% { stroke: var(--cor-azul-linha); filter: drop-shadow(0 0 0 transparent); }
+  50% {
+    stroke: var(--cor-azul-claro);
+    filter: drop-shadow(0 0 3px color-mix(in srgb, var(--cor-destaque) 55%, transparent));
+  }
+  100% { stroke: var(--cor-destaque); filter: drop-shadow(0 0 0 transparent); }
+}
+
+[data-cena] {
+  --cena-suave: cubic-bezier(0.45, 0, 0.35, 1);
+  --cena-queda: cubic-bezier(0.55, 0, 0.85, 0.5);
+  --cena-saida: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.cena__surgir {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+:root:not([data-movimento="reduzido"]) [data-cena="espera"] .cena__tracar,
+:root:not([data-movimento="reduzido"]) [data-cena="espera"] .cena__onda {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+:root:not([data-movimento="reduzido"]) [data-cena="espera"] .cena__acender,
+:root:not([data-movimento="reduzido"]) [data-cena="espera"] .cena__surgir {
+  opacity: 0;
+}
+
+[data-cena="toca"] .cena__tracar {
+  animation: cena-tracar calc(var(--d, 1) * 1s) var(--e, var(--cena-saida)) calc(var(--t, 0) * 1s) both;
+}
+
+[data-cena="toca"] .cena__onda {
+  animation:
+    cena-tracar calc(var(--d, 1) * 1s) var(--cena-saida) calc(var(--t, 0) * 1s) both,
+    cena-iluminar calc(var(--d, 1) * 1s + 0.7s) ease-in-out calc(var(--t, 0) * 1s) both;
+}
+
+[data-cena="toca"] .cena__acender {
+  animation: cena-acender calc(var(--d, 0.35) * 1s) ease-out calc(var(--t, 0) * 1s) both;
+}
+
+[data-cena="toca"] .cena__surgir {
+  animation: cena-surgir calc(var(--d, 0.3) * 1s) var(--cena-saida) calc(var(--t, 0) * 1s) both;
+}
+
 /* ---------- 600px+ ---------- */
 
 @media (min-width: 600px) {

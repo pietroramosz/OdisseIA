@@ -38,6 +38,11 @@
   --cor-texto-secundario: #c2c2cc;
   --cor-texto-atenuado: #9d9daa;
   --cor-apagado: #6f6f7d;
+  /* Filete: divisórias, molduras de ficha e contornos finos. Hachura: a cor das listras de "fechado".
+     No escuro coincidem com a superfície elevada; no claro têm valor próprio, porque ali a superfície
+     elevada fica clara demais para desenhar um limite. */
+  --cor-filete: var(--cor-superficie-alta);
+  --cor-hachura: var(--cor-superficie-alta);
   --cor-grade: rgba(255, 255, 255, 0.04);
 
   --cor-azul: #142146;
@@ -123,20 +128,25 @@
 
 :root[data-tema="claro"] {
   color-scheme: light;
-  --cor-fundo: #f3f5fa;
-  --cor-superficie: #ffffff;
-  --cor-superficie-escura: #e9edf5;
-  --cor-superficie-alta: #dde3ef;
-  --cor-texto: #14171f;
-  --cor-texto-secundario: #353a49;
-  --cor-texto-atenuado: #4f5568;
+  /* Camadas do claro, da mais funda para a mais próxima de quem lê: o fundo é um cinza-azulado, as
+     superfícies são off-white (nunca branco puro), o palco e o "fechado" afundam num cinza mais
+     escuro e o destaque ganha um tom do azul. O limite entre elas vem do filete, não só da cor. */
+  --cor-fundo: #e6e9f0;
+  --cor-superficie: #f4f5f9;
+  --cor-superficie-escura: #d9dde8;
+  --cor-superficie-alta: #dde6f8;
+  --cor-texto: #141824;
+  --cor-texto-secundario: #323a4e;
+  --cor-texto-atenuado: #485066;
   --cor-destaque: #2a55d6;
   --cor-sobre-destaque: #ffffff;
-  --cor-apagado: #686f82;
-  --cor-azul: #c9d4f4;
-  --cor-azul-linha: #6f8ce0;
+  --cor-apagado: #646c82;
+  --cor-filete: #8f98ae;
+  --cor-hachura: #b3bbcd;
+  --cor-azul: #c3cff2;
+  --cor-azul-linha: #4a6ed6;
   --cor-azul-claro: #1c3fb0;
-  --cor-grade: rgba(20, 23, 31, 0.06);
+  --cor-grade: rgba(20, 24, 36, 0.07);
   --cor-xbot: #8f26c7;
   --cor-sobre-xbot: #ffffff;
 }
@@ -163,6 +173,8 @@
   --cor-superficie: #ffffff;
   --cor-superficie-escura: #f0f0f2;
   --cor-superficie-alta: #d6d6dc;
+  --cor-filete: #55555f;
+  --cor-hachura: #9a9aa6;
   --cor-texto: #000000;
   --cor-texto-secundario: #000000;
   --cor-texto-atenuado: #1f1f24;
@@ -392,9 +404,16 @@ p .zero::after {
   transform: translateY(1px);
 }
 
+/* O botão secundário ganha um filete interno para ter limite sobre qualquer superfície. No escuro o
+   filete coincide com o fundo do botão e não aparece. */
+.botao {
+  box-shadow: inset 0 0 0 1px var(--cor-filete);
+}
+
 .botao--principal {
   background: var(--cor-destaque);
   color: var(--cor-sobre-destaque);
+  box-shadow: none;
 }
 
 .botao:focus-visible {
@@ -514,7 +533,7 @@ p .zero::after {
 
 /* Hachura diagonal: marca o que ainda está fechado. */
 .textura-hachura {
-  background-color: var(--cor-superficie-alta);
+  background-color: var(--cor-hachura);
   -webkit-mask: var(--textura-hachura) 0 0 / 10px 10px repeat;
   mask: var(--textura-hachura) 0 0 / 10px 10px repeat;
 }
@@ -583,7 +602,7 @@ p .zero::after {
    - ::after repinta o miolo um pouco para dentro, então a moldura acompanha também os cantos
      diagonais, coisa que um box-shadow não faz sob clip-path. */
 .ficha {
-  --moldura: var(--cor-superficie-alta);
+  --moldura: var(--cor-filete);
   --espessura: 1px;
   --miolo: var(--cor-superficie);
   position: relative;

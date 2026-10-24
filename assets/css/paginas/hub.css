@@ -409,7 +409,7 @@
   gap: var(--espaco-2) var(--espaco-3);
   margin-top: var(--espaco-4);
   padding: var(--espaco-3) var(--espaco-4);
-  border-top: 1px dashed var(--cor-superficie-alta);
+  border-top: 1px dashed var(--cor-filete);
 }
 
 .cartao__estado {
@@ -511,7 +511,7 @@
 
 .estacao--bloqueada .cartao__corpo,
 .final--bloqueado .cartao__corpo {
-  --moldura: var(--cor-superficie-alta);
+  --moldura: var(--cor-filete);
   --miolo: var(--cor-fundo);
   --faixa-altura: 10px;
 }
@@ -550,7 +550,7 @@
 
 .estacao--bloqueada .estacao__acao {
   background: none;
-  border-top: 1px solid var(--cor-superficie-alta);
+  border-top: 1px solid var(--cor-filete);
   color: var(--cor-texto-secundario);
 }
 
@@ -741,7 +741,7 @@ a.cartao:active .cartao__corpo {
 .final__detalhe--status {
   min-height: 0;
   background: none;
-  border-top: 1px solid var(--cor-superficie-alta);
+  border-top: 1px solid var(--cor-filete);
   font-weight: 600;
   font-size: 0.875rem;
   color: var(--cor-texto-secundario);

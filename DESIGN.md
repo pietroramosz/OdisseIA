@@ -139,7 +139,7 @@ Medido nas páginas renderizadas: 85–95% de pixels grafite, 0,4–6,2% de azul
 - **Grid Line** (`rgba(255,255,255,0.04)`): grade fixa de 32px atrás da página. As colunas de leitura têm fundo sólido e a escondem.
 
 ### Temas
-O tema escuro é o padrão e a identidade. O tema claro tem paleta própria, com neutros de matiz azul-acinzentada (fundo `#f3f5fa`, superfícies brancas, texto `#14171f`; os tons lilases anteriores liam como roxo fora do X-B0T) com o azul de acento mais fundo (`#2a55d6`, 6,2:1 sobre branco, texto branco sobre ele), azul de linha `#6f8ce0` e o roxo do X-B0T mais fundo (`#8f26c7`), porque o `#cd5efa` tem só 3,2:1 sobre branco. O alto contraste existe nos dois temas (acento `#9db8ff` no escuro e `#0b3a9a` no claro). Texto sobre o acento usa `--cor-sobre-destaque`, que muda junto. As escolhas (tema, tamanho de texto, contraste, movimento) vêm do painel de acessibilidade e ficam em `odisseia:acessibilidade`.
+O tema escuro é o padrão e a identidade. O tema claro tem paleta própria, com neutros de matiz azul-acinzentada (os tons lilases anteriores liam como roxo fora do X-B0T) e sem branco puro. As camadas, da mais funda à mais próxima: fundo `#e6e9f0`, palco e "fechado" `#d9dde8`, superfície off-white `#f4f5f9` e destaque num tom do azul `#dde6f8`. Texto `#141824` (14,6:1 sobre o fundo). O limite entre as camadas vem de dois tokens novos, que no escuro coincidem com a superfície elevada (então o escuro não muda) e no claro têm valor próprio: `--cor-filete` (`#8f98ae`, divisórias, molduras de ficha, contorno do botão secundário) e `--cor-hachura` (`#b3bbcd`, listras de "fechado"). O azul de acento é mais fundo (`#2a55d6`, 5,7:1 sobre a superfície, texto branco sobre ele), o azul de linha é `#4a6ed6` (3,9:1) e o roxo do X-B0T é mais fundo (`#8f26c7`), porque o `#cd5efa` tem só 3,2:1 sobre branco. Regra: borda, divisória e contorno usam `--cor-filete`, nunca `--cor-superficie-alta`, que é só preenchimento. O alto contraste existe nos dois temas (acento `#9db8ff` no escuro e `#0b3a9a` no claro). Texto sobre o acento usa `--cor-sobre-destaque`, que muda junto. As escolhas (tema, tamanho de texto, contraste, movimento) vêm do painel de acessibilidade e ficam em `odisseia:acessibilidade`.
 
 ### Named Rules
 **The Blue-Accent Rule.** O azul de acento marca o que está ativo ou pode ser feito: estado, progresso, ação, foco. O azul de linha desenha estrutura e textura. O azul profundo só aparece como fundo sutil. Nenhum azul é cor de texto corrido nem preenchimento de painel inteiro: o grafite é a base (DEC-024, que substitui as regras de cor das DEC-018, DEC-020 e DEC-023).
@@ -352,6 +352,12 @@ O movimento é um gesto por página, sempre partindo de um estado já visível:
 - Estação 4: numeral, linhas de foco, carta e leque entram em sequência, como o quadro de uma página de mangá;
 - na Conclusão, a explosão irrompe e os carimbos batem em sequência;
 - na validação, o carimbo bate.
+
+Três visualizações rodam por tempo, uma vez, ao chegar à tela, porque contam uma sequência (`cenas.js` marca `data-cena="espera"` e depois `"toca"`; o CSS, na seção "Cenas" de `estacao-editorial.css`, desenha; cada peça tem `--t` atraso, `--d` duração e `--e` curva; keyframes `cena-`):
+- Estação 1, crise de 1983: a curva sobe, cai (curva de queda, mais rápida), o marco 1983 surge, há uma pausa e a recuperação do NES se traça; o rótulo NES entra por último. Os pontos da curva não mudaram;
+- Estação 2, ondas da Twitch: cada uma das quatro curvas é revelada do centro para fora, nos dois lados ao mesmo tempo (as internas antes das externas), e acende do azul de linha ao azul claro (com um halo curto de 3px) até assentar no azul de acento;
+- Estação 3, rota do A*: as células que o A* examinou aparecem em nove ondas, na ordem de expansão (calculada offline com Manhattan, sobre a grade da figura; 61 células), e só depois a rota de 22 passos se traça de A até B. A rota é a mesma de antes: é o menor caminho.
+Sem `cenas.js` ou com movimento reduzido o atributo não existe e a figura fica completa e parada.
 
 Os gestos das Estações 1 e 3 usam `animation-timeline: view()` dentro de `@supports`, sem JavaScript; sem suporte, a página fica estática e completa. Os keyframes levam o prefixo da estação (`tempo-`, `rede-`, `percurso-`, `palco-`), e nenhuma estação usa o gesto de outra.
 

@@ -124,7 +124,7 @@
 .resultado--invalido,
 .resultado--erro-armazenamento {
   background: var(--cor-fundo);
-  box-shadow: inset 0 0 0 1px var(--cor-superficie-alta);
+  box-shadow: inset 0 0 0 1px var(--cor-filete);
 }
 
 .resultado--fora-de-ordem::before,
@@ -134,7 +134,7 @@
   position: absolute;
   z-index: -1;
   inset: 0;
-  background-color: var(--cor-superficie-alta);
+  background-color: var(--cor-hachura);
   -webkit-mask: var(--textura-hachura) 0 0 / 10px 10px repeat;
   mask: var(--textura-hachura) 0 0 / 10px 10px repeat;
   opacity: 0.6;

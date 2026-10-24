@@ -435,7 +435,7 @@
 .nota .nota__lista li::after {
   content: "";
   height: 10px;
-  background-color: var(--cor-superficie-alta);
+  background-color: var(--cor-hachura);
   -webkit-mask: var(--textura-hachura) 0 0 / 10px 10px repeat;
   mask: var(--textura-hachura) 0 0 / 10px 10px repeat;
 }
@@ -979,7 +979,7 @@
     grid-template-columns: minmax(0, 1fr);
     row-gap: 2px;
     padding-left: var(--espaco-4);
-    border-left: 2px solid var(--cor-superficie-alta);
+    border-left: 2px solid var(--cor-filete);
   }
 
   .marco::before {

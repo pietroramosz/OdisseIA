@@ -140,20 +140,29 @@
           <p>Quando os cenários ficaram maiores, os personagens também precisaram aprender a navegar por eles.</p>
           <p>O <strong>pathfinding</strong> permite encontrar rotas pelo ambiente, desviando de paredes e outros obstáculos.</p>
           <p>O algoritmo <strong>A*</strong> é um exemplo de técnica usada para calcular caminhos.</p>
-          <figure class="figura" style="--ancora: 3">
+          <figure class="figura" data-cena style="--ancora: 3">
             <svg class="esquema figura__esquema" viewBox="0 0 340 160" aria-hidden="true" focusable="false">
               <defs>
                 <pattern id="grade-rota" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0.5H0.5V20" class="figura__grade"/></pattern>
               </defs>
               <rect width="340" height="160" fill="url(#grade-rota)"/>
+              <path class="figura__explorado cena__acender" style="--t: 0.30" d="M41 81h18v18h-18ZM61 81h18v18h-18ZM81 81h18v18h-18ZM81 61h18v18h-18ZM81 41h18v18h-18ZM61 61h18v18h-18ZM61 41h18v18h-18Z"/>
+              <path class="figura__explorado cena__acender" style="--t: 0.47" d="M41 61h18v18h-18ZM41 41h18v18h-18ZM21 61h18v18h-18ZM21 41h18v18h-18ZM81 21h18v18h-18ZM81 101h18v18h-18ZM61 101h18v18h-18Z"/>
+              <path class="figura__explorado cena__acender" style="--t: 0.64" d="M21 21h18v18h-18ZM1 41h18v18h-18ZM41 101h18v18h-18ZM1 61h18v18h-18ZM21 101h18v18h-18ZM1 81h18v18h-18ZM81 1h18v18h-18Z"/>
+              <path class="figura__explorado cena__acender" style="--t: 0.81" d="M81 121h18v18h-18ZM101 121h18v18h-18ZM121 121h18v18h-18ZM141 121h18v18h-18ZM161 121h18v18h-18ZM181 121h18v18h-18ZM201 121h18v18h-18Z"/>
+              <path class="figura__explorado cena__acender" style="--t: 0.98" d="M201 101h18v18h-18ZM201 81h18v18h-18ZM201 61h18v18h-18ZM201 41h18v18h-18ZM141 101h18v18h-18ZM141 81h18v18h-18ZM161 81h18v18h-18Z"/>
+              <path class="figura__explorado cena__acender" style="--t: 1.15" d="M181 81h18v18h-18ZM181 61h18v18h-18ZM181 41h18v18h-18ZM161 61h18v18h-18ZM161 41h18v18h-18ZM141 61h18v18h-18ZM141 41h18v18h-18Z"/>
+              <path class="figura__explorado cena__acender" style="--t: 1.32" d="M121 101h18v18h-18ZM121 81h18v18h-18ZM121 61h18v18h-18ZM121 41h18v18h-18ZM61 121h18v18h-18ZM21 1h18v18h-18ZM41 1h18v18h-18Z"/>
+              <path class="figura__explorado cena__acender" style="--t: 1.49" d="M61 1h18v18h-18ZM1 21h18v18h-18ZM41 121h18v18h-18ZM21 121h18v18h-18ZM1 101h18v18h-18ZM201 21h18v18h-18ZM221 21h18v18h-18Z"/>
+              <path class="figura__explorado cena__acender" style="--t: 1.66" d="M241 21h18v18h-18ZM261 21h18v18h-18ZM281 21h18v18h-18ZM301 21h18v18h-18Z"/>
               <path class="figura__parede" d="M100 0H120V120H100ZM220 40H240V160H220ZM160 100H200V120H160ZM40 20H80V40H40Z"/>
-              <path class="figura__rota" d="M30 90H90V130H210V30H310V50"/>
+              <path class="figura__rota cena__tracar" pathLength="1" style="--t: 2; --d: 1.6; --e: var(--cena-suave)" d="M30 90H90V130H210V30H310V50"/>
               <rect class="figura__inicio" x="21" y="81" width="18" height="18"/>
-              <rect class="figura__chegada" x="301" y="41" width="18" height="18"/>
+              <rect class="figura__chegada cena__surgir" style="--t: 3.4; --d: 0.3" x="301" y="41" width="18" height="18"/>
               <text class="esquema__texto esquema__texto--forte" x="26" y="114">A</text>
               <text class="esquema__texto esquema__texto--destaque" x="306" y="76">B</text>
             </svg>
-            <figcaption class="figura__legenda">Ilustração: uma rota de A até B que contorna as paredes de uma grade.</figcaption>
+            <figcaption class="figura__legenda">Ilustração: o A* examina as células da grade (áreas sombreadas) e traça a rota de A até B, contornando as paredes.</figcaption>
           </figure>
           <p>Com jogos mais complexos, também surgiram formas mais avançadas de organizar decisões.</p>
           <p>As <strong>Behavior Trees</strong> estruturam comportamentos como uma árvore de possibilidades.</p>
@@ -260,5 +269,6 @@
   <script src="assets/js/qr.js"></script>
   <script src="assets/js/scanner.js"></script>
   <script src="assets/js/app.js"></script>
+  <script src="assets/js/cenas.js"></script>
 </body>
 </html>

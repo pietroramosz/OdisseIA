@@ -146,16 +146,16 @@
           <p>Durante os anos 1980 surgiram jogos que se tornaram símbolos da história dos videogames.</p>
           <p><strong>Pac-Man, Tetris e Super Mario Bros.</strong> marcaram gerações com personagens, músicas e mecânicas facilmente reconhecíveis.</p>
           <p>Mas a indústria também passou por dificuldades. Em 1983 aconteceu uma grande crise no mercado de videogames, ligada, entre outros fatores, ao excesso de produtos e à baixa qualidade de vários lançamentos.</p>
-          <figure class="placa placa--crise" style="--ancora: 3">
+          <figure class="placa placa--crise" data-cena style="--ancora: 3">
             <svg class="placa__svg" viewBox="0 0 260 150" aria-hidden="true" focusable="false">
               <path class="p-linha" d="M20 126H244M20 126V16"/>
-              <path class="p-linha p-tracar" pathLength="1" style="--i: 0" d="M20 104L56 86L92 62L128 42L152 30"/>
-              <path class="p-forte p-tracar" pathLength="1" style="--i: 1" d="M152 30L170 112"/>
-              <path class="p-ativa p-tracar" pathLength="1" style="--i: 2" d="M170 112L196 106L220 86L244 62"/>
-              <path class="p-cheio p-surgir" style="--i: 3" d="M164 106h12v12h-12Z"/>
-              <path class="p-linha" d="M170 126V132"/>
-              <text class="p-texto p-texto--forte p-texto--meio" x="170" y="145">1983</text>
-              <text class="p-texto p-texto--fim" x="244" y="50">NES</text>
+              <path class="p-linha cena__tracar" pathLength="1" style="--t: 0.2; --d: 1.2; --e: var(--cena-suave)" d="M20 104L56 86L92 62L128 42L152 30"/>
+              <path class="p-forte cena__tracar" pathLength="1" style="--t: 1.4; --d: 0.45; --e: var(--cena-queda)" d="M152 30L170 112"/>
+              <path class="p-cheio cena__surgir" style="--t: 1.85; --d: 0.3" d="M164 106h12v12h-12Z"/>
+              <path class="p-linha cena__acender" style="--t: 1.85" d="M170 126V132"/>
+              <text class="p-texto p-texto--forte p-texto--meio cena__acender" style="--t: 1.85" x="170" y="145">1983</text>
+              <path class="p-ativa cena__tracar" pathLength="1" style="--t: 2.4; --d: 1.1; --e: var(--cena-suave)" d="M170 112L196 106L220 86L244 62"/>
+              <text class="p-texto p-texto--fim cena__acender" style="--t: 3.3" x="244" y="50">NES</text>
             </svg>
             <figcaption class="placa__legenda">Ilustração sem escala: a crise de 1983 e a recuperação com o NES.</figcaption>
           </figure>
@@ -275,5 +275,6 @@
   <script src="assets/js/qr.js"></script>
   <script src="assets/js/scanner.js"></script>
   <script src="assets/js/app.js"></script>
+  <script src="assets/js/cenas.js"></script>
 </body>
 </html>
