@@ -796,3 +796,31 @@ A DEC-027 fechou a linha do tempo da Estação 1 em 2000, mas o título, a rota,
 ### O que não muda
 
 `progresso.js`, `qr.js`, `config.js`, scanner, chave `odisseia:progresso`, regras de ordem e desbloqueio, conteúdo histórico, HTML/CSS/JS puros, caminhos relativos para o GitHub Pages em `/OdisseIA/`.
+
+---
+
+## DEC-029 — Linha do tempo nas quatro estações
+
+### Contexto
+
+Só a Estação 1 tinha uma linha do tempo completa (DEC-027). A 2 tinha a lista de marcos sem fecho nem links, a 3 tinha uma escada de etapas sem nenhuma data e a 4 não tinha nada. A intenção é que as quatro tenham a sua, ligada ao assunto, na mesma gramática visual.
+
+### Decisão
+
+1. **Mesma gramática, composição por assunto.** Espinha, nós quadrados, anos em Chakra, "No capítulo 0N" com seta para cima, no máximo um link por capítulo e nenhum ano vizinho linkado. A composição muda com o conteúdo:
+   - **Estação 1** (DEC-027): linha fechada, termina em 2000 (nó de alvo).
+   - **Estação 2:** os 12 marcos de 2001 a 2026 (já existentes, nenhum acrescentado), com os anos 2001, 2011, 2017 e 2020 levando aos capítulos. Termina em **"Em aberto"** (nó tracejado), porque a evolução continua; é o oposto do fecho em 2000.
+   - **Estação 3:** a escada de seis técnicas vira a linha do tempo, com as etapas "Máquinas de estados", "Pathfinding", "Machine Learning" e "IA generativa" levando aos capítulos e **três datas de referência pesquisadas**: 1968 (artigo do A\*), 2004 (Halo 2 e as Behavior Trees) e 2016 (AlphaGo vence Lee Sedol). As outras etapas não têm data de propósito (são famílias de técnicas que coexistem), e uma nota sob a linha diz isso e cita as fontes. As fontes completas estão em `docs/OdisseIA_Conteudo_Site_Estacoes.md`.
+   - **Estação 4:** "A trajetória do X-B0T", **sem datas** (não existem na documentação e a DEC-007 proíbe afirmar o que o jogo não confirmou). Quatro pontos tirados do que a página já diz: referências (Yu-Gi-Oh! e Pokémon), mecânicas próprias, demonstração na feira e site do jogo (com link para o bastidor 02) e um último ponto tracejado, "A confirmar" (regras, cartas e papel da IA). Roxo, como o resto da estação.
+2. **Fim de linha por `--antes`.** A espinha termina no último nó (e não no fim do texto dele) com uma variável de grade: 5 nas Estações 1 e 2 (quatro épocas e o fim) e 4 na Estação 4. O nó tracejado (`.epoca--aberta`) vale para "Em aberto" e "A confirmar".
+3. **Âncoras** nos capítulos das Estações 2, 3 e 4 (`cap-nova-geracao`, `cap-internet`, `cap-mundos-maiores`, `cap-hoje`, `cap-estados`, `cap-caminhos`, `cap-ml`, `cap-generativa`, `bastidor-por-que`, `bastidor-jogo`); todos os links são âncoras da própria página, então não mudam a navegação entre páginas, o progresso nem os QR Codes.
+4. **Revisão do conteúdo histórico** (Estações 1 e 2): os marcos continuam batendo com o texto-fonte e com os fatos conhecidos; nada foi alterado.
+
+### Lacunas assumidas
+
+- Estação 4: nenhuma data disponível. Para uma linha do tempo datada, o grupo do X-B0T precisa informar datas e o que está confirmado.
+- Estação 3: sem data para regras simples, máquinas de estados, Utility AI e IA generativa. O ano do Halo 2 (2004) é de conhecimento geral e não foi conferido numa fonte própria.
+
+### O que não muda
+
+`progresso.js`, `qr.js`, `config.js`, scanner, chave `odisseia:progresso`, regras de ordem e desbloqueio, fluxo de navegação, conteúdo dos capítulos, HTML/CSS/JS puros, caminhos relativos para o GitHub Pages em `/OdisseIA/`.

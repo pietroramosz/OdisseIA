@@ -266,6 +266,23 @@ Em muitos casos, tecnologias diferentes podem trabalhar juntas.
 ↓  
 **IA generativa**
 
+### Datas de referência da linha do tempo (acrescentadas depois da pesquisa original)
+
+O conteúdo acima não traz datas. Para a linha do tempo da página só entraram três marcos, cada um com fonte. As etapas são famílias de técnicas que surgiram em épocas diferentes e continuam em uso, então as demais etapas ficam **sem data**, de propósito.
+
+- **1968 — algoritmo A\*.** Hart, Nilsson e Raphael, "A Formal Basis for the Heuristic Determination of Minimum Cost Paths", IEEE Transactions on Systems Science and Cybernetics, v. 4, n. 2, p. 100–107, 1968 (existe um relatório técnico do SRI de 1967 com o mesmo título). O artigo chamava o método de "Algorithm A"; o "\*" veio depois.
+  - Artigo: https://people.stfx.ca/jdelamer/courses/csci-564/_downloads/b2220c66675ddde471ca1795147b8e86/A_Formal_Basis_for_the_Heuristic_Determination_of_Minimum_Cost_Paths.pdf
+  - Relatório SRI de 1967 (Computer History Museum): https://www.computerhistory.org/collections/catalog/102742637
+  - Sobre a origem do nome (ACM, 2020): https://cacmb4.acm.org/magazines/2020/1/241713-a-search
+- **2004 — Halo 2 e as Behavior Trees.** Halo 2 (Bungie) é citado como um dos primeiros jogos comerciais conhecidos a usar Behavior Trees; Damián Isla descreveu a IA do jogo na GDC de março de 2005 ("Handling Complexity in the Halo 2 AI"). O ano é o do lançamento do jogo (2004); a palestra é de 2005. Não afirmamos que foi o primeiro uso.
+  - Palestra (cópia arquivada do Gamasutra): https://web.archive.org/web/20120511035851/http://www.gamasutra.com/view/feature/130663/gdc_2005_proceeding_handling_.php
+  - Visão geral da técnica: https://en.wikipedia.org/wiki/Behavior_tree_(artificial_intelligence,_robotics_and_control)
+- **2016 — AlphaGo vence Lee Sedol.** Partidas em Seul, de 9 a 15 de março de 2016, com vitória do AlphaGo por 4 a 1 (DeepMind).
+  - https://en.wikipedia.org/wiki/AlphaGo_versus_Lee_Sedol
+  - https://www.koreatimes.co.kr/business/tech-science/20160315/alphago-wins-final-game-after-neck-and-neck-race
+
+Lacunas assumidas: não há data para "regras simples", "máquinas de estados", "Utility AI" e "IA generativa", porque a pesquisa original não traz marcos e nenhuma data foi escolhida sem fonte. O ano de lançamento do Halo 2 (2004) é de conhecimento geral e não foi conferido numa fonte própria nesta rodada.
+
 ## E o X-B0T?
 
 Em jogos de cartas, uma inteligência artificial pode analisar jogadas, escolher cartas e controlar um adversário.
@@ -291,6 +308,8 @@ Na próxima estação, você poderá conhecer essa aplicação na prática.
 > - Machine Learning;
 > - IA generativa;
 > - qualquer outra técnica que ainda não tenha sido confirmada no código ou pelo grupo responsável.
+>
+> **Linha do tempo da página (sem datas):** a página mostra "A trajetória do X-B0T" só com o que ela já afirma (referências, mecânicas próprias, demonstração na feira e site, e um último ponto "a confirmar"). Não existe nenhuma data do jogo na documentação. Se o grupo quiser uma linha do tempo datada, precisa fornecer as datas (início do desenvolvimento, protótipo, demonstração na feira) e o que já está confirmado.
 >
 > Quando o estado final do X-B0T estiver definido, atualizar esta seção com:
 >

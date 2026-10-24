@@ -68,7 +68,7 @@
         <p>No início, esses comportamentos eram extremamente simples. Com o tempo, surgiram técnicas capazes de organizar decisões, encontrar caminhos, analisar situações e até gerar novos conteúdos.</p>
       </section>
 
-      <section class="capitulo">
+      <section class="capitulo" id="cap-estados">
         <h2 class="capitulo__titulo">Das regras às máquinas de estados</h2>
         <p class="terminal-rotulo capitulo__rotulo">CAPÍTULO <span class="capitulo__numero">01</span></p>
         <div class="capitulo__corpo">
@@ -114,7 +114,7 @@
         </div>
       </section>
 
-      <section class="capitulo">
+      <section class="capitulo" id="cap-caminhos">
         <h2 class="capitulo__titulo">Encontrando caminhos e escolhendo ações</h2>
         <p class="terminal-rotulo capitulo__rotulo">CAPÍTULO <span class="capitulo__numero">02</span></p>
         <div class="capitulo__corpo">
@@ -143,7 +143,7 @@
         </div>
       </section>
 
-      <section class="capitulo">
+      <section class="capitulo" id="cap-ml">
         <h2 class="capitulo__titulo">Machine Learning e adaptação</h2>
         <p class="terminal-rotulo capitulo__rotulo">CAPÍTULO <span class="capitulo__numero">03</span></p>
         <div class="capitulo__corpo">
@@ -168,7 +168,7 @@
         </div>
       </section>
 
-      <section class="capitulo">
+      <section class="capitulo" id="cap-generativa">
         <h2 class="capitulo__titulo">IA generativa e o futuro</h2>
         <p class="terminal-rotulo capitulo__rotulo">CAPÍTULO <span class="capitulo__numero">04</span></p>
         <div class="capitulo__corpo">
@@ -193,16 +193,17 @@
         </div>
       </section>
 
-      <section class="linha-tempo linha-tempo--percurso">
+      <section class="linha-tempo linha-tempo--percurso" id="sequencia">
         <h2 class="linha-tempo__titulo">A evolução em uma sequência</h2>
         <ol class="percurso">
           <li class="etapa" style="--i: 0"><span class="etapa__nome">Regras simples</span></li>
-          <li class="etapa" style="--i: 1"><span class="etapa__nome">Máquinas de estados</span></li>
-          <li class="etapa" style="--i: 2"><span class="etapa__nome">Pathfinding e navegação</span></li>
-          <li class="etapa" style="--i: 3"><span class="etapa__nome">Behavior Trees e Utility AI</span></li>
-          <li class="etapa" style="--i: 4"><span class="etapa__nome">Machine Learning</span></li>
-          <li class="etapa" style="--i: 5"><span class="etapa__nome">IA generativa</span></li>
+          <li class="etapa" style="--i: 1"><a class="etapa__link" href="#cap-estados"><span class="etapa__nome">Máquinas de estados</span><span class="marco__destino">No capítulo 01 <span class="seta" aria-hidden="true"></span></span></a></li>
+          <li class="etapa" style="--i: 2"><a class="etapa__link" href="#cap-caminhos"><span class="etapa__nome">Pathfinding e navegação</span><span class="marco__destino">No capítulo 02 <span class="seta" aria-hidden="true"></span></span></a><p class="etapa__marco"><strong class="marco__ano">1968</strong><span class="visualmente-oculto"> — </span><span class="marco__nome">artigo do algoritmo A*</span></p></li>
+          <li class="etapa" style="--i: 3"><span class="etapa__nome">Behavior Trees e Utility AI</span><p class="etapa__marco"><strong class="marco__ano">2004</strong><span class="visualmente-oculto"> — </span><span class="marco__nome">Halo 2 e as Behavior Trees</span></p></li>
+          <li class="etapa" style="--i: 4"><a class="etapa__link" href="#cap-ml"><span class="etapa__nome">Machine Learning</span><span class="marco__destino">No capítulo 03 <span class="seta" aria-hidden="true"></span></span></a><p class="etapa__marco"><strong class="marco__ano">2016</strong><span class="visualmente-oculto"> — </span><span class="marco__nome">AlphaGo vence Lee Sedol</span></p></li>
+          <li class="etapa" style="--i: 5"><a class="etapa__link" href="#cap-generativa"><span class="etapa__nome">IA generativa</span><span class="marco__destino">No capítulo 04 <span class="seta" aria-hidden="true"></span></span></a></li>
         </ol>
+        <p class="linha-tempo__fonte">As etapas são famílias de técnicas: surgiram em épocas diferentes e continuam em uso, por isso só alguns marcos levam data. Datas de referência: o artigo do algoritmo A*, de Hart, Nilsson e Raphael (IEEE, 1968); Halo 2, da Bungie (2004), um dos primeiros exemplos conhecidos de Behavior Trees em jogos, descrito por Damián Isla na GDC de 2005; AlphaGo contra Lee Sedol, em Seul, em março de 2016 (DeepMind).</p>
       </section>
 
       <section class="conexao">
