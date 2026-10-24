@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>OdisseIA — arte de prévia (1200 × 630)</title>
+  <!--
+    Fonte da imagem assets/img/og-odisseia.png (prévia de link do WhatsApp, Discord e afins).
+    Não é uma página do site: é a composição da arte, feita com os próprios recursos do projeto
+    (style.css: fonte Chakra Petch local, grade de fundo, texturas de retícula e de linhas de foco e as
+    cores do DESIGN.md). Para gerar de novo: abrir este arquivo no Chrome com a janela em 1200 × 630 e
+    capturar a tela (por exemplo, com o DevTools: Ctrl+Shift+P > "Capture screenshot").
+    Nenhum gerador de imagens foi usado.
+  -->
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    html { font-size: 100%; scrollbar-width: none; }
+    body {
+      position: relative;
+      width: 1200px;
+      height: 630px;
+      min-height: 0;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    /* Tudo o que é desenhado fica dentro da moldura de cantos cortados (a linguagem do site). */
+    .palco {
+      position: absolute;
+      inset: 28px;
+      overflow: hidden;
+      clip-path: polygon(24px 0, 100% 0, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0 100%, 0 24px);
+    }
+
+    /* Retícula de mangá no canto, cortada na diagonal, atrás da palavra-marca (como na abertura). */
+    .reticula {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 440px;
+      height: 280px;
+      clip-path: polygon(34% 0, 100% 0, 100% 100%);
+      opacity: 0.5;
+    }
+
+
+    .marca {
+      position: absolute;
+      left: 44px;
+      top: 38px;
+      margin: 0;
+      font-family: var(--fonte-titulo);
+      font-weight: 700;
+      font-size: 204px;
+      line-height: 0.84;
+      letter-spacing: -0.04em;
+      color: var(--cor-texto);
+      white-space: nowrap;
+    }
+
+    .marca span { color: var(--cor-destaque); }
+
+    .frase {
+      position: absolute;
+      left: 52px;
+      top: 214px;
+      width: 640px;
+      margin: 0;
+      font-size: 35px;
+      line-height: 1.3;
+      text-wrap: balance;
+      color: var(--cor-texto-secundario);
+    }
+
+    svg.arte {
+      position: absolute;
+      inset: 0;
+      width: 1200px;
+      height: 630px;
+    }
+
+    .arte text {
+      font-family: var(--fonte-titulo);
+      font-weight: 600;
+      font-size: 21px;
+      letter-spacing: 0.12em;
+      fill: var(--cor-texto-secundario);
+    }
+
+    .arte .forte { font-weight: 700; fill: var(--cor-texto); }
+    .arte .xbot { fill: var(--cor-xbot); font-weight: 700; }
+  </style>
+</head>
+<body>
+  <div class="palco">
+    <div class="reticula textura-reticula"></div>
+    <h1 class="marca">Odisse<span>IA</span></h1>
+    <p class="frase">Uma jornada pela evolução dos jogos e da inteligência artificial.</p>
+  </div>
+
+  <svg class="arte" viewBox="0 0 1200 630" aria-hidden="true">
+    <!-- Linhas de foco: cunhas afiladas que saem da carta (o único objeto da composição), no roxo do X-B0T. -->
+    <defs><clipPath id="moldura-clip"><path d="M52 28H1172V578L1148 602H28V52Z"/></clipPath></defs>
+    <g clip-path="url(#moldura-clip)"><path d="M1052.3 405.8L983.9 236.1L989.7 233.8ZM1060.5 402.8L1031.6 315.9L1036.3 314.5ZM1066.3 392.5L1021.8 222.2L1031.0 220.0ZM1073.0 398.2L1055.4 317.0L1059.7 316.2ZM1078.7 375.2L1056.9 234.9L1066.7 233.7ZM1087.6 394.7L1079.1 309.9L1084.8 309.5ZM1098.1 391.2L1096.2 220.0L1105.5 220.1ZM1103.4 379.8L1108.2 238.3L1113.4 238.6ZM1110.6 393.6L1127.3 219.4L1134.1 220.2ZM1122.5 390.5L1130.9 332.8L1137.5 334.1ZM1128.2 384.6L1142.6 314.4L1147.1 315.5ZM1135.8 390.9L1167.5 276.2L1174.2 278.2ZM1148.3 387.6L1171.3 320.2L1177.5 322.7ZM1154.3 388.8L1202.7 272.9L1207.9 275.2ZM1155.9 402.8L1219.3 268.2L1227.9 272.6ZM1171.0 395.4L1230.7 292.1L1234.4 294.4ZM1166.5 420.1L1244.7 302.4L1251.2 307.0ZM1184.8 406.7L1211.8 367.4L1216.5 371.1ZM1190.8 409.5L1277.3 302.3L1283.6 307.8ZM1191.1 420.9L1289.7 312.5L1295.2 317.8ZM1196.7 428.1L1300.9 329.4L1304.5 333.3ZM1194.5 439.8L1274.8 369.4L1279.7 375.4ZM1213.1 437.6L1254.3 405.7L1257.1 409.7ZM1207.3 449.6L1323.7 370.3L1328.8 378.4ZM1219.4 455.7L1348.6 385.2L1351.2 390.2ZM1218.4 461.0L1317.0 410.2L1319.6 415.5ZM1212.8 473.0L1276.0 444.0L1278.5 450.2ZM1218.6 479.7L1301.9 450.2L1303.2 454.0ZM1218.1 487.1L1325.9 454.0L1327.9 461.5ZM1228.1 493.9L1297.9 475.1L1299.8 484.7ZM1240.5 502.0L1347.7 486.6L1348.2 490.7ZM1228.8 507.5L1323.0 495.5L1323.6 501.6ZM1218.7 515.4L1319.9 508.1L1320.2 515.2ZM1222.0 523.2L1311.0 522.0L1310.8 528.7ZM1225.2 530.2L1328.5 533.5L1327.8 543.3ZM1216.6 539.6L1309.6 550.1L1308.2 558.9ZM1229.5 548.1L1355.0 570.7L1353.4 578.2ZM1218.9 556.6L1294.7 575.5L1292.6 582.4ZM1226.6 567.2L1326.5 599.3L1323.9 606.3ZM1212.0 568.5L1379.9 634.5L1377.0 641.4ZM1218.1 579.0L1352.8 640.2L1349.8 646.4ZM1212.1 585.9L1340.5 653.8L1336.2 661.3ZM1202.7 586.3L1310.6 650.2L1307.8 654.7ZM1198.4 593.3L1265.3 637.8L1262.0 642.3ZM1207.5 611.8L1290.5 676.6L1286.9 680.9ZM1185.2 605.1L1288.0 699.4L1284.1 703.4ZM1190.2 620.7L1270.9 700.4L1264.2 706.7ZM1191.4 630.2L1294.3 745.5L1290.8 748.5ZM1179.3 634.6L1258.4 737.7L1252.7 741.8ZM1169.7 628.7L1254.5 746.5L1247.8 751.0ZM1158.8 624.9L1214.6 710.7L1208.3 714.5ZM1160.9 644.2L1214.8 738.7L1207.8 742.4ZM1147.2 645.9L1187.9 739.6L1183.4 741.4ZM1139.9 637.4L1207.7 806.1L1199.4 809.2ZM1133.0 651.4L1178.9 805.8L1174.2 807.1ZM1124.0 638.8L1143.6 710.9L1138.6 712.1ZM1117.6 651.8L1134.1 739.0L1129.8 739.7ZM1108.7 645.0L1125.3 787.1L1121.1 787.5ZM1102.8 655.8L1110.0 712.8L1101.4 713.3ZM1096.7 664.5L1100.4 795.6L1094.4 795.6ZM1084.6 663.3L1078.8 799.1L1068.9 798.3ZM1075.9 660.8L1067.3 747.9L1059.9 746.9ZM1072.8 646.4L1065.4 699.2L1060.9 698.4ZM1066.7 642.4L1059.6 683.7L1054.4 682.4ZM1057.0 635.6L1042.0 687.3L1037.5 685.7ZM1050.6 643.1L1042.9 671.9L1037.7 670.0ZM1038.0 643.7L1027.6 672.1L1022.8 669.8ZM1033.9 633.2L1015.0 675.8L1008.1 672.0Z" fill="#cd5efa" opacity="0.6"/></g>
+
+    <!-- Moldura de cantos cortados -->
+    <path d="M52 28H1172V578L1148 602H28V52Z" fill="none" stroke="#3558c4" stroke-width="2"/>
+
+    <!-- Cruzes de registro -->
+    <path d="M1141 52H1155M1148 45V59M45 578H59M52 571V585" stroke="#6f6f7d" stroke-width="1.5" fill="none"/>
+
+    <!-- A rota das quatro estações. Cheio = percorrido, tracejado = a próxima, fino = o que vem depois
+         (as mesmas formas do trilho do Hub). Termina na carta do X-B0T. -->
+    <path d="M90 408H300L356 464" fill="none" stroke="#5b8cff" stroke-width="5"/>
+    <path d="M356 464H556L612 520" fill="none" stroke="#5b8cff" stroke-width="5" stroke-dasharray="14 9"/>
+    <path d="M612 520H812L868 576H1048" fill="none" stroke="#6f6f7d" stroke-width="2.5"/>
+
+    <rect x="80" y="398" width="20" height="20" fill="#5b8cff"/>
+    <rect x="346" y="454" width="20" height="20" fill="#0c0c10" stroke="#5b8cff" stroke-width="3"/>
+    <rect x="339" y="447" width="34" height="34" fill="none" stroke="#5b8cff" stroke-width="2"/>
+    <rect x="602" y="510" width="20" height="20" fill="#0c0c10" stroke="#9d9daa" stroke-width="3"/>
+    <rect x="858" y="566" width="20" height="20" fill="#0c0c10" stroke="#9d9daa" stroke-width="3"/>
+
+    <text x="80" y="382"><tspan class="forte">01</tspan>  ATÉ 2000</text>
+    <text x="346" y="432"><tspan class="forte">02</tspan>  2001 → HOJE</text>
+    <text x="602" y="488"><tspan class="forte">03</tspan>  IA NOS JOGOS</text>
+    <text x="858" y="544"><tspan class="forte">04</tspan></text>
+
+    <!-- A silhueta da carta do X-B0T (só a silhueta, como na abertura) -->
+    <g transform="translate(1096 520) rotate(-8) scale(3.4)">
+      <path d="M-12 -22H14L18 -18V22H-14L-18 18V-18Z" fill="#16161d" stroke="#cd5efa" stroke-width="0.8"/>
+      <path d="M-4 -6H4L6 -4V4L4 6H-4L-6 4V-4Z" fill="#cd5efa"/>
+    </g>
+    <text class="xbot" x="1096" y="428" text-anchor="middle">X-BØT</text>
+  </svg>
+</body>
+</html>

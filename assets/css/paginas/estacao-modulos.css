@@ -744,6 +744,21 @@
   color: var(--cor-texto-atenuado);
 }
 
+/* Referências: um bloco próprio logo abaixo da nota, um pouco menor (13px, acima do mínimo de 12px) e
+   com pouco espaço entre os dois. */
+.linha-tempo__referencias {
+  max-width: 62ch;
+  margin: var(--espaco-2) 0 0;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--cor-texto-atenuado);
+}
+
+.linha-tempo__referencias strong {
+  font-weight: 600;
+  color: var(--cor-texto-secundario);
+}
+
 /* ---------- Estação 4: o palco da carta ---------- */
 
 [data-estacao="4"] .dossie-capa__numeral {
