@@ -12,7 +12,7 @@
 
 ---
 
-# Estação 1 — História dos jogos até 1999
+# Estação 1 — História dos jogos até 2000
 
 ## Do laboratório ao videogame
 

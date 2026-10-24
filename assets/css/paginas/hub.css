@@ -133,6 +133,18 @@
   color: var(--cor-texto);
 }
 
+/* Próxima estação: segmento tracejado, igual ao trecho da rota até ela. Os três estados da barra
+   (cheio, tracejado, fino) se leem pela forma, e o número da próxima também fica em destaque. */
+.barra__segmento--proximo {
+  height: 0;
+  background: none;
+  border-top: 4px dashed var(--cor-destaque);
+}
+
+.barra__celula--proxima .barra__numero {
+  color: var(--cor-destaque);
+}
+
 /* ---------- Acesso ao scanner: a próxima ação da jornada ---------- */
 
 .scan-acesso {
@@ -154,11 +166,30 @@
 
 .scan-acesso__titulo {
   margin: 0;
+  /* No celular o numeral vazado ocupa o canto; o título não passa por baixo dele. */
+  padding-right: 4.5rem;
   font-family: var(--fonte-titulo);
   font-weight: 700;
   font-size: 1.5rem;
   line-height: 1.15;
   text-wrap: balance;
+}
+
+/* Numeral vazado da próxima estação (decorativo): no celular, no canto; no desktop, entre o texto e
+   as regras. O texto e as regras ficam acima dele. */
+.scan-acesso__numeral {
+  position: absolute;
+  z-index: 0;
+  top: var(--espaco-4);
+  right: var(--espaco-4);
+  font-size: 5rem;
+  -webkit-text-stroke-color: var(--cor-azul-linha);
+}
+
+.scan-acesso__texto,
+.scan-acesso__regras {
+  position: relative;
+  z-index: 1;
 }
 
 .scan-acesso__descricao {
@@ -302,6 +333,11 @@
   margin-top: var(--espaco-1);
 }
 
+/* O número da próxima estação acompanha o alvo do nó e o segmento da barra de progresso. */
+.estacao--proxima .estacao__numero {
+  color: var(--cor-destaque);
+}
+
 /* ---------- Cartão: ficha de missão (.ficha em style.css) ----------
    .cartao__faixa é a faixa de estado no topo: sólida (validada), linhas de movimento (próxima) ou
    hachura (bloqueada). */
@@ -324,6 +360,25 @@
   right: var(--espessura);
   height: var(--faixa-altura);
   background-color: var(--cor-apagado);
+}
+
+/* Validada: retícula de mangá no canto do cartão, a marca de conquista do sistema. O texto vem
+   acima dela. */
+.cartao__reticula {
+  position: absolute;
+  z-index: 0;
+  top: calc(var(--espessura) + var(--faixa-altura));
+  right: var(--espessura);
+  width: 4.5rem;
+  height: 4.5rem;
+  clip-path: polygon(0 0, 100% 0, 100% 100%);
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.estacao__titulo,
+.cartao__descricao {
+  position: relative;
 }
 
 .estacao__titulo,
@@ -611,6 +666,16 @@ a.cartao:active .cartao__corpo {
     transform: translateX(3px);
   }
 
+  /* O cartão inteiro é o link: no hover, o título de uma estação ativa ganha o sublinhado de ação.
+     As bloqueadas não ganham, porque não levam a nada novo. */
+  .estacao--desbloqueada a.cartao:hover .estacao__titulo,
+  .estacao--proxima a.cartao:hover .estacao__titulo {
+    text-decoration: underline;
+    text-decoration-color: var(--cor-destaque);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.18em;
+  }
+
   /* A engrenagem de uma estação validada gira um pouco sob o cursor. A da próxima estação tem o
      anel de alvo (box-shadow) e a das bloqueadas é dormente: ambas ficam paradas. */
   .estacao--desbloqueada .marcador {
@@ -786,7 +851,7 @@ a.cartao:active .cartao__corpo {
 
 @media (min-width: 900px) {
   .scan-acesso {
-    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    grid-template-columns: minmax(0, 6fr) auto minmax(0, 5fr);
     column-gap: var(--espaco-12);
     align-items: center;
     padding: var(--espaco-8);
@@ -794,6 +859,16 @@ a.cartao:active .cartao__corpo {
 
   .scan-acesso--completa {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .scan-acesso__titulo {
+    padding-right: 0;
+    font-size: 1.875rem;
+  }
+
+  .scan-acesso__numeral {
+    position: static;
+    font-size: 9rem;
   }
 
   .scan-acesso__acao {
@@ -938,7 +1013,7 @@ a.cartao:active .cartao__corpo {
   }
 
   .rota__titulo {
-    margin-bottom: var(--espaco-8);
+    margin-bottom: var(--espaco-4);
   }
 
   .finais--completa {

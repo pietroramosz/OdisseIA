@@ -4,20 +4,22 @@
 //
 // Não lê nem grava progresso, não toca em localStorage e não altera nenhum link: o gatilho é um
 // ouvinte de clique em elementos marcados com data-bigode (a marca não é link nem botão). Clique do
-// mouse e toque chegam ao mesmo evento "click". A apresentação é um <dialog> nativo em tela cheia
-// (foco preso, Esc fecha), montado só na primeira vez. O movimento segue data-movimento, que
-// acessibilidade.js grava no <html>; com "reduzido" o CSS desliga toda a animação.
+// mouse e toque chegam ao mesmo evento "click". A apresentação é uma janela pequena no centro da
+// página (um <dialog> nativo: foco preso, Esc fecha) sobre um fundo escurecido. Ela se fecha sozinha
+// depois de DURACAO_MS, pelo botão "Fechar", por Esc ou por um clique fora dela. O movimento segue
+// data-movimento, que acessibilidade.js grava no <html>; com "reduzido" o CSS desliga toda a animação.
 (function () {
   "use strict";
 
   const CLIQUES = 5;
   // Intervalo máximo entre dois cliques seguidos. Um clique mais lento recomeça a contagem.
   const INTERVALO_MS = 700;
-  // Repetições do letreiro da faixa: o bastante para cobrir telas largas (até 2560px com escala).
-  const FAIXA_REPETICOES = 12;
+  // Tempo até a janela se fechar sozinha. A barra de tempo do CSS usa o mesmo valor (--bigode-duracao).
+  const DURACAO_MS = 5000;
 
   let dialogo = null;
   let fechar = null;
+  let temporizador = 0;
 
   function criar(tag, classe, texto) {
     const elemento = document.createElement(tag);
@@ -35,19 +37,12 @@
     dialogo = criar("dialog", "bigode");
     dialogo.setAttribute("aria-labelledby", "bigode-titulo");
     dialogo.setAttribute("aria-describedby", "bigode-frase");
+    dialogo.style.setProperty("--bigode-duracao", DURACAO_MS + "ms");
 
-    // Fundo: linhas de foco que irrompem do centro, cruzes de registro e a faixa que corre embaixo.
+    // Linhas de foco ao redor da janela: irrompem do centro e ficam atrás do cartão.
     dialogo.appendChild(decorativo(criar("div", "bigode__foco textura-foco")));
-    dialogo.appendChild(decorativo(criar("span", "registro bigode__registro-a")));
-    dialogo.appendChild(decorativo(criar("span", "registro bigode__registro-b")));
 
-    const faixa = decorativo(criar("div", "bigode__faixa"));
-    faixa.appendChild(criar("div", "bigode__correr", "PALAVRA DADA · PALAVRA CUMPRIDA · ".repeat(FAIXA_REPETICOES)));
-    dialogo.appendChild(faixa);
-
-    const palco = criar("div", "bigode__palco");
-
-    const carimbo = criar("div", "ficha bigode__carimbo");
+    const cartao = criar("div", "ficha bigode__cartao");
     const titulo = criar("h2", "bigode__titulo");
     titulo.id = "bigode-titulo";
     // O texto completo vai no aria-label; as letras separadas são só para a animação.
@@ -60,24 +55,35 @@
       palavra.appendChild(parte);
     });
     titulo.appendChild(palavra);
-    carimbo.appendChild(titulo);
+    cartao.appendChild(titulo);
 
     const frase = criar("p", "bigode__frase", "Palavra dada, palavra cumprida.");
     frase.id = "bigode-frase";
-    carimbo.appendChild(frase);
-    palco.appendChild(carimbo);
+    cartao.appendChild(frase);
 
     fechar = criar("button", "botao bigode__fechar", "Fechar");
     fechar.type = "button";
     fechar.addEventListener("click", function () {
       dialogo.close();
     });
-    palco.appendChild(fechar);
-    dialogo.appendChild(palco);
+    cartao.appendChild(fechar);
 
-    // Clicar fora do carimbo (no fundo) também fecha.
+    // Barra de tempo: esvazia até a janela se fechar. Decorativa; o botão e Esc seguem valendo.
+    const tempo = decorativo(criar("div", "bigode__tempo"));
+    tempo.appendChild(criar("span", "bigode__tempo-barra"));
+    cartao.appendChild(tempo);
+    dialogo.appendChild(cartao);
+
+    // Um clique no fundo escurecido (fora da janela) também fecha.
     dialogo.addEventListener("click", function (evento) {
-      if (evento.target === dialogo || evento.target === palco) dialogo.close();
+      const caixa = dialogo.getBoundingClientRect();
+      const dentro = evento.clientX >= caixa.left && evento.clientX <= caixa.right &&
+        evento.clientY >= caixa.top && evento.clientY <= caixa.bottom;
+      if (!dentro) dialogo.close();
+    });
+    // Qualquer forma de fechar (botão, Esc, clique fora, tempo) cancela o relógio.
+    dialogo.addEventListener("close", function () {
+      window.clearTimeout(temporizador);
     });
 
     document.body.appendChild(dialogo);
@@ -92,6 +98,10 @@
       dialogo.setAttribute("open", "");
     }
     fechar.focus();
+    window.clearTimeout(temporizador);
+    temporizador = window.setTimeout(function () {
+      if (dialogo.open) dialogo.close();
+    }, DURACAO_MS);
   }
 
   // Conta cliques seguidos num mesmo elemento; o quinto abre a apresentação.

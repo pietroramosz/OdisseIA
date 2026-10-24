@@ -773,3 +773,26 @@ A linha do tempo da Estação 1 terminava sem fecho: no desktop a espinha seguia
 ### O que não muda
 
 `progresso.js`, `qr.js`, `config.js`, scanner, chave `odisseia:progresso`, regras de ordem e desbloqueio, conteúdo histórico, HTML/CSS/JS puros.
+
+---
+
+## DEC-028 — Estação 1 "até 2000", easter egg em janela pequena e acabamento do Hub
+
+### Contexto
+
+A DEC-027 fechou a linha do tempo da Estação 1 em 2000, mas o título, a rota, a ficha e a abertura ainda diziam "até 1999". O easter egg ocupava a tela inteira, o que o fazia parecer uma página nova e não uma surpresa. O Hub empilhava três caixas (cabeçalho, painel do QR e cartões) com o mesmo peso, e o painel do QR deixava um vazio grande no meio no desktop.
+
+### Decisão
+
+1. **Estação 1 = "Evolução dos jogos até 2000".** O título (página e tela de bloqueio), o nome no Hub e na abertura (`ESTACOES_NOMES`, `jornada__nome`), a rota "ATÉ 2000" das quatro estações, o rótulo da abertura, a ficha "Período 1950–2000", o ano final da quadra de Pong da capa e os documentos (README, PRODUCT, PROJECT e o texto-fonte em `docs/`) passam a dizer 2000. Isso revisa a frase da DEC-027 que mantinha "1950–1999" na ficha. Nada de conteúdo muda: os 15 marcos (1950 a 1996), os textos dos capítulos e o "Até o fim dos anos 1990" da conexão ficam como estavam, e a Estação 2 continua em 2001. As menções históricas a 1999 (DEC-005, DEVLOG) não foram reescritas.
+2. **Easter egg em janela pequena** (revisa o item 5 da DEC-027). A tela cheia dá lugar a um `<dialog>` de até 23rem no centro, com fundo escurecido (`::backdrop`, mesmo véu escuro do scanner). O cartão tem recorte diagonal, moldura azul de 3px e leve giro; as linhas de foco irrompem em octógono ao redor dele; as letras de BIGODE entram em sequência. A janela se fecha sozinha em 5s (`DURACAO_MS`), com uma barra de tempo que esvazia e sincroniza pela variável `--bigode-duracao`, e também pelo botão "Fechar", por Esc e por um clique fora dela. Com movimento reduzido nada anima e a barra de tempo some (ficaria cheia para sempre). O gatilho (cinco cliques de até 700ms) e a regra de não tocar no progresso não mudaram.
+3. **Hub** (só visual; `progresso.js`, `qr.js` e as regras de desbloqueio não mudam):
+   - a barra de progresso ganha o estado "próxima" (segmento tracejado, número em destaque), então cheio, tracejado e fino se leem pela forma, como o trilho da rota; o número da próxima estação no trilho também fica em destaque;
+   - o painel do QR ganha o numeral vazado da próxima estação (no celular, no canto; no desktop, entre o texto e as regras, onde antes havia um vazio), com título maior no desktop;
+   - os cartões de estações validadas ganham a retícula de mangá no canto (a marca de conquista do sistema);
+   - hover de estação ativa sublinha o título em azul (as bloqueadas não, porque não levam a nada novo); o espaço sob "Estações" no desktop foi reduzido.
+4. **Polimento das demais páginas:** revisão de todas as páginas em 360, 430, 768 e 1440px (sem overflow, imagem quebrada ou erro de console). Nenhuma mudança além do que está acima, porque as páginas de leitura já têm hierarquia e ritmo adequados.
+
+### O que não muda
+
+`progresso.js`, `qr.js`, `config.js`, scanner, chave `odisseia:progresso`, regras de ordem e desbloqueio, conteúdo histórico, HTML/CSS/JS puros, caminhos relativos para o GitHub Pages em `/OdisseIA/`.

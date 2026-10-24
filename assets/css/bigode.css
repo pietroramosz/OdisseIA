@@ -1,8 +1,9 @@
 /* Easter egg "VOCÊ É BIGODE" (assets/js/bigode.js): cinco cliques rápidos na marca, no Hub ou na
-   abertura. Tela cheia, na linguagem do sistema: linhas de foco que irrompem do centro, um carimbo
-   de recorte diagonal que bate, as letras de BIGODE entrando em sequência e uma faixa que corre
-   embaixo. Só tokens de cor (azul; o roxo é do X-B0T). Com movimento reduzido (data-movimento, em
-   style.css) nenhuma animação roda e a composição já nasce completa. */
+   abertura. Uma janela pequena no centro, sobre um fundo escurecido: o carimbo de recorte diagonal
+   bate, as letras de BIGODE entram em sequência, linhas de foco irrompem ao redor e uma barra de
+   tempo esvazia até a janela se fechar (5s). Só tokens de cor (azul; o roxo é do X-B0T). Com
+   movimento reduzido (data-movimento, em style.css) nenhuma animação roda e a janela já nasce
+   completa; a barra de tempo, que só faz sentido animada, some. */
 
 /* A marca que dispara o easter egg: cliques rápidos não devem selecionar texto nem dar zoom no toque. */
 [data-bigode] {
@@ -12,118 +13,68 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-html:has(dialog.bigode[open]) {
-  overflow: hidden;
-}
-
+/* O <dialog> é só o palco transparente; o cartão (.ficha) é a janela. */
 .bigode {
   position: fixed;
-  inset: 0;
   z-index: 70;
-  display: grid;
-  place-items: center;
-  width: 100%;
+  width: min(23rem, calc(100vw - 2 * var(--gutter)));
   max-width: none;
-  height: 100%;
-  max-height: none;
-  margin: 0;
-  padding: var(--gutter);
+  margin: auto;
+  padding: 0;
   border: 0;
-  background: var(--cor-fundo);
+  background: none;
   color: var(--cor-texto);
-  overflow: hidden;
+  overflow: visible;
 }
 
 .bigode:not([open]) {
   display: none;
 }
 
+/* Escurecimento discreto: a página continua à vista por trás. */
 .bigode::backdrop {
-  background: var(--cor-fundo);
+  background: rgba(5, 5, 8, 0.62);
 }
 
-.bigode[open] {
-  animation: bigode-entrar 0.2s ease-out both;
+.bigode[open]::backdrop {
+  animation: bigode-escurecer 0.25s ease-out both;
 }
 
-/* Fundo: as linhas de foco saem do carimbo, que é o objeto real da composição. */
+/* Linhas de foco: saem do centro do cartão, que é o objeto real da composição. Octógono, como as
+   explosões do resto do site. */
 .bigode__foco {
   position: absolute;
-  inset: -12%;
-  opacity: 0.55;
+  z-index: -1;
+  top: 50%;
+  left: 50%;
+  width: 200%;
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  clip-path: polygon(30% 0, 70% 0, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0 70%, 0 30%);
+  opacity: 0.5;
   pointer-events: none;
 }
 
 .bigode[open] .bigode__foco {
-  animation: bigode-irromper 0.55s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+  animation: bigode-irromper 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.05s backwards;
 }
 
-.bigode__registro-a {
-  top: var(--espaco-4);
-  left: var(--espaco-4);
-}
-
-.bigode__registro-b {
-  top: var(--espaco-4);
-  right: var(--espaco-4);
-}
-
-/* Faixa embaixo: texto de letreiro entre dois filetes. Desliza uma vez, ao abrir, e fica parada.
-   Decorativa. */
-.bigode__faixa {
-  position: absolute;
-  right: 0;
-  bottom: var(--espaco-8);
-  left: 0;
-  padding: var(--espaco-2) 0;
-  border-top: 2px solid var(--cor-azul-linha);
-  border-bottom: 2px solid var(--cor-azul-linha);
-  background: var(--cor-fundo);
-  overflow: hidden;
-  pointer-events: none;
-}
-
-.bigode__correr {
-  display: flex;
-  width: max-content;
-  font-family: var(--fonte-titulo);
-  font-weight: 600;
-  font-size: 0.75rem;
-  letter-spacing: 0.16em;
-  white-space: pre;
-  color: var(--cor-texto-atenuado);
-}
-
-.bigode[open] .bigode__correr {
-  animation: bigode-deslizar 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.3s backwards;
-}
-
-.bigode__palco {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  justify-items: center;
-  gap: var(--espaco-8);
-  max-width: 100%;
-}
-
-/* O carimbo: moldura dupla de recorte diagonal, levemente girado, como o VALIDADA do Hub, só que
-   maior. A moldura azul é da .ficha (style.css). */
-.bigode__carimbo {
+/* O cartão: moldura de recorte diagonal, levemente girado, como o carimbo VALIDADA do Hub. A moldura
+   azul é da .ficha (style.css). */
+.bigode__cartao {
   --moldura: var(--cor-destaque);
   --espessura: 3px;
   --miolo: var(--cor-superficie);
   display: grid;
   justify-items: center;
   gap: var(--espaco-4);
-  max-width: 100%;
-  padding: var(--espaco-8) var(--espaco-6);
+  padding: var(--espaco-8) var(--espaco-6) var(--espaco-6);
   text-align: center;
-  rotate: -3deg;
+  rotate: -2deg;
 }
 
-.bigode[open] .bigode__carimbo {
-  animation: bigode-bater 0.42s cubic-bezier(0.16, 1, 0.3, 1) 0.12s backwards;
+.bigode[open] .bigode__cartao {
+  animation: bigode-bater 0.42s cubic-bezier(0.16, 1, 0.3, 1) backwards;
 }
 
 .bigode__titulo {
@@ -137,13 +88,13 @@ html:has(dialog.bigode[open]) {
 }
 
 .bigode__voce {
-  font-size: clamp(2rem, 9vw, 3.5rem);
+  font-size: clamp(1.5rem, 7vw, 2rem);
   letter-spacing: 0.04em;
 }
 
 .bigode__palavra {
   display: flex;
-  font-size: clamp(3.5rem, 17vw, 9rem);
+  font-size: clamp(3rem, 15vw, 4.75rem);
   letter-spacing: -0.02em;
   color: var(--cor-destaque);
 }
@@ -153,7 +104,7 @@ html:has(dialog.bigode[open]) {
 }
 
 .bigode[open] .bigode__letra {
-  animation: bigode-letra 0.5s cubic-bezier(0.22, 1, 0.36, 1) calc(0.45s + var(--i) * 0.06s) backwards;
+  animation: bigode-letra 0.5s cubic-bezier(0.22, 1, 0.36, 1) calc(0.3s + var(--i) * 0.06s) backwards;
 }
 
 .bigode__frase {
@@ -162,30 +113,62 @@ html:has(dialog.bigode[open]) {
   border-top: 1px dashed var(--cor-apagado);
   font-family: var(--fonte-titulo);
   font-weight: 600;
-  font-size: clamp(1.0625rem, 4.2vw, 1.5rem);
+  font-size: 1.0625rem;
   line-height: 1.3;
   text-wrap: balance;
   color: var(--cor-texto-secundario);
 }
 
 .bigode[open] .bigode__frase {
-  animation: bigode-subir 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.95s backwards;
+  animation: bigode-subir 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.75s backwards;
 }
 
 .bigode__fechar {
-  min-width: 11rem;
+  min-width: 9rem;
 }
 
-@keyframes bigode-entrar {
+/* Barra de tempo: colada na base do cartão, segmento duro (sem arredondar) como as barras do Hub. */
+.bigode__tempo {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 6px;
+  background: var(--cor-superficie-alta);
+}
+
+.bigode__tempo-barra {
+  display: block;
+  height: 100%;
+  background: var(--cor-destaque);
+  transform-origin: left;
+}
+
+.bigode[open] .bigode__tempo-barra {
+  animation: bigode-tempo var(--bigode-duracao, 5000ms) linear forwards;
+}
+
+/* Sem animação a barra ficaria cheia para sempre e passaria a ideia errada: some. */
+:root[data-movimento="reduzido"] .bigode__tempo {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root:not([data-movimento]) .bigode__tempo {
+    display: none;
+  }
+}
+
+@keyframes bigode-escurecer {
   from { opacity: 0; }
 }
 
 @keyframes bigode-irromper {
-  from { opacity: 0; scale: 0.4; }
+  from { opacity: 0; scale: 0.3; }
 }
 
 @keyframes bigode-bater {
-  from { opacity: 0; scale: 1.5; rotate: -12deg; }
+  from { opacity: 0; scale: 1.45; rotate: -10deg; }
 }
 
 @keyframes bigode-letra {
@@ -196,16 +179,6 @@ html:has(dialog.bigode[open]) {
   from { opacity: 0; translate: 0 8px; }
 }
 
-@keyframes bigode-deslizar {
-  from { opacity: 0; translate: -6rem 0; }
-}
-
-@media (min-width: 900px) {
-  .bigode__carimbo {
-    padding: var(--espaco-12) var(--espaco-16);
-  }
-
-  .bigode__faixa {
-    bottom: var(--espaco-12);
-  }
+@keyframes bigode-tempo {
+  to { transform: scaleX(0); }
 }

@@ -12,7 +12,7 @@ Visitantes de uma feira de ciências escolar, circulando entre quatro estações
 
 ## Product Purpose
 
-O OdisseIA é a camada digital de uma feira escolar dividida em quatro estações físicas (evolução dos jogos até 1999; de 2001 até hoje; IA nos jogos; X-B0T). O site acompanha o percurso do visitante, complementa — sem repetir — o conteúdo apresentado presencialmente, e usa QR Codes para validar que o visitante realmente passou por cada estação física antes de desbloquear o conteúdo digital correspondente. Ao final das quatro estações, uma página de conclusão desbloqueia o acesso ao X-B0T, um jogo digital (TCG) desenvolvido por outro núcleo do projeto. Sucesso = o visitante completa o fluxo físico+digital sem fricção, no próprio celular, e chega ao X-B0T entendendo que o desbloqueou.
+O OdisseIA é a camada digital de uma feira escolar dividida em quatro estações físicas (evolução dos jogos até 2000; de 2001 até hoje; IA nos jogos; X-B0T). O site acompanha o percurso do visitante, complementa — sem repetir — o conteúdo apresentado presencialmente, e usa QR Codes para validar que o visitante realmente passou por cada estação física antes de desbloquear o conteúdo digital correspondente. Ao final das quatro estações, uma página de conclusão desbloqueia o acesso ao X-B0T, um jogo digital (TCG) desenvolvido por outro núcleo do projeto. Sucesso = o visitante completa o fluxo físico+digital sem fricção, no próprio celular, e chega ao X-B0T entendendo que o desbloqueou.
 
 ## Positioning
 

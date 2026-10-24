@@ -1,7 +1,7 @@
 // Inicialização das páginas. Hub e estações só leem o progresso; só a validação grava.
 
 const ESTACOES_NOMES = [
-  "Evolução dos jogos até 1999",
+  "Evolução dos jogos até 2000",
   "Evolução dos jogos de 2001 até hoje",
   "Inteligência Artificial nos jogos",
   "X-B0T"
@@ -102,6 +102,11 @@ function renderizarAcessoScanner(ultima, total) {
   texto.appendChild(criarBotaoScanner("Escanear QR da Estação " + proxima, "botao--principal scan-acesso__acao"));
   area.appendChild(texto);
 
+  // Numeral vazado da próxima estação: identifica de relance de qual parada o painel está falando.
+  const numeral = criarTexto("span", "numeral-vazado scan-acesso__numeral", proxima);
+  numeral.setAttribute("aria-hidden", "true");
+  area.appendChild(numeral);
+
   const regras = document.createElement("ul");
   regras.className = "scan-acesso__regras";
   [
@@ -129,16 +134,18 @@ function renderizarProgresso(ultima, total) {
 
   for (let n = 1; n <= total; n++) {
     const cheia = n <= ultima;
+    // O segmento da próxima estação é tracejado, como o trecho da rota até ela (Hub, trilho).
+    const proxima = n === ultima + 1;
 
     const celula = document.createElement("span");
     celula.className = cheia
       ? "barra__celula barra__celula--cheia"
-      : "barra__celula";
+      : proxima ? "barra__celula barra__celula--proxima" : "barra__celula";
 
     const segmento = document.createElement("span");
     segmento.className = cheia
       ? "barra__segmento barra__segmento--cheio"
-      : "barra__segmento";
+      : proxima ? "barra__segmento barra__segmento--proximo" : "barra__segmento";
     celula.appendChild(segmento);
     celula.appendChild(criarTexto("span", "barra__numero", doisDigitos(n)));
 
@@ -209,6 +216,12 @@ function criarCardEstacao(numero, estado, estadoSeguinte) {
   const faixa = criarTexto("span", "cartao__faixa", "");
   faixa.setAttribute("aria-hidden", "true");
   corpo.appendChild(faixa);
+  // Estação validada: retícula de mangá no canto, a marca de conquista do sistema.
+  if (estado === "desbloqueada") {
+    const reticula = criarTexto("span", "cartao__reticula textura-reticula", "");
+    reticula.setAttribute("aria-hidden", "true");
+    corpo.appendChild(reticula);
+  }
   corpo.appendChild(criarTexto("h2", "estacao__titulo", ESTACOES_NOMES[numero - 1], id + "-titulo"));
   corpo.appendChild(criarTexto("p", "cartao__descricao", ESTACOES_DESCRICOES[numero - 1], id + "-descricao"));
 

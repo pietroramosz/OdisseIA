@@ -47,14 +47,14 @@ Situação revisada em 23/10/2026 (identidade azul sobre grafite, scanner de QR,
 
 O projeto possui atualmente **quatro estações**.
 
-### Estação 1 — Evolução dos jogos até 1999
+### Estação 1 — Evolução dos jogos até 2000
 
-A primeira estação cobre a evolução dos jogos até 1999.
+A primeira estação cobre a evolução dos jogos até 2000.
 
 Algumas definições importantes:
 
-- a linha do tempo termina em 2000, como limite da estação (DEC-027): o ano 2000 fecha a linha, sem marco próprio;
-- o conteúdo histórico da estação vai até 1999 e o de 2000 em diante fica para a estação seguinte;
+- a linha do tempo termina em 2000 (DEC-027 e DEC-028): o ano 2000 fecha a linha, sem marco próprio e sem inventar eventos para preencher o período;
+- os 15 marcos vão de 1950 a 1996 e o conteúdo de 2001 em diante fica para a estação seguinte;
 - o site deve complementar a apresentação física em vez de repetir exatamente o mesmo conteúdo.
 
 ### Estação 2 — Evolução dos jogos de 2001 até hoje
