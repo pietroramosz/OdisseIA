@@ -452,6 +452,93 @@
   color: var(--cor-texto-secundario);
 }
 
+/* ---------- Mini Jogos: acesso discreto, depois do X-B0T (o jogo principal mantém o destaque) ---------- */
+
+.final-minijogos {
+  margin-top: var(--espaco-12);
+}
+
+.final-minijogos__texto {
+  max-width: 34rem;
+  margin: 0 0 var(--espaco-6);
+  line-height: 1.6;
+  color: var(--cor-texto-secundario);
+}
+
+.final-minijogos__lista {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--espaco-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.final-minijogo {
+  --moldura: var(--cor-filete);
+  --miolo: var(--cor-superficie);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    "arte"
+    "nome"
+    "dica";
+  align-content: start;
+  row-gap: var(--espaco-2);
+  height: 100%;
+  padding: var(--espaco-3);
+  color: var(--cor-texto);
+  text-decoration: none;
+  transition: transform 0.15s ease-out;
+}
+
+.final-minijogo:focus-visible {
+  outline: none;
+  --moldura: var(--cor-texto);
+  --espessura: 3px;
+}
+
+.final-minijogo:active {
+  transform: translateY(1px);
+}
+
+.final-minijogo__arte {
+  grid-area: arte;
+  width: 3.5rem;
+  height: 3.5rem;
+  margin-bottom: var(--espaco-1);
+  padding: var(--espaco-1);
+  background: var(--cor-superficie-escura);
+  clip-path: var(--recorte-minimo);
+}
+
+.final-minijogo__nome {
+  grid-area: nome;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 1.0625rem;
+  line-height: 1.1;
+}
+
+.final-minijogo__dica {
+  grid-area: dica;
+  min-width: 0;
+  font-size: 0.875rem;
+  line-height: 1.35;
+  color: var(--cor-texto-secundario);
+}
+
+@media (hover: hover) {
+  .final-minijogo:hover {
+    --moldura: var(--cor-destaque);
+    --espessura: 2px;
+    --miolo: var(--cor-superficie-alta);
+    transform: translateY(-2px);
+  }
+}
+
 .final-saida {
   display: grid;
   margin-top: var(--espaco-8);
@@ -645,6 +732,24 @@
 
   .final-acoes {
     max-width: 30rem;
+  }
+
+  .final-minijogos {
+    margin-top: var(--espaco-16);
+  }
+
+  .final-minijogos__lista {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--espaco-4);
+  }
+
+  .final-minijogo {
+    padding: var(--espaco-4);
+  }
+
+  .final-minijogo__arte {
+    width: 4.5rem;
+    height: 4.5rem;
   }
 
   .final-saida {

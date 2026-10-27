@@ -1,17 +1,17 @@
 // Inicialização das páginas. Hub e estações só leem o progresso; só a validação grava.
 
 const ESTACOES_NOMES = [
+  "Inteligência Artificial nos jogos",
   "Evolução dos jogos até 2000",
   "Evolução dos jogos de 2001 até hoje",
-  "Inteligência Artificial nos jogos",
   "X-B0T"
 ];
 
 // Descrição curta de cada cartão: o título do briefing da própria estação.
 const ESTACOES_DESCRICOES = [
+  "Das regras à inteligência artificial",
   "Do laboratório ao videogame",
   "A era dos jogos conectados",
-  "Das regras à inteligência artificial",
   "Um jogo de cartas feito para o OdisseIA"
 ];
 

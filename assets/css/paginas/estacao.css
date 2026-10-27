@@ -1,7 +1,7 @@
 /* Estações 1–4: cada estação é um dossiê editorial (DEC-019). Capa com numeral na grade, ficha
    técnica e ilustração própria (na Estação 4, o palco da carta); capítulos em fluxo de leitura com
    módulos complementares (.nota) na coluna lateral; uma linha do tempo única (ou o percurso, na
-   Estação 3); fechamento que liga à próxima etapa. Módulos, linha do tempo, percurso, palco da carta e movimento ficam em estacao-modulos.css. */
+   Estação 1); fechamento que liga à próxima etapa. Módulos, linha do tempo, percurso, palco da carta e movimento ficam em estacao-modulos.css. */
 
 .pagina-estacao main {
   max-width: calc(var(--palco) + 2 * var(--gutter));
@@ -958,8 +958,8 @@ body[data-estacao="4"] .pular {
     font-size: clamp(3rem, 5.6vw, 5.5rem);
   }
 
-  /* Estação 2: a rede ocupa a largura toda, abaixo do título. */
-  [data-estacao="2"] .dossie-capa:not(.dossie-capa--bloqueada) {
+  /* Estação 3: a rede ocupa a largura toda, abaixo do título. */
+  [data-estacao="3"] .dossie-capa:not(.dossie-capa--bloqueada) {
     grid-template-columns: minmax(0, 1fr);
     grid-template-areas:
       "numeral"
@@ -967,26 +967,26 @@ body[data-estacao="4"] .pular {
       "arte";
   }
 
-  [data-estacao="2"] .dossie-capa__texto {
+  [data-estacao="3"] .dossie-capa__texto {
     display: grid;
     grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
     column-gap: var(--espaco-12);
     align-items: end;
   }
 
-  [data-estacao="2"] .dossie-ficha {
+  [data-estacao="3"] .dossie-ficha {
     grid-column: 2;
     grid-row: 1 / span 2;
     align-self: end;
   }
 
-  [data-estacao="2"] .dossie-capa__arte {
+  [data-estacao="3"] .dossie-capa__arte {
     max-width: 62rem;
     margin-top: var(--espaco-8);
   }
 
-  /* Estação 3: numeral e título à esquerda, a árvore de decisão à direita (a grade padrão da capa,
-     como nas Estações 1 e 4). */
+  /* Estação 1: numeral e título à esquerda, a árvore de decisão à direita (a grade padrão da capa,
+     como nas Estações 2 e 4). */
 
   /* Estação 4: o palco da carta ocupa a coluna direita, ao lado de numeral e título. */
   [data-estacao="4"] .dossie-capa:not(.dossie-capa--bloqueada) {
@@ -1153,15 +1153,15 @@ body[data-estacao="4"] .pular {
 }
 
 /* Com a coluna lateral larga, o diagrama fica à direita do trecho que ilustra, como um módulo. A
-   Estação 3 reserva a coluna lateral para as figuras (texto à esquerda, imagem à direita): a coluna de
+   Estação 1 reserva a coluna lateral para as figuras (texto à esquerda, imagem à direita): a coluna de
    leitura encolhe para 27rem e a lateral cresce, para o texto do diagrama continuar legível (12px ou
    mais). Abaixo de 1100px as figuras seguem no fluxo, abaixo do texto. */
 @media (min-width: 1100px) {
-  [data-estacao="3"] .capitulo {
+  [data-estacao="1"] .capitulo {
     grid-template-columns: var(--margem) minmax(0, 27rem) minmax(22rem, 1fr);
   }
 
-  [data-estacao="3"] .capitulo > .capitulo__titulo {
+  [data-estacao="1"] .capitulo > .capitulo__titulo {
     grid-column: 2 / -1;
   }
 

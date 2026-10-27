@@ -1,0 +1,867 @@
+/* Mini Jogos: o menu com os quatro cartões e o painel de cada jogo (montado por minijogos.js).
+   Tudo em tokens do site: grafite, azul de acento e recorte diagonal. O roxo é do X-B0T e não
+   aparece aqui. Os jogos desenham no canvas com as mesmas cores (lidas dos tokens), então os temas
+   claro, escuro e de alto contraste valem para eles também. */
+
+.pagina-minijogos main {
+  max-width: calc(var(--palco) + 2 * var(--gutter));
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: var(--espaco-2) var(--gutter) var(--espaco-16);
+  background: var(--cor-fundo);
+  overflow-x: clip;
+}
+
+main:focus,
+.mj-cabeca__titulo:focus,
+.mj-jogo__titulo:focus {
+  outline: none;
+}
+
+/* ---------- Menu ---------- */
+
+.mj-cabeca {
+  position: relative;
+  margin-top: var(--espaco-4);
+  padding-top: var(--espaco-6);
+  border-top: 2px solid var(--cor-azul-linha);
+}
+
+.mj-cabeca__titulo {
+  margin: 0;
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: clamp(2.5rem, 11vw, 4.75rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+
+.mj-cabeca__texto {
+  max-width: 34rem;
+  margin: var(--espaco-4) 0 0;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--cor-texto-secundario);
+}
+
+.mj-lista {
+  display: grid;
+  gap: var(--espaco-4);
+  margin: var(--espaco-8) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mj-cartao {
+  --moldura: var(--cor-filete);
+  --miolo: var(--cor-superficie);
+  display: grid;
+  grid-template-columns: 5.5rem minmax(0, 1fr);
+  align-items: center;
+  gap: var(--espaco-4);
+  height: 100%;
+  padding: var(--espaco-4) var(--espaco-6) var(--espaco-4) var(--espaco-4);
+  color: var(--cor-texto);
+  text-decoration: none;
+  transition: transform 0.15s ease-out;
+}
+
+.mj-cartao:focus-visible {
+  outline: none;
+  --moldura: var(--cor-texto);
+  --espessura: 3px;
+}
+
+.mj-cartao:active {
+  transform: translateY(1px);
+}
+
+.mj-cartao__arte {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  padding: var(--espaco-2);
+  background: var(--cor-superficie-escura);
+  clip-path: var(--recorte-pequeno);
+}
+
+.mj-cartao__corpo {
+  display: grid;
+  gap: var(--espaco-2);
+  min-width: 0;
+}
+
+.mj-cartao__titulo {
+  margin: 0;
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 1.375rem;
+  line-height: 1.1;
+}
+
+.mj-cartao__texto {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--cor-texto-secundario);
+}
+
+.mj-cartao__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espaco-3);
+  margin: var(--espaco-1) 0 0;
+}
+
+.mj-cartao__chip {
+  padding: var(--espaco-1) var(--espaco-2);
+  background: var(--cor-superficie-alta);
+  box-shadow: inset 0 0 0 1px var(--cor-filete);
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cor-texto-secundario);
+  clip-path: var(--recorte-minimo);
+}
+
+.mj-cartao__acao {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espaco-2);
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 0.875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cor-azul-claro);
+}
+
+.mj-cartao__acao .seta {
+  transition: transform 0.15s ease-out;
+}
+
+@media (hover: hover) {
+  .mj-cartao:hover {
+    --moldura: var(--cor-destaque);
+    --espessura: 2px;
+    --miolo: var(--cor-superficie-alta);
+    transform: translateY(-2px);
+  }
+
+  .mj-cartao:hover .seta {
+    transform: translateX(4px);
+  }
+}
+
+/* Entrada do menu: os cartões chegam em sequência, uma vez. */
+.mj-lista > li {
+  animation: entrar 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.mj-lista > li:nth-child(2) { animation-delay: 0.06s; }
+.mj-lista > li:nth-child(3) { animation-delay: 0.12s; }
+.mj-lista > li:nth-child(4) { animation-delay: 0.18s; }
+
+.mj-semjs {
+  margin: var(--espaco-8) 0;
+  padding: var(--espaco-4);
+  background: var(--cor-superficie);
+  color: var(--cor-texto);
+  clip-path: var(--recorte-pequeno);
+}
+
+/* ---------- Painel do jogo ---------- */
+
+.mj-jogo {
+  display: grid;
+  gap: var(--espaco-3);
+  margin-top: 0;
+}
+
+.mj-jogo__topo {
+  display: grid;
+  gap: var(--espaco-1);
+}
+
+.mj-jogo__titulo {
+  margin: 0;
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: clamp(1.75rem, 7vw, 3.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+
+.mj-voltar {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espaco-2);
+  justify-self: start;
+  min-height: 44px;
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  font-size: 0.875rem;
+  letter-spacing: 0.04em;
+  color: var(--cor-texto-secundario);
+  text-decoration: none;
+}
+
+@media (hover: hover) {
+  .mj-voltar:hover {
+    color: var(--cor-texto);
+  }
+}
+
+/* Dificuldade: três botões em segmento. O rótulo só aparece em tela larga. */
+.mj-dif {
+}
+
+.mj-dif__rotulo {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.mj-dif__opcoes {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--espaco-2);
+}
+
+.mj-dif__botao {
+  min-height: 44px;
+  padding: var(--espaco-2) var(--espaco-2);
+  border: 0;
+  background: var(--cor-superficie-alta);
+  box-shadow: inset 0 0 0 1px var(--cor-filete);
+  color: var(--cor-texto);
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 0.9375rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  clip-path: var(--recorte-pequeno);
+  transition: background-color 0.15s ease-out, color 0.15s ease-out;
+}
+
+.mj-dif__botao[aria-pressed="true"] {
+  background: var(--cor-destaque);
+  box-shadow: none;
+  color: var(--cor-sobre-destaque);
+}
+
+.mj-dif__botao:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 3px var(--cor-texto);
+}
+
+.mj-dif__botao[aria-pressed="true"]:focus-visible {
+  box-shadow: inset 0 0 0 3px var(--cor-sobre-destaque);
+}
+
+.mj-dif__botao:disabled {
+  cursor: not-allowed;
+}
+
+.mj-dif__botao:disabled:not([aria-pressed="true"]) {
+  background: var(--cor-superficie);
+  color: var(--cor-texto-atenuado);
+}
+
+@media (hover: hover) {
+  .mj-dif__botao:not(:disabled):not([aria-pressed="true"]):hover {
+    background: var(--cor-texto);
+    color: var(--cor-fundo);
+  }
+}
+
+/* Indicadores: o valor em destaque e o rótulo embaixo, como o placar da Conclusão. */
+.mj-hud {
+  display: flex;
+  margin: 0;
+  background: var(--cor-superficie);
+  clip-path: var(--recorte-pequeno);
+}
+
+.mj-hud__item {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-end;
+  gap: var(--espaco-1);
+  min-width: 0;
+  padding: var(--espaco-2) var(--espaco-3) var(--espaco-2);
+}
+
+.mj-hud__item + .mj-hud__item {
+  box-shadow: inset 1px 0 0 var(--cor-filete);
+}
+
+.mj-hud__rotulo {
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cor-texto-secundario);
+}
+
+.mj-hud__valor {
+  margin: 0;
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 1.625rem;
+  line-height: 1.05;
+  font-variant-numeric: tabular-nums;
+  color: var(--cor-texto);
+}
+
+.mj-hud__item:first-child .mj-hud__valor {
+  font-size: 1.125rem;
+  line-height: 1.45;
+  color: var(--cor-azul-claro);
+}
+
+/* Palco: a moldura azul da ficha e o canvas dentro. */
+.mj-palco {
+  --moldura: var(--cor-azul-linha);
+  --espessura: 2px;
+  --miolo: var(--cor-superficie-escura);
+  --recorte: var(--recorte-pequeno);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  padding: var(--espaco-2);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.mj-palco:focus {
+  outline: none;
+}
+
+/* Snake e Pathfinding desenham a moldura do próprio mapa (que muda de tamanho com a dificuldade):
+   o palco some atrás dela, sem moldura dupla. A largura do palco continua sendo a da coluna, porque é
+   dela que o jogo mede o espaço disponível. */
+.mj-jogo--snake .mj-palco,
+.mj-jogo--pathfinding .mj-palco {
+  --moldura: transparent;
+  --miolo: transparent;
+  --espessura: 0px;
+  padding: 0;
+}
+
+.mj-palco:focus-visible {
+  --moldura: var(--cor-texto);
+  --espessura: 3px;
+}
+
+.mj-canvas {
+  display: block;
+  max-width: 100%;
+  touch-action: manipulation;
+}
+
+.mj-jogo--pong .mj-canvas,
+.mj-jogo--pathfinding .mj-canvas {
+  touch-action: none;
+}
+
+/* Avisos sobre o palco: início, pausa e fim da partida. */
+.mj-sobre {
+  position: absolute;
+  inset: var(--espessura, 2px);
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  padding: var(--espaco-4);
+  background: color-mix(in srgb, var(--cor-fundo) 86%, transparent);
+  overflow: auto;
+}
+
+.mj-sobre[hidden] {
+  display: none;
+}
+
+.mj-sobre__caixa {
+  display: grid;
+  justify-items: center;
+  gap: var(--espaco-3);
+  max-width: 21rem;
+  text-align: center;
+}
+
+.mj-sobre__titulo {
+  margin: 0;
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: clamp(1.75rem, 7vw, 2.5rem);
+  line-height: 1;
+}
+
+.mj-sobre__texto {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--cor-texto-secundario);
+  text-wrap: balance;
+}
+
+.mj-sobre__controles {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--cor-texto);
+}
+
+.mj-sobre__acao {
+  min-width: 12rem;
+  min-height: 52px;
+  margin-top: var(--espaco-1);
+}
+
+/* Carimbo do resultado, o mesmo da validação e da Conclusão. */
+.mj-selo {
+  --giro: -4deg;
+  margin: 0;
+  padding: var(--espaco-2) var(--espaco-4);
+  border: 3px solid currentColor;
+  box-shadow: inset 0 0 0 2px var(--cor-fundo), inset 0 0 0 4px currentColor;
+  background: var(--cor-fundo);
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: clamp(1.25rem, 6vw, 1.75rem);
+  line-height: 1.1;
+  letter-spacing: 0.14em;
+  transform: rotate(var(--giro));
+  animation: carimbar 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.mj-selo--vitoria {
+  color: var(--cor-destaque);
+}
+
+.mj-selo--derrota {
+  --giro: 3deg;
+  color: var(--cor-texto-secundario);
+}
+
+/* Linha de estado dos desafios e legenda. */
+.mj-estado {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--espaco-3);
+  min-height: 4.25rem;
+  margin: 0;
+  padding: var(--espaco-3) var(--espaco-4);
+  background: var(--cor-superficie);
+  font-size: 1rem;
+  line-height: 1.45;
+  color: var(--cor-texto);
+  clip-path: var(--recorte-pequeno);
+}
+
+.mj-estado::before {
+  content: "";
+  flex: none;
+  width: var(--espaco-3);
+  height: var(--espaco-3);
+  margin-top: 0.35em;
+  background: var(--cor-azul-linha);
+}
+
+.mj-estado[data-tipo="ok"]::before {
+  background: var(--cor-destaque);
+}
+
+.mj-estado[data-tipo="aviso"] {
+  background: var(--cor-superficie-alta);
+  font-weight: 600;
+}
+
+.mj-estado[data-tipo="aviso"]::before {
+  background: var(--cor-texto);
+}
+
+.mj-legenda {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espaco-2) var(--espaco-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.8125rem;
+  line-height: 1.2;
+  color: var(--cor-texto-secundario);
+}
+
+.mj-legenda__item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espaco-2);
+}
+
+.mj-legenda__amostra {
+  position: relative;
+  flex: none;
+  width: 16px;
+  height: 16px;
+  background: var(--cor-superficie-escura);
+  box-shadow: inset 0 0 0 1px var(--cor-apagado);
+}
+
+.mj-legenda__amostra--inicio {
+  background: var(--cor-texto);
+  box-shadow: inset 0 0 0 2px var(--cor-superficie-escura), inset 0 0 0 3px var(--cor-texto);
+}
+
+.mj-legenda__amostra--fim {
+  background: var(--cor-destaque);
+  box-shadow: inset 0 0 0 2px var(--cor-texto);
+}
+
+.mj-legenda__amostra--parede {
+  background: color-mix(in srgb, var(--cor-texto) 20%, var(--cor-superficie-escura));
+}
+
+.mj-legenda__amostra--parede::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: var(--cor-texto);
+  opacity: 0.6;
+  -webkit-mask: var(--textura-hachura) 0 0 / 8px 8px repeat;
+  mask: var(--textura-hachura) 0 0 / 8px 8px repeat;
+}
+
+.mj-legenda__amostra--explorada {
+  background: color-mix(in srgb, var(--cor-azul-linha) 38%, var(--cor-superficie-escura));
+}
+
+.mj-legenda__amostra--explorada::after {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  background: var(--cor-azul-linha);
+}
+
+.mj-legenda__amostra--astar {
+  background: var(--cor-destaque);
+  box-shadow: inset 0 0 0 2px var(--cor-superficie-escura);
+}
+
+.mj-legenda__amostra--jogador::after {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  background: var(--cor-texto);
+}
+
+/* ---------- Controles táteis ---------- */
+
+.mj-toque {
+  display: grid;
+  gap: var(--espaco-2);
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.mj-toque--vertical {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.mj-toque--invaders {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.7fr);
+}
+
+/* Cruz de setas: cima no centro, as outras três embaixo. */
+.mj-toque--cruz {
+  grid-template-columns: repeat(3, 4.5rem);
+  grid-template-areas:
+    ". cima ."
+    "esq baixo dir";
+  justify-content: center;
+}
+
+.mj-toque--cruz .mj-toque__botao--cima { grid-area: cima; }
+.mj-toque--cruz .mj-toque__botao--esq { grid-area: esq; }
+.mj-toque--cruz .mj-toque__botao--baixo { grid-area: baixo; }
+.mj-toque--cruz .mj-toque__botao--dir { grid-area: dir; }
+
+.mj-toque__botao {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--espaco-2);
+  min-height: 64px;
+  padding: var(--espaco-2);
+  border: 0;
+  background: var(--cor-superficie-alta);
+  box-shadow: inset 0 0 0 1px var(--cor-filete);
+  color: var(--cor-texto);
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  touch-action: none;
+  -webkit-tap-highlight-color: transparent;
+  clip-path: var(--recorte);
+  transition: background-color 0.1s ease-out, color 0.1s ease-out;
+}
+
+.mj-toque--vertical .mj-toque__botao,
+.mj-toque--invaders .mj-toque__botao {
+  min-height: 72px;
+}
+
+.mj-toque__botao--atirar {
+  background: var(--cor-destaque);
+  box-shadow: none;
+  color: var(--cor-sobre-destaque);
+}
+
+.mj-toque__botao--ativo,
+.mj-toque__botao:active {
+  background: var(--cor-texto);
+  color: var(--cor-fundo);
+  box-shadow: none;
+}
+
+.mj-toque__botao:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 3px var(--cor-texto);
+}
+
+.mj-toque__botao--atirar:focus-visible {
+  box-shadow: inset 0 0 0 3px var(--cor-sobre-destaque);
+}
+
+.mj-seta {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.mj-seta--cima { transform: rotate(-90deg); }
+.mj-seta--baixo { transform: rotate(90deg); }
+.mj-seta--esq { transform: scaleX(-1); }
+
+/* Sem mouse preciso e em tela larga, os botões ficam escondidos: o teclado resolve. */
+@media (hover: hover) and (pointer: fine) and (min-width: 900px) {
+  .mj-toque {
+    display: none;
+  }
+}
+
+/* ---------- Ações e ajuda ---------- */
+
+/* O .botao do site foi feito para links; no <button> é preciso tirar a borda do navegador. */
+.pagina-minijogos button.botao {
+  border: 0;
+  cursor: pointer;
+}
+
+.mj-acoes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  gap: var(--espaco-2);
+}
+
+.mj-acoes .botao {
+  padding-inline: var(--espaco-3);
+  font-size: 0.9375rem;
+}
+
+.mj-acoes .botao:disabled {
+  cursor: not-allowed;
+  background: var(--cor-superficie);
+  color: var(--cor-texto-atenuado);
+}
+
+.mj-acoes .botao--principal:disabled {
+  background: var(--cor-superficie-alta);
+}
+
+.mj-ajuda {
+  padding-top: var(--espaco-4);
+  border-top: 1px solid var(--cor-filete);
+}
+
+.mj-ajuda__titulo {
+  margin: 0;
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 1.125rem;
+  line-height: 1.2;
+}
+
+.mj-ajuda__objetivo {
+  margin: var(--espaco-2) 0 var(--espaco-3);
+  line-height: 1.55;
+  color: var(--cor-texto-secundario);
+}
+
+.mj-ajuda__lista {
+  display: grid;
+  gap: var(--espaco-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--cor-texto-secundario);
+}
+
+/* Teclado ou toque: cada aparelho vê só as instruções que servem a ele. */
+.mj-ajuda__item--toque {
+  display: none;
+}
+
+@media (hover: none), (pointer: coarse) {
+  .mj-ajuda__item--teclado {
+    display: none;
+  }
+
+  .mj-ajuda__item--toque {
+    display: block;
+  }
+}
+
+.mj-tecla {
+  display: inline-block;
+  min-width: 1.6em;
+  margin: 0 1px;
+  padding: 0 var(--espaco-2);
+  background: var(--cor-superficie-alta);
+  box-shadow: inset 0 0 0 1px var(--cor-apagado);
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  text-align: center;
+  color: var(--cor-texto);
+}
+
+/* As áreas da grade só existem nas composições largas; no celular em pé tudo corre em coluna. */
+@media (min-width: 900px), (max-height: 520px) and (orientation: landscape) and (max-width: 899px) {
+  .mj-jogo__topo { grid-area: topo; }
+  .mj-dif { grid-area: dif; }
+  .mj-hud { grid-area: hud; }
+  .mj-palco { grid-area: palco; }
+  .mj-estado { grid-area: estado; }
+  .mj-legenda { grid-area: legenda; }
+  .mj-toque { grid-area: toque; }
+  .mj-acoes { grid-area: acoes; }
+  .mj-ajuda { grid-area: ajuda; }
+}
+
+/* ---------- Tela larga: o palco à esquerda, tudo o mais numa coluna à direita ---------- */
+
+@media (min-width: 900px) {
+  .mj-lista {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--espaco-6);
+    margin-top: var(--espaco-12);
+  }
+
+  .mj-cartao {
+    grid-template-columns: 8rem minmax(0, 1fr);
+    gap: var(--espaco-6);
+    padding: var(--espaco-6);
+  }
+
+  .mj-cartao__titulo {
+    font-size: 1.75rem;
+  }
+
+  .mj-cartao__texto {
+    font-size: 1rem;
+  }
+
+  .mj-jogo {
+    grid-template-columns: minmax(0, 1fr) 22rem;
+    grid-template-areas:
+      "topo    topo"
+      "palco   dif"
+      "palco   hud"
+      "palco   estado"
+      "palco   toque"
+      "palco   acoes"
+      "palco   ajuda"
+      "legenda legenda";
+    grid-template-rows: auto auto auto auto auto auto 1fr auto;
+    column-gap: var(--espaco-8);
+    row-gap: 0;
+    align-items: start;
+  }
+
+  .mj-jogo > * {
+    margin-bottom: var(--espaco-4);
+  }
+
+  .mj-jogo > .mj-palco {
+    margin-bottom: var(--espaco-4);
+  }
+
+  .mj-jogo__topo {
+    margin-bottom: var(--espaco-6);
+  }
+
+  .mj-palco {
+    align-self: start;
+  }
+
+  .mj-dif__rotulo {
+    position: static;
+    display: block;
+    width: auto;
+    height: auto;
+    margin-bottom: var(--espaco-2);
+    overflow: visible;
+    clip-path: none;
+    font-family: var(--fonte-titulo);
+    font-weight: 600;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    color: var(--cor-texto-secundario);
+  }
+}
+
+/* ---------- Telas baixas (celular deitado) ---------- */
+
+@media (max-height: 520px) and (orientation: landscape) and (max-width: 899px) {
+  .mj-jogo {
+    grid-template-columns: minmax(0, 1fr) 15rem;
+    grid-template-areas:
+      "topo    topo"
+      "palco   dif"
+      "palco   hud"
+      "palco   estado"
+      "palco   toque"
+      "palco   acoes"
+      "palco   ajuda"
+      "legenda legenda";
+    column-gap: var(--espaco-4);
+    row-gap: 0;
+    align-items: start;
+  }
+
+  .mj-jogo > * {
+    margin-bottom: var(--espaco-2);
+  }
+
+  .mj-ajuda {
+    display: none;
+  }
+}

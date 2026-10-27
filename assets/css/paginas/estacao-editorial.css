@@ -3,8 +3,8 @@
    - placa (.placa): ilustração de um trecho do capítulo, traço direto sobre o fundo da página, sem
      moldura de cartão. No desktop ocupa a coluna lateral, alinhada ao parágrafo que ilustra; no
      celular entra no fluxo, logo depois dele, e faz a pausa visual entre blocos de texto;
-   - palco editorial (.palco-editorial): o momento marcante de um capítulo (Pokémon na Estação 1,
-     Twitch na Estação 2). O texto vira corpo grande e divide a largura com uma ilustração própria.
+   - palco editorial (.palco-editorial): o momento marcante de um capítulo (Pokémon na Estação 2,
+     Twitch na Estação 3). O texto vira corpo grande e divide a largura com uma ilustração própria.
    Todo desenho é SVG com traços dos tokens de cor; a legenda marca o que é ilustração. */
 
 /* ---------- Traços das ilustrações ---------- */
@@ -174,7 +174,7 @@
   line-height: 1.2;
 }
 
-/* Estação 3: lista curta (diálogos, histórias…) em duas colunas quando há largura. */
+/* Estação 1: lista curta (diálogos, histórias…) em duas colunas quando há largura. */
 .lista-curta {
   grid-template-columns: minmax(0, 1fr);
 }
@@ -251,7 +251,7 @@
 }
 
 /* ---------- Cenas: três visualizações que se desenham uma vez, ao chegar à tela ----------
-   Crise de 1983 (Estação 1), ondas da Twitch (Estação 2) e rota do A* (Estação 3). Diferente das
+   Crise de 1983 (Estação 2), ondas da Twitch (Estação 3) e rota do A* (Estação 1). Diferente das
    placas acima, que acompanham a rolagem, estas rodam por tempo, porque contam uma sequência
    (subir, cair, recuperar; explorar e então traçar). cenas.js põe data-cena="espera" no que ainda
    não apareceu e "toca" quando chega; sem o script, ou com movimento reduzido, o atributo não
@@ -376,7 +376,7 @@
     grid-area: arte;
   }
 
-  /* Twitch: a transmissão à esquerda, o ano e a frase à direita, o inverso da Estação 1. */
+  /* Twitch: a transmissão à esquerda, o ano e a frase à direita, o inverso da Estação 2. */
   .palco-editorial--transmissao {
     grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
     grid-template-areas:

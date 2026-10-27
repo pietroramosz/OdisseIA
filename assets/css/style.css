@@ -631,6 +631,37 @@ p .zero::after {
   transition: background-color 0.15s ease-out;
 }
 
+/* Pictogramas dos Mini Jogos (Conclusão e página dos jogos): traço direto, sem moldura, só tokens de cor. */
+.mj-pic__linha {
+  fill: none;
+  stroke: var(--cor-apagado);
+  stroke-width: 2;
+  stroke-linecap: square;
+}
+
+.mj-pic__rota {
+  fill: none;
+  stroke: var(--cor-destaque);
+  stroke-width: 4;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+}
+
+.mj-pic__forte {
+  fill: var(--cor-texto-secundario);
+  stroke: none;
+}
+
+.mj-pic__acento {
+  fill: var(--cor-destaque);
+  stroke: var(--cor-destaque);
+  stroke-width: 2;
+}
+
+.mj-pic__fundo {
+  fill: var(--cor-superficie-escura);
+}
+
 /* Cruz de registro: marca de impressão no canto de um plano. */
 .registro {
   position: absolute;
