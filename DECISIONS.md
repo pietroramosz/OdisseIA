@@ -848,3 +848,50 @@ Na revisão final, a linha do tempo da Estação 3 estava carregada (quatro linh
 ### O que não muda
 
 `progresso.js`, `qr.js`, `config.js`, scanner, chave `odisseia:progresso`, regras de ordem e desbloqueio, navegação, conteúdo dos capítulos, Estações 1 e 2, HTML/CSS/JS puros, caminhos relativos para o GitHub Pages em `/OdisseIA/`.
+
+---
+
+## DEC-031 — Portfólio na Conclusão, em leitor local
+
+### Contexto
+
+O portfólio (documento Word de 27 páginas, versão correta, entregue como `portfolio-fonte.docx`) é um complemento da jornada, não uma quinta estação (DEC sobre as quatro estações). O `.docx` é só a fonte: ele não entra no site nem no commit.
+
+Antes desta decisão, uma tentativa de incorporar o documento hospedado no SharePoint da escola foi implementada e testada em 28/10/2026. O quadro carregava, mas o endereço de incorporação não tinha token de compartilhamento: visitantes sem conta da escola viam a tela "Entre para exibir este arquivo" (testado em perfil anônimo, no topo da aba e num iframe sem `sandbox`, então a causa era a permissão do arquivo). A incorporação dependia ainda de a escola liberar links anônimos e não dava como garantir a ocultação do download. Por isso foi descartada e removida (`portfolioUrl`, a validação de URL e o `sandbox`). Também não existe, no histórico do Git, outra implementação anterior do portfólio: o único código relacionado era essa tentativa, que nunca foi commitada.
+
+Uma segunda versão converteu o documento para uma página própria, com capa, título, índice e nota redesenhados. Ela foi substituída porque o objetivo é incorporar o documento original, não criar uma versão editorial dele.
+
+### Decisão
+
+1. **O documento original, no site:** `portfolio.html` reproduz o `.docx` com o layout do Word, em HTML e CSS puros e sem URL externa. O texto é o do documento, na mesma ordem, sem acréscimos (sem título, índice, capa nova, notas nem legendas). Preservados: fontes (Arial no corpo, Times New Roman na capa, nos títulos de seção e na tabela), tamanhos, negrito, itálico e sublinhado, texto justificado, recuo de 1,25 cm, entrelinha de 1,5, espaçamentos antes e depois, as faixas cinza dos anexos (`#BFBFBF`, texto preto), as listas numeradas, a tabela com bordas, os links, as imagens nos tamanhos originais e a colagem de fotos do Anexo 02 nas posições do Word (em percentual, então escala com a tela).
+2. **Como foi gerado:** o `document.xml` do `.docx` foi lido por um script (fora do repositório) que escreve o HTML e as regras `.pN` do fim de `assets/css/paginas/portfolio-documento.css`, uma por combinação de formatação de parágrafo. O resto do CSS é fixo. O tamanho em `pt` vira `rem` (12 pt = 1 rem), então o texto acompanha o tamanho escolhido no painel de acessibilidade.
+3. **Tema:** o único ajuste visual desejado. A folha do documento (a coluna de 21 cm) e o texto seguem o tema do site (escuro ou claro, inclusive alto contraste), no lugar da folha branca, e o espaço do modal ao redor da folha tem outro tom, para ela se destacar: no tema claro, folha clara (`--cor-superficie`) com texto escuro sobre grafite (`#2b2b35`); no escuro, folha escura (`--cor-superficie`) com texto claro sobre um tom ainda mais escuro (`#050508`, `#000` no alto contraste). Esses tons externos são fixos (o tema claro não tem grafite próprio) e valem para o modal (`portfolio.css`) e para o fundo do documento (`portfolio-documento.css`). Fica de fora do tema o que tem cor própria no original: as faixas cinza e as imagens. Dois ajustes de contraste: os links usam a cor de acento do tema, e o logotipo do Colégio (PNG transparente com letras azul-marinho) ganha um fundo branco só no tema escuro, onde ficaria ilegível. No tema claro nada muda.
+4. **Posição:** em `final.html`, dentro do bloco do X-B0T, imediatamente antes de `#xbot-acesso` (o aviso de giro e o "Jogar X-B0T"). Ficha de moldura azul fina com título "Portfólio do projeto", uma frase e o botão de contorno "Ver portfólio". É azul porque o roxo é só do jogo, e é secundário para o "Jogar X-B0T" continuar sendo a única ação sólida. Não mexe em progresso, Hub, estações nem X-B0T.
+5. **Leitor:** `portfolio.js` + `portfolio.css`. Um `<dialog>` modal centralizado, com fundo escurecido, margem mínima igual à do site (`--gutter`, 16px no celular), até 72rem × 60rem no desktop e a tela menos as margens no celular. Cabeçalho com título e botão "Fechar" (texto, não só ícone), o documento num `<iframe>` de mesma origem apontando para `portfolio.html` e a nota "Documento em modo de leitura" (interface do site, não conteúdo do documento). Fecha por "Fechar", Esc ou clique no fundo; o foco inicial vai ao "Fechar" e volta ao "Ver portfólio"; a rolagem da página fica travada enquanto aberto. O documento só é carregado na primeira abertura. Sem suporte a `<dialog>`, o botão abre `portfolio.html` inteira.
+6. **Esc dentro do documento:** o teclado dentro de um iframe não chega à página que o contém. `portfolio-documento.js` repassa o Esc por `postMessage` e `portfolio.js` só aceita a mensagem vinda do próprio quadro.
+7. **Preferências de acessibilidade:** o documento aplica tema, tamanho do texto, contraste e movimento salvos (`acessibilidade.js`). Dentro do leitor o painel não é montado de novo (`data-sem-painel` no `<html>`, uma verificação nova em `montarPainel`); aberta direto, a página mostra o painel.
+8. **QR Codes das estações:** as imagens dos QR Codes que liberam as estações 1 a 4 e as quatro legendas delas ("QR code que libera a primeira estação" etc.) não entram no site, sem nota no lugar. O QR de cada estação só deve existir depois da visita física, e `portfolio.html` é pública. Os QR Codes não foram decodificados (não há decodificador no ambiente de desenvolvimento): a omissão se baseia nas próprias legendas do documento. O QR da parte inicial (index) foi mantido. Para exibi-los, basta acrescentar as imagens 31 a 34 do `.docx` ao fim do Anexo 03.
+
+### Adaptações técnicas (o que difere do Word)
+
+- **Sem paginação:** o texto corre contínuo. O cabeçalho repetido (logotipo, que no original só aparece da página 2 em diante) e o número de página não são reproduzidos; a capa e a folha de rosto mantêm a ordem do original. Sequências longas de parágrafos vazios que serviam de quebra de página, e as quebras de página, viram um espaço.
+- **Margens:** as de 3 cm e 2 cm do Word encolhem em telas estreitas; a página tem no máximo 21 cm de largura.
+- **Hifenização automática** (`hyphens: auto`) no texto justificado, para evitar buracos em linhas curtas no celular.
+- **Colagem do Anexo 02:** as posições vêm das coordenadas do Word; as alturas das linhas foram estimadas, então pode haver pequenas diferenças (a foto 5 encosta em cerca de 39 × 39 px da foto 3). A colagem começa logo abaixo do texto do anexo, em vez de ao lado dele.
+- **Tabela:** em tela estreita ela rola na horizontal dentro de uma região com foco de teclado. As células usam `th` (cabeçalho de coluna e de linha) sem mudar a aparência.
+- **Texto alternativo:** as 30 imagens ganharam `alt` (o documento não tem), escrito a partir do que aparece nelas.
+- **Linhas em branco curtas** (até 6 seguidas) foram mantidas como espaço; os "títulos" do documento viraram `h2`/`h3` (sem `h1`: o documento não tem título), sem mudar a aparência.
+- **Erros de digitação do documento foram preservados** ("OdissélA", "Portifólio", "BIBLIOGRAFICAS", "A sala foi dividida em 5 ambientes" com seis itens, três referências coladas num só parágrafo). A correção cabe ao grupo, na fonte.
+- As 30 imagens são as originais do `.docx`, sem recompressão (cerca de 5,6 MB no total, carregadas sob demanda).
+
+### Limitações
+
+- A página é só leitura, mas isso não impede cópia de texto, captura de tela nem salvar as imagens: o site é público.
+- Ela não acompanha o `.docx`: uma mudança no documento exige regerar o HTML e republicar o site.
+- A aparência é a do Word reproduzida no navegador, não pixel a pixel: a paginação, o espaçamento exato das linhas e as fontes (se o aparelho não tiver Arial ou Times New Roman, entram equivalentes) podem variar.
+- A página lista nomes de alunos (folha de rosto e escala de turnos), como o documento original. Confirmar com o grupo e a escola se podem ficar num site público.
+- Com o foco dentro do documento, o leitor ainda fecha com Esc; só o "Fechar" fica mais longe pelo teclado (Shift+Tab a partir do documento).
+
+### O que não muda
+
+`progresso.js`, `qr.js`, `config.js`, scanner, chave `odisseia:progresso`, regras de ordem e desbloqueio, Hub, estações, X-B0T, minijogos, HTML/CSS/JS puros, sem dependências nem backend.

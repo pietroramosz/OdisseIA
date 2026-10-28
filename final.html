@@ -28,6 +28,7 @@
   <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/paginas/conclusao.css">
+  <link rel="stylesheet" href="assets/css/portfolio.css">
   <script src="assets/js/acessibilidade.js"></script>
 </head>
 <body class="pagina-final">
@@ -55,6 +56,13 @@
       <section class="final-jornada" aria-labelledby="final-jornada-titulo">
         <h2 id="final-jornada-titulo" class="final-secao">Resumo da jornada</h2>
         <ol id="conclusao-estacoes" class="final-jornada__lista"></ol>
+      </section>
+
+      <!-- Portfólio: complemento da jornada, não uma estação. Abre portfolio.html num leitor (portfolio.js). -->
+      <section id="portfolio-acesso" class="ficha final-portfolio" aria-labelledby="final-portfolio-titulo">
+        <h2 id="final-portfolio-titulo" class="final-portfolio__titulo">Portfólio do projeto</h2>
+        <p class="final-portfolio__texto">O documento do OdisseIA, com a pesquisa, o desenvolvimento e as referências do trabalho.</p>
+        <button id="portfolio-abrir" class="botao final-portfolio__abrir" type="button" aria-haspopup="dialog">Ver portfólio</button>
       </section>
 
       <section class="final-xbot" aria-labelledby="final-xbot-titulo">
@@ -109,5 +117,6 @@
   <script src="assets/js/progresso.js"></script>
   <script src="assets/js/qr.js"></script>
   <script src="assets/js/app.js"></script>
+  <script src="assets/js/portfolio.js"></script>
 </body>
 </html>

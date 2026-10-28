@@ -1,0 +1,135 @@
+/* Leitor do portfólio (assets/js/portfolio.js): modal centralizado sobre a Conclusão, com o documento
+   local (portfolio.html) num iframe. Segue a linguagem do sistema: ficha de recorte diagonal com moldura azul (o portfólio é
+   azul; o roxo é só do X-B0T), Chakra Petch, botão Fechar com texto. Só tokens de cor, exceto o véu
+   escuro do fundo, igual ao do scanner e do easter egg. */
+
+/* Sem rolagem da página por trás do leitor. */
+html.portfolio-aberto {
+  overflow: hidden;
+}
+
+.portfolio {
+  --moldura: var(--cor-destaque);
+  --espessura: 2px;
+  --miolo: var(--cor-superficie);
+  position: fixed;
+  z-index: 70;
+  inset: 0;
+  margin: auto;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  /* Margem visível em todas as bordas (a mesma do resto do site); no desktop, um teto proporcional. */
+  width: min(72rem, calc(100vw - 2 * var(--gutter)));
+  max-width: none;
+  height: min(60rem, calc(100vh - 2 * var(--gutter)));
+  height: min(60rem, calc(100dvh - 2 * var(--gutter)));
+  max-height: none;
+  padding: 0;
+  border: 0;
+  color: var(--cor-texto);
+}
+
+.portfolio:not([open]) {
+  display: none;
+}
+
+.portfolio[open] {
+  animation: portfolio-entrar 0.25s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.portfolio::backdrop {
+  background: rgba(5, 5, 8, 0.78);
+}
+
+.portfolio__topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espaco-3);
+  padding: var(--espaco-3) var(--espaco-4);
+  border-bottom: 1px solid var(--cor-filete);
+}
+
+.portfolio__titulo {
+  margin: 0;
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+.portfolio__fechar {
+  flex: none;
+  min-width: 7rem;
+}
+
+.portfolio__corpo {
+  position: relative;
+  min-height: 0;
+  /* O mesmo tom do espaço ao redor da folha do documento (portfolio-documento.css). */
+  background: #050508;
+}
+
+:root[data-tema="claro"] .portfolio__corpo {
+  background: #2b2b35;
+}
+
+:root[data-tema="escuro"][data-contraste="alto"] .portfolio__corpo {
+  background: #000;
+}
+
+.portfolio__carregando {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  margin: 0;
+  padding: var(--espaco-4);
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-align: center;
+  color: var(--cor-texto-secundario);
+}
+
+/* O quadro só aparece depois de carregar: antes disso seria uma folha em branco. */
+.portfolio__quadro {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  opacity: 0;
+}
+
+.portfolio__corpo--pronto .portfolio__quadro {
+  opacity: 1;
+}
+
+.portfolio__nota {
+  margin: 0;
+  padding: var(--espaco-2) var(--espaco-4);
+  border-top: 1px solid var(--cor-filete);
+  font-size: 0.9375rem;
+  line-height: 1.4;
+  color: var(--cor-texto-secundario);
+}
+
+@media (min-width: 600px) {
+  .portfolio__topo {
+    padding: var(--espaco-3) var(--espaco-6);
+  }
+
+  .portfolio__titulo {
+    font-size: 1.5rem;
+  }
+
+  .portfolio__nota {
+    padding: var(--espaco-3) var(--espaco-6);
+  }
+}
+
+@keyframes portfolio-entrar {
+  from { opacity: 0; translate: 0 16px; }
+}

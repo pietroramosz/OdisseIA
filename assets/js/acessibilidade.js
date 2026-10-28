@@ -238,7 +238,9 @@
   }
 
   function montarPainel() {
-    if (!document.body || document.getElementById("a11y")) return;
+    // data-sem-painel: página dentro de outra que já tem o painel (o portfólio no leitor da Conclusão).
+    // As preferências continuam aplicadas; só o painel não é montado.
+    if (!document.body || document.getElementById("a11y") || raiz.hasAttribute("data-sem-painel")) return;
 
     const caixa = elemento("div", "a11y");
     caixa.id = "a11y";

@@ -46,7 +46,7 @@ Abrir diretamente uma página não deve avançar o progresso.
 
 Como os visitantes vão usar o próprio celular durante a feira, o projeto está sendo pensado desde o início com foco em **mobile-first**.
 
-No começo, o projeto tinha uma quinta estação ligada a portfólio/documentação. Depois de revisar a estrutura, essa parte foi retirada do percurso da feira e permaneceu apenas como documentação do projeto.
+No começo, o projeto tinha uma quinta estação ligada a portfólio/documentação. Depois de revisar a estrutura, essa parte foi retirada do percurso da feira. O portfólio continua como recurso complementar: a Conclusão tem um botão "Ver portfólio", logo antes de "Jogar X-B0T", que abre o documento do projeto num leitor sobre a própria página (conteúdo local em `portfolio.html`; veja DEC-031 em `DECISIONS.md`).
 
 ---
 

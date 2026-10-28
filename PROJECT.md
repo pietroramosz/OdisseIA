@@ -38,6 +38,7 @@ Situação revisada em 24/10/2026 (identidade azul sobre grafite, tema claro ref
 - **Implementadas e revisadas:** Estações 1–3 com conteúdo, estados `desbloqueada`, `próxima` e `futura`, além da composição editorial compartilhada.
 - **Implementada:** Estação 4 (`estacao-4.html`), com página própria ligada ao X-B0T; o conteúdo deve continuar fiel às informações confirmadas pelo grupo do jogo.
 - **Implementada:** `final.html`, com estados de jornada completa/incompleta e área de acesso ao X-B0T; o botão "Jogar X-B0T" usa a `gameUrl` configurada (https://robot-tcg.netlify.app/); `downloadUrl` continua nulo.
+- **Implementado e testado em Chrome headless:** portfólio na Conclusão (`portfolio.js`, `portfolio.css`; o documento em `portfolio.html`, `portfolio-documento.js`, `portfolio-documento.css` e `assets/img/portfolio/`). O botão "Ver portfólio" abre num modal o documento original, reproduzido em HTML local com o layout do Word, somente leitura, com o fundo seguindo o tema, sem URL externa nem conta (DEC-031). O portfólio é um complemento, não uma quinta estação; o `.docx` de origem não faz parte do site. Ainda sem teste em celular real, Safari, Firefox nem leitor de tela.
 - **Implementado e testado por console, por URL e com a câmera de um celular (o link abre após a confirmação; repetido e fora de ordem funcionam), ainda sem teste com WhatsApp/navegador interno nem com os QR Codes definitivos:** validação de QR (`validar.html` e `qr.js`).
 - **Ainda pendente:** confirmação do endereço final do X-B0T, hospedagem final, QR Codes definitivos e teste físico completo da jornada.
 
@@ -101,7 +102,7 @@ No começo, o projeto tinha uma quinta estação ligada a portfólio/documentaç
 
 Depois de revisar a experiência, decidimos que essa parte não precisava ocupar uma estação física.
 
-A estrutura atual ficou com quatro estações, enquanto o portfólio e os bastidores permanecem apenas na documentação do projeto.
+A estrutura atual ficou com quatro estações. O portfólio não voltou a ser uma estação: ele é um recurso complementar, aberto num leitor sobre a Conclusão (DEC-031), e os bastidores permanecem na documentação do projeto.
 
 Essa mudança alterou diretamente o fluxo do site e o escopo da experiência.
 
@@ -406,7 +407,8 @@ Esta seção guarda apenas trabalho concreto ainda aberto. Ela não substitui o 
 - [ ] Resolver a duplicação de nome entre “Estação 4 — X-B0T” e o card final do jogo, sem renomear nada antes da decisão.
 - [x] Implementar a página de conclusão e os estados de jornada completa/incompleta.
 - [x] Link do X-B0T configurado na Conclusão (botão "Jogar X-B0T" a partir de `gameUrl`). Falta confirmar com o grupo se esse é o endereço final.
-- [ ] Decidir se a conclusão terá link para portfólio/PDF e confirmar o arquivo/endereço antes de adicioná-lo.
+- [x] Portfólio na Conclusão: leitor local com o documento em HTML, logo antes de "Jogar X-B0T" (DEC-031). Implementado e testado.
+- [ ] Confirmar com o grupo e a escola se os nomes dos alunos e a escala de turnos podem ficar públicos em `portfolio.html`, e se os QR Codes das estações (omitidos de propósito, com as legendas) devem continuar fora. Se o `.docx` mudar, regerar `portfolio.html` e republicar (a página não acompanha o original).
 - [x] `gameUrl` preenchida com https://robot-tcg.netlify.app/ (23/10/2026). `downloadUrl` continua `null`; decidir só se houver versão para download.
 - [x] Adicionar no Hub um caminho claro de volta para a Visão geral (`index.html`).
 - [ ] Definir hospedagem e URL final antes de gerar ou imprimir os QR Codes definitivos.
