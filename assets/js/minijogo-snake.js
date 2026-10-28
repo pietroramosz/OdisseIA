@@ -1,11 +1,14 @@
 // Snake: a cobrinha clássica. A dificuldade muda o tamanho do mapa (maior no Fácil, menor no
 // Difícil) e o ritmo. A célula tem o mesmo tamanho nas três, então o mapa menor também é menor na tela.
+// No celular, além dos botões, dá para deslizar o dedo sobre o mapa para virar a cobra.
 
 (function () {
   "use strict";
 
   const COLUNAS_BASE = 18;
   const PONTOS_POR_ITEM = 10;
+  // Distância (em px da tela) que o dedo precisa percorrer para valer como um comando de direção.
+  const LIMIAR_DESLIZE = 24;
 
   // intervalo: segundos por passo; cada item o encurta em 1,2%, até a fração mínima (piso).
   const NIVEIS = {
@@ -211,6 +214,62 @@
       ctx.strokeRect(1.5, 1.5, lado - 3, lado - 3);
     }
 
+    // Deslizar: cada trecho de pelo menos LIMIAR_DESLIZE px vira um comando, e o ponto de partida
+    // passa a ser onde o dedo está, então uma curva em L dá dois comandos e um traço reto dá um só
+    // (repetir a direção é ignorado por acao). A página não rola sobre o mapa: ver touch-action
+    // em minijogos.css. Só toque e caneta; o mouse segue pelo teclado e pelos botões.
+    function ligarDeslize() {
+      const canvas = api.canvas;
+      let dedo = null;
+
+      function soltar(evento) {
+        if (dedo && evento.pointerId === dedo.id) {
+          dedo = null;
+        }
+      }
+
+      canvas.addEventListener("pointerdown", function (evento) {
+        if (evento.pointerType === "mouse" || !evento.isPrimary) {
+          return;
+        }
+        dedo = { id: evento.pointerId, x: evento.clientX, y: evento.clientY };
+        try {
+          canvas.setPointerCapture(evento.pointerId);
+        } catch (erro) {
+          // sem captura, o gesto só vale enquanto o dedo estiver sobre o mapa
+        }
+      });
+      canvas.addEventListener("pointermove", function (evento) {
+        if (!dedo || evento.pointerId !== dedo.id) {
+          return;
+        }
+        const dx = evento.clientX - dedo.x;
+        const dy = evento.clientY - dedo.y;
+        if (Math.max(Math.abs(dx), Math.abs(dy)) < LIMIAR_DESLIZE) {
+          return;
+        }
+        dedo.x = evento.clientX;
+        dedo.y = evento.clientY;
+        if (api.estado() !== "jogando") {
+          return;
+        }
+        if (Math.abs(dx) > Math.abs(dy)) {
+          acao(dx > 0 ? "dir" : "esq", true);
+        } else {
+          acao(dy > 0 ? "baixo" : "cima", true);
+        }
+      });
+      canvas.addEventListener("pointerup", soltar);
+      canvas.addEventListener("pointercancel", soltar);
+      canvas.addEventListener("lostpointercapture", soltar);
+      // Segurar o dedo no mapa não deve abrir o menu de contexto do navegador.
+      canvas.addEventListener("contextmenu", function (evento) {
+        evento.preventDefault();
+      });
+    }
+
+    ligarDeslize();
+
     return {
       novo: novo,
       passo: passo,
@@ -233,10 +292,10 @@
     descricaoCanvas: "Mapa quadriculado com a cobrinha e o item a coletar.",
     objetivo: "Coma os itens para crescer e somar pontos, sem bater nas paredes nem no próprio corpo.",
     dicaTeclado: "Guie a cobra com [Setas] ou [W] [A] [S] [D].",
-    dicaToque: "Use os botões direcionais abaixo do mapa.",
+    dicaToque: "Deslize sobre o mapa ou use os botões abaixo.",
     controles: {
       teclado: ["[Setas] ou [W] [A] [S] [D]: mudar de direção", "[P]: pausar"],
-      toque: ["Botões direcionais abaixo do mapa"]
+      toque: ["Deslize o dedo sobre o mapa para mudar de direção", "Ou use os botões direcionais abaixo do mapa"]
     },
     teclas: {
       cima: ["ArrowUp", "w"],

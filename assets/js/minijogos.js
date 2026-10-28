@@ -381,11 +381,14 @@
       foco: function () {
         P.palco.focus({ preventScroll: true });
       },
-      // Espaço que o palco pode ocupar sem passar da altura útil da tela.
+      // Espaço que o palco pode ocupar sem passar da altura útil da tela. A largura é a do miolo do
+      // palco (sem o padding), senão o canvas nasce mais largo que o espaço e o CSS o espreme.
       area: function (alturaMin) {
         const reserva = telaLarga() ? 150 : 330;
+        const estilo = window.getComputedStyle(P.palco);
+        const miolo = P.palco.clientWidth - (parseFloat(estilo.paddingLeft) || 0) - (parseFloat(estilo.paddingRight) || 0);
         return {
-          largura: Math.max(120, P.palco.clientWidth),
+          largura: Math.max(120, miolo),
           altura: Math.max(alturaMin || 240, window.innerHeight - reserva)
         };
       },
@@ -439,6 +442,7 @@
     }
     marcarDificuldade(P);
     atualizarBotoes(P);
+    ajustarSobre(P);
     if (P.def.tipo === "puzzle") {
       P.api.anunciar("Novo desafio, dificuldade " + nomeDificuldade(id) + ".");
     }
@@ -468,6 +472,15 @@
     pausar.disabled = !emJogo;
     pausar.textContent = P.estado === "pausado" ? "Continuar" : "Pausar";
     marcarDificuldade(P);
+  }
+
+  // Palco baixo (mapa pequeno no celular): se o aviso não cabe, o texto encolhe para o botão aparecer.
+  function ajustarSobre(P) {
+    const s = P.sobre;
+    s.classList.remove("mj-sobre--compacto");
+    if (!s.hidden && s.scrollHeight > s.clientHeight) {
+      s.classList.add("mj-sobre--compacto");
+    }
   }
 
   function mostrarSobre(P, modo, dados) {
@@ -524,6 +537,7 @@
     caixa.appendChild(botao);
     s.appendChild(caixa);
     s.hidden = false;
+    ajustarSobre(P);
     P.sobreAte = performance.now() + (modo === "fim" ? ATRASO_SOBRE : 0);
 
     // O foco vai ao botão para o teclado seguir do ponto certo (só se o foco já estava no jogo).
@@ -794,6 +808,7 @@
         P.jogo.redimensionar();
         P.jogo.desenhar();
       }
+      ajustarSobre(P);
     });
     P.observador.observe(P.palco);
   }

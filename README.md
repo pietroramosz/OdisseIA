@@ -13,9 +13,9 @@ A ideia do site é acompanhar o percurso da feira, complementar as apresentaçõ
 
 Atualmente, o OdisseIA está dividido em **quatro estações físicas**:
 
-1. **Estação 1 — Evolução dos jogos até 2000**
-2. **Estação 2 — Evolução dos jogos de 2001 até hoje**
-3. **Estação 3 — Inteligência Artificial nos jogos**
+1. **Estação 1 — Inteligência Artificial nos jogos**
+2. **Estação 2 — Evolução dos jogos até 2000**
+3. **Estação 3 — Evolução dos jogos de 2001 até hoje**
 4. **Estação 4 — X-B0T**
 
 O fluxo oficial da experiência digital é:

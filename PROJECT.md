@@ -47,30 +47,9 @@ Situação revisada em 24/10/2026 (identidade azul sobre grafite, tema claro ref
 
 O projeto possui atualmente **quatro estações**.
 
-### Estação 1 — Evolução dos jogos até 2000
+### Estação 1 — Inteligência Artificial nos jogos
 
-A primeira estação cobre a evolução dos jogos até 2000.
-
-Algumas definições importantes:
-
-- a linha do tempo termina em 2000 (DEC-027 e DEC-028): o ano 2000 fecha a linha, sem marco próprio e sem inventar eventos para preencher o período;
-- os 15 marcos vão de 1950 a 1996 e o conteúdo de 2001 em diante fica para a estação seguinte;
-- o site deve complementar a apresentação física em vez de repetir exatamente o mesmo conteúdo.
-
-### Estação 2 — Evolução dos jogos de 2001 até hoje
-
-A segunda estação continua a linha do tempo a partir de 2001.
-
-Algumas decisões já tomadas:
-
-- não forçar um marco exclusivo para 2026;
-- tratar 2024–2026 como um período de tendências atuais quando fizer sentido;
-- não transformar imagens ilustrativas em marcos históricos sem base;
-- evitar comparações ou afirmações que não tenham suporte suficiente.
-
-### Estação 3 — Inteligência Artificial nos jogos
-
-A terceira estação apresenta a evolução de abordagens de IA em jogos.
+A primeira estação apresenta a evolução de abordagens de IA em jogos.
 
 A linha conceitual atual passa por:
 
@@ -84,6 +63,27 @@ A linha conceitual atual passa por:
 - IA generativa.
 
 O conteúdo final continua dependente da versão aprovada da apresentação da estação.
+
+### Estação 2 — Evolução dos jogos até 2000
+
+A segunda estação cobre a evolução dos jogos até 2000.
+
+Algumas definições importantes:
+
+- a linha do tempo termina em 2000 (DEC-027 e DEC-028): o ano 2000 fecha a linha, sem marco próprio e sem inventar eventos para preencher o período;
+- os 15 marcos vão de 1950 a 1996 e o conteúdo de 2001 em diante fica para a estação seguinte;
+- o site deve complementar a apresentação física em vez de repetir exatamente o mesmo conteúdo.
+
+### Estação 3 — Evolução dos jogos de 2001 até hoje
+
+A terceira estação continua a linha do tempo a partir de 2001.
+
+Algumas decisões já tomadas:
+
+- não forçar um marco exclusivo para 2026;
+- tratar 2024–2026 como um período de tendências atuais quando fizer sentido;
+- não transformar imagens ilustrativas em marcos históricos sem base;
+- evitar comparações ou afirmações que não tenham suporte suficiente.
 
 ### Estação 4 — X-B0T
 

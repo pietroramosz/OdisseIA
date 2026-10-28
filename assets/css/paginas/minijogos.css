@@ -182,6 +182,18 @@ main:focus,
   margin-top: 0;
 }
 
+/* Largura máxima do palco no computador, por jogo: quadra de Pong (3:2), mapa do Snake (quadrado, até
+   18 células de 31px), nave e invasores (retrato, no máximo 1,6x de 360px mais o padding: 592px) e a
+   grade do A* (até 12 colunas de 56px). Em rem, para acompanhar a escala da tela e o tamanho do texto,
+   exceto onde o limite é o do próprio canvas, em px. Pong e Invaders também não passam da
+   largura que a altura da tela permite na proporção deles (a altura útil é 100vh menos os 150px que
+   api.area, em minijogos.js, reserva no computador; 1rem é o padding do palco), senão a moldura azul
+   ficaria mais larga que o canvas. */
+.mj-jogo--pong { --palco-max: min(52rem, calc(max(180px, 100vh - 150px) * 1.5 + 1rem)); }
+.mj-jogo--snake { --palco-max: 36rem; }
+.mj-jogo--invaders { --palco-max: min(592px, calc(max(340px, 100vh - 150px) * 0.75 + 1rem)); }
+.mj-jogo--pathfinding { --palco-max: 44rem; }
+
 .mj-jogo__topo {
   display: grid;
   gap: var(--espaco-1);
@@ -366,6 +378,14 @@ main:focus,
   --espessura: 3px;
 }
 
+/* O jogo foca o palco sozinho ao iniciar (só para receber as teclas; ele não entra na ordem do Tab).
+   Pelo teclado isso casa :focus-visible, e a moldura de foco, que preenche a coluna inteira sob o
+   miolo transparente, apareceria como dois retângulos claros ao lado do mapa. */
+.mj-jogo--snake .mj-palco:focus-visible {
+  --moldura: transparent;
+  --espessura: 0px;
+}
+
 .mj-canvas {
   display: block;
   max-width: 100%;
@@ -373,6 +393,7 @@ main:focus,
 }
 
 .mj-jogo--pong .mj-canvas,
+.mj-jogo--snake .mj-canvas,
 .mj-jogo--pathfinding .mj-canvas {
   touch-action: none;
 }
@@ -391,6 +412,35 @@ main:focus,
 
 .mj-sobre[hidden] {
   display: none;
+}
+
+/* Aviso apertado (mapa pequeno no celular; minijogos.js marca): o botão precisa continuar à vista. O
+   objetivo do "Pronto?" já está em "Como jogar", então some; o resto encolhe. */
+.mj-sobre--compacto {
+  padding: var(--espaco-2);
+}
+
+.mj-sobre--compacto .mj-sobre__caixa {
+  gap: var(--espaco-2);
+}
+
+.mj-sobre--compacto .mj-sobre__titulo {
+  font-size: 1.5rem;
+}
+
+.mj-sobre--compacto[data-modo="pronto"] .mj-sobre__texto {
+  display: none;
+}
+
+.mj-sobre--compacto .mj-sobre__texto,
+.mj-sobre--compacto .mj-sobre__controles {
+  font-size: 0.9375rem;
+  line-height: 1.4;
+}
+
+.mj-sobre--compacto .mj-sobre__acao {
+  min-height: 44px;
+  margin-top: 0;
 }
 
 .mj-sobre__caixa {
@@ -789,8 +839,12 @@ main:focus,
     font-size: 1rem;
   }
 
+  /* Cada jogo tem a largura de palco que o seu desenho pede (--palco-max, abaixo). O palco para aí e a
+     coluna de controles fica ao lado dele; o conjunto se centraliza, em vez de espalhar o jogo pela
+     tela inteira. Sem --palco-max, o palco usa o espaço livre. */
   .mj-jogo {
-    grid-template-columns: minmax(0, 1fr) 22rem;
+    grid-template-columns: minmax(0, var(--palco-max, 1fr)) 22rem;
+    justify-content: center;
     grid-template-areas:
       "topo    topo"
       "palco   dif"
