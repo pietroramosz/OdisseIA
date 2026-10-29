@@ -6,8 +6,9 @@
 
    Adaptações técnicas (DEC-031):
    - a folha do documento e o texto seguem o tema do site (escuro ou claro), em vez da folha branca, e o
-     espaço ao redor dela é de outro tom, para o documento se destacar: no tema claro a folha é clara sobre
-     grafite; no escuro, a folha é escura sobre um tom ainda mais escuro;
+     espaço ao redor dela é de outro tom, para o documento se destacar: no tema claro a folha é off-white
+     sobre um cinza-azulado mais fundo, com filete e uma sombra curta; no escuro, a folha é escura sobre um
+     tom ainda mais escuro;
    - os links usam a cor de acento do tema, para ter contraste nos dois fundos;
    - o logotipo, que é transparente com letras azul-marinho, ganha um fundo branco no tema escuro;
    - sem paginação: o texto corre contínuo, e sequências de parágrafos vazios que serviam de quebra de página
@@ -17,8 +18,8 @@
    As regras .pN do fim do arquivo são geradas a partir da formatação de cada parágrafo do .docx. */
 
 body.pagina-portfolio {
-  /* Folha do documento e espaço ao redor dela. O tom externo é fixo (grafite no claro, quase preto no
-     escuro, igual ao véu do modal), porque o tema claro não tem um grafite próprio. */
+  /* Folha do documento e espaço ao redor dela. No escuro o tom externo é fixo (quase preto, igual ao véu
+     do modal); no claro vem do token do palco (ver abaixo). */
   --doc-fundo: var(--cor-superficie);
   --doc-externo: #050508;
   padding: 1rem clamp(0.5rem, 3vw, 1.5rem);
@@ -27,11 +28,16 @@ body.pagina-portfolio {
 }
 
 :root[data-tema="claro"] body.pagina-portfolio {
-  --doc-externo: #2b2b35;
+  --doc-externo: var(--cor-superficie-escura);
 }
 
 :root[data-tema="escuro"][data-contraste="alto"] body.pagina-portfolio {
   --doc-externo: #000;
+}
+
+/* A folha clara se destaca do fundo com uma sombra curta, além do filete. */
+:root[data-tema="claro"] .doc {
+  box-shadow: 0 0 0 1px var(--cor-filete), 0 2px 8px rgba(20, 24, 36, 0.18);
 }
 
 /* Sem a grade decorativa do site: o espaço ao redor da folha é liso. */

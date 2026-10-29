@@ -71,8 +71,10 @@ html.portfolio-aberto {
   background: #050508;
 }
 
+/* No claro, o espaço ao redor da folha é o cinza-azulado do palco (mais fundo que a folha, que é
+   off-white), nunca um grafite escuro. No alto contraste claro o token já vira cinza quase branco. */
 :root[data-tema="claro"] .portfolio__corpo {
-  background: #2b2b35;
+  background: var(--cor-superficie-escura);
 }
 
 :root[data-tema="escuro"][data-contraste="alto"] .portfolio__corpo {

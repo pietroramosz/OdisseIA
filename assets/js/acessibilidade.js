@@ -39,6 +39,17 @@
     });
   }
 
+  // O painel de uma página muda só o próprio <html>. Outros documentos já abertos que usam as mesmas
+  // preferências (o portfólio dentro do leitor da Conclusão, que fica carregado depois da primeira
+  // abertura, ou outra aba) recebem este evento quando a escolha é gravada e reaplicam tudo na hora.
+  // Sem armazenamento disponível não há evento: a escolha vale só na página onde foi feita.
+  window.addEventListener("storage", function (evento) {
+    if (evento.key !== null && evento.key !== CHAVE) return;
+    preferencias = lerPreferencias();
+    aplicar(preferencias, true);
+    atualizarControles();
+  });
+
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", montarPainel);
   } else {

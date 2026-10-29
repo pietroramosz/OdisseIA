@@ -1,126 +1,39 @@
 # OdisseIA — AI Workflow
 
-Este arquivo explica como ferramentas de IA estão sendo usadas no desenvolvimento do OdisseIA.
+Este arquivo explica como as ferramentas de IA são usadas no desenvolvimento do OdisseIA.
 
-A intenção é registrar o processo com transparência.
-
-Não queremos fingir que tudo foi feito manualmente, mas também seria errado resumir o projeto a “a IA fez tudo”.
+A intenção é registrar o processo com transparência: não fingimos que tudo foi feito à mão, mas também seria errado resumir o projeto a "a IA fez tudo".
 
 ---
 
-## 1. Como estamos trabalhando
+## 1. Quem faz o quê
 
-O projeto utiliza IA como ferramenta de apoio em várias etapas.
+**Pietro**, o responsável pelo projeto, participa principalmente de:
 
-De forma geral:
+- explicar o problema, definir objetivos e passar contexto;
+- comparar possibilidades, tomar ou consolidar decisões e aceitar, alterar ou rejeitar sugestões;
+- preparar as tarefas de implementação e acompanhar o código;
+- testar manualmente, pedir correções e usar Git e GitHub;
+- assumir a responsabilidade pelo resultado final.
 
-- **ChatGPT** ajuda mais na parte de planejamento, análise, organização, UX, arquitetura, revisão e documentação;
-- **Claude (chat)** é usado principalmente para revisão crítica, análise de risco, revisão e montagem de prompts para o Claude Code e conferência de resultados;
-- **Claude Code** entra mais diretamente na implementação e edição do código;
-- decisões finais, testes, validação e responsabilidade continuam sendo humanas.
+Quando uma parte depende de outro grupo, como o X-B0T, a responsabilidade por ela continua com aquele grupo.
 
-Essa divisão não é rígida. O importante é mostrar o que realmente aconteceu.
+**As ferramentas de IA** entram assim:
 
----
+- **ChatGPT** ajuda a organizar ideias, transformar ideias em requisitos, comparar alternativas, discutir arquitetura e UX, identificar riscos, explicar código, apoiar o debugging e preparar documentação.
+- **Claude (chat)** funciona como uma camada de revisão crítica, quando vale a pena questionar uma ideia antes de implementá-la: levanta riscos, refina a composição e a UX, e ajuda a montar uma tarefa mais clara para o Claude Code.
+- **Claude Code** trabalha direto no repositório: cria arquivos, implementa funcionalidades, corrige bugs, refatora e executa tarefas já discutidas.
 
-## 2. Papel humano
-
-Pietro participa principalmente de:
-
-- explicar o problema;
-- definir objetivos;
-- passar contexto;
-- levantar requisitos;
-- comparar possibilidades;
-- tomar ou consolidar decisões;
-- aceitar, modificar ou rejeitar sugestões;
-- preparar tarefas para implementação;
-- acompanhar o código;
-- identificar problemas;
-- testar manualmente;
-- pedir correções;
-- organizar o projeto;
-- usar Git e GitHub;
-- assumir responsabilidade pelo resultado final.
-
-Quando alguma parte depende de outro grupo, como o X-B0T, essa responsabilidade continua com os integrantes daquele grupo.
+Essa divisão não é rígida, e nenhuma resposta é aceita automaticamente: uma sugestão pode ser usada, adaptada, rejeitada ou deixada para depois.
 
 ---
 
-## 3. Como o ChatGPT é usado
-
-O ChatGPT é usado principalmente para:
-
-- organizar ideias;
-- transformar ideias em requisitos;
-- comparar alternativas;
-- discutir arquitetura;
-- planejar UX/UI;
-- revisar decisões;
-- identificar riscos;
-- explicar código;
-- ajudar em debugging;
-- preparar documentação;
-- montar instruções mais claras para implementação.
-
-As respostas não são aceitas automaticamente.
-
-Uma sugestão pode ser:
-
-- usada;
-- adaptada;
-- rejeitada;
-- deixada para depois.
-
----
-
-## 4. Como Claude e Claude Code são usados
-
-O **Claude (chat)** é usado como uma camada intermediária de revisão quando vale a pena questionar uma ideia antes de transformar aquilo em implementação. Ele ajuda a criticar soluções, levantar riscos, refinar composição/UX, revisar instruções e montar uma tarefa mais clara para o Claude Code.
-
-O **Claude Code** é usado principalmente quando precisamos trabalhar diretamente no projeto.
-
-Entre as tarefas estão:
-
-- criar arquivos;
-- alterar código;
-- implementar funcionalidades;
-- corrigir bugs;
-- refatorar;
-- executar tarefas técnicas já discutidas antes.
-
-A ideia não é simplesmente pedir “faça o site”.
-
-Antes da implementação, o contexto geral do projeto é estabelecido e depois o trabalho segue uma tarefa por vez.
-
-Os prompts costumam ser enxutos e organizados em:
-
-```text
-Tarefa
-Contexto necessário
-Requisitos
-Restrições
-Critério de conclusão
-```
-
-Não é necessário repetir toda a história do projeto a cada tarefa.
-
-Claude Code pode decidir detalhes internos de implementação, mas decisões de produto, UX, fluxo e regras do projeto são definidas antes.
-
----
-
-## 5. Workflow atual
-
-Com o início da implementação, o processo deixou de ser apenas planejado e passou a ser usado de verdade.
-
-O ciclo atual pode incluir:
+## 2. Como uma tarefa é feita
 
 ```text
 ideia / requisito
 ↓
-planejamento e revisão
-↓
-quando útil: crítica e refinamento no Claude (chat)
+planejamento e revisão (quando útil, crítica no Claude chat)
 ↓
 tarefa enxuta para o Claude Code
 ↓
@@ -133,195 +46,53 @@ commit na branch dev
 registro das decisões relevantes
 ```
 
-Nem toda tarefa precisa passar pelas três ferramentas. O objetivo é usar cada uma quando ela melhora a clareza ou reduz risco, e não adicionar etapas por ritual.
+Nem toda tarefa passa pelas três ferramentas: cada uma entra quando melhora a clareza ou reduz risco, não por ritual.
 
-Quando uma mudança é maior ou mais arriscada, primeiro é feito um diagnóstico antes de alterar o código.
+Antes de implementar, o contexto geral do projeto é estabelecido, e o trabalho segue uma tarefa por vez. Os prompts para o Claude Code são curtos e organizados em tarefa, contexto necessário, requisitos, restrições e critério de conclusão. O Claude Code decide os detalhes internos da implementação; produto, UX, fluxo e regras do projeto são definidos antes.
 
-A intenção é manter tarefas pequenas o suficiente para que o resultado possa ser entendido, testado e versionado sem misturar várias responsabilidades ao mesmo tempo.
-
----
-
-## 6. Estado atual
-
-O workflow já foi usado em ciclos completos de desenvolvimento.
-
-Em 02/10/2026 foram concluídas as primeiras entregas técnicas importantes:
-
-- fundação inicial do site;
-- sistema de progresso local.
-
-Essas tarefas passaram por especificação, implementação com Claude Code, revisão, teste manual e commit em `dev`.
-
-O projeto continua usando IA como ferramenta de implementação, não como substituta da definição do produto.
+Mudanças maiores ou mais arriscadas começam por um diagnóstico, sem alterar o código. As tarefas ficam pequenas o bastante para o resultado ser entendido, testado e versionado sem misturar responsabilidades.
 
 ---
 
-## 7. Casos reais até agora
+## 3. Validação
 
-### 7.1 Mudança de cinco para quatro estações
-
-No começo, o projeto previa cinco estações.
-
-Depois de discutir a função da etapa de portfólio/documentação, chegamos ao consenso de que ela não precisava fazer parte do percurso físico.
-
-A estrutura passou então para quatro estações.
-
-A IA ajudou principalmente a organizar as consequências dessa mudança para o site e para a documentação.
-
-A decisão final, porém, foi do grupo.
+- **Revisão de uma IA que não rodou o código não é validação.** Quem valida é uma pessoa, no navegador e no celular, ou um teste que realmente executa o código.
+- **"Rodou sem erro" não é o mesmo que "está correto".**
+- **Planejado não é o mesmo que implementado.** A documentação só afirma o que existe, principalmente sobre o X-B0T.
+- Iteração visual melhora o resultado, mas precisa de critério de parada para não consumir o tempo das partes mais críticas.
 
 ---
 
-### 7.2 Separação entre o site e o Robot TCG
+## 4. Casos reais
 
-A Estação 4 depende de um jogo que ainda está sendo desenvolvido por outro grupo.
+### 4.1 Site e X-B0T: planejado não é implementado
 
-Durante o planejamento percebemos um problema: se o site começasse a documentar regras ou tecnologias ainda não implementadas, poderíamos acabar apresentando algo que não existia de verdade.
+A Estação 4 depende de um jogo que outro grupo ainda estava desenvolvendo. Percebemos que, se o site documentasse regras ou tecnologias ainda não implementadas, poderia apresentar algo que não existia. Então separamos as responsabilidades: o grupo do jogo cuida das mecânicas, e o site recebe só as informações finais necessárias para integrar e apresentar o X-B0T (DEC-007).
 
-Por isso, decidimos separar as responsabilidades.
+### 4.2 Da especificação ao commit
 
-O grupo do jogo cuida das mecânicas e da implementação. O site recebe apenas as informações finais necessárias para integrar e apresentar o X-B0T.
+A fundação do site e o sistema de progresso foram os primeiros ciclos completos. Cada tarefa foi especificada com limites claros (a fundação, por exemplo, não antecipava progresso, QR Codes nem desbloqueio), implementada com o Claude Code, revisada, testada manualmente e commitada em `dev`.
 
-Essa decisão também virou uma regra de documentação: **planejado não é o mesmo que implementado**.
+No progresso, a decisão de usar `localStorage` já existia. A implementação reduziu o estado a `{ versao, ultimaEstacaoDesbloqueada }`, na chave `odisseia:progresso`, derivando o resto da interface desse valor. Os testes cobriram o avanço, a persistência após recarregar, o limite de quatro estações e o estado inválido.
 
----
+### 4.3 A validação que aceitava número decimal
 
-### 7.3 Segurança no frontend
+Uma revisão em chat considerou a validação do progresso robusta. Uma auditoria feita direto no código mostrou que o valor `2.5` passava, porque a checagem só testava se era número. A correção usou `Number.isInteger` e foi testada no console.
 
-Em uma discussão sobre o sistema de progresso surgiu uma dúvida simples:
+### 4.4 A IA não conseguiu testar o resultado
 
-> E se alguém abrir o F12 e alterar isso?
-
-A partir daí, analisamos melhor o papel do frontend.
-
-Como JavaScript e `localStorage` ficam no navegador, o usuário pode inspecionar ou modificar esses dados.
-
-Então adotamos uma regra:
-
-> O frontend pode controlar a experiência, mas não deve guardar nada que dependa de segurança real.
-
-Essa discussão ajudou a separar duas coisas diferentes:
-
-- impedir um usuário comum de pular uma etapa;
-- proteger de verdade uma informação ou recurso.
-
-São problemas diferentes.
+O Claude Code avisou que o painel de pré-visualização dele bloqueia o `localStorage` e que, por isso, não testou os estados do Hub. Os testes foram feitos por uma pessoa, no navegador e no celular.
 
 ---
 
-### 7.4 Fundação inicial do projeto
+## 5. O que não vai neste arquivo
 
-Antes de desenvolver Hub, QR Codes e conteúdo das estações, era necessário criar uma base consistente para o site.
+Este arquivo não é uma coleção de prompts, um histórico de conversas, propaganda de IA nem uma tentativa de exagerar (ou de apagar) a participação humana.
 
-A tarefa foi especificada com limites claros: criar as páginas principais, a estrutura de `assets` e a configuração central, sem antecipar a lógica de progresso, QR Codes ou desbloqueio.
-
-A implementação foi feita com Claude Code.
-
-Os arquivos de documentação existentes foram preservados e a estrutura resultante foi revisada antes de seguir para a próxima tarefa.
-
-O principal ganho dessa etapa foi criar uma fundação real sem misturar responsabilidades que pertenciam a tarefas posteriores.
+Um novo caso só entra quando mostra algo útil sobre o processo: uma IA que sugeriu algo errado, uma proposta rejeitada, uma solução que precisou mudar bastante, uma limitação importante ou uma decisão humana que mudou o rumo.
 
 ---
 
-### 7.5 Sistema de progresso
+## 6. Responsabilidade
 
-Depois da fundação, a próxima tarefa foi criar a base de progresso usada pelo restante da experiência.
-
-A decisão de usar `localStorage` já existia. Na implementação, o estado foi reduzido a uma estrutura simples:
-
-```js
-{
-  versao: 1,
-  ultimaEstacaoDesbloqueada: 0
-}
-```
-
-A chave definida foi:
-
-```text
-odisseia:progresso
-```
-
-Em vez de guardar vários estados redundantes, as demais informações da interface podem ser derivadas da última estação desbloqueada.
-
-A funcionalidade foi implementada com Claude Code e depois testada manualmente.
-
-Foram verificados o avanço do progresso, a persistência após recarregar, o limite das quatro estações e o comportamento diante de estado inválido.
-
-Depois da validação, a mudança foi commitada na branch `dev`.
-
-Esse foi o primeiro exemplo completo do ciclo:
-
-```text
-especificação → implementação → teste → commit
-```
-
----
-
-### 7.6 Validação de progresso que aceitava número decimal
-
-Uma revisão em chat considerou a validação do progresso robusta. Uma auditoria posterior, feita direto no código, mostrou que o valor 2.5 passava na checagem, porque ela só testava se era número. Foi corrigido com `Number.isInteger` e testado no console.
-
-Lição: revisão de uma IA que não rodou o código não é validação.
-
----
-
-### 7.7 A IA não conseguiu testar o resultado
-
-O Claude Code informou que o painel de pré-visualização dele bloqueia o `localStorage` e que, por isso, os estados do Hub não foram testados por ele. Os testes foram feitos por uma pessoa, no navegador e no celular.
-
-Lição: "rodou sem erro" não é o mesmo que "está correto".
-
----
-
-### 7.8 Referência visual sem trazer a stack
-
-Foi usada uma referência de componentes feita para React, Tailwind e TypeScript. O prompt proibiu explicitamente instalar dependências, e o visual foi recriado em HTML e CSS puros, conforme a DEC-003.
-
----
-
-### 7.9 Refinamento em chat antes da implementação visual
-
-Durante o trabalho do Index e das Estações 1–3, algumas ideias de composição e UX passaram por revisão em chat antes de virarem tarefas de implementação. O Claude (chat) foi usado para questionar escolhas, refinar a direção e ajudar a transformar o feedback em instruções mais claras para o Claude Code.
-
-A implementação continuou sendo feita no repositório pelo Claude Code e o resultado foi revisado manualmente. Em alguns pontos, novas rodadas de composição foram feitas depois de ver o resultado funcionando.
-
-Lição: uma IA de conversa e um agente de código podem cumprir papéis diferentes no mesmo problema. A primeira pode ajudar a criticar e especificar; a segunda implementa. Iteração visual melhora o resultado, mas precisa ter critério de parada para não consumir o tempo das partes mais críticas do projeto.
-
----
-
-## 8. O que não vamos colocar aqui
-
-Este arquivo não deve virar:
-
-- uma coleção de prompts;
-- um histórico completo das conversas;
-- propaganda de IA;
-- uma lista de tudo que cada ferramenta respondeu;
-- uma tentativa de exagerar a participação humana;
-- uma tentativa de jogar toda a autoria para a IA.
-
-Só entram casos que ajudam a mostrar como o projeto foi pensado, revisado e construído.
-
----
-
-## 9. Quando adicionar novos casos
-
-Vale registrar quando acontecer algo como:
-
-- uma IA sugerir algo errado;
-- uma solução precisar ser bastante alterada;
-- uma proposta ser rejeitada;
-- uma implementação exigir várias tentativas;
-- uma decisão humana mudar o rumo da solução;
-- surgir uma limitação importante;
-- houver um bom exemplo de planejamento → implementação → teste;
-- ChatGPT e Claude Code forem usados de formas diferentes no mesmo problema.
-
----
-
-## 10. Responsabilidade
-
-As ferramentas ajudam bastante, mas não assumem responsabilidade pelo projeto.
-
-No final, o resultado precisa ser entendido, revisado, testado, versionado e assumido por quem está desenvolvendo.
+As ferramentas ajudam bastante, mas não assumem responsabilidade pelo projeto. No fim, o resultado precisa ser entendido, revisado, testado, versionado e assumido por quem o desenvolve.

@@ -1,446 +1,185 @@
 # OdisseIA — Project Documentation
 
-Este arquivo explica como o OdisseIA foi pensado e como o projeto está sendo organizado.
+Este arquivo explica como o OdisseIA está organizado e o que é preciso saber para mantê-lo. A apresentação do projeto fica no [`README.md`](./README.md), o público e os princípios do produto em [`PRODUCT.md`](./PRODUCT.md), o sistema visual em [`DESIGN.md`](./DESIGN.md) e o porquê das escolhas em [`DECISIONS.md`](./DECISIONS.md).
 
-Ele não é um diário de desenvolvimento e também não tenta fingir que tudo já está pronto. Quando alguma funcionalidade ainda estiver só no planejamento, isso será deixado claro.
+Quando algo ainda não existe, o texto diz isso com todas as letras.
 
 ---
 
 ## 1. Visão geral
 
-O **OdisseIA** é um projeto para uma feira escolar que combina:
+O **OdisseIA** é um projeto para uma feira escolar que combina estações físicas, conteúdo digital, QR Codes e progressão entre etapas, tudo acessado pelo celular do visitante. No fim, ele libera o jogo **X-B0T** (antes chamado Robot TCG).
 
-- estações físicas;
-- conteúdo digital;
-- QR Codes;
-- progressão entre etapas;
-- acesso pelo celular do visitante;
-- integração com o jogo **X-B0T** (antes chamado Robot TCG).
-
-O site não foi pensado para substituir a apresentação física. Ele funciona como uma extensão da experiência, ajudando a conectar as estações e oferecendo conteúdo e interações que fazem sentido no celular.
+O site não substitui a apresentação física: é uma extensão dela, que conecta as estações e oferece o que faz sentido no celular.
 
 ---
 
-## 2. Como tratamos o estado das funcionalidades
+## 2. Estado das funcionalidades
 
-Durante o desenvolvimento, usamos quatro estados para evitar confusão:
+Usamos quatro estados para evitar confusão:
 
-- **Definido:** a decisão já foi tomada;
-- **Planejado:** sabemos como queremos que funcione, mas ainda não foi implementado;
+- **Definido:** a decisão foi tomada;
+- **Planejado:** sabemos como deve funcionar, mas ainda não foi implementado;
 - **Implementado:** já existe no código;
 - **Validado:** foi implementado e testado no fluxo esperado.
 
-Situação revisada em 24/10/2026 (identidade azul sobre grafite, tema claro refinado, três animações das estações, scanner de QR, carta do X-B0T, `gameUrl` e acessibilidade). Os testes funcionais de QR Codes, progressão, códigos repetidos e fora de ordem, temas e animações foram feitos e funcionam, e a leitura do QR pela câmera de um celular pede para abrir o link e o acesso funciona após a confirmação (relato do responsável; detalhes no DEVLOG). As verificações automatizadas rodaram em Chrome headless:
+Situação em 28/10/2026:
 
-- **Validado:** sistema de progresso (`progresso.js`), testado no console, incluindo dado corrompido e número decimal.
-- **Implementado e testado em emulador e no celular:** Hub (`hub.html`), nos estados 0 a 4.
-- **Implementado e revisado:** `index.html` como porta de entrada estática. Não depende do progresso (não lê nem grava `odisseia:progresso`), mas carrega JavaScript: `acessibilidade.js` (tema, tamanho do texto, contraste e movimento, salvos em `odisseia:acessibilidade`) e `bigode.js` (easter egg, que não toca em `localStorage`).
-- **Implementadas e revisadas:** Estações 1–3 com conteúdo, estados `desbloqueada`, `próxima` e `futura`, além da composição editorial compartilhada.
-- **Implementada:** Estação 4 (`estacao-4.html`), com página própria ligada ao X-B0T; o conteúdo deve continuar fiel às informações confirmadas pelo grupo do jogo.
-- **Implementada:** `final.html`, com estados de jornada completa/incompleta e área de acesso ao X-B0T; o botão "Jogar X-B0T" usa a `gameUrl` configurada (https://robot-tcg.netlify.app/); `downloadUrl` continua nulo.
-- **Implementado e testado em Chrome headless:** portfólio na Conclusão (`portfolio.js`, `portfolio.css`; o documento em `portfolio.html`, `portfolio-documento.js`, `portfolio-documento.css` e `assets/img/portfolio/`). O botão "Ver portfólio" abre num modal o documento original, reproduzido em HTML local com o layout do Word, somente leitura, com o fundo seguindo o tema, sem URL externa nem conta (DEC-031). O portfólio é um complemento, não uma quinta estação; o `.docx` de origem não faz parte do site. Ainda sem teste em celular real, Safari, Firefox nem leitor de tela.
-- **Implementado e testado por console, por URL e com a câmera de um celular (o link abre após a confirmação; repetido e fora de ordem funcionam), ainda sem teste com WhatsApp/navegador interno nem com os QR Codes definitivos:** validação de QR (`validar.html` e `qr.js`).
-- **Ainda pendente:** confirmação do endereço final do X-B0T, hospedagem final, QR Codes definitivos e teste físico completo da jornada.
+- **Validado:** sistema de progresso (`progresso.js`), testado no console, inclusive com dado corrompido e número decimal; Hub, nos estados 0 a 4, em emulador e no celular; validação de QR (`validar.html` e `qr.js`), por console, por URL e com a câmera de um celular; painel de acessibilidade; e a experiência com os QR Codes finais, nos testes físicos.
+- **Implementado:** `index.html` (porta de entrada estática); Estações 1 a 4, com conteúdo e estados `desbloqueada`, `próxima` e `futura`; `final.html`, com estados de jornada completa e incompleta; scanner de QR pela câmera; portfólio na Conclusão (testado em Chrome headless; sem registro de teste em Safari, Firefox ou leitor de tela); e a página de minijogos.
+- **Em aberto:** nada. Não há pendências conhecidas.
 
 ---
 
-## 3. Estrutura atual das estações
+## 3. Estações
 
-O projeto possui atualmente **quatro estações**.
+O projeto tem **quatro estações**.
 
 ### Estação 1 — Inteligência Artificial nos jogos
 
-A primeira estação apresenta a evolução de abordagens de IA em jogos.
-
-A linha conceitual atual passa por:
-
-- regras;
-- perseguição e tomada de decisão simples;
-- máquinas de estado;
-- pathfinding;
-- behavior trees;
-- utility AI;
-- machine learning;
-- IA generativa.
-
-O conteúdo final continua dependente da versão aprovada da apresentação da estação.
+Apresenta a evolução das abordagens de IA em jogos: regras, perseguição e decisão simples, máquinas de estado, pathfinding, behavior trees, utility AI, machine learning e IA generativa.
 
 ### Estação 2 — Evolução dos jogos até 2000
 
-A segunda estação cobre a evolução dos jogos até 2000.
-
-Algumas definições importantes:
-
-- a linha do tempo termina em 2000 (DEC-027 e DEC-028): o ano 2000 fecha a linha, sem marco próprio e sem inventar eventos para preencher o período;
-- os 15 marcos vão de 1950 a 1996 e o conteúdo de 2001 em diante fica para a estação seguinte;
-- o site deve complementar a apresentação física em vez de repetir exatamente o mesmo conteúdo.
+- A linha do tempo termina em 2000. O ano fecha a linha como limite da estação, sem marco próprio e sem eventos inventados para preencher o período.
+- Os 15 marcos vão de 1950 a 1996; o conteúdo de 2001 em diante fica para a estação seguinte.
 
 ### Estação 3 — Evolução dos jogos de 2001 até hoje
 
-A terceira estação continua a linha do tempo a partir de 2001.
-
-Algumas decisões já tomadas:
-
-- não forçar um marco exclusivo para 2026;
-- tratar 2024–2026 como um período de tendências atuais quando fizer sentido;
-- não transformar imagens ilustrativas em marcos históricos sem base;
-- evitar comparações ou afirmações que não tenham suporte suficiente.
+- Não forçamos um marco exclusivo para 2026; 2024–2026 aparece como período de tendências atuais, quando faz sentido.
+- Imagens ilustrativas não viram marcos históricos sem base, e evitamos afirmações sem suporte suficiente.
 
 ### Estação 4 — X-B0T
 
-A quarta estação apresenta o **X-B0T**, jogo desenvolvido por outro núcleo do projeto.
+Apresenta o jogo, desenvolvido por outro grupo. O site só mostra mecânicas e tecnologias que existam na versão final (DEC-007).
 
-O site deve mostrar apenas mecânicas e tecnologias que realmente existirem na versão final do jogo.
-
-As regras internas, balanceamento, cartas, energia, IA adversária e outras decisões do X-B0T continuam sob responsabilidade do grupo responsável pelo jogo.
+Em todas elas, o site complementa a apresentação física em vez de repeti-la. O texto-fonte do conteúdo está em `docs/OdisseIA_Conteudo_Site_Estacoes.md`.
 
 ---
 
-## 4. De cinco para quatro estações
-
-No começo, o projeto tinha uma quinta estação ligada a portfólio/documentação.
-
-Depois de revisar a experiência, decidimos que essa parte não precisava ocupar uma estação física.
-
-A estrutura atual ficou com quatro estações. O portfólio não voltou a ser uma estação: ele é um recurso complementar, aberto num leitor sobre a Conclusão (DEC-031), e os bastidores permanecem na documentação do projeto.
-
-Essa mudança alterou diretamente o fluxo do site e o escopo da experiência.
-
----
-
-## 5. Estrutura atual de páginas
-
-A fundação inicial do site já foi criada.
-
-Atualmente o projeto possui as seguintes páginas principais:
+## 4. Páginas
 
 ```text
-index.html
-hub.html
-validar.html
-estacao-1.html
-estacao-2.html
-estacao-3.html
-estacao-4.html
-final.html
+index.html       visão geral; porta de entrada estática, não lê nem altera o progresso
+hub.html         central das estações e do progresso
+validar.html     destino dos QR Codes (validar.html?estacao=N)
+estacao-1.html … estacao-4.html
+final.html       conclusão, com "Ver portfólio", "Jogar X-B0T" e o acesso aos minijogos
+portfolio.html   documento do portfólio, exibido no leitor da Conclusão (DEC-015)
+minijogos.html   Pong, Snake, Space Invaders e o desafio de pathfinding; fora da jornada
 ```
 
-Também existe uma estrutura de `assets` para organizar CSS, JavaScript e imagens.
+O CSS fica em `assets/css/` (a base compartilhada em `style.css`, uma folha por página em `paginas/`), o JavaScript em `assets/js/` e as imagens e fontes em `assets/img/` e `assets/fonts/`.
 
-### Função geral das páginas
-
-- `index.html` — visão geral e porta de entrada estática da experiência; não lê nem altera progresso;
-- `hub.html` — central das estações e representação do progresso;
-- `validar.html` — página usada pelo fluxo de validação dos QR Codes;
-- `estacao-1.html` a `estacao-4.html` — páginas das estações e seus estados de acesso; a Estação 4 é dedicada ao X-B0T;
-- `final.html` — conclusão da jornada, com estados de acesso e área destinada ao link do X-B0T.
-
-A existência dessas páginas não significa que todas as funcionalidades internas já estejam finalizadas.
+O projeto teve uma quinta estação, ligada a portfólio e documentação, que saiu do percurso (DEC-005). O portfólio ficou como recurso complementar, aberto num leitor sobre a Conclusão. A página não acompanha o `.docx` de origem: se o documento mudar, é preciso regerar `portfolio.html` e republicar.
 
 ---
 
-## 6. Fluxo do visitante
-
-O fluxo oficial da experiência é:
+## 5. Fluxo do visitante
 
 ```text
-Visão geral
-↓
-Hub
-↓
-Estação 1
-↓
-Estação 2
-↓
-Estação 3
-↓
-Estação 4
-↓
-Conclusão
-↓
-X-B0T
+Visão geral → Hub → Estação 1 → Estação 2 → Estação 3 → Estação 4 → Conclusão → X-B0T
 ```
 
-A experiência física e a experiência digital estão ligadas pelos QR Codes.
+**Regra principal:** o QR Code de uma estação valida que o visitante passou por ela fisicamente e libera o conteúdo digital dela. Navegar direto até uma página não avança o progresso.
 
-### Regra principal
-
-O QR Code de uma estação valida que o visitante passou por aquela etapa física e desbloqueia o conteúdo digital da própria estação.
-
-Apenas navegar diretamente até uma página não deve avançar o progresso.
-
-Estações futuras podem ser acessadas pelo Hub para mostrar seu estado bloqueado, mas o conteúdo permanece indisponível até a validação correta.
-
-Depois de um QR válido, a experiência deve permitir voltar ao Hub ou seguir para o conteúdo desbloqueado. Após a quarta estação, a conclusão também passa a fazer parte do fluxo.
+Estações futuras podem ser abertas pelo Hub para mostrar o estado bloqueado, mas o conteúdo só aparece depois da validação. Depois de um QR válido, o visitante volta ao Hub ou segue para o conteúdo liberado; ao completar a quarta estação, a Conclusão entra no fluxo.
 
 ---
 
-## 7. Sistema de progresso
+## 6. Sistema de progresso
 
-O sistema de progresso já foi implementado.
-
-Os dados são armazenados no navegador utilizando `localStorage`.
-
-### Chave utilizada
-
-```text
-odisseia:progresso
-```
-
-### Estrutura base
+O progresso fica no `localStorage`, na chave `odisseia:progresso`:
 
 ```js
 {
   versao: 1,
-  ultimaEstacaoDesbloqueada: 0
+  ultimaEstacaoDesbloqueada: 0 // de 0 a 4
 }
 ```
 
-`ultimaEstacaoDesbloqueada` varia de `0` a `4`.
+Os demais estados da interface são derivados desse valor, sem armazenamento redundante. O sistema cobre leitura e gravação, persistência após recarregar, limite de quatro estações e tratamento de estado inválido.
 
-Os demais estados da interface devem ser derivados desse valor sempre que possível, evitando armazenamento redundante.
-
-### Objetivo
-
-O progresso existe para representar a jornada do visitante durante a feira.
-
-Ele não funciona como mecanismo de segurança.
-
-Como os dados ficam no próprio navegador, uma pessoa com conhecimento técnico pode alterá-los manualmente.
-
-Isso é aceitável porque nenhuma informação sensível ou recurso crítico depende desse controle.
-
-### Estado atual
-
-O sistema já foi implementado, testado manualmente e versionado na branch `dev`.
-
-Ele cobre a leitura e gravação do progresso, persistência após recarregar a página, limite das quatro estações e tratamento de estado inválido.
+Ele representa a jornada do visitante, não é mecanismo de segurança: quem tem conhecimento técnico pode alterar o valor no navegador. Isso é aceitável, porque nada sensível depende dele (DEC-004, DEC-006).
 
 ---
 
-## 8. QR Codes
+## 7. QR Codes e scanner
 
-Os QR Codes fazem a conexão entre a parte física e a parte digital do OdisseIA.
+Cada QR abre `validar.html?estacao=N`. Só o QR da próxima estação na ordem avança o progresso; QR repetido, fora de ordem ou inválido não altera nada (DEC-011).
 
-Cada estação possui seu próprio QR Code.
+O progresso é salvo no navegador usado. Abrir o QR em um navegador diferente do que abriu o Hub resulta em "fora de ordem", e as telas do site explicam isso ao visitante.
 
-A função dele é validar que o visitante chegou àquela estação física e então desbloquear o conteúdo digital correspondente.
+O **scanner** (`scanner.js`, `scanner.css`) lê o QR pela câmera dentro do site (DEC-014):
 
-Por isso, o progresso não deve avançar apenas porque alguém abriu diretamente uma página.
+- pede a câmera só depois de "Abrir câmera" e não grava nem envia nada;
+- aceita apenas um link http(s) que termine em `/validar.html` com o parâmetro `estacao` de 1 a 4. O endereço não é comparado e **nada é aberto**: o texto lido só serve para obter o número;
+- reaproveita `resultadoParaEstacao()` de `qr.js`, a mesma regra de `validar.html`;
+- usa a API `BarcodeDetector`, que existe no Chrome e no Samsung Internet do Android, mas não no Safari do iOS nem no Firefox. Nesses navegadores o scanner explica que o app Câmera lê o mesmo QR e cai no mesmo fluxo;
+- a câmera exige contexto seguro (HTTPS); em `file://` só o Chrome a libera para teste.
 
-A validação digital já está implementada em `validar.html` e `qr.js`. A leitura pela câmera de um celular já foi testada (ela pede para abrir o link, e o acesso funciona após a confirmação). O que ainda falta é validar o fluxo físico com os QR Codes definitivos, testar a abertura por aplicativos como o WhatsApp e gerar/imprimir esses QR Codes depois que a URL final estiver fechada.
-
-O QR Code faz parte da lógica da experiência, mas não deve ser tratado como mecanismo de segurança real.
-
-Cada QR abre `validar.html?estacao=N`. Só o QR da próxima estação na ordem avança o progresso; QR repetido, fora de ordem ou inválido não altera nada. O progresso fica salvo no navegador usado, então abrir o QR em um navegador diferente do Hub resulta em "fora de ordem". A tela explica isso ao visitante (DEC-014).
-
----
-
-## 9. Arquitetura inicial
-
-A arquitetura foi mantida simples de propósito.
-
-### Frontend
-
-- HTML;
-- CSS;
-- JavaScript.
-
-### Hospedagem
-
-Ainda não definida. O GitHub Pages está ligado na branch `dev` apenas para testes. A URL final precisa estar fechada antes de imprimir os QR Codes.
-
-### Persistência
-
-Implementada com `localStorage`.
-
-### Versionamento
-
-- Git;
-- GitHub;
-- desenvolvimento incremental na branch `dev`.
-
-### Backend
-
-Não existe backend previsto para a primeira versão.
-
-Se no futuro surgir uma necessidade real — como autenticação, sincronização ou proteção de dados — essa decisão pode ser revista.
-
-### Configuração central
-
-O projeto possui uma configuração central em JavaScript.
-
-Ela foi mantida em JavaScript puro, utilizando `const`.
-
-Nesta fase, módulos ES foram evitados para preservar compatibilidade com execução local através de `file://`.
-
-Essa escolha reduz dependências durante etapas simples de desenvolvimento e teste e está registrada em `DECISIONS.md`.
+O QR não é segurança real. Nenhuma tela manda escanear o QR da estação seguinte: o código é sempre entregue pelo orientador, depois da visita física.
 
 ---
 
-## 10. Segurança
+## 8. Arquitetura
 
-Uma regra simples foi adotada para o projeto:
+- **Frontend:** HTML, CSS e JavaScript puros, sem framework (DEC-003).
+- **Backend:** não existe. Se surgir uma necessidade real, como autenticação ou sincronização, a decisão pode ser revista.
+- **Persistência:** `localStorage`.
+- **Configuração central:** `assets/js/config.js` define `OdisseIAConfig` (`totalEstacoes`, `gameUrl`, `downloadUrl`) com `const`. Todos os scripts são `<script>` comuns, sem módulos ES, para o site funcionar também via `file://` (DEC-009). `downloadUrl` continua `null`: não há link de download.
+- **Hospedagem:** GitHub Pages, em `https://pietroramosz.github.io/OdisseIA/`. Todos os caminhos são relativos e respeitam maiúsculas e minúsculas, porque o site roda sob o prefixo `/OdisseIA/`.
+- **Versionamento:** Git e GitHub, com desenvolvimento na branch `dev`.
+
+---
+
+## 9. Segurança
 
 > Se alguma coisa puder ser descoberta ou alterada facilmente pelo DevTools/F12 e isso causar um problema real, ela não deve depender só do frontend.
 
-Na prática, isso significa que não devemos colocar no cliente:
-
-- segredos;
-- tokens privados;
-- credenciais;
-- chaves sensíveis;
-- dados que precisem permanecer ocultos;
-- regras críticas de autorização.
-
-O frontend pode controlar a experiência do visitante, mas não é tratado como uma camada real de segurança.
+Por isso o cliente não guarda segredos, tokens, credenciais, dados que precisem ficar ocultos nem regras críticas de autorização. O frontend controla a experiência do visitante, mas não é camada de segurança (DEC-006).
 
 ---
 
-## 11. Mobile-first
+## 10. Mobile-first e identidade visual
 
-O mobile-first não foi escolhido por moda.
+Os visitantes circulam pelas estações usando o próprio celular, então a experiência precisa ser rápida de entender em telas pequenas: pouca informação por tela, navegação simples, consistência entre as estações e leitura rápida (DEC-001).
 
-Durante a feira, o visitante estará circulando entre as estações e usando o próprio celular. Por isso, a experiência precisa ser rápida de entender e fácil de usar em telas pequenas.
-
-Alguns princípios que guiam o design:
-
-- pouca informação por tela;
-- navegação simples;
-- consistência entre as estações;
-- leitura rápida;
-- o site complementa a apresentação em vez de competir com ela.
+O site e o X-B0T devem parecer partes da mesma experiência, cada um com a sua cor (DEC-010). A base é grafite; o azul (escala do `#142146`, com acento `#5b8cff`) marca estados, progresso e ações; o branco é só para texto; e o roxo **`#CD5EFA`**, cor definitiva do X-B0T, aparece apenas nas partes do jogo. Legibilidade e contraste vêm antes de efeito visual, e nenhum estado depende só de cor. As regras completas estão em `DESIGN.md`; o sistema visual foi criado com a skill Impeccable.
 
 ---
 
-## 12. Identidade visual
+## 11. Conteúdo
 
-O site e o X-B0T devem parecer partes da mesma experiência, cada um com a sua cor.
-
-Desde 23/10/2026 (DEC-024), a base é grafite, escura e neutra, com o azul como acento principal e o roxo reservado ao jogo:
-
-- azul de acento (`#5b8cff`) para estados, progresso, ações e foco; azul de linha (`#3558c4`) para linhas, trilhos e molduras; o azul intermediário da sala (`#142146`) como referência escura da escala;
-- branco só para texto;
-- roxo (`#CD5EFA`, provisório) só nas partes ligadas ao X-B0T.
-
-As engrenagens das estações são azuis (validada) e cinza (ainda não); a do X-B0T é roxa. O azul nunca é fundo de painel nem cor de texto corrido, e o roxo não é usado como cor geral do site.
-
-Como a experiência é mobile-first, legibilidade e contraste têm prioridade sobre efeitos visuais.
-
-Estados importantes da interface também não devem depender exclusivamente de cor para serem compreendidos.
-
----
-
-## 13. Conteúdo
-
-O conteúdo digital é construído junto com as apresentações físicas.
-
-As Estações 1–4 possuem páginas implementadas e estados de acesso. A precisão do conteúdo da Estação 4 continua dependente das informações confirmadas sobre o X-B0T.
-
-Algumas regras que seguimos:
+O conteúdo digital nasce junto com as apresentações físicas e fica escrito direto no HTML das estações, sem arquivo de dados nem geração por JavaScript. Regras que seguimos:
 
 - usar como base a pesquisa real dos grupos;
-- não tratar conteúdo ainda em discussão como definitivo;
-- não inventar marcos ou tecnologias;
-- manter a Estação 4 sincronizada com o jogo real.
+- não tratar conteúdo em discussão como definitivo;
+- não inventar marcos, dados ou tecnologias;
+- manter a Estação 4 fiel ao jogo real.
 
-Decisões pequenas de conteúdo não precisam virar registros técnicos.
-
----
-
-## 14. Integração com o X-B0T
-
-Para evitar confusão entre os grupos, as responsabilidades foram separadas.
-
-### Grupo do X-B0T
-
-Cuida de:
-
-- regras;
-- cartas;
-- energia;
-- balanceamento;
-- turnos;
-- IA;
-- implementação do jogo.
-
-### Site do OdisseIA
-
-Cuida de:
-
-- como o jogo aparece na experiência;
-- acesso e integração;
-- apresentação da estação;
-- desbloqueio dentro do fluxo;
-- documentação apenas do que realmente existir na versão final.
-
-A página de conclusão deve informar que o X-B0T foi desbloqueado e conduzir o visitante para o jogo quando a integração estiver pronta.
+Decisões pequenas de conteúdo não viram registro técnico.
 
 ---
 
-## 15. O que não faz parte do escopo atual
+## 12. Integração com o X-B0T
 
-Neste momento, não há motivo para adicionar:
+O **grupo do X-B0T** cuida de regras, cartas, energia, balanceamento, turnos, IA e implementação do jogo. O **site** cuida de como o jogo aparece na experiência: a apresentação da estação, o acesso, o desbloqueio no fluxo e a documentação apenas do que existe na versão final (DEC-007).
 
-- framework frontend;
-- backend;
-- banco de dados;
-- login;
-- autenticação;
-- infraestrutura complexa.
-
-A ideia é manter o projeto simples enquanto isso for suficiente.
+O acesso vem de `OdisseIAConfig.gameUrl` (https://robot-tcg.netlify.app/) e só é liberado com as quatro estações validadas (DEC-012). A Conclusão avisa que o X-B0T foi desbloqueado e leva o visitante ao jogo. A grafia oficial é **X-B0T**, com zero.
 
 ---
 
-## 16. Pendências atuais
+## 13. Fora do escopo
 
-**Última revisão:** 24/10/2026\
-**Data externa principal:** feira em **29/10/2026**.
+Framework frontend, backend, banco de dados, login, autenticação e infraestrutura complexa. O projeto continua simples enquanto isso bastar.
 
-Esta seção guarda apenas trabalho concreto ainda aberto. Ela não substitui o DEVLOG: quando uma pendência relevante for concluída, ela sai daqui e pode virar um marco no histórico.
-
-### Necessárias para fechar a experiência da feira
-
-- [x] Implementar a página da Estação 4 ligada ao X-B0T; revisar o conteúdo conforme as informações confirmadas pelo grupo.
-- [ ] Obter um status/build utilizável do X-B0T para destravar a integração da Estação 4 e da conclusão.
-- [ ] Resolver a duplicação de nome entre “Estação 4 — X-B0T” e o card final do jogo, sem renomear nada antes da decisão.
-- [x] Implementar a página de conclusão e os estados de jornada completa/incompleta.
-- [x] Link do X-B0T configurado na Conclusão (botão "Jogar X-B0T" a partir de `gameUrl`). Falta confirmar com o grupo se esse é o endereço final.
-- [x] Portfólio na Conclusão: leitor local com o documento em HTML, logo antes de "Jogar X-B0T" (DEC-031). Implementado e testado.
-- [ ] Confirmar com o grupo e a escola se os nomes dos alunos e a escala de turnos podem ficar públicos em `portfolio.html`, e se os QR Codes das estações (omitidos de propósito, com as legendas) devem continuar fora. Se o `.docx` mudar, regerar `portfolio.html` e republicar (a página não acompanha o original).
-- [x] `gameUrl` preenchida com https://robot-tcg.netlify.app/ (23/10/2026). `downloadUrl` continua `null`; decidir só se houver versão para download.
-- [x] Adicionar no Hub um caminho claro de volta para a Visão geral (`index.html`).
-- [ ] Definir hospedagem e URL final antes de gerar ou imprimir os QR Codes definitivos.
-- [x] Leitura de QR pela câmera de um celular: pede para abrir o link e o acesso funciona após a confirmação (24/10/2026).
-- [ ] Testar a abertura por WhatsApp/navegador interno.
-- [ ] Ampliar ou confirmar a orientação de “mesmo navegador”: hoje o Index já avisa, mas o problema ainda pode aparecer durante o fluxo de QR.
-- [ ] Fazer um teste completo em celular do fluxo: visão geral → Hub → QR1 → 1 → QR2 → 2 → QR3 → 3 → QR4 → 4 → conclusão → X-B0T.
-- [ ] Confirmar a cor final do X-B0T; enquanto isso, `#CD5EFA` continua provisório.
-- [ ] Confirmar com o grupo a alteração editorial na Estação 4 (DEC-020) e o texto novo do Bastidores 02 (DEC-023).
-- [ ] Testar em celular real o acesso ao X-B0T pelo Hub e pela Conclusão e o aviso "vire o aparelho na horizontal".
-- [ ] Testar a leitura real de QR pelo scanner (Chrome/Android, em HTTPS) e pelo app Câmera do iPhone, com os QR Codes impressos (DEC-024).
-- [ ] Decidir se entra uma cópia local de uma biblioteca de decodificação de QR para o scanner funcionar também no Safari do iOS e no Firefox (hoje eles usam o app Câmera).
-- [ ] Testar o painel de acessibilidade no computador da escola (DEC-022) e, se possível, com o armazenamento do navegador bloqueado.
-
-### Risco operacional
-
-- [ ] A cópia de trabalho local ainda está dentro do OneDrive. Mover o repositório de desenvolvimento para uma pasta local não sincronizada ou adotar uma forma equivalente de evitar conflitos de sincronização; o Git/GitHub deve continuar sendo a fonte de versionamento.
-
-### A avaliar antes da versão final
-
-- créditos da equipe e do grupo do X-B0T;
-- favicon;
-- comportamento do site depois da feira;
-- necessidade de tutorial/instruções do X-B0T.
-
-Não serão criados prazos artificiais para esses itens. Se algum deles virar requisito, entra na lista principal com contexto e, quando necessário, data.
 ---
 
-## 17. Outros arquivos
+## 14. Outros arquivos
 
 - [`README.md`](./README.md)
-- [`AI-WORKFLOW.md`](./AI-WORKFLOW.md)
+- [`PRODUCT.md`](./PRODUCT.md)
+- [`DESIGN.md`](./DESIGN.md)
 - [`DECISIONS.md`](./DECISIONS.md)
-- [`DEVLOG.md`](./DEVLOG.md)
-- [`DESIGN.md`](./DESIGN.md) — sistema de design (substitui o antigo `docs/ESTILO.md`)
+- [`AI-WORKFLOW.md`](./AI-WORKFLOW.md)
