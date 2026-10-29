@@ -61,9 +61,6 @@ O site é pensado para o celular. Em telas de 390 px, da esquerda para a direita
   <img src="docs/screenshots/hub-mobile.png" alt="Hub no celular, com 2 de 4 estações validadas" width="23%">
   <img src="docs/screenshots/estacao-4-mobile.png" alt="Estação 4 no celular" width="23%">
   <img src="docs/screenshots/conclusao-mobile.png" alt="Conclusão no celular" width="23%">
-  <img src="docs/screenshots/hub.png" alt="Hub no computador, com 2 de 4 estações validadas" width="23%">
-  <img src="docs/screenshots/estacao-4.png" alt="Estação 4 no computador" width="23%">
-  <img src="docs/screenshots/conclusao.png" alt="Conclusão no computador" width="23%">
 </p>
 
 O X-B0T, jogo do outro grupo, abre em endereço próprio:
