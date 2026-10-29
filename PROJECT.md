@@ -67,6 +67,7 @@ estacao-1.html … estacao-4.html
 final.html       conclusão, com "Ver portfólio", "Jogar X-B0T" e o acesso aos minijogos
 portfolio.html   documento do portfólio, exibido no leitor da Conclusão (DEC-015)
 minijogos.html   Pong, Snake, Space Invaders e o desafio de pathfinding; fora da jornada
+creditos.html    créditos dos seis grupos; estática, não lê nem altera o progresso; acessada pelo rodapé
 ```
 
 O CSS fica em `assets/css/` (a base compartilhada em `style.css`, uma folha por página em `paginas/`), o JavaScript em `assets/js/` e as imagens e fontes em `assets/img/` e `assets/fonts/`.

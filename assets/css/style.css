@@ -494,6 +494,56 @@ p .zero::after {
   }
 }
 
+/* Rodapé discreto das páginas principais: a marca e o acesso aos créditos. Mesma largura útil do
+   conteúdo (palco e margem), um filete no topo e nada mais. */
+.rodape {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espaco-1) var(--espaco-6);
+  width: min(100% - 2 * var(--gutter), var(--palco));
+  margin: 0 auto;
+  padding: var(--espaco-2) 0 var(--espaco-6);
+  border-top: 1px solid var(--cor-filete);
+}
+
+.rodape__marca {
+  margin: 0;
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: -0.01em;
+  color: var(--cor-texto-atenuado);
+}
+
+.rodape__ia {
+  color: var(--cor-destaque);
+}
+
+.rodape__link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espaco-2);
+  min-height: 44px;
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  font-size: 0.875rem;
+  letter-spacing: 0.04em;
+  color: var(--cor-texto-secundario);
+  text-decoration: none;
+}
+
+@media (hover: hover) {
+  .rodape__link:hover {
+    color: var(--cor-texto);
+    text-decoration: underline;
+    text-decoration-color: var(--cor-destaque);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.3em;
+  }
+}
+
 /* ---------- Gramática gráfica ---------- */
 
 /* Numeral gigante vazado: plano de fundo tipográfico, sempre decorativo (aria-hidden). */

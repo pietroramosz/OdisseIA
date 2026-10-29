@@ -1,0 +1,235 @@
+/* Créditos: os seis grupos e os alunos do OdisseIA, num só painel de colunas. O grupo que
+   desenvolveu o site abre a página, com um acento azul discreto; os demais seguem a ordem da jornada
+   (IA, até 2000, de 2001 em diante, jogo) e o portfólio fecha. Grafite com o azul de acento; o roxo
+   só aparece no grupo do jogo, porque o assunto dele é o X-B0T. Movimento: o painel entra uma vez. */
+
+.pagina-creditos main {
+  max-width: calc(var(--palco) + 2 * var(--gutter));
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: var(--espaco-2) var(--gutter) var(--espaco-16);
+  background: var(--cor-fundo);
+  overflow-x: clip;
+}
+
+/* ---------- Capa: a palavra-marca e o resumo ---------- */
+
+.cred-capa {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  gap: var(--espaco-4);
+  margin-top: var(--espaco-4);
+  padding-top: var(--espaco-6);
+  border-top: 2px solid var(--cor-azul-linha);
+}
+
+.cred-capa__tom {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  right: calc(-1 * var(--gutter));
+  width: 52%;
+  height: 11rem;
+  opacity: 0.28;
+  clip-path: polygon(34% 0, 100% 0, 100% 100%, 0 62%);
+}
+
+.cred-capa__titulo {
+  margin: 0;
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  line-height: 0.84;
+  letter-spacing: -0.04em;
+}
+
+.cred-capa__marca {
+  display: block;
+  font-size: clamp(3.75rem, 20vw, 10rem);
+}
+
+.cred-capa__ia {
+  color: var(--cor-destaque);
+}
+
+/* O nome da página vem depois da marca, como anotação (um título nunca fica sob um rótulo). */
+.cred-capa__pagina {
+  display: block;
+  margin-top: var(--espaco-4);
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.2;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--cor-texto-secundario);
+}
+
+.cred-capa__texto {
+  margin: 0;
+  max-width: 24rem;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--cor-texto-secundario);
+}
+
+.cred-capa__resumo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espaco-2);
+  margin: 0;
+}
+
+.cred-capa__chip {
+  padding: var(--espaco-1) var(--espaco-2);
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  font-size: 0.75rem;
+  line-height: 1.3;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cor-texto-secundario);
+  box-shadow: inset 0 0 0 1px var(--cor-filete);
+  clip-path: var(--recorte-minimo);
+}
+
+/* ---------- Painel: os grupos em colunas ---------- */
+
+/* Um só painel de moldura azul, como um quadro de créditos: cada coluna empilha dois grupos, e cada
+   grupo é o nome da área em rótulo pequeno com os nomes logo abaixo, em linhas compactas. */
+.cred-painel {
+  --moldura: var(--cor-azul-linha);
+  display: grid;
+  gap: var(--espaco-8);
+  margin-top: var(--espaco-8);
+  padding: var(--espaco-8) var(--espaco-6);
+  animation: entrar 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.cred-coluna {
+  display: grid;
+  align-content: start;
+  gap: var(--espaco-8);
+  min-width: 0;
+}
+
+/* O traço curto acima do nome da área marca o grupo. Cinza por padrão; azul de acento no site (o
+   único acento do painel) e roxo no jogo, que é do X-B0T. */
+.cred-grupo {
+  --marca: var(--cor-apagado);
+  min-width: 0;
+}
+
+.cred-grupo--site {
+  --marca: var(--cor-destaque);
+}
+
+.cred-grupo--jogo {
+  --marca: var(--cor-xbot);
+}
+
+.cred-grupo__titulo {
+  margin: 0;
+  padding-top: var(--espaco-3);
+  border-top: 2px solid var(--marca);
+  max-width: 24rem;
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  font-size: 0.8125rem;
+  line-height: 1.3;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cor-texto-secundario);
+}
+
+.cred-nomes {
+  margin: var(--espaco-3) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cred-nomes li {
+  padding: var(--espaco-1) 0;
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  font-size: 1.125rem;
+  line-height: 1.3;
+  color: var(--cor-texto);
+}
+
+/* ---------- Saída ---------- */
+
+.cred-saida {
+  display: grid;
+  gap: var(--espaco-3);
+  margin-top: var(--espaco-12);
+}
+
+@media (min-width: 600px) {
+  .cred-painel {
+    padding: var(--espaco-12) var(--espaco-8);
+  }
+
+  .cred-saida {
+    grid-auto-flow: column;
+    justify-content: start;
+  }
+
+  .cred-saida .botao {
+    min-width: 16rem;
+  }
+}
+
+/* Tablet: duas colunas; as colunas se desfazem e os seis grupos fluem em pares, na mesma ordem. */
+@media (min-width: 600px) and (max-width: 899px) {
+  .cred-painel {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--espaco-8);
+  }
+
+  .cred-coluna {
+    display: contents;
+  }
+}
+
+@media (min-width: 900px) {
+  .cred-capa {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 22rem);
+    grid-template-areas:
+      "titulo texto"
+      "titulo resumo";
+    align-items: end;
+    column-gap: var(--espaco-12);
+  }
+
+  .cred-capa__tom {
+    width: 40%;
+    height: 100%;
+  }
+
+  .cred-capa__titulo {
+    grid-area: titulo;
+  }
+
+  .cred-capa__texto {
+    grid-area: texto;
+  }
+
+  .cred-capa__resumo {
+    grid-area: resumo;
+  }
+
+  .cred-painel {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: var(--espaco-12);
+    margin-top: var(--espaco-12);
+    padding: var(--espaco-16) var(--espaco-12);
+  }
+
+  .cred-nomes li {
+    font-size: 1.25rem;
+  }
+
+  .cred-saida {
+    margin-top: var(--espaco-16);
+  }
+}
