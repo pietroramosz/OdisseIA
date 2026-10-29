@@ -1,0 +1,1322 @@
+/* Estações 1–4: cada estação é um dossiê editorial (DEC-019). Capa com numeral na grade, ficha
+   técnica e ilustração própria (na Estação 4, o palco da carta); capítulos em fluxo de leitura com
+   módulos complementares (.nota) na coluna lateral; uma linha do tempo única (ou o percurso, na
+   Estação 1); fechamento que liga à próxima etapa. Módulos, linha do tempo, percurso, palco da carta e movimento ficam em estacao-modulos.css. */
+
+.pagina-estacao main {
+  max-width: calc(var(--palco) + 2 * var(--gutter));
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: var(--espaco-2) var(--gutter) var(--espaco-16);
+  background: var(--cor-fundo);
+  overflow-x: clip;
+}
+
+/* A Estação 4 é do X-B0T: a capa e os módulos do jogo usam o roxo dele no lugar da cor de ênfase.
+   A navegação da jornada (trilho, painel de acessibilidade, fechamento) continua na cor do site. */
+body[data-estacao="4"] {
+  --cor-destaque: var(--cor-xbot);
+  --cor-azul-linha: var(--cor-xbot);
+  --cor-sobre-destaque: var(--cor-sobre-xbot);
+}
+
+body[data-estacao="4"] .dossie-rota,
+body[data-estacao="4"] .conexao,
+body[data-estacao="4"] .a11y,
+body[data-estacao="4"] .pular {
+  --cor-destaque: var(--cor-marca);
+  --cor-azul-linha: var(--cor-marca-linha);
+  --cor-sobre-destaque: var(--cor-sobre-marca);
+}
+
+/* Barra de leitura: um fio de 3px no topo que acompanha a rolagem da estação. Mostra, sem texto, quanto
+   falta para o fim do conteúdo. Fica na cor do site (--cor-marca), mesmo na Estação 4. Só com
+   animation-timeline; sem suporte, ou com movimento reduzido, não aparece. */
+@supports (animation-timeline: scroll()) {
+  .pagina-estacao--desbloqueada::after {
+    content: "";
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--cor-marca);
+    transform: scaleX(0);
+    transform-origin: left;
+    animation: leitura linear both;
+    animation-timeline: scroll(root);
+    pointer-events: none;
+  }
+}
+
+@keyframes leitura {
+  to { transform: scaleX(1); }
+}
+
+/* ---------- Capa do dossiê ----------
+   Numeral, texto e arte são áreas de uma grade: nada é posicionado por deslocamento. */
+
+.dossie-capa {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    "numeral"
+    "texto"
+    "arte";
+  padding-top: var(--espaco-6);
+}
+
+.dossie-capa--bloqueada {
+  grid-template-areas:
+    "numeral"
+    "texto";
+}
+
+/* Estação 4: o palco da carta é a terceira área da capa (estacao-modulos.css o desenha). */
+[data-estacao="4"] .dossie-capa:not(.dossie-capa--bloqueada) {
+  grid-template-areas:
+    "numeral"
+    "texto"
+    "palco";
+}
+
+.dossie-capa__numeral {
+  grid-area: numeral;
+  margin-bottom: -0.18em;
+  font-size: clamp(7rem, 34vw, 10.5rem);
+  pointer-events: none;
+}
+
+.dossie-capa__texto {
+  grid-area: texto;
+  position: relative;
+  z-index: 1;
+}
+
+.titulo-estacao {
+  max-width: 14ch;
+  margin: 0;
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: clamp(2.5rem, 11vw, 4.75rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  /* Contorno de letreiro: corta as linhas do numeral que passam atrás das letras. */
+  -webkit-text-stroke: 8px var(--cor-fundo);
+  paint-order: stroke fill;
+}
+
+.terminal-hero__rotulo {
+  display: flex;
+  align-items: baseline;
+  gap: var(--espaco-2);
+  margin: var(--espaco-4) 0 0;
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  color: var(--cor-texto-secundario);
+}
+
+.terminal-hero__numero {
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: 0;
+  color: var(--cor-destaque);
+}
+
+/* Ficha técnica: só fatos tirados do próprio conteúdo (período, capítulos, marcos). */
+.dossie-ficha {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(6rem, 1fr));
+  margin: var(--espaco-6) 0 0;
+  border-top: 1px solid var(--cor-apagado);
+}
+
+.dossie-ficha__item {
+  padding: var(--espaco-3) var(--espaco-3) 0 0;
+}
+
+.dossie-ficha__item + .dossie-ficha__item {
+  padding-left: var(--espaco-3);
+  border-left: 1px solid var(--cor-filete);
+}
+
+.dossie-ficha dt {
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cor-texto-atenuado);
+}
+
+.dossie-ficha dd {
+  margin: var(--espaco-1) 0 0;
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 1.0625rem;
+  white-space: nowrap;
+  line-height: 1.1;
+  color: var(--cor-destaque);
+}
+
+.dossie-capa__arte {
+  margin-top: var(--espaco-8);
+}
+
+.arte {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.arte__tela {
+  fill: var(--cor-superficie-escura);
+  stroke: var(--cor-apagado);
+  stroke-width: 1.5;
+}
+
+.arte__varredura {
+  stroke: var(--cor-superficie-alta);
+  stroke-width: 1;
+}
+
+.arte__rede {
+  stroke: var(--cor-apagado);
+  stroke-width: 2;
+  stroke-dasharray: 6 6;
+}
+
+.arte__borda,
+.arte__ligacao {
+  fill: none;
+  stroke: var(--cor-apagado);
+  stroke-width: 1.5;
+}
+
+.arte__ligacao--ativa,
+.arte__sinal {
+  fill: none;
+  stroke: var(--cor-destaque);
+  stroke-width: 2;
+}
+
+.arte__solido {
+  fill: var(--cor-texto);
+}
+
+.arte__rastro,
+.arte__bola {
+  fill: var(--cor-destaque);
+}
+
+.arte__trajetoria {
+  fill: none;
+  stroke: var(--cor-destaque);
+  stroke-width: 1.5;
+  stroke-dasharray: 2 6;
+  opacity: 0.7;
+}
+
+.arte__controle {
+  fill: var(--cor-fundo);
+  stroke: var(--cor-texto);
+  stroke-width: 2;
+}
+
+.arte__traco-fino {
+  fill: none;
+  stroke: var(--cor-texto);
+  stroke-width: 2;
+}
+
+.arte__no {
+  fill: var(--cor-fundo);
+  stroke: var(--cor-texto-secundario);
+  stroke-width: 1.5;
+}
+
+.arte__no--ativo {
+  fill: var(--cor-destaque);
+  stroke: var(--cor-destaque);
+}
+
+/* Capa bloqueada: o mesmo dossiê, ainda lacrado. */
+/* O numeral monumental da capa já nasce no azul de linha (roxo na Estação 4, pelo escopo da página). */
+.dossie-capa:not(.dossie-capa--bloqueada) .dossie-capa__numeral {
+  -webkit-text-stroke-color: var(--cor-azul-linha);
+}
+
+.dossie-capa--bloqueada .dossie-capa__numeral {
+  -webkit-text-stroke-color: var(--cor-filete);
+}
+
+/* ---------- Seções: o título abre; o rótulo é uma anotação de margem ---------- */
+
+.briefing,
+.capitulo,
+.linha-tempo,
+.conexao {
+  position: relative;
+  margin-top: var(--espaco-8);
+  padding-top: var(--espaco-6);
+  border-top: 2px solid var(--cor-azul-linha);
+}
+
+.terminal-rotulo {
+  position: absolute;
+  top: calc(-0.5em - 1px);
+  right: 0;
+  margin: 0;
+  padding-left: var(--espaco-2);
+  background: var(--cor-fundo);
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  font-size: 0.75rem;
+  line-height: 1;
+  letter-spacing: 0.12em;
+  color: var(--cor-texto-secundario);
+}
+
+.briefing > .terminal-rotulo,
+.linha-tempo > .terminal-rotulo {
+  display: none;
+}
+
+.briefing__titulo,
+.capitulo__titulo,
+.linha-tempo__titulo,
+.conexao__titulo {
+  margin: 0;
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 1.625rem;
+  line-height: 1.22;
+}
+
+.briefing__titulo {
+  font-size: 1.875rem;
+}
+
+/* Marca de título: um bloco curto no azul de acento sob o título do briefing. */
+.briefing__titulo::after {
+  content: "";
+  display: block;
+  width: 3.5rem;
+  height: 4px;
+  margin-top: var(--espaco-3);
+  background: var(--cor-destaque);
+  transform-origin: left;
+}
+
+.briefing p:not(.terminal-rotulo) {
+  margin: var(--espaco-4) 0 0;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+
+.briefing > p:not(.terminal-rotulo):first-of-type,
+.briefing__corpo > p:first-of-type {
+  font-size: 1.1875rem;
+  line-height: 1.5;
+}
+
+/* Capítulo: numeral grande à esquerda do título, nunca acima dele. */
+.capitulo {
+  scroll-margin-top: var(--espaco-6);
+  display: grid;
+  grid-template-columns: 4.5rem minmax(0, 1fr);
+  column-gap: var(--espaco-3);
+  align-items: center;
+}
+
+.capitulo .capitulo__rotulo {
+  position: static;
+  grid-row: 1;
+  grid-column: 1;
+  display: grid;
+  gap: var(--espaco-1);
+  padding: 0;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  color: var(--cor-texto-atenuado);
+}
+
+.capitulo__numero {
+  font-weight: 700;
+  font-size: 3.25rem;
+  line-height: 0.85;
+  letter-spacing: -0.03em;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--cor-destaque);
+}
+
+.capitulo__titulo {
+  grid-row: 1;
+  grid-column: 2;
+}
+
+.capitulo__corpo {
+  grid-column: 1 / -1;
+  margin-top: var(--espaco-4);
+}
+
+.capitulo__corpo p {
+  margin: 0 0 var(--espaco-4);
+  line-height: 1.7;
+  color: var(--cor-texto-secundario);
+}
+
+/* Abertura do capítulo: a primeira frase é a tese, em corpo maior e em texto pleno. */
+.capitulo__corpo > p:first-child {
+  font-size: 1.1875rem;
+  line-height: 1.5;
+  color: var(--cor-texto);
+}
+
+.capitulo__corpo > :last-child {
+  margin-bottom: 0;
+}
+
+/* Nomes e conceitos: marca-texto discreta sob a palavra, no azul de traçado. */
+.capitulo__corpo strong,
+.briefing strong {
+  color: var(--cor-texto);
+  background-image: linear-gradient(color-mix(in srgb, var(--cor-destaque) 30%, transparent), color-mix(in srgb, var(--cor-destaque) 30%, transparent));
+  background-repeat: no-repeat;
+  background-position: 0 90%;
+  background-size: 100% 0.4em;
+}
+
+.capitulo__corpo > ul {
+  display: grid;
+  gap: var(--espaco-2);
+  margin: 0 0 var(--espaco-4);
+  padding: 0;
+  list-style: none;
+}
+
+.capitulo__corpo > ul > li {
+  position: relative;
+  padding-left: var(--espaco-6);
+  line-height: 1.5;
+  color: var(--cor-texto-secundario);
+}
+
+.capitulo__corpo > ul > li::before {
+  content: "";
+  position: absolute;
+  left: var(--espaco-1);
+  top: calc(0.75em - var(--espaco-1));
+  width: var(--espaco-2);
+  height: var(--espaco-2);
+  background: var(--cor-destaque);
+}
+
+/* ---------- Figuras (diagramas do conteúdo) ---------- */
+
+/* Diagramas ilustram uma ideia: ficam com o tamanho da ideia, nunca esticados até a largura da tela. */
+.figura {
+  max-width: 28rem;
+  margin: var(--espaco-6) 0;
+  padding: var(--espaco-4);
+  background: var(--cor-superficie-escura);
+  clip-path: var(--recorte);
+}
+
+.figura__legenda {
+  margin-top: var(--espaco-3);
+  padding-top: var(--espaco-3);
+  border-top: 1px solid var(--cor-filete);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--cor-texto-atenuado);
+}
+
+.figura__estado {
+  fill: var(--cor-fundo);
+  stroke: var(--cor-texto);
+  stroke-width: 1.5;
+}
+
+/* Texto de SVG com 12px ou mais também no celular de 360px (o diagrama encolhe com a largura). */
+.figura__esquema .esquema__texto {
+  font-size: 14.5px;
+}
+
+.figura__nome,
+.figura__esquema .figura__nome {
+  text-anchor: middle;
+  font-size: 14px;
+}
+
+.figura__condicao,
+.figura__esquema .figura__condicao {
+  font-size: 14.5px;
+  letter-spacing: 0.02em;
+}
+
+.arte .esquema__texto {
+  font-size: 12.5px;
+}
+
+.figura__condicao--fim {
+  text-anchor: end;
+}
+
+.figura__ponta,
+.figura__chegada {
+  fill: var(--cor-destaque);
+}
+
+.figura__grade {
+  fill: none;
+  stroke: var(--cor-superficie-alta);
+  stroke-width: 1;
+}
+
+/* Células que o A* examinou antes de achar a rota: um tom do azul, mais fraco que a rota. */
+.figura__explorado {
+  fill: var(--cor-destaque);
+  fill-opacity: 0.26;
+}
+
+.figura__parede {
+  fill: var(--cor-apagado);
+  opacity: 0.55;
+}
+
+.figura__rota {
+  fill: none;
+  stroke: var(--cor-destaque);
+  stroke-width: 3;
+  stroke-linejoin: miter;
+}
+
+.figura__inicio {
+  fill: var(--cor-fundo);
+  stroke: var(--cor-texto);
+  stroke-width: 2;
+}
+
+/* ---------- Próxima conexão ---------- */
+
+.conexao {
+  isolation: isolate;
+  padding: var(--espaco-8) var(--espaco-6) var(--espaco-6);
+  border-top: none;
+  background: var(--cor-superficie-alta);
+  clip-path: var(--recorte);
+}
+
+.conexao::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--espaco-4);
+  background-color: var(--cor-destaque);
+  -webkit-mask: var(--textura-movimento) center / 100% 100% no-repeat;
+  mask: var(--textura-movimento) center / 100% 100% no-repeat;
+}
+
+.conexao .terminal-rotulo {
+  position: static;
+  margin-top: var(--espaco-2);
+  padding: 0;
+  background: none;
+  color: var(--cor-texto-atenuado);
+}
+
+.conexao p:not(.terminal-rotulo) {
+  margin: var(--espaco-4) 0 0;
+  line-height: 1.6;
+  color: var(--cor-texto-secundario);
+}
+
+/* Orientação para continuar a jornada física, antes de "Voltar ao Hub". */
+.conexao__proximo {
+  display: grid;
+  gap: var(--espaco-3);
+  justify-items: start;
+  margin-top: var(--espaco-4);
+}
+
+.conexao__proximo-texto {
+  margin: 0 !important;
+  padding: var(--espaco-3) var(--espaco-4);
+  background: var(--cor-fundo);
+  box-shadow: inset 0 0 0 1px var(--cor-azul-linha);
+  line-height: 1.5;
+  color: var(--cor-texto);
+}
+
+.conexao__escanear {
+  min-height: 44px;
+  background: none;
+  box-shadow: inset 0 0 0 2px var(--cor-destaque);
+  color: var(--cor-destaque);
+}
+
+/* Ações do fim do conteúdo: avançar (próxima estação ou Conclusão, só se o progresso já liberou) e
+   voltar ao Hub. Sem script, fica só o link do Hub, que é a ação principal. */
+.conexao__acoes {
+  display: grid;
+  gap: var(--espaco-3);
+  margin-top: var(--espaco-6);
+}
+
+.conexao__avanco {
+  display: grid;
+  gap: var(--espaco-2);
+}
+
+.conexao__avanco:empty {
+  display: none;
+}
+
+.conexao__avancar {
+  width: 100%;
+}
+
+.conexao__avancar .seta {
+  transition: transform 0.15s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Bloqueado: o botão existe e é lido, mas não leva a lugar nenhum. Hachura de "ainda fechado", cadeado
+   e texto atenuado: o estado não depende só da cor. */
+.conexao__avancar--bloqueado {
+  position: relative;
+  isolation: isolate;
+  background: var(--cor-fundo);
+  color: var(--cor-texto-atenuado);
+  box-shadow: inset 0 0 0 1px var(--cor-apagado);
+  cursor: not-allowed;
+}
+
+.conexao__avancar--bloqueado::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background-color: var(--cor-hachura);
+  -webkit-mask: var(--textura-hachura) 0 0 / 10px 10px repeat;
+  mask: var(--textura-hachura) 0 0 / 10px 10px repeat;
+  opacity: 0.7;
+}
+
+.conexao__cadeado {
+  flex: none;
+  width: 1.125em;
+  height: 1.125em;
+  background-color: currentColor;
+  -webkit-mask: var(--icone-cadeado) center / contain no-repeat;
+  mask: var(--icone-cadeado) center / contain no-repeat;
+}
+
+.conexao p.conexao__dica {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  color: var(--cor-texto-secundario);
+}
+
+/* Numeral vazado da próxima estação: o fecho aponta para onde a jornada segue. */
+.conexao__numeral {
+  position: absolute;
+  z-index: -1;
+  top: var(--espaco-6);
+  right: var(--espaco-4);
+  font-size: 4.5rem;
+  -webkit-text-stroke-color: var(--cor-azul-linha);
+}
+
+/* O Hub deixa de ser a ação principal quando o avanço está liberado: botão escuro com contorno, a
+   forma do botão secundário sobre painel elevado. */
+.conexao__voltar:not(.botao--principal) {
+  background: var(--cor-fundo);
+  box-shadow: inset 0 0 0 1px var(--cor-apagado);
+}
+
+@media (hover: hover) {
+  .conexao__voltar:not(.botao--principal):hover {
+    background: var(--cor-texto);
+    color: var(--cor-fundo);
+  }
+}
+
+/* ---------- Telas de bloqueio ---------- */
+
+.bloqueio {
+  position: relative;
+  isolation: isolate;
+  margin-top: var(--espaco-8);
+  padding: var(--espaco-6);
+  clip-path: var(--recorte);
+}
+
+.bloqueio--proxima {
+  padding-top: calc(var(--espaco-6) + var(--espaco-4));
+  background: var(--cor-superficie-alta);
+}
+
+.bloqueio--proxima::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--espaco-4);
+  background-color: var(--cor-destaque);
+  -webkit-mask: var(--textura-movimento) center / 100% 100% no-repeat;
+  mask: var(--textura-movimento) center / 100% 100% no-repeat;
+}
+
+.bloqueio--futura {
+  background: var(--cor-fundo);
+  box-shadow: inset 0 0 0 1px var(--cor-filete);
+}
+
+.bloqueio--futura::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background-color: var(--cor-hachura);
+  -webkit-mask: var(--textura-hachura) 0 0 / 10px 10px repeat;
+  mask: var(--textura-hachura) 0 0 / 10px 10px repeat;
+  opacity: 0.6;
+}
+
+/* Selo de estado das telas de bloqueio: carimbo girado, em Chakra caixa alta. */
+.bloqueio__estado {
+  display: inline-block;
+  padding: var(--espaco-1) var(--espaco-2);
+  border: 2px solid currentColor;
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  color: var(--cor-destaque);
+  transform: rotate(-3deg);
+}
+
+/* Nas telas de bloqueio o estado vem depois do título. */
+.bloqueio > .bloqueio__estado {
+  margin-top: var(--espaco-3);
+}
+
+.bloqueio--proxima .bloqueio__estado {
+  border-color: var(--cor-destaque);
+  background: var(--cor-destaque);
+  color: var(--cor-sobre-destaque);
+  transform: none;
+}
+
+.bloqueio--futura .bloqueio__estado {
+  color: var(--cor-texto-atenuado);
+}
+
+.bloqueio__titulo {
+  margin: 0;
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 1.75rem;
+  line-height: 1.1;
+}
+
+.bloqueio__texto {
+  margin: var(--espaco-3) 0 0;
+  line-height: 1.5;
+  color: var(--cor-texto-secundario);
+}
+
+/* Ação de escanear nas telas de bloqueio: o texto diz qual QR Code vale agora. */
+.bloqueio__scan {
+  display: grid;
+  gap: var(--espaco-3);
+  margin-top: var(--espaco-6);
+  padding-top: var(--espaco-4);
+  border-top: 1px dashed var(--cor-apagado);
+}
+
+.bloqueio__scan-texto {
+  margin: 0;
+  line-height: 1.5;
+  color: var(--cor-texto-secundario);
+}
+
+.bloqueio__passos {
+  display: grid;
+  gap: var(--espaco-3);
+  margin: var(--espaco-4) 0 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: passo;
+}
+
+.bloqueio__passos-item {
+  counter-increment: passo;
+  display: grid;
+  grid-template-columns: var(--espaco-8) minmax(0, 1fr);
+  align-items: center;
+  gap: var(--espaco-3);
+  min-height: var(--espaco-8);
+}
+
+.bloqueio__passos-item::before {
+  content: counter(passo, decimal-leading-zero);
+  display: grid;
+  place-items: center;
+  height: var(--espaco-8);
+  background: var(--cor-fundo);
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 0.875rem;
+  color: var(--cor-destaque);
+  clip-path: var(--recorte-pequeno);
+}
+
+.bloqueio__destino {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  column-gap: var(--espaco-3);
+  min-height: 44px;
+  margin-top: var(--espaco-4);
+  padding: var(--espaco-4);
+  background: var(--cor-superficie);
+  text-decoration: none;
+  clip-path: var(--recorte);
+}
+
+.bloqueio__destino-rotulo {
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--cor-texto-secundario);
+}
+
+.bloqueio__destino-nome {
+  grid-column: 1;
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 1.125rem;
+  line-height: 1.25;
+}
+
+.bloqueio__destino .seta {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.bloqueio__destino:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 3px var(--cor-texto);
+}
+
+.bloqueio__progresso {
+  margin-top: var(--espaco-6);
+  padding-top: var(--espaco-4);
+  border-top: 1px solid var(--cor-apagado);
+}
+
+.bloqueio__progresso-linha {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--espaco-3);
+  margin: 0 0 var(--espaco-3);
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--cor-texto-secundario);
+}
+
+.bloqueio__progresso-numero {
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 0.85;
+  letter-spacing: -0.02em;
+  color: var(--cor-texto);
+}
+
+.bloqueio__barra {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: var(--espaco-1);
+}
+
+.bloqueio__celula {
+  display: grid;
+  grid-template-rows: var(--espaco-3) auto;
+  gap: var(--espaco-2);
+}
+
+.bloqueio__segmento {
+  align-self: end;
+  height: var(--espaco-1);
+  background: var(--cor-apagado);
+}
+
+.bloqueio__celula--cheia .bloqueio__segmento {
+  height: var(--espaco-3);
+  background: var(--cor-destaque);
+  clip-path: var(--recorte-pequeno);
+}
+
+.bloqueio__numero {
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--cor-texto-atenuado);
+}
+
+.bloqueio__celula--cheia .bloqueio__numero {
+  color: var(--cor-texto);
+}
+
+@media (hover: hover) {
+  .bloqueio__destino:hover {
+    background: var(--cor-superficie-alta);
+  }
+}
+
+/* ---------- 600px+: respiro e figuras maiores ---------- */
+
+@media (min-width: 600px) {
+  .dossie-capa__numeral {
+    font-size: 12rem;
+  }
+
+  .capitulo {
+    grid-template-columns: 6rem minmax(0, 1fr);
+  }
+
+  .capitulo__numero {
+    font-size: 4.25rem;
+  }
+}
+
+/* ---------- 900px+: margem, leitura e coluna lateral ----------
+   Capítulos e briefing: margem (rótulo), coluna de leitura (até 38rem) e coluna lateral, onde os
+   módulos ficam à altura do parágrafo que destacam. A linha do tempo e as figuras usam a largura
+   das duas últimas colunas. */
+
+@media (min-width: 900px) {
+  .pagina-estacao {
+    --margem: 7rem;
+  }
+
+  .pagina-estacao main {
+    padding-top: var(--espaco-4);
+  }
+
+  /* Capa: o numeral é uma linha da grade, sobre o título, na mesma borda esquerda. */
+  .dossie-capa {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    grid-template-areas:
+      "numeral arte"
+      "texto arte";
+    column-gap: var(--espaco-12);
+    align-items: end;
+    padding-top: var(--espaco-8);
+  }
+
+  .dossie-capa--bloqueada {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "numeral"
+      "texto";
+  }
+
+  .dossie-capa__numeral {
+    margin-bottom: -0.1em;
+    font-size: clamp(11rem, 15vw, 16rem);
+  }
+
+  .dossie-capa__arte {
+    align-self: center;
+    margin-top: 0;
+  }
+
+  .titulo-estacao {
+    font-size: clamp(3rem, 5.6vw, 5.5rem);
+  }
+
+  /* Estação 3: a rede ocupa a largura toda, abaixo do título. */
+  [data-estacao="3"] .dossie-capa:not(.dossie-capa--bloqueada) {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "numeral"
+      "texto"
+      "arte";
+  }
+
+  [data-estacao="3"] .dossie-capa__texto {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    column-gap: var(--espaco-12);
+    align-items: end;
+  }
+
+  [data-estacao="3"] .dossie-ficha {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    align-self: end;
+  }
+
+  [data-estacao="3"] .dossie-capa__arte {
+    max-width: 62rem;
+    margin-top: var(--espaco-8);
+  }
+
+  /* Estação 1: numeral e título à esquerda, a árvore de decisão à direita (a grade padrão da capa,
+     como nas Estações 2 e 4). */
+
+  /* Estação 4: o palco da carta ocupa a coluna direita, ao lado de numeral e título. */
+  [data-estacao="4"] .dossie-capa:not(.dossie-capa--bloqueada) {
+    grid-template-columns: minmax(0, 6fr) minmax(0, 6fr);
+    grid-template-areas:
+      "numeral palco"
+      "texto palco";
+  }
+
+  .briefing,
+  .capitulo,
+  .linha-tempo {
+    display: grid;
+    grid-template-columns: var(--margem) minmax(0, 38rem) minmax(13.5rem, 1fr);
+    column-gap: var(--espaco-8);
+    align-items: start;
+    margin-top: var(--espaco-16);
+  }
+
+  .briefing > *,
+  .linha-tempo > * {
+    grid-column: 2;
+  }
+
+  /* Rótulo de margem: na coluna da esquerda, alinhado ao título. */
+  .briefing > .terminal-rotulo,
+  .linha-tempo > .terminal-rotulo,
+  .capitulo > .capitulo__rotulo {
+    display: block;
+    position: static;
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    padding: var(--espaco-1) 0 0;
+    background: none;
+  }
+
+  /* O numeral do capítulo acompanha a leitura: fica à vista enquanto o capítulo é percorrido. */
+  .capitulo > .capitulo__rotulo {
+    position: sticky;
+    top: var(--espaco-8);
+    align-self: start;
+  }
+
+  .capitulo > .capitulo__titulo {
+    grid-column: 2;
+    grid-row: 1;
+    font-size: 2rem;
+  }
+
+  .capitulo .capitulo__rotulo {
+    font-size: 0.75rem;
+  }
+
+  .capitulo__numero {
+    font-size: 5.5rem;
+  }
+
+  .briefing__titulo {
+    font-size: 2.5rem;
+  }
+
+  /* Corpo do capítulo: duas colunas herdadas da seção (leitura e lateral). */
+  .capitulo__corpo,
+  .briefing__corpo {
+    grid-column: 2 / -1;
+    grid-row: 2;
+    display: grid;
+    grid-template-columns: subgrid;
+    align-content: start;
+    margin-top: var(--espaco-4);
+  }
+
+  .briefing__corpo {
+    grid-row: auto;
+  }
+
+  .capitulo__corpo > :not(.nota),
+  .briefing__corpo > :not(.nota) {
+    grid-column: 1;
+  }
+
+  .capitulo__corpo > .figura {
+    grid-column: 1 / -1;
+  }
+
+  .briefing p:not(.terminal-rotulo),
+  .capitulo__corpo p,
+  .capitulo__corpo > ul {
+    max-width: 66ch;
+  }
+
+  .briefing > p:not(.terminal-rotulo):first-of-type,
+  .briefing__corpo > p:first-of-type {
+    font-size: 1.375rem;
+  }
+
+  /* Em telas largas a primeira frase do briefing é a abertura da estação: grande, atravessa as duas
+     colunas e dá o tom antes do texto corrido. */
+  @media (min-width: 1100px) {
+    .briefing > p:not(.terminal-rotulo):first-of-type {
+      grid-column: 2 / -1;
+      max-width: 42ch;
+      font-size: clamp(1.625rem, 2.1vw, 2.125rem);
+      line-height: 1.28;
+      letter-spacing: -0.005em;
+      color: var(--cor-texto);
+    }
+  }
+
+  .conexao {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    column-gap: var(--espaco-12);
+    margin-top: var(--espaco-16);
+    padding: var(--espaco-12) var(--espaco-8) var(--espaco-8);
+  }
+
+  .conexao > * {
+    grid-column: 1;
+  }
+
+  .conexao__titulo {
+    font-size: 2.5rem;
+  }
+
+  .conexao__acoes {
+    grid-column: 2;
+    grid-row: 2 / span 4;
+    align-self: end;
+    justify-self: end;
+    width: min(100%, 20rem);
+    margin-top: 0;
+  }
+
+  /* No desktop o numeral é um item da grade, acima das ações: os dois nunca se sobrepõem. */
+  .conexao__numeral {
+    position: static;
+    grid-column: 2;
+    grid-row: 1;
+    align-self: start;
+    justify-self: end;
+    margin-top: calc(-1 * var(--espaco-4));
+    font-size: 5.5rem;
+  }
+
+  .bloqueio {
+    max-width: 48rem;
+  }
+}
+
+/* ---------- 1100px+: margem mais larga e coluna lateral maior ---------- */
+
+/* Em telas largas o texto cresce junto com a coluna (66ch, dentro dos 65–75 confortáveis). */
+@media (min-width: 1100px) {
+  .capitulo__corpo p,
+  .capitulo__corpo > ul,
+  .briefing p:not(.terminal-rotulo) {
+    font-size: 1.125rem;
+  }
+
+  .capitulo__corpo > p:first-child {
+    font-size: 1.3125rem;
+  }
+}
+
+/* Com a coluna lateral larga, o diagrama fica à direita do trecho que ilustra, como um módulo. A
+   Estação 1 reserva a coluna lateral para as figuras (texto à esquerda, imagem à direita): a coluna de
+   leitura encolhe para 27rem e a lateral cresce, para o texto do diagrama continuar legível (12px ou
+   mais). Abaixo de 1100px as figuras seguem no fluxo, abaixo do texto. */
+@media (min-width: 1100px) {
+  [data-estacao="1"] .capitulo {
+    grid-template-columns: var(--margem) minmax(0, 27rem) minmax(22rem, 1fr);
+  }
+
+  [data-estacao="1"] .capitulo > .capitulo__titulo {
+    grid-column: 2 / -1;
+  }
+
+  .capitulo__corpo > .figura {
+    grid-column: 2;
+    grid-row: var(--ancora, 1) / span var(--vao, 12);
+    align-self: start;
+    max-width: 34rem;
+    margin: 0;
+  }
+}
+
+@media (min-width: 1100px) {
+  .pagina-estacao {
+    --margem: 9rem;
+  }
+
+  .briefing,
+  .capitulo,
+  .linha-tempo {
+    grid-template-columns: var(--margem) minmax(0, 44rem) minmax(15rem, 1fr);
+  }
+}
+
+/* ---------- 1360px+: a rota acompanha a leitura na coluna da direita ---------- */
+
+.dossie-rota {
+  display: none;
+}
+
+@media (min-width: 1360px) {
+  .pagina-estacao--desbloqueada #conteudo-estacao {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 9rem;
+    column-gap: var(--espaco-8);
+  }
+
+  .pagina-estacao--desbloqueada #conteudo-estacao > * {
+    grid-column: 1;
+  }
+
+  .pagina-estacao--desbloqueada #conteudo-estacao > .dossie-rota {
+    display: block;
+    grid-column: 2;
+    grid-row: 1 / span 30;
+    align-self: start;
+    position: sticky;
+    top: var(--espaco-8);
+    margin-top: 10rem;
+    /* Campo sólido: a explosão da Estação 4 nunca passa por trás dos rótulos do trilho. */
+    padding: var(--espaco-4);
+    background: var(--cor-fundo);
+    box-shadow: inset 0 0 0 1px var(--cor-filete);
+  }
+
+  .dossie-rota__titulo {
+    margin: 0 0 var(--espaco-4);
+    font-family: var(--fonte-titulo);
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.16em;
+    color: var(--cor-texto-atenuado);
+  }
+
+  .dossie-rota__lista {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .dossie-rota__parada {
+    position: relative;
+    padding: 0 0 var(--espaco-8) var(--espaco-6);
+    font-family: var(--fonte-titulo);
+    font-weight: 600;
+    font-size: 0.75rem;
+    line-height: 1.3;
+    letter-spacing: 0.06em;
+    color: var(--cor-texto-atenuado);
+  }
+
+  .dossie-rota__numero {
+    display: block;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--cor-texto-secundario);
+  }
+
+  /* Nó da parada. */
+  .dossie-rota__parada::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 3px;
+    width: 10px;
+    height: 10px;
+    background: var(--cor-fundo);
+    box-shadow: inset 0 0 0 1.5px var(--cor-apagado);
+  }
+
+  /* Trecho até a próxima parada: destaque sólido no que já foi percorrido, tracejado no resto. */
+  .dossie-rota__parada::after {
+    content: "";
+    position: absolute;
+    left: 4px;
+    top: 17px;
+    bottom: 0;
+    border-left: 2px dashed var(--cor-apagado);
+  }
+
+  .dossie-rota__parada--feita::before {
+    background: var(--cor-destaque);
+    box-shadow: none;
+  }
+
+  .dossie-rota__parada--feita::after {
+    border-left: 3px solid var(--cor-destaque);
+  }
+
+  .dossie-rota__parada--atual {
+    color: var(--cor-texto);
+  }
+
+  .dossie-rota__parada--atual .dossie-rota__numero {
+    font-size: 1.75rem;
+    line-height: 1;
+    color: var(--cor-destaque);
+  }
+
+  .dossie-rota__parada--atual::before {
+    left: -3px;
+    top: 4px;
+    width: 16px;
+    height: 16px;
+    background: var(--cor-destaque);
+    box-shadow: 0 0 0 3px var(--cor-fundo), 0 0 0 5px var(--cor-destaque);
+  }
+
+  .dossie-rota__parada--atual::after {
+    top: 26px;
+    border-left-color: var(--cor-destaque);
+  }
+
+  .dossie-rota__parada--fim {
+    padding-bottom: 0;
+  }
+
+  .dossie-rota__parada--fim::before {
+    width: 12px;
+    height: 16px;
+    top: 0;
+    transform: rotate(-8deg);
+  }
+
+  .dossie-rota__parada--fim::after {
+    content: none;
+  }
+}

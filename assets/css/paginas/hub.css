@@ -1,0 +1,1022 @@
+/* Hub: a rota da jornada. No celular, um trilho vertical; a partir de 900px, uma rota horizontal
+   de quatro paradas. Cada estado tem forma própria: validada (carimbo), próxima (faixa de
+   movimento e folha de instruções), bloqueada (silhueta hachurada). */
+
+.cabecalho,
+.pagina-hub main {
+  max-width: calc(var(--palco) + 2 * var(--gutter));
+  margin: 0 auto;
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+}
+
+.cabecalho {
+  padding-top: var(--espaco-2);
+}
+
+.pagina-hub main {
+  padding-bottom: var(--espaco-16);
+}
+
+/* ---------- Painel de status ---------- */
+
+.painel-status {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  margin-top: var(--espaco-2);
+  padding: var(--espaco-6);
+  background: var(--cor-superficie);
+  clip-path: var(--recorte);
+}
+
+.painel-status__movimento {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  right: -12%;
+  width: 78%;
+  height: 100%;
+  opacity: 0.2;
+}
+
+.titulo-marca {
+  margin: 0;
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+
+.titulo-marca__ia {
+  color: var(--cor-destaque);
+}
+
+.titulo-marca__pagina {
+  display: block;
+  margin-top: var(--espaco-2);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cor-texto-secundario);
+}
+
+.progresso {
+  margin-top: var(--espaco-6);
+}
+
+.progresso__texto {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--espaco-3);
+  margin: 0 0 var(--espaco-3);
+}
+
+.progresso__rotulo {
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--cor-texto-secundario);
+}
+
+.progresso__numero {
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 4rem;
+  line-height: 0.8;
+  letter-spacing: -0.03em;
+}
+
+/* O total ("/4") recua: o que importa é quantas estações já foram validadas. */
+.progresso__total {
+  color: var(--cor-texto-atenuado);
+}
+
+.barra {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--espaco-1);
+}
+
+.barra__celula {
+  display: grid;
+  grid-template-rows: var(--espaco-3) auto;
+  gap: var(--espaco-2);
+}
+
+/* Vazio = trilho fino; cheio = bloco alto azul. A diferença é de forma, não só de cor. */
+.barra__segmento {
+  align-self: end;
+  height: var(--espaco-1);
+  background: var(--cor-apagado);
+}
+
+.barra__segmento--cheio {
+  height: var(--espaco-3);
+  background: var(--cor-destaque);
+  clip-path: var(--recorte-pequeno);
+}
+
+.barra__numero {
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--cor-texto-atenuado);
+}
+
+.barra__celula--cheia .barra__numero {
+  color: var(--cor-texto);
+}
+
+/* Próxima estação: segmento tracejado, igual ao trecho da rota até ela. Os três estados da barra
+   (cheio, tracejado, fino) se leem pela forma, e o número da próxima também fica em destaque. */
+.barra__segmento--proximo {
+  height: 0;
+  background: none;
+  border-top: 4px dashed var(--cor-destaque);
+}
+
+.barra__celula--proxima .barra__numero {
+  color: var(--cor-destaque);
+}
+
+/* ---------- Acesso ao scanner: a próxima ação da jornada ---------- */
+
+.scan-acesso {
+  --moldura: var(--cor-azul-linha);
+  --espessura: 2px;
+  --miolo: var(--cor-superficie);
+  display: grid;
+  gap: var(--espaco-6);
+  margin-top: var(--espaco-8);
+  padding: var(--espaco-6);
+}
+
+.scan-acesso__texto {
+  display: grid;
+  gap: var(--espaco-3);
+  align-content: start;
+  justify-items: start;
+}
+
+.scan-acesso__titulo {
+  margin: 0;
+  /* No celular o numeral vazado ocupa o canto; o título não passa por baixo dele. */
+  padding-right: 4.5rem;
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+/* Numeral vazado da próxima estação (decorativo): no celular, no canto; no desktop, entre o texto e
+   as regras. O texto e as regras ficam acima dele. */
+.scan-acesso__numeral {
+  position: absolute;
+  z-index: 0;
+  top: var(--espaco-4);
+  right: var(--espaco-4);
+  font-size: 5rem;
+  -webkit-text-stroke-color: var(--cor-azul-linha);
+}
+
+.scan-acesso__texto,
+.scan-acesso__regras {
+  position: relative;
+  z-index: 1;
+}
+
+.scan-acesso__descricao {
+  max-width: 46ch;
+  margin: 0;
+  line-height: 1.55;
+  color: var(--cor-texto-secundario);
+}
+
+.scan-acesso__acao {
+  width: 100%;
+  margin-top: var(--espaco-2);
+}
+
+.scan-acesso__regras {
+  display: grid;
+  gap: var(--espaco-3);
+  margin: 0;
+  padding: var(--espaco-4) 0 0;
+  border-top: 1px dashed var(--cor-apagado);
+  list-style: none;
+  counter-reset: regra;
+}
+
+.scan-acesso__regras li {
+  counter-increment: regra;
+  display: grid;
+  grid-template-columns: var(--espaco-6) minmax(0, 1fr);
+  gap: var(--espaco-2);
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  color: var(--cor-texto-secundario);
+}
+
+.scan-acesso__regras li::before {
+  content: counter(regra, decimal-leading-zero);
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 0.75rem;
+  line-height: 1.8;
+  color: var(--cor-destaque);
+}
+
+/* Jornada concluída: o painel vira a ponte para a Conclusão. */
+.scan-acesso--completa {
+  --moldura: var(--cor-destaque);
+}
+
+/* ---------- Rota das estações ---------- */
+
+.rota {
+  margin-top: var(--espaco-12);
+}
+
+/* Mesmo título de seção do "Destino final" (.destino__titulo, mais abaixo). */
+.rota__titulo {
+  margin-bottom: var(--espaco-6);
+}
+
+.estacoes,
+.finais {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.estacoes {
+  display: grid;
+}
+
+.estacao {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr);
+  column-gap: var(--espaco-3);
+  padding-bottom: var(--espaco-4);
+}
+
+.estacao:last-child {
+  padding-bottom: 0;
+}
+
+.estacao > .cartao {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr);
+  column-gap: var(--espaco-3);
+  color: inherit;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Nó do trilho: engrenagem, número e o trecho até a próxima parada. */
+.estacao__no {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: var(--espaco-2);
+}
+
+.marcador {
+  display: block;
+  flex: none;
+}
+
+.estacao__numero {
+  margin-top: var(--espaco-1);
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.estacao__no::after {
+  content: "";
+  flex: 1;
+  min-height: var(--espaco-4);
+  margin-top: var(--espaco-2);
+  margin-bottom: calc(-1 * var(--espaco-4));
+  border-left: 2px dashed var(--cor-apagado);
+}
+
+/* Trecho percorrido: azul sólido. Até a próxima estação: azul tracejado. */
+.estacao--liga-desbloqueada .estacao__no::after {
+  border-left: 3px solid var(--cor-destaque);
+}
+
+.estacao--liga-proxima .estacao__no::after {
+  border-left: 3px dashed var(--cor-destaque);
+}
+
+.estacao:last-child .estacao__no::after {
+  content: none;
+}
+
+/* Próxima estação: o nó do trilho ganha um alvo azul, para o trilho mostrar o estado sozinho. */
+.estacao--proxima .marcador {
+  box-shadow: 0 0 0 2px var(--cor-fundo), 0 0 0 4px var(--cor-destaque);
+}
+
+.estacao--bloqueada .marcador {
+  margin-top: var(--espaco-1);
+}
+
+/* O número da próxima estação acompanha o alvo do nó e o segmento da barra de progresso. */
+.estacao--proxima .estacao__numero {
+  color: var(--cor-destaque);
+}
+
+/* ---------- Cartão: ficha de missão (.ficha em style.css) ----------
+   .cartao__faixa é a faixa de estado no topo: sólida (validada), linhas de movimento (próxima) ou
+   hachura (bloqueada). */
+
+.cartao__corpo {
+  --faixa-altura: 6px;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  /* O conteúdo fica dentro da moldura: a barra de ação nunca pinta por cima dela (foco incluso). */
+  padding: calc(var(--faixa-altura) + var(--espaco-4)) var(--espessura) var(--espessura);
+  transition: transform 0.15s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.15s ease-out;
+}
+
+.cartao__faixa {
+  position: absolute;
+  z-index: 0;
+  top: var(--espessura);
+  left: calc(var(--espaco-3) + var(--espessura));
+  right: var(--espessura);
+  height: var(--faixa-altura);
+  background-color: var(--cor-apagado);
+}
+
+/* Validada: retícula de mangá no canto do cartão, a marca de conquista do sistema. O texto vem
+   acima dela. */
+.cartao__reticula {
+  position: absolute;
+  z-index: 0;
+  top: calc(var(--espessura) + var(--faixa-altura));
+  right: var(--espessura);
+  width: 4.5rem;
+  height: 4.5rem;
+  clip-path: polygon(0 0, 100% 0, 100% 100%);
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.estacao__titulo,
+.cartao__descricao {
+  position: relative;
+}
+
+.estacao__titulo,
+.final__titulo {
+  margin: 0;
+  padding: 0 var(--espaco-6) 0 var(--espaco-4);
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+.cartao__descricao {
+  margin: var(--espaco-2) 0 0;
+  padding: 0 var(--espaco-6) 0 var(--espaco-4);
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  color: var(--cor-texto-secundario);
+}
+
+/* Faixa de estado: selo à esquerda, registro da ficha à direita. */
+.cartao__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espaco-2) var(--espaco-3);
+  margin-top: var(--espaco-4);
+  padding: var(--espaco-3) var(--espaco-4);
+  border-top: 1px dashed var(--cor-filete);
+}
+
+.cartao__estado {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espaco-2);
+  font-weight: 700;
+}
+
+.cartao__ficha {
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  color: var(--cor-texto-atenuado);
+}
+
+/* Barra de ação: a base do cartão, sempre com altura de toque. */
+.estacao__acao,
+.final__detalhe {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espaco-3);
+  min-height: 48px;
+  margin-top: auto;
+  padding: var(--espaco-3) var(--espaco-6) var(--espaco-3) var(--espaco-4);
+  background: var(--cor-superficie-alta);
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 0.9375rem;
+  letter-spacing: 0.02em;
+  color: var(--cor-texto);
+}
+
+.estacao__acao .seta,
+.final__detalhe .seta {
+  transition: transform 0.15s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* --- Validada: faixa cheia (como o segmento cheio da barra) e carimbo --- */
+
+.estacao--desbloqueada .cartao__faixa {
+  background-color: var(--cor-destaque);
+}
+
+.estacao--desbloqueada .cartao__estado {
+  padding: var(--espaco-1) var(--espaco-2);
+  border: 2px solid var(--cor-destaque);
+  box-shadow: inset 0 0 0 2px var(--cor-superficie), inset 0 0 0 3px var(--cor-destaque);
+  color: var(--cor-destaque);
+  letter-spacing: 0.14em;
+  transform: rotate(-3deg);
+}
+
+/* --- Próxima: moldura roxa, faixa de movimento, ação roxa: o maior destaque funcional --- */
+
+.estacao--proxima .cartao__corpo {
+  --moldura: var(--cor-destaque);
+  --espessura: 2px;
+  --miolo: var(--cor-superficie-alta);
+  --faixa-altura: 14px;
+}
+
+.estacao--proxima .cartao__faixa {
+  background-color: var(--cor-destaque);
+  -webkit-mask: var(--textura-movimento) center / 100% 100% no-repeat;
+  mask: var(--textura-movimento) center / 100% 100% no-repeat;
+}
+
+.estacao--proxima .estacao__titulo {
+  font-size: 1.5rem;
+  line-height: 1.12;
+}
+
+.estacao--proxima .cartao__descricao {
+  color: var(--cor-texto);
+}
+
+.estacao--proxima .cartao__estado {
+  padding: var(--espaco-1) var(--espaco-2);
+  background: var(--cor-destaque);
+  color: var(--cor-sobre-destaque);
+  clip-path: var(--recorte-minimo);
+}
+
+.estacao--proxima .cartao__meta {
+  border-top-color: var(--cor-apagado);
+}
+
+/* A ação sólida da página é o botão do QR; a barra do cartão fica na superfície, com o texto em azul. */
+.estacao--proxima .estacao__acao {
+  background: var(--cor-superficie-escura);
+  color: var(--cor-destaque);
+  font-size: 1rem;
+}
+
+/* --- Bloqueada: indisponível, mas legível. Hachura só na faixa; cadeado no selo --- */
+
+.estacao--bloqueada .cartao__corpo,
+.final--bloqueado .cartao__corpo {
+  --moldura: var(--cor-filete);
+  --miolo: var(--cor-fundo);
+  --faixa-altura: 10px;
+}
+
+.estacao--bloqueada .cartao__faixa,
+.final--bloqueado .cartao__faixa {
+  background-color: var(--cor-apagado);
+  -webkit-mask: var(--textura-hachura) 0 0 / 10px 10px repeat;
+  mask: var(--textura-hachura) 0 0 / 10px 10px repeat;
+}
+
+.estacao--bloqueada .estacao__titulo,
+.final--bloqueado .final__titulo {
+  color: var(--cor-texto-secundario);
+}
+
+.estacao--bloqueada .cartao__descricao,
+.final--bloqueado .cartao__descricao {
+  color: var(--cor-texto-atenuado);
+}
+
+.estacao--bloqueada .cartao__estado,
+.final--bloqueado .cartao__estado {
+  color: var(--cor-texto-secundario);
+}
+
+.estacao--bloqueada .cartao__estado::before,
+.final--bloqueado .cartao__estado::before {
+  content: "";
+  width: 14px;
+  height: 14px;
+  background-color: currentColor;
+  -webkit-mask: var(--icone-cadeado) center / contain no-repeat;
+  mask: var(--icone-cadeado) center / contain no-repeat;
+}
+
+.estacao--bloqueada .estacao__acao {
+  background: none;
+  border-top: 1px solid var(--cor-filete);
+  color: var(--cor-texto-secundario);
+}
+
+.estacao--bloqueada .estacao__numero {
+  color: var(--cor-texto-atenuado);
+}
+
+/* ---------- Entrada: a jornada se monta, na ordem em que se lê ----------
+   O painel do QR, o progresso que enche, o trilho que se estende, as engrenagens que acendem e os
+   cartões que entram um a um. Dura cerca de 1,1s, uma vez, e parte do estado final visível. */
+
+@keyframes preencher {
+  from { transform: scaleX(0); }
+}
+
+@keyframes estender {
+  from { clip-path: inset(0 100% 0 0); }
+}
+
+@keyframes estender-vertical {
+  from { clip-path: inset(0 0 100% 0); }
+}
+
+@keyframes acender {
+  from { opacity: 0.35; transform: scale(0.6); }
+}
+
+.scan-acesso,
+.destino {
+  animation: entrar 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.destino {
+  animation-delay: 0.65s;
+}
+
+.estacao {
+  animation: entrar 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.estacao:nth-child(1) { --ordem: 0; }
+.estacao:nth-child(2) { --ordem: 1; }
+.estacao:nth-child(3) { --ordem: 2; }
+.estacao:nth-child(4) { --ordem: 3; }
+
+.estacao {
+  animation-delay: calc(0.18s + var(--ordem, 0) * 0.1s);
+}
+
+.barra__segmento--cheio {
+  transform-origin: left;
+  animation: preencher 0.5s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+
+.barra__celula:nth-child(1) .barra__segmento--cheio { animation-delay: 0.1s; }
+.barra__celula:nth-child(2) .barra__segmento--cheio { animation-delay: 0.22s; }
+.barra__celula:nth-child(3) .barra__segmento--cheio { animation-delay: 0.34s; }
+.barra__celula:nth-child(4) .barra__segmento--cheio { animation-delay: 0.46s; }
+
+.estacao--desbloqueada .marcador,
+.estacao--proxima .marcador {
+  animation: acender 0.45s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+  animation-delay: calc(0.3s + var(--ordem, 0) * 0.1s);
+}
+
+.estacao--liga-desbloqueada .estacao__no::after,
+.estacao--liga-proxima .estacao__no::after {
+  animation: estender-vertical 0.5s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+  animation-delay: calc(0.4s + var(--ordem, 0) * 0.1s);
+}
+
+@media (min-width: 900px) {
+  .estacao--liga-desbloqueada .estacao__no::after,
+  .estacao--liga-proxima .estacao__no::after {
+    animation-name: estender;
+  }
+}
+
+/* ---------- Interação: hover só melhora; foco e toque sempre visíveis ---------- */
+
+a.cartao:focus-visible {
+  outline: none;
+}
+
+/* Foco: a moldura engrossa em branco. Desenhada dentro do recorte, nunca é cortada. */
+a.cartao:focus-visible .cartao__corpo {
+  --moldura: var(--cor-texto);
+  --espessura: 3px;
+}
+
+a.cartao:focus-visible .estacao__numero {
+  color: var(--cor-texto);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+a.cartao:active .cartao__corpo {
+  transform: translateY(1px);
+  --miolo: var(--cor-superficie-escura);
+}
+
+@media (hover: hover) {
+  a.cartao:hover .cartao__corpo {
+    transform: translateY(-2px);
+    --miolo: var(--cor-superficie-alta);
+  }
+
+  .estacao--bloqueada a.cartao:hover .cartao__corpo {
+    --miolo: var(--cor-superficie-escura);
+  }
+
+  a.cartao:hover .seta {
+    transform: translateX(3px);
+  }
+
+  /* O cartão inteiro é o link: no hover, o título de uma estação ativa ganha o sublinhado de ação.
+     As bloqueadas não ganham, porque não levam a nada novo. */
+  .estacao--desbloqueada a.cartao:hover .estacao__titulo,
+  .estacao--proxima a.cartao:hover .estacao__titulo {
+    text-decoration: underline;
+    text-decoration-color: var(--cor-destaque);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.18em;
+  }
+
+  /* A engrenagem de uma estação validada gira um pouco sob o cursor. A da próxima estação tem o
+     anel de alvo (box-shadow) e a das bloqueadas é dormente: ambas ficam paradas. */
+  .estacao--desbloqueada .marcador {
+    transition: rotate 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  :root:not([data-movimento="reduzido"]) .estacao--desbloqueada a.cartao:hover .marcador {
+    rotate: 30deg;
+  }
+}
+
+/* ---------- Destino final: a chegada da rota ---------- */
+
+.destino {
+  margin-top: var(--espaco-12);
+}
+
+.destino__titulo {
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-3);
+  margin: 0 0 var(--espaco-4);
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: 0.02em;
+}
+
+.destino__titulo::after {
+  content: "";
+  flex: 1;
+  border-top: 1px solid var(--cor-apagado);
+}
+
+.finais {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--espaco-3);
+}
+
+.finais--completa {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (max-width: 479px) {
+  .finais {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.final .cartao {
+  display: block;
+  height: 100%;
+  color: inherit;
+  text-decoration: none;
+}
+
+.final .cartao__corpo {
+  height: 100%;
+}
+
+/* Sem link, o detalhe é um status: texto simples sob um filete, nunca com cara de botão. */
+.final__detalhe--status {
+  min-height: 0;
+  background: none;
+  border-top: 1px solid var(--cor-filete);
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: var(--cor-texto-secundario);
+}
+
+/* X-B0T: o único destino com a cor do jogo (roxo) e a engrenagem roxa. Os outros cartões do Hub
+   seguem a linguagem grafite. Com a jornada concluída e a gameUrl configurada o cartão é um link para
+   o jogo; antes disso é só status, sem ação. */
+.final--xbot {
+  --cor-destaque: var(--cor-xbot);
+  --cor-azul-linha: var(--cor-xbot);
+  --cor-sobre-destaque: var(--cor-sobre-xbot);
+}
+
+.final--xbot .cartao__corpo {
+  --moldura: var(--cor-xbot);
+  --espessura: 2px;
+}
+
+.final--xbot .final__titulo,
+.final--xbot .cartao__descricao {
+  padding-right: calc(var(--espaco-16) + var(--espaco-4));
+}
+
+.final__engrenagem {
+  position: absolute;
+  z-index: 1;
+  top: calc(var(--faixa-altura) + var(--espaco-4));
+  right: var(--espaco-4);
+  width: 56px;
+  height: 56px;
+}
+
+.final--xbot .cartao__faixa {
+  background-color: var(--cor-xbot);
+}
+
+/* Bloqueado: a moldura roxa fica apagada, para não disputar atenção com a próxima estação. */
+.final--xbot.final--bloqueado .cartao__corpo {
+  --moldura: color-mix(in srgb, var(--cor-xbot) 42%, var(--cor-fundo));
+}
+
+.final--xbot.final--bloqueado .cartao__faixa {
+  opacity: 0.55;
+}
+
+.final--xbot:not(.final--bloqueado) .cartao__estado {
+  padding: var(--espaco-1) var(--espaco-2);
+  background: var(--cor-xbot);
+  color: var(--cor-sobre-xbot);
+  clip-path: var(--recorte-minimo);
+}
+
+.final--xbot.final--bloqueado .cartao__estado::before {
+  color: var(--cor-xbot);
+}
+
+/* Aguardando liberação (jornada concluída, mas sem gameUrl): o mesmo selo, só contornado. */
+.final--xbot.final--pendente .cartao__estado {
+  background: none;
+  color: var(--cor-xbot);
+  box-shadow: inset 0 0 0 2px var(--cor-xbot);
+}
+
+.final--xbot a.cartao .final__detalhe {
+  background: var(--cor-xbot);
+  color: var(--cor-sobre-xbot);
+}
+
+/* O aviso de giro (style.css) fica dentro do cartão, entre o selo de estado e a ação. */
+.cartao__corpo > .aviso-giro {
+  border-top: 1px dashed var(--cor-apagado);
+}
+
+/* Conclusão disponível: mesma linguagem da próxima estação. */
+.final--principal .cartao__corpo {
+  --moldura: var(--cor-destaque);
+  --espessura: 2px;
+  --miolo: var(--cor-superficie-alta);
+  --faixa-altura: 14px;
+}
+
+.final--principal .cartao__faixa {
+  background-color: var(--cor-destaque);
+  -webkit-mask: var(--textura-movimento) center / 100% 100% no-repeat;
+  mask: var(--textura-movimento) center / 100% 100% no-repeat;
+}
+
+.final--principal .final__titulo {
+  font-size: 2rem;
+}
+
+.final--principal .cartao__estado {
+  padding: var(--espaco-1) var(--espaco-2);
+  background: var(--cor-destaque);
+  color: var(--cor-sobre-destaque);
+  clip-path: var(--recorte-minimo);
+}
+
+.final--principal .final__detalhe {
+  background: var(--cor-destaque);
+  color: var(--cor-sobre-destaque);
+  font-size: 1rem;
+}
+
+/* ---------- A partir de 900px: rota horizontal de quatro paradas ---------- */
+
+@media (min-width: 900px) {
+  .scan-acesso {
+    grid-template-columns: minmax(0, 6fr) auto minmax(0, 5fr);
+    column-gap: var(--espaco-12);
+    align-items: center;
+    padding: var(--espaco-8);
+  }
+
+  .scan-acesso--completa {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .scan-acesso__titulo {
+    padding-right: 0;
+    font-size: 1.875rem;
+  }
+
+  .scan-acesso__numeral {
+    position: static;
+    font-size: 9rem;
+  }
+
+  .scan-acesso__acao {
+    width: auto;
+    min-width: 18rem;
+  }
+
+  .scan-acesso__regras {
+    padding: 0 0 0 var(--espaco-8);
+    border-top: 0;
+    border-left: 1px dashed var(--cor-apagado);
+  }
+
+  .painel-status {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    column-gap: var(--espaco-12);
+    align-items: end;
+    padding: var(--espaco-8);
+  }
+
+  .titulo-marca {
+    font-size: 3.5rem;
+  }
+
+  .progresso {
+    margin-top: 0;
+  }
+
+  .progresso__numero {
+    font-size: 6rem;
+  }
+
+  /* Os quatro cartões da linha terminam juntos: ação sempre na base. */
+  /* Linha 1: os quatro cartões, todos com a altura do maior. Linha 2: a folha de passos,
+     só sob a próxima estação, sem esticar os outros cartões. */
+  .estacoes {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-rows: auto auto;
+    column-gap: var(--espaco-4);
+  }
+
+  .estacao {
+    grid-row: span 2;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: subgrid;
+    padding-bottom: 0;
+  }
+
+  .estacao > .cartao {
+    grid-row: 1;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: 72px 1fr;
+  }
+
+  /* A faixa de estado muda de altura por estado (6, 10 e 14px); o título começa sempre abaixo da
+     maior, para os quatro cartões da linha alinharem título e descrição. */
+  .estacao .cartao__corpo {
+    padding-top: calc(14px + var(--espaco-4));
+  }
+
+  /* Os títulos reservam duas linhas: as descrições dos quatro cartões começam na mesma altura.
+     O da próxima estação é maior, mas cabe nas mesmas duas linhas (2 × 1,1 × 1,375rem). */
+  .estacao__titulo {
+    min-height: 3rem;
+  }
+
+  .estacao--proxima .estacao__titulo {
+    font-size: 1.375rem;
+    line-height: 1.1;
+  }
+
+  /* A meta desce para alinhar entre cartões; a margem da descrição garante o respiro
+     mínimo no cartão mais alto, onde o auto vale zero. */
+  .cartao__descricao {
+    margin-bottom: var(--espaco-4);
+  }
+
+  .cartao__meta {
+    min-height: 3.5rem;
+    margin-top: auto;
+  }
+
+  .cartao__meta + .estacao__acao {
+    margin-top: 0;
+  }
+
+  .estacao__no {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--espaco-2);
+    padding-top: 0;
+  }
+
+  .estacao__numero {
+    margin-top: 0;
+    font-size: 1.5rem;
+  }
+
+  .estacao__no::after {
+    min-height: 0;
+    margin: 0 calc(-1 * var(--espaco-4)) 0 var(--espaco-2);
+    border-left: none;
+    border-top: 2px dashed var(--cor-apagado);
+  }
+
+  .estacao--liga-desbloqueada .estacao__no::after {
+    border-left: none;
+    border-top: 4px solid var(--cor-destaque);
+  }
+
+  .estacao--liga-proxima .estacao__no::after {
+    border-left: none;
+    border-top: 4px dashed var(--cor-destaque);
+  }
+
+  .destino {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 9fr);
+    column-gap: var(--espaco-8);
+    align-items: start;
+    margin-top: var(--espaco-16);
+  }
+
+  /* Título de seção: no lugar do filete horizontal do celular, o bloco curto de azul que também
+     marca os títulos de briefing das estações. */
+  .destino__titulo {
+    display: block;
+    margin: 0;
+    font-size: 1.875rem;
+    line-height: 1;
+  }
+
+  .destino__titulo::after {
+    display: block;
+    flex: none;
+    width: 3.5rem;
+    height: 4px;
+    margin-top: var(--espaco-3);
+    border-top: 0;
+    background: var(--cor-destaque);
+  }
+
+  .rota__titulo {
+    margin-bottom: var(--espaco-4);
+  }
+
+  .finais--completa {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  }
+}

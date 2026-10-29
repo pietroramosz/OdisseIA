@@ -1,0 +1,72 @@
+# Product
+
+<!-- impeccable:product-schema 1 -->
+
+## Platform
+
+web
+
+## Users
+
+Visitantes de uma feira de ciências escolar, circulando entre quatro estações físicas e usando o próprio celular durante o percurso. O uso é em pé, em movimento, com atenção dividida entre o site e a apresentação física, possivelmente sob iluminação variável de ambiente de feira. Mobile é o cenário real de uso; desktop é suportado mas não é prioridade (DEC-001).
+
+## Product Purpose
+
+O OdisseIA é a camada digital de uma feira escolar dividida em quatro estações físicas (IA nos jogos; evolução dos jogos até 2000; evolução de 2001 até hoje; X-B0T). O site acompanha o percurso do visitante, complementa — sem repetir — o conteúdo apresentado presencialmente, e usa QR Codes para validar que o visitante realmente passou por cada estação física antes de desbloquear o conteúdo digital correspondente. Ao final das quatro estações, uma página de conclusão desbloqueia o acesso ao X-B0T, um jogo digital (TCG) desenvolvido por outro núcleo do projeto. Sucesso = o visitante completa o fluxo físico+digital sem fricção, no próprio celular, e chega ao X-B0T entendendo que o desbloqueou.
+
+## Positioning
+
+A experiência não é "um site sobre a feira" nem "um jogo com um site de apoio": é uma jornada única em que o progresso digital só avança mediante validação física (QR Code por estação), e o site compartilha a linguagem visual do X-B0T (grafite, cantos cortados, Chakra Petch), cada um com a sua cor (DEC-010), para que sair do site e entrar no jogo pareça a mesma experiência contínua, não dois produtos separados.
+
+## Operating Context
+
+- Evento físico real: feira escolar em **29/10/2026**.
+- Fluxo oficial: Visão geral → Hub → Estação 1 → Estação 2 → Estação 3 → Estação 4 → Conclusão → X-B0T.
+- Cada estação física tem QR Code próprio; abrir uma página diretamente (sem QR) não avança o progresso.
+- O progresso é salvo por navegador via `localStorage` (chave `odisseia:progresso`); abrir o QR num navegador diferente do Hub resulta em "fora de ordem" — limitação conhecida e comunicada ao visitante (DEC-011).
+- Execução local via `file://`, sem servidor — por isso sem ES modules, sem build step (DEC-009).
+- Hospedagem definitiva: GitHub Pages (`https://pietroramosz.github.io/OdisseIA/`), com caminhos relativos.
+- A Estação 4 depende de outro grupo (X-B0T): o site só pode mostrar mecânicas/tecnologias que realmente existirem na versão final do jogo (DEC-007).
+
+## Capabilities and Constraints
+
+- Stack travada em HTML/CSS/JS puro, sem framework, sem backend, sem CDN (DEC-003) — revisitar só se surgir necessidade real.
+- Configuração central em JS puro (`const OdisseIAConfig = {...}`), carregada via `<script>` comum, não ES module, para funcionar em `file://` (DEC-009). Demais scripts (`progresso.js`, `qr.js`, `app.js`) seguem o mesmo padrão.
+- Progresso: `{ versao: 1, ultimaEstacaoDesbloqueada: 0 }` (0 a 4), derivando os demais estados de UI desse valor sempre que possível. Não é mecanismo de segurança (DEC-004, DEC-006) — nada crítico deve depender só do frontend.
+- QR: cada QR abre `validar.html?estacao=N`; só o QR da próxima estação na ordem avança o progresso (DEC-011). O scanner pela câmera (DEC-014) reaproveita `resultadoParaEstacao()` de `qr.js` e nunca abre a URL lida. Cinco resultados possíveis: sucesso, repetido, fora de ordem, inválido, erro de armazenamento.
+- Conteúdo das 4 estações é escrito direto no HTML (`estacao-1.html`–`estacao-4.html`), sem arquivo de dados nem geração por JS. As páginas compartilham componentes e a ordem dos blocos, e cada estação tem a sua composição.
+- Páginas atuais: `index.html` (porta de entrada estática, sem progresso), `hub.html` (estados 0–4), `validar.html`, `estacao-1.html`–`estacao-4.html`, `final.html` (conclusão), `portfolio.html` (documento exibido no leitor da Conclusão, DEC-015) e `minijogos.html` (fora da jornada, não mexe no progresso).
+- **Testes realizados**: progresso testado no console (incluindo dado corrompido e número decimal); Hub nos estados 0–4 em emulador e no celular; validação de QR por console, por URL e com a câmera de um celular; testes físicos da experiência com os QR Codes finais e do painel de acessibilidade. Não há registro de testes em Safari, Firefox ou com leitor de tela.
+- **Endereços**: `gameUrl` aponta para https://robot-tcg.netlify.app/; `downloadUrl` segue `null`, porque não há link de download.
+
+## Brand Commitments
+
+- Nome do projeto: **OdisseIA**. Jogo final: **X-B0T**.
+- Identidade visual (DEC-014): base grafite, escura e neutra; o azul (escala do #142146, acento #5b8cff) como acento principal; o branco só para texto; o **roxo** (`#CD5EFA`, cor definitiva do X-B0T) reservado ao jogo — nunca cor dominante em texto corrido, e nunca fora das partes do jogo.
+- Tipografia: **Chakra Petch** SemiBold(600)/Bold(700), local em `assets/fonts/` (sem CDN), para títulos/rótulos/números; texto corrido em fonte de sistema. Inter guardada na pasta como alternativa futura, não carregada.
+- Motivo de forma único e repetido: cantos cortados em diagonal (cards, segmentos de barra).
+- Proibido: glow generalizado, gradiente excessivo, glassmorphism, emoji como ícone, hover como requisito, texto pequeno em contorno, fonte nova sem decisão explícita.
+- Energia de mangá crescente: linhas de velocidade, retícula e carimbos aparecem pouco na abertura, como faixa de movimento na próxima estação, como explosão na Estação 4 e na densidade máxima na **Conclusão**, que continua sendo o pico visual e o único lugar com sombra suave. Tudo dentro da paleta e das regras de contraste e movimento.
+
+## Evidence on Hand
+
+- Documentação viva do projeto é fonte de verdade e deve ser tratada como tal: `README.md`, `PROJECT.md`, `DECISIONS.md`, `DESIGN.md` (sistema visual) e `AI-WORKFLOW.md`.
+- As decisões numeradas em `DECISIONS.md` registram as escolhas de produto, arquitetura e visual — qualquer mudança que contradiga uma DEC existente exige decisão explícita, não apenas uma preferência de implementação.
+- Nenhuma mecânica, carta, regra ou dado do X-B0T deve ser inventado ou documentado pelo site além do que realmente existir na versão final do jogo (DEC-007).
+
+## Product Principles
+
+- Mobile-first não é estética: é a realidade de uso na feira (DEC-001) — pouca informação por tela, navegação simples, leitura rápida.
+- O site complementa a apresentação física, nunca a repete ou compete com ela.
+- Simplicidade deliberada: sem framework, sem backend, sem complexidade adicionada "por boa prática" — só revisitar quando houver necessidade real (DEC-003).
+- Frontend controla a experiência, não é camada de segurança real (DEC-006); nada crítico depende só de QR/localStorage.
+- Planejado não é implementado: a Estação 4 e qualquer menção ao X-B0T só refletem o que existe de fato na versão final do jogo (DEC-007, lição registrada em AI-WORKFLOW.md §4.1).
+- Transparência assumida sobre uso de IA no desenvolvimento (DEC-008) — decisões finais, testes e responsabilidade continuam humanos.
+
+## Accessibility & Inclusion
+
+- Contraste mínimo 4,5:1 em texto e 3:1 em elementos de interface.
+- Alvos de toque de 44px; foco visível (atenção a `clip-path` cortando o contorno dos cantos diagonais).
+- `prefers-reduced-motion` respeitado.
+- Estados de interface (bloqueada/próxima/desbloqueada) nunca dependem só de cor — sempre também texto, tamanho e ícone.
+- Sem rolagem horizontal entre 360–430px (faixa mobile real de uso na feira).

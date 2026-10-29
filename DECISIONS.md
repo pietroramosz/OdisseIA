@@ -2,9 +2,9 @@
 
 Este arquivo guarda as decisões que realmente mudaram o rumo, a estrutura ou a forma de desenvolver o OdisseIA.
 
-A ideia não é registrar cada detalhe.
+A ideia não é registrar cada detalhe. Trocar uma cor, ajustar uma margem, mudar uma frase ou mover um botão não precisa virar decisão formal.
 
-Trocar uma cor, ajustar margem, mudar uma frase ou mover um botão não precisa virar decisão formal.
+Cada decisão segue a mesma estrutura: status, contexto, decisão, por quê e o que muda. Só ficam aqui as escolhas que orientam o projeto; o resto fica no código e em `DESIGN.md`.
 
 ---
 
@@ -14,22 +14,21 @@ Trocar uma cor, ajustar margem, mudar uma frase ou mover um botão não precisa 
 
 ### Contexto
 
-Na feira, os visitantes vão usar o próprio celular enquanto passam pelas estações.
+Na feira, os visitantes usam o próprio celular enquanto passam pelas estações.
 
 ### Decisão
 
-O site será pensado primeiro para telas pequenas.
+O site é pensado primeiro para telas pequenas.
 
 ### Por quê?
 
 Porque esse é o cenário real de uso.
 
-### O que isso muda?
+### O que muda?
 
 - menos informação por tela;
-- navegação mais simples;
-- foco em leitura rápida;
-- desktop continua sendo suportado, mas não é a prioridade.
+- navegação mais simples e leitura rápida;
+- o desktop continua suportado, mas não é a prioridade.
 
 ---
 
@@ -39,47 +38,44 @@ Porque esse é o cenário real de uso.
 
 ### Contexto
 
-A experiência física já possui uma sequência definida.
-
-Se o site deixasse tudo aberto desde o começo, ele poderia acabar se desconectando do percurso da feira.
+A experiência física tem uma sequência definida. Se o site deixasse tudo aberto desde o começo, poderia se desconectar do percurso da feira.
 
 ### Decisão
 
-O visitante seguirá as estações em ordem, e o site deverá acompanhar esse progresso.
-
-### Consequências
-
-- precisamos registrar quais etapas já foram concluídas;
-- a próxima etapa deve ser liberada conforme o avanço;
-- os QR Codes passam a fazer parte desse fluxo.
-
----
-
-## DEC-003 — Começar sem framework
-
-**Status:** aceita
-
-### Contexto
-
-O projeto não possui, neste momento, uma complexidade que obrigue o uso de React, Vue ou outro framework.
-
-### Decisão
-
-Começar com:
-
-- HTML;
-- CSS;
-- JavaScript.
+O visitante segue as estações em ordem, e o site acompanha esse progresso.
 
 ### Por quê?
 
-Porque isso já atende ao que precisamos e evita adicionar dependências sem necessidade.
+Porque o site existe para complementar o percurso físico, não para ser lido fora dele.
 
-### Consequências
+### O que muda?
 
-O projeto fica mais simples, mas exige cuidado com a organização manual do código.
+- é preciso registrar quais etapas já foram concluídas;
+- a próxima etapa só é liberada conforme o avanço;
+- os QR Codes passam a fazer parte do fluxo.
 
-Se no futuro surgir uma necessidade real, essa decisão pode ser revista.
+---
+
+## DEC-003 — Começar sem framework e sem backend
+
+**Status:** aceita para a primeira versão
+
+### Contexto
+
+O projeto é um site estático para uma feira escolar e não tem requisito que exija React, Vue, servidor ou banco de dados.
+
+### Decisão
+
+Usar HTML, CSS e JavaScript puros, sem framework e sem backend.
+
+### Por quê?
+
+Porque isso já atende ao que precisamos e evita dependências e complexidade sem necessidade.
+
+### O que muda?
+
+- o código é mais simples, mas exige cuidado com a organização manual;
+- a decisão pode ser revista se surgir necessidade real de autenticação, sincronização, persistência centralizada, segurança real ou dados compartilhados.
 
 ---
 
@@ -89,62 +85,43 @@ Se no futuro surgir uma necessidade real, essa decisão pode ser revista.
 
 ### Contexto
 
-Precisamos lembrar quais estações o visitante já concluiu.
-
-### Opções consideradas
-
-- `localStorage`;
-- servidor;
-- conta de usuário.
+Precisamos lembrar quais estações o visitante já concluiu. As opções eram `localStorage`, servidor ou conta de usuário.
 
 ### Decisão
 
-Usar `localStorage`.
+Guardar o progresso no `localStorage`, na chave `odisseia:progresso`.
 
 ### Por quê?
 
-Porque o projeto não precisa, neste momento, de:
+Porque o projeto não precisa de login, conta, sincronização entre dispositivos nem persistência crítica.
 
-- login;
-- conta;
-- sincronização entre dispositivos;
-- persistência crítica.
+### O que muda?
 
-### Limitações aceitas
-
-O progresso fica preso ao navegador e pode ser alterado manualmente.
-
-Isso não é tratado como um problema grave porque o sistema serve para organizar a experiência, não para proteger dados importantes.
+- o progresso fica preso ao navegador e pode ser alterado manualmente, o que é aceitável: o sistema organiza a experiência, não protege dados importantes;
+- trocar de navegador ou limpar os dados do site zera a jornada.
 
 ---
 
 ## DEC-005 — Reduzir de cinco para quatro estações
 
-**Status:** aceita  
-**Substitui:** estrutura inicial de cinco estações
+**Status:** aceita
 
 ### Contexto
 
-No começo, existia uma quinta estação ligada a portfólio/documentação.
+No começo, existia uma quinta estação ligada a portfólio e documentação.
 
 ### Decisão
 
-A experiência principal ficou com quatro estações:
-
-1. jogos até 1999;
-2. jogos de 2001 até hoje;
-3. IA nos jogos;
-4. Robot TCG.
+A experiência principal tem quatro estações: IA nos jogos; evolução dos jogos até 2000; evolução dos jogos de 2001 até hoje; e X-B0T.
 
 ### Por quê?
 
 Porque o portfólio e a documentação não precisavam ocupar uma etapa física do percurso.
 
-### Consequências
+### O que muda?
 
 - o fluxo principal ficou menor;
-- materiais antigos que falam em cinco estações precisam ser atualizados;
-- o portfólio continua existindo, mas fora da experiência do visitante.
+- o portfólio passou a ser um complemento aberto na Conclusão (DEC-015).
 
 ---
 
@@ -158,108 +135,233 @@ Qualquer pessoa pode abrir o DevTools e inspecionar JavaScript, URLs e `localSto
 
 ### Decisão
 
-O frontend será usado para controlar a experiência, não para proteger algo crítico.
-
-### Regra adotada
-
-Se algo puder ser descoberto ou alterado facilmente pelo F12 e isso causar um problema real, não deve depender só do frontend.
-
-### Consequências
-
-Não colocar no cliente:
-
-- credenciais;
-- tokens privados;
-- segredos;
-- chaves sensíveis;
-- dados que precisem ficar ocultos;
-- regras críticas de autorização.
-
----
-
-## DEC-007 — Separar o site das decisões internas do Robot TCG
-
-**Status:** aceita
-
-### Contexto
-
-A Estação 4 depende de um jogo desenvolvido por outro grupo.
-
-### Problema
-
-Se a equipe do site começasse a definir ou documentar as mecânicas antes do jogo ficar pronto, poderíamos criar divergências entre o que está escrito e o que realmente existe.
-
-### Decisão
-
-O grupo do Robot TCG continua responsável por:
-
-- regras;
-- cartas;
-- energia;
-- balanceamento;
-- turnos;
-- IA;
-- implementação.
-
-O site recebe apenas as informações finais necessárias para integração.
-
-### Consequência
-
-A Estação 4 só deve apresentar aquilo que realmente existir na versão final do jogo.
-
----
-
-## DEC-008 — Não usar backend sem necessidade
-
-**Status:** aceita para a primeira versão
-
-### Contexto
-
-O projeto atual é um site estático para uma feira escolar.
-
-### Decisão
-
-Não adicionar backend apenas por “boa prática” ou para deixar a arquitetura mais complexa.
+O frontend controla a experiência, mas não protege nada crítico. Se algo puder ser descoberto ou alterado facilmente pelo F12 e isso causar um problema real, não deve depender só do frontend.
 
 ### Por quê?
 
-Porque hoje não existe requisito que justifique isso.
+Porque tudo o que roda no navegador está nas mãos de quem o usa.
 
-### Quando rever?
+### O que muda?
 
-Se surgir necessidade de:
-
-- autenticação;
-- sincronização;
-- persistência centralizada;
-- segurança real;
-- dados compartilhados.
+- o cliente não guarda credenciais, tokens privados, segredos, chaves sensíveis, dados que precisem ficar ocultos nem regras críticas de autorização;
+- progresso e QR Codes são tratados como organização da jornada, não como barreira.
 
 ---
 
-## DEC-009 — Ser transparente sobre o uso de IA
+## DEC-007 — Separar o site das decisões internas do X-B0T
 
 **Status:** aceita
 
 ### Contexto
 
-ChatGPT e Claude Code fazem parte do processo de desenvolvimento.
+A Estação 4 depende de um jogo desenvolvido por outro grupo. Se o site definisse ou documentasse mecânicas antes de o jogo ficar pronto, o texto poderia divergir do que realmente existe.
 
 ### Decisão
 
-Assumir isso claramente na documentação.
+O grupo do X-B0T continua responsável por regras, cartas, energia, balanceamento, turnos, IA e implementação. O site recebe só as informações finais necessárias para integração.
 
-### Como dividimos o trabalho
+### Por quê?
 
-De forma geral:
+Porque planejado não é o mesmo que implementado, e cada grupo deve responder pelo que construiu.
 
-- ChatGPT ajuda mais em planejamento, análise, arquitetura, UX, revisão e documentação;
-- Claude Code ajuda mais na implementação;
-- as pessoas responsáveis definem contexto, tomam decisões, testam e assumem o resultado.
+### O que muda?
 
-### Consequências
+- a Estação 4 apresenta apenas o que existe na versão final do jogo;
+- a grafia oficial é **X-B0T**, com zero (o jogo se chamava Robot TCG).
 
-- existe um `AI-WORKFLOW.md`;
-- casos importantes de uso de IA podem ser registrados;
-- não vamos fingir autoria manual de algo que não aconteceu;
-- também não vamos tratar o projeto como se tivesse sido criado automaticamente.
+---
+
+## DEC-008 — Ser transparente sobre o uso de IA
+
+**Status:** aceita
+
+### Contexto
+
+ChatGPT, Claude e Claude Code fazem parte do processo de desenvolvimento.
+
+### Decisão
+
+Assumir isso claramente na documentação: as ferramentas ajudam no planejamento, na revisão e na implementação, e as pessoas responsáveis definem o contexto, decidem, testam e assumem o resultado.
+
+### Por quê?
+
+Porque esconder o uso de IA seria desonesto, e apresentar o projeto como gerado automaticamente também.
+
+### O que muda?
+
+- existe o `AI-WORKFLOW.md`, que descreve o processo;
+- a documentação não atribui a autoria manual de algo que não aconteceu.
+
+---
+
+## DEC-009 — Configuração em `config.js` sem ES modules
+
+**Status:** aceita
+
+### Contexto
+
+Precisávamos de um lugar simples para a configuração global (`totalEstacoes`, `gameUrl`, `downloadUrl`). O projeto roda localmente por `file://`, sem servidor, e é mantido por estudantes.
+
+### Decisão
+
+Usar um objeto global (`const OdisseIAConfig = {...}`) carregado por `<script>` comum, em vez de ES modules.
+
+### Por quê?
+
+Porque ES modules exigem servidor HTTP e falham em `file://`, que é como os estudantes abrem o HTML.
+
+### O que muda?
+
+- os demais scripts (`progresso.js`, `qr.js`, `app.js`…) seguem o mesmo padrão: `<script>` comuns, na mesma ordem, no fim do `<body>`;
+- a URL do jogo existe só em `config.js`.
+
+---
+
+## DEC-010 — Identidade visual: grafite, azul e o roxo do X-B0T
+
+**Status:** aceita; revisada em 23/10/2026 (a versão inicial seguia a paleta cinza e roxo do jogo)
+
+### Contexto
+
+O site e o X-B0T fazem parte da mesma jornada e devem parecer da mesma experiência, mas o jogo precisa continuar reconhecível como produto à parte. A sala da feira é azul (`#142146`).
+
+### Decisão
+
+- base grafite, escura e neutra, com texto em branco;
+- azul como acento principal, numa escala de mesma matiz: `#142146` como referência escura, `#3558c4` para linhas e molduras, `#5b8cff` para estados, progresso, ações e foco, e `#8fb0ff` no hover;
+- roxo `#CD5EFA`, cor definitiva do X-B0T, só onde o jogo é o assunto: cartão e engrenagem no Hub, carta, Estação 4 e bloco do jogo na Conclusão. A navegação da jornada continua azul mesmo dentro dessas áreas.
+
+### Por quê?
+
+Porque o grafite dá legibilidade sob a luz variável da feira, o azul liga o site ao ambiente da sala e o roxo mantém o X-B0T como o único ponto de outra cor.
+
+### O que muda?
+
+- as cores ficam em variáveis CSS em `:root`, então a troca acontece num ponto só;
+- o azul nunca é fundo de painel nem cor de texto corrido, e o roxo nunca aparece fora do jogo;
+- contraste e legibilidade têm prioridade sobre efeito visual, e estados nunca dependem só de cor.
+
+Os valores completos, os temas e as regras de uso estão em `DESIGN.md`.
+
+---
+
+## DEC-011 — Contrato de validação dos QR Codes
+
+**Status:** aceita
+
+### Contexto
+
+O QR Code é a ponte entre a estação física e o conteúdo digital, e precisa ter um resultado previsível em qualquer situação: primeira leitura, repetição, ordem errada ou falha.
+
+### Decisão
+
+O QR da estação N abre `validar.html?estacao=N`. Há cinco resultados possíveis: sucesso, repetido, fora de ordem, inválido e erro de armazenamento. Só "sucesso" altera o progresso.
+
+### Por quê?
+
+Porque um contrato fechado evita que a página avance o progresso por acidente e deixa claro, para o visitante, o que aconteceu.
+
+### O que muda?
+
+- se o salvamento falhar, nunca se mostra sucesso, e recarregar a página é seguro (vira "repetido");
+- o parâmetro é validado antes de qualquer uso e exibido somente via `textContent`;
+- o progresso é por navegador: quem abre o QR em outro navegador cai em "fora de ordem", o que foi confirmado em teste real. As telas do site orientam o visitante a usar o mesmo navegador do Hub;
+- o QR não é segurança real (DEC-006).
+
+---
+
+## DEC-012 — Jornada concluída não é o mesmo que jogo acessível
+
+**Status:** aceita
+
+### Contexto
+
+Completar as quatro estações desbloqueia o X-B0T, mas o acesso depende de um endereço válido do jogo.
+
+### Decisão
+
+No Hub e na Conclusão, o X-B0T só vira link quando as quatro estações estão validadas **e** `OdisseIAConfig.gameUrl` é uma URL absoluta http(s). O link abre na mesma aba.
+
+### Por quê?
+
+Porque o visitante não deve ver um botão que leva a lugar nenhum, e nenhuma navegação comum deve liberar o jogo: o acesso é consequência do progresso já salvo.
+
+### O que muda?
+
+- sem URL válida, o X-B0T continua "desbloqueado" como recompensa, mas o acesso aparece como "aguardando liberação", sem botão;
+- no celular na vertical, o acesso mostra o aviso "Para jogar pelo celular, vire o aparelho na horizontal.", que não força a rotação nem bloqueia o acesso.
+
+---
+
+## DEC-013 — Movimento: o sistema é o padrão, a escolha do usuário vence
+
+**Status:** aceita
+
+### Contexto
+
+No computador da escola, "Reduzir animações" não podia ser desligada: o sistema pedia movimento reduzido, o interruptor aparecia ligado e travado, e nada era gravado. Era um defeito de projeto, não da máquina.
+
+### Decisão
+
+Sem escolha salva, vale a preferência do sistema (`prefers-reduced-motion`). A escolha explícita é gravada em `odisseia:acessibilidade` (`movimento: "sistema" | "reduzido" | "normal"`) e vence o sistema nos dois sentidos.
+
+### Por quê?
+
+Porque a pessoa precisa poder ligar e desligar o movimento por conta própria, qualquer que seja o padrão do aparelho.
+
+### O que muda?
+
+- o interruptor nunca fica travado;
+- `acessibilidade.js` grava `data-movimento="reduzido"` ou `"normal"` no `<html>` antes da primeira pintura, e o CSS só corta animações por esse atributo, sem condicionar nenhuma animação a `prefers-reduced-motion`;
+- se o navegador bloquear o `localStorage`, nenhuma preferência persiste entre páginas, e o painel avisa que a escolha vale só naquela página.
+
+---
+
+## DEC-014 — Scanner de QR Code pela câmera
+
+**Status:** aceita
+
+### Contexto
+
+Faltava ler os QR Codes dentro do site, sem depender do app Câmera do celular.
+
+### Decisão
+
+Um scanner (`scanner.js`, `scanner.css`) abre num `<dialog>` a partir do Hub, das telas de bloqueio e do fim das estações. Ele só pede a câmera depois de "Abrir câmera" e não grava nem envia nada. Usa a API nativa `BarcodeDetector`, em vez de uma biblioteca de decodificação.
+
+### Por quê?
+
+Porque uma biblioteca de decodificação conflitaria com a regra de não adicionar dependências (DEC-003). O custo é que a API não existe no Safari do iOS nem no Firefox; nesses navegadores o scanner explica que o app Câmera lê o mesmo QR e cai no mesmo fluxo de validação.
+
+### O que muda?
+
+- reaproveita `resultadoParaEstacao()` de `qr.js`, a mesma regra de `validar.html`; `progresso.js` e `qr.js` não mudam;
+- aceita só um link http(s) que termine em `/validar.html` com o parâmetro `estacao` de 1 a 4. O endereço não é comparado e **nada é aberto**: o texto lido só fornece o número;
+- todas as trilhas da câmera são paradas ao fechar, ler, cancelar, trocar de aba ou sair da página;
+- a câmera exige contexto seguro, então o alvo é a versão em HTTPS.
+
+---
+
+## DEC-015 — Portfólio na Conclusão, em leitor local
+
+**Status:** aceita
+
+### Contexto
+
+O portfólio (documento Word de 27 páginas, entregue como `portfolio-fonte.docx`) é um complemento da jornada, não uma quinta estação (DEC-005). Incorporar o arquivo hospedado no SharePoint da escola foi tentado e descartado: visitantes sem conta da escola viam a tela de login, e a incorporação dependia de permissões que o site não controla.
+
+### Decisão
+
+`portfolio.html` reproduz o documento original em HTML e CSS puros, sem URL externa: mesmo texto, mesma ordem e o layout do Word. Na Conclusão, o botão "Ver portfólio" abre esse documento num `<dialog>` modal com um `<iframe>` de mesma origem (`portfolio.js`, `portfolio.css`).
+
+### Por quê?
+
+Porque um documento local não depende de conta nem de permissão externa, e reproduzir o original (em vez de redesenhá-lo) mantém o conteúdo exatamente como o grupo entregou.
+
+### O que muda?
+
+- o `.docx` é só a fonte e não entra no site; mudar o documento exige regerar o HTML e republicar;
+- o único ajuste visual é o tema: a folha e o texto seguem o tema do site, inclusive alto contraste, e as faixas cinza dos anexos e as imagens mantêm as cores originais;
+- o botão é secundário, para "Jogar X-B0T" continuar sendo a única ação sólida da Conclusão;
+- as imagens dos QR Codes das estações 1 a 4 não entram no site, porque o QR de cada estação só deve existir depois da visita física e `portfolio.html` é pública;
+- a página é só leitura, mas isso não impede copiar texto ou salvar imagens; ela não tem paginação nem fidelidade pixel a pixel, preserva os erros de digitação do original e lista nomes de alunos, como ele.

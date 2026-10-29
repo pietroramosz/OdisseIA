@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OdisseIA</title>
+  <meta name="description" content="Uma jornada pela evolução dos videogames, da inteligência artificial e das ideias que transformaram a forma de jogar.">
+
+  <!-- Prévia de link (WhatsApp, Discord, redes): Open Graph e Twitter Cards. Mesma arte em todas as páginas. -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="OdisseIA">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:title" content="OdisseIA — Uma jornada pelos jogos e pela inteligência artificial">
+  <meta property="og:description" content="Uma jornada pela evolução dos videogames, da inteligência artificial e das ideias que transformaram a forma de jogar.">
+  <meta property="og:url" content="https://pietroramosz.github.io/OdisseIA/">
+  <meta property="og:image" content="https://pietroramosz.github.io/OdisseIA/assets/img/og-odisseia.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Arte do OdisseIA: o nome OdisseIA em destaque sobre fundo grafite, com a rota das quatro estações em azul descendo até a carta do X-B0T, em roxo.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="OdisseIA — Uma jornada pelos jogos e pela inteligência artificial">
+  <meta name="twitter:description" content="Uma jornada pela evolução dos videogames, da inteligência artificial e das ideias que transformaram a forma de jogar.">
+  <meta name="twitter:image" content="https://pietroramosz.github.io/OdisseIA/assets/img/og-odisseia.png">
+  <meta name="twitter:image:alt" content="Arte do OdisseIA: o nome OdisseIA em destaque sobre fundo grafite, com a rota das quatro estações em azul descendo até a carta do X-B0T, em roxo.">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/img/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/paginas/abertura.css">
+  <link rel="stylesheet" href="assets/css/bigode.css">
+  <script src="assets/js/acessibilidade.js"></script>
+</head>
+<body class="pagina-index">
+  <a class="pular" href="#conteudo-principal">Pular para o conteúdo</a>
+  <!-- Porta de entrada estática: não lê progresso. Os únicos scripts são o painel de acessibilidade e o
+       easter egg da marca (bigode.js), que não mexem na jornada. -->
+  <main id="conteudo-principal" tabindex="-1" class="abertura">
+    <section class="capa" aria-labelledby="index-titulo">
+      <div class="capa__tom textura-reticula" aria-hidden="true"></div>
+      <span class="registro capa__registro-a" aria-hidden="true"></span>
+      <span class="registro capa__registro-b" aria-hidden="true"></span>
+
+      <h1 id="index-titulo" class="capa__titulo" aria-label="OdisseIA" data-bigode><span class="capa__odisse">Odisse</span><span class="capa__ia">IA</span></h1>
+      <p class="capa__proposta">Uma jornada pela evolução dos videogames, da inteligência artificial e das ideias que transformaram a forma de jogar.</p>
+      <a class="botao botao--principal capa__cta" href="hub.html">INICIAR JORNADA</a>
+
+      <!-- Rota esquemática: as quatro estações descem até o X-B0T. A lista "A jornada" traz o mesmo conteúdo em texto. -->
+      <div class="capa__rota" aria-hidden="true">
+        <div class="capa__explosao textura-foco"></div>
+        <svg class="esquema capa__mapa" viewBox="0 0 360 270">
+          <path class="esquema__linha capa__trilho" d="M0 34H40H92L132 74H170L210 114H248L288 154V214" pathLength="1000"/>
+          <g class="capa__parada" style="--ordem: 0">
+            <rect class="esquema__no esquema__no--cheio" x="34" y="28" width="12" height="12"/>
+            <text class="esquema__texto esquema__texto--forte" x="34" y="18">01</text>
+            <text class="esquema__texto" x="54" y="18">IA NOS JOGOS</text>
+          </g>
+          <g class="capa__parada" style="--ordem: 1">
+            <rect class="esquema__no" x="126" y="68" width="12" height="12"/>
+            <text class="esquema__texto esquema__texto--forte" x="126" y="58">02</text>
+            <text class="esquema__texto" x="146" y="58">ATÉ 2000</text>
+          </g>
+          <g class="capa__parada" style="--ordem: 2">
+            <rect class="esquema__no" x="204" y="108" width="12" height="12"/>
+            <text class="esquema__texto esquema__texto--forte" x="204" y="98">03</text>
+            <text class="esquema__texto" x="224" y="98">2001 → HOJE</text>
+          </g>
+          <g class="capa__parada" style="--ordem: 3">
+            <rect class="esquema__no" x="282" y="148" width="12" height="12"/>
+            <text class="esquema__texto esquema__texto--forte" x="250" y="168">04</text>
+          </g>
+          <g class="capa__xbot" transform="translate(288 236)">
+            <path class="capa__carta" d="M-12 -22H14L18 -18V22H-14L-18 18V-18Z" transform="rotate(-8)"/>
+            <path class="capa__eixo" d="M-4 -6H4L6 -4V4L4 6H-4L-6 4V-4Z" transform="rotate(-8)"/>
+            <text class="esquema__texto esquema__texto--destaque" x="-84" y="30">X-B0T</text>
+          </g>
+        </svg>
+      </div>
+
+      <p class="capa__jornada"><span class="capa__numero">4</span> <span class="capa__frase"><span class="capa__unidade">estações</span> conectam passado, presente e o próximo passo da experiência.</span></p>
+    </section>
+
+    <section class="protocolo" aria-labelledby="passos-titulo">
+      <h2 id="passos-titulo" class="protocolo__titulo">Como funciona</h2>
+      <ol class="protocolo__lista">
+        <li class="protocolo__passo ficha">
+          <span class="numeral-vazado protocolo__numeral" aria-hidden="true">1</span>
+          <svg class="protocolo__icone" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+            <path class="esquema__traco" d="M8 42V12L14 6H40V42M4 42H44M18 42V26H30V42M18 14H30"/>
+          </svg>
+          <div class="protocolo__corpo">
+            <strong class="protocolo__nome">ENTRE NA ESTAÇÃO</strong>
+            <p class="protocolo__texto">Visite a estação na feira e descubra uma parte dessa evolução.</p>
+          </div>
+        </li>
+        <li class="protocolo__passo ficha">
+          <span class="numeral-vazado protocolo__numeral" aria-hidden="true">2</span>
+          <svg class="protocolo__icone" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+            <path class="esquema__traco" d="M4 6H44V30H4ZM24 30V36M14 42L24 36L34 42M12 14H28M12 20H36"/>
+          </svg>
+          <div class="protocolo__corpo">
+            <strong class="protocolo__nome">ACOMPANHE A EXPERIÊNCIA</strong>
+            <p class="protocolo__texto">Ouça a apresentação e explore o tema junto com o grupo.</p>
+          </div>
+        </li>
+        <li class="protocolo__passo ficha">
+          <span class="numeral-vazado protocolo__numeral" aria-hidden="true">3</span>
+          <svg class="protocolo__icone" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+            <path class="esquema__traco" d="M12 4H36V44H12ZM20 38H28"/>
+            <path d="M17 10H23V16H17ZM25 10H31V16H25ZM17 18H23V24H17ZM27 20H31V24H27ZM25 26H29V30H25ZM19 28H23V32H19Z" fill="currentColor"/>
+          </svg>
+          <div class="protocolo__corpo">
+            <strong class="protocolo__nome">CONTINUE NO CELULAR</strong>
+            <p class="protocolo__texto">Valide o QR Code para liberar o conteúdo digital daquela estação.</p>
+            <p class="protocolo__nota">Mantenha a jornada no mesmo navegador para preservar seu progresso.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section class="jornada" aria-labelledby="jornada-titulo">
+      <h2 id="jornada-titulo" class="jornada__titulo">A JORNADA <span class="jornada__detalhe">04 ESTAÇÕES</span></h2>
+      <ol class="jornada__lista">
+        <li class="jornada__item"><span class="jornada__numero"><span class="visualmente-oculto">Estação </span>01</span><span class="jornada__nome">Inteligência Artificial nos jogos</span></li>
+        <li class="jornada__item"><span class="jornada__numero"><span class="visualmente-oculto">Estação </span>02</span><span class="jornada__nome">Evolução dos jogos até 2000</span></li>
+        <li class="jornada__item"><span class="jornada__numero"><span class="visualmente-oculto">Estação </span>03</span><span class="jornada__nome">Evolução dos jogos de 2001 até hoje</span></li>
+        <li class="jornada__item jornada__item--xbot"><span class="jornada__numero"><span class="visualmente-oculto">Estação </span>04</span><span class="jornada__nome">X-B<span class="zero">0</span>T</span></li>
+      </ol>
+    </section>
+
+    <section class="destino" aria-labelledby="destino-titulo">
+      <div class="destino__palco" aria-hidden="true">
+        <div class="destino__foco textura-foco"></div>
+        <div class="destino__silhueta">
+          <div class="destino__hachura textura-hachura"></div>
+          <svg class="destino__engrenagem" viewBox="-40 -40 80 80" focusable="false">
+            <path d="M-6 -34H6L8 -27L14 -24L20 -28L28 -20L24 -14L27 -8L34 -6V6L27 8L24 14L28 20L20 28L14 24L8 27L6 34H-6L-8 27L-14 24L-20 28L-28 20L-24 14L-27 8L-34 6V-6L-27 -8L-24 -14L-28 -20L-20 -28L-14 -24L-8 -27ZM-7 -7H7V7H-7Z" fill-rule="evenodd"/>
+          </svg>
+          <span class="destino__selo">BLOQUEADO</span>
+        </div>
+      </div>
+      <div class="destino__texto">
+        <h2 id="destino-titulo" class="destino__titulo">DESTINO FINAL</h2>
+        <p class="destino__descricao">Complete as 4 estações para chegar à conclusão e desbloquear o X-B0T.</p>
+        <a class="botao botao--principal destino__cta" href="hub.html">INICIAR JORNADA</a>
+      </div>
+    </section>
+  </main>
+  <script src="assets/js/bigode.js"></script>
+</body>
+</html>

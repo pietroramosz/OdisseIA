@@ -1,102 +1,117 @@
 # OdisseIA
 
-O **OdisseIA** é um projeto criado para uma feira escolar que mistura uma experiência física, dividida em estações, com uma parte digital acessada pelo celular dos visitantes.
+O **OdisseIA** é um projeto criado para uma feira escolar que combina uma experiência física, dividida em estações, com uma parte digital acessada pelo celular dos visitantes.
 
-A ideia do site é acompanhar o percurso da feira, complementar as apresentações de cada estação e conectar tudo em uma experiência única. O projeto também inclui o **Robot TCG**, um jogo digital que fará parte da etapa final.
+O site acompanha o percurso da feira, complementa a apresentação de cada estação e liga tudo numa experiência só. No fim da jornada, ele libera o **X-B0T**, um jogo digital desenvolvido por outro grupo do projeto.
 
-> **Status atual:** em desenvolvimento.  
-> Neste momento, o projeto ainda está passando por definições de conteúdo, UX, estrutura e arquitetura. Nem tudo que aparece como planejado aqui já foi implementado.
+> **Status atual:** publicado no GitHub Pages (https://pietroramosz.github.io/OdisseIA/) e testado fisicamente para a feira de 29/10/2026.
 
 ---
 
 ## Como funciona a experiência
 
-Atualmente, o OdisseIA está dividido em **quatro estações físicas**:
+São **quatro estações físicas**:
 
-1. **Estação 1 — Evolução dos jogos até 1999**
-2. **Estação 2 — Evolução dos jogos de 2001 até hoje**
-3. **Estação 3 — Inteligência Artificial nos jogos**
-4. **Estação 4 — Robot TCG**
+1. **Estação 1 — Inteligência Artificial nos jogos**
+2. **Estação 2 — Evolução dos jogos até 2000**
+3. **Estação 3 — Evolução dos jogos de 2001 até hoje**
+4. **Estação 4 — X-B0T**
 
-Cada estação terá um **QR Code** ligado à parte correspondente do site.
+O fluxo digital é este:
 
-Como os visitantes vão usar o próprio celular durante a feira, o projeto está sendo pensado desde o início com foco em **mobile-first**.
+```text
+Visão geral → Hub → Estação 1 → Estação 2 → Estação 3 → Estação 4 → Conclusão → X-B0T
+```
 
-No começo, o projeto tinha uma quinta estação ligada a portfólio/documentação. Depois de revisar a estrutura, decidimos tirar essa parte do percurso da feira e manter a documentação separada no repositório.
+Cada estação física tem um **QR Code** próprio. Ele não é só um link: valida que o visitante passou pela estação e libera o conteúdo digital daquela etapa. Abrir uma página diretamente não avança o progresso.
+
+Como todo mundo usa o próprio celular durante a feira, o projeto foi pensado desde o início para **mobile-first**.
+
+O projeto chegou a ter uma quinta estação, ligada a portfólio e documentação, mas ela saiu do percurso. O portfólio continua como complemento: a Conclusão tem um botão "Ver portfólio" que abre o documento do projeto num leitor sobre a própria página (conteúdo local em `portfolio.html`).
 
 ---
 
-## O que está planejado
+## O que já foi implementado
 
-Entre as principais ideias já definidas para o site estão:
+- estrutura das páginas, organização de `assets` e configuração central (`config.js`);
+- sistema de progresso em `localStorage`, com persistência após recarregar e limite na quarta estação;
+- Hub com estados de 0 a 4 estações validadas;
+- validação dos QR Codes por `validar.html` e `qr.js`, e scanner pela câmera (Chrome/Android) que usa as mesmas regras. No Safari do iOS e no Firefox, o QR é lido pelo app Câmera do celular;
+- `index.html` como porta de entrada estática, que não lê nem grava o progresso (`odisseia:progresso`);
+- Estações 1 a 4 com conteúdo, três estados de acesso (desbloqueada, próxima e futura) e linguagem editorial compartilhada;
+- página de conclusão (`final.html`), com estados de jornada completa e incompleta, botão "Ver portfólio" e botão "Jogar X-B0T";
+- acesso ao X-B0T pelo Hub e pela Conclusão, liberado só com as quatro estações validadas, com aviso para jogar no celular na horizontal;
+- portfólio do projeto em leitor local, aberto a partir da Conclusão;
+- página de minijogos (Pong, Snake, Space Invaders e um desafio de pathfinding com A*), aberta a partir da Conclusão e separada da jornada: não mexe no progresso;
+- identidade visual em grafite, com o azul como acento principal (escala do `#142146`, a cor da sala da feira) e o roxo `#CD5EFA` reservado ao X-B0T;
+- painel de acessibilidade com animações, alto contraste, tema, tamanho do texto e restaurar padrão;
+- publicação definitiva no GitHub Pages, QR Codes finais e testes físicos da experiência, com o X-B0T apontando para https://robot-tcg.netlify.app/ (`gameUrl`).
 
-- navegação pensada primeiro para celular;
-- conexão entre as estações físicas e as páginas digitais;
-- progresso em sequência entre as etapas;
-- registro local do progresso;
-- liberação das próximas estações conforme o avanço;
-- integração com o Robot TCG;
-- hospedagem como site estático.
+---
 
-Alguns detalhes da Estação 4 ainda dependem diretamente da versão final do Robot TCG.
+## Prévia do site
+
+Capturas reais do site rodando no Chrome, com o progresso ajustado só para mostrar cada tela. Visão geral em desktop:
+
+![Visão geral do OdisseIA em desktop](docs/screenshots/visao-geral.png)
+
+O site é pensado para o celular. Em telas de 390 px, da esquerda para a direita: Hub com duas estações validadas, Estação 2, Estação 4 e Conclusão.
+
+<p>
+  <img src="docs/screenshots/hub-mobile.png" alt="Hub no celular, com 2 de 4 estações validadas" width="23%">
+  <img src="docs/screenshots/estacao-4-mobile.png" alt="Estação 4 no celular" width="23%">
+  <img src="docs/screenshots/conclusao-mobile.png" alt="Conclusão no celular" width="23%">
+  <img src="docs/screenshots/hub.png" alt="Hub no computador, com 2 de 4 estações validadas" width="23%">
+  <img src="docs/screenshots/estacao-4.png" alt="Estação 4 no computador" width="23%">
+  <img src="docs/screenshots/conclusao.png" alt="Conclusão no computador" width="23%">
+</p>
+
+O X-B0T, jogo do outro grupo, abre em endereço próprio:
+
+![Tela inicial do X-B0T](docs/screenshots/xbot.png)
+
+As demais capturas (desktop e celular de todas as páginas) estão em [`docs/screenshots/`](./docs/screenshots/).
 
 ---
 
 ## Tecnologias
 
-A stack inicial do site foi mantida simples:
+A stack foi mantida simples de propósito:
 
-- HTML;
-- CSS;
-- JavaScript;
-- Git;
-- GitHub;
-- `localStorage`;
-- QR Codes.
+- HTML, CSS e JavaScript puros;
+- `localStorage` para o progresso;
+- QR Codes;
+- Git e GitHub, com publicação no GitHub Pages.
 
-A ideia é não adicionar frameworks, backend ou outras tecnologias só para deixar o projeto mais complexo. Se surgir uma necessidade real, isso pode ser revisto depois.
-
-O Robot TCG é tratado separadamente, porque possui seu próprio desenvolvimento.
+Não há frameworks nem backend, e só vale acrescentar algo se surgir uma necessidade real. O X-B0T é tratado à parte, porque tem desenvolvimento próprio.
 
 ---
 
 ## Desenvolvimento com IA
 
-O projeto utiliza IA de forma assumida e organizada.
+O projeto usa IA de forma assumida e organizada:
 
-De forma geral:
+- **ChatGPT** entra no planejamento, na análise, na arquitetura, na revisão e na documentação;
+- **Claude (chat)** serve de segunda camada de revisão crítica antes da implementação, quando isso ajuda;
+- **Claude Code** faz a implementação e as alterações diretas no código. A skill **Impeccable**, usada com ele, ajudou a criar o sistema visual do projeto;
+- decisões finais, testes, validação e responsabilidade pelo resultado continuam sendo humanas.
 
-- **ChatGPT** é usado principalmente para planejamento, análise, arquitetura, UX, revisão, documentação e preparação de tarefas;
-- **Claude Code** é usado principalmente para implementação e alterações diretas no código;
-- decisões finais, validação e responsabilidade pelo resultado continuam sendo humanas.
-
-A intenção não é esconder o uso de IA, mas também não apresentar o projeto como se bastasse pedir para uma ferramenta gerar tudo.
-
-Mais detalhes estão em [`AI-WORKFLOW.md`](./AI-WORKFLOW.md).
+A intenção não é esconder o uso de IA, nem apresentar o projeto como se bastasse pedir a uma ferramenta que gerasse tudo. Os detalhes estão em [`AI-WORKFLOW.md`](./AI-WORKFLOW.md).
 
 ---
 
 ## Documentação
 
-Além deste README, o projeto possui:
-
-- [`PROJECT.md`](./PROJECT.md) — explica como o projeto está estruturado;
-- [`AI-WORKFLOW.md`](./AI-WORKFLOW.md) — mostra como as ferramentas de IA entram no processo;
-- [`DECISIONS.md`](./DECISIONS.md) — registra decisões importantes e seus motivos;
-- [`DEVLOG.md`](./DEVLOG.md) — acompanha os principais marcos da criação do site.
+- [`PROJECT.md`](./PROJECT.md) — como o projeto está estruturado e como mantê-lo;
+- [`PRODUCT.md`](./PRODUCT.md) — usuários, propósito e princípios do produto;
+- [`DESIGN.md`](./DESIGN.md) — sistema visual: cores, tipografia, layout, componentes, movimento e acessibilidade;
+- [`DECISIONS.md`](./DECISIONS.md) — as decisões essenciais e seus motivos;
+- [`AI-WORKFLOW.md`](./AI-WORKFLOW.md) — como as ferramentas de IA entram no processo.
 
 ---
 
 ## Estado atual
 
-O projeto ainda não está finalizado.
+O site está no ar no GitHub Pages (endereço definitivo), os QR Codes finais foram gerados e os testes físicos da experiência foram realizados. O X-B0T tem endereço final em https://robot-tcg.netlify.app/, configurado em `gameUrl`.
 
-Neste momento, o foco está principalmente em:
-
-- fechar o conteúdo das estações;
-- organizar a experiência do visitante;
-- definir a estrutura do site;
-- preparar a integração com o Robot TCG;
-- registrar as decisões importantes antes da implementação avançar.
-
-Screenshots, demonstração, instruções de execução e links públicos serão adicionados quando essas partes realmente existirem.
+Uma demonstração em vídeo ainda não foi adicionada.

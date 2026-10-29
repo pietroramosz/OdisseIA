@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OdisseIA — Mini Jogos</title>
+  <meta name="description" content="Quatro jogos rápidos do OdisseIA: Pong, Snake, Space Invaders e um desafio de pathfinding com o algoritmo A*.">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/img/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/paginas/minijogos.css">
+  <script src="assets/js/acessibilidade.js"></script>
+</head>
+<body class="pagina-minijogos">
+  <a class="pular" href="#conteudo-principal">Pular para o conteúdo</a>
+  <main id="conteudo-principal" tabindex="-1">
+
+    <!-- Menu: os quatro jogos. Cada cartão abre o jogo na própria página (minijogos.js troca a vista pelo hash). -->
+    <div id="mj-menu">
+      <a class="final-voltar" href="final.html"><span class="seta seta--voltar" aria-hidden="true"></span> Voltar à Conclusão</a>
+
+      <header class="mj-cabeca">
+        <h1 id="mj-titulo" class="mj-cabeca__titulo" tabindex="-1">Mini Jogos</h1>
+        <p class="mj-cabeca__texto">Quatro jogos rápidos para jogar à vontade. Eles são à parte da jornada e não mexem no seu progresso.</p>
+      </header>
+
+      <ul class="mj-lista">
+        <li>
+          <a class="mj-cartao mj-cartao--pong ficha" href="#pong">
+            <svg class="mj-cartao__arte" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+              <path class="mj-pic__linha" d="M32 6V58" stroke-dasharray="5 5"/>
+              <rect class="mj-pic__forte" x="8" y="18" width="5" height="22"/>
+              <rect class="mj-pic__forte" x="51" y="28" width="5" height="22"/>
+              <rect class="mj-pic__acento" x="38" y="22" width="6" height="6"/>
+            </svg>
+            <div class="mj-cartao__corpo">
+              <h2 class="mj-cartao__titulo">Pong</h2>
+              <p class="mj-cartao__texto">Rebata a bola contra o computador. Quem chegar a 5 pontos vence.</p>
+              <p class="mj-cartao__meta"><span class="mj-cartao__chip">Arcade</span><span class="mj-cartao__acao">Jogar <span class="seta" aria-hidden="true"></span></span></p>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a class="mj-cartao mj-cartao--snake ficha" href="#snake">
+            <svg class="mj-cartao__arte" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+              <path class="mj-pic__rota" d="M8 52H26V36H42V20"/>
+              <rect class="mj-pic__forte" x="37" y="11" width="10" height="10"/>
+              <path class="mj-pic__linha" d="M54 40L59 45L54 50L49 45Z"/>
+            </svg>
+            <div class="mj-cartao__corpo">
+              <h2 class="mj-cartao__titulo">Snake</h2>
+              <p class="mj-cartao__texto">Colete itens, cresça e não bata nas paredes nem em si mesma.</p>
+              <p class="mj-cartao__meta"><span class="mj-cartao__chip">Arcade</span><span class="mj-cartao__acao">Jogar <span class="seta" aria-hidden="true"></span></span></p>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a class="mj-cartao mj-cartao--invaders ficha" href="#invaders">
+            <svg class="mj-cartao__arte" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+              <path class="mj-pic__linha" d="M20 10L25 16M44 10L39 16"/>
+              <rect class="mj-pic__forte" x="16" y="16" width="32" height="16"/>
+              <rect class="mj-pic__fundo" x="23" y="21" width="5" height="5"/>
+              <rect class="mj-pic__fundo" x="36" y="21" width="5" height="5"/>
+              <path class="mj-pic__linha" d="M20 36V40M32 36V40M44 36V40"/>
+              <path class="mj-pic__acento" d="M32 42V48"/>
+              <path class="mj-pic__forte" d="M32 52L40 60H24Z"/>
+            </svg>
+            <div class="mj-cartao__corpo">
+              <h2 class="mj-cartao__titulo">Space Invaders</h2>
+              <p class="mj-cartao__texto">Defenda a linha de defesa e destrua a frota antes que ela chegue.</p>
+              <p class="mj-cartao__meta"><span class="mj-cartao__chip">Arcade</span><span class="mj-cartao__acao">Jogar <span class="seta" aria-hidden="true"></span></span></p>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a class="mj-cartao mj-cartao--pathfinding ficha" href="#pathfinding">
+            <svg class="mj-cartao__arte" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+              <path class="mj-pic__linha" d="M8 8H56V56H8ZM20 8V56M32 8V56M44 8V56M8 20H56M8 32H56M8 44H56"/>
+              <path class="mj-pic__rota" d="M14 14H26V26H38V38H50V50"/>
+              <rect class="mj-pic__forte" x="22" y="34" width="8" height="8"/>
+              <rect class="mj-pic__forte" x="34" y="10" width="8" height="8"/>
+              <rect class="mj-pic__forte" x="10" y="10" width="8" height="8"/>
+              <rect class="mj-pic__acento" x="46" y="46" width="8" height="8"/>
+            </svg>
+            <div class="mj-cartao__corpo">
+              <h2 class="mj-cartao__titulo">Desafio de Pathfinding</h2>
+              <p class="mj-cartao__texto">Trace o caminho do A ao B e veja o algoritmo A* resolver o mesmo mapa.</p>
+              <p class="mj-cartao__meta"><span class="mj-cartao__chip">IA</span><span class="mj-cartao__acao">Jogar <span class="seta" aria-hidden="true"></span></span></p>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Os painéis dos jogos são montados por assets/js/minijogos.js. -->
+    <div id="mj-jogos"></div>
+
+    <noscript>
+      <p class="mj-semjs">Os mini jogos precisam de JavaScript. Ative o JavaScript do navegador para jogar.</p>
+    </noscript>
+  </main>
+
+  <script src="assets/js/minijogos.js"></script>
+  <script src="assets/js/minijogo-pong.js"></script>
+  <script src="assets/js/minijogo-snake.js"></script>
+  <script src="assets/js/minijogo-invaders.js"></script>
+  <script src="assets/js/minijogo-pathfinding.js"></script>
+</body>
+</html>

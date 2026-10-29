@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OdisseIA — Estação 1</title>
+  <meta name="description" content="Das regras simples às máquinas de estados, ao Machine Learning e à IA generativa: a evolução da inteligência artificial nos videogames.">
+
+  <!-- Prévia de link (WhatsApp, Discord, redes): Open Graph e Twitter Cards. Mesma arte em todas as páginas. -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="OdisseIA">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:title" content="OdisseIA — Estação 1: Inteligência Artificial nos jogos">
+  <meta property="og:description" content="Das regras simples às máquinas de estados, ao Machine Learning e à IA generativa: a evolução da inteligência artificial nos videogames.">
+  <meta property="og:url" content="https://pietroramosz.github.io/OdisseIA/estacao-1.html">
+  <meta property="og:image" content="https://pietroramosz.github.io/OdisseIA/assets/img/og-odisseia.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Arte do OdisseIA: o nome OdisseIA em destaque sobre fundo grafite, com a rota das quatro estações em azul descendo até a carta do X-B0T, em roxo.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="OdisseIA — Estação 1: Inteligência Artificial nos jogos">
+  <meta name="twitter:description" content="Das regras simples às máquinas de estados, ao Machine Learning e à IA generativa: a evolução da inteligência artificial nos videogames.">
+  <meta name="twitter:image" content="https://pietroramosz.github.io/OdisseIA/assets/img/og-odisseia.png">
+  <meta name="twitter:image:alt" content="Arte do OdisseIA: o nome OdisseIA em destaque sobre fundo grafite, com a rota das quatro estações em azul descendo até a carta do X-B0T, em roxo.">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/img/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/paginas/estacao.css">
+  <link rel="stylesheet" href="assets/css/paginas/estacao-modulos.css">
+  <link rel="stylesheet" href="assets/css/paginas/estacao-editorial.css">
+  <link rel="stylesheet" href="assets/css/scanner.css">
+  <script src="assets/js/acessibilidade.js"></script>
+</head>
+<body class="pagina-estacao" data-estacao="1">
+  <a class="pular" href="#conteudo-principal">Pular para o conteúdo</a>
+  <main id="conteudo-principal" tabindex="-1">
+    <!-- Conteúdo da estação: só aparece quando a estação está desbloqueada (app.js). -->
+    <div id="conteudo-estacao" hidden>
+      <a class="terminal-voltar" href="hub.html"><span class="seta seta--voltar" aria-hidden="true"></span> Voltar ao Hub</a>
+      <aside class="dossie-rota" aria-hidden="true">
+        <p class="dossie-rota__titulo">ROTA</p>
+        <ol class="dossie-rota__lista">
+          <li class="dossie-rota__parada dossie-rota__parada--atual"><span class="dossie-rota__numero">01</span> IA NOS JOGOS</li>
+          <li class="dossie-rota__parada"><span class="dossie-rota__numero">02</span> ATÉ 2000</li>
+          <li class="dossie-rota__parada"><span class="dossie-rota__numero">03</span> 2001 → HOJE</li>
+          <li class="dossie-rota__parada"><span class="dossie-rota__numero">04</span> X-B<span class="zero">0</span>T</li>
+          <li class="dossie-rota__parada dossie-rota__parada--fim">CONCLUSÃO</li>
+        </ol>
+      </aside>
+      <header class="dossie-capa">
+        <span class="numeral-vazado dossie-capa__numeral" aria-hidden="true">01</span>
+        <div class="dossie-capa__texto">
+          <h1 class="titulo-estacao">Inteligência Artificial nos jogos</h1>
+          <p class="terminal-hero__rotulo">ESTAÇÃO <span class="terminal-hero__numero">01</span> / 04</p>
+          <dl class="dossie-ficha">
+            <div class="dossie-ficha__item"><dt>Capítulos</dt><dd>04</dd></div>
+            <div class="dossie-ficha__item"><dt>Etapas</dt><dd>06</dd></div>
+          </dl>
+        </div>
+        <div class="dossie-capa__arte" aria-hidden="true">
+          <svg class="arte" viewBox="0 0 320 200" focusable="false">
+            <path class="arte__tela" d="M14 6H306L316 16V184L306 194H14L4 184V16Z"/>
+            <path class="arte__ligacao" pathLength="1" d="M160 44V60M70 60H250M70 60V76M160 60V76M250 60V76M70 100V116M40 116H100M40 116V132M100 116V132M160 100V116M130 116H190M130 116V132M190 116V132M250 100V116M220 116H280M220 116V132"/>
+            <path class="arte__ligacao arte__ligacao--ativa" pathLength="1" d="M160 44V60H250V76M250 100V116H280V132M280 156V170"/>
+            <rect class="arte__solido arte__bola" x="148" y="20" width="24" height="24"/>
+            <rect class="arte__no" x="58" y="76" width="24" height="24"/>
+            <rect class="arte__no" x="148" y="76" width="24" height="24"/>
+            <rect class="arte__no arte__no--ativo" x="238" y="76" width="24" height="24"/>
+            <rect class="arte__no" x="31" y="132" width="18" height="18"/>
+            <rect class="arte__no" x="91" y="132" width="18" height="18"/>
+            <rect class="arte__no" x="121" y="132" width="18" height="18"/>
+            <rect class="arte__no" x="181" y="132" width="18" height="18"/>
+            <rect class="arte__no" x="211" y="132" width="18" height="18"/>
+            <rect class="arte__no arte__no--ativo" x="271" y="132" width="18" height="18"/>
+            <path class="arte__traco-fino" d="M154 32H166M160 26V38"/>
+            <path class="arte__bola arte__delta" d="M272 170H288L280 184Z"/>
+          </svg>
+        </div>
+      </header>
+
+      <section class="briefing">
+        <h2 class="briefing__titulo">Das regras à inteligência artificial</h2>
+        <p>A inteligência artificial está presente nos videogames há muito mais tempo do que ferramentas modernas como o ChatGPT.</p>
+        <p>Desde os primeiros jogos, desenvolvedores já precisavam criar maneiras de fazer o computador responder às ações do jogador.</p>
+        <p>No início, esses comportamentos eram extremamente simples. Com o tempo, surgiram técnicas capazes de organizar decisões, encontrar caminhos, analisar situações e até gerar novos conteúdos.</p>
+      </section>
+
+      <section class="capitulo" id="cap-estados">
+        <h2 class="capitulo__titulo">Das regras às máquinas de estados</h2>
+        <p class="terminal-rotulo capitulo__rotulo">CAPÍTULO <span class="capitulo__numero">01</span></p>
+        <div class="capitulo__corpo">
+          <p>Nos primeiros jogos, muitos comportamentos eram controlados por cálculos e regras previamente programadas.</p>
+          <p>Em <strong>Pong</strong>, por exemplo, o adversário controlado pelo computador utilizava cálculos simples para acompanhar a bola.</p>
+          <p>Uma forma comum de organizar comportamentos é utilizar regras como:</p>
+          <ul>
+            <li>se não encontrar o jogador, patrulhar;</li>
+            <li>se detectar o jogador, perseguir;</li>
+            <li>se estiver próximo, atacar;</li>
+            <li>se estiver em perigo, fugir.</li>
+          </ul>
+          <p>As <strong>máquinas de estados</strong> organizam essas ações em diferentes situações.</p>
+          <p>Um personagem pode estar patrulhando, perceber o jogador, começar a persegui-lo e depois mudar novamente de comportamento.</p>
+          <figure class="figura figura--legivel" style="--ancora: 3">
+            <svg class="esquema figura__esquema" viewBox="0 0 340 240" aria-hidden="true" focusable="false">
+              <defs>
+                <marker id="seta-estado" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L8 4L0 8Z" class="figura__ponta"/></marker>
+              </defs>
+              <path class="esquema__linha esquema__linha--ativa" d="M60 101V36H112" marker-end="url(#seta-estado)"/>
+              <path class="esquema__linha esquema__linha--ativa" d="M228 36H280V93" marker-end="url(#seta-estado)"/>
+              <path class="esquema__linha esquema__linha--ativa" d="M280 135V196H230" marker-end="url(#seta-estado)"/>
+              <path class="esquema__linha esquema__linha--ativa" d="M112 196H60V143" marker-end="url(#seta-estado)"/>
+              <path class="figura__estado" d="M122 20H222L228 26V52H128L122 46Z"/>
+              <path class="figura__estado" d="M12 101H112L118 107V133H18L12 127Z"/>
+              <path class="figura__estado" d="M232 101H332L338 107V133H238L232 127Z"/>
+              <path class="figura__estado" d="M122 180H222L228 186V212H128L122 206Z"/>
+              <text class="esquema__texto esquema__texto--forte figura__nome" x="175" y="41">PERSEGUIR</text>
+              <text class="esquema__texto esquema__texto--forte figura__nome" x="65" y="122">PATRULHAR</text>
+              <text class="esquema__texto esquema__texto--forte figura__nome" x="285" y="122">ATACAR</text>
+              <text class="esquema__texto esquema__texto--forte figura__nome" x="175" y="201">FUGIR</text>
+              <text class="esquema__texto figura__condicao" x="73" y="74">detecta o</text>
+              <text class="esquema__texto figura__condicao" x="73" y="87">jogador</text>
+              <text class="esquema__texto figura__condicao figura__condicao--fim" x="272" y="74">está</text>
+              <text class="esquema__texto figura__condicao figura__condicao--fim" x="272" y="87">próximo</text>
+              <text class="esquema__texto figura__condicao figura__condicao--fim" x="272" y="160">está em</text>
+              <text class="esquema__texto figura__condicao figura__condicao--fim" x="272" y="173">perigo</text>
+              <text class="esquema__texto figura__condicao" x="73" y="160">não encontra</text>
+              <text class="esquema__texto figura__condicao" x="73" y="173">o jogador</text>
+            </svg>
+            <figcaption class="figura__legenda">As quatro regras como uma máquina de estados: cada seta é a condição que leva ao próximo comportamento.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="capitulo" id="cap-caminhos">
+        <h2 class="capitulo__titulo">Encontrando caminhos e escolhendo ações</h2>
+        <p class="terminal-rotulo capitulo__rotulo">CAPÍTULO <span class="capitulo__numero">02</span></p>
+        <div class="capitulo__corpo">
+          <p>Quando os cenários ficaram maiores, os personagens também precisaram aprender a navegar por eles.</p>
+          <p>O <strong>pathfinding</strong> permite encontrar rotas pelo ambiente, desviando de paredes e outros obstáculos.</p>
+          <p>O algoritmo <strong>A*</strong> é um exemplo de técnica usada para calcular caminhos.</p>
+          <figure class="figura" data-cena style="--ancora: 3">
+            <svg class="esquema figura__esquema" viewBox="0 0 340 160" aria-hidden="true" focusable="false">
+              <defs>
+                <pattern id="grade-rota" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0.5H0.5V20" class="figura__grade"/></pattern>
+              </defs>
+              <rect width="340" height="160" fill="url(#grade-rota)"/>
+              <path class="figura__explorado cena__acender" style="--t: 0.30" d="M41 81h18v18h-18ZM61 81h18v18h-18ZM81 81h18v18h-18ZM81 61h18v18h-18ZM81 41h18v18h-18ZM61 61h18v18h-18ZM61 41h18v18h-18Z"/>
+              <path class="figura__explorado cena__acender" style="--t: 0.47" d="M41 61h18v18h-18ZM41 41h18v18h-18ZM21 61h18v18h-18ZM21 41h18v18h-18ZM81 21h18v18h-18ZM81 101h18v18h-18ZM61 101h18v18h-18Z"/>
+              <path class="figura__explorado cena__acender" style="--t: 0.64" d="M21 21h18v18h-18ZM1 41h18v18h-18ZM41 101h18v18h-18ZM1 61h18v18h-18ZM21 101h18v18h-18ZM1 81h18v18h-18ZM81 1h18v18h-18Z"/>
+              <path class="figura__explorado cena__acender" style="--t: 0.81" d="M81 121h18v18h-18ZM101 121h18v18h-18ZM121 121h18v18h-18ZM141 121h18v18h-18ZM161 121h18v18h-18ZM181 121h18v18h-18ZM201 121h18v18h-18Z"/>
+              <path class="figura__explorado cena__acender" style="--t: 0.98" d="M201 101h18v18h-18ZM201 81h18v18h-18ZM201 61h18v18h-18ZM201 41h18v18h-18ZM141 101h18v18h-18ZM141 81h18v18h-18ZM161 81h18v18h-18Z"/>
+              <path class="figura__explorado cena__acender" style="--t: 1.15" d="M181 81h18v18h-18ZM181 61h18v18h-18ZM181 41h18v18h-18ZM161 61h18v18h-18ZM161 41h18v18h-18ZM141 61h18v18h-18ZM141 41h18v18h-18Z"/>
+              <path class="figura__explorado cena__acender" style="--t: 1.32" d="M121 101h18v18h-18ZM121 81h18v18h-18ZM121 61h18v18h-18ZM121 41h18v18h-18ZM61 121h18v18h-18ZM21 1h18v18h-18ZM41 1h18v18h-18Z"/>
+              <path class="figura__explorado cena__acender" style="--t: 1.49" d="M61 1h18v18h-18ZM1 21h18v18h-18ZM41 121h18v18h-18ZM21 121h18v18h-18ZM1 101h18v18h-18ZM201 21h18v18h-18ZM221 21h18v18h-18Z"/>
+              <path class="figura__explorado cena__acender" style="--t: 1.66" d="M241 21h18v18h-18ZM261 21h18v18h-18ZM281 21h18v18h-18ZM301 21h18v18h-18Z"/>
+              <path class="figura__parede" d="M100 0H120V120H100ZM220 40H240V160H220ZM160 100H200V120H160ZM40 20H80V40H40Z"/>
+              <path class="figura__rota cena__tracar" pathLength="1" style="--t: 2; --d: 1.6; --e: var(--cena-suave)" d="M30 90H90V130H210V30H310V50"/>
+              <rect class="figura__inicio" x="21" y="81" width="18" height="18"/>
+              <rect class="figura__chegada cena__surgir" style="--t: 3.4; --d: 0.3" x="301" y="41" width="18" height="18"/>
+              <text class="esquema__texto esquema__texto--forte" x="26" y="114">A</text>
+              <text class="esquema__texto esquema__texto--destaque" x="306" y="76">B</text>
+            </svg>
+            <figcaption class="figura__legenda">Ilustração: o A* examina as células da grade (áreas sombreadas) e traça a rota de A até B, contornando as paredes.</figcaption>
+          </figure>
+          <p>Com jogos mais complexos, também surgiram formas mais avançadas de organizar decisões.</p>
+          <p>As <strong>Behavior Trees</strong> estruturam comportamentos como uma árvore de possibilidades.</p>
+          <p>Já a <strong>Utility AI</strong> pode atribuir prioridades às ações disponíveis. Um personagem com pouca vida, por exemplo, pode considerar que se proteger ou se curar é mais importante do que continuar atacando.</p>
+          <p>NPCs também podem utilizar esses sistemas para executar rotinas, como trabalhar, conversar, descansar, patrulhar ou reagir a acontecimentos do mundo.</p>
+        </div>
+      </section>
+
+      <section class="capitulo" id="cap-ml">
+        <h2 class="capitulo__titulo">Machine Learning e adaptação</h2>
+        <p class="terminal-rotulo capitulo__rotulo">CAPÍTULO <span class="capitulo__numero">03</span></p>
+        <div class="capitulo__corpo">
+          <p>O <strong>Machine Learning</strong>, ou aprendizado de máquina, permite que sistemas encontrem padrões a partir de dados e experiências.</p>
+          <p>Nos jogos, essas técnicas podem ser utilizadas para analisar comportamentos, estudar estratégias, treinar agentes ou ajudar a ajustar desafios.</p>
+          <figure class="placa placa--aprender" style="--ancora: 1">
+            <svg class="placa__svg" viewBox="0 0 260 150" aria-hidden="true" focusable="false">
+              <path class="p-no" d="M14 30h8v8h-8ZM40 62h8v8h-8ZM22 96h8v8h-8ZM58 24h8v8h-8ZM64 100h8v8h-8ZM34 124h8v8h-8ZM70 66h8v8h-8ZM50 46h8v8h-8Z"/>
+              <path class="p-ativa p-tracar" pathLength="1" style="--i: 0" d="M92 76H132M122 66L134 76L122 86"/>
+              <path class="p-no p-surgir" style="--i: 1" d="M170 24h8v8h-8ZM184 40h8v8h-8ZM204 28h8v8h-8ZM190 56h8v8h-8Z"/>
+              <path class="p-no p-surgir" style="--i: 2" d="M172 98h8v8h-8ZM194 110h8v8h-8ZM214 96h8v8h-8ZM200 124h8v8h-8ZM224 118h8v8h-8Z"/>
+              <path class="p-ativa p-surgir" style="--i: 3" d="M160 16H216L222 22V66L216 72H166L160 66Z"/>
+              <path class="p-ativa p-surgir" style="--i: 4" d="M162 90H236L242 96V134L236 140H168L162 134Z"/>
+              <text class="p-texto p-texto--meio" x="46" y="146">DADOS</text>
+              <text class="p-texto p-texto--meio" x="202" y="12">PADRÕES</text>
+            </svg>
+            <figcaption class="placa__legenda">Ilustração: padrões encontrados a partir de dados e experiências.</figcaption>
+          </figure>
+          <p>Um exemplo conhecido é o <strong>AlphaGo</strong>, que combinou aprendizado de máquina e técnicas de busca para jogar Go.</p>
+          <p>Também existem sistemas adaptativos capazes de alterar comportamentos ou desafios de acordo com as ações do jogador.</p>
+          <p>Isso não significa necessariamente que todo inimigo esteja "aprendendo" como uma pessoa. Muitas vezes, o sistema está apenas utilizando regras e informações previamente definidas para responder de maneiras diferentes.</p>
+        </div>
+      </section>
+
+      <section class="capitulo" id="cap-generativa">
+        <h2 class="capitulo__titulo">IA generativa e o futuro</h2>
+        <p class="terminal-rotulo capitulo__rotulo">CAPÍTULO <span class="capitulo__numero">04</span></p>
+        <div class="capitulo__corpo">
+          <p>A <strong>IA generativa</strong> amplia novamente as possibilidades.</p>
+          <p>Em vez de apenas escolher uma ação, esses sistemas podem ajudar a produzir novos conteúdos, como:</p>
+          <ul class="lista-curta">
+            <li>diálogos;</li>
+            <li>histórias;</li>
+            <li>personagens;</li>
+            <li>imagens;</li>
+            <li>músicas;</li>
+            <li>vozes;</li>
+            <li>cenários.</li>
+          </ul>
+          <p>Isso pode permitir experiências mais variadas, mas também cria novos desafios.</p>
+          <p>O conteúdo gerado precisa continuar coerente com o mundo do jogo, respeitar suas regras e não prejudicar o equilíbrio da experiência.</p>
+          <div class="palco-editorial palco-editorial--fecho">
+            <p class="palco-editorial__frase">A IA tradicional, portanto, não desapareceu.</p>
+          </div>
+          <p>Regras, máquinas de estados, pathfinding, Behavior Trees e outras técnicas continuam úteis porque oferecem controle e previsibilidade.</p>
+          <p>Em muitos casos, tecnologias diferentes podem trabalhar juntas.</p>
+        </div>
+      </section>
+
+      <section class="linha-tempo linha-tempo--percurso" id="sequencia">
+        <h2 class="linha-tempo__titulo">A evolução em uma sequência</h2>
+        <ol class="percurso">
+          <li class="etapa" style="--i: 0"><span class="etapa__nome">Regras simples</span></li>
+          <li class="etapa" style="--i: 1"><a class="etapa__link" href="#cap-estados"><span class="etapa__nome">Máquinas de estados</span><span class="marco__destino">No capítulo 01 <span class="seta" aria-hidden="true"></span></span></a></li>
+          <li class="etapa" style="--i: 2"><a class="etapa__link" href="#cap-caminhos"><span class="etapa__nome">Pathfinding e navegação</span><p class="etapa__marco"><strong class="marco__ano">1968</strong> <span class="marco__nome">artigo do algoritmo A*</span></p><span class="marco__destino">No capítulo 02 <span class="seta" aria-hidden="true"></span></span></a></li>
+          <li class="etapa" style="--i: 3"><span class="etapa__nome">Behavior Trees e Utility AI</span><p class="etapa__marco"><strong class="marco__ano">2004</strong> <span class="marco__nome">Halo 2 e as Behavior Trees</span></p></li>
+          <li class="etapa" style="--i: 4"><a class="etapa__link" href="#cap-ml"><span class="etapa__nome">Machine Learning</span><p class="etapa__marco"><strong class="marco__ano">2016</strong> <span class="marco__nome">AlphaGo vence Lee Sedol</span></p><span class="marco__destino">No capítulo 03 <span class="seta" aria-hidden="true"></span></span></a></li>
+          <li class="etapa" style="--i: 5"><a class="etapa__link" href="#cap-generativa"><span class="etapa__nome">IA generativa</span><span class="marco__destino">No capítulo 04 <span class="seta" aria-hidden="true"></span></span></a></li>
+        </ol>
+        <p class="linha-tempo__fonte">As técnicas surgiram em épocas diferentes e continuam em uso; por isso, nem todas têm uma data definida.</p>
+        <p class="linha-tempo__referencias"><strong>Referências:</strong> A* — Hart, Nilsson e Raphael (IEEE, 1968); Halo 2 e Behavior Trees — 2004, descritos por Damián Isla (GDC, 2005); AlphaGo contra Lee Sedol — março de 2016 (DeepMind).</p>
+      </section>
+
+      <section class="conexao">
+        <span class="numeral-vazado conexao__numeral" aria-hidden="true">02</span>
+        <h2 class="conexao__titulo">E depois?</h2>
+        <p>Em jogos de cartas, uma inteligência artificial pode analisar jogadas, escolher cartas e controlar um adversário.</p>
+        <p>Esses conceitos ajudam a criar uma ponte entre esta estação e o <strong>X-B0T</strong>, jogo desenvolvido para o OdisseIA. Isso não significa que todas as técnicas apresentadas aqui estejam implementadas no X-B0T: a tecnologia utilizada no jogo depende do que for realmente concluído pelo grupo responsável.</p>
+        <p>Você poderá conhecer essa aplicação na prática na Estação 04. Antes dela, a próxima estação volta no tempo para acompanhar a história dos videogames, dos primeiros experimentos até o ano 2000.</p>
+        <div class="conexao__proximo" data-proximo-passo hidden></div>
+        <div class="conexao__acoes">
+          <div class="conexao__avanco" data-proxima-estacao></div>
+          <a class="botao botao--principal conexao__voltar" data-voltar-hub href="hub.html">Voltar ao Hub</a>
+        </div>
+      </section>
+    </div>
+
+    <!-- Mensagem de bloqueio: preenchida por app.js quando a estação é a próxima ou futura. -->
+    <div id="estado-bloqueado" hidden>
+      <a class="terminal-voltar" href="hub.html"><span class="seta seta--voltar" aria-hidden="true"></span> Voltar ao Hub</a>
+      <header class="dossie-capa dossie-capa--bloqueada">
+        <span class="numeral-vazado dossie-capa__numeral" aria-hidden="true">01</span>
+        <div class="dossie-capa__texto">
+          <h1 class="titulo-estacao">Inteligência Artificial nos jogos</h1>
+          <p class="terminal-hero__rotulo">ESTAÇÃO <span class="terminal-hero__numero">01</span> / 04</p>
+        </div>
+      </header>
+      <section id="bloqueio-painel" class="bloqueio"></section>
+    </div>
+  </main>
+
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/progresso.js"></script>
+  <script src="assets/js/qr.js"></script>
+  <script src="assets/js/scanner.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/cenas.js"></script>
+</body>
+</html>

@@ -1,0 +1,438 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-23T00:00:00.000Z",
+  "title": "Design System: OdisseIA",
+  "extensions": {
+    "colorMeta": {
+      "void-black": {
+        "role": "neutral",
+        "displayName": "Void Black",
+        "canonical": "#0c0c10",
+        "tonalRamp": [
+          "#0c0c10",
+          "#16161d",
+          "#222230",
+          "#30303f",
+          "#46465a",
+          "#63637a",
+          "#9d9daa",
+          "#d4d4dc"
+        ]
+      },
+      "graphite-surface": {
+        "role": "neutral",
+        "displayName": "Graphite Surface",
+        "canonical": "#16161d",
+        "tonalRamp": [
+          "#0c0c10",
+          "#111116",
+          "#16161d",
+          "#1f1f29",
+          "#2a2a36",
+          "#3b3b49",
+          "#55556a",
+          "#7c7c90"
+        ]
+      },
+      "graphite-surface-elevated": {
+        "role": "neutral",
+        "displayName": "Elevated Graphite",
+        "canonical": "#1f1f29",
+        "tonalRamp": [
+          "#111116",
+          "#16161d",
+          "#1a1a23",
+          "#1f1f29",
+          "#2b2b38",
+          "#3d3d4d",
+          "#57576b",
+          "#7d7d92"
+        ]
+      },
+      "signal-white": {
+        "role": "neutral",
+        "displayName": "Signal White",
+        "canonical": "#f3f3f6",
+        "tonalRamp": [
+          "#26262d",
+          "#46464f",
+          "#6f6f7d",
+          "#9d9daa",
+          "#c2c2cc",
+          "#dadade",
+          "#eeeef0",
+          "#f3f3f6"
+        ]
+      },
+      "dormant-gray": {
+        "role": "neutral",
+        "displayName": "Dormant Gray",
+        "canonical": "#6f6f7d",
+        "tonalRamp": [
+          "#1a1a1f",
+          "#2c2c34",
+          "#434350",
+          "#5b5b6c",
+          "#6f6f7d",
+          "#8f8f9b",
+          "#b4b4bd",
+          "#dadade"
+        ]
+      },
+      "xbot-roxo": {
+        "role": "accent",
+        "displayName": "Roxo do X-B0T",
+        "canonical": "#cd5efa",
+        "tonalRamp": [
+          "#2b0e3a",
+          "#4a1864",
+          "#702790",
+          "#9a3cc0",
+          "#b94fe0",
+          "#cd5efa",
+          "#ddaafd",
+          "#f0d9fe"
+        ]
+      },
+      "xbot-roxo-claro": {
+        "role": "accent",
+        "displayName": "Roxo do X-B0T (tema claro)",
+        "canonical": "#8f26c7",
+        "tonalRamp": [
+          "#2b0e3a",
+          "#4a1864",
+          "#6a0fa0",
+          "#8f26c7",
+          "#b94fe0",
+          "#cd5efa",
+          "#ddaafd",
+          "#f0d9fe"
+        ]
+      },
+      "azul-profundo": {
+        "role": "secondary",
+        "displayName": "Azul profundo (referência #142146)",
+        "canonical": "#142146",
+        "tonalRamp": [
+          "#080d1f",
+          "#0e1633",
+          "#142146",
+          "#1d2e63",
+          "#2a428a",
+          "#3558c4",
+          "#5b8cff",
+          "#8fb0ff"
+        ]
+      },
+      "azul-linha": {
+        "role": "secondary",
+        "displayName": "Azul de linha",
+        "canonical": "#3558c4",
+        "tonalRamp": [
+          "#142146",
+          "#1d2e63",
+          "#2a428a",
+          "#3558c4",
+          "#4a6fe0",
+          "#5b8cff",
+          "#8fb0ff",
+          "#cbd9ff"
+        ]
+      },
+      "azul-acento": {
+        "role": "primary",
+        "displayName": "Azul de acento",
+        "canonical": "#5b8cff",
+        "tonalRamp": [
+          "#142146",
+          "#2a428a",
+          "#3558c4",
+          "#4a73e8",
+          "#5b8cff",
+          "#8fb0ff",
+          "#bccfff",
+          "#e6edff"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Palavra-marca da abertura, placar 4/4 e numerais de estação: escala monumental, só em Chakra 700."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Título de estação (3 a 4,75rem) e da Conclusão, sempre com contorno da cor do fundo sobre numerais e linhas de foco."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Título de capítulo, briefing, módulo editorial e época da linha do tempo."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Parágrafo de abertura e corpo de capítulo, coluna de leitura de até 38rem (cerca de 62ch)."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Selo, ano de módulo, rótulo de margem e carimbo: caixa alta, 12px no mínimo."
+      }
+    },
+    "shadows": [
+      {
+        "name": "ficha-frame",
+        "value": ".ficha::before (moldura) + .ficha::after (miolo recuado em --espessura)",
+        "purpose": "Moldura que acompanha o recorte diagonal: um box-shadow não segue o canto cortado. Estados mudam --moldura e --espessura."
+      },
+      {
+        "name": "focus-frame",
+        "value": "--moldura: var(--cor-texto); --espessura: 3px",
+        "purpose": "Foco de teclado em cartões: o outline seria cortado pelo clip-path, então o foco é a própria moldura."
+      },
+      {
+        "name": "edge-dormant",
+        "value": "inset 0 0 0 1px var(--cor-superficie-alta)",
+        "purpose": "Contorno fino em painel fechado, sem preenchimento."
+      },
+      {
+        "name": "card-drop-shadow",
+        "value": "drop-shadow(0 12px 24px color-mix(in srgb, var(--cor-destaque) 30%, transparent))",
+        "purpose": "Único uso de sombra suave: a carta revelada na Conclusão."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-saida",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Chegada confiante dos gestos das estações; sem ricochete."
+      },
+      {
+        "name": "tracar / carimbar / irromper",
+        "value": "keyframes da abertura, da validação e da Conclusão",
+        "purpose": "A rota se desenha, o carimbo bate, a explosão irrompe."
+      },
+      {
+        "name": "tempo-*",
+        "value": "animation-timeline: view()",
+        "purpose": "Estação 1: a espinha da linha do tempo se traça e cada marco acende conforme a rolagem."
+      },
+      {
+        "name": "rede-*",
+        "value": "stroke-dashoffset 1.1s + nós em cascata",
+        "purpose": "Estação 2: a rede de conexões da capa é traçada e os nós ativos acendem um a um."
+      },
+      {
+        "name": "percurso-*",
+        "value": "animation-timeline: view()",
+        "purpose": "Estação 3: os trechos entre as etapas se ligam em sequência, conforme a rolagem."
+      },
+      {
+        "name": "palco-*",
+        "value": "numeral 0.6s, foco 0.7s, carta 0.6s, leque 0.55s",
+        "purpose": "Estação 4: numeral, linhas de foco, carta e leque entram em sequência."
+      },
+      {
+        "name": "movimento-reduzido",
+        "value": "prefers-reduced-motion e [data-movimento=\"reduzido\"]",
+        "purpose": "Animações e deslocamentos desligam; o estado final é o estado padrão. Ficam só trocas de cor em 0,12s."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "480px"
+      },
+      {
+        "name": "md",
+        "value": "600px"
+      },
+      {
+        "name": "lg",
+        "value": "900px"
+      },
+      {
+        "name": "xl",
+        "value": "1100px"
+      },
+      {
+        "name": "rail",
+        "value": "1360px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Ação principal (ex.: jogar X-B0T na Conclusão, só com gameUrl válida).",
+      "html": "<a class=\"ds-btn\" href=\"#\">JOGAR X-B0T</a>",
+      "css": ".ds-btn { display: flex; align-items: center; justify-content: center; min-height: 48px; padding: 12px 24px; background: #5b8cff; color: #0c0c10; font-family: 'Chakra Petch', system-ui, sans-serif; font-weight: 700; font-size: 1rem; letter-spacing: 0.06em; text-decoration: none; clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px); } .ds-btn:focus-visible { outline: none; box-shadow: inset 0 0 0 3px #f3f3f6; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Ação secundária (ex.: voltar ao Hub).",
+      "html": "<a class=\"ds-btn\" href=\"#\">VOLTAR AO HUB</a>",
+      "css": ".ds-btn { display: flex; align-items: center; justify-content: center; min-height: 48px; padding: 12px 24px; background: #1f1f29; color: #f3f3f6; font-family: 'Chakra Petch', system-ui, sans-serif; font-weight: 700; font-size: 1rem; letter-spacing: 0.06em; text-decoration: none; clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px); } .ds-btn:focus-visible { outline: none; box-shadow: inset 0 0 0 3px #f3f3f6; }"
+    },
+    {
+      "name": "Station Card — Next",
+      "kind": "card",
+      "refersTo": "card-next",
+      "description": "Cartão da próxima estação no Hub: ficha com moldura roxa de 2px, faixa de movimento, título maior e barra de ação roxa.",
+      "html": "<a class=\"ds-ficha\" href=\"#\"><span class=\"ds-ficha__faixa\"></span><strong class=\"ds-ficha__titulo\">Inteligência Artificial nos jogos</strong><span class=\"ds-ficha__estado\">PRÓXIMA ESTAÇÃO</span><span class=\"ds-ficha__acao\">Ver como desbloquear</span></a>",
+      "css": ".ds-ficha { display: grid; gap: 12px; padding: 20px 2px 2px; background: #5b8cff; color: #f3f3f6; text-decoration: none; clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px); } .ds-ficha > * { background: #1f1f29; padding: 0 16px; } .ds-ficha__faixa { height: 14px; padding: 0; background: #5b8cff; } .ds-ficha__titulo { font-family: 'Chakra Petch', system-ui, sans-serif; font-size: 1.5rem; line-height: 1.12; } .ds-ficha__estado { justify-self: start; background: #5b8cff; color: #0c0c10; font-family: 'Chakra Petch', system-ui, sans-serif; font-weight: 700; font-size: 0.75rem; letter-spacing: 0.08em; padding: 4px 8px; } .ds-ficha__acao { padding: 12px 16px; background: #5b8cff; color: #0c0c10; font-family: 'Chakra Petch', system-ui, sans-serif; font-weight: 700; }"
+    },
+    {
+      "name": "Station Card — Locked",
+      "kind": "card",
+      "refersTo": "card-locked",
+      "description": "Cartão bloqueado: miolo no fundo, faixa hachurada, cadeado, texto atenuado. Continua levando à explicação de como desbloquear.",
+      "html": "<a class=\"ds-bloq\" href=\"#\"><strong>X-B0T</strong><span>BLOQUEADA</span></a>",
+      "css": ".ds-bloq { display: grid; gap: 8px; padding: 20px 16px 16px; background: #0c0c10; color: #9d9daa; text-decoration: none; box-shadow: inset 0 0 0 1px #1f1f29; clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px); } .ds-bloq strong { font-family: 'Chakra Petch', system-ui, sans-serif; font-size: 1.25rem; } .ds-bloq span { font-family: 'Chakra Petch', system-ui, sans-serif; font-weight: 700; font-size: 0.75rem; letter-spacing: 0.08em; }"
+    },
+    {
+      "name": "Editorial Note — Marco",
+      "kind": "card",
+      "refersTo": null,
+      "description": "Módulo editorial (.nota) que destaca um marco: o ano é o monumento, moldura roxa. Complementa o capítulo; usa só um trecho literal dele.",
+      "html": "<div class=\"ds-nota\"><h3>Twitch</h3><p class=\"ds-nota__ano\">2011</p><p>Assistir outras pessoas jogando e acompanhar campeonatos passou a fazer parte da experiência dos videogames.</p></div>",
+      "css": ".ds-nota { display: grid; grid-template-columns: 1fr auto; gap: 12px; padding: 16px; background: #16161d; color: #c2c2cc; box-shadow: inset 0 0 0 2px #3558c4; clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px); } .ds-nota h3 { margin: 0; font-family: 'Chakra Petch', system-ui, sans-serif; font-size: 1.1875rem; color: #f3f3f6; } .ds-nota__ano { margin: 0; align-self: end; font-family: 'Chakra Petch', system-ui, sans-serif; font-weight: 700; font-size: 3rem; line-height: 0.8; letter-spacing: -0.04em; color: #5b8cff; } .ds-nota p:last-child { grid-column: 1 / -1; margin: 0; font-size: 0.9375rem; line-height: 1.5; }"
+    },
+    {
+      "name": "Editorial Note — Conexão",
+      "kind": "card",
+      "refersTo": null,
+      "description": "Módulo editorial de conexão: o diagrama (A liga a B) vem primeiro, miolo elevado.",
+      "html": "<div class=\"ds-conexao\"><svg viewBox=\"0 0 240 40\" aria-hidden=\"true\"><rect x=\"8\" y=\"8\" width=\"24\" height=\"24\" fill=\"#111116\" stroke=\"#c2c2cc\"/><path d=\"M32 20H208\" stroke=\"#f3f3f6\" stroke-width=\"2\"/><rect x=\"208\" y=\"8\" width=\"24\" height=\"24\" fill=\"#f3f3f6\"/></svg><h3>Da crise à recuperação</h3></div>",
+      "css": ".ds-conexao { padding: 16px; background: #1f1f29; box-shadow: inset 0 0 0 1px #6f6f7d; clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px); } .ds-conexao svg { display: block; width: 100%; padding-bottom: 8px; border-bottom: 1px dashed #6f6f7d; } .ds-conexao h3 { margin: 12px 0 0; font-family: 'Chakra Petch', system-ui, sans-serif; font-size: 1.1875rem; color: #f3f3f6; }"
+    },
+    {
+      "name": "Timeline Era",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "Época da linha do tempo única: nó oco na espinha, título em caixa alta e marcos como ano + nome, sem card.",
+      "html": "<div class=\"ds-epoca\"><h3>Anos 1970</h3><p><strong>1972</strong> Pong</p><p><strong>1977</strong> Atari 2600</p></div>",
+      "css": ".ds-epoca { position: relative; padding: 0 0 0 24px; border-left: 2px solid #5b8cff; color: #c2c2cc; } .ds-epoca::before { content: \"\"; position: absolute; left: -7px; top: 6px; width: 12px; height: 12px; background: #0c0c10; box-shadow: inset 0 0 0 2px #5b8cff; } .ds-epoca h3 { margin: 0 0 12px; font-family: 'Chakra Petch', system-ui, sans-serif; font-size: 1.5rem; text-transform: uppercase; color: #f3f3f6; } .ds-epoca p { margin: 0 0 8px; } .ds-epoca strong { display: inline-block; width: 4.75rem; font-family: 'Chakra Petch', system-ui, sans-serif; font-size: 1.25rem; color: #f3f3f6; }"
+    },
+    {
+      "name": "Path Step",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "Etapa do percurso da Estação 3: o nó cresce a cada etapa e o trecho liga uma etapa à seguinte.",
+      "html": "<div class=\"ds-etapa\"><span class=\"ds-etapa__no\"></span><strong>Máquinas de estados</strong></div>",
+      "css": ".ds-etapa { display: grid; grid-template-columns: 36px 1fr; align-items: center; gap: 12px; color: #f3f3f6; } .ds-etapa__no { justify-self: center; width: 20px; height: 20px; background: #5b8cff; } .ds-etapa strong { font-family: 'Chakra Petch', system-ui, sans-serif; font-size: 1.125rem; }"
+    },
+    {
+      "name": "Card Stage",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "Palco da carta na Estação 4: verso inclinado em moldura branca, linhas de foco saindo do centro da carta e etiqueta de arquivo.",
+      "html": "<figure class=\"ds-palco\"><div class=\"ds-palco__carta\"></div><figcaption>VERSO DA CARTA</figcaption></figure>",
+      "css": ".ds-palco { position: relative; aspect-ratio: 1; margin: 0; background: #111116; clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px); } .ds-palco__carta { position: absolute; top: 50%; left: 50%; width: 52%; aspect-ratio: 468 / 654; background: #6a2fb0; box-shadow: 0 0 0 4px #0c0c10, 0 0 0 6px #f3f3f6; transform: translate(-50%, -50%) rotate(-5deg); } .ds-palco figcaption { position: absolute; left: 16px; bottom: 16px; padding: 8px 12px; background: #f3f3f6; color: #0c0c10; font-family: 'Chakra Petch', system-ui, sans-serif; font-weight: 700; font-size: 0.75rem; letter-spacing: 0.16em; }"
+    },
+    {
+      "name": "Status Chip",
+      "kind": "chip",
+      "refersTo": "chip-state",
+      "description": "Selo de estado: próxima estação, validada, em validação.",
+      "html": "<span class=\"ds-chip\">PRÓXIMA ESTAÇÃO</span>",
+      "css": ".ds-chip { display: inline-block; padding: 4px 8px; background: #5b8cff; color: #0c0c10; font-family: 'Chakra Petch', system-ui, sans-serif; font-weight: 700; font-size: 0.75rem; letter-spacing: 0.08em; clip-path: polygon(4px 0, 100% 0, 100% calc(100% - 4px), calc(100% - 4px) 100%, 0 100%, 0 4px); }"
+    },
+    {
+      "name": "Progress Segment",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "Segmento da barra de progresso: vazio = trilho fino, cheio = bloco alto azul. A diferença é de forma, não só de cor.",
+      "html": "<div class=\"ds-progress\"><span class=\"ds-progress__seg ds-progress__seg--full\"></span><span class=\"ds-progress__seg ds-progress__seg--full\"></span><span class=\"ds-progress__seg\"></span><span class=\"ds-progress__seg\"></span></div>",
+      "css": ".ds-progress { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; } .ds-progress__seg { height: 4px; align-self: end; background: #6f6f7d; } .ds-progress__seg--full { height: 12px; background: #5b8cff; clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "O Arquivo de Missão",
+    "overview": "O OdisseIA é um arquivo de missão aberto página a página. Um traçado esquemático azul liga as quatro estações ao X-B0T, o único ponto roxo da jornada: na abertura é a rota inteira, no Hub a posição do visitante, nas estações um trilho na margem e uma linha do tempo ou um percurso do próprio assunto, na Conclusão a rota fechada com quatro carimbos. Sobre esse esqueleto técnico, a energia de mangá do X-B0T (linhas de velocidade, retícula, silhuetas, carimbos) irrompe nos pontos de conquista e cresce com a jornada: um pouco na abertura, uma faixa de movimento na próxima estação, o palco da carta na Estação 4, a densidade máxima na Conclusão.\n\nCada estação é um dossiê editorial: capítulos em fluxo de leitura, módulos complementares na coluna lateral (ficha com moldura, uma forma por tipo de conteúdo) e um movimento próprio. Os capítulos continuam capítulos; o card complementa, nunca embala a página inteira.\n\nO roxo é tinta com origem e direção: sinal de estado e tinta de ilustração (linhas que saem de um objeto real, rota percorrida, nós ativos). Nunca é texto corrido nem painel.",
+    "keyCharacteristics": [
+      "Escala tipográfica de contraste extremo: palavra-marca, placar e numerais monumentais; texto de leitura em fonte de sistema.",
+      "Numerais vazados como linhas da grade da capa, na mesma borda do título.",
+      "Linhas esquemáticas (traço de 1,5–2px, nós quadrados; tracejado = ainda não percorrido, sólido = percorrido).",
+      "Módulos editoriais em .ficha, só onde acrescentam algo ao parágrafo (marco, órbita, status); nunca repetindo o texto vizinho.",
+      "Uma linha do tempo única e um percurso conectado, sem repetir acontecimentos nem empilhar caixas iguais.",
+      "Texturas de mangá como máscaras SVG coloridas por token; linhas de foco só quando partem de um objeto real.",
+      "O recorte diagonal é a única forma de contêiner; o título sempre abre a seção."
+    ],
+    "rules": [
+      {
+        "name": "The Blue-Accent Rule",
+        "body": "O azul de acento (#5b8cff) marca estado, progresso, ação e foco; o azul de linha (#3558c4) desenha estrutura e textura; o azul profundo (#142146) só aparece como fundo sutil. Nenhum azul é cor de texto corrido nem preenchimento de painel inteiro: o grafite é a base (DEC-024).",
+        "section": "colors"
+      },
+      {
+        "name": "The Purple Is the Game Rule",
+        "body": "O roxo #cd5efa só aparece onde o X-B0T é o assunto: cartão e engrenagem do X-B0T no Hub, carta e explosão da abertura, Estação 4 (com a carta interativa) e o bloco do jogo na Conclusão. A navegação da jornada volta ao azul com --cor-marca.",
+        "section": "colors"
+      },
+      {
+        "name": "The Two-Dark Rule",
+        "body": "Graphite Surface Dim marca palco ou fechado; Elevated Graphite marca destaque ou próximo. Nunca usar um no lugar do outro.",
+        "section": "colors"
+      },
+      {
+        "name": "The Token-Colored Texture Rule",
+        "body": "Retícula, linhas de foco, linhas de movimento, hachura, grade e seta são SVGs usados como mask, com background-color vindo de um token. Nenhuma textura carrega cor própria (DEC-013).",
+        "section": "colors"
+      },
+      {
+        "name": "The Heading-First Rule",
+        "body": "O título abre a seção. Rótulos de estado vêm depois dele, como selo; rótulos de seção ficam na margem a partir de 900px. Nenhum rótulo acima de título.",
+        "section": "typography"
+      },
+      {
+        "name": "The Hollow Numeral Rule",
+        "body": "Contorno sem preenchimento só em numerais grandes e decorativos (a partir de 1.75rem). Texto pequeno em contorno continua proibido.",
+        "section": "typography"
+      },
+      {
+        "name": "The No New Font Rule",
+        "body": "Nenhuma fonte entra sem decisão explícita. A Inter continua na pasta como alternativa futura e não é carregada.",
+        "section": "typography"
+      },
+      {
+        "name": "The Hard-Edge Rule",
+        "body": "Toda sombra estrutural é aresta dura (inset) ou a moldura da ficha. Blur só na carta revelada da Conclusão.",
+        "section": "elevation"
+      },
+      {
+        "name": "The One Cut Rule",
+        "body": "O contêiner tem uma forma só: o recorte diagonal. Ângulos e curvas pertencem à ilustração (trajetória da bola, carta inclinada), nunca à moldura da interface.",
+        "section": "shapes"
+      }
+    ],
+    "dos": [
+      "Do abrir toda seção pelo título e pôr estado e rótulo depois, como selo ou anotação de margem.",
+      "Do expressar estado por texto, forma e cor juntos: carimbo, hachura, faixa de movimento, alvo no nó (DEC-013).",
+      "Do desenhar diagramas só com relações que o conteúdo afirma, e marcar como ilustração o que for exemplo.",
+      "Do usar nos módulos editoriais apenas trechos que já estão na página, variando a forma com o conteúdo.",
+      "Do posicionar numeral e arte da capa pelas áreas da grade, e o módulo na coluna lateral pela linha do parágrafo que destaca.",
+      "Do manter contraste mínimo de 4,5:1 em texto, 3:1 em interface, alvos de 44px, foco sempre visível e movimento com alternativa reduzida.",
+      "Do contornar títulos que passam sobre numerais ou linhas de foco (paint-order: stroke fill)."
+    ],
+    "donts": [
+      "Don't pôr rótulo, kicker ou selo acima de título.",
+      "Don't transformar capítulos em cards, aninhar módulos nem repetir o mesmo módulo em todas as seções.",
+      "Don't pôr linhas de foco que não partam de um objeto real da composição (a carta, o numeral).",
+      "Don't posicionar numeral ou arte da capa por calc() e deslocamentos arbitrários.",
+      "Don't usar glow difuso, gradiente decorativo, glassmorphism, border-radius ou uma segunda linguagem de contêiner.",
+      "Don't usar glifos Unicode ou emoji como ícone; use a .seta ou um SVG desenhado.",
+      "Don't mostrar a arte da carta fora da Estação 4 e da Conclusão, nem a sombra suave fora da Conclusão.",
+      "Don't inventar mecânicas, dados ou datas do X-B0T nem de qualquer estação em diagramas, módulos ou legendas.",
+      "Don't introduzir fonte nova, carregar a Inter ou usar texto visível abaixo de 12px.",
+      "Don't permitir rolagem horizontal entre 360 e 430px.",
+      "Don't condicionar uma animação a prefers-reduced-motion por conta própria: a decisão é de data-movimento (DEC-022).",
+      "Don't repetir num módulo, legenda ou título o que o parágrafo vizinho já diz.",
+      "Don't escrever o nome do jogo com a letra O: a grafia é X-B0T, com zero.",
+      "Don't deixar o azul tão discreto que não se veja, nem deixar o branco assumir o papel do acento; o grafite é a base e o azul, o acento.",
+      "Don't mandar escanear o QR da estação seguinte antes da visita física a ela: o QR só existe depois que o orientador o entrega."
+    ]
+  }
+}

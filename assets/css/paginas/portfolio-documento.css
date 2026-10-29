@@ -1,0 +1,242 @@
+/* Portfólio (portfolio.html): o documento original (Word, A4) exibido no site com o layout preservado:
+   Arial 12 pt com entrelinha de 1,5 e texto justificado, capa e títulos em Times New Roman, faixas cinza
+   dos anexos, tabela com bordas, imagens nos tamanhos do original e a colagem de fotos do Anexo 02 nas
+   posições do Word. O tamanho em pt vira rem (12 pt = 1 rem), então o texto acompanha o tamanho escolhido
+   no painel de acessibilidade.
+
+   Adaptações técnicas (DEC-031):
+   - a folha do documento e o texto seguem o tema do site (escuro ou claro), em vez da folha branca, e o
+     espaço ao redor dela é de outro tom, para o documento se destacar: no tema claro a folha é off-white
+     sobre um cinza-azulado mais fundo, com filete e uma sombra curta; no escuro, a folha é escura sobre um
+     tom ainda mais escuro;
+   - os links usam a cor de acento do tema, para ter contraste nos dois fundos;
+   - o logotipo, que é transparente com letras azul-marinho, ganha um fundo branco no tema escuro;
+   - sem paginação: o texto corre contínuo, e sequências de parágrafos vazios que serviam de quebra de página
+     viram um espaço;
+   - as margens do Word (3 cm e 2 cm) encolhem em telas estreitas.
+   Fica de fora do tema o que tem cor própria no original: as faixas cinza (#BFBFBF, texto preto) e as imagens.
+   As regras .pN do fim do arquivo são geradas a partir da formatação de cada parágrafo do .docx. */
+
+body.pagina-portfolio {
+  /* Folha do documento e espaço ao redor dela. No escuro o tom externo é fixo (quase preto, igual ao véu
+     do modal); no claro vem do token do palco (ver abaixo). */
+  --doc-fundo: var(--cor-superficie);
+  --doc-externo: #050508;
+  padding: 1rem clamp(0.5rem, 3vw, 1.5rem);
+  background: var(--doc-externo);
+  color: var(--cor-texto);
+}
+
+:root[data-tema="claro"] body.pagina-portfolio {
+  --doc-externo: var(--cor-superficie-escura);
+}
+
+:root[data-tema="escuro"][data-contraste="alto"] body.pagina-portfolio {
+  --doc-externo: #000;
+}
+
+/* A folha clara se destaca do fundo com uma sombra curta, além do filete. */
+:root[data-tema="claro"] .doc {
+  box-shadow: 0 0 0 1px var(--cor-filete), 0 2px 8px rgba(20, 24, 36, 0.18);
+}
+
+/* Sem a grade decorativa do site: o espaço ao redor da folha é liso. */
+body.pagina-portfolio::before {
+  display: none;
+}
+
+.pagina-portfolio main {
+  container-type: inline-size;
+}
+
+.pagina-portfolio main:focus {
+  outline: none;
+}
+
+.doc {
+  /* Margens do Word (esquerda 3 cm, direita 2 cm) numa página de 21 cm; encolhem junto com a tela. */
+  --m-esq: clamp(1rem, 22.25cqw - 63.7px, 3cm);
+  --m-dir: clamp(1rem, 13.76cqw - 33.3px, 2cm);
+  max-width: 21cm;
+  margin: 0 auto;
+  padding: 1.25cm var(--m-dir) 2rem var(--m-esq);
+  background: var(--doc-fundo);
+  box-shadow: 0 0 0 1px var(--cor-filete);
+  font-family: Arial, "Liberation Sans", Helvetica, sans-serif;
+  font-size: 1rem;
+  line-height: 1.3225;
+  text-align: justify;
+  hyphens: auto;
+  overflow-wrap: break-word;
+}
+
+.doc :where(p, h2, h3) {
+  margin: 0;
+  font-size: 1em;
+  font-weight: 400;
+}
+
+.doc .tnr {
+  font-family: "Times New Roman", Times, "Liberation Serif", serif;
+}
+
+.doc .arial {
+  font-family: Arial, "Liberation Sans", Helvetica, sans-serif;
+}
+
+.doc img {
+  display: inline-block;
+  max-width: 100%;
+  height: auto;
+  vertical-align: bottom;
+}
+
+.doc a {
+  color: var(--cor-azul-claro);
+  text-decoration: underline;
+  overflow-wrap: anywhere;
+}
+
+.doc a:hover {
+  color: var(--cor-texto);
+}
+
+/* Parágrafos vazios do original: só espaço. */
+.doc .v {
+  min-height: 1em;
+}
+
+/* Sequências longas de parágrafos vazios (ou quebra de página) do original: um espaço. */
+.doc__quebra {
+  height: 5rem;
+}
+
+/* ---------- Capa e folha de rosto ---------- */
+
+.doc__capa {
+  display: flex;
+  flex-direction: column;
+  min-height: 26cm;
+}
+
+.doc__logo {
+  width: 88.1%;
+  margin-left: 1.5%;
+}
+
+:root[data-tema="escuro"] .doc__logo {
+  padding: 0.5rem;
+  background: #fff;
+}
+
+.doc__capa-meio {
+  margin-top: 4rem;
+}
+
+.doc__emblema {
+  display: block;
+  width: 86.1%;
+  margin: 1rem auto 0;
+}
+
+.doc__capa-fim {
+  margin-top: auto;
+}
+
+.doc__rosto {
+  margin-top: 4rem;
+}
+
+.doc__rosto-base {
+  margin-top: 6rem;
+}
+
+/* ---------- Listas numeradas ---------- */
+
+.doc__ol {
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+.doc__ol--2 {
+  padding-left: 3rem;
+}
+
+/* ---------- Tabela da escala de turnos ---------- */
+
+.doc__tabela {
+  overflow-x: auto;
+}
+
+.doc__tabela:focus-visible {
+  outline: 2px solid var(--cor-destaque);
+  outline-offset: 2px;
+}
+
+.doc__tabela table {
+  width: 100%;
+  min-width: 34rem;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-family: "Times New Roman", Times, "Liberation Serif", serif;
+  line-height: 1.15;
+  text-align: left;
+}
+
+.doc__tabela th,
+.doc__tabela td {
+  padding: 0.4167rem;
+  border: 1.33px solid currentColor;
+  font-weight: 400;
+  text-align: left;
+  vertical-align: top;
+}
+
+.doc__tabela p {
+  text-align: left;
+  hyphens: manual;
+}
+
+/* ---------- Colagem de fotos do Anexo 02 ---------- */
+
+/* Ocupa a página toda (sai das margens do texto), como no Word; as posições são percentuais. */
+.doc__colagem {
+  position: relative;
+  margin-inline: calc(-1 * var(--m-esq)) calc(-1 * var(--m-dir));
+}
+
+.doc .doc__colagem-img {
+  position: absolute;
+  max-width: none;
+}
+
+/* ---------- Formatação de cada parágrafo (gerada a partir do .docx) ---------- */
+.doc .p1{font-family:"Times New Roman", Times, "Liberation Serif", serif;font-size:1.3333rem;font-weight:700;text-align:center;padding-bottom:0.8333rem;line-height:1.725}
+.doc .p2{font-family:"Times New Roman", Times, "Liberation Serif", serif;font-size:1.1667rem;text-align:center;line-height:1.725}
+.doc .p3{font-family:"Times New Roman", Times, "Liberation Serif", serif;text-align:center;line-height:1.725}
+.doc .p4{text-align:center;padding-bottom:0.8333rem;line-height:1.725}
+.doc .p5{font-family:"Times New Roman", Times, "Liberation Serif", serif;text-align:center;padding-bottom:0.8333rem;line-height:1.725}
+.doc .p6{text-align:center;line-height:1.725}
+.doc .p7{font-family:"Times New Roman", Times, "Liberation Serif", serif;text-align:left;padding-left:min(15em, 40%);line-height:1.725}
+.doc .p8{font-family:"Times New Roman", Times, "Liberation Serif", serif;text-align:left;text-indent:3em;padding-left:min(12em, 40%);line-height:1.725}
+.doc .p9{line-height:1.725}
+.doc .p10{font-weight:700;line-height:1.725}
+.doc .p11{text-indent:2.95em;line-height:1.725}
+.doc .p12{padding-bottom:0.8333rem;line-height:1.725}
+.doc .p13{font-weight:700;padding-bottom:0.8333rem;line-height:1.725}
+.doc .p14{text-indent:2.95em;padding-bottom:0.8333rem;line-height:1.725}
+.doc .p15{text-indent:3em;padding-bottom:0.8333rem;line-height:1.725}
+.doc .p16{text-indent:2.95em;padding-bottom:1rem;line-height:1.725}
+.doc .p17{text-indent:3em;padding-bottom:1rem;line-height:1.725}
+.doc .p18{padding-top:1rem;padding-bottom:1rem;line-height:1.725}
+.doc .p19{padding-bottom:1rem;line-height:1.725}
+.doc .p20{font-weight:700;padding-bottom:1rem;line-height:1.725}
+.doc .p21{font-family:"Times New Roman", Times, "Liberation Serif", serif;font-weight:700;padding-bottom:1rem;line-height:1.725}
+.doc .p22{font-family:"Times New Roman", Times, "Liberation Serif", serif;line-height:1.725;background:#BFBFBF;color:#000}
+.doc .p23{font-weight:700;text-align:left;line-height:1.725}
+.doc .p24{font-size:1.0833rem;font-weight:700;line-height:1.725}
+.doc .p25{text-align:left;line-height:1.725}
+.doc .p26{font-weight:700;text-align:left;padding-bottom:0.8333rem;line-height:1.3225}
+.doc .p27{font-family:"Times New Roman", Times, "Liberation Serif", serif;line-height:1.725}
+.doc .p28{text-align:left;padding-bottom:0.8333rem;line-height:1.3225}
+.doc .p29{font-family:"Times New Roman", Times, "Liberation Serif", serif;font-size:1.3333rem;font-weight:700;line-height:1.725}
