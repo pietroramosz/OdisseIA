@@ -110,5 +110,3 @@ A intenção não é esconder o uso de IA, nem apresentar o projeto como se bast
 ## Estado atual
 
 O site está no ar no GitHub Pages (endereço definitivo), os QR Codes finais foram gerados e os testes físicos da experiência foram realizados. O X-B0T tem endereço final em https://robot-tcg.netlify.app/, configurado em `gameUrl`.
-
-Uma demonstração em vídeo ainda não foi adicionada.
