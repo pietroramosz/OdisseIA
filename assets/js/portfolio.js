@@ -1,8 +1,8 @@
 // Leitor do portfólio na Conclusão (final.html): um <dialog> modal com o documento do projeto.
 //
 // O documento é a página local portfolio.html (HTML estático, somente leitura), carregada num <iframe>
-// da mesma origem. Não depende de endereço externo, de conta nem de configuração. Não lê nem grava
-// progresso e não toca em localStorage.
+// da mesma origem. Não depende de endereço externo, de conta nem de configuração. Não toca em
+// localStorage.
 //
 // Acessibilidade: o <dialog> modal prende o foco, Esc fecha e o fundo fica inerte. O foco inicial vai ao
 // "Fechar" (primeiro controle do leitor) e, ao fechar, volta ao "Ver portfólio". Com o foco dentro do

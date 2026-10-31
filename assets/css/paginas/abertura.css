@@ -247,15 +247,6 @@
   color: var(--cor-texto-secundario);
 }
 
-.protocolo__nota {
-  margin: var(--espaco-3) 0 0;
-  padding-top: var(--espaco-3);
-  border-top: 1px dashed var(--cor-apagado);
-  font-size: 0.875rem;
-  line-height: 1.5;
-  color: var(--cor-texto-atenuado);
-}
-
 /* ---------- Índice da jornada ---------- */
 
 .jornada {

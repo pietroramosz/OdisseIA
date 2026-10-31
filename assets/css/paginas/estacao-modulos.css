@@ -1,6 +1,6 @@
 /* Módulos das estações (DEC-019): módulos editoriais (.nota), linha do tempo única (Estações 2 e 3),
    percurso (Estação 1), palco da carta (Estação 4) e o movimento próprio de cada estação.
-   Carrega depois de estacao.css, que traz a capa, os capítulos, a grade e as telas de bloqueio. */
+   Carrega depois de estacao.css, que traz a capa, os capítulos e a grade. */
 
 /* ---------- Módulos editoriais (.nota) ----------
    Complementam a leitura: destacam uma ideia, um marco, um conceito ou uma conexão que já está no
@@ -1253,15 +1253,15 @@
 }
 
 /* Capa, em sequência: numeral, título, "ESTAÇÃO 0N / 04", ficha técnica e, em paralelo, a arte. */
-.dossie-capa:not(.dossie-capa--bloqueada) .dossie-capa__numeral {
+.dossie-capa .dossie-capa__numeral {
   animation: estacao-numeral 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards;
 }
 
-.dossie-capa:not(.dossie-capa--bloqueada) .titulo-estacao {
+.dossie-capa .titulo-estacao {
   animation: estacao-entrar 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.12s backwards;
 }
 
-.dossie-capa:not(.dossie-capa--bloqueada) .terminal-hero__rotulo {
+.dossie-capa .terminal-hero__rotulo {
   animation: estacao-entrar 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.26s backwards;
 }
 
@@ -1311,7 +1311,7 @@
   to { transform: none; }
 }
 
-[data-estacao="2"] .dossie-capa:not(.dossie-capa--bloqueada) .titulo-estacao {
+[data-estacao="2"] .dossie-capa .titulo-estacao {
   animation: arcade-escrever 0.7s steps(18, end) 0.15s backwards;
 }
 
@@ -1502,25 +1502,20 @@
     transform: translateY(-3px);
   }
 
-  .conexao__avancar:not(.conexao__avancar--bloqueado):hover .seta {
+  .conexao__avancar:hover .seta {
     transform: translateX(4px);
-  }
-
-  .conexao__avancar--bloqueado:hover {
-    background: var(--cor-fundo);
-    color: var(--cor-texto-atenuado);
   }
 
   .terminal-voltar:hover .seta--voltar {
     transform: translateX(-3px) scaleX(-1);
   }
 
-  .botao:not(.conexao__avancar--bloqueado):hover {
+  .botao:hover {
     transform: translateY(-2px);
   }
 }
 
-.conexao__avancar:not(.conexao__avancar--bloqueado):focus-visible .seta {
+.conexao__avancar:focus-visible .seta {
   transform: translateX(4px);
 }
 

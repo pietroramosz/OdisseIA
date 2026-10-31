@@ -5,7 +5,7 @@
 // escolha explícita. "Restaurar padrão" volta a seguir o sistema.
 // Carregado no <head> de cada página para aplicar as escolhas antes da primeira pintura e evitar
 // o clarão do tema escuro. O painel é montado depois, quando o documento está pronto.
-// Chave própria no localStorage, independente do progresso: "odisseia:acessibilidade".
+// Chave própria no localStorage: "odisseia:acessibilidade".
 (function () {
   "use strict";
 

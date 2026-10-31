@@ -1,6 +1,6 @@
-/* Conclusão: o clímax. Explosão de linhas de foco em volta do placar 4/4, carimbo da jornada,
-   passaporte com as quatro estações carimbadas e a carta do X-B0T revelada. O acesso ao jogo
-   só vira botão com gameUrl válida; sem ela, o painel de status diz a verdade. */
+/* Conclusão: o fecho da jornada. Explosão de linhas de foco em volta do numeral das quatro estações,
+   carimbo, resumo com as quatro estações e a carta do X-B0T. O acesso ao jogo só vira botão com
+   gameUrl válida; sem ela, o painel de status diz a verdade. */
 
 .pagina-final main {
   max-width: calc(var(--palco) + 2 * var(--gutter));
@@ -11,7 +11,7 @@
   overflow-x: clip;
 }
 
-/* ---------- Herói: placar monumental dentro da explosão ---------- */
+/* ---------- Herói: numeral monumental dentro da explosão ---------- */
 
 .final-hero {
   position: relative;
@@ -93,13 +93,6 @@
   paint-order: stroke fill;
 }
 
-.final-placar__total {
-  font-size: clamp(2.5rem, 12vw, 4.5rem);
-  white-space: pre;
-  color: transparent;
-  -webkit-text-stroke: 1.5px var(--cor-texto);
-}
-
 .final-placar__rotulo {
   display: inline-block;
   margin: var(--espaco-3) 0 0;
@@ -112,11 +105,11 @@
   color: var(--cor-texto);
 }
 
-/* Carimbo da jornada: bate sobre o placar. */
+/* Carimbo: bate sobre o numeral. */
 .final-selo {
   position: absolute;
-  top: 18%;
-  right: -6%;
+  top: 10%;
+  right: -38%;
   margin: 0;
   padding: var(--espaco-2) var(--espaco-3);
   border: 3px solid var(--cor-texto);
@@ -133,47 +126,7 @@
   animation: carimbar 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.6s both;
 }
 
-/* Barra: cheia = bloco alto azul, vazia = trilho fino. */
-.final-barra {
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: 1fr;
-  gap: var(--espaco-1);
-  width: min(18rem, 80vw);
-  margin: var(--espaco-4) auto 0;
-}
-
-.final-barra__celula {
-  display: grid;
-  grid-template-rows: var(--espaco-3) auto;
-  gap: var(--espaco-2);
-}
-
-.final-barra__segmento {
-  align-self: end;
-  height: var(--espaco-1);
-  background: var(--cor-apagado);
-}
-
-.final-barra__celula--cheia .final-barra__segmento {
-  height: var(--espaco-3);
-  background: var(--cor-destaque);
-  clip-path: var(--recorte-pequeno);
-}
-
-.final-barra__numero {
-  font-family: var(--fonte-titulo);
-  font-weight: 600;
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
-  color: var(--cor-texto-atenuado);
-}
-
-.final-barra__celula--cheia .final-barra__numero {
-  color: var(--cor-texto);
-}
-
-/* ---------- Passaporte: as quatro estações carimbadas ---------- */
+/* ---------- Resumo: as quatro estações ---------- */
 
 .final-jornada {
   margin-top: var(--espaco-12);
@@ -195,7 +148,7 @@
   border-top: 1px solid var(--cor-apagado);
 }
 
-/* A rota se fecha: uma linha roxa contínua liga as quatro paradas; cada uma recebe o carimbo. */
+/* A rota se fecha: uma linha contínua liga as quatro paradas; cada uma tem o carimbo de abrir. */
 .final-jornada__lista {
   isolation: isolate;
   display: grid;
@@ -269,6 +222,7 @@
   font-size: 0.75rem;
   letter-spacing: 0.14em;
   color: var(--cor-destaque);
+  text-decoration: none;
   --giro: -6deg;
   transform: rotate(var(--giro));
   animation: carimbar 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
@@ -411,7 +365,7 @@
   letter-spacing: 0.1em;
 }
 
-/* Sem gameUrl válida: duas linhas separadas — jornada concluída (cheia) e acesso pendente (vazado). */
+/* Sem gameUrl válida: o acesso pendente (vazado), com a nota explicando. */
 .final-status {
   position: relative;
   isolation: isolate;
@@ -427,12 +381,7 @@
   justify-content: space-between;
   gap: var(--espaco-1) var(--espaco-3);
   margin: 0;
-  padding: var(--espaco-3) 0;
-}
-
-.final-status__linha:first-child {
-  padding-top: 0;
-  border-bottom: 1px solid var(--cor-filete);
+  padding: 0;
 }
 
 .final-status__rotulo {
@@ -467,7 +416,7 @@
   color: var(--cor-texto);
 }
 
-/* O acesso pendente leva hachura: ainda fechado, como as estações bloqueadas. */
+/* O acesso pendente é vazado: ainda sem link publicado. */
 .final-status__linha--pendente {
   position: relative;
 }
@@ -509,94 +458,6 @@
 .final-saida {
   display: grid;
   margin-top: var(--espaco-8);
-}
-
-/* ---------- Jornada incompleta: passaporte ainda sem todos os carimbos ---------- */
-
-.final-bloqueio {
-  position: relative;
-  isolation: isolate;
-  margin-top: var(--espaco-8);
-  padding: var(--espaco-8) var(--espaco-6) var(--espaco-6);
-  background: var(--cor-fundo);
-  box-shadow: inset 0 0 0 1px var(--cor-filete);
-  clip-path: var(--recorte);
-}
-
-.final-bloqueio::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  background-color: var(--cor-hachura);
-  -webkit-mask: var(--textura-hachura) 0 0 / 10px 10px repeat;
-  mask: var(--textura-hachura) 0 0 / 10px 10px repeat;
-  opacity: 0.6;
-}
-
-.final-bloqueio__titulo {
-  margin: 0;
-  font-family: var(--fonte-titulo);
-  font-weight: 700;
-  font-size: clamp(2.25rem, 10vw, 3.5rem);
-  line-height: 0.95;
-}
-
-.final-bloqueio__estado {
-  display: inline-block;
-  margin: var(--espaco-4) 0 0;
-  padding: var(--espaco-1) var(--espaco-2);
-  border: 2px solid var(--cor-texto-atenuado);
-  font-family: var(--fonte-titulo);
-  font-weight: 700;
-  font-size: 0.75rem;
-  letter-spacing: 0.12em;
-  color: var(--cor-texto-secundario);
-  transform: rotate(-3deg);
-}
-
-.final-bloqueio__texto {
-  margin: var(--espaco-4) 0 var(--espaco-6);
-  line-height: 1.6;
-  color: var(--cor-texto-secundario);
-}
-
-.final-bloqueio__progresso {
-  padding: var(--espaco-4);
-  background: var(--cor-superficie);
-  clip-path: var(--recorte);
-}
-
-.final-bloqueio__progresso .final-barra {
-  width: auto;
-  margin: 0;
-}
-
-.final-bloqueio__linha {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: var(--espaco-3);
-  margin: 0 0 var(--espaco-3);
-}
-
-.final-bloqueio__rotulo {
-  font-family: var(--fonte-titulo);
-  font-weight: 600;
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
-  color: var(--cor-texto-secundario);
-}
-
-.final-bloqueio__numero {
-  font-family: var(--fonte-titulo);
-  font-weight: 700;
-  font-size: 2.5rem;
-  line-height: 0.85;
-}
-
-.final-bloqueio__acao {
-  margin-top: var(--espaco-6);
 }
 
 /* ---------- Telas largas ---------- */
@@ -740,10 +601,5 @@
 
   .final-saida .botao {
     min-width: 16rem;
-  }
-
-  .final-bloqueio {
-    max-width: 48rem;
-    padding: var(--espaco-12);
   }
 }

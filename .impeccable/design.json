@@ -277,20 +277,12 @@
       "css": ".ds-btn { display: flex; align-items: center; justify-content: center; min-height: 48px; padding: 12px 24px; background: #1f1f29; color: #f3f3f6; font-family: 'Chakra Petch', system-ui, sans-serif; font-weight: 700; font-size: 1rem; letter-spacing: 0.06em; text-decoration: none; clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px); } .ds-btn:focus-visible { outline: none; box-shadow: inset 0 0 0 3px #f3f3f6; }"
     },
     {
-      "name": "Station Card — Next",
+      "name": "Station Card",
       "kind": "card",
-      "refersTo": "card-next",
-      "description": "Cartão da próxima estação no Hub: ficha com moldura roxa de 2px, faixa de movimento, título maior e barra de ação roxa.",
-      "html": "<a class=\"ds-ficha\" href=\"#\"><span class=\"ds-ficha__faixa\"></span><strong class=\"ds-ficha__titulo\">Inteligência Artificial nos jogos</strong><span class=\"ds-ficha__estado\">PRÓXIMA ESTAÇÃO</span><span class=\"ds-ficha__acao\">Ver como desbloquear</span></a>",
-      "css": ".ds-ficha { display: grid; gap: 12px; padding: 20px 2px 2px; background: #5b8cff; color: #f3f3f6; text-decoration: none; clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px); } .ds-ficha > * { background: #1f1f29; padding: 0 16px; } .ds-ficha__faixa { height: 14px; padding: 0; background: #5b8cff; } .ds-ficha__titulo { font-family: 'Chakra Petch', system-ui, sans-serif; font-size: 1.5rem; line-height: 1.12; } .ds-ficha__estado { justify-self: start; background: #5b8cff; color: #0c0c10; font-family: 'Chakra Petch', system-ui, sans-serif; font-weight: 700; font-size: 0.75rem; letter-spacing: 0.08em; padding: 4px 8px; } .ds-ficha__acao { padding: 12px 16px; background: #5b8cff; color: #0c0c10; font-family: 'Chakra Petch', system-ui, sans-serif; font-weight: 700; }"
-    },
-    {
-      "name": "Station Card — Locked",
-      "kind": "card",
-      "refersTo": "card-locked",
-      "description": "Cartão bloqueado: miolo no fundo, faixa hachurada, cadeado, texto atenuado. Continua levando à explicação de como desbloquear.",
-      "html": "<a class=\"ds-bloq\" href=\"#\"><strong>X-B0T</strong><span>BLOQUEADA</span></a>",
-      "css": ".ds-bloq { display: grid; gap: 8px; padding: 20px 16px 16px; background: #0c0c10; color: #9d9daa; text-decoration: none; box-shadow: inset 0 0 0 1px #1f1f29; clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px); } .ds-bloq strong { font-family: 'Chakra Petch', system-ui, sans-serif; font-size: 1.25rem; } .ds-bloq span { font-family: 'Chakra Petch', system-ui, sans-serif; font-weight: 700; font-size: 0.75rem; letter-spacing: 0.08em; }"
+      "refersTo": "card-station",
+      "description": "Cartão de estação no Hub: ficha com faixa azul cheia, título, carimbo DISPONÍVEL e barra de ação \"Ver conteúdo\". Todas as estações usam este cartão.",
+      "html": "<a class=\"ds-ficha\" href=\"#\"><span class=\"ds-ficha__faixa\"></span><strong class=\"ds-ficha__titulo\">Inteligência Artificial nos jogos</strong><span class=\"ds-ficha__estado\">DISPONÍVEL</span><span class=\"ds-ficha__acao\">Ver conteúdo</span></a>",
+      "css": ".ds-ficha { display: grid; gap: 12px; padding: 20px 2px 2px; background: #3558c4; color: #f3f3f6; text-decoration: none; clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px); } .ds-ficha > * { background: #1f1f29; padding: 0 16px; } .ds-ficha__faixa { height: 6px; padding: 0; background: #5b8cff; } .ds-ficha__titulo { font-family: 'Chakra Petch', system-ui, sans-serif; font-size: 1.25rem; line-height: 1.2; } .ds-ficha__estado { justify-self: start; border: 2px solid #5b8cff; color: #5b8cff; font-family: 'Chakra Petch', system-ui, sans-serif; font-weight: 700; font-size: 0.75rem; letter-spacing: 0.14em; padding: 4px 8px; transform: rotate(-3deg); } .ds-ficha__acao { padding: 12px 16px; background: #1f1f29; color: #f3f3f6; font-family: 'Chakra Petch', system-ui, sans-serif; font-weight: 700; }"
     },
     {
       "name": "Editorial Note — Marco",
@@ -336,17 +328,9 @@
       "name": "Status Chip",
       "kind": "chip",
       "refersTo": "chip-state",
-      "description": "Selo de estado: próxima estação, validada, em validação.",
-      "html": "<span class=\"ds-chip\">PRÓXIMA ESTAÇÃO</span>",
+      "description": "Selo de estado: estação disponível no Hub.",
+      "html": "<span class=\"ds-chip\">DISPONÍVEL</span>",
       "css": ".ds-chip { display: inline-block; padding: 4px 8px; background: #5b8cff; color: #0c0c10; font-family: 'Chakra Petch', system-ui, sans-serif; font-weight: 700; font-size: 0.75rem; letter-spacing: 0.08em; clip-path: polygon(4px 0, 100% 0, 100% calc(100% - 4px), calc(100% - 4px) 100%, 0 100%, 0 4px); }"
-    },
-    {
-      "name": "Progress Segment",
-      "kind": "custom",
-      "refersTo": null,
-      "description": "Segmento da barra de progresso: vazio = trilho fino, cheio = bloco alto azul. A diferença é de forma, não só de cor.",
-      "html": "<div class=\"ds-progress\"><span class=\"ds-progress__seg ds-progress__seg--full\"></span><span class=\"ds-progress__seg ds-progress__seg--full\"></span><span class=\"ds-progress__seg\"></span><span class=\"ds-progress__seg\"></span></div>",
-      "css": ".ds-progress { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; } .ds-progress__seg { height: 4px; align-self: end; background: #6f6f7d; } .ds-progress__seg--full { height: 12px; background: #5b8cff; clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px); }"
     }
   ],
   "narrative": {
@@ -364,7 +348,7 @@
     "rules": [
       {
         "name": "The Blue-Accent Rule",
-        "body": "O azul de acento (#5b8cff) marca estado, progresso, ação e foco; o azul de linha (#3558c4) desenha estrutura e textura; o azul profundo (#142146) só aparece como fundo sutil. Nenhum azul é cor de texto corrido nem preenchimento de painel inteiro: o grafite é a base (DEC-024).",
+        "body": "O azul de acento (#5b8cff) marca estado, ação e foco; o azul de linha (#3558c4) desenha estrutura e textura; o azul profundo (#142146) só aparece como fundo sutil. Nenhum azul é cor de texto corrido nem preenchimento de painel inteiro: o grafite é a base (DEC-024).",
         "section": "colors"
       },
       {
@@ -431,8 +415,7 @@
       "Don't condicionar uma animação a prefers-reduced-motion por conta própria: a decisão é de data-movimento (DEC-022).",
       "Don't repetir num módulo, legenda ou título o que o parágrafo vizinho já diz.",
       "Don't escrever o nome do jogo com a letra O: a grafia é X-B0T, com zero.",
-      "Don't deixar o azul tão discreto que não se veja, nem deixar o branco assumir o papel do acento; o grafite é a base e o azul, o acento.",
-      "Don't mandar escanear o QR da estação seguinte antes da visita física a ela: o QR só existe depois que o orientador o entrega."
+      "Don't deixar o azul tão discreto que não se veja, nem deixar o branco assumir o papel do acento; o grafite é a base e o azul, o acento."
     ]
   }
 }

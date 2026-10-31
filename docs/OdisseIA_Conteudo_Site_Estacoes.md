@@ -335,6 +335,6 @@ Na próxima estação, você poderá conhecer essa aplicação na prática.
 - Não adicionar fatos por conta própria.
 - Não resumir automaticamente.
 - Pequenos ajustes de quebra de parágrafo ou marcação podem ser feitos para encaixar no layout.
-- Não alterar sistema de progresso, QR Codes, navegação ou estados bloqueados por causa deste arquivo.
+- Não alterar a navegação do site por causa deste arquivo.
 - A apresentação visual continua sendo responsabilidade da estrutura de UX/UI já definida no projeto.
 - Se algum trecho não encaixar bem visualmente, sinalizar antes de cortar conteúdo relevante.

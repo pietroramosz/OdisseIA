@@ -1,7 +1,7 @@
 /* Leitor do portfólio (assets/js/portfolio.js): modal centralizado sobre a Conclusão, com o documento
    local (portfolio.html) num iframe. Segue a linguagem do sistema: ficha de recorte diagonal com moldura azul (o portfólio é
    azul; o roxo é só do X-B0T), Chakra Petch, botão Fechar com texto. Só tokens de cor, exceto o véu
-   escuro do fundo, igual ao do scanner e do easter egg. */
+   escuro do fundo, igual ao do easter egg. */
 
 /* Sem rolagem da página por trás do leitor. */
 html.portfolio-aberto {

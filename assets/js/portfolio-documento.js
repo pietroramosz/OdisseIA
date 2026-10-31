@@ -4,7 +4,7 @@
 // painel de acessibilidade de novo (a Conclusão já tem o seu; tema, tamanho do texto, contraste e
 // movimento continuam aplicados por acessibilidade.js) e repassa o Esc ao leitor, porque o teclado
 // dentro do quadro não chega à página que o contém. Aberta direto, é só o documento, com o painel.
-// Não lê nem grava progresso e não toca em localStorage. Carregado no <head>, antes de acessibilidade.js.
+// Não toca em localStorage. Carregado no <head>, antes de acessibilidade.js.
 (function () {
   "use strict";
 

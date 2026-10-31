@@ -8,22 +8,21 @@ web
 
 ## Users
 
-Visitantes de uma feira de ciências escolar, circulando entre quatro estações físicas e usando o próprio celular durante o percurso. O uso é em pé, em movimento, com atenção dividida entre o site e a apresentação física, possivelmente sob iluminação variável de ambiente de feira. Mobile é o cenário real de uso; desktop é suportado mas não é prioridade (DEC-001).
+Qualquer pessoa interessada em IA e jogos que abra o site, no celular ou no computador. Na feira de ciências escolar de 29/10/2026, os visitantes circulavam entre quatro estações físicas usando o próprio celular, em pé, com atenção dividida entre o site e a apresentação. Mobile continua sendo o cenário principal de uso; desktop é suportado, mas não é prioridade (DEC-001).
 
 ## Product Purpose
 
-O OdisseIA é a camada digital de uma feira escolar dividida em quatro estações físicas (IA nos jogos; evolução dos jogos até 2000; evolução de 2001 até hoje; X-B0T). O site acompanha o percurso do visitante, complementa — sem repetir — o conteúdo apresentado presencialmente, e usa QR Codes para validar que o visitante realmente passou por cada estação física antes de desbloquear o conteúdo digital correspondente. Ao final das quatro estações, uma página de conclusão desbloqueia o acesso ao X-B0T, um jogo digital (TCG) desenvolvido por outro núcleo do projeto. Sucesso = o visitante completa o fluxo físico+digital sem fricção, no próprio celular, e chega ao X-B0T entendendo que o desbloqueou.
+O OdisseIA é um projeto educacional sobre a evolução da IA e a sua relação com os jogos, organizado em quatro estações (IA nos jogos; evolução dos jogos até 2000; evolução de 2001 até hoje; X-B0T). Nasceu como a camada digital de uma feira escolar, onde usava QR Codes para comprovar a passagem física por cada estação; depois da feira, o site foi aberto (DEC-016) e todo o conteúdo pode ser consultado livremente, em qualquer ordem. A página de conclusão reúne o resumo e o acesso ao X-B0T, um jogo digital (TCG) desenvolvido por outro núcleo do projeto. Sucesso = o visitante encontra e consulta o conteúdo sem fricção, no próprio celular, e chega ao X-B0T entendendo que o desbloqueou.
 
 ## Positioning
 
-A experiência não é "um site sobre a feira" nem "um jogo com um site de apoio": é uma jornada única em que o progresso digital só avança mediante validação física (QR Code por estação), e o site compartilha a linguagem visual do X-B0T (grafite, cantos cortados, Chakra Petch), cada um com a sua cor (DEC-010), para que sair do site e entrar no jogo pareça a mesma experiência contínua, não dois produtos separados.
+A experiência não é "um site sobre a feira" nem "um jogo com um site de apoio": é uma jornada única e aberta, e o site compartilha a linguagem visual do X-B0T (grafite, cantos cortados, Chakra Petch), cada um com a sua cor (DEC-010), para que sair do site e entrar no jogo pareça a mesma experiência contínua, não dois produtos separados.
 
 ## Operating Context
 
-- Evento físico real: feira escolar em **29/10/2026**.
-- Fluxo oficial: Visão geral → Hub → Estação 1 → Estação 2 → Estação 3 → Estação 4 → Conclusão → X-B0T.
-- Cada estação física tem QR Code próprio; abrir uma página diretamente (sem QR) não avança o progresso.
-- O progresso é salvo por navegador via `localStorage` (chave `odisseia:progresso`); abrir o QR num navegador diferente do Hub resulta em "fora de ordem" — limitação conhecida e comunicada ao visitante (DEC-011).
+- Evento físico real: feira escolar em **29/10/2026** (já realizada). Hoje o site é público e livre.
+- Fluxo sugerido (nenhuma ordem é obrigatória): Visão geral → Hub → Estação 1 → Estação 2 → Estação 3 → Estação 4 → Conclusão → X-B0T.
+- Sem QR Codes, sem progresso e sem bloqueios: toda página abre direto pela URL (DEC-016). O sistema da feira (DEC-002, DEC-004, DEC-011, DEC-014) foi descontinuado.
 - Execução local via `file://`, sem servidor — por isso sem ES modules, sem build step (DEC-009).
 - Hospedagem definitiva: GitHub Pages (`https://pietroramosz.github.io/OdisseIA/`), com caminhos relativos.
 - A Estação 4 depende de outro grupo (X-B0T): o site só pode mostrar mecânicas/tecnologias que realmente existirem na versão final do jogo (DEC-007).
@@ -31,12 +30,11 @@ A experiência não é "um site sobre a feira" nem "um jogo com um site de apoio
 ## Capabilities and Constraints
 
 - Stack travada em HTML/CSS/JS puro, sem framework, sem backend, sem CDN (DEC-003) — revisitar só se surgir necessidade real.
-- Configuração central em JS puro (`const OdisseIAConfig = {...}`), carregada via `<script>` comum, não ES module, para funcionar em `file://` (DEC-009). Demais scripts (`progresso.js`, `qr.js`, `app.js`) seguem o mesmo padrão.
-- Progresso: `{ versao: 1, ultimaEstacaoDesbloqueada: 0 }` (0 a 4), derivando os demais estados de UI desse valor sempre que possível. Não é mecanismo de segurança (DEC-004, DEC-006) — nada crítico deve depender só do frontend.
-- QR: cada QR abre `validar.html?estacao=N`; só o QR da próxima estação na ordem avança o progresso (DEC-011). O scanner pela câmera (DEC-014) reaproveita `resultadoParaEstacao()` de `qr.js` e nunca abre a URL lida. Cinco resultados possíveis: sucesso, repetido, fora de ordem, inválido, erro de armazenamento.
+- Configuração central em JS puro (`const OdisseIAConfig = {...}`), carregada via `<script>` comum, não ES module, para funcionar em `file://` (DEC-009). Demais scripts (`app.js`, `cenas.js`…) seguem o mesmo padrão.
+- Sem progresso: nenhum estado de interface depende de dados salvos no navegador. O único `localStorage` do site guarda as preferências de acessibilidade (DEC-013); `app.js` apaga a chave antiga `odisseia:progresso`. Nada crítico deve depender só do frontend (DEC-006).
 - Conteúdo das 4 estações é escrito direto no HTML (`estacao-1.html`–`estacao-4.html`), sem arquivo de dados nem geração por JS. As páginas compartilham componentes e a ordem dos blocos, e cada estação tem a sua composição.
-- Páginas atuais: `index.html` (porta de entrada estática, sem progresso), `hub.html` (estados 0–4), `validar.html`, `estacao-1.html`–`estacao-4.html`, `final.html` (conclusão), `portfolio.html` (documento exibido no leitor da Conclusão, DEC-015) e `minijogos.html` (fora da jornada, não mexe no progresso).
-- **Testes realizados**: progresso testado no console (incluindo dado corrompido e número decimal); Hub nos estados 0–4 em emulador e no celular; validação de QR por console, por URL e com a câmera de um celular; testes físicos da experiência com os QR Codes finais e do painel de acessibilidade. Não há registro de testes em Safari, Firefox ou com leitor de tela.
+- Páginas atuais: `index.html` (porta de entrada estática), `hub.html` (menu livre), `estacao-1.html`–`estacao-4.html`, `final.html` (conclusão), `portfolio.html` (documento exibido no leitor da Conclusão, DEC-015), `minijogos.html` e `creditos.html`.
+- **Testes realizados**: o painel de acessibilidade foi testado fisicamente. O sistema de QR Codes e progresso (hoje descontinuado) foi testado no console, por URL, em emulador e com a câmera de um celular. Não há registro de testes em Safari, Firefox ou com leitor de tela.
 - **Endereços**: `gameUrl` aponta para https://robot-tcg.netlify.app/; `downloadUrl` segue `null`, porque não há link de download.
 
 ## Brand Commitments
@@ -56,10 +54,10 @@ A experiência não é "um site sobre a feira" nem "um jogo com um site de apoio
 
 ## Product Principles
 
-- Mobile-first não é estética: é a realidade de uso na feira (DEC-001) — pouca informação por tela, navegação simples, leitura rápida.
-- O site complementa a apresentação física, nunca a repete ou compete com ela.
+- Mobile-first não é estética: é a realidade de uso (DEC-001) — pouca informação por tela, navegação simples, leitura rápida.
+- O conteúdo é aberto: nenhuma página exige cadastro, validação ou ordem de leitura (DEC-016).
 - Simplicidade deliberada: sem framework, sem backend, sem complexidade adicionada "por boa prática" — só revisitar quando houver necessidade real (DEC-003).
-- Frontend controla a experiência, não é camada de segurança real (DEC-006); nada crítico depende só de QR/localStorage.
+- Frontend controla a experiência, não é camada de segurança real (DEC-006); nada crítico depende só do navegador.
 - Planejado não é implementado: a Estação 4 e qualquer menção ao X-B0T só refletem o que existe de fato na versão final do jogo (DEC-007, lição registrada em AI-WORKFLOW.md §4.1).
 - Transparência assumida sobre uso de IA no desenvolvimento (DEC-008) — decisões finais, testes e responsabilidade continuam humanos.
 
@@ -68,5 +66,5 @@ A experiência não é "um site sobre a feira" nem "um jogo com um site de apoio
 - Contraste mínimo 4,5:1 em texto e 3:1 em elementos de interface.
 - Alvos de toque de 44px; foco visível (atenção a `clip-path` cortando o contorno dos cantos diagonais).
 - `prefers-reduced-motion` respeitado.
-- Estados de interface (bloqueada/próxima/desbloqueada) nunca dependem só de cor — sempre também texto, tamanho e ícone.
-- Sem rolagem horizontal entre 360–430px (faixa mobile real de uso na feira).
+- Estados de interface (disponível, pendente) nunca dependem só de cor — sempre também texto, tamanho e ícone.
+- Sem rolagem horizontal entre 360–430px (faixa mobile real de uso).

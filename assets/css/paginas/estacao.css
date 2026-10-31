@@ -33,7 +33,7 @@ body[data-estacao="4"] .pular {
    falta para o fim do conteúdo. Fica na cor do site (--cor-marca), mesmo na Estação 4. Só com
    animation-timeline; sem suporte, ou com movimento reduzido, não aparece. */
 @supports (animation-timeline: scroll()) {
-  .pagina-estacao--desbloqueada::after {
+  .pagina-estacao::after {
     content: "";
     position: fixed;
     z-index: 30;
@@ -69,14 +69,8 @@ body[data-estacao="4"] .pular {
   padding-top: var(--espaco-6);
 }
 
-.dossie-capa--bloqueada {
-  grid-template-areas:
-    "numeral"
-    "texto";
-}
-
 /* Estação 4: o palco da carta é a terceira área da capa (estacao-modulos.css o desenha). */
-[data-estacao="4"] .dossie-capa:not(.dossie-capa--bloqueada) {
+[data-estacao="4"] .dossie-capa {
   grid-template-areas:
     "numeral"
     "texto"
@@ -245,14 +239,9 @@ body[data-estacao="4"] .pular {
   stroke: var(--cor-destaque);
 }
 
-/* Capa bloqueada: o mesmo dossiê, ainda lacrado. */
 /* O numeral monumental da capa já nasce no azul de linha (roxo na Estação 4, pelo escopo da página). */
-.dossie-capa:not(.dossie-capa--bloqueada) .dossie-capa__numeral {
+.dossie-capa .dossie-capa__numeral {
   -webkit-text-stroke-color: var(--cor-azul-linha);
-}
-
-.dossie-capa--bloqueada .dossie-capa__numeral {
-  -webkit-text-stroke-color: var(--cor-filete);
 }
 
 /* ---------- Seções: o título abre; o rótulo é uma anotação de margem ---------- */
@@ -540,32 +529,7 @@ body[data-estacao="4"] .pular {
   color: var(--cor-texto-secundario);
 }
 
-/* Orientação para continuar a jornada física, antes de "Voltar ao Hub". */
-.conexao__proximo {
-  display: grid;
-  gap: var(--espaco-3);
-  justify-items: start;
-  margin-top: var(--espaco-4);
-}
-
-.conexao__proximo-texto {
-  margin: 0 !important;
-  padding: var(--espaco-3) var(--espaco-4);
-  background: var(--cor-fundo);
-  box-shadow: inset 0 0 0 1px var(--cor-azul-linha);
-  line-height: 1.5;
-  color: var(--cor-texto);
-}
-
-.conexao__escanear {
-  min-height: 44px;
-  background: none;
-  box-shadow: inset 0 0 0 2px var(--cor-destaque);
-  color: var(--cor-destaque);
-}
-
-/* Ações do fim do conteúdo: avançar (próxima estação ou Conclusão, só se o progresso já liberou) e
-   voltar ao Hub. Sem script, fica só o link do Hub, que é a ação principal. */
+/* Ações do fim do conteúdo: avançar (próxima estação ou Conclusão) e voltar ao Hub. */
 .conexao__acoes {
   display: grid;
   gap: var(--espaco-3);
@@ -577,54 +541,12 @@ body[data-estacao="4"] .pular {
   gap: var(--espaco-2);
 }
 
-.conexao__avanco:empty {
-  display: none;
-}
-
 .conexao__avancar {
   width: 100%;
 }
 
 .conexao__avancar .seta {
   transition: transform 0.15s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-/* Bloqueado: o botão existe e é lido, mas não leva a lugar nenhum. Hachura de "ainda fechado", cadeado
-   e texto atenuado: o estado não depende só da cor. */
-.conexao__avancar--bloqueado {
-  position: relative;
-  isolation: isolate;
-  background: var(--cor-fundo);
-  color: var(--cor-texto-atenuado);
-  box-shadow: inset 0 0 0 1px var(--cor-apagado);
-  cursor: not-allowed;
-}
-
-.conexao__avancar--bloqueado::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  background-color: var(--cor-hachura);
-  -webkit-mask: var(--textura-hachura) 0 0 / 10px 10px repeat;
-  mask: var(--textura-hachura) 0 0 / 10px 10px repeat;
-  opacity: 0.7;
-}
-
-.conexao__cadeado {
-  flex: none;
-  width: 1.125em;
-  height: 1.125em;
-  background-color: currentColor;
-  -webkit-mask: var(--icone-cadeado) center / contain no-repeat;
-  mask: var(--icone-cadeado) center / contain no-repeat;
-}
-
-.conexao p.conexao__dica {
-  margin: 0;
-  font-size: 0.9375rem;
-  line-height: 1.45;
-  color: var(--cor-texto-secundario);
 }
 
 /* Numeral vazado da próxima estação: o fecho aponta para onde a jornada segue. */
@@ -637,262 +559,17 @@ body[data-estacao="4"] .pular {
   -webkit-text-stroke-color: var(--cor-azul-linha);
 }
 
-/* O Hub deixa de ser a ação principal quando o avanço está liberado: botão escuro com contorno, a
-   forma do botão secundário sobre painel elevado. */
-.conexao__voltar:not(.botao--principal) {
+/* O Hub é a ação secundária: botão escuro com contorno, a forma do botão secundário sobre painel
+   elevado. */
+.conexao__voltar {
   background: var(--cor-fundo);
   box-shadow: inset 0 0 0 1px var(--cor-apagado);
 }
 
 @media (hover: hover) {
-  .conexao__voltar:not(.botao--principal):hover {
+  .conexao__voltar:hover {
     background: var(--cor-texto);
     color: var(--cor-fundo);
-  }
-}
-
-/* ---------- Telas de bloqueio ---------- */
-
-.bloqueio {
-  position: relative;
-  isolation: isolate;
-  margin-top: var(--espaco-8);
-  padding: var(--espaco-6);
-  clip-path: var(--recorte);
-}
-
-.bloqueio--proxima {
-  padding-top: calc(var(--espaco-6) + var(--espaco-4));
-  background: var(--cor-superficie-alta);
-}
-
-.bloqueio--proxima::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: var(--espaco-4);
-  background-color: var(--cor-destaque);
-  -webkit-mask: var(--textura-movimento) center / 100% 100% no-repeat;
-  mask: var(--textura-movimento) center / 100% 100% no-repeat;
-}
-
-.bloqueio--futura {
-  background: var(--cor-fundo);
-  box-shadow: inset 0 0 0 1px var(--cor-filete);
-}
-
-.bloqueio--futura::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  background-color: var(--cor-hachura);
-  -webkit-mask: var(--textura-hachura) 0 0 / 10px 10px repeat;
-  mask: var(--textura-hachura) 0 0 / 10px 10px repeat;
-  opacity: 0.6;
-}
-
-/* Selo de estado das telas de bloqueio: carimbo girado, em Chakra caixa alta. */
-.bloqueio__estado {
-  display: inline-block;
-  padding: var(--espaco-1) var(--espaco-2);
-  border: 2px solid currentColor;
-  font-family: var(--fonte-titulo);
-  font-weight: 700;
-  font-size: 0.75rem;
-  letter-spacing: 0.12em;
-  color: var(--cor-destaque);
-  transform: rotate(-3deg);
-}
-
-/* Nas telas de bloqueio o estado vem depois do título. */
-.bloqueio > .bloqueio__estado {
-  margin-top: var(--espaco-3);
-}
-
-.bloqueio--proxima .bloqueio__estado {
-  border-color: var(--cor-destaque);
-  background: var(--cor-destaque);
-  color: var(--cor-sobre-destaque);
-  transform: none;
-}
-
-.bloqueio--futura .bloqueio__estado {
-  color: var(--cor-texto-atenuado);
-}
-
-.bloqueio__titulo {
-  margin: 0;
-  font-family: var(--fonte-titulo);
-  font-weight: 700;
-  font-size: 1.75rem;
-  line-height: 1.1;
-}
-
-.bloqueio__texto {
-  margin: var(--espaco-3) 0 0;
-  line-height: 1.5;
-  color: var(--cor-texto-secundario);
-}
-
-/* Ação de escanear nas telas de bloqueio: o texto diz qual QR Code vale agora. */
-.bloqueio__scan {
-  display: grid;
-  gap: var(--espaco-3);
-  margin-top: var(--espaco-6);
-  padding-top: var(--espaco-4);
-  border-top: 1px dashed var(--cor-apagado);
-}
-
-.bloqueio__scan-texto {
-  margin: 0;
-  line-height: 1.5;
-  color: var(--cor-texto-secundario);
-}
-
-.bloqueio__passos {
-  display: grid;
-  gap: var(--espaco-3);
-  margin: var(--espaco-4) 0 0;
-  padding: 0;
-  list-style: none;
-  counter-reset: passo;
-}
-
-.bloqueio__passos-item {
-  counter-increment: passo;
-  display: grid;
-  grid-template-columns: var(--espaco-8) minmax(0, 1fr);
-  align-items: center;
-  gap: var(--espaco-3);
-  min-height: var(--espaco-8);
-}
-
-.bloqueio__passos-item::before {
-  content: counter(passo, decimal-leading-zero);
-  display: grid;
-  place-items: center;
-  height: var(--espaco-8);
-  background: var(--cor-fundo);
-  font-family: var(--fonte-titulo);
-  font-weight: 700;
-  font-size: 0.875rem;
-  color: var(--cor-destaque);
-  clip-path: var(--recorte-pequeno);
-}
-
-.bloqueio__destino {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: center;
-  column-gap: var(--espaco-3);
-  min-height: 44px;
-  margin-top: var(--espaco-4);
-  padding: var(--espaco-4);
-  background: var(--cor-superficie);
-  text-decoration: none;
-  clip-path: var(--recorte);
-}
-
-.bloqueio__destino-rotulo {
-  font-family: var(--fonte-titulo);
-  font-weight: 600;
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
-  color: var(--cor-texto-secundario);
-}
-
-.bloqueio__destino-nome {
-  grid-column: 1;
-  font-family: var(--fonte-titulo);
-  font-weight: 700;
-  font-size: 1.125rem;
-  line-height: 1.25;
-}
-
-.bloqueio__destino .seta {
-  grid-column: 2;
-  grid-row: 1 / span 2;
-  font-family: var(--fonte-titulo);
-  font-weight: 700;
-  font-size: 1.25rem;
-}
-
-.bloqueio__destino:focus-visible {
-  outline: none;
-  box-shadow: inset 0 0 0 3px var(--cor-texto);
-}
-
-.bloqueio__progresso {
-  margin-top: var(--espaco-6);
-  padding-top: var(--espaco-4);
-  border-top: 1px solid var(--cor-apagado);
-}
-
-.bloqueio__progresso-linha {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: var(--espaco-3);
-  margin: 0 0 var(--espaco-3);
-  font-family: var(--fonte-titulo);
-  font-weight: 600;
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
-  color: var(--cor-texto-secundario);
-}
-
-.bloqueio__progresso-numero {
-  font-weight: 700;
-  font-size: 2rem;
-  line-height: 0.85;
-  letter-spacing: -0.02em;
-  color: var(--cor-texto);
-}
-
-.bloqueio__barra {
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: 1fr;
-  gap: var(--espaco-1);
-}
-
-.bloqueio__celula {
-  display: grid;
-  grid-template-rows: var(--espaco-3) auto;
-  gap: var(--espaco-2);
-}
-
-.bloqueio__segmento {
-  align-self: end;
-  height: var(--espaco-1);
-  background: var(--cor-apagado);
-}
-
-.bloqueio__celula--cheia .bloqueio__segmento {
-  height: var(--espaco-3);
-  background: var(--cor-destaque);
-  clip-path: var(--recorte-pequeno);
-}
-
-.bloqueio__numero {
-  font-family: var(--fonte-titulo);
-  font-weight: 600;
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
-  color: var(--cor-texto-atenuado);
-}
-
-.bloqueio__celula--cheia .bloqueio__numero {
-  color: var(--cor-texto);
-}
-
-@media (hover: hover) {
-  .bloqueio__destino:hover {
-    background: var(--cor-superficie-alta);
   }
 }
 
@@ -937,13 +614,6 @@ body[data-estacao="4"] .pular {
     padding-top: var(--espaco-8);
   }
 
-  .dossie-capa--bloqueada {
-    grid-template-columns: minmax(0, 1fr);
-    grid-template-areas:
-      "numeral"
-      "texto";
-  }
-
   .dossie-capa__numeral {
     margin-bottom: -0.1em;
     font-size: clamp(11rem, 15vw, 16rem);
@@ -959,7 +629,7 @@ body[data-estacao="4"] .pular {
   }
 
   /* Estação 3: a rede ocupa a largura toda, abaixo do título. */
-  [data-estacao="3"] .dossie-capa:not(.dossie-capa--bloqueada) {
+  [data-estacao="3"] .dossie-capa {
     grid-template-columns: minmax(0, 1fr);
     grid-template-areas:
       "numeral"
@@ -989,7 +659,7 @@ body[data-estacao="4"] .pular {
      como nas Estações 2 e 4). */
 
   /* Estação 4: o palco da carta ocupa a coluna direita, ao lado de numeral e título. */
-  [data-estacao="4"] .dossie-capa:not(.dossie-capa--bloqueada) {
+  [data-estacao="4"] .dossie-capa {
     grid-template-columns: minmax(0, 6fr) minmax(0, 6fr);
     grid-template-areas:
       "numeral palco"
@@ -1131,10 +801,6 @@ body[data-estacao="4"] .pular {
     margin-top: calc(-1 * var(--espaco-4));
     font-size: 5.5rem;
   }
-
-  .bloqueio {
-    max-width: 48rem;
-  }
 }
 
 /* ---------- 1100px+: margem mais larga e coluna lateral maior ---------- */
@@ -1193,17 +859,17 @@ body[data-estacao="4"] .pular {
 }
 
 @media (min-width: 1360px) {
-  .pagina-estacao--desbloqueada #conteudo-estacao {
+  .pagina-estacao #conteudo-estacao {
     display: grid;
     grid-template-columns: minmax(0, 1fr) 9rem;
     column-gap: var(--espaco-8);
   }
 
-  .pagina-estacao--desbloqueada #conteudo-estacao > * {
+  .pagina-estacao #conteudo-estacao > * {
     grid-column: 1;
   }
 
-  .pagina-estacao--desbloqueada #conteudo-estacao > .dossie-rota {
+  .pagina-estacao #conteudo-estacao > .dossie-rota {
     display: block;
     grid-column: 2;
     grid-row: 1 / span 30;

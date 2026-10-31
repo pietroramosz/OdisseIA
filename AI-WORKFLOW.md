@@ -73,7 +73,7 @@ A Estação 4 depende de um jogo que outro grupo ainda estava desenvolvendo. Per
 
 A fundação do site e o sistema de progresso foram os primeiros ciclos completos. Cada tarefa foi especificada com limites claros (a fundação, por exemplo, não antecipava progresso, QR Codes nem desbloqueio), implementada com o Claude Code, revisada, testada manualmente e commitada em `dev`.
 
-No progresso, a decisão de usar `localStorage` já existia. A implementação reduziu o estado a `{ versao, ultimaEstacaoDesbloqueada }`, na chave `odisseia:progresso`, derivando o resto da interface desse valor. Os testes cobriram o avanço, a persistência após recarregar, o limite de quatro estações e o estado inválido.
+(O sistema de progresso e os QR Codes serviram à feira de 29/10/2026 e foram descontinuados em 30/10/2026, DEC-016; o relato abaixo é histórico.) No progresso, a decisão de usar `localStorage` já existia. A implementação reduziu o estado a `{ versao, ultimaEstacaoDesbloqueada }`, na chave `odisseia:progresso`, derivando o resto da interface desse valor. Os testes cobriram o avanço, a persistência após recarregar, o limite de quatro estações e o estado inválido.
 
 ### 4.3 A validação que aceitava número decimal
 

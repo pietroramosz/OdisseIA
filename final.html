@@ -4,14 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>OdisseIA — Conclusão</title>
-  <meta name="description" content="O fim da jornada pelas quatro estações do OdisseIA e o acesso ao X-B0T, o jogo de cartas feito para o projeto.">
+  <meta name="description" content="A conclusão da jornada pelas quatro estações do OdisseIA e o acesso ao X-B0T, o jogo de cartas feito para o projeto.">
 
   <!-- Prévia de link (WhatsApp, Discord, redes): Open Graph e Twitter Cards. Mesma arte em todas as páginas. -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="OdisseIA">
   <meta property="og:locale" content="pt_BR">
-  <meta property="og:title" content="OdisseIA — Conclusão da jornada">
-  <meta property="og:description" content="O fim da jornada pelas quatro estações do OdisseIA e o acesso ao X-B0T, o jogo de cartas feito para o projeto.">
+  <meta property="og:title" content="OdisseIA — Conclusão">
+  <meta property="og:description" content="A conclusão da jornada pelas quatro estações do OdisseIA e o acesso ao X-B0T, o jogo de cartas feito para o projeto.">
   <meta property="og:url" content="https://pietroramosz.github.io/OdisseIA/final.html">
   <meta property="og:image" content="https://pietroramosz.github.io/OdisseIA/assets/img/og-odisseia.png">
   <meta property="og:image:type" content="image/png">
@@ -19,8 +19,8 @@
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Arte do OdisseIA: o nome OdisseIA em destaque sobre fundo grafite, com a rota das quatro estações em azul descendo até a carta do X-B0T, em roxo.">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="OdisseIA — Conclusão da jornada">
-  <meta name="twitter:description" content="O fim da jornada pelas quatro estações do OdisseIA e o acesso ao X-B0T, o jogo de cartas feito para o projeto.">
+  <meta name="twitter:title" content="OdisseIA — Conclusão">
+  <meta name="twitter:description" content="A conclusão da jornada pelas quatro estações do OdisseIA e o acesso ao X-B0T, o jogo de cartas feito para o projeto.">
   <meta name="twitter:image" content="https://pietroramosz.github.io/OdisseIA/assets/img/og-odisseia.png">
   <meta name="twitter:image:alt" content="Arte do OdisseIA: o nome OdisseIA em destaque sobre fundo grafite, com a rota das quatro estações em azul descendo até a carta do X-B0T, em roxo.">
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
@@ -34,22 +34,20 @@
 <body class="pagina-final">
   <a class="pular" href="#conteudo-principal">Pular para o conteúdo</a>
   <main id="conteudo-principal" tabindex="-1">
-    <!-- Conclusão: só aparece com a jornada completa (app.js). -->
-    <div id="conclusao" hidden>
+    <div id="conclusao">
       <a class="final-voltar" href="hub.html"><span class="seta seta--voltar" aria-hidden="true"></span> Voltar ao Hub</a>
 
       <header class="final-hero">
         <div class="final-hero__foco textura-foco" aria-hidden="true"></div>
         <div class="final-hero__tom textura-reticula" aria-hidden="true"></div>
         <div class="final-hero__texto">
-          <h1 class="final-titulo">Parabéns! Você concluiu a jornada.</h1>
-          <p class="final-hero__descricao">Você passou pelas estações do OdisseIA e validou cada uma delas. Como recompensa, o X-B0T foi desbloqueado.</p>
+          <h1 class="final-titulo">Fim da jornada.</h1>
+          <p class="final-hero__descricao">As quatro estações mostram como a inteligência artificial e os jogos evoluíram juntos. Revisite o que quiser e chegue ao X-B0T, o jogo feito para o OdisseIA.</p>
         </div>
         <div class="final-placar">
-          <p class="final-placar__numero"><span id="conclusao-validadas" class="final-placar__feito"></span><span class="final-placar__total"> / <span id="conclusao-total"></span></span></p>
-          <p class="final-placar__rotulo">ESTAÇÕES VALIDADAS</p>
-          <p class="final-selo">JORNADA CONCLUÍDA</p>
-          <div id="conclusao-barra" class="final-barra" role="progressbar" aria-label="Progresso da jornada" aria-valuemin="0" aria-valuemax="4" aria-valuenow="0"></div>
+          <p class="final-placar__numero"><span class="final-placar__feito">4</span></p>
+          <p class="final-placar__rotulo">ESTAÇÕES PARA EXPLORAR</p>
+          <p class="final-selo">ACESSO LIVRE</p>
         </div>
       </header>
 
@@ -68,12 +66,12 @@
       <section class="final-xbot" aria-labelledby="final-xbot-titulo">
         <div class="final-xbot__palco">
           <div class="final-xbot__foco textura-foco" aria-hidden="true"></div>
-          <img class="final-xbot__carta" src="assets/img/verso-carta.png" alt="Verso da carta do X-B0T, a recompensa desbloqueada." width="220" height="307" loading="lazy">
+          <img class="final-xbot__carta" src="assets/img/verso-carta.png" alt="Verso da carta do X-B0T." width="220" height="307" loading="lazy">
         </div>
         <div class="final-xbot__corpo">
           <h2 id="final-xbot-titulo" class="final-xbot__titulo">X-B<span class="zero">0</span>T</h2>
-          <p class="final-xbot__selo">DESBLOQUEADO</p>
-          <p class="final-xbot__texto">Você desbloqueou o X-B0T, o jogo desenvolvido para o OdisseIA como recompensa pela jornada.</p>
+          <p class="final-xbot__selo">DISPONÍVEL</p>
+          <p class="final-xbot__texto">O X-B0T é o jogo digital de cartas desenvolvido para o OdisseIA.</p>
           <div id="xbot-acesso" class="final-acoes"></div>
         </div>
       </section>
@@ -81,7 +79,7 @@
       <section class="final-minijogos" aria-labelledby="final-minijogos-titulo">
         <h2 id="final-minijogos-titulo" class="final-secao">Mini Jogos</h2>
         <div class="final-minijogos__corpo">
-          <p class="final-minijogos__texto">Existem outros desafios à sua espera: jogos rápidos para jogar à vontade, à parte da jornada e sem mexer no seu progresso.</p>
+          <p class="final-minijogos__texto">Existem outros desafios à sua espera: jogos rápidos para jogar à vontade, à parte das estações.</p>
           <a class="botao final-minijogos__acao" href="minijogos.html">Explorar os minijogos <span class="seta" aria-hidden="true"></span></a>
         </div>
       </section>
@@ -89,27 +87,6 @@
       <nav class="final-saida" aria-label="Navegação">
         <a class="botao" href="hub.html">Voltar ao Hub</a>
       </nav>
-    </div>
-
-    <!-- Acesso antecipado: aparece quando a jornada ainda não tem 4/4 (app.js). -->
-    <div id="estado-incompleto" hidden>
-      <a class="final-voltar" href="hub.html"><span class="seta seta--voltar" aria-hidden="true"></span> Voltar ao Hub</a>
-
-      <section class="final-bloqueio" aria-labelledby="final-bloqueio-titulo">
-        <h1 id="final-bloqueio-titulo" class="final-bloqueio__titulo">Conclusão ainda bloqueada</h1>
-        <p class="final-bloqueio__estado">JORNADA INCOMPLETA</p>
-        <p class="final-bloqueio__texto">Para ver a conclusão, é necessário validar as 4 estações da jornada.</p>
-
-        <div class="final-bloqueio__progresso">
-          <p class="final-bloqueio__linha">
-            <span class="final-bloqueio__rotulo">PROGRESSO DA JORNADA</span>
-            <span class="final-bloqueio__numero"><span id="incompleto-validadas"></span> / <span id="incompleto-total"></span></span>
-          </p>
-          <div id="incompleto-barra" class="final-barra" role="progressbar" aria-label="Progresso da jornada" aria-valuemin="0" aria-valuemax="4" aria-valuenow="0"></div>
-        </div>
-
-        <a class="botao botao--principal final-bloqueio__acao" href="hub.html">Voltar ao Hub</a>
-      </section>
     </div>
   </main>
 
@@ -119,8 +96,6 @@
   </footer>
 
   <script src="assets/js/config.js"></script>
-  <script src="assets/js/progresso.js"></script>
-  <script src="assets/js/qr.js"></script>
   <script src="assets/js/app.js"></script>
   <script src="assets/js/portfolio.js"></script>
 </body>

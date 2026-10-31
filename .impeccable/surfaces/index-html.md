@@ -2,12 +2,12 @@
 version: 1
 slug: "index-html"
 primary_target: "index.html"
-related_targets: ["hub.html","estacao-1.html","estacao-2.html","estacao-3.html","estacao-4.html","final.html","validar.html"]
+related_targets: ["hub.html","estacao-1.html","estacao-2.html","estacao-3.html","estacao-4.html","final.html"]
 ---
 
 ## Scope
 
-Toda a jornada: index (Persuade/Experience), Hub (Operate), Estações 1–4 (Read), Conclusão (Experience), validar (Operate). Visitante em pé, no celular, numa feira.
+Toda a jornada: index (Persuade/Experience), Hub (Operate), Estações 1–4 (Read), Conclusão (Experience). Visitante no celular ou no computador (na feira de 29/10/2026, em pé, no celular).
 
 ## Direction contract
 

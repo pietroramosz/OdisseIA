@@ -4,14 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>OdisseIA — Hub</title>
-  <meta name="description" content="Acompanhe seu progresso pelas quatro estações do OdisseIA, descubra o próximo QR Code e siga até o X-B0T.">
+  <meta name="description" content="Escolha uma das quatro estações do OdisseIA, vá até a conclusão e siga até o X-B0T.">
 
   <!-- Prévia de link (WhatsApp, Discord, redes): Open Graph e Twitter Cards. Mesma arte em todas as páginas. -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="OdisseIA">
   <meta property="og:locale" content="pt_BR">
-  <meta property="og:title" content="OdisseIA — Hub da jornada">
-  <meta property="og:description" content="Acompanhe seu progresso pelas quatro estações do OdisseIA, descubra o próximo QR Code e siga até o X-B0T.">
+  <meta property="og:title" content="OdisseIA — Hub das estações">
+  <meta property="og:description" content="Escolha uma das quatro estações do OdisseIA, vá até a conclusão e siga até o X-B0T.">
   <meta property="og:url" content="https://pietroramosz.github.io/OdisseIA/hub.html">
   <meta property="og:image" content="https://pietroramosz.github.io/OdisseIA/assets/img/og-odisseia.png">
   <meta property="og:image:type" content="image/png">
@@ -19,8 +19,8 @@
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Arte do OdisseIA: o nome OdisseIA em destaque sobre fundo grafite, com a rota das quatro estações em azul descendo até a carta do X-B0T, em roxo.">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="OdisseIA — Hub da jornada">
-  <meta name="twitter:description" content="Acompanhe seu progresso pelas quatro estações do OdisseIA, descubra o próximo QR Code e siga até o X-B0T.">
+  <meta name="twitter:title" content="OdisseIA — Hub das estações">
+  <meta name="twitter:description" content="Escolha uma das quatro estações do OdisseIA, vá até a conclusão e siga até o X-B0T.">
   <meta name="twitter:image" content="https://pietroramosz.github.io/OdisseIA/assets/img/og-odisseia.png">
   <meta name="twitter:image:alt" content="Arte do OdisseIA: o nome OdisseIA em destaque sobre fundo grafite, com a rota das quatro estações em azul descendo até a carta do X-B0T, em roxo.">
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
@@ -28,7 +28,6 @@
   <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/paginas/hub.css">
-  <link rel="stylesheet" href="assets/css/scanner.css">
   <link rel="stylesheet" href="assets/css/bigode.css">
   <script src="assets/js/acessibilidade.js"></script>
 </head>
@@ -38,18 +37,11 @@
     <a class="terminal-voltar hub-visao" href="index.html"><span class="seta seta--voltar" aria-hidden="true"></span> Visão geral</a>
     <div class="painel-status">
       <h1 id="titulo-odisseia" class="titulo-marca" data-bigode>Odisse<span class="titulo-marca__ia">IA</span> <span class="titulo-marca__pagina">Rota da jornada</span></h1>
-      <section class="progresso" aria-label="Progresso">
-        <p id="progresso-texto" class="progresso__texto"></p>
-        <div id="progresso-barra" class="barra" role="progressbar" aria-label="Progresso da jornada" aria-valuemin="0" aria-valuemax="4" aria-valuenow="0"></div>
-      </section>
       <div class="painel-status__movimento textura-movimento" aria-hidden="true"></div>
     </div>
   </header>
 
   <main id="conteudo-principal" tabindex="-1">
-    <!-- Acesso ao scanner de QR Code: preenchido por app.js a partir do progresso. -->
-    <section id="hub-scan" class="scan-acesso ficha" aria-labelledby="hub-scan-titulo"></section>
-
     <section class="rota" aria-labelledby="rota-titulo">
       <h2 id="rota-titulo" class="destino__titulo rota__titulo">ESTAÇÕES</h2>
       <ol id="lista-estacoes" class="estacoes"></ol>
@@ -67,9 +59,6 @@
   </footer>
 
   <script src="assets/js/config.js"></script>
-  <script src="assets/js/progresso.js"></script>
-  <script src="assets/js/qr.js"></script>
-  <script src="assets/js/scanner.js"></script>
   <script src="assets/js/app.js"></script>
   <script src="assets/js/bigode.js"></script>
 </body>

@@ -25,7 +25,7 @@
      aparecer sobre o grafite. Por isso a escala tem quatro passos da mesma matiz (~226°):
        --cor-azul        #142146  referência escura: fundos sutis, marca-texto, hachura
        --cor-azul-linha  #3558c4  linhas, trilhos, separadores, texturas e molduras (3,1:1)
-       --cor-destaque    #5b8cff  acento: estados, progresso, ações, foco (6,2:1; texto escuro sobre ele)
+       --cor-destaque    #5b8cff  acento: estados, ações, foco (6,2:1; texto escuro sobre ele)
        --cor-azul-claro  #8fb0ff  hover e texto de acento sobre superfícies elevadas (9,1:1)
    - --cor-xbot (#cd5efa) é só do X-B0T: onde o jogo é o assunto, --cor-destaque é trocado por ele.
    Uma troca de cor acontece neste bloco. */
@@ -111,7 +111,6 @@
   --textura-movimento: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 400' preserveAspectRatio='none'%3E%3Cpath d='M510.8 5.9L953.6 4.5L953.6 7.2ZM330.1 15.3L949.7 14.1L949.7 16.5ZM358.2 20.8L902.3 16L902.3 25.7ZM437 30.3L906.6 29.4L906.6 31.2ZM83.8 40.5L885.8 39.8L885.8 41.2ZM248.3 45.9L947.2 43.5L947.2 48.3ZM277.8 54.3L1000 51.1L1000 57.5ZM293.7 61.3L905.8 60.1L905.8 62.4ZM96.4 72.3L917.5 68.5L917.5 76.1ZM598.4 81.2L971.2 80.3L971.2 82.1ZM504.9 90L916.2 89.2L916.2 90.8ZM306.1 98.5L991.9 97.6L991.9 99.4ZM315.2 108.5L904.2 107.8L904.2 109.2ZM524.6 116.3L915.8 113L915.8 119.6ZM293.9 125.3L907.1 124.6L907.1 125.9ZM140.7 135L900.6 133.4L900.6 136.6ZM564.9 145.8L938.2 143.8L938.2 147.9ZM434.4 151.8L940.6 150.5L940.6 153ZM365.9 158.4L974.5 156.9L974.5 159.9ZM685.7 171.8L988.2 170.8L988.2 172.9ZM506 176L942.5 175.3L942.5 176.7ZM84.2 186.1L908.7 185.1L908.7 187ZM558.6 193.2L925.4 190.7L925.4 195.6ZM221.7 202L955.3 200.7L955.3 203.4ZM506.3 209.9L997.8 206.3L997.8 213.6ZM560.5 220.9L990.1 218.9L990.1 222.9ZM609.3 233L882.8 232L882.8 234ZM698.8 238.2L974.3 237.5L974.3 238.9ZM258.8 247.3L959.4 246.7L959.4 248ZM716.4 254.8L977.5 254.1L977.5 255.5ZM438.8 261.7L909 260.3L909 263.1ZM328.3 272.5L889.6 271.5L889.6 273.4ZM187.9 280.2L893.4 278.4L893.4 282ZM340.2 289.8L988.6 286.8L988.6 292.7ZM497.4 299.7L896.6 299L896.6 300.4ZM332.3 309.4L931.7 308.8L931.7 310ZM186 314.3L950 310.3L950 318.3ZM126.7 327.7L922.7 326.4L922.7 329.1ZM350.9 333.8L888.1 331.8L888.1 335.7ZM649.2 342.4L996.3 341.8L996.3 343.1ZM392.9 348.2L941.3 345.1L941.3 351.3ZM697.7 359.4L924.7 357.6L924.7 361.2ZM598.2 366.1L999.4 362.1L999.4 370.1ZM570.2 376.8L908.1 375.2L908.1 378.4ZM330.1 388.3L942.6 385.4L942.6 391.2ZM391.2 394.4L883.8 393.7L883.8 395.1Z'/%3E%3C/svg%3E");
   --textura-reticula: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Ccircle cx='4' cy='4' r='1.7'/%3E%3C/svg%3E");
   --textura-grade: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Cpath d='M0 0.5H32M0.5 0V32' stroke='black' stroke-width='1'/%3E%3C/svg%3E");
-  --icone-cadeado: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M5 7V4.5L6.5 3H9.5L11 4.5V7M2.5 7H13.5V14.5H2.5ZM8 9.5V12' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='square'/%3E%3C/svg%3E");
   --icone-seta: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M1.5 8H14M9 3L14 8L9 13' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='square'/%3E%3C/svg%3E");
   --textura-hachura: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10'%3E%3Cpath d='M-2 2L2 -2M0 10L10 0M8 12L12 8' stroke='black' stroke-width='1.2'/%3E%3C/svg%3E");
 }
@@ -842,7 +841,7 @@ p .zero::after {
 :root[data-movimento="reduzido"] .conexao__avancar:hover .seta,
 :root[data-movimento="reduzido"] .epoca:hover::before,
 :root[data-movimento="reduzido"] .marco:hover::before,
-:root[data-movimento="reduzido"] .botao:not(.conexao__avancar--bloqueado):hover {
+:root[data-movimento="reduzido"] .botao:hover {
   transform: none;
 }
 
@@ -876,7 +875,7 @@ p .zero::after {
   :root:not([data-movimento]) .conexao__avancar:hover .seta,
   :root:not([data-movimento]) .epoca:hover::before,
   :root:not([data-movimento]) .marco:hover::before,
-  :root:not([data-movimento]) .botao:not(.conexao__avancar--bloqueado):hover {
+  :root:not([data-movimento]) .botao:hover {
     transform: none;
   }
 

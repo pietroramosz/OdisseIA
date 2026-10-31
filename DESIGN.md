@@ -74,14 +74,6 @@ components:
     backgroundColor: "{colors.graphite-surface}"
     textColor: "{colors.signal-white}"
     padding: "16px 24px 16px 16px"
-  card-next:
-    backgroundColor: "{colors.graphite-surface-elevated}"
-    textColor: "{colors.signal-white}"
-    padding: "32px 24px 16px 16px"
-  card-locked:
-    backgroundColor: "{colors.void-black}"
-    textColor: "{colors.signal-white-muted}"
-    padding: "16px 24px 16px 16px"
   chip-state:
     backgroundColor: "{colors.azul-acento}"
     textColor: "{colors.void-black}"
@@ -100,9 +92,9 @@ components:
 
 **Creative North Star: "O Arquivo de Missão"**
 
-O OdisseIA é um arquivo de missão aberto página a página. Um traçado esquemático azul liga as quatro estações ao X-B0T, que é o único ponto roxo da jornada. Na abertura ele é a rota inteira; no Hub, a posição do visitante; nas estações, um trilho na margem; na Conclusão, a rota fechada com quatro carimbos. Sobre esse esqueleto técnico, a energia de mangá do X-B0T (linhas de velocidade, retícula, silhuetas, carimbos) irrompe nos pontos de conquista e aumenta conforme a jornada avança: um pouco na abertura, uma faixa de movimento na próxima estação, uma explosão na Estação 4, a densidade máxima na Conclusão.
+O OdisseIA é um arquivo de missão aberto página a página. Um traçado esquemático azul liga as quatro estações ao X-B0T, que é o único ponto roxo da jornada. Na abertura ele é a rota inteira; no Hub, o mapa das quatro paradas, todas abertas; nas estações, um trilho na margem; na Conclusão, a rota fechada. Sobre esse esqueleto técnico, a energia de mangá do X-B0T (linhas de velocidade, retícula, silhuetas, carimbos) irrompe nos pontos de destaque e aumenta conforme a rota avança: um pouco na abertura, uma explosão na Estação 4, a densidade máxima na Conclusão.
 
-Cada página tem composição própria: palavra-marca monumental na abertura, rota no Hub, em cada estação uma capa com motivo próprio, um percurso do assunto e módulos editoriais, o placar 4/4 na Conclusão. Todas falam a mesma gramática: numerais gigantes vazados, linhas esquemáticas de nós quadrados, recorte diagonal e o azul de acento. O roxo é só do jogo.
+Cada página tem composição própria: palavra-marca monumental na abertura, rota no Hub, em cada estação uma capa com motivo próprio, um percurso do assunto e módulos editoriais, o numeral monumental das quatro estações na Conclusão. Todas falam a mesma gramática: numerais gigantes vazados, linhas esquemáticas de nós quadrados, recorte diagonal e o azul de acento. O roxo é só do jogo.
 
 O sistema foi criado com a skill Impeccable, e a direção está registrada como contrato em `.impeccable/surfaces/index-html.md`.
 
@@ -121,20 +113,20 @@ Fundo quase preto, planos de grafite e branco-sinal para a leitura. O azul é o 
 O azul parte do `#142146` (o azul intermediário da sala da feira), que é escuro demais para aparecer sobre o grafite (1,2:1). A escala usa a mesma matiz (~226°) em quatro passos:
 - **Azul profundo** (`#142146`, `--cor-azul`): referência escura, para fundos muito sutis. Nunca é a cor de uma informação.
 - **Azul de linha** (`#3558c4`, `--cor-azul-linha`, 3,1:1 sobre o grafite): linhas, trilhos, separadores de seção, molduras de módulos e de painéis, retícula, linhas de foco e de movimento.
-- **Azul de acento** (`#5b8cff`, `--cor-destaque`, 6,2:1; texto escuro sobre ele): estados (validada, próxima estação, progresso), ações (botão principal, barra de ação, foco), nós ativos dos diagramas, numerais de capítulo e o "IA" da palavra-marca.
+- **Azul de acento** (`#5b8cff`, `--cor-destaque`, 6,2:1; texto escuro sobre ele): estados (estação disponível), ações (botão principal, barra de ação, foco), nós ativos dos diagramas, numerais de capítulo e o "IA" da palavra-marca.
 - **Azul claro** (`#8fb0ff`, `--cor-azul-claro`, 9,1:1): hover e texto de acento sobre superfícies elevadas.
 - **Roxo do X-B0T** (`--cor-xbot`, `#CD5EFA`, cor definitiva do X-B0T): só onde o jogo é o assunto. Ver "The Purple Is the Game Rule".
 
-Medido nas páginas renderizadas: 85–95% de pixels grafite, 0,4–6,2% de azul de acento (mais no celular, onde a página é mais estreita) e 0,9–3,2% de branco. Onde há estado, progresso ou ação, o azul vence o branco; nas páginas de leitura o branco é o texto.
+Medido nas páginas renderizadas: 85–95% de pixels grafite, 0,4–6,2% de azul de acento (mais no celular, onde a página é mais estreita) e 0,9–3,2% de branco. Onde há estado ou ação, o azul vence o branco; nas páginas de leitura o branco é o texto.
 
 ### Neutral
 - **Void Black** (`#0c0c10`): fundo de todas as páginas e cor de texto sobre o azul de acento e sobre o roxo do X-B0T.
 - **Graphite Surface** (`#16161d`): painel padrão (cards, figuras, folha de passos).
 - **Graphite Surface Dim** (`#111116`): palco de ilustração, figura, escala do tempo e herói da Conclusão.
-- **Elevated Graphite** (`#1f1f29`): painel em destaque (próxima estação, Conclusão disponível, fechamento da estação). Também é a cor da hachura de "ainda fechado".
+- **Elevated Graphite** (`#1f1f29`): painel em destaque (Conclusão, fechamento da estação). Também é a cor da hachura do acesso pendente ao jogo.
 - **Signal White** (`#f3f3f6`): títulos, texto de leitura principal, frase de abertura dos capítulos.
 - **Signal White Secondary** (`#c2c2cc`): explicação dos capítulos, rótulos, texto secundário.
-- **Signal White Muted** (`#9d9daa`): numerais vazados, estado bloqueado, legendas.
+- **Signal White Muted** (`#9d9daa`): numerais vazados, estado pendente, legendas.
 - **Dormant Gray** (`#6f6f7d`): filetes, trilho não percorrido, traços de diagrama. Nunca é usado para texto.
 - **Grid Line** (`rgba(255,255,255,0.04)`): grade fixa de 32px atrás da página. As colunas de leitura têm fundo sólido e a escondem.
 
@@ -142,9 +134,9 @@ Medido nas páginas renderizadas: 85–95% de pixels grafite, 0,4–6,2% de azul
 O tema escuro é o padrão e a identidade. O tema claro tem paleta própria, com neutros de matiz azul-acinzentada (os tons lilases anteriores liam como roxo fora do X-B0T) e sem branco puro. As camadas, da mais funda à mais próxima: fundo `#e6e9f0`, palco e "fechado" `#d9dde8`, superfície off-white `#f4f5f9` e destaque num tom do azul `#dde6f8`. Texto `#141824` (14,6:1 sobre o fundo). O limite entre as camadas vem de dois tokens novos, que no escuro coincidem com a superfície elevada (então o escuro não muda) e no claro têm valor próprio: `--cor-filete` (`#8f98ae`, divisórias, molduras de ficha, contorno do botão secundário) e `--cor-hachura` (`#b3bbcd`, listras de "fechado"). O azul de acento é mais fundo (`#2a55d6`, 5,7:1 sobre a superfície, texto branco sobre ele), o azul de linha é `#4a6ed6` (3,9:1) e o roxo do X-B0T é mais fundo (`#8f26c7`), porque o `#CD5EFA` tem só 3,2:1 sobre branco. Regra: borda, divisória e contorno usam `--cor-filete`, nunca `--cor-superficie-alta`, que é só preenchimento. O alto contraste existe nos dois temas (acento `#9db8ff` no escuro e `#0b3a9a` no claro). Texto sobre o acento usa `--cor-sobre-destaque`, que muda junto. As escolhas (tema, tamanho de texto, contraste, movimento) vêm do painel de acessibilidade e ficam em `odisseia:acessibilidade`.
 
 ### Named Rules
-**The Blue-Accent Rule.** O azul de acento marca o que está ativo ou pode ser feito: estado, progresso, ação, foco. O azul de linha desenha estrutura e textura. O azul profundo só aparece como fundo sutil. Nenhum azul é cor de texto corrido nem preenchimento de painel inteiro: o grafite é a base (DEC-010).
+**The Blue-Accent Rule.** O azul de acento marca o que está ativo ou pode ser feito: estado, ação, foco. O azul de linha desenha estrutura e textura. O azul profundo só aparece como fundo sutil. Nenhum azul é cor de texto corrido nem preenchimento de painel inteiro: o grafite é a base (DEC-010).
 
-**The Purple Is the Game Rule.** O roxo só aparece onde o X-B0T é o assunto: cartão, engrenagem e selo do X-B0T no Hub, carta e explosão no fim da rota da abertura, silhueta do destino final, quarta linha do índice, Estação 4 (capa, módulos, carta interativa) e o bloco do X-B0T na Conclusão. Essas áreas re-pintam `--cor-destaque` e `--cor-azul-linha` com `--cor-xbot`; a navegação da jornada (trilho, painel de acessibilidade, fechamento das páginas, barra de leitura) os devolve com `--cor-marca` e `--cor-marca-linha`, mesmo dentro da Estação 4. As engrenagens das estações são azuis (`engrenagem-azul.png`, derivada da roxa por troca de matiz) quando validadas e cinzas (`engrenagem-apagada.png`) quando não; a roxa é só do X-B0T.
+**The Purple Is the Game Rule.** O roxo só aparece onde o X-B0T é o assunto: cartão, engrenagem e selo do X-B0T no Hub, carta e explosão no fim da rota da abertura, silhueta do destino final, quarta linha do índice, Estação 4 (capa, módulos, carta interativa) e o bloco do X-B0T na Conclusão. Essas áreas re-pintam `--cor-destaque` e `--cor-azul-linha` com `--cor-xbot`; a navegação da jornada (trilho, painel de acessibilidade, fechamento das páginas, barra de leitura) os devolve com `--cor-marca` e `--cor-marca-linha`, mesmo dentro da Estação 4. As engrenagens das estações são azuis (`engrenagem-azul.png`, derivada da roxa por troca de matiz); a roxa é só do X-B0T.
 
 **The Two-Dark Rule.** Graphite Surface Dim marca palco ou fechado; Elevated Graphite marca destaque ou próximo. Nunca usar um no lugar do outro.
 
@@ -172,7 +164,7 @@ O tema escuro é o padrão e a identidade. O tema claro tem paleta própria, com
   - resumo da Conclusão: 1.75rem (base), 3.5rem (≥900px).
 - **Title** (700, 1.625rem, linha 1.15):
   - título de capítulo e de seção: 2rem a 2.5rem a partir de 900px;
-  - título de card no Hub: 1.125rem; o card da próxima estação usa 1.5rem.
+  - título de card no Hub: 1.25rem; o da Conclusão usa 2rem.
 - **Body** (400, 1.0625rem, linha 1.6):
   - corpo de leitura com no máximo 62ch;
   - frase de abertura do briefing em 1.1875rem (1.375rem a partir de 900px);
@@ -180,7 +172,7 @@ O tema escuro é o padrão e a identidade. O tema claro tem paleta própria, com
 - **Label** (600, 0.75rem, espaçamento 0.08–0.16em, caixa alta): ficha técnica, selos, carimbos e anotações de margem. Nada de texto visível abaixo de 12px.
 
 ### Named Rules
-**The Heading-First Rule.** O título abre a seção. Rótulos de estado (PRÓXIMA ESTAÇÃO, BLOQUEADA, DESBLOQUEADO, SUCESSO) vêm depois dele, como selo. Rótulos de seção (BRIEFING, LINHA DO TEMPO) ficam na coluna de margem a partir de 900px e somem no celular. Nenhum rótulo acima de título.
+**The Heading-First Rule.** O título abre a seção. Rótulos de estado (DISPONÍVEL, AGUARDANDO LIBERAÇÃO) vêm depois dele, como selo. Rótulos de seção (BRIEFING, LINHA DO TEMPO) ficam na coluna de margem a partir de 900px e somem no celular. Nenhum rótulo acima de título.
 
 **The Hollow Numeral Rule.** Contorno sem preenchimento só em numerais grandes e decorativos (a partir de 1.75rem). Texto pequeno em contorno continua proibido.
 
@@ -191,7 +183,7 @@ O tema escuro é o padrão e a identidade. O tema claro tem paleta própria, com
 Mobile-first: cada página foi composta primeiro a 390px e recomposta, não esticada, a partir de 900px. Nenhuma página rola na horizontal entre 360 e 430px.
 
 - **Espaçamento:** escala fechada `--espaco-1` a `--espaco-24` (4, 8, 12, 16, 24, 32, 48, 64, 96px).
-- **Palco e margem:** a área útil é a viewport menos a margem `--gutter: clamp(1rem, 3.4vw, 3.5rem)` (16px no celular, cerca de 3,4% da largura no desktop), até o teto `--palco: 108rem`. Medido: 93% da largura em 1280, 1440 e 1920px, e cerca de 84% em 2560px. O mesmo palco vale para todas as páginas; quem precisa de medida de leitura confortável limita o próprio texto (a validação do QR é a exceção, com 36rem).
+- **Palco e margem:** a área útil é a viewport menos a margem `--gutter: clamp(1rem, 3.4vw, 3.5rem)` (16px no celular, cerca de 3,4% da largura no desktop), até o teto `--palco: 108rem`. Medido: 93% da largura em 1280, 1440 e 1920px, e cerca de 84% em 2560px. O mesmo palco vale para todas as páginas; quem precisa de medida de leitura confortável limita o próprio texto.
 - **Escala por tela:** `html` usa `font-size: calc(var(--escala-tela) * 100%)`, com `--escala-tela` em 1, 1,125 (a partir de 1600px) e 1,25 (a partir de 2200px). O painel de acessibilidade multiplica essa escala (115% e 130%). Tudo o que usa rem cresce junto, e o desktop de 1920px lê como uma composição maior, não como uma tela de 1280px com margens.
 - **Breakpoints:**
   - 480px: os destinos do Hub empilham abaixo dessa largura;
@@ -238,17 +230,14 @@ Um motivo de contêiner, o **recorte diagonal** (`--recorte` 12px, `--recorte-pe
 - **Painel de acessibilidade** (`.a11y`): tudo à vista, sem seção recolhida. De cima para baixo: os interruptores "Reduzir animações" e "Alto contraste" (estado também em texto, Ativado/Desativado), "Tema" (Escuro, Claro, Sistema) e "Tamanho do texto" (100%, 115%, 130%) em linhas de três botões de 56px, com 12px entre eles e 12px de padding interno, sempre com a mesma altura (a opção "Extra grande" quebra em duas linhas sem ficar mais alta que as outras) e "Restaurar padrão". Cerca de 430px de altura, com o título e o botão Fechar numa só linha. O interruptor de animações mostra o que vale agora e nunca fica travado: sem escolha salva reflete o sistema ("Ativado pelo sistema"); ao ser mexido grava a escolha explícita, que vence o sistema.
 - **Portfólio** (`.final-portfolio`, `dialog.portfolio`, `portfolio.html`; `portfolio.js`, `portfolio.css`, `portfolio-documento.js`, `portfolio-documento.css`; DEC-015): na Conclusão, logo acima do "Jogar X-B0T", uma `.ficha` com moldura azul de 1px (o roxo é só do jogo, mesmo dentro do bloco do X-B0T), título "Portfólio do projeto", uma frase e o botão de contorno "Ver portfólio", secundário para o "Jogar X-B0T" seguir como única ação sólida. O botão abre um `<dialog>` modal centralizado sobre um véu escuro: ficha de moldura azul de 2px com margem mínima de `--gutter` em todas as bordas, até 72rem × 60rem no desktop e a tela menos as margens no celular; cabeçalho com título e "Fechar" (texto), o documento num `<iframe>` de mesma origem e uma nota "Documento em modo de leitura". Esc, "Fechar" e clique no fundo fecham (o Esc dentro do documento é repassado por `postMessage`); o foco vai ao "Fechar" e volta ao "Ver portfólio". O documento é o original do Word, não um redesenho: Arial 12 pt justificado com entrelinha de 1,5, capa e títulos de seção em Times New Roman, faixas cinza dos anexos, tabela com bordas e colagem de fotos nas posições do Word, tudo com o layout do `.docx` (as regras `.pN` do CSS são geradas dele; pt vira rem). O único ajuste visual é o tema: a folha do documento e o texto seguem o tema do site (`--cor-superficie` e `--cor-texto`, também no alto contraste) e o espaço do modal ao redor da folha é de outro tom, para destacá-la (no tema claro, o cinza-azulado do palco, `--cor-superficie-escura`, com filete e uma sombra curta na folha; no escuro, `#050508`, ou `#000` no alto contraste); as faixas cinza e as imagens mantêm as cores originais, os links usam o acento do tema e o logotipo transparente ganha fundo branco no tema escuro. Sem animação, sem grade de fundo e sem elementos do site dentro do documento.
 - **Zero do X-B0T** (`.zero`): na Chakra Petch o zero é quase igual à letra O, então em títulos e botões ele leva uma barra desenhada em CSS. No texto corrido (fonte de sistema) não é necessário.
-- **Acesso ao scanner no Hub** (`.scan-acesso`): a primeira coisa depois do herói, porque é a próxima ação da jornada. O título diz qual QR Code é o esperado ("Próximo QR Code: Estação 0N"), uma frase explica que o orientador o entrega ao fim da visita física, e o botão "Escanear QR da Estação 0N" abre o scanner; ao lado, três regras curtas e visíveis (escanear valida a passagem, cada código libera só a estação correspondente e em ordem, abrir uma página pelo Hub não libera nada). Com 4/4 vira "Jornada concluída", com um link para a Conclusão e nenhum botão de escanear.
-- **Scanner** (`dialog.scanner`, `scanner.js` + `scanner.css`): tela cheia no celular, painel recortado a partir de 600px. Estados: verificação, explicação (para que serve a câmera, qual QR é esperado, que nada é gravado), leitura (pré-visualização quadrada com moldura e linha de varredura), resultado (sucesso, repetido, fora de ordem, inválido, erro de armazenamento), erros de câmera (negada, indisponível, ocupada, página insegura, câmera desligada) e "sem suporte" (explica o app Câmera e não liga a câmera). Nenhuma tela manda escanear o QR da estação seguinte: depois de um sucesso o texto diz para terminar a próxima estação na feira e receber o QR com o orientador.
-- **Telas de bloqueio e fim de conteúdo**: a estação bloqueada mostra o botão do QR esperado e o texto que explica a ordem física; no fim das Estações 1 a 3, "Voltar ao Hub" é a ação principal e uma orientação curta diz para visitar a próxima estação na feira, com um botão discreto "Já recebi o QR Code da Estação 0N".
 - **Card de origem** (`.nota--origem`, Estação 4): ocupa a coluna lateral onde ficava o card de pendências. Faixa de linhas de movimento roxa no topo, a primeira frase em Chakra 700 (até 1,75rem) com marca-texto roxo sob os dois nomes e o resto em texto secundário. Sem selos, listas nem ícones.
 - **Carta de acesso** (`.carta-acesso`, Estação 4): o momento marcante da estação. Um palco de linhas de foco roxas com uma carta de 15 a 19rem, levemente girada. A frente (um `<button>`: emblema, nome e "Virar a carta") gira 180° em 0,8s e revela o verso real do jogo com a barra "Conhecer o site do X-B0T" (um `<a>`). Ativar o verso lança a carta (0,62s: avança e some no portal de linhas) e abre o site na mesma aba. A face escondida fica `inert` e `aria-hidden`; Esc ou "Virar de volta" desvira; o foco vai ao verso quando a carta gira. Com movimento reduzido não há giro nem lançamento: a face troca na hora e o clique segue direto. Sem `gameUrl` válida a carta fica oculta. Destino só de `OdisseIAConfig.gameUrl`.
-- **Texturas** (`.textura-reticula`, `.textura-foco`, `.textura-movimento`, `.textura-hachura`): máscaras SVG geradas com semente fixa e coloridas por token. A retícula e as linhas de foco marcam conquista; as linhas de movimento marcam "a seguir"; a hachura marca "ainda fechado".
-- **Carimbo** (desenhado em cada página: estado do cartão no Hub, Conclusão, validação): moldura dupla em aresta dura, Chakra 700 espaçado, levemente girado. Marca o que foi conquistado (VALIDADA, JORNADA CONCLUÍDA, SUCESSO). No Hub, o carimbo é o próprio rótulo de estado, visível e lido, sem cópia escondida.
+- **Texturas** (`.textura-reticula`, `.textura-foco`, `.textura-movimento`, `.textura-hachura`): máscaras SVG geradas com semente fixa e coloridas por token. A retícula e as linhas de foco marcam destaque; as linhas de movimento marcam a Conclusão; a hachura marca o acesso ao jogo ainda pendente.
+- **Carimbo** (desenhado em cada página: estado do cartão no Hub, Conclusão): moldura dupla em aresta dura, Chakra 700 espaçado, levemente girado (DISPONÍVEL, ACESSO LIVRE, ABRIR). No Hub, o carimbo é o próprio rótulo de estado, visível e lido, sem cópia escondida.
 - **Ficha** (`.ficha`): o cartão do sistema, em três camadas. O elemento tem a cor do miolo (`--miolo`), então o texto continua legível se as camadas falharem; `::before` pinta a moldura (`--moldura`) e `::after` repinta o miolo recuado em `--espessura`, para a moldura seguir também o corte diagonal. Usada nos cartões do Hub e nos passos de "Como funciona" da abertura. Os dois pseudo-elementos ficam reservados para a ficha; detalhes extras vêm de elementos próprios (ex.: `.cartao__faixa`).
 - **Placa** (`.placa`, `estacao-editorial.css`): ilustração de um trecho do capítulo, traço direto sobre o fundo (sem moldura de cartão), SVG só com os tokens de cor (`.p-linha`, `.p-forte`, `.p-ativa`, `.p-cheio`, `.p-no`) e texto em Chakra de 12px ou mais já renderizado. Só desenha o que o parágrafo vizinho afirma e traz uma legenda que a marca como ilustração. Desktop: coluna lateral, alinhada ao parágrafo (`--ancora`); celular: no fluxo, logo depois dele, com até 17rem, como pausa entre blocos de texto. Estação 1: dados e padrões do aprendizado de máquina; Estação 2: duelo de naves (Spacewar!), cartuchos do Atari 2600, crise de 1983 e NES; Estação 3: lan house, mundo aberto conectado, console e celular na mesma partida online.
 - **Palco editorial** (`.palco-editorial`): o momento marcante de um capítulo. O texto vira corpo grande (Chakra 700, até 2,5rem) e divide a largura com uma ilustração própria. Estação 2, Pokémon: a frase à esquerda e o núcleo POKÉMON ligado a JOGOS e aos quatro desdobramentos do texto, à direita (passar o mouse acende o satélite). Estação 3, Twitch: o inverso, com a transmissão (monitor, ondas, barramento e plateia que se acende) à esquerda e o numeral vazado 2011 sobre a frase, à direita. A variante `--fecho` (Estações 1 e 3) isola uma frase de conclusão sob um filete.
-- **Avanço no fim da estação** (`.conexao__acoes`, `prepararProximaEstacao()` em `app.js`): lê o progresso existente (`estacaoDesbloqueada()` / `jornadaCompleta()`) e nunca grava. Nas Estações 1 a 3, liberada a seguinte, aparece "Ir para a Estação 0N" como ação principal e o Hub passa a secundário; bloqueada, o botão é desabilitado (`aria-disabled`, ainda focável e lido, com hachura e cadeado) com a orientação "visite a Estação 0N na feira e receba o QR Code com o orientador", e o Hub continua principal. Na Estação 4 o destino é "Ver a Conclusão" (`final.html`), liberado com 4/4. O bloco "Já recebi o QR Code" e o acesso ao scanner continuam como estavam. Um numeral vazado da próxima estação marca o fecho.
+- **Avanço no fim da estação** (`.conexao__acoes`): escrito direto no HTML de cada estação. Nas Estações 1 a 3, "Ir para a Estação 0N" é a ação principal e "Voltar ao Hub" é secundário; na Estação 4 o destino é "Ver a Conclusão" (`final.html`). Todas as estações estão sempre abertas, então o botão nunca é desabilitado. Um numeral vazado da próxima estação marca o fecho.
 - **Favicon** (`assets/img/favicon.svg`, `favicon-32.png`, `apple-touch-icon.png`): placa grafite de cantos cortados com a rota azul que sai de um nó e chega ao destino; caminhos relativos em todas as páginas.
 - **Rodapé e créditos** (`.rodape` em `style.css`; `creditos.html`, `creditos.css`): o rodapé é só a marca e o link "Créditos", com um filete no topo, na mesma largura do conteúdo, nas aberturas, no Hub, nas Estações, na Conclusão e nos Mini Jogos. A página de créditos abre com a palavra-marca e traz os seis grupos num só painel (`.cred-painel`, uma `.ficha` de moldura azul): três colunas de dois grupos no desktop, dois grupos por linha no tablet e uma coluna compacta no celular. Cada grupo é o nome da área em rótulo pequeno, sob um traço de 2px, com os nomes logo abaixo, sem separadores. A ordem segue a jornada, com o site primeiro (traço em azul de acento, o único acento do painel) e o portfólio por último; o grupo do jogo tem o traço roxo, por ser do X-B0T. Nomes e grupos escritos direto no HTML, sem identificadores numéricos, cargos nem descrições individuais.
 - **Pular para o conteúdo** (`.pular`): primeiro link de toda página, só aparece com foco e leva ao `<main id="conteudo-principal">`.
@@ -273,33 +262,22 @@ Um motivo de contêiner, o **recorte diagonal** (`--recorte` 12px, `--recorte-pe
 - **Focus:** aresta interna de 3px, porque o `clip-path` cortaria o outline.
 
 ### Hub — rota
-- **Nó:**
-  - engrenagem acesa = validada; apagada = ainda não;
-  - a próxima estação ganha um alvo azul em volta do nó;
-  - o trilho é azul de acento: sólido e grosso = percorrido, tracejado grosso = até a próxima, tracejado fino cinza = futuro; o estado também está nas engrenagens (azul = validada, cinza = ainda não) e no texto do cartão.
-- **Cabeçalho:** o placar "2/4" põe o feito em destaque e o total ("/4") em Signal White Muted. A barra de progresso tem três formas, as mesmas do trilho da rota: segmento cheio (validada), tracejado em azul (próxima, com o número em destaque) e fino em cinza (ainda não).
-- **Painel do QR:** leva o numeral vazado da próxima estação (no celular, no canto; no desktop, numa coluna própria entre o texto e as regras). A rota e o destino têm título de seção do mesmo padrão ("Estações", "Destino final"): no celular, título e filete; a partir de 900px, título e bloco azul curto.
+Todas as estações e a Conclusão estão sempre abertas; o Hub é um menu de navegação, sem progresso, sem estados bloqueados e sem barra de avanço. O cabeçalho é só a palavra-marca com o título "Rota da jornada".
+- **Nó:** engrenagem azul acesa com o número da estação. O trilho é azul de acento, sólido e grosso, ligando as quatro paradas.
+- **Seções:** a rota e o destino têm título de seção do mesmo padrão ("Estações", "Destino final"): no celular, título e filete; a partir de 900px, título e bloco azul curto.
 - **Anatomia do cartão** (`.cartao__corpo`, uma `.ficha`), de cima para baixo:
-  - faixa de estado (`.cartao__faixa`, decorativa);
+  - faixa azul cheia (`.cartao__faixa`, decorativa) e retícula de mangá no canto superior direito (o texto passa por cima dela);
   - título;
   - descrição curta (o título do briefing da estação);
-  - linha de estado: selo à esquerda, registro "EST. 0N / 04" à direita (decorativo);
-  - barra de ação com altura mínima de 48px.
+  - linha de estado: carimbo DISPONÍVEL à esquerda, registro "EST. 0N / 04" à direita (decorativo);
+  - barra de ação "Ver conteúdo", com altura mínima de 48px.
   - O link inteiro é o alvo. Nome acessível: título, estado e ação; a descrição entra como `aria-describedby`.
-- **Validada:** faixa azul cheia (como o segmento cheio da barra), carimbo VALIDADA e retícula de mangá no canto superior direito (a marca de conquista do sistema; o texto passa por cima dela).
-- **Próxima:**
-  - moldura azul de 2px, miolo elevado, faixa de linhas de movimento e título maior;
-  - selo PRÓXIMA ESTAÇÃO azul cheio; a barra de ação fica na superfície com o texto em azul, para o botão do QR ser a única ação sólida da página;
-  - folha anexa com os três passos reais, fora do link.
-- **Bloqueada:** miolo no fundo, faixa hachurada, cadeado ao lado de BLOQUEADA, texto atenuado e ação "Ver o que falta", que leva à explicação de como desbloquear.
-- Estado sempre por texto, forma e cor juntos; nenhum depende só da cor.
-- **Interação:** no hover o cartão sobe 2px, o miolo clareia, a seta avança e o título das estações ativas (validada e próxima) ganha sublinhado azul; a engrenagem das validadas gira 30° (as bloqueadas ficam paradas); no toque ele desce 1px; no foco a moldura vira Signal White de 3px seguindo o recorte e o número do nó ganha sublinhado.
-- **≥900px:** os quatro cartões dividem a mesma linha (subgrid), então as linhas de estado e as barras de ação se alinham; o padding superior é fixo, o título reserva duas linhas e a faixa de estado tem altura mínima, então título, descrição e estado também se alinham; a folha de passos fica numa segunda linha, só embaixo da próxima.
+- **Interação:** no hover o cartão sobe 2px, o miolo clareia, a seta avança, o título ganha sublinhado azul e a engrenagem gira 30°; no toque ele desce 1px; no foco a moldura vira Signal White de 3px seguindo o recorte e o número do nó ganha sublinhado.
+- **≥900px:** os quatro cartões dividem a mesma linha (subgrid), então as linhas de estado e as barras de ação se alinham; o padding superior é fixo, o título reserva duas linhas e a faixa de estado tem altura mínima, então título, descrição e estado também se alinham.
 - **Destino final:** mesma anatomia, sem o registro.
-  - Conclusão disponível: moldura azul, faixa de movimento e barra de ação azul;
-  - X-B0T: o único cartão do Hub com a cor do jogo (moldura, faixa, selo e engrenagem roxos). Bloqueado até 4/4, com cadeado e engrenagem cinza; com 4/4 e `gameUrl` válida o cartão inteiro é um link para o jogo (mesma aba) com o aviso de giro dentro dele;
-  - bloqueados: faixa hachurada e cadeado; sem link, o detalhe é texto de status, não ação;
-  - X-B0T sem `gameUrl` válida (nula, vazia, relativa ou de outro protocolo): selo só contornado e "AGUARDANDO LIBERAÇÃO", sem link e sem aviso.
+  - Conclusão: moldura azul, faixa de movimento, carimbo DISPONÍVEL e barra de ação azul "Ver conclusão";
+  - X-B0T: o único cartão do Hub com a cor do jogo (moldura, faixa, selo e engrenagem roxos). Com `gameUrl` válida o cartão inteiro é um link para o jogo (mesma aba) com o aviso de giro dentro dele;
+  - X-B0T sem `gameUrl` válida (nula, vazia, relativa ou de outro protocolo): selo só contornado e "AGUARDANDO LIBERAÇÃO", sem link e sem aviso; o detalhe é texto de status, não ação.
 
 ### Estação — dossiê
 - **Capa** (`.dossie-capa`): numeral vazado gigante, título, "ESTAÇÃO 0N / 04", ficha técnica (`.dossie-ficha`) só com fatos do próprio conteúdo e ilustração SVG do assunto (`.dossie-capa__arte`). O título leva um contorno da cor do fundo (`paint-order: stroke fill`) que corta as linhas do numeral atrás das letras.
@@ -321,10 +299,7 @@ Um motivo de contêiner, o **recorte diagonal** (`--recorte` 12px, `--recorte-pe
   - Desktop: espinha horizontal, épocas lado a lado com hastes em alturas alternadas.
   - Celular: espinha vertical conectada, nós quadrados em cada época e marco.
 - **Percurso** (`.percurso`, Estação 1): as seis etapas como um caminho. Desktop: escada ascendente, nós que crescem e trechos que sobem de uma etapa e entram na seguinte pela esquerda; o último nó tem anel azul. Celular: linha vertical. As etapas não são caixas.
-- **Trilho da rota** (`.dossie-rota`, a partir de 1360px): paradas anteriores cheias, parada atual grande, futuras tracejadas, terminando em CONCLUSÃO. É decorativo (`aria-hidden`) e só aparece no conteúdo desbloqueado.
-- **Bloqueio:**
-  - próxima: painel elevado com faixa de movimento, passos numerados e "Seu progresso";
-  - futura: painel hachurado com link para a próxima estação válida.
+- **Trilho da rota** (`.dossie-rota`, a partir de 1360px): paradas anteriores cheias, parada atual grande, futuras tracejadas, terminando em CONCLUSÃO. É decorativo (`aria-hidden`).
 
 ### X-B0T Card Image
 O verso da carta (`verso-carta.png`) continua só na Estação 4 e na Conclusão, entre 200 e 280px de largura e com dimensões declaradas. Na Estação 4 ele está na capa, acima da dobra, então carrega sem `loading="lazy"`; na Conclusão continua lazy.
@@ -333,19 +308,16 @@ O verso da carta (`verso-carta.png`) continua só na Estação 4 e na Conclusão
 
 ### Conclusão
 - **Herói:**
-  - explosão de linhas de foco atrás do placar 4/4;
-  - carimbo JORNADA CONCLUÍDA batido sobre o placar;
-  - título com contorno de letreiro (`paint-order: stroke fill`) para se separar das linhas.
-- **Resumo:** a rota fechada, uma linha contínua em azul de acento pelas quatro engrenagens azuis, com os carimbos VALIDADA batendo em sequência.
-- **Acesso ao jogo:** botão "Jogar X-B0T" só com `gameUrl` absoluta http(s). Sem ela, o painel `.final-status` mostra a jornada concluída (marcador cheio) separada do acesso pendente (marcador vazado e etiqueta "AGUARDANDO LIBERAÇÃO").
-
-### Validação do QR
-O resultado é um carimbo depois do título: azul para sucesso e "já validada", cinza para fora de ordem, inválido e erro. O sucesso ganha linhas de foco no canto, cortadas na diagonal. A ação principal vem primeiro. Na Conclusão, o aviso de giro fica logo acima do botão "Jogar X-B0T".
+  - explosão de linhas de foco atrás do numeral "4" ("ESTAÇÕES PARA EXPLORAR");
+  - carimbo ACESSO LIVRE batido sobre o numeral;
+  - título "Fim da jornada." com contorno de letreiro (`paint-order: stroke fill`) para se separar das linhas.
+- **Resumo:** a rota fechada, uma linha contínua em azul de acento pelas quatro engrenagens azuis. Cada estação tem um carimbo "ABRIR" que é o link para a página dela.
+- **Acesso ao jogo:** botão "Jogar X-B0T" só com `gameUrl` absoluta http(s). Sem ela, o painel `.final-status` mostra o acesso pendente (marcador vazado e etiqueta "AGUARDANDO LIBERAÇÃO"). O aviso de giro fica logo acima do botão.
 
 ## Motion
 O movimento é um gesto por página, sempre partindo de um estado já visível:
 - na abertura, a rota se desenha e as paradas entram;
-- no Hub, a jornada se monta em cerca de 1,1s: o painel do QR entra, as barras de progresso enchem, o trilho se estende, as engrenagens acendem e os cartões entram um a um;
+- no Hub, a rota se monta em cerca de 1,1s: o trilho se estende, as engrenagens acendem e os cartões entram um a um;
 - Estação 1: as etapas do percurso se ligam em sequência, conforme a rolagem;
 - Estação 2: a linha do tempo acende conforme a rolagem (a espinha se traça e cada marco acende em azul ao passar);
 - Estação 3: o sinal sai do controle e se espalha pela rede em quatro voltas (as cinco conexões do centro, a segunda volta, as pontas e, por fim, as conexões ativas em azul de acento); cada nó surge quando a linha chega e os ativos acendem quando a conexão ativa os alcança. Cerca de 2,2s, uma vez. Cada trecho é um `<path>` com `--t` (atraso) e `--d` (duração) em segundos;
@@ -366,7 +338,7 @@ Sem `cenas.js` ou com movimento reduzido o atributo não existe e a figura fica 
 
 Os gestos por rolagem das Estações 2 (linha do tempo) e 1 (percurso) não usam JavaScript; sem suporte a `animation-timeline`, a página fica estática e completa. Os keyframes levam o prefixo da estação (`tempo-`, `rede-`, `percurso-`, `palco-`), e nenhuma estação usa o gesto de outra. A exceção é `cena-`, a mecânica compartilhada das três cenas acima, em que cada figura tem a sua própria sequência.
 
-Transversais, sem coreografia própria: a troca de página é um fade curto com subida de 10px (View Transitions entre documentos, `@view-transition`; sem efeito em file:// e nos navegadores sem suporte), a barra de leitura de 3px no topo das estações acompanha a rolagem (`animation-timeline: scroll()`, na cor do site, invisível sem suporte) e o scanner entra subindo 16px.
+Transversais, sem coreografia própria: a troca de página é um fade curto com subida de 10px (View Transitions entre documentos, `@view-transition`; sem efeito em file:// e nos navegadores sem suporte), a barra de leitura de 3px no topo das estações acompanha a rolagem (`animation-timeline: scroll()`, na cor do site, invisível sem suporte).
 
 Entrada das estações: toda capa entra em sequência (numeral, título, rótulo, ficha, arte) e, onde há `animation-timeline: view()`, a linha de abertura de cada seção se traça e os títulos sobem ao chegar à tela, sempre a partir de um estado visível; o texto de leitura nunca se anima, e cada ilustração se desenha sozinha, por rolagem, exceto as três cenas acima, que rodam por tempo. Sotaques: Estação 1 traça a árvore de decisão nível a nível e o delta pousa no fim, Estação 2 é arcade (título digitado e bola que cruza a quadra aos saltos, com `steps()`), Estação 3 é sinal (marcos e nós da linha do tempo entram como o sinal que se espalha pela rede), Estação 4 cresce o delta de retícula do palco depois do leque de cartas. Microinterações: marca-texto que se expande sob termos em negrito, nós da linha do tempo que crescem, módulos e figuras que sobem 3px, setas que avançam.
 
@@ -382,7 +354,7 @@ Com movimento reduzido, todas as animações e deslocamentos desligam: a rota j�
 
 ### Do:
 - **Do** abrir toda seção pelo título e pôr estado e rótulo depois, como selo ou anotação de margem.
-- **Do** expressar estado por texto, forma e cor juntos: carimbo, hachura, faixa de movimento, alvo no nó.
+- **Do** expressar estado por texto, forma e cor juntos: carimbo, hachura, faixa de movimento.
 - **Do** desenhar diagramas só com relações que o conteúdo afirma, e marcar como ilustração o que for exemplo.
 - **Do** usar texturas apenas pelas máscaras de `style.css`, coloridas por token.
 - **Do** manter contraste mínimo de 4,5:1 em texto, 3:1 em elementos de interface, alvos de 44px e foco sempre visível.
@@ -397,7 +369,6 @@ Com movimento reduzido, todas as animações e deslocamentos desligam: a rota j�
 - **Don't** usar glow difuso, gradiente decorativo, glassmorphism, `border-radius` ou uma segunda linguagem de contêiner.
 - **Don't** pintar texto corrido de azul ou de roxo, nem usar o azul como fundo de painel, de cartão ou de página: o grafite é a base.
 - **Don't** deixar o azul tão discreto que não se veja (linhas de estado em #142146 sobre o grafite) nem deixar o branco assumir o papel do acento.
-- **Don't** mandar escanear o QR da estação seguinte antes da visita física a ela: o QR de uma estação só existe depois que o orientador o entrega.
 - **Don't** usar o roxo fora do X-B0T (The Purple Is the Game Rule) nem misturar azul e roxo no mesmo elemento.
 - **Don't** repetir num módulo, legenda ou título o que o parágrafo vizinho já diz.
 - **Don't** condicionar uma animação a `prefers-reduced-motion` por conta própria: a decisão é de `data-movimento`.

@@ -30,14 +30,12 @@
   <link rel="stylesheet" href="assets/css/paginas/estacao.css">
   <link rel="stylesheet" href="assets/css/paginas/estacao-modulos.css">
   <link rel="stylesheet" href="assets/css/paginas/estacao-editorial.css">
-  <link rel="stylesheet" href="assets/css/scanner.css">
   <script src="assets/js/acessibilidade.js"></script>
 </head>
 <body class="pagina-estacao" data-estacao="3">
   <a class="pular" href="#conteudo-principal">Pular para o conteúdo</a>
   <main id="conteudo-principal" tabindex="-1">
-    <!-- Conteúdo da estação: só aparece quando a estação está desbloqueada (app.js). -->
-    <div id="conteudo-estacao" hidden>
+    <div id="conteudo-estacao">
       <a class="terminal-voltar" href="hub.html"><span class="seta seta--voltar" aria-hidden="true"></span> Voltar ao Hub</a>
       <aside class="dossie-rota" aria-hidden="true">
         <p class="dossie-rota__titulo">ROTA</p>
@@ -284,25 +282,13 @@
         <h2 class="conexao__titulo">E o X-B<span class="zero">0</span>T?</h2>
         <p>Os videogames ficaram maiores, mais conectados e mais complexos.</p>
         <p>Na próxima estação, você vai conhecer o <strong>X-B0T</strong>, jogo digital de cartas desenvolvido para o OdisseIA.</p>
-        <div class="conexao__proximo" data-proximo-passo hidden></div>
         <div class="conexao__acoes">
-          <div class="conexao__avanco" data-proxima-estacao></div>
-          <a class="botao botao--principal conexao__voltar" data-voltar-hub href="hub.html">Voltar ao Hub</a>
+          <div class="conexao__avanco">
+            <a class="botao botao--principal conexao__avancar" href="estacao-4.html"><span>Ir para a Estação 04</span><span class="seta" aria-hidden="true"></span></a>
+          </div>
+          <a class="botao conexao__voltar" href="hub.html">Voltar ao Hub</a>
         </div>
       </section>
-    </div>
-
-    <!-- Mensagem de bloqueio: preenchida por app.js quando a estação é a próxima ou futura. -->
-    <div id="estado-bloqueado" hidden>
-      <a class="terminal-voltar" href="hub.html"><span class="seta seta--voltar" aria-hidden="true"></span> Voltar ao Hub</a>
-      <header class="dossie-capa dossie-capa--bloqueada">
-        <span class="numeral-vazado dossie-capa__numeral" aria-hidden="true">03</span>
-        <div class="dossie-capa__texto">
-          <h1 class="titulo-estacao">Evolução dos jogos de 2001 até hoje</h1>
-          <p class="terminal-hero__rotulo">ESTAÇÃO <span class="terminal-hero__numero">03</span> / 04</p>
-        </div>
-      </header>
-      <section id="bloqueio-painel" class="bloqueio"></section>
     </div>
   </main>
 
@@ -312,9 +298,6 @@
   </footer>
 
   <script src="assets/js/config.js"></script>
-  <script src="assets/js/progresso.js"></script>
-  <script src="assets/js/qr.js"></script>
-  <script src="assets/js/scanner.js"></script>
   <script src="assets/js/app.js"></script>
   <script src="assets/js/cenas.js"></script>
 </body>

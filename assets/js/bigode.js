@@ -2,7 +2,7 @@
 //
 // "Bigode", aqui, é quem tem palavra: pessoa de respeito, que cumpre o que promete.
 //
-// Não lê nem grava progresso, não toca em localStorage e não altera nenhum link: o gatilho é um
+// Não toca em localStorage e não altera nenhum link: o gatilho é um
 // ouvinte de clique em elementos marcados com data-bigode (a marca não é link nem botão). Clique do
 // mouse e toque chegam ao mesmo evento "click". A apresentação é uma janela pequena no centro da
 // página (um <dialog> nativo: foco preso, Esc fecha) sobre um fundo escurecido. Ela se fecha sozinha

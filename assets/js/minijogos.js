@@ -1,7 +1,7 @@
 // Mini Jogos: núcleo compartilhado pelos quatro jogos (minijogo-*.js).
 // Monta o painel de cada jogo (dificuldade, indicadores, palco, controles táteis, estados), cuida
 // do teclado sem atrapalhar campos e botões, pausa quando a aba perde o foco e lê as cores do tema.
-// Não lê nem grava o progresso da jornada: os jogos são independentes das regras das estações.
+// Os jogos são independentes das estações e não gravam nada no navegador.
 //
 // Cada jogo se registra com MiniJogos.registrar({...}) e devolve, em criar(api), um objeto com:
 //   novo(dificuldade)  prepara uma partida nova e desenha o primeiro quadro
